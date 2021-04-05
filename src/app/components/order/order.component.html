@@ -1,0 +1,214 @@
+<div class="p-grid">
+    <div class="p-col-fixed">
+        <button pButton icon="pi pi-plus" label="New Order"></button>
+    </div>
+    <div class="p-col p-buttonset">
+        <button pButton class="p-button-text p-button-secondary" icon="pi pi-star" label="Saved Views :" disabled></button>
+        <button pButton class="p-button-text p-button-secondary" label="Unpaid"></button>
+        <button pButton class="p-button-text p-button-secondary" label="Waiting"></button>
+        <button pButton class="p-button-text p-button-secondary" label="Production"></button>
+        <button pButton class="p-button-text p-button-secondary" label="Finishing"></button>
+        <button pButton class="p-button-text p-button-secondary" label="Shipping"></button>
+        <button pButton class="p-button-text p-button-secondary" label="Completed"></button>
+    </div>
+</div>
+<div class="p-grid">
+    <div class="p-col">
+        <div class="card card-body">
+            <p-table [value]="dataOrder" selectionMode="single" (onRowSelect)="selectOrder($event)" dataKey="orderId" styleClass="p-datatable-striped" [paginator]="true" [rows]="5" [showCurrentPageReport]="true">
+                <ng-template pTemplate="caption">
+                    <div class="p-grid">
+                        <div class="p-col p-inputgroup">
+                            <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                            <input type="text" pInputText placeholder="Filter Order...">
+                        </div>
+                        <div class="p-col-fixed p-buttonset">
+                            <button pButton label="Status" (click)="oFilterStatus.toggle($event)"  class="p-button-secondary" icon="pi pi-chevron-down" iconPos="right"></button>
+                            <button pButton label="Payment Status" (click)="oFilterPaymentStatus.toggle($event)" class="p-button-secondary" icon="pi pi-chevron-down" iconPos="right"></button>
+                            <button pButton label="More Filter" class="p-button-secondary" icon="pi pi-filter" iconPos="right"></button>
+                        </div>
+                        <div class="p-col-fixed">
+                            <button pButton label="Save View" class="p-button-outlined p-button-secondary" icon="pi pi-star-o"></button>
+                            <button pButton label="Export" class="p-button-outlined p-button-secondary"></button>
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th width="200">Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Payment</th>
+                        <th>Status</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr [pSelectableRow]="product">
+                        <td>{{product.orderId}}</td>
+                        <td>{{product.orderDate}}</td>
+                        <td><button pButton (click)="op.toggle($event)" class="p-button-text p-button-secondary" icon="pi pi-angle-down" iconPos="right" label="{{product.customerName}}"></button></td>
+                        <td>{{product.items}}</td>
+                        <td>{{product.total}}</td>
+                        <td>{{product.payment}}</td>
+                        <td><span class="badge badge-info">{{product.status}}</span></td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Detail Order" [(visible)]="dialogDetailOrder" [style]="{width: '80vw'}">
+    <div class="p-grid nested-grid p-pt-2">
+        <div class="p-col-7">
+            <fieldset class="form-fieldset">
+                <legend>Items Detail</legend>
+                <p-table [value]="products" class="p-datatable-unstriped">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Product Id</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Variant</th>
+                            <th>Qty</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product>
+                        <tr [pSelectableRow]="product">
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.category}}</td>
+                            <td>{{product.variant}}</td>
+                            <td>{{product.qty}}</td>
+                            <td>
+                                <button pButton class="p-button-sm p-button-text" icon="pi pi-pencil" label="Edit"></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </fieldset>
+        </div>
+        <div class="p-col-5">
+            <fieldset class="form-fieldset">
+                <legend>Customer</legend>
+                <div class="p-fluid p-pt-0">
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Customer ID</label>
+                        <div class="p-col">
+                            <input type="text" disabled="disabled" pInputText>
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Name</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Address</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">City</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Province</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Country</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Zipcode</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Email</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="p-field p-grid">
+                        <label for="Order ID" class="p-col-3">Phone</label>
+                        <div class="p-col">
+                            <input type="text" pInputText disabled="disabled">
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="p-col-7">
+            <fieldset class="form-fieldset">
+                <legend>Remark</legend>
+            </fieldset>
+        </div>
+    </div>
+</p-dialog>
+
+<p-overlayPanel #op>
+    <ng-template pTemplate>
+        <b>Fazri Anggriawan</b><br/>
+        <div class="p-mb-2">Depok - Indonesia 16513</div>
+        <i class="pi pi-envelope p-mr-3"></i><a href="mailto:fazri.anggriawan@gmail.com">fazri.anggriawan@gmail.com</a> <br>
+        <i class="pi pi-phone p-mr-3"></i>+6282110661680 <br>
+        <button pButton class="p-button-sm p-mt-2" icon="pi pi-eye" label="View Customer"></button>
+    </ng-template>
+</p-overlayPanel>
+
+<p-overlayPanel #oFilterStatus>
+    <ng-template pTemplate>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="unpaid" [(ngModel)]="selectedValues" inputId="unpaid"></p-checkbox>
+            <label for="unpaid">Waiting</label>
+        </div>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="production" [(ngModel)]="selectedValues" inputId="production"></p-checkbox>
+            <label for="production">Production</label>
+        </div>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="finishing" [(ngModel)]="selectedValues" inputId="finishing"></p-checkbox>
+            <label for="finishing">Finishing</label>
+        </div>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="shipping" [(ngModel)]="selectedValues" inputId="shipping"></p-checkbox>
+            <label for="shipping">Shipping</label>
+        </div>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="completed" [(ngModel)]="selectedValues" inputId="completed"></p-checkbox>
+            <label for="completed">Completed</label>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<p-overlayPanel #oFilterPaymentStatus>
+    <ng-template pTemplate>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="unpaid" [(ngModel)]="selectedValues" inputId="unpaid"></p-checkbox>
+            <label for="unpaid">Unpaid</label>
+        </div>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="paid" [(ngModel)]="selectedValues" inputId="paid"></p-checkbox>
+            <label for="paid">Paid</label>
+        </div>
+        <div class="p-field-checkbox">
+            <p-checkbox name="groupname" value="production" [(ngModel)]="selectedValues" inputId="production"></p-checkbox>
+            <label for="production">Refund</label>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+

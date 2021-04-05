@@ -1,1 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
+html{ font-size: 14px;}
+.clickable{ cursor: pointer; }
+.p-component{ font-size: 0.9rem; }
+
+.p-datatable .p-datatable-tbody > tr > td, .p-datatable .p-datatable-thead > tr > th{
+    padding: 0.8rem;
+}
+
+.p-menubar{
+    background: transparent;
+    border: none;
+}
+
+.p-menubar .p-menuitem-link{
+    background: transparent;
+}
+
+.p-menubar .p-menuitem-link{
+    background: transparent;
+}
+
+.p-datatable .p-datatable-tbody > tr > td{
+    border-color: rgba(72, 94, 144, 0.16);
+}
+
+.p-datatable .p-datatable-thead > tr > th{
+    border-color: rgba(72, 94, 144, 0.16);
+    background: transparent;
+    border-width: 0 0 1px 0;
+}
+
+.p-datatable .p-datatable-tbody > tr{
+    background: #f3f4f7;
+}
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even){
+    background: #fff;
+}
+
+.p-datatable .p-datatable-tbody > tr.p-highlight, .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight{
+    background: #dae7f9;
+}
+
+.p-inputtext{ padding: 0.3rem; }
+.p-field{ margin-bottom: 0.5rem; }
+.p-tabview .p-tabview-panels{ padding: 0.5rem 0; }
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link{
+    /* color: #585858;
+    border-color: #585858;     */
+    text-decoration: unset;
+}
+.p-tabview .p-tabview-nav li .p-tabview-nav-link{ text-decoration: underline; }
+
+.p-disabled, .p-component:disabled{ background: #d3d9de; }
+
+.p-button.p-button-sm{ padding: 0.2rem 0.5rem; }
+
+.p-datatable-unstriped .p-datatable-tbody > tr{
+    background: unset;
+}
+
+.p-datatable-unstriped .p-datatable-tbody > tr:hover{
+    background: #f3f4f7;
+}
+
+.header-row-group td{
+    background: #f3f4f7;
+}
+
+.p-button{ margin-right: 0.5rem; }
+.p-field-checkbox>label, .p-field-radiobutton>label, .p-checkbox-label {
+    margin-left: 0.5rem;
+    line-height: 1;
+    padding-top: 0.5rem;
+    cursor: pointer;
+}
+
+.p-field-checkbox{ margin-bottom: 0.2rem; }
+
+.p-datatable .p-datatable-header{
+    background: unset;
+    padding: 0.5rem;
+    border-top: unset;
+}
