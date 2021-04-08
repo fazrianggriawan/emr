@@ -7,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderComponent implements OnInit {
 
-  dialogDetailOrder: Boolean = false;
+  dialogDetailOrder: boolean = false;
   selectedValues: String[] = [];
+  moreFilter: boolean = false;
+  filterDate: string = '';
 
   dataOrder = [
-    {orderId: '2001', orderDate: '20 Jan 2021, 18:30', customerName: 'Fazri Anggriawan', customerEmail: 'fazri.anggriawan@gmail.com', customerPhone: '082110661680', items: '3 items', total: '2,500,000', status: 'Waiting for payment'},
-    {orderId: '2002', orderDate: '21 Jan 2021, 14:12', customerName: 'Fazri Anggriawan', items: '3 items', total: '2,500,000', status: 'On Process'},
+    {orderId: '2001', orderDate: '20 Jan 2021, 18:30', customerName: 'Fazri Anggriawan', items: '3 items', total: '2,500,000', status: 'Waiting', payment: 'Paid'},
+    {orderId: '2002', orderDate: '21 Jan 2021, 14:12', customerName: 'Julita Widyasafitrie', items: '1 items', total: '1,250,000', status: 'On Process', payment: 'Unpaid'},
   ];
 
   products = [

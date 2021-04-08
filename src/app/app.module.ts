@@ -14,18 +14,25 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TabViewModule } from "primeng/tabview";
 import { StepsModule } from "primeng/steps";
 import { TagModule } from 'primeng/tag';
-import {CardModule} from 'primeng/card';
+import { CardModule } from 'primeng/card';
 import { OrderComponent } from './components/order/order.component';
 import { DataViewModule } from "primeng/dataview";
 import { OverlayPanelModule } from "primeng/overlaypanel";
 import { CheckboxModule } from "primeng/checkbox";
 import { FormsModule } from "@angular/forms";
+import { SidebarModule } from "primeng/sidebar";
+import { AccordionModule } from "primeng/accordion";
+import { InputMaskModule } from 'primeng/inputmask';
+import { ChipModule } from "primeng/chip";
+import { FormOrderComponent } from './components/form-order/form-order.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DtOrderComponent,
-    OrderComponent
+    OrderComponent,
+    FormOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +50,11 @@ import { FormsModule } from "@angular/forms";
     DataViewModule,
     OverlayPanelModule,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    SidebarModule,
+    AccordionModule,
+    InputMaskModule,
+    ChipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

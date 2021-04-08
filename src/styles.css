@@ -82,3 +82,19 @@ html{ font-size: 14px;}
     padding: 0.5rem;
     border-top: unset;
 }
+
+.p-accordion .p-accordion-header .p-accordion-header-link{
+    background: unset;
+    border: unset;
+    /* border-bottom: 1px solid #dee2e6; */
+}
+
+.p-accordion .p-accordion-content{
+    border: unset;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0.5rem 1rem;
+    padding-bottom: 1rem;
+}
+
+.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus{ box-shadow: unset; }
+.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link{ background: unset; }
