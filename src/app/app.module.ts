@@ -25,6 +25,8 @@ import { AccordionModule } from "primeng/accordion";
 import { InputMaskModule } from 'primeng/inputmask';
 import { ChipModule } from "primeng/chip";
 import { FormOrderComponent } from './components/form-order/form-order.component';
+import { LoginComponent } from './components/login/login.component';
+import { UrologiComponent } from './components/urologi/urologi.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { FormOrderComponent } from './components/form-order/form-order.component
     AppComponent,
     DtOrderComponent,
     OrderComponent,
-    FormOrderComponent
+    FormOrderComponent,
+    LoginComponent,
+    UrologiComponent
   ],
   imports: [
     BrowserModule,
