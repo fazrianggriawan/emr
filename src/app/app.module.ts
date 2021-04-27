@@ -8,6 +8,7 @@ import { InputTextModule } from "primeng/inputtext";
 import { ButtonModule } from "primeng/button";
 import { TableModule } from "primeng/table";
 import { MenubarModule } from "primeng/menubar";
+import { MenuModule } from "primeng/menu";
 import { DialogModule } from "primeng/dialog";
 import { DtOrderComponent } from './components/dt-order/dt-order.component';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -58,7 +59,8 @@ import { UrologiComponent } from './components/urologi/urologi.component';
     SidebarModule,
     AccordionModule,
     InputMaskModule,
-    ChipModule
+    ChipModule,
+    MenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

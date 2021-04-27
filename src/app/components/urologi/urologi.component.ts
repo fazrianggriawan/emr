@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from "primeng/api";
 
 @Component({
   selector: 'app-urologi',
@@ -24,10 +25,28 @@ export class UrologiComponent implements OnInit {
 
   comparasion: boolean = false;
   panelTambahData: boolean = false;
+  menu: MenuItem[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+      this.menu = [
+          { label: 'Menu', items: [
+              { label: 'Pasien', icon: 'pi pi-angle-right' },
+              { label: 'Dokter', icon: 'pi pi-angle-right' },
+              { label: 'Perawat', icon: 'pi pi-angle-right' },
+          ]},
+          {
+              label: 'Penunjang',
+              items: [
+                  { label: 'E-Resep', icon: 'pi pi-angle-right' },
+                  { label: 'Order Radiologi', icon: 'pi pi-angle-right' },
+                  { label: 'Order Lab', icon: 'pi pi-angle-right' },
+                  { label: 'Order Operasi', icon: 'pi pi-angle-right' }
+              ]
+          },
+          { label: 'Komparasi Kunjungan', icon: 'pi pi-angle-right', command: () => {this.comparasion = true} }
+      ];
   }
 
 }
