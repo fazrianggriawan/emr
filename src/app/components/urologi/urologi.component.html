@@ -1,264 +1,332 @@
 <div class="row">
-    <div class="col-2" *ngIf="!comparasion" [@fadeInOut]>
-        <div class="row">
+   <div class="col-2" *ngIf="!comparasion" [@fadeInOut]>
+      <div class="row">
+         <div class="col-fixed">
+            <div class="image"></div>
+            <table class="table">
+               <tr>
+                  <td colspan="2">
+                     <input type="text" pInputText>
+                  </td>
+               </tr>
+               <tr>
+                  <td colspan="2">FAZRI ANGGRIAWAN</td>
+               </tr>
+               <tr>
+                  <td>No. RM</td>
+                  <td>808182</td>
+               </tr>
+               <tr>
+                  <td>Usia <br> Jns. Kelamin</td>
+                  <td>72 Tahun <br> Laki-laki</td>
+               </tr>
+            </table>
+         </div>
+      </div>
+   </div>
+   <div class="col p-p-4 card">
+      <div #StickyMenu>
+         <div class="row">
+            <!-- <div class="col-fixed p-pl-2"><button pButton icon="pi pi-angle-left" iconPos="left" label="Terbaru" class="p-button-sm" disabled></button></div> -->
+            <div class="col">
+               <h4>Fazri Anggriawan</h4>
+               <h5>33 thn, Laki-laki - RM: 808182</h5>
+               22 Januari 2021, (hari ini).
+               <span class="badge badge-info">BPJS - BPJS MANDIRI</span>&nbsp;
+               <span class="badge badge-info">R.JALAN</span>&nbsp;
+               <span class="badge badge-info">RJ2101120001</span>&nbsp;
+            </div>
             <div class="col-fixed">
-                <div class="image"></div>
-                <table class="table">
-                    <tr>
-                        <td colspan="2">
-                            <input type="text" pInputText>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">FAZRI ANGGRIAWAN</td>
-                    </tr>
-                    <tr>
-                        <td>No. RM</td>
-                        <td>808182</td>
-                    </tr>
-                    <tr>
-                        <td>Usia <br> Jns. Kelamin</td>
-                        <td>72 Tahun <br> Laki-laki</td>
-                    </tr>
-                </table>
+               <!-- <button pButton label="Sebelumnya" iconPos="right" icon="pi pi-angle-right" class="p-button-sm"></button> -->
+               <button pButton label="Pasien" icon="pi pi-user" class="p-button-sm"></button>
             </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="p-2">
-            <div class="row">
-                <div class="col-fixed p-pl-2"><button pButton icon="pi pi-angle-left" iconPos="left" label="Terbaru" class="p-button-sm" disabled></button></div>
-                <div class="col p-text-center">
-                    <h4>Fazri Anggriawan</h4>
-                    <h5>33 thn, Laki-laki - RM: 808182</h5>
-                    22 Januari 2021, (hari ini).
-                    <span class="badge badge-info">BPJS - BPJS MANDIRI</span>&nbsp;
-                    <span class="badge badge-info">R.JALAN</span>&nbsp;
-                    <span class="badge badge-info">RJ2101120001</span>&nbsp;
-                </div>
-                <div class="col-fixed p-pr-2">
-                    <button pButton label="Sebelumnya" iconPos="right" icon="pi pi-angle-right" class="p-button-sm"></button>
-                    <button pButton label="All Data" icon="pi pi-table" class="p-button-sm"></button>
-                </div>
+         </div>
+         <div class="row">
+            <div class="col">
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Subjektif"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Tanda Vital"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Objektif"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Gambar/Photo"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Diagnosis"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Tindakan"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Kondisi Akhir"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Files"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Laboratorium"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Resep/Farmasi"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm" icon="pi pi-plus" label="Tambah Data" (click)="panelTambahData = true"></p-button>
             </div>
-            <div class="p-pt-2">
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Subjektif"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Tanda Vital"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Objektif"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Gambar/Photo"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Diagnosis"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Tindakan"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Kondisi Akhir"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Files"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Laboratorium"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-secondary" label="Resep/Farmasi"></p-button>
-                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm" icon="pi pi-plus" label="Tambah Data" (click)="panelTambahData = true"></p-button>
+         </div>
+      </div>
+      <hr>
+      <div>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">SUBJEKTIF</div>
+            <div class="col">
+               <p class="p-m-1"><span style="color: rgb(39, 104, 245);">KELUHAN : </span> <a @fadeInOut2>Kontrol rawat luka pasca op, keluhan saat ini tidak ada. </a></p>
+               <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LAMA KELUHAN : </span> <a>3 Hari</a></p>
+               <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LOKASI : </span> <a>rahang kanan dan bawah mata kiri</a></p>
+               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
             </div>
-        </div>
-        <hr class="p-m-0">
-        <div>
-            <div class="row p-p-3 p-pt-2 p-pb-2" @fadeInOut @fadeInOut2>
-                <div class="col-2 p-pt-2 bd">SUBJEKTIF</div>
-                <div class="col">
-                    <p class="p-m-1"><span style="color: rgb(39, 104, 245);">KELUHAN : </span> <a @fadeInOut2>Kontrol rawat luka pasca op, keluhan saat ini tidak ada. </a></p>
-                    <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LAMA KELUHAN : </span> <a>3 Hari</a></p>
-                    <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LOKASI : </span> <a>rahang kanan dan bawah mata kiri</a></p>
-                    <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-                </div>
-                <div class="col-fixed">
-                    <p-button styleClass="p-button-sm p-button-outlined p-button-info" icon="pi pi-pencil" label="Edit"></p-button>
-                </div>
+            <div class="col-2">
+               <p-button styleClass="p-button-sm p-button-outlined p-button-info" icon="pi pi-pencil" label="Edit"></p-button>
             </div>
-            <hr class="p-m-1">
-            <div class="row p-p-3 p-pt-2 p-pb-2" @fadeInOut @fadeInOut2>
-                <div class="col-2 p-pt-2 bd">TANDA VITAL</div>
-                <div class="col">
-                    <span style="color: rgb(39, 104, 245);">BERAT : </span> <a>80 kg </a><br>
-                    <span style="color: rgb(39, 104, 245);">TEKANAN DARAH : </span> <a>100/70 MmHg </a> <br>
-                    <span style="color: rgb(39, 104, 245);">NADI : </span> <a>82 /menit </a> <br>
-                    <span style="color: rgb(39, 104, 245);">SUHU AKSILER : </span> <a>36.5 <sup>o</sup>C </a> <br>
-                    <span style="color: rgb(39, 104, 245);">GIZI : </span> <a>N/A </a> <br>
-                    <span style="color: rgb(39, 104, 245);">KESADARAN (GCS) : </span> <a>15 </a> <br>
-                    <span style="color: rgb(39, 104, 245);">KARNORSKY SCORE : </span> <a>Capable of normal activity, few symptoms or signs of disease (90%) </a> <br>
-                    <span style="color: rgb(39, 104, 245);">SKALA NYERI : </span> <a>2 </a> <br>
-                    <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-                </div>
-                <div class="col-fixed">
-                    <p-button styleClass="p-button-sm p-button-outlined p-button-info" icon="pi pi-pencil" label="Edit"></p-button>
-                </div>
+         </div>
+         <hr>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">TANDA VITAL</div>
+            <div class="col">
+               <span style="color: rgb(39, 104, 245);">BERAT : </span> <a>80 kg </a><br>
+               <span style="color: rgb(39, 104, 245);">TEKANAN DARAH : </span> <a>100/70 MmHg </a> <br>
+               <span style="color: rgb(39, 104, 245);">NADI : </span> <a>82 /menit </a> <br>
+               <span style="color: rgb(39, 104, 245);">SUHU AKSILER : </span> <a>36.5 <sup>o</sup>C </a> <br>
+               <span style="color: rgb(39, 104, 245);">GIZI : </span> <a>N/A </a> <br>
+               <span style="color: rgb(39, 104, 245);">KESADARAN (GCS) : </span> <a>15 </a> <br>
+               <span style="color: rgb(39, 104, 245);">KARNORSKY SCORE : </span> <a>Capable of normal activity, few symptoms or signs of disease (90%) </a> <br>
+               <span style="color: rgb(39, 104, 245);">SKALA NYERI : </span> <a>2 </a> <br>
+               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
             </div>
-            <hr class="p-m-1">
-            <div class="row p-p-3 p-pt-2 p-pb-2" @fadeInOut @fadeInOut2>
-                <div class="col-2 p-pt-2 bd">OBJEKTIF</div>
-                <div class="col">
-                    <span style="color: rgb(39, 104, 245);">TANGGAL : </span> <a>Kamis, 12 Januari 2021. 09:45 </a><br>
-                    <span style="color: rgb(39, 104, 245);">LAIN-LAIN : </span> <a>- </a> <br>
-                    <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-                </div>
+            <div class="col-2">
+               <p-button styleClass="p-button-sm p-button-outlined p-button-info" icon="pi pi-pencil" label="Edit"></p-button>
             </div>
-            <hr class="p-m-1">
-            <div class="row p-p-3 p-pt-2 p-pb-2" @fadeInOut @fadeInOut2>
-                <div class="col-2 p-pt-2 bd">DIAGNOSIS</div>
-                <div class="col">
-                    <span style="color: rgb(39, 104, 245);">DIAG. UTAMA : </span> <a>(S02.4) - Fracture of malar and maxillary bones </a><br>
-                    <span style="color: rgb(39, 104, 245);">DIAG. BANDING : </span> <a>- </a> <br>
-                    <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-                </div>
+         </div>
+         <hr>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">OBJEKTIF</div>
+            <div class="col">
+               <span style="color: rgb(39, 104, 245);">TANGGAL : </span> <a>Kamis, 12 Januari 2021. 09:45 </a><br>
+               <span style="color: rgb(39, 104, 245);">LAIN-LAIN : </span> <a>- </a> <br>
+               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
             </div>
-            <hr class="p-m-1">
-            <div class="row p-p-3 p-pt-2 p-pb-2" @fadeInOut @fadeInOut2>
-                <div class="col-2 p-pt-2 bd">TINDAKAN</div>
-                <div class="col">
-                    <span style="color: rgb(39, 104, 245);">TINDAKAN : </span> <a>Perawatan luka kotor sedang (diameter 10cm2-20cm2) </a><br>
-                </div>
+         </div>
+         <hr>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">DIAGNOSIS</div>
+            <div class="col">
+               <span style="color: rgb(39, 104, 245);">DIAG. UTAMA : </span> <a>(S02.4) - Fracture of malar and maxillary bones </a><br>
+               <span style="color: rgb(39, 104, 245);">DIAG. BANDING : </span> <a>- </a> <br>
+               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
             </div>
-            <hr class="p-m-1">
-            <div class="row p-p-3 p-pt-2 p-pb-2" @fadeInOut @fadeInOut2>
-                <div class="col-2 p-pt-2 bd">KONDISI AKHIR</div>
-                <div class="col">
-                    <span style="color: rgb(39, 104, 245);">KONDISI AKHIR : </span> <a>Kontrol </a><br>
-                    <span style="color: rgb(39, 104, 245);">KETERANGAN : </span> <a>kontrol jika ada keluhan </a> <br>
-                    <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-                </div>
+         </div>
+         <hr>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">TINDAKAN</div>
+            <div class="col">
+               <span style="color: rgb(39, 104, 245);">TINDAKAN : </span> <a>Perawatan luka kotor sedang (diameter 10cm2-20cm2) </a><br>
             </div>
-            <hr class="p-m-1">
-            <div class="row p-p-3 p-pt-2 p-pb-2" @fadeInOut @fadeInOut2>
-                <div class="col-2 p-pt-2 bd">GAMBAR / PHOTO</div>
-                <div class="col">
-                    <img src="https://via.placeholder.com/500" class="img-thumbnail p-mr-2" alt="Responsive image" width="150px">
-                    <img src="https://via.placeholder.com/500" class="img-thumbnail" alt="Responsive image" width="150px">
-                </div>
+         </div>
+         <hr>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">KONDISI AKHIR</div>
+            <div class="col">
+               <span style="color: rgb(39, 104, 245);">KONDISI AKHIR : </span> <a>Kontrol </a><br>
+               <span style="color: rgb(39, 104, 245);">KETERANGAN : </span> <a>kontrol jika ada keluhan </a> <br>
+               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
             </div>
-        </div>
-    </div>
-    <div class="col-2" *ngIf="comparasion"></div>
-    <div class="col-3 p-pt-2">
-        <div>
-            <button pButton label="Komparasi Kunjungan" (click)="comparasion = true" icon="pi pi-clone" class="p-button-sm"></button>
-            <button pButton class="p-button-block" label="Actions" icon="pi pi-angle-down" class="p-button-sm" iconPos="right"></button>
-        </div>
-        <!-- <div id="list-example" class="list-group">
-            <a class="list-group-item list-group-item-action" href="#list-item-1">Pemeriksaan Fisik</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-2">Radiologi</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-3">Farmasi</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-4">Laboratorium</a>
-        </div> -->
-    </div>
+         </div>
+         <hr>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">GAMBAR / PHOTO</div>
+            <div class="col">
+               <img src="https://via.placeholder.com/500" class="img-thumbnail p-mr-2" alt="Responsive image" width="150px">
+               <img src="https://via.placeholder.com/500" class="img-thumbnail" alt="Responsive image" width="150px">
+            </div>
+         </div>
+         <hr>
+         <div class="row" @fadeInOut @fadeInOut2>
+            <div class="col-2 p-ml-3 p-pt-2 bd">FARMASI</div>
+            <div class="col">
+               <table class="table">
+                  <tr>
+                     <th>No.</th>
+                     <th>Nama Obat</th>
+                     <th>Jumlah</th>
+                     <th>Satuan</th>
+                     <th>Catatan</th>
+                  </tr>
+                  <tr>
+                     <td>1.</td>
+                     <td>Panadol 500mg</td>
+                     <td>2</td>
+                     <td>tablet</td>
+                     <td>makan 1x sehari sebelum makan</td>
+                  </tr>
+                  <tr>
+                     <td>2.</td>
+                     <td>Tolak Angin</td>
+                     <td>1</td>
+                     <td>sachet</td>
+                     <td>makan 2x sehari setelah makan makan</td>
+                  </tr>
+                  <tr>
+                     <td>3.</td>
+                     <td colspan="4">Racikan</td>
+                  </tr>
+                  <tr>
+                     <td>&nbsp;</td>
+                     <td>Tolak Angin</td>
+                     <td>1</td>
+                     <td>sachet</td>
+                     <td>makan 2x sehari setelah makan makan</td>
+                  </tr>
+                  <tr>
+                     <td>&nbsp;</td>
+                     <td>Tolak Angin</td>
+                     <td>1</td>
+                     <td>sachet</td>
+                     <td>makan 2x sehari setelah makan makan</td>
+                  </tr>
+                  <tr>
+                     <td>&nbsp;</td>
+                     <td>Tolak Angin</td>
+                     <td>1</td>
+                     <td>sachet</td>
+                     <td>makan 2x sehari setelah makan makan</td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="col-2" *ngIf="comparasion"></div>
+   <div class="col-3 p-pt-2">
+      <div *ngIf="!stickyRightPanel">
+         <button pButton label="Komparasi Kunjungan" (click)="comparasion = true" icon="pi pi-clone" class="p-button-sm"></button>
+         <button pButton class="p-button-block" label="Actions" icon="pi pi-angle-down" class="p-button-sm" iconPos="right"></button>
+      </div>
+      <div *ngIf="stickyRightPanel" style="position: fixed; right: 0; width: 25%; top: 80px;" @fadeInOut>
+         <div class="p-p-3 p-mr-3 p-shadow-2 rounded">
+            <div>
+               <h4 class="p-mb-1">Fazri Anggriawan</h4>
+               <h5 class="p-mb-0">33 thn, Laki-laki - RM: 808182</h5>
+               <span class="p-mb-1">22 Januari 2021, (hari ini)</span>
+               <span class="badge badge-info p-mb-1">BPJS - BPJS MANDIRI</span>
+               <span class="badge badge-info p-mb-1">R.JALAN</span>
+               <span class="badge badge-info p-mb-1">RJ2101120001</span>
+            </div>
+            <div id="list-example" class="list-group">
+               <a class="list-group-item list-group-item-action" href="#list-item-1">Pemeriksaan Fisik</a>
+               <a class="list-group-item list-group-item-action" href="#list-item-2">Radiologi</a>
+               <a class="list-group-item list-group-item-action" href="#list-item-3">Farmasi</a>
+               <a class="list-group-item list-group-item-action" href="#list-item-4">Laboratorium</a>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 
-<p-sidebar [(visible)]="comparasion" position="right" [style]="{width:'38rem',overflow:'auto'}" [blockScroll]="true" [modal]="false" [blockScroll]="true">
-    <h1 class="tx-16 p-pt-2"><i class="pi pi-clone tx-16"></i> &nbsp; Komparasi Kunjungan</h1>
-    <hr class="p-mb-1">
-    <div class="row p-mt-4 p-pl-2 p-pb-2">
-        <div class="col p-text-center">
-            <h4>Kunjungan Ke 1</h4>
-            7 Januari 2021, (2 minggu lalu)
-        </div>
-    </div>
-    <hr>
-    <div class="row p-pl-3">
-        <div class="col-2 p-pt-2 bd">SUBJEKTIF</div>
-        <div class="col">
-            <p class="p-m-1"><span style="color: rgb(24, 25, 27);">KELUHAN : </span> <a>Kontrol rawat luka pasca op, keluhan saat ini tidak ada. </a> </p>
-            <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LAMA KELUHAN : </span> <a>3 Hari</a></p>
-            <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LOKASI : </span> <a>rahang kanan dan bawah mata kiri</a></p>
-            <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-        </div>
-    </div>
-    <hr>
-    <div class="row p-pl-3">
-        <div class="col-2 p-pt-2 bd">TANDA VITAL</div>
-        <div class="col">
-            <span style="color: rgb(39, 104, 245);">BERAT : </span> <a>80 kg </a> <br>
-            <span style="color: rgb(39, 104, 245);">TEKANAN DARAH : </span> <a>100/70 MmHg </a> <br>
-            <span style="color: rgb(39, 104, 245);">NADI : </span> <a>82 /menit </a>
-            <span style="color: rgb(39, 104, 245);">SUHU AKSILER : </span> <a>36.5 <sup>o</sup>C </a>
-            <span style="color: rgb(39, 104, 245);">GIZI : </span> <a>N/A </a>
-            <span style="color: rgb(39, 104, 245);">KESADARAN (GCS) : </span> <a>15 </a>
-            <span style="color: rgb(39, 104, 245);">KARNORSKY SCORE : </span> <a>Capable of normal activity, few symptoms or signs of disease (90%) </a>
-            <span style="color: rgb(39, 104, 245);">SKALA NYERI : </span> <a>2 </a> <br>
-            <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-        </div>
-    </div>
-    <hr>
-    <div class="row p-pl-3">
-        <div class="col-2 p-pt-2 bd">OBJEKTIF</div>
-        <div class="col">
-            <span style="color: rgb(39, 104, 245);">TANGGAL : </span> <a>Kamis, 12 Januari 2021. 09:45 </a><br>
-            <span style="color: rgb(39, 104, 245);">LAIN-LAIN : </span> <a>- </a> <br>
-            <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-        </div>
-    </div>
-    <hr>
-    <div class="row p-pl-3">
-        <div class="col-2 p-pt-2 bd">GAMBAR / PHOTO</div>
-        <div class="col">
-            <img src="https://via.placeholder.com/500" class="img-thumbnail p-mr-2" alt="Responsive image" width="150px">
-            <img src="https://via.placeholder.com/500" class="img-thumbnail" alt="Responsive image" width="150px">
-        </div>
-    </div>
-    <hr>
-    <div class="row p-pl-3">
-        <div class="col-2 p-pt-2 bd">DIAGNOSIS</div>
-        <div class="col">
-            <span style="color: rgb(39, 104, 245);">DIAG. UTAMA : </span> <a>(S02.4) - Fracture of malar and maxillary bones </a><br>
-            <span style="color: rgb(39, 104, 245);">DIAG. BANDING : </span> <a>- </a> <br>
-            <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-        </div>
-    </div>
-    <hr>
-    <div class="row p-pl-3">
-        <div class="col-2 p-pt-2 bd">TINDAKAN</div>
-        <div class="col">
-            <span style="color: rgb(39, 104, 245);">TINDAKAN : </span> <a>Perawatan luka kotor sedang (diameter 10cm2-20cm2) </a><br>
-        </div>
-    </div>
-    <hr>
-    <div class="row p-pl-3">
-        <div class="col-2 p-pt-2 bd">KONDISI AKHIR</div>
-        <div class="col">
-            <span style="color: rgb(39, 104, 245);">KONDISI AKHIR : </span> <a>Kontrol </a><br>
-            <span style="color: rgb(39, 104, 245);">KETERANGAN : </span> <a>kontrol jika ada keluhan </a> <br>
-            <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-        </div>
-    </div>
-    <div class="p-mb-5"></div>
+<p-sidebar [(visible)]="comparasion" position="right" [style]="{width:'40%',overflow:'auto'}" [blockScroll]="true" [modal]="false" [blockScroll]="true">
+   <h1 class="tx-16 p-pt-2"><i class="pi pi-clone tx-16"></i> &nbsp; Komparasi Kunjungan</h1>
+   <hr class="p-mb-1">
+   <div class="row p-mt-4 p-pl-2 p-pb-2">
+      <div class="col p-text-center">
+         <h4>Kunjungan Ke 1</h4>
+         7 Januari 2021, (2 minggu lalu)
+      </div>
+   </div>
+   <hr>
+   <div class="row p-pl-3">
+      <div class="col-2 p-pt-2 bd">SUBJEKTIF</div>
+      <div class="col">
+         <p class="p-m-1"><span style="color: rgb(24, 25, 27);">KELUHAN : </span> <a>Kontrol rawat luka pasca op, keluhan saat ini tidak ada. </a> </p>
+         <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LAMA KELUHAN : </span> <a>3 Hari</a></p>
+         <p class="p-m-1"><span style="color: rgb(39, 104, 245);">LOKASI : </span> <a>rahang kanan dan bawah mata kiri</a></p>
+         <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+      </div>
+   </div>
+   <hr>
+   <div class="row p-pl-3">
+      <div class="col-2 p-pt-2 bd">TANDA VITAL</div>
+      <div class="col">
+         <span style="color: rgb(39, 104, 245);">BERAT : </span> <a>80 kg </a> <br>
+         <span style="color: rgb(39, 104, 245);">TEKANAN DARAH : </span> <a>100/70 MmHg </a> <br>
+         <span style="color: rgb(39, 104, 245);">NADI : </span> <a>82 /menit </a>
+         <span style="color: rgb(39, 104, 245);">SUHU AKSILER : </span> <a>36.5 <sup>o</sup>C </a>
+         <span style="color: rgb(39, 104, 245);">GIZI : </span> <a>N/A </a>
+         <span style="color: rgb(39, 104, 245);">KESADARAN (GCS) : </span> <a>15 </a>
+         <span style="color: rgb(39, 104, 245);">KARNORSKY SCORE : </span> <a>Capable of normal activity, few symptoms or signs of disease (90%) </a>
+         <span style="color: rgb(39, 104, 245);">SKALA NYERI : </span> <a>2 </a> <br>
+         <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+      </div>
+   </div>
+   <hr>
+   <div class="row p-pl-3">
+      <div class="col-2 p-pt-2 bd">OBJEKTIF</div>
+      <div class="col">
+         <span style="color: rgb(39, 104, 245);">TANGGAL : </span> <a>Kamis, 12 Januari 2021. 09:45 </a><br>
+         <span style="color: rgb(39, 104, 245);">LAIN-LAIN : </span> <a>- </a> <br>
+         <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+      </div>
+   </div>
+   <hr>
+   <div class="row p-pl-3">
+      <div class="col-2 p-pt-2 bd">GAMBAR / PHOTO</div>
+      <div class="col">
+         <img src="https://via.placeholder.com/500" class="img-thumbnail p-mr-2" alt="Responsive image" width="150px">
+         <img src="https://via.placeholder.com/500" class="img-thumbnail" alt="Responsive image" width="150px">
+      </div>
+   </div>
+   <hr>
+   <div class="row p-pl-3">
+      <div class="col-2 p-pt-2 bd">DIAGNOSIS</div>
+      <div class="col">
+         <span style="color: rgb(39, 104, 245);">DIAG. UTAMA : </span> <a>(S02.4) - Fracture of malar and maxillary bones </a><br>
+         <span style="color: rgb(39, 104, 245);">DIAG. BANDING : </span> <a>- </a> <br>
+         <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+      </div>
+   </div>
+   <hr>
+   <div class="row p-pl-3">
+      <div class="col-2 p-pt-2 bd">TINDAKAN</div>
+      <div class="col">
+         <span style="color: rgb(39, 104, 245);">TINDAKAN : </span> <a>Perawatan luka kotor sedang (diameter 10cm2-20cm2) </a><br>
+      </div>
+   </div>
+   <hr>
+   <div class="row p-pl-3">
+      <div class="col-2 p-pt-2 bd">KONDISI AKHIR</div>
+      <div class="col">
+         <span style="color: rgb(39, 104, 245);">KONDISI AKHIR : </span> <a>Kontrol </a><br>
+         <span style="color: rgb(39, 104, 245);">KETERANGAN : </span> <a>kontrol jika ada keluhan </a> <br>
+         <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+      </div>
+   </div>
+   <div class="p-mb-5"></div>
 </p-sidebar>
 
 <p-sidebar [(visible)]="panelTambahData" [fullScreen]="true">
-    <h4><i class="pi pi-plus"></i> Tambah Data</h4>
-    <div class="p-p-3">
-        <div class="row">
-            <div class="col">asdas</div>
-            <div class="col-9 card">
-                <h5 class="p-p-3 bd-b">Subjektif</h5>
-                <div class="p-field p-grid">
-                    <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Keluhan</label>
-                    <div class="p-col p-md-10">
-                        <input id="firstname4" type="text" pInputText>
-                    </div>
-                </div>
-                <div class="p-field p-grid">
-                    <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Lama Keluhan</label>
-                    <div class="p-col p-md-10">
-                        <input id="firstname4" type="text" pInputText>
-                    </div>
-                </div>
-                <div class="p-field p-grid">
-                    <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Lokasi</label>
-                    <div class="p-col p-md-10">
-                        <input id="firstname4" type="text" pInputText>
-                    </div>
-                </div>
+   <h4><i class="pi pi-plus"></i> Tambah Data</h4>
+   <div class="p-p-3">
+      <div class="row">
+         <div class="col">asdas</div>
+         <div class="col-9 card">
+            <h5 class="p-p-3 bd-b">Subjektif</h5>
+            <div class="p-field p-grid">
+               <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Keluhan</label>
+               <div class="p-col p-md-10">
+                  <input id="firstname4" type="text" pInputText>
+               </div>
             </div>
-        </div>
-        <div class="row p-text-center">
-            <p-card class="col-2"><h4>Subjektif</h4></p-card>
-            <p-card class="col-2"><h4>Tanda Vital</h4></p-card>
-            <p-card class="col-2"><h4>Objektif</h4></p-card>
-            <p-card class="col-2"><h4>Diagnosis</h4></p-card>
-            <p-card class="col-2"><h4>Tindakan</h4></p-card>
-            <p-card class="col-2"><h4>Kondisi Akhir</h4></p-card>
-        </div>
-    </div>
+            <div class="p-field p-grid">
+               <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Lama Keluhan</label>
+               <div class="p-col p-md-10">
+                  <input id="firstname4" type="text" pInputText>
+               </div>
+            </div>
+            <div class="p-field p-grid">
+               <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Lokasi</label>
+               <div class="p-col p-md-10">
+                  <input id="firstname4" type="text" pInputText>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="row p-text-center">
+         <p-card class="col-2"><h4>Subjektif</h4></p-card>
+         <p-card class="col-2"><h4>Tanda Vital</h4></p-card>
+         <p-card class="col-2"><h4>Objektif</h4></p-card>
+         <p-card class="col-2"><h4>Diagnosis</h4></p-card>
+         <p-card class="col-2"><h4>Tindakan</h4></p-card>
+         <p-card class="col-2"><h4>Kondisi Akhir</h4></p-card>
+      </div>
+   </div>
 </p-sidebar>
