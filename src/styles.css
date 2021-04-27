@@ -106,4 +106,11 @@
     margin-right: 0.5rem;
 }
 
-.p-menu{ width: unset; }
+.p-menu{ width: unset; border: unset; }
+
+.p-menu .p-menuitem-link .p-menuitem-text{ color: #2096f3; }
+
+.col-25{
+   flex: 0 0 18.66667%;
+   max-width: 18.66667%;
+}
