@@ -24,6 +24,7 @@ import { FormsModule } from "@angular/forms";
 import { SidebarModule } from "primeng/sidebar";
 import { AccordionModule } from "primeng/accordion";
 import { InputMaskModule } from 'primeng/inputmask';
+
 import { ChipModule } from "primeng/chip";
 import { FormOrderComponent } from './components/form-order/form-order.component';
 import { LoginComponent } from './components/login/login.component';

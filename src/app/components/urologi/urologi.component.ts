@@ -27,6 +27,7 @@ export class UrologiComponent implements OnInit {
    panelTambahData: boolean = false;
    stickyRightPanel: boolean = false;
    menu: MenuItem[] = [];
+   calendar: Date | undefined;
 
    @ViewChild('StickyMenu') menuElement: ElementRef | undefined;
 
@@ -51,14 +52,14 @@ export class UrologiComponent implements OnInit {
 
    ngOnInit(): void {
       this.menu = [
-         {
-            label: 'Menu',
-            items: [
-               { label: 'Pasien', icon: 'pi pi-angle-right' },
-               { label: 'Dokter', icon: 'pi pi-angle-right' },
-               { label: 'Perawat', icon: 'pi pi-angle-right' },
-            ]
-         },
+         // {
+         //    label: 'Menu',
+         //    items: [
+         //       { label: 'Pasien', icon: 'pi pi-user' },
+         //       { label: 'Dokter', icon: 'pi pi-angle-right' },
+         //       { label: 'Perawat', icon: 'pi pi-angle-right' },
+         //    ]
+         // },
          {
             label: 'Penunjang',
             items: [
@@ -69,10 +70,18 @@ export class UrologiComponent implements OnInit {
             ]
          },
          {
-            label: 'Actions',
+            label: 'Action',
             items: [
-               { label: 'History Kunjungan', icon: 'pi pi-angle-right', command: () => {this.comparasion = true}  },
-               { label: 'ICD-10 & ICD-9', icon: 'pi pi-angle-right' },
+               { label: 'Masuk Rawat Inap', icon: 'pi pi-angle-right' },
+               { label: 'Konsul ke Poli Lain', icon: 'pi pi-angle-right' },
+               { label: 'Jadwal Kunjungan', icon: 'pi pi-angle-right' },
+            ]
+         },
+         {
+            label: 'Referensi',
+            items: [
+               { label: 'History Kunjungan', icon: 'pi pi-clock', command: () => {this.comparasion = true}  },
+               { label: 'ICD-10 & ICD-9', icon: 'pi pi-table' },
             ]
          }
          ];
