@@ -20,12 +20,10 @@
          </div>
          <div class="row p-mt-2">
             <div class="col">
-               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Subjektif"></p-button>
-               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Tanda Vital"></p-button>
-               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Objektif"></p-button>
-               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Gambar/Photo"></p-button>
-               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Diagnosis"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Assessment Awal Medis Pasien Urologi"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="CPPT"></p-button>
                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Tindakan"></p-button>
+               <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Gambar/Photo"></p-button>
                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Kondisi Akhir"></p-button>
                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Files"></p-button>
                <p-button styleClass="p-mr-1 p-mb-1 p-button-sm p-button-outlined p-button-primary" label="Laboratorium"></p-button>
@@ -37,66 +35,308 @@
       <hr>
       <div>
          <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">SUBJEKTIF</div>
+            <div class="col-2 p-ml-3 p-pt-2 rounded bd">ASSESSMENT AWAL MEDIS PASIEN UROLOGI</div>
             <div class="col">
-               <p class="p-m-1"><span style="color: #0088d1;">KELUHAN : </span> <a >Kontrol rawat luka pasca op, keluhan saat ini tidak ada. </a></p>
-               <p class="p-m-1"><span style="color: #0088d1;">LAMA KELUHAN : </span> <a>3 Hari</a></p>
-               <p class="p-m-1"><span style="color: #0088d1;">LOKASI : </span> <a>rahang kanan dan bawah mata kiri</a></p>
+               <p-divider styleClass="p-mb-1 p-mt-2 p-text-bold"><span>KELUHAN</span></p-divider>
+               <p class="p-m-1"><span style="color: #0088d1;">Keluhan : </span> <a >Kontrol rawat luka pasca op, keluhan saat ini tidak ada. </a></p>
+               <p class="p-m-1"><span style="color: #0088d1;">Lama Keluhan : </span> <a>3 Hari</a></p>
+               <p class="p-m-1"><span style="color: #0088d1;">Lokasi : </span> <a>rahang kanan dan bawah mata kiri</a></p>
+
+               <p-divider styleClass="p-mb-1 p-mt-2 p-text-bold"><span>RIWAYAT PENYAKIT</span></p-divider>
+               <p class="p-m-1"><span style="color: #0088d1;">Riwayat Penyakit Sekarang (lengkap) : </span> Sakit perut</p>
+               <p class="p-m-1"><span style="color: #0088d1;">Riwayat Penyakit Terdahulu : </span> Sakit perut</p>
+
+               <p-divider styleClass="p-mb-1 p-mt-3 p-text-bold"><span>PEMERIKSAAN FISIK</span></p-divider>
+               <span style="color: #0088d1;">Keadaan Umum : </span> <a>80 kg </a><br>
+               <span style="color: #0088d1;">Kesadaran : </span> <a>80 kg </a><br>
+               <span style="color: #0088d1;">Kesan Sakit : </span> <a>80 kg </a><br>
+               <span style="color: #0088d1;">BB : </span> <a>80 kg </a><br>
+               <span style="color: #0088d1;">Suhu : </span> <a>36.5 <sup>o</sup>C </a> <br>
+               <span style="color: #0088d1;">Tinggi Badan : </span> <a>82 /menit </a> <br>
+               <span style="color: #0088d1;">Respirasi : </span> <a>100/70 MmHg </a> <br>
+               <span style="color: #0088d1;">Gizi : </span> <a>82 /menit </a> <br>
+               <span style="color: #0088d1;">Nadi : </span> <a>15 </a> <br>
+               <span style="color: #0088d1;">Tensi : </span> <a>N/A </a> <br>
+               <p-divider styleClass="p-mb-1 p-mt-3 p-text-bold"><span>STATUS PSIKOSOSIAL DAN SPIRITUAL</span></p-divider>
+               <span style="color: #0088d1;">Status Psikologis : </span> Cemas<br>
+               <span style="color: #0088d1;">Status Mental : </span><br>
+               - Sadar & orientasi baik<br>
+               - Ada masalah perilaku : suka murung<br>
+               - Perilaku kekerasan yang dialami pasien sebelumnya : kdrt<br>
+               <span style="color: #0088d1;">Status Sosial : </span><br>
+               - Hubungan pasien dengan Keluarga <br>
+               - Tempat tinggal : rumah <br>
+               - Kerabat terdekat yang dapat dihubungi : Baik. Fazri Anggriawan (Ayah) - 082110661680 <br>
+               <span style="color: #0088d1;">Status Ekonomi : </span> BPJS<br>
+               <span style="color: #0088d1;">Status Spiritual : </span> <br>
+               - Kegiatan keagamaan yang biasa dilakukan : Sholat <br>
+               - Kegiatan spiritual yang dibutuhkan selama perawatan : Masjid <br>
+
+               <p-divider></p-divider>
+               <!-- <span style="color: #0088d1;">Pemeriksaan Fisik : </span> Tidak<br> -->
+               <span style="color: #0088d1;">Kebutuhan Privasi Pasien : </span> Ya<br>
+               - Keinginan waktu/tempat khusus saat wawancara dan tindakan : sore hari di kamar <br>
+               - Pengobatan <br>
+               - Transportasi <br>
+               - Kondisi Penyakit <br>
+               - Lain-lain : Makanan <br>
+               <span style="color: #0088d1;">Status Fungsional : </span> <br>
+               - Aktifitas dan mobilisasi <br>
+               - Perlu bantuan : dibantu untuk dijalan <br>
+               - Alat bantu jalan : tongkat <br>
+
+               <p-divider styleClass="p-mb-1 p-mt-3 p-text-bold"><span>SKALA NYERI</span></p-divider>
+               <span style="color: #0088d1;">Skala Nyeri : </span> 0 (Tidak Nyeri)<br>
+               <span style="color: #0088d1;">Nyeri Kronis : </span><br>
+               - Intensitas istirahat : 4/10 <br>
+               - Aktifitas : 8/10 <br>
+               <span style="color: #0088d1;">Nyeri Akut : </span><br>
+               - Intensitas istirahat : 4/10 <br>
+               - Aktifitas : 8/10 <br>
+
                <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+               <p-chip>Poli Urologi</p-chip>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Subjective (S)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Objective (O)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Assesment (A)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Plan (P)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Instruksi Tenaga Kesehatan</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
             </div>
          </div>
          <hr>
          <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">TANDA VITAL</div>
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">CPPT</div>
             <div class="col">
-               <span style="color: #0088d1;">BERAT : </span> <a>80 kg </a><br>
-               <span style="color: #0088d1;">TEKANAN DARAH : </span> <a>100/70 MmHg </a> <br>
-               <span style="color: #0088d1;">NADI : </span> <a>82 /menit </a> <br>
-               <span style="color: #0088d1;">SUHU AKSILER : </span> <a>36.5 <sup>o</sup>C </a> <br>
-               <span style="color: #0088d1;">GIZI : </span> <a>N/A </a> <br>
-               <span style="color: #0088d1;">KESADARAN (GCS) : </span> <a>15 </a> <br>
-               <span style="color: #0088d1;">KARNORSKY SCORE : </span> <a>Capable of normal activity, few symptoms or signs of disease (90%) </a> <br>
-               <span style="color: #0088d1;">SKALA NYERI : </span> <a>2 </a> <br>
-               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+               <p-accordion [multiple]="true" styleClass="p-mb-3">
+                  <p-accordionTab>
+                     <ng-template pTemplate="header" styleClass="inline">
+                        <div class="p-mr-4">CPPT Sebelumnya</div>
+                     </ng-template>
+                     <table class="table p-mt-2">
+                        <tr>
+                           <th width="100">Tgl/Jam</th>
+                           <th>Profesi</th>
+                           <th>SOAP</th>
+                           <th>Instruksi Tenaga Kesehatan</th>
+                           <th>Verifikasi DPJP</th>
+                        </tr>
+                        <tr>
+                           <td>26-03-2021</td>
+                           <td>Perawat</td>
+                           <td>
+                              <b>Subjective (S)</b>
+                              <div class="p-pl-4">
+                                 Nyeri akut lutut kiri sejak 1-2 jam
+                              </div>
+                              <b>Objective (O)</b>
+                              <div class="p-pl-4">
+                                 Skala nyeri VAS: 7, TD: 165/90, N 115/m, Frek Nafas: 30/m
+                              </div>
+                              <b>Assesment (A)</b>
+                              <div class="p-pl-4">
+                                 Nyeri akut arthritis gout
+                              </div>
+                              <b>Plan (P)</b>
+                              <div class="p-pl-4">
+                                 Mengatasi nyeri dalam 2 jam dgn target VAS < 4
+                              </div>
+                           </td>
+                           <td>
+                              <ul>
+                                 <li>Monitoring nyeri tiap 30'</li>
+                                 <li>Lapor DPJP</li>
+                                 <li>Kolaborasi pemberian anti inlamasi & analgesic</li>
+                              </ul>
+                           </td>
+                           <td>dr. Bebet Prasetyo, SpU</td>
+                        </tr>
+                        <tr>
+                           <td>27-03-2021</td>
+                           <td>Dokter</td>
+                           <td>
+                              <b>Subjective (S)</b>
+                              <div class="p-pl-4">
+                                 Nyeri lutut kiri akut sejak pagi
+                              </div>
+                              <b>Objective (O)</b>
+                              <div class="p-pl-4">
+                                 Lutut kiri agak merah, nyeri tekan, skala NRS 7-8, hangat pd palpasi
+                              </div>
+                              <b>Assesment (A)</b>
+                              <div class="p-pl-4">
+                                 Gouty arthritis - flare genu sinitra
+                              </div>
+                              <b>Plan (P)</b>
+                              <div class="p-pl-4">
+                                 inj steroid xx mg, tab colchicine 2 x 0.6mg/hari
+                              </div>
+                           </td>
+                           <td>
+                              <ul>
+                                 <li>lapor 2 jam lagi skala nyeri</li>
+                                 <li>Foto Ro lutut hari ini bila nyeri mereda / toleransi cukup</li>
+                              </ul>
+                           </td>
+                           <td>dr. Bebet Prasetyo, SpU</td>
+                        </tr>
+                     </table>
+                  </p-accordionTab>
+               </p-accordion>
+               <div class="bd rounded">
+                  <table class="table">
+                     <tr>
+                        <th width="100">Tgl/Jam</th>
+                        <th>Profesi</th>
+                        <th>SOAP</th>
+                        <th>Instruksi Tenaga Kesehatan</th>
+                        <th>Verifikasi DPJP</th>
+                     </tr>
+                     <tr>
+                        <td>30-03-2021</td>
+                        <td>Dokter</td>
+                        <td>
+                           <b>Subjective (S)</b>
+                           <div class="p-pl-4">
+                              Nyeri akut lutut kiri sejak 1-2 jam
+                           </div>
+                           <b>Objective (O)</b>
+                           <div class="p-pl-4">
+                              Skala nyeri VAS: 7, TD: 165/90, N 115/m, Frek Nafas: 30/m
+                           </div>
+                           <b>Assesment (A)</b>
+                           <div class="p-pl-4">
+                              Nyeri akut arthritis gout
+                           </div>
+                           <b>Plan (P)</b>
+                           <div class="p-pl-4">
+                              Mengatasi nyeri dalam 2 jam dgn target VAS < 4
+                           </div>
+                        </td>
+                        <td>
+                           <ul>
+                              <li>Monitoring nyeri tiap 30'</li>
+                              <li>Lapor DPJP</li>
+                              <li>Kolaborasi pemberian anti inlamasi & analgesic</li>
+                           </ul>
+                        </td>
+                        <td>dr. Bebet Prasetyo, SpU</td>
+                     </tr>
+                  </table>
+               </div>
             </div>
          </div>
          <hr>
          <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">OBJEKTIF</div>
-            <div class="col">
-               <span style="color: #0088d1;">TANGGAL : </span> <a>Kamis, 12 Januari 2021. 09:45 </a><br>
-               <span style="color: #0088d1;">LAIN-LAIN : </span> <a>- </a> <br>
-               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-            </div>
-         </div>
-         <hr>
-         <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">DIAGNOSIS</div>
-            <div class="col">
-               <span style="color: #0088d1;">DIAG. UTAMA : </span> <a>(S02.4) - Fracture of malar and maxillary bones </a><br>
-               <span style="color: #0088d1;">DIAG. BANDING : </span> <a>- </a> <br>
-               <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
-            </div>
-         </div>
-         <hr>
-         <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">TINDAKAN</div>
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">TINDAKAN</div>
             <div class="col">
                <span style="color: #0088d1;">TINDAKAN : </span> <a>Perawatan luka kotor sedang (diameter 10cm2-20cm2) </a><br>
-            </div>
-         </div>
-         <hr>
-         <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">KONDISI AKHIR</div>
-            <div class="col">
-               <span style="color: #0088d1;">KONDISI AKHIR : </span> <a>Kontrol </a><br>
-               <span style="color: #0088d1;">KETERANGAN : </span> <a>kontrol jika ada keluhan </a> <br>
                <p-chip>dr. Bebet Prasetyo, SpU</p-chip>
+               <p-chip>Poli Urologi</p-chip>
             </div>
          </div>
          <hr>
          <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">GAMBAR / PHOTO</div>
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">GAMBAR / PHOTO</div>
             <div class="col">
                <img src="https://via.placeholder.com/500" class="img-thumbnail p-mr-2" alt="Responsive image" width="150px">
                <img src="https://via.placeholder.com/500" class="img-thumbnail" alt="Responsive image" width="150px">
@@ -104,54 +344,23 @@
          </div>
          <hr>
          <div class="row" @fadeInOut >
-            <div class="col-2 p-ml-3 p-pt-2 bd">FARMASI</div>
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">E-RESEP</div>
             <div class="col">
                <table class="table">
                   <tr>
-                     <th>No.</th>
+                     <th width="50"></th>
                      <th>Nama Obat</th>
-                     <th>Jumlah</th>
-                     <th>Satuan</th>
                      <th>Catatan</th>
                   </tr>
                   <tr>
-                     <td>1.</td>
-                     <td>Panadol 500mg</td>
-                     <td>2</td>
-                     <td>tablet</td>
-                     <td>makan 1x sehari sebelum makan</td>
+                     <td>R/</td>
+                     <td>Tamofen tab mg 20 no XXX </td>
+                     <td>S. sdd tab 1</td>
                   </tr>
                   <tr>
-                     <td>2.</td>
-                     <td>Tolak Angin</td>
-                     <td>1</td>
-                     <td>sachet</td>
-                     <td>makan 2x sehari setelah makan makan</td>
-                  </tr>
-                  <tr>
-                     <td>3.</td>
-                     <td colspan="4">Racikan</td>
-                  </tr>
-                  <tr>
-                     <td>&nbsp;</td>
-                     <td>Tolak Angin</td>
-                     <td>1</td>
-                     <td>sachet</td>
-                     <td>makan 2x sehari setelah makan makan</td>
-                  </tr>
-                  <tr>
-                     <td>&nbsp;</td>
-                     <td>Tolak Angin</td>
-                     <td>1</td>
-                     <td>sachet</td>
-                     <td>makan 2x sehari setelah makan makan</td>
-                  </tr>
-                  <tr>
-                     <td>&nbsp;</td>
-                     <td>Tolak Angin</td>
-                     <td>1</td>
-                     <td>sachet</td>
-                     <td>makan 2x sehari setelah makan makan</td>
+                     <td>R/</td>
+                     <td>Theragran M tab no XXX </td>
+                     <td>S. 1dd tab 1</td>
                   </tr>
                </table>
             </div>
@@ -241,13 +450,6 @@
    </div>
    <hr>
    <div class="row p-pl-3">
-      <div class="col-2 p-pt-2 bd">TINDAKAN</div>
-      <div class="col">
-         <span style="color: #0088d1;">TINDAKAN : </span> <a>Perawatan luka kotor sedang (diameter 10cm2-20cm2) </a><br>
-      </div>
-   </div>
-   <hr>
-   <div class="row p-pl-3">
       <div class="col-2 p-pt-2 bd">KONDISI AKHIR</div>
       <div class="col">
          <span style="color: #0088d1;">KONDISI AKHIR : </span> <a>Kontrol </a><br>
@@ -259,39 +461,128 @@
 </p-sidebar>
 
 <p-sidebar [(visible)]="panelTambahData" [fullScreen]="true">
-   <h4><i class="pi pi-plus"></i> Tambah Data</h4>
-   <div class="p-p-3">
-      <div class="row">
-         <div class="col">asdas</div>
-         <div class="col-9 card">
-            <h5 class="p-p-3 bd-b">Subjektif</h5>
-            <div class="p-field p-grid">
-               <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Keluhan</label>
-               <div class="p-col p-md-10">
-                  <input id="firstname4" type="text" pInputText>
-               </div>
+   <h4><i class="pi pi-plus"></i> CPPT Pasien Rawat Jalan</h4>
+   <div class="row p-p-4">
+      <div class="col-7 card p-p-4">
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Tanggal/Jam</div>
+            <div class="col">
+               <input type="text" pInputText>
             </div>
-            <div class="p-field p-grid">
-               <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Lama Keluhan</label>
-               <div class="p-col p-md-10">
-                  <input id="firstname4" type="text" pInputText>
-               </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Profesi</div>
+            <div class="col">
+               <input type="text" pInputText>
             </div>
-            <div class="p-field p-grid">
-               <label for="firstname4" class="p-col-4 p-mb-2 p-md-2 p-mb-md-0">Lokasi</label>
-               <div class="p-col p-md-10">
-                  <input id="firstname4" type="text" pInputText>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Subjective (S)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
                </div>
             </div>
          </div>
-      </div>
-      <div class="row p-text-center">
-         <p-card class="col-2"><h4>Subjektif</h4></p-card>
-         <p-card class="col-2"><h4>Tanda Vital</h4></p-card>
-         <p-card class="col-2"><h4>Objektif</h4></p-card>
-         <p-card class="col-2"><h4>Diagnosis</h4></p-card>
-         <p-card class="col-2"><h4>Tindakan</h4></p-card>
-         <p-card class="col-2"><h4>Kondisi Akhir</h4></p-card>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Objective (O)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Assesment (A)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Plan (P)</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
+         <div class="row">
+            <div class="col-2 p-ml-3 p-pt-2 bd rounded">Instruksi Tenaga Kesehatan</div>
+            <div class="col">
+               <div class="card">
+                  <editor
+                     [init]="{
+                        force_br_newlines : true,
+                        force_p_newlines : false,
+                        forced_root_block : '',
+                        height: 200,
+                        menubar: false,
+                        plugins: ['lists','autoresize'],
+                        toolbar:
+                           'undo redo | bold italic | \
+                           bullist numlist outdent indent'
+                        }">
+                  </editor>
+               </div>
+            </div>
+         </div>
+         <hr>
       </div>
    </div>
 </p-sidebar>

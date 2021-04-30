@@ -24,6 +24,8 @@ import { FormsModule } from "@angular/forms";
 import { SidebarModule } from "primeng/sidebar";
 import { AccordionModule } from "primeng/accordion";
 import { InputMaskModule } from 'primeng/inputmask';
+import { DividerModule } from 'primeng/divider';
+import { EditorModule, TINYMCE_SCRIPT_SRC } from "@tinymce/tinymce-angular";
 
 import { ChipModule } from "primeng/chip";
 import { FormOrderComponent } from './components/form-order/form-order.component';
@@ -61,9 +63,13 @@ import { UrologiComponent } from './components/urologi/urologi.component';
     AccordionModule,
     InputMaskModule,
     ChipModule,
-    MenuModule
+    MenuModule,
+    DividerModule,
+    EditorModule
   ],
-  providers: [],
+  providers: [
+   { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
