@@ -118,3 +118,11 @@
 }
 
 .table th{ border-top: unset; }
+
+.thumbnailSelector[_ngcontent-foc-c115], .thumbnailSelector[_ngcontent-ioq-c115] {
+   width: 123px !important;
+}
+
+a.list-group-item[_ngcontent-foc-c115]{
+   padding: unset !important;
+}

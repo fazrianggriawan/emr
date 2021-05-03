@@ -42,7 +42,14 @@
               "node_modules/primeng/resources/primeng.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/hammerjs/hammer.js",
+              "node_modules/cornerstone-core/dist/cornerstone.js",
+              "node_modules/cornerstone-math/dist/cornerstoneMath.js",
+              "node_modules/cornerstone-tools/dist/cornerstoneTools.js",
+              "node_modules/dicom-parser/dist/dicomParser.js",
+              "src/assets/cornerstone/lib/cornerstoneWADOImageLoader.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,4 +1,15 @@
 <div class="row">
+   <div class="col" style="height: 900px;">
+      <div class="choose_file">
+         Choose Your DICOM Files
+         <input class="hide_file" type="file" multiple accept="application/dicom" id="imagens" title="selecione arquivos de imagens">
+       </div>
+       <div style="display: flex;height: calc(100% - 90px); width:100%;">
+         <dicom-viewer [enableViewerTools]="false" [enablePlayTools]="false" [maxImagesToLoad]="2" style="height:100%; width:100%; margin: 10px;"></dicom-viewer>
+       </div>
+   </div>
+</div>
+<div class="row">
    <div class="col-2 p-mr-3" *ngIf="!comparasion" @fadeInOut>
       <!-- <div class="row card">
          <div class="col p-p-3">
@@ -586,3 +597,4 @@
       </div>
    </div>
 </p-sidebar>
+

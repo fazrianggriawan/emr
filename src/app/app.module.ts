@@ -26,6 +26,7 @@ import { AccordionModule } from "primeng/accordion";
 import { InputMaskModule } from 'primeng/inputmask';
 import { DividerModule } from 'primeng/divider';
 import { EditorModule, TINYMCE_SCRIPT_SRC } from "@tinymce/tinymce-angular";
+import { DicomViewerModule } from 'ng-dicomviewer';
 
 import { ChipModule } from "primeng/chip";
 import { FormOrderComponent } from './components/form-order/form-order.component';
@@ -65,7 +66,8 @@ import { UrologiComponent } from './components/urologi/urologi.component';
     ChipModule,
     MenuModule,
     DividerModule,
-    EditorModule
+    EditorModule,
+    DicomViewerModule
   ],
   providers: [
    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }
