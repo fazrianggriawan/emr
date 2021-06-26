@@ -1,0 +1,14 @@
+<div class="bd-b p-mb-2">
+    <h5>HASIL USG BEDAH UROLOGI</h5>
+</div>
+<form [formGroup]="formHasilUsg" class="p-mt-2">
+    <fieldset class="form-fieldset">
+        <!-- <legend>Pemeriksaan Fisik</legend> -->
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label class="col-3 col-form-label">Hasil</label>
+            <div class="col">
+                <p-editor formControlName="hasil" [style]="{'height':'320px'}"></p-editor>
+            </div>
+        </div>
+    </fieldset>
+</form>

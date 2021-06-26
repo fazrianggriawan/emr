@@ -1,0 +1,9 @@
+<div class="p-p-2 bd-b">
+    <input class="form-control" pInputText [(ngModel)]="term" placeholder="Search Menu...">
+</div>
+<div class="pd-10" *ngFor="let item of items">
+    <label class="tx-sans tx-uppercase tx-medium tx-10 tx-spacing-1 tx-color-03 pd-l-10">{{item.label}}</label>
+    <nav class="nav nav-sidebar">
+        <a class="nav-link" [routerLink]="[ item2.link ]" *ngFor="let item2 of item.items | filter:term"><span>{{item2.label}}</span></a>
+    </nav>
+</div>

@@ -1,0 +1,419 @@
+<div class="row bd p-shadow-3 bg-white">
+    <app-left-menu></app-left-menu>
+    <div class="col" style="background: #f7f9ff;">
+        <app-header-registrasi></app-header-registrasi>
+
+        <div class="row">
+            <div class="col-2 p-p-0 bd-r bg-white">
+                <app-menu-emr></app-menu-emr>
+            </div>
+            <div class="col p-p-3">
+                <div class="bd-b p-mb-2">
+                    <h5>PENGAJUAN PEMBEDAHAAN</h5>
+                </div>
+                <form [formGroup]="formDiagnosa" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3">
+                                <label class="d-block">Diagnosa </label>
+                            </div>
+                            <div class="col">
+                                <input pInputText class="form-control" formControlName="diagnosa">
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-6">
+                                <label class="d-block">Rencana Pembedahaan </label>
+                                <input pInputText class="form-control" formControlName="rencanaBedah">
+                            </div>
+                            <div class="col">
+                                <label class="d-block">Tanggal </label>
+                                <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" formControlName="tgl"></p-calendar>
+                            </div>
+                            <div class="col">
+                                <label class="d-block">Jam </label>
+                                <p-calendar placeholder="Pilih Jam" [timeOnly]="true" formControlName="jam"></p-calendar>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col">
+                                <label class="d-block">Ahli Bedah </label>
+                                <p-dropdown [options]="allDokter" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="ahliBedah"></p-dropdown>
+                            </div>
+                            <div class="col">
+                                <label class="d-block">Asisten Bedah </label>
+                                <p-dropdown [options]="allDokter" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="asistenBedah"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3">
+                                <label class="d-block">Anestesi yang diinginkan </label>
+                            </div>
+                            <div class="col">
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="anestesi" value="umum" formControlName="anestesi"></p-radioButton>
+                                    <label>Umum</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="anestesi" value="regional" formControlName="anestesi"></p-radioButton>
+                                    <label>Regional</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="anestesi" value="neurolep" formControlName="anestesi"></p-radioButton>
+                                    <label>Neurolep</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="anestesi" value="lokal" formControlName="anestesi"></p-radioButton>
+                                    <label>Lokal</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3">
+                                <label class="d-block">Jenis Kasus </label>
+                            </div>
+                            <div class="col">
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="jnsKasus" value="bersih" formControlName="jnsKasus"></p-radioButton>
+                                    <label>Bersih</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="jnsKasus" value="bersih tercemar" formControlName="jnsKasus"></p-radioButton>
+                                    <label>Bersih tercemar</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="jnsKasus" value="tercemar" formControlName="jnsKasus"></p-radioButton>
+                                    <label>Tercemar</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="jnsKasus" value="kotor" formControlName="jnsKasus"></p-radioButton>
+                                    <label>Kotor</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3 p-pt-2">
+                                <label class="d-block tx-bold">1. DATA MEDIS </label>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3">
+                                <label class="d-block p-pl-4">Pemeriksaan Fisik </label>
+                            </div>
+                            <div class="col">
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">BB</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="bb">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">kg</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">Nadi</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="nadi">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">x/menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">P</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="p">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">x/menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">Suhu</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="suhu">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><sup>o</sup>C</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">a. Riwayat Alergi</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="riwAlergi" value="Tidak" formControlName="riwAlergi"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="riwAlergi" value="Ya" formControlName="riwAlergi"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Obat</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiObat">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Makanan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiMakanan">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Lainnya</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiLain">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Reaksi</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiReaksi">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">b. Penyakit penyerta</label>
+                            <div class="col-5">
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="diabetes militus" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Diabetes Militus</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="hipertensi" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Hipertensi</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="dekompensasi medis" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Dekompensasi Medis</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="pasca infrak jantung" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Pasca Infrak Jantung</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="insufiensi koroner" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Insufiensi Koroner</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="gangguan fungsi hepar" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Gangguan Fungsi Hepar</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="gangguan fungsi ginjal" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Gangguan Fungsi Ginjal</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="gangguan fungsi paru" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Gangguan Fungsi Paru</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="penyakitPenyerta" value="gangguan pembekuan darah" formControlName="penyakitPenyerta"></p-checkbox>
+                                            <label>Gangguan Pembekuan Darah</label>
+                                        </div>
+                                        <div>
+                                            <label class="d-block">Lainnya </label>
+                                            <input pInputText class="form-control" formControlName="penyakitPenyertaLain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3 p-pt-2">
+                                <label class="d-block tx-bold">2. PEMERIKSAAN TAMBAHAN </label>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">a. E.K.G ((rutin) 40 tahun)</label>
+                            <div class="col">
+                                <input pInputText class="form-control" formControlName="ekg">
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">b. Thorax Photo</label>
+                            <div class="col">
+                                <input pInputText class="form-control" formControlName="thoraxPhoto">
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">c. Tes Fungsi Paru</label>
+                            <div class="col">
+                                <input pInputText class="form-control" formControlName="tesFungsiParu">
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">d. Hasil Konsultasi I K A</label>
+                            <div class="col">
+                                <input pInputText class="form-control" formControlName="hasilKonsulIka">
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">e. Hasil Konsultasi Kardiologi</label>
+                            <div class="col">
+                                <input pInputText class="form-control" formControlName="hasilKonsulKardio">
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3 p-pt-2">
+                                <label class="d-block tx-bold">3. HASIL LABORATORIUM</label>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-1">
+                            <label class="col-3 p-pl-5 col-form-label">a. Hasil laboratorium rutin <b>(harus diperiksa)</b></label>
+                            <div class="col-5">
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Hb</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="hb">
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Gol. Darah</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="golDarah">
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Gula Darah</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="gulaDarah">
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Masa Pendarahan</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="masaPendarahan">
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Masa Pembekuan</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="masaPembekuan">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 p-pl-5 col-form-label">b. Hasil laboratorium tambahan</label>
+                            <div class="col-5">
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Ureum</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="ureum">
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Creatinine</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="creatinine">
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label class="col-4 p-pl-5 col-form-label">Lab. Lain</label>
+                                    <div class="col">
+                                        <input pInputText class="form-control" formControlName="labLain">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col p-pt-2">
+                                <label class="d-block tx-bold">4. PENGOBATAN SAAT INI</label>
+                                <div class="col">
+                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                        <p-checkbox name="pengobatanSaatIni" value="obat hipertensi" formControlName="pengobatanSaatIni"></p-checkbox>
+                                        <label>Obat Hipertensi</label>
+                                    </div>
+                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                        <p-checkbox name="pengobatanSaatIni" value="obat jantung" formControlName="pengobatanSaatIni"></p-checkbox>
+                                        <label>Obat Jantung</label>
+                                    </div>
+                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                        <p-checkbox name="pengobatanSaatIni" value="sedatine / hypnotik" formControlName="pengobatanSaatIni"></p-checkbox>
+                                        <label>Sedatine / Hypnotik</label>
+                                    </div>
+                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                        <p-checkbox name="pengobatanSaatIni" value="obat D.M" formControlName="pengobatanSaatIni"></p-checkbox>
+                                        <label>Obat D.M</label>
+                                    </div>
+                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                        <p-checkbox name="pengobatanSaatIni" value="corti costeroid" formControlName="pengobatanSaatIni"></p-checkbox>
+                                        <label>Corti Costeroid</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-3">
+                                <label class="d-block">Persetujuan persediaan darah</label>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                            <p-radioButton name="persetujuanDarah" value="tidak" formControlName="persetujuanDarah"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </div>
+                                        <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                            <p-radioButton name="persetujuanDarah" value="ya" formControlName="persetujuanDarah"></p-radioButton>
+                                            <label>Ya, Jumlah :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group row p-mb-1">
+                                            <div class="col">
+                                                <input pInputText class="form-control" formControlName="persetujuanDarahYa">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <fieldset class="form-fieldset p-mt-2">
+                            <legend>Diisi oleh petugas anestesi / bedah sentral</legend>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col">
+                                    <label class="d-block">Premedikasi</label>
+                                    <input pInputText class="form-control" formControlName="premedikasi">
+                                </div>
+                                <div class="col">
+                                    <label class="d-block">Rencana Anestesi</label>
+                                    <input pInputText class="form-control" formControlName="rencanaAnest">
+                                </div>
+                                <div class="col">
+                                    <label class="d-block">Kamar Operasi</label>
+                                    <input pInputText class="form-control" formControlName="kamarOp">
+                                </div>
+                            </div>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col">
+                                    <label class="d-block">Persetujuan Konsulen</label>
+                                    <p-dropdown [options]="allDokter" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="dokterKonsulen"></p-dropdown>
+                                </div>
+                                <div class="col">
+                                    <label class="d-block">Dokter yang mengajukan</label>
+                                    <p-dropdown [options]="allDokter" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="dokterPengajuan"></p-dropdown>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -51,8 +51,8 @@
                         <td><button pButton (click)="op.toggle($event)" class="p-button-text p-button-secondary" icon="pi pi-angle-down" iconPos="right" label="{{product.customerName}}"></button></td>
                         <td>{{product.items}}</td>
                         <td>{{product.total}}</td>
-                        <td><p-chip label="{{product.payment}}"></p-chip></td>
-                        <td><p-chip label="{{product.status}}"></p-chip></td>
+                        <!-- <td><p-chip label="{{product.payment}}"></p-chip></td> -->
+                        <!-- <td><p-chip label="{{product.status}}"></p-chip></td> -->
                     </tr>
                 </ng-template>
             </p-table>
@@ -215,12 +215,11 @@
 <p-sidebar [(visible)]="moreFilter" position="right" [style]="{width:'30em'}">
     <h1 class="tx-16 p-pt-2"><i class="pi pi-filter tx-16"></i> &nbsp; More Filter</h1>
     <hr class="p-mb-1">
-    <p-accordion [multiple]="true">
+    <!-- <p-accordion [multiple]="true">
         <p-accordionTab header="Date">
             <div class="p-fluid p-pl-1">
                 <p-inputMask [(ngModel)]="filterDate" mask="99-99-9999" placeholder="dd-mm-yyyy"></p-inputMask>
             </div>
-            <!-- <input type="text" pInputMask mask="99-99-9999" [(ngModel)]="filterDate" placeholder="dd-mm-yyyy" > -->
         </p-accordionTab>
         <p-accordionTab header="Cust. Email">
             <div class="p-fluid">
@@ -237,7 +236,7 @@
                 <input type="text" pInputText>
             </div>
         </p-accordionTab>
-    </p-accordion>
+    </p-accordion> -->
     <div class="p-fluid p-mt-3">
         <button pButton label="Filter" icon="pi pi-search" iconPos="right"></button>
     </div>

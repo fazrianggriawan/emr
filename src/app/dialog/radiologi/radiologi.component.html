@@ -1,0 +1,57 @@
+<div>
+    <div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Pemeriksaan Terakhir Tgl :</label>
+            <div class="col-2">
+                <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy"></p-calendar>
+            </div>
+            <label for="inputEmail3" class="col-2 col-form-label tx-right">Nomor :</label>
+            <div class="col">
+                <input class="form-control" pInputText class="form-control">
+            </div>
+        </div>
+    </div>
+    <fieldset class="form-fieldset p-mb-2">
+        <legend>Pemeriksaan Yang Diminta</legend>
+        <div class="row">
+            <div class="col-2" *ngFor="let item of dataMasterRadiologi">
+                <div class="p-field-checkbox">
+                    <p-checkbox name="group1" value="{{item.id}}" [(ngModel)]="selectedRad"></p-checkbox>
+                    <label for="ny">{{item.name}}</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="p-field-checkbox">
+                    <p-checkbox name="group1" value="lain" [(ngModel)]="selectedRad"></p-checkbox>
+                    <label for="ny">Lain-lain</label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Jenis Pemeriksaan</label>
+            <div class="col">
+                <input class="form-control" pInputText>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Lokasi</label>
+            <div class="col">
+                <input class="form-control" pInputText>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Yang Diminta</label>
+            <div class="col">
+                <input class="form-control" pInputText>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-12 col-form-label">Data Klinis / Lab / Pemeriksaan Terdahulu</label>
+            <div class="col-12">
+                <p-editor [(ngModel)]="dataKlinis" [style]="{'min-height':'150px'}"></p-editor>
+            </div>
+        </div>
+    </div>
+</div>

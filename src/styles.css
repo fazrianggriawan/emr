@@ -1,8 +1,15 @@
 
 /* You can add global styles to this file, and also import other style files */
+body{
+    background-color: rgb(0 0 0 / 10%);
+}
 
+.navbar-header .nav-link{
+    color: rgb(0 0 0 / 85%);
+}
+.navbar-menu .nav-link:hover{ color: black; }
 .clickable{ cursor: pointer; }
-.p-component{ font-size: 0.9rem; }
+.p-component{ font-size: 0.9rem; font-family: unset; }
 
 .p-datatable .p-datatable-tbody > tr > td, .p-datatable .p-datatable-thead > tr > th{
     padding: 0.8rem;
@@ -104,7 +111,8 @@
 
 .p-menu{ width: unset; border: unset; }
 
-.p-menu .p-menuitem-link .p-menuitem-text{ color: #2096f3; }
+/* .p-menu .p-menuitem-link .p-menuitem-text{ color: #2096f3; } */
+.p-menu .p-menuitem-link .p-menuitem-text{ color: #111111; }
 
 .col-25{
    flex: 0 0 18.66667%;
@@ -126,3 +134,112 @@
 a.list-group-item[_ngcontent-foc-c115]{
    padding: unset !important;
 }
+
+.df-example {
+    font-size: 0.875rem;
+    letter-spacing: normal;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid rgba(72, 94, 144, 0.16);
+    position: relative;
+}
+
+.df-example::before {
+    content: attr(data-label);
+    display: block;
+    position: absolute;
+    top: -6px;
+    left: 5px;
+    font-size: 8px;
+    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background-color: inherit;
+    color: #8392a5;
+    padding: 0 5px;
+}
+
+.patient-list:hover{
+    background: rgb(241 241 241);
+    cursor: pointer;
+}
+
+.form-group{ margin-bottom: 0px; }
+
+.navbar-header{
+    background: #D1913C;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFD194, #D1913C);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-bottom-color: #e0b985;
+    box-shadow: 0 0 25px rgb(26 108 225 / 30%);
+}
+
+.header-content{
+    background: #0f4f86;
+    color: white;
+}
+
+.white{ color: white; }
+.box-kunjungan{
+    background: #0e3c63;
+    color: #235d90;
+    font-weight: 500;
+    border: none;
+
+}
+
+.p-scrollpanel.custombar1 .p-scrollpanel-bar{
+    background-color:#e1e3eb;
+}
+
+.p-scrollpanel-content{
+    background-color: white;
+    padding-right: 10px !important;
+}
+
+.form-fieldset legend {
+    color: #e48f1f;
+}
+
+.p-inputtext{
+    background-color: #f7f9ff;
+}
+
+.p-dropdown { min-width: 100%; max-width: 100%; background: #f7f9ff; }
+input:read-only{ cursor: not-allowed; }
+.p-calendar .p-inputtext{ padding: 8px; }
+.p-field-radiobutton{ display: inline-flex; }
+.p-autocomplete{ width: 100%; }
+.tx-grey{ color: grey; }
+.bg-silver{ background: #f3f4f7; }
+.p-datatable .p-datatable-tbody > tr:hover, .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even):hover{ background: #ebeef8; }
+.label-question{
+    margin: 0;
+    font-weight: 600;
+}
+
+.login-page {
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: 9999;
+    background: url(assets/manhood.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    padding-right: 100px;
+}
+
+.login-container {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    margin-top: -10px;
+    margin-right: 0;
+    color: white;
+}
+
+.login-container .tx-color-01{ color: white; }
+.login-container .tx-color-03{ color: #a5a5a5; }
+.login-container a{ color: #e0aa51 !important; }

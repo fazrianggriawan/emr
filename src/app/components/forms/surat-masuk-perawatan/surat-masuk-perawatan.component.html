@@ -1,0 +1,79 @@
+<div class="row bd p-shadow-3 bg-white">
+    <app-left-menu></app-left-menu>
+    <div class="col" style="background: #f7f9ff;">
+        <app-header-registrasi></app-header-registrasi>
+
+        <div class="row">
+            <div class="col-2 p-p-0 bd-r bg-white">
+                <app-menu-emr></app-menu-emr>
+            </div>
+            <div class="col p-p-3">
+                <div style="position: relative;" class="p-pb-6">
+                    <div class="bd-b p-mb-2">
+                        <h5>SURAT MASUK PERAWATAN</h5>
+                    </div>
+                    <form [formGroup]="formMasukPerawatan" class="p-mt-2">
+                        <fieldset class="form-fieldset">
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col-3">
+                                    <label class="d-block">Dimasukkan ke ruangan </label>
+                                </div>
+                                <div class="col">
+                                    <input pInputText class="form-control" formControlName="keRuangan">
+                                </div>
+                            </div>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col-3">
+                                    <label class="d-block">Dengan diagnosa tetap / sementara </label>
+                                </div>
+                                <div class="col">
+                                    <input pInputText class="form-control" formControlName="diagnosa">
+                                </div>
+                            </div>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col-3">
+                                    <label class="d-block">Nama Pasien </label>
+                                </div>
+                                <div class="col">
+                                    <input pInputText class="form-control" formControlName="namaPasien">
+                                </div>
+                            </div>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col-3">
+                                    <label class="d-block">No. Rekam Medis </label>
+                                </div>
+                                <div class="col">
+                                    <input pInputText class="form-control" formControlName="noRm">
+                                </div>
+                            </div>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col-3">
+                                    <label class="d-block">Jenis Kelamin </label>
+                                </div>
+                                <div class="col">
+                                    <input pInputText class="form-control" formControlName="jnsKelamin">
+                                </div>
+                            </div>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col-3">
+                                    <label class="d-block">Alamat </label>
+                                </div>
+                                <div class="col">
+                                    <input pInputText class="form-control" formControlName="alamat">
+                                </div>
+                            </div>
+                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                <div class="col-3">
+                                    <label class="d-block">Dikirim oleh </label>
+                                </div>
+                                <div class="col">
+                                    <input pInputText class="form-control" formControlName="dikirimOleh">
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

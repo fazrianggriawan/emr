@@ -1,0 +1,1118 @@
+<div class="row bd p-shadow-3 bg-white">
+    <app-left-menu></app-left-menu>
+    <div class="col" style="background: #f7f9ff;">
+        <app-header-registrasi></app-header-registrasi>
+
+        <div class="row">
+            <div class="col-2 p-p-0 bd-r bg-white">
+                <app-menu-emr></app-menu-emr>
+            </div>
+            <div class="col p-p-3">
+                <div class="bd-b p-mb-2"><h5>PENGKAJIAN AWAL MEDIS & KEPERAWATAN MEDIKAL BEDAH RAWAT JALAN</h5></div>
+                <form [formGroup]="formPengkajian" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>Keluhan Utama</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Keluhan Utama</label>
+                            <div class="col">
+                                <p-dropdown [options]="tplKeluhan" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="keluhanUtama"></p-dropdown>
+                                <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanUtamaLain">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formPengkajian" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>Pemeriksaan Fisik</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Pemeriksaan Fisik</label>
+                            <div class="col">
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">BB</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="bb">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">kg</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">TB</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="tb">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">cm</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">TD</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="td">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">mmHg</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">Nadi</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="nadi">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">x/menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">P</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="p">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">x/menit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row p-mb-1">
+                                    <label for="inputEmail3" class="col-1 col-form-label">Suhu</label>
+                                    <div class="input-group col-5">
+                                        <input class="form-control" pInputText formControlName="suhu">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><sup>o</sup>C</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formRiwayatKesehatan" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>Riwayat Kesehatan</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">a. Riwayat Penyakit Lalu</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="penyakitLalu" value="Tidak" formControlName="penyakitLalu"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="penyakitLalu" value="Ya" formControlName="penyakitLalu"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Penyakit</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="penyakitLaluYa">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label p-pl-6"><li>Pernah dirawat</li></label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="pernahRawat" value="Tidak" formControlName="pernahRawat"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="pernahRawat" value="Ya" formControlName="pernahRawat"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Diagnosa</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="pernahRawatDiag">
+                                        </div>
+                                        <div class="input-group p-mb-1 p-pl-0">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Kapan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="pernahRawatKapan">
+                                        </div>
+                                        <div class="input-group p-mb-1 p-pl-0">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Di</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="pernahRawatDi">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label p-pl-6"><li>Pernah dioperasi</li></label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="pernahOp" value="Tidak" formControlName="pernahOp"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="pernahOp" value="Ya" formControlName="pernahOp"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Jenis Operasi</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="pernahOpJenis">
+                                        </div>
+                                        <div class="input-group p-mb-1 p-pl-0">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Kapan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="pernahOpKapan">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label p-pl-6"><li>Obat-obatan yang dikonsumsi</li></label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="obatKonsumsi" value="Tidak" formControlName="obatKonsumsi"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="obatKonsumsi" value="Ya" formControlName="obatKonsumsi"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Obat</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="obatKonsumsiYa">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">b. Riwayat Penyakit Keluarga</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="penyakitKeluarga" value="Tidak" formControlName="penyakitKeluarga"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="penyakitKeluarga" value="Ya" formControlName="penyakitKeluarga"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Penyakit</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="penyakitKeluargaYa">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Lainnya</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="penyakitKeluargaLain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">c. Ketergantungan terhadap</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="ketergantungan" value="Tidak" formControlName="ketergantungan"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="ketergantungan" value="Ya" formControlName="ketergantungan"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Sebutkan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="ketergantunganYa">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Lainnya</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="ketergantunganLain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">d. Riwayat pekerjaan (apakah berhubungan dengan zat-zat berbahaya)</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="riwPekerjaan" value="Tidak" formControlName="riwPekerjaan"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="riwPekerjaan" value="Ya" formControlName="riwPekerjaan"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Sebutkan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwPekerjaanYa">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">e. Riwayat Alergi</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="riwAlergi" value="Tidak" formControlName="riwAlergi"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="riwAlergi" value="Ya" formControlName="riwAlergi"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Obat</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiObat">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Makanan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiMakanan">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Lainnya</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiLain">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Reaksi</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="riwAlergiReaksi">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formRiwayatPsikososial" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>Riwayat Psikososial dan Spiritual</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label tx-bold">a. Status Psikologi</label>
+                            <div class="col">
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="penyakitLalu" value="Tidak" formControlName="penyakitLalu"></p-radioButton>
+                                    <label>Cemas</label>
+                                </span>
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="penyakitLalu" value="Ya" formControlName="penyakitLalu"></p-radioButton>
+                                    <label>Takut</label>
+                                </span>
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="penyakitLalu" value="Ya" formControlName="penyakitLalu"></p-radioButton>
+                                    <label>Sedih</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">
+                                <b>b. Status Sosial</b><br>
+                                <div class="p-pl-3">Hubungan pasien dengan anggota keluarga</div>
+                            </label>
+                            <div class="col p-pt-4">
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="pernahRawat" value="Tidak" formControlName="pernahRawat"></p-radioButton>
+                                    <label>Tidak Baik</label>
+                                </span>
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="pernahRawat" value="Ya" formControlName="pernahRawat"></p-radioButton>
+                                    <label>Baik</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label p-pl-5">Kerabat terdekat yang dapat dihubungi</label>
+                            <div class="col">
+                                <div class="input-group p-mb-1">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Nama</span>
+                                    </div>
+                                    <input class="form-control" pInputText formControlName="pernahOpJenis">
+                                </div>
+                                <div class="input-group p-mb-1 p-pl-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Hubungan</span>
+                                    </div>
+                                    <input class="form-control" pInputText formControlName="pernahOpKapan">
+                                </div>
+                                <div class="input-group p-mb-1 p-pl-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Telepon</span>
+                                    </div>
+                                    <input class="form-control" pInputText formControlName="pernahOpKapan">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label tx-bold">c. Status Ekonomi</label>
+                            <div class="col">
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="pernahOp" value="Tidak" formControlName="pernahOp"></p-radioButton>
+                                    <label>Asuransi</label>
+                                </span>
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="pernahOp" value="Ya" formControlName="pernahOp"></p-radioButton>
+                                    <label>Jaminan</label>
+                                </span>
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="pernahOp" value="Ya" formControlName="pernahOp"></p-radioButton>
+                                    <label>Biaya Sendiri</label>
+                                </span>
+                                <div class="input-group p-mb-1 p-pl-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Lainnya</span>
+                                    </div>
+                                    <input class="form-control" pInputText formControlName="pernahOpKapan">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">
+                                <b>d. Status Spiritual</b><br>
+                                <div class="p-pl-3">Kegiatan keagamaan yang dilakukan</div>
+                            </label>
+                            <div class="col p-pt-3">
+                                <input class="form-control" pInputText formControlName="pernahOpKapan">
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">
+                                <b>e. Nilai-Nilai</b><br>
+                                <div class="p-pl-3">Nilai-nilai budaya dan kepercayaan yang diyakini pasien</div>
+                            </label>
+                            <div class="col p-pt-3">
+                                <input class="form-control" pInputText formControlName="pernahOpKapan">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formKebutuhanKomunikasi" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>Kebutuhan Komunikasi dan Edukasi</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Terdapat hambatan dalam pembelajaran</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="hambatanPembelajaran" value="Tidak" formControlName="hambatanPembelajaran"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="hambatanPembelajaran" value="Ya" formControlName="hambatanPembelajaran"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="hambatanPembelajaranYa" value="Tidak" formControlName="hambatanPembelajaranYa"></p-checkbox>
+                                            <label>Pendengaran</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="hambatanPembelajaranYa" value="Ya" formControlName="hambatanPembelajaranYa"></p-checkbox>
+                                            <label>Penglihatan</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="hambatanPembelajaranYa" value="Ya" formControlName="hambatanPembelajaranYa"></p-checkbox>
+                                            <label>Kognitif</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="hambatanPembelajaranYa" value="Ya" formControlName="hambatanPembelajaranYa"></p-checkbox>
+                                            <label>Fisik</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="hambatanPembelajaranYa" value="Ya" formControlName="hambatanPembelajaranYa"></p-checkbox>
+                                            <label>Budaya</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="hambatanPembelajaranYa" value="Ya" formControlName="hambatanPembelajaranYa"></p-checkbox>
+                                            <label>Emosi</label>
+                                        </div>
+                                        <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                            <p-checkbox name="hambatanPembelajaranYa" value="Ya" formControlName="hambatanPembelajaranYa"></p-checkbox>
+                                            <label>Bahasa</label>
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Lainnya</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="hambatanPembelajaranLain">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Dibutuhkan penerjemah</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="butuhPenerjemah" value="Tidak" formControlName="butuhPenerjemah"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </div>
+                                        <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="butuhPenerjemah" value="Ya" formControlName="butuhPenerjemah"></p-radioButton>
+                                            <label>Ya</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1 p-pl-0">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Sebutkan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="butuhPenerjemahYa">
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-3 col-form-label">Bahasa Isyarat:</label>
+                                            <div class="col p-pt-1">
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                    <p-radioButton name="bhsInsyarat" value="Tidak" formControlName="bhsInsyarat"></p-radioButton>
+                                                    <label>Tidak</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                    <p-radioButton name="bhsInsyarat" value="Ya" formControlName="bhsInsyarat"></p-radioButton>
+                                                    <label>Ya</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Kesediaan menerima informasi</label>
+                            <div class="col">
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="kesediaanTerimaInfo" value="Tidak" formControlName="kesediaanTerimaInfo"></p-radioButton>
+                                    <label>Tidak</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="kesediaanTerimaInfo" value="Ya" formControlName="kesediaanTerimaInfo"></p-radioButton>
+                                    <label>Ya</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Kebutuhan edukasi (pilih topik edukasi sesuai pada kotak yang tersedia)</label>
+                            <div class="col">
+                                <span class="p-field-checkbox p-mr-2 p-mb-1">
+                                    <p-checkbox name="kebutuhanEdu" value="Tidak" formControlName="kebutuhanEdu"></p-checkbox>
+                                    <label>Diagnosa dan manajemen penyakit</label>
+                                </span>
+                                <span class="p-field-checkbox p-mr-2 p-mb-1">
+                                    <p-checkbox name="kebutuhanEdu" value="Tidak" formControlName="kebutuhanEdu"></p-checkbox>
+                                    <label>Obat-obatan / Terapi</label>
+                                </span>
+                                <span class="p-field-checkbox p-mr-2 p-mb-1">
+                                    <p-checkbox name="kebutuhanEdu" value="Tidak" formControlName="kebutuhanEdu"></p-checkbox>
+                                    <label>Diet dan nutrisi</label>
+                                </span>
+                                <span class="p-field-checkbox p-mr-2 p-mb-1">
+                                    <p-checkbox name="kebutuhanEdu" value="Tidak" formControlName="kebutuhanEdu"></p-checkbox>
+                                    <label>Rehabilitasi</label>
+                                </span>
+                                <span class="p-field-checkbox p-mr-2 p-mb-1">
+                                    <p-checkbox name="kebutuhanEdu" value="Tidak" formControlName="kebutuhanEdu"></p-checkbox>
+                                    <label>Manajemen nyeri</label>
+                                </span>
+                                <div class="input-group p-mb-1 p-pl-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text p-0">
+                                            <span class="p-field-checkbox p-mr-2 p-mb-1 p-pl-2 p-pt-1 p-pb-0">
+                                                <p-checkbox name="kebutuhanEdu" value="Tidak" formControlName="kebutuhanEdu"></p-checkbox>
+                                                <label>Tindakan Keperawatan</label>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" pInputText formControlName="kebutuhanEduKeperawatan" placeholder="Sebutkan...">
+                                </div>
+                                <div class="input-group p-mb-1 p-pl-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Lainnya</span>
+                                    </div>
+                                    <input class="form-control" pInputText formControlName="kebutuhanEduLain" placeholder="Sebutkan...">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formKebutuhanKomunikasi" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>Risiko Cidera / Jatuh</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">a. Perhatikan cara berjalan pasien saat akan duduk di kursi. Apakah pasien tampak tidak seimbang (sempoyongan)</label>
+                            <div class="col">
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="hambatanPembelajaran" value="Tidak" formControlName="hambatanPembelajaran"></p-radioButton>
+                                    <label>Tidak</label>
+                                </span>
+                                <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="hambatanPembelajaran" value="Ya" formControlName="hambatanPembelajaran"></p-radioButton>
+                                    <label>Ya</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">b. Apakah pasien memagang pinggiran kursi atau meja benda lain sebagai penopang saat akan duduk ?</label>
+                            <div class="col">
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="butuhPenerjemah" value="Tidak" formControlName="butuhPenerjemah"></p-radioButton>
+                                    <label>Tidak</label>
+                                </div>
+                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                    <p-radioButton name="butuhPenerjemah" value="Ya" formControlName="butuhPenerjemah"></p-radioButton>
+                                    <label>Ya</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Hasil</label>
+                            <div class="col">
+                                <input class="form-control" pInputText formControlName="kebutuhanEduLain">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formStatusFungsional" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>7. Status Fungsional</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Aktifitas dan Mobilitas</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="aktifitasMobilitas" value="Tidak" formControlName="aktifitasMobilitas"></p-radioButton>
+                                            <label>Mandiri</label>
+                                        </span>
+                                        <span class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="aktifitasMobilitas" value="Ya" formControlName="aktifitasMobilitas"></p-radioButton>
+                                            <label>Perlu Bantuan</label>
+                                        </span>
+                                    </div>
+                                    <div class="col">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Sebutkan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="aktifitasMobilitasYa">
+                                        </div>
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Alat bantu jalan</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="alatBantuJalan" placeholder="Sebutkan...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formSkalaNyeri" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>8. Skala Nyeri</legend>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label class="col-2 col-form-label">Nyeri</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-3 p-pt-1">
+                                        <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="nyeri" value="Tidak" formControlName="nyeri"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </div>
+                                        <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                            <p-radioButton name="nyeri" value="Ya" formControlName="nyeri"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                            <label class="col-2 col-form-label">Skala</label>
+                                            <div class="col">
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="0" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>0</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="1" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>1</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="2" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>2</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="3" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>3</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="4" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>4</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="5" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>5</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="6" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>6</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="7" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>7</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="8" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>8</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="9" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>9</label>
+                                                </div>
+                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                    <p-radioButton name="skalaNyeri" value="10" formControlName="skalaNyeri"></p-radioButton>
+                                                    <label>10</label>
+                                                </div>
+                                                <div class="bd p-2">
+                                                    <table>
+                                                        <tr>
+                                                            <td>1 - 3</td>
+                                                            <td>: Nyeri ringan, analgetik oral</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>4 - 7</td>
+                                                            <td>: Nyeri sedang, perlu analgetik injeksi</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>8 - 10</td>
+                                                            <td>: Nyeri berat, konsul tim nyeri</td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row bd-b p-mb-2 p-pb-1">
+                                                <div class="col-3">
+                                                    <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                                        <p-checkbox name="nyeri" value="Nyeri Kronis" formControlName="nyeriKronis"></p-checkbox>
+                                                        <label>Nyeri Kronis,</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="input-group p-mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Lokasi</span>
+                                                        </div>
+                                                        <input class="form-control" pInputText formControlName="nyeriKronisLokasi">
+                                                    </div>
+                                                    <div class="input-group p-mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Frekuensi</span>
+                                                        </div>
+                                                        <input class="form-control" pInputText formControlName="nyeriKronisFrek">
+                                                    </div>
+                                                    <div class="input-group p-mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Durasi / Lama nyeri</span>
+                                                        </div>
+                                                        <input class="form-control" pInputText formControlName="nyeriKronisDurasi">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row bd-b p-mb-2 p-pb-1">
+                                                <div class="col-3">
+                                                    <div class="p-field-checkbox p-mr-2 p-mb-1">
+                                                        <p-checkbox name="nyeri" value="Nyeri Akut" formControlName="nyeriAkut"></p-checkbox>
+                                                        <label>Nyeri Akut,</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="input-group p-mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Lokasi</span>
+                                                        </div>
+                                                        <input class="form-control" pInputText formControlName="nyeriAkutLokasi">
+                                                    </div>
+                                                    <div class="input-group p-mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Frekuensi</span>
+                                                        </div>
+                                                        <input class="form-control" pInputText formControlName="nyeriAkutFrek">
+                                                    </div>
+                                                    <div class="input-group p-mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Durasi / Lama nyeri</span>
+                                                        </div>
+                                                        <input class="form-control" pInputText formControlName="nyeriAkutDurasi">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                                <label class="col-3 col-form-label">Score Nyeri (0 - 10)</label>
+                                                <div class="col">
+                                                    <input class="form-control" pInputText formControlName="scoreNyeri">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                                <label class="col-3 col-form-label">Menjalar</label>
+                                                <div class="col">
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="menjalar" value="Tidak" formControlName="menjalar"></p-radioButton>
+                                                        <label>Tidak</label>
+                                                    </div>
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="menjalar" value="Ya" formControlName="menjalar"></p-radioButton>
+                                                        <label>Ya</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                                                <label class="col-3 col-form-label">Kualitas Nyeri</label>
+                                                <div class="col">
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="kualitasNyeri" value="Nyeri Tumpul" formControlName="kualitasNyeri"></p-radioButton>
+                                                        <label>Nyeri Tumpul</label>
+                                                    </div>
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="kualitasNyeri" value="Nyeri Tajam" formControlName="kualitasNyeri"></p-radioButton>
+                                                        <label>Nyeri Tajam</label>
+                                                    </div>
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="kualitasNyeri" value="Panas / Terbakar" formControlName="kualitasNyeri"></p-radioButton>
+                                                        <label>Panas / Terbakar</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row p-mb-2 p-pb-2">
+                                                <label class="col-12 col-form-label">Faktor-faktor yang mengurangi / menghilangkan nyeri</label>
+                                                <div class="col-12">
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="faktorMengurangiNyeri" value="Minum Obat" formControlName="faktorMengurangiNyeri"></p-radioButton>
+                                                        <label>Minum Obat</label>
+                                                    </div>
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="faktorMengurangiNyeri" value="Istirahat" formControlName="faktorMengurangiNyeri"></p-radioButton>
+                                                        <label>Istirahat</label>
+                                                    </div>
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="faktorMengurangiNyeri" value="Mendengarkan Musik" formControlName="faktorMengurangiNyeri"></p-radioButton>
+                                                        <label>Mendengarkan Musik</label>
+                                                    </div>
+                                                    <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                        <p-radioButton name="faktorMengurangiNyeri" value="Berubah Posisi Tidur" formControlName="faktorMengurangiNyeri"></p-radioButton>
+                                                        <label>Berubah Posisi Tidur</label>
+                                                    </div>
+                                                    <div class="input-group p-mb-1">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">Lainnya</span>
+                                                        </div>
+                                                        <input class="form-control" pInputText formControlName="faktorMengurangiNyeriLain" placeholder="Sebutkan...">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formNutrisi" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>9. Nutrisi</legend>
+                        <div class="tx-bold">SKRINING GIZI (Berdasarkan Malnutrition Screening Tool / MST)</div>
+                        <div>(Lingkari skor sesuai dengan jawaban, Total skor adalah jumlah skr yang dilingkari)</div>
+                        <div class="row">
+                            <div class="col">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="50">No.</th>
+                                            <th>Parameter</th>
+                                            <th>Skor</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1.</td>
+                                            <td colspan="2">Apakah pasien mengalami penurunan berat badan yang tidak diingnkan dalam 6 bulan terakhir?</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                    <p-radioButton name="pasienTurunBB" value="Tidak" formControlName="pasienTurunBB"></p-radioButton>
+                                                    <label>a. Tidak penurunan berat badan</label>
+                                                </div>
+                                            </td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                    <p-radioButton name="pasienTurunBB" value="Tidak" formControlName="pasienTurunBB"></p-radioButton>
+                                                    <label>b. Tidak yakin / tidak tahu / terasa baju lebih longgar</label>
+                                                </div>
+                                            </td>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>c. Jika ya, berapa penurunan berat badan tersebut</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1 p-pl-3">
+                                                    <p-radioButton name="pasienTurunBB" value="Tidak" formControlName="pasienTurunBB"></p-radioButton>
+                                                    <label>1-5 kg</label>
+                                                </div>
+                                            </td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1 p-pl-3">
+                                                    <p-radioButton name="pasienTurunBB" value="Tidak" formControlName="pasienTurunBB"></p-radioButton>
+                                                    <label>6-10 kg</label>
+                                                </div>
+                                            </td>
+                                            <td>2</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1 p-pl-3">
+                                                    <p-radioButton name="pasienTurunBB" value="Tidak" formControlName="pasienTurunBB"></p-radioButton>
+                                                    <label>11-15 kg</label>
+                                                </div>
+                                            </td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1 p-pl-3">
+                                                    <p-radioButton name="pasienTurunBB" value="Tidak" formControlName="pasienTurunBB"></p-radioButton>
+                                                    <label>>15 kg</label>
+                                                </div>
+                                            </td>
+                                            <td>4</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.</td>
+                                            <td colspan="2">Apakah asupan makan berkurang karena berkurangnya nafsu makan?</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1 p-pl-3">
+                                                    <p-radioButton name="asupanMakanBerkurang" value="Tidak" formControlName="asupanMakanBerkurang"></p-radioButton>
+                                                    <label>Tidak</label>
+                                                </div>
+                                            </td>
+                                            <td>0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                <div class="p-field-radiobutton p-mr-2 p-mb-1 p-pl-3">
+                                                    <p-radioButton name="asupanMakanBerkurang" value="Tidak" formControlName="asupanMakanBerkurang"></p-radioButton>
+                                                    <label>Ya</label>
+                                                </div>
+                                            </td>
+                                            <td>1</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" class="tx-right"><b>Total Skor</b></td>
+                                            <td>
+                                                <input class="form-control" pInputText formControlName="totalSkor" readonly>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3.</td>
+                                            <td colspan="2">
+                                                <div class="form-group row p-mb-2 p-pb-2">
+                                                    <label class="col-2 col-form-label">Pasien dengan diagnosa khusus</label>
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col-2">
+                                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                                    <p-radioButton name="pasienDiagKhusus" value="Tidak" formControlName="pasienDiagKhusus"></p-radioButton>
+                                                                    <label>Tidak</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                                                    <p-radioButton name="pasienDiagKhusus" value="Ya" formControlName="pasienDiagKhusus"></p-radioButton>
+                                                                    <label>Ya,</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col">
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>DM</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Ginjal</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Hati</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Jantung</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Paru</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Stroke</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Kanker</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Penurunan Imunitas</label>
+                                                                </div>
+                                                                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                                                                    <p-checkbox name="pasienDiagKhususYa" value="Tidak" formControlName="pasienDiagKhususYa"></p-checkbox>
+                                                                    <label>Geriatri</label>
+                                                                </div>
+                                                                <div class="input-group p-mb-1">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text">Lain-lain</span>
+                                                                    </div>
+                                                                    <input class="form-control" pInputText formControlName="pasienDiagKhususLain">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tx-bold">Bila skor > 2 dan atau pasien dengan diagnosis / kondisi khusus dilakukan pengkajian lanjut oleh Tim Terapi Gizi (TTG)</div>
+                        <div class="form-group row p-mb-2 p-pb-2">
+                            <label class="col-3 col-form-label">Sudah dilaporkan ke Tim Terapi Gizi</label>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-2 p-pt-1">
+                                        <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                            <p-radioButton name="sudahLaporGizi" value="Tidak" formControlName="sudahLaporGizi"></p-radioButton>
+                                            <label>Tidak</label>
+                                        </div>
+                                        <div class="p-field-radiobutton p-mr-3 p-mb-1">
+                                            <p-radioButton name="sudahLaporGizi" value="Ya" formControlName="sudahLaporGizi"></p-radioButton>
+                                            <label>Ya,</label>
+                                        </div>
+                                    </div>
+                                    <div class="col p-pt-1">
+                                        <div class="input-group p-mb-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Tanggal & Jam</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="sudahLaporGiziYa">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form [formGroup]="formDaftarDiagnosa" class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>10. Daftar diagnosa / masalah keperawatan prioritas</legend>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th width="100">No.</th>
+                                    <th>Diagnosa Keperawatan / Masalah Keperawatan</th>
+                                    <th>Tujuan Terukur</th>
+                                    <th width="100">&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input class="form-control" pInputText formControlName="no"></td>
+                                    <td><input class="form-control" pInputText formControlName="diagnosa"></td>
+                                    <td><input class="form-control" pInputText formControlName="tujuan"></td>
+                                    <td><button pButton label="Tambah" icon="pi pi-plus"></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

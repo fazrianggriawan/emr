@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { catchError } from "rxjs/operators";
 import { ErrorHandlerService } from "../error-handler.service";
+import { config } from "src/app/config";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class Icd10Service {
   ) { }
 
   getIcd10(): Observable<any> {
-      return this.http.get<any>('http://localhost/api_emr/public' + '/icd10').pipe(catchError(this.errorHandle.handleIt));
+      return this.http.get<any>(config.api_url('icd10')).pipe(catchError(this.errorHandle.handleIt));
   }
 
 }

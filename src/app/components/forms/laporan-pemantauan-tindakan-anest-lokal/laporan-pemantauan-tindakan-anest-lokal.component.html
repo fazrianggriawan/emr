@@ -1,0 +1,100 @@
+<div class="bd-b p-mb-2">
+    <h5>LAPORAN PEMANTAUAN TINDAKAN DENGAN ANESTESI LOKAL</h5>
+</div>
+<form [formGroup]="formPemantauanTindakan" class="p-mt-2">
+    <fieldset class="form-fieldset">
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <div class="col-2">
+                <label class="d-block">Profilaksi : </label>
+                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                    <p-radioButton name="profilaksi" value="tidak" formControlName="profilaksi"></p-radioButton>
+                    <label>Tidak</label>
+                </div>
+                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                    <p-radioButton name="profilaksi" value="ya" formControlName="profilaksi"></p-radioButton>
+                    <label>Ya</label>
+                </div>
+            </div>
+            <div class="col">
+                <label class="d-block">Jenis Antibiotik : </label>
+                <input pInputText class="form-control" formControlName="jnsAntibiotik">
+            </div>
+            <div class="col">
+                <label class="d-block">Waktu Pemberian : </label>
+                <div class="input-group">
+                    <input pInputText class="form-control" formControlName="waktuPemberian">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1">Jam sebelum operasi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <div class="col-2">
+                <label class="d-block">Teknik anestesi lokal </label>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <div class="col-2">
+                <li class="p-ml-4">Jenis</li>
+            </div>
+            <div class="col">
+                <input pInputText class="form-control" formControlName="teknikJenis">
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <div class="col-2">
+                <li class="p-ml-4">Lokasi</li>
+            </div>
+            <div class="col">
+                <input pInputText class="form-control" formControlName="teknikLokasi">
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <div class="col-2">
+                <li class="p-ml-4">Obat-obatan</li>
+            </div>
+            <div class="col">
+                <input pInputText class="form-control" formControlName="teknikObat">
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <div class="col-2">
+                <label class="d-block">Respon Hipersensitivitas </label>
+            </div>
+            <div class="col-2">
+                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                    <p-radioButton name="responHipersensitive" value="tidak" formControlName="responHipersensitive"></p-radioButton>
+                    <label>Tidak</label>
+                </div>
+                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                    <p-radioButton name="responHipersensitive" value="ya" formControlName="responHipersensitive"></p-radioButton>
+                    <label>Ya</label>
+                </div>
+            </div>
+            <div class="col">
+                <label class="d-block">Ket :</label>
+                <input pInputText class="form-control" formControlName="responHipersensitiveKet">
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <div class="col-2">
+                <label class="d-block">Kejadian Toksikasi </label>
+            </div>
+            <div class="col-2">
+                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                    <p-radioButton name="kejadianToksikasi" value="tidak" formControlName="kejadianToksikasi"></p-radioButton>
+                    <label>Tidak</label>
+                </div>
+                <div class="p-field-radiobutton p-mr-2 p-mb-1">
+                    <p-radioButton name="kejadianToksikasi" value="ya" formControlName="kejadianToksikasi"></p-radioButton>
+                    <label>Ya</label>
+                </div>
+            </div>
+            <div class="col">
+                <label class="d-block">Ket :</label>
+                <input pInputText class="form-control" formControlName="kejadianToksikasiKet">
+            </div>
+        </div>
+    </fieldset>
+</form>

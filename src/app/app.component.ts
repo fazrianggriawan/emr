@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { PrimeNGConfig, MenuItem } from 'primeng/api';
 
 @Component({
@@ -7,13 +7,13 @@ import { PrimeNGConfig, MenuItem } from 'primeng/api';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'iniapps'; 
+  title = 'iniapps';
   items: MenuItem[] = [];
 
   constructor( private primeNgConfig: PrimeNGConfig ){}
 
   ngOnInit(){
-    this.primeNgConfig.ripple = true;    
+    this.primeNgConfig.ripple = true;
     this.items = [
       { label:'File', items: [{label:'New'}] }, { label: 'Edit' }
     ]

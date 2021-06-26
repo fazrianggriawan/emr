@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { PasienService } from '../../pasien/pasien.service';
 
@@ -8,12 +8,26 @@ import { PasienService } from '../../pasien/pasien.service';
   styleUrls: ['./pengkajian-awal-watlan.component.css']
 })
 export class PengkajianAwalWatlanComponent implements OnInit {
-  @ViewChild('greettemp', { read: ViewContainerRef })
+  // @ViewChild('lazyLoad', { read: ViewContainerRef })
+  // private vcref!: ViewContainerRef;
 
   constructor(
     private formData: FormBuilder,
-    private pasienService: PasienService
+    private pasienService: PasienService,
+    // private cfr: ComponentFactoryResolver,
   ) { }
+
+  // async loadRencanBerobatComponent(){
+  //   this.vcref.clear();
+  //   const { RencanBerobatLanjutanFormComponent } = await import('../rencan-berobat-lanjutan-form/rencan-berobat-lanjutan-form.component');
+  //   this.vcref.createComponent(
+  //     this.cfr.resolveComponentFactory(RencanBerobatLanjutanFormComponent)
+  //   );
+  // }
+
+  // clearLazyLoad(){
+  //   this.vcref.clear();
+  // }
 
   tplKeluhan: any;
 

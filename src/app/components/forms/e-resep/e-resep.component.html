@@ -1,0 +1,82 @@
+<div class="row bd p-shadow-3 bg-white">
+    <app-left-menu></app-left-menu>
+    <div class="col" style="background: #f7f9ff;">
+        <app-header-registrasi></app-header-registrasi>
+
+        <div class="row">
+            <div class="col-2 p-p-0 bd-r bg-white">
+                <app-menu-emr></app-menu-emr>
+            </div>
+            <div class="col p-p-3">
+                <div class="bd-b p-mb-2"><h5>E-RESEP</h5></div>
+                <div class="p-mt-2">
+                    <fieldset class="form-fieldset">
+                        <legend>Resep Non Racikan</legend>
+                        <div class="p-p-2 p-mb-2 bg-silver rounded bd">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="d-block">Nama Obat : </label>
+                                    <p-autoComplete #dd [forceSelection]="true" (onSelect)="hitungTotalObat()" field="nama_obat" [(ngModel)]="selectedObat" [suggestions]="filterDataObat" (completeMethod)="search($event)" placeholder="Cari Nama Obat" [dropdown]="true">
+                                        <ng-template let-obat pTemplate="item">
+                                            <div class="obat-item">
+                                                <div>{{obat.nama_obat}}</div>
+                                                <div>
+                                                    <span class="badge" [ngClass]="obat.stok_gudang <= 0 ? 'badge-danger' : 'badge-info'">Stok : {{obat.stok_gudang}} {{obat.satuan}}</span>
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </p-autoComplete>
+                                </div>
+                                <div class="col">
+                                    <label class="d-block">Signa : </label>
+                                    <div style="display: inline-flex;">
+                                        <p-dropdown (onChange)="hitungTotalObat()" dropdownIcon="" [options]="dataHari" optionLabel="name" optionValue="name" [(ngModel)]="signa1" placeholder="Pilih..."></p-dropdown>
+                                        <span class="p-p-2">X</span>
+                                        <p-dropdown (onChange)="hitungTotalObat()" dropdownIcon="" [options]="dataSigna2" optionLabel="name" optionValue="name" [(ngModel)]="signa2" placeholder="Pilih..."></p-dropdown>&nbsp;
+                                        <p-dropdown (onChange)="hitungTotalObat()" dropdownIcon="" [options]="satuanObat" optionLabel="name" [(ngModel)]="signaSatuan" placeholder="Pilih..."></p-dropdown>
+                                    </div>
+                                </div>
+                                <div class="col-1">
+                                    <label class="d-block">Jumlah Hari : </label>
+                                    <p-dropdown (onChange)="hitungTotalObat()" dropdownIcon="" [options]="dataHari" [(ngModel)]="jumlahHari" optionLabel="name" optionValue="name" placeholder="Pilih..."></p-dropdown>
+                                </div>
+                                <div class="col-1">
+                                    <label class="d-block">Jumlah Obat : </label>
+                                    <input type="text" class="form-control" [(ngModel)]="jumlahObat" pInputText>
+                                </div>
+                                <div class="col">
+                                    <label class="d-block">Petunjuk : </label>
+                                    <div class="p-inputgroup">
+                                        <input type="text" class="form-control" [(ngModel)]="petunjuk" pInputText>
+                                        <button type="button" pButton pRipple icon="pi pi-plus" label="Tambah" (click)="tambahObatNonRacikan(dd)" styleClass="p-button-warn"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="50">No.</th>
+                                    <th>Nama Obat</th>
+                                    <th width="200">Jumlah Obat</th>
+                                    <th>Catatan</th>
+                                    <th width="100"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of dataObatNonRacikan; let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{item.obat.nama_obat}}</td>
+                                    <td>{{item.jumlahObat}}</td>
+                                    <td>{{item.petunjuk}}</td>
+                                    <td><button pButton (click)="hapusObat(i)" class="p-button-text p-button-danger" icon="pi pi-trash" label="Hapus"></button></td>
+                                </tr>
+                                <tr><td colspan="5" *ngIf="dataObatNonRacikan.length < 1" class="tx-center tx-grey">Tidak ada data saat ini.</td></tr>
+                            </tbody>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
