@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, NgModule, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { PasienService } from "../../pasien/pasien.service";
-import { Icd10Service } from "../../../services/icd10.service";
+import { IcdService } from "../../../services/icd.service";
 import { SaveStatusService } from "../../../services/save-status.service";
 import { FormBuilder } from '@angular/forms';
 import { CpptService } from "src/app/services/cppt.service";
@@ -13,22 +13,15 @@ import { CpptService } from "src/app/services/cppt.service";
 
 export class CpptFormComponent implements OnInit {
 
-  constructor(
-    private pasienService: PasienService,
-    private Icd10Service: Icd10Service,
-    private SaveStatusService: SaveStatusService,
-    private FormBuilder: FormBuilder,
-    private cfr: ComponentFactoryResolver,
-    private cpptService: CpptService
-  ) {}
-
   @ViewChild('lazyLoad', { read: ViewContainerRef })
   private vcref!: ViewContainerRef;
 
   tplKeluhan: any;
-  icd10: any;
+  icd10: any[] = [];
+  icd9: any[] = [];
   dialogLab: boolean = false;
   dialogRad: boolean = false;
+  dialogFarmasi: boolean = false;
 
   formSubjective = this.FormBuilder.group({
     keluhanUtama: [null],
@@ -86,13 +79,31 @@ export class CpptFormComponent implements OnInit {
     this.vcref.clear();
   }
 
+  getIcd10(){
+    this.IcdService.getIcd10().subscribe(data => {
+      this.icd10 = data;
+    })
+  }
+  getIcd9(){
+    this.IcdService.getIcd10().subscribe(data => {
+      this.icd9 = data;
+    })
+  }
+
+  constructor(
+    private pasienService: PasienService,
+    private IcdService: IcdService,
+    private SaveStatusService: SaveStatusService,
+    private FormBuilder: FormBuilder,
+    private cfr: ComponentFactoryResolver,
+    private cpptService: CpptService
+  ) {}
+
   ngOnInit(): void {
+    this.getIcd10()
+    this.getIcd9()
     this.pasienService.getTplKeluhan().subscribe(data => {
       this.tplKeluhan = data;
-    })
-
-    this.Icd10Service.getIcd10().subscribe(data => {
-      this.icd10 = data;
     })
   }
 

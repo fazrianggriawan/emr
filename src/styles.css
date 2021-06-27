@@ -209,6 +209,7 @@ a.list-group-item[_ngcontent-foc-c115]{
 .p-dropdown { min-width: 100%; max-width: 100%; background: #f7f9ff; }
 input:read-only{ cursor: not-allowed; }
 .p-calendar .p-inputtext{ padding: 8px; }
+.p-datepicker{ width: 350px !important; }
 .p-field-radiobutton{ display: inline-flex; }
 .p-autocomplete{ width: 100%; }
 .tx-grey{ color: grey; }
@@ -227,6 +228,7 @@ input:read-only{ cursor: not-allowed; }
     background: url(assets/manhood.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: white;
     width: 100%;
     height: 100%;
     padding-right: 100px;
@@ -243,3 +245,4 @@ input:read-only{ cursor: not-allowed; }
 .login-container .tx-color-01{ color: white; }
 .login-container .tx-color-03{ color: #a5a5a5; }
 .login-container a{ color: #e0aa51 !important; }
+

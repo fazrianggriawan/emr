@@ -8,7 +8,7 @@ import { config } from "src/app/config";
 @Injectable({
   providedIn: 'root'
 })
-export class Icd10Service {
+export class IcdService {
 
   saveStatus: boolean = false;
 
@@ -20,5 +20,9 @@ export class Icd10Service {
   getIcd10(): Observable<any> {
       return this.http.get<any>(config.api_url('icd10')).pipe(catchError(this.errorHandle.handleIt));
   }
+
+  getIcd9(): Observable<any> {
+    return this.http.get<any>(config.api_url('icd9')).pipe(catchError(this.errorHandle.handleIt));
+}
 
 }

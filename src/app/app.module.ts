@@ -55,6 +55,7 @@ import { ViewDataRegistrasiComponent } from './dialog/view-data-registrasi/view-
 import { LaboratoriumComponent } from './dialog/laboratorium/laboratorium.component';
 import { RadiologiComponent } from './dialog/radiologi/radiologi.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { FarmasiComponent } from './dialog/farmasi/farmasi.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     LeftMenuComponent,
     ViewDataRegistrasiComponent,
     LaboratoriumComponent,
-    RadiologiComponent
+    RadiologiComponent,
+    FarmasiComponent
   ],
   imports: [
     BrowserModule,

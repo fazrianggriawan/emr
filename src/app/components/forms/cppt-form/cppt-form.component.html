@@ -130,19 +130,24 @@
                     </fieldset>
                     <fieldset class="form-fieldset p-mb-3">
                         <legend>Plan (P)</legend>
-                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                        <div class="form-group row p-pb-2">
                             <label for="inputEmail3" class="col-2 col-form-label">Terapi</label>
                             <div class="col">
-                                <button pButton label="E-Resep"></button>
-                                <input class="form-control" pInputText>
+                                <button pButton label="E-Resep" (click)="dialogFarmasi=true" class="p-mb-1" icon="pi pi-external-link"></button> &nbsp;
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <label for="inputEmail3" class="col-2 col-form-label p-pl-6">Tindakan (Icd 9)</label>
+                            <div class="col">
+                                <p-dropdown formControlName="diagUtama" [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
                             </div>
                         </div>
                         <div class="form-group row bd-b p-mb-2 p-pb-2">
                             <label for="inputEmail3" class="col-2 col-form-label">Rencana Pemeriksaan</label>
                             <div class="col">
                                 <div>
-                                    <button pButton label="Radiologi" (click)="dialogRad=true"></button> &nbsp;
-                                    <button pButton label="Laboratorium" (click)="dialogLab=true"></button>
+                                    <button pButton label="Radiologi" (click)="dialogRad=true" icon="pi pi-external-link"></button> &nbsp;
+                                    <button pButton label="Laboratorium" (click)="dialogLab=true" icon="pi pi-external-link"></button>
                                 </div>
                                 <!-- <div>
                                     <div class="p-mb-2"><ng-template #lazyLoad></ng-template></div>
@@ -166,3 +171,4 @@
 
 <p-dialog header="Laboratorium" [(visible)]="dialogLab" [modal]="true" [style]="{width: '80vw'}"><app-laboratorium></app-laboratorium></p-dialog>
 <p-dialog header="Radiologi" [(visible)]="dialogRad" [modal]="true" [style]="{width: '80vw'}"><app-radiologi></app-radiologi></p-dialog>
+<p-dialog header="E-Resep" [(visible)]="dialogFarmasi" [modal]="true" [style]="{width: '80vw'}"><app-farmasi></app-farmasi></p-dialog>

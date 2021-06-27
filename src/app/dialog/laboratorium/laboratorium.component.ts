@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IcdService } from 'src/app/services/icd.service';
 import { LaboratoriumService } from 'src/app/services/laboratorium.service';
 
 @Component({
@@ -16,6 +17,7 @@ export class LaboratoriumComponent implements OnInit {
     {id: 'cito', name: 'CITO'},
   ];
   selectedCito : any = 'reg';
+  icd10: any[] = [];
 
   getMasterCito(){
     this.labService.getMasterLabCito().subscribe(data=>{
@@ -45,13 +47,21 @@ export class LaboratoriumComponent implements OnInit {
     })
   }
 
+  getIcd10(){
+    this.icdService.getIcd10().subscribe(data=>{
+      this.icd10 = data;
+    })
+  }
+
   constructor(
-    private labService: LaboratoriumService
+    private labService: LaboratoriumService,
+    private icdService: IcdService
   ) { }
 
   ngOnInit(): void {
     this.getMasterCito()
     this.getMasterLab()
+    this.getIcd10()
   }
 
 }

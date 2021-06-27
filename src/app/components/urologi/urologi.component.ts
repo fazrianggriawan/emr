@@ -39,8 +39,7 @@ export class UrologiComponent implements OnInit {
    tglRegistrasi: Date = new Date;
    loading: boolean = true;
    filterPasien: any[] = [
-      {id: 'all', name: 'All Pasien'},
-      {id: 'me', name: 'Pasien Saya'},
+      {value: '9210', label: 'Pasien Saya'},
    ];
    filter: any;
    dialogViewRegistrasi: boolean = false;
@@ -49,11 +48,29 @@ export class UrologiComponent implements OnInit {
       this.getDataRegistrasi(this.tglRegistrasi)
    }
 
+   filterBox: string = '';
+
+   hallo(e:any,a:string){
+      this.filterBox = 'gatot';
+   }
+
    getDataRegistrasi(date: Date){
+      this.loading = true;
       this.registrasiService.getAllRegistrasi(date).subscribe( data => {
-         this.dataRegistrasi = data;
+         if( data.status == 200 ){
+            this.dataRegistrasi = data.data;
+         }else{
+            this.dataRegistrasi = [];
+         }
+
          this.loading = false;
       })
+   }
+
+   getIdPelaksana(){
+      var ls:any = localStorage.getItem('login');
+      var aa = JSON.parse(ls);
+      this.filterPasien[0].value = aa.id_pelaksana;
    }
 
    @ViewChild('dtRegistrasi') dt: Table | undefined;
@@ -136,6 +153,7 @@ export class UrologiComponent implements OnInit {
 
       ngOnInit(): void {
          this.getDataRegistrasi(new Date);
+         this.getIdPelaksana();
          // this.registrasiService.getAllRegistrasi().subscribe(data => {
          //    this.dataRegistrasi = data;
          // })

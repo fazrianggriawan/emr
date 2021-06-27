@@ -4,21 +4,22 @@
         <div class="col login-container sign-wrapper mg-lg-l-50 mg-xl-l-60 rounded">
             <div class="wd-100p">
                 <h3 class="tx-color-01 mg-b-5">Sign In</h3>
-                <p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
-                <form [formGroup]="formLogin">
+                <p class="tx-color-03 tx-16 mg-b-20">Welcome back! Please signin to continue.</p>
+                <form [formGroup]="formLogin" >
                     <div class="form-group">
                         <label>Username</label>
-                        <input type="email" class="form-control" formControlName="username" placeholder="Enter your username">
+                        <input type="email" (keyup)="listenLogin($event)" class="form-control" formControlName="username" placeholder="Enter your username">
                     </div>
                     <div class="form-group p-mt-2">
                         <div class="d-flex justify-content-between mg-b-5">
                             <label class="mg-b-0-f">Password</label>
-                            <a href="" class="tx-13">Forgot password?</a>
                         </div>
-                        <input type="password" class="form-control" formControlName="password" placeholder="Enter your password">
+                        <input type="password" (keyup)="listenLogin($event)" class="form-control" formControlName="password" placeholder="Enter your password">
                     </div>
                 </form>
+                <p class="alert alert-danger p-mt-1 p-mb-1 tx-center" *ngIf="msgFailedLogin">{{msgFailedLogin}}</p>
                 <button class="btn btn-brand-02 btn-block p-mt-2" (click)="doLogin()">Sign In</button>
+                <a href="" class="tx-13">Forgot password?</a>
                 <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="page-signup.html">Create an Account</a></div>
             </div>
         </div><!-- sign-wrapper -->

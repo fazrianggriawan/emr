@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { Icd10Service } from './icd10.service';
+import { IcdService } from './icd.service';
 
 describe('Icd10Service', () => {
-  let service: Icd10Service;
+  let service: IcdService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(Icd10Service);
+    service = TestBed.inject(IcdService);
   });
 
   it('should be created', () => {
