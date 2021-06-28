@@ -14,6 +14,8 @@ import { PengajuanPembedahaanComponent } from './components/forms/pengajuan-pemb
 import { EResepComponent } from './components/forms/e-resep/e-resep.component';
 import { PasienComponent } from './components/pasien/pasien.component';
 import { LoginComponent } from './components/login/login.component';
+import { FormRadiologiComponent } from './components/forms/form-radiologi/form-radiologi.component';
+import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/form-laboratorium.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -30,6 +32,8 @@ const routes: Routes = [
   {path: 'surat_masuk_perawatan', component: SuratMasukPerawatanComponent},
   {path: 'pengajuan_pembedahaan', component: PengajuanPembedahaanComponent},
   {path: 'e_resep', component: EResepComponent},
+  {path: 'radiologi', component: FormRadiologiComponent},
+  {path: 'laboratorium', component: FormLaboratoriumComponent},
 ];
 
 @NgModule({

@@ -56,6 +56,8 @@ import { LaboratoriumComponent } from './dialog/laboratorium/laboratorium.compon
 import { RadiologiComponent } from './dialog/radiologi/radiologi.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FarmasiComponent } from './dialog/farmasi/farmasi.component';
+import { FormRadiologiComponent } from './components/forms/form-radiologi/form-radiologi.component';
+import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/form-laboratorium.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,9 @@ import { FarmasiComponent } from './dialog/farmasi/farmasi.component';
     ViewDataRegistrasiComponent,
     LaboratoriumComponent,
     RadiologiComponent,
-    FarmasiComponent
+    FarmasiComponent,
+    FormRadiologiComponent,
+    FormLaboratoriumComponent
   ],
   imports: [
     BrowserModule,

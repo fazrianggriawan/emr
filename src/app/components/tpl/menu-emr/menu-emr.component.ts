@@ -16,7 +16,7 @@ export class MenuEmrComponent implements OnInit {
     this.items = [{
       label: 'Menu',
       items: [
-        {label: 'CPPT / SOAP', link: '/cppt'},
+        {label: 'SOAP', link: '/cppt'},
         {label: 'Pengkajian Awal Medis', link: '/pengkajian_awal_medis'},
         {label: 'Laporan Pembedahaan Dengan Anestesi Lokal', link: '/lap_bedah_anest_lokal'},
         {label: 'Surat Masuk Perawatan', link: '/surat_masuk_perawatan'},
@@ -31,8 +31,8 @@ export class MenuEmrComponent implements OnInit {
     },{
       label: 'Penunjang',
       items: [
-        {label: 'Laboratorium'},
-        {label: 'Radiologi'},
+        {label: 'Laboratorium', link: '/laboratorium'},
+        {label: 'Radiologi', link: '/radiologi'},
         {label: 'Farmasi', link: '/e_resep'},
       ]
     }]
