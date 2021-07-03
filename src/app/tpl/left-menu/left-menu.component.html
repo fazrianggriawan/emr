@@ -1,3 +1,220 @@
-<!-- <div class="col-2 bd-r">
-    <app-registrasi-list></app-registrasi-list>
-</div> -->
+<div class="col p-p-0">
+    <fieldset class="form-fieldset p-mt-2">
+        <legend>History Kunjungan</legend>
+        <div class="row">
+            <div class="col p-p-0">
+                <p-selectButton [options]="menuHistory" (onChange)="selectTanggal($event)" [(ngModel)]="selectedHistory" optionValue="id" optionLabel="name" optionIcon="icon"></p-selectButton>
+            </div>
+        </div>
+        <div class="row p-mt-1" @fadeInOut *ngIf="selectedHistory == 'more'">
+            <div class="col p-p-0">
+                <table class="table table-striped table-hover bd">
+                    <thead>
+                        <tr class="bg-primary">
+                            <th>No.</th>
+                            <th>Tanggal</th>
+                            <th>Poliklinik</th>
+                            <th>DPJP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="clickable">
+                            <td>1.</td>
+                            <td>12 Jun 2021</td>
+                            <td>Bedah Urologi</td>
+                            <td>dr. R. Bebet Prasetyo SpU</td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>2.</td>
+                            <td>10 Jun 2021</td>
+                            <td>Bedah Urologi</td>
+                            <td>dr. R. Bebet Prasetyo SpU</td>
+                        </tr>
+                        <tr class="clickable">
+                            <td>3.</td>
+                            <td>09 Jun 2021</td>
+                            <td>Bedah Urologi</td>
+                            <td>dr. R. Bebet Prasetyo SpU</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <div class="row p-mt-1 p-mb-1 p-p-2 rounded bg-primary">
+                <div class="col"><span>Tanggal : </span> <br><span class="tx-highlight">21 Juni 2021</span></div>
+                <div class="col"><span>DPJP : </span> <br><span class="tx-highlight">dr. R. Bebet Prasetyo SpU</span></div>
+                <div class="col"><span>Poliklinik : </span> <br><span class="tx-highlight">Bedah Urologi</span></div>
+            </div>
+            <div class="row loading tx-center bg-silver p-p-2 p-mb-1 bd rounded" @fadeInOut>
+                <div class="col">
+                    <i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i>
+                    <span class="p-pl-1">Loading...</span>
+                </div>
+            </div>
+            <div class="row bd rounded">
+                <div class="col">
+                    <div>
+                        <div class="row bg-silver p-p-2 tx-bold tx-primary">Subjective (S)</div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">Keluhan Utama</div>
+                            <div class="col">Gangguan Miksi - Aliran (7 hari)</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">Keluhan Tambahan</div>
+                            <div class="col">Sakit Pinggang (2 Hari)</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row bg-silver p-p-2 tx-bold tx-primary">Objective (O)</div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">BB</div>
+                            <div class="col">60 kg</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">TB</div>
+                            <div class="col">170 cm</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">TD</div>
+                            <div class="col">100/80 mmHg</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">Nadi</div>
+                            <div class="col">100 x/menit</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">P</div>
+                            <div class="col">80 x/menit</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">Suhu</div>
+                            <div class="col">34 <sup>o</sup>C</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row bg-silver p-p-2 tx-bold tx-primary">Assessment (A)</div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">Diagnosa Utama</div>
+                            <div class="col">T51.2 - 2-PROPANOL</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">Diagnosa Differensial</div>
+                            <div class="col">C76.2 - ABDOMEN</div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col-4 label-question">Diagnosa Sekunder</div>
+                            <div class="col">R19.1 - ABNORMAL BOWEL SOUNDS</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row bg-silver p-p-2 tx-bold tx-primary">Plan (P)</div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col p-mb-1 p-pt-1">
+                                <div class="bg-primary p-p-2"><b>FARMASI</b> <span class="badge badge-light p-ml-2">Terapi</span></div>
+                                <table class="table table-bordered p-mb-1">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Nama Obat</th>
+                                            <th>Jumlah</th>
+                                            <th>Petunjuk</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1.</td>
+                                            <td>PANADOL</td>
+                                            <td>10 Tab/Cap</td>
+                                            <td>1 X SEHARI 1 TAB/CAP</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.</td>
+                                            <td>AMOXAN</td>
+                                            <td>10 Tab/Cap</td>
+                                            <td>1 X SEHARI 1 TAB/CAP</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="bg-silver tx-center p-p-1 tx-grey bd p-mb-1">
+                                    Belum ada hasil saat ini.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col p-mb-1 p-pt-1">
+                                <div class="bg-primary p-p-2">
+                                    <b>LABORATORIUM</b>
+                                    <span class="badge badge-light p-ml-2">Pemeriksaan</span>
+                                    <span class="badge badge-warning p-ml-2">CITO</span>
+                                </div>
+                                <table class="table table-bordered p-mb-1">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Kode</th>
+                                            <th>Nama Pemeriksaan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1.</td>
+                                            <td>1000</td>
+                                            <td>HEMATOLOGI RUTIN</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.</td>
+                                            <td>2000</td>
+                                            <td>BILIRUBIN TOTAL</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="bg-silver tx-center p-p-1 tx-grey bd p-mb-1">
+                                    Belum ada hasil saat ini.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bd-b p-p-1">
+                            <div class="col p-mb-1 p-pt-1">
+                                <div class="bg-primary p-p-2">
+                                    <b>RADIOLOGI</b>
+                                    <span class="badge badge-light p-ml-2">Pemeriksaan</span>
+                                </div>
+                                <table class="table table-bordered p-mb-1">
+                                    <thead>
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Kode</th>
+                                            <th>Nama Pemeriksaan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1.</td>
+                                            <td>1000</td>
+                                            <td>HEMATOLOGI RUTIN</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2.</td>
+                                            <td>2000</td>
+                                            <td>BILIRUBIN TOTAL</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="tx-right">
+                                    <button pButton label="Lihat Hasil" class="p-button-outlined p-button-sm" icon="pi pi-external-link"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row bd-b p-p-2">
+                            <div class="col-4 label-question">Evaluasi</div>
+                            <div class="col">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</div>

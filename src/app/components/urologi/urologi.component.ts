@@ -1,10 +1,10 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { MenuItem } from "primeng/api";
 import { DICOMViewerComponent } from "ng-dicomviewer";
 import { RegistrasiService } from 'src/app/services/registrasi.service';
 import { Table } from 'primeng/table';
 import { Router } from '@angular/router';
+import { MenuItem } from "primeng/api";
 
 declare const cornerstone: any;
 declare const cornerstoneWADOImageLoader: any;
@@ -43,6 +43,9 @@ export class UrologiComponent implements OnInit {
    ];
    filter: any;
    dialogViewRegistrasi: boolean = false;
+   menuHistory!: MenuItem[];
+
+   activeItem!: MenuItem;
 
    changeTglRegistrasi(){
       this.getDataRegistrasi(this.tglRegistrasi)
@@ -154,6 +157,16 @@ export class UrologiComponent implements OnInit {
       ngOnInit(): void {
          this.getDataRegistrasi(new Date);
          this.getIdPelaksana();
+
+         this.menuHistory = [
+            {label: '22 Jun 2021', icon: 'pi pi-fw pi-home'},
+            {label: '18 Jun 2021', icon: 'pi pi-fw pi-calendar'},
+            {label: '14 Jun 2021', icon: 'pi pi-fw pi-pencil'},
+            {label: '8 Jun 2021', icon: 'pi pi-fw pi-file'},
+            {label: '27 Mei 2021', icon: 'pi pi-fw pi-cog'}
+        ];
+        this.activeItem = this.menuHistory[0];
+
          // this.registrasiService.getAllRegistrasi().subscribe(data => {
          //    this.dataRegistrasi = data;
          // })

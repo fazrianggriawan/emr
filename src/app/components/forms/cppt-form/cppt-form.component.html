@@ -1,6 +1,8 @@
 <div class="row bd p-shadow-3 bg-white">
-    <app-left-menu></app-left-menu>
-    <div class="col" style="background: #f7f9ff;">
+    <div class="col">
+        <app-left-menu></app-left-menu>
+    </div>
+    <div class="col-8" style="background: #f7f9ff;">
         <app-header-registrasi></app-header-registrasi>
 
         <div class="row">
@@ -137,7 +139,7 @@
                             </div>
                         </div>
                         <div class="form-group row bd-b p-mb-2 p-pb-2">
-                            <label for="inputEmail3" class="col-2 col-form-label p-pl-6">Tindakan (Icd 9)</label>
+                            <label for="inputEmail3" class="col-2 col-form-label">Tindakan (ICD 9)</label>
                             <div class="col">
                                 <p-dropdown formControlName="diagUtama" [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
                             </div>

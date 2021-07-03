@@ -1,152 +1,157 @@
 <div class="row">
-    <div class="col-6">
-       <fieldset class="form-fieldset">
-          <legend>Data Rekam Medis Sebelumnya</legend>
-          <div class="row p-mb-2">
-             <div class="col p-p-0"><b>Tanggal : </b>21 Juni 2021</div>
-             <div class="col"><b>DPJP : </b> dr. Bebet</div>
-             <div class="col"><b>Poliklinik : </b> Beda Urologi</div>
-          </div>
-          <div class="row">
-             <div class="col">
-                <div>
-                   <div class="row bg-silver p-p-2 tx-bold tx-info">Subjective (S)</div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Keluhan Utama</div>
-                      <div class="col">Gangguan Miksi - Aliran (7 hari)</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Keluhan Tambahan</div>
-                      <div class="col">Sakit Pinggang (2 Hari)</div>
-                   </div>
-                </div>
-                <div>
-                   <div class="row bg-silver p-p-2 tx-bold tx-info">Objective (O)</div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">BB</div>
-                      <div class="col">60 kg</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">TB</div>
-                      <div class="col">170 cm</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">TD</div>
-                      <div class="col">100/80 mmHg</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Nadi</div>
-                      <div class="col">100 x/menit</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">P</div>
-                      <div class="col">80 x/menit</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Suhu</div>
-                      <div class="col">34 <sup>o</sup>C</div>
-                   </div>
-                </div>
-                <div>
-                   <div class="row bg-silver p-p-2 tx-bold tx-info">Assessment (A)</div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Diagnosa Utama</div>
-                      <div class="col">T51.2 - 2-PROPANOL</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Diagnosa Differensial</div>
-                      <div class="col">C76.2 - ABDOMEN</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Diagnosa Sekunder</div>
-                      <div class="col">R19.1 - ABNORMAL BOWEL SOUNDS</div>
-                   </div>
-                </div>
-                <div>
-                   <div class="row bg-silver p-p-2 tx-bold tx-info">Plan (P)</div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Terapi</div>
-                      <div class="col">
-                         <b>Obat-obatan (resep) :</b><br>
-                         <div>Panadol - 10 tab - 1x sehari 1 tab/cap</div>
-                         <div>Amoxan - 10 tab - 1x sehari 1 tab/cap</div>
-                      </div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Pemeriksaan</div>
-                      <div class="col">
-                         <div class="bd-b p-pb-1 p-mb-1">
-                            <div class="tx-bold">Laboratorium</div>
-                            <div>Darah Lengkap</div>
-                            <div>Darah Rutin</div>
-                            <div><button pButton pRipple type="button" label="Hasil Pemeriksaan" icon="pi pi-external-link" class="p-button-text p-p-1" styleClass="p-button-sm"></button></div>
-                         </div>
-                         <div class="bd-b p-pb-1 p-mb-1">
-                            <div class="tx-bold">Radiologi</div>
-                            <div>Darah Lengkap</div>
-                            <div>Darah Rutin</div>
-                            <div><button pButton pRipple type="button" label="Hasil Pemeriksaan" icon="pi pi-external-link" class="p-button-text p-p-1" styleClass="p-button-sm"></button></div>
-                         </div>
-                      </div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Evaluasi</div>
-                      <div class="col">
-                         -
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </fieldset>
-    </div>
-    <div class="col-6">
-       <fieldset class="form-fieldset">
-          <legend>Data Pasien</legend>
-          <div class="row">
-             <div class="col">
-                <div>
-                   <div class="row bg-silver p-p-2 tx-bold tx-info">Registrasi</div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Tanggal</div>
-                      <div class="col">24 Juni 2021</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Nama</div>
-                      <div class="col">{{registrasi.nama_pasien}}</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">No. RM</div>
-                      <div class="col">{{registrasi.no_rekam_medik}}</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Jns. Kelamin</div>
-                      <div class="col">{{registrasi.jns_kelamin}}</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Usia</div>
-                      <div class="col">{{registrasi.usia}} thn</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">Cara Bayar</div>
-                      <div class="col">{{registrasi.carabayar_nama}}</div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <div class="col-4 label-question">DPJP</div>
-                      <div class="col">
-                         <p-dropdown [options]="dataDokter" optionLabel="nama_pelaksana" optionValue="id_pelaksana" placeholder="Pilih..." [(ngModel)]="dpjp"></p-dropdown>
-                      </div>
-                   </div>
-                   <div class="row bd-b p-p-2">
-                      <!-- <div class="col-4 label-question">&nbsp;</div> -->
-                      <div class="col">
-                         <button pButton label="Simpan" (click)="simpan()" icon="pi pi-check" iconPos="left"></button>
-                         <button pButton label="Mulai Pelayanan" icon="pi pi-chevron-right" (click)="mulaiPelayanan()" iconPos="right"></button>
-                      </div>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </fieldset>
-    </div>
- </div>
+   <div class="col-4 p-shadow-2">
+      <fieldset class="form-fieldset">
+         <legend>History Kunjungan</legend>
+         <div class="row">
+            <div class="col p-p-0">
+               <p-selectButton [options]="menuHistory" [(ngModel)]="selectedHistory" optionLabel="name"></p-selectButton>
+            </div>
+         </div>
+         <div class="row p-mt-1 p-mb-1 p-p-2 bd bg-primary">
+            <div class="col"><b>Tanggal : </b> <br><span class="tx-highlight">21 Juni 2021</span></div>
+            <div class="col"><b>DPJP : </b> <br><span class="tx-highlight">dr. Bebet</span></div>
+            <div class="col"><b>Poliklinik : </b> <br><span class="tx-highlight">Bedah Urologi</span></div>
+         </div>
+         <div class="row">
+            <div class="col">
+               <div>
+                  <div class="row bg-silver p-p-2 tx-bold tx-primary">Subjective (S)</div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Keluhan Utama</div>
+                     <div class="col">Gangguan Miksi - Aliran (7 hari)</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Keluhan Tambahan</div>
+                     <div class="col">Sakit Pinggang (2 Hari)</div>
+                  </div>
+               </div>
+               <div>
+                  <div class="row bg-silver p-p-2 tx-bold tx-primary">Objective (O)</div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">BB</div>
+                     <div class="col">60 kg</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">TB</div>
+                     <div class="col">170 cm</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">TD</div>
+                     <div class="col">100/80 mmHg</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Nadi</div>
+                     <div class="col">100 x/menit</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">P</div>
+                     <div class="col">80 x/menit</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Suhu</div>
+                     <div class="col">34 <sup>o</sup>C</div>
+                  </div>
+               </div>
+               <div>
+                  <div class="row bg-silver p-p-2 tx-bold tx-primary">Assessment (A)</div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Diagnosa Utama</div>
+                     <div class="col">T51.2 - 2-PROPANOL</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Diagnosa Differensial</div>
+                     <div class="col">C76.2 - ABDOMEN</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Diagnosa Sekunder</div>
+                     <div class="col">R19.1 - ABNORMAL BOWEL SOUNDS</div>
+                  </div>
+               </div>
+               <div>
+                  <div class="row bg-silver p-p-2 tx-bold tx-primary">Plan (P)</div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Terapi</div>
+                     <div class="col">
+                        <b>Obat-obatan (resep) :</b><br>
+                        <div>Panadol - 10 tab - 1x sehari 1 tab/cap</div>
+                        <div>Amoxan - 10 tab - 1x sehari 1 tab/cap</div>
+                     </div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Pemeriksaan</div>
+                     <div class="col">
+                        <div class="bd-b p-pb-1 p-mb-1">
+                           <div class="tx-bold">Laboratorium</div>
+                           <div>Darah Lengkap</div>
+                           <div>Darah Rutin</div>
+                           <div><button pButton pRipple type="button" label="Hasil Pemeriksaan" icon="pi pi-external-link" class="p-button-text p-p-1" styleClass="p-button-sm"></button></div>
+                        </div>
+                        <div class="bd-b p-pb-1 p-mb-1">
+                           <div class="tx-bold">Radiologi</div>
+                           <div>Darah Lengkap</div>
+                           <div>Darah Rutin</div>
+                           <div><button pButton pRipple type="button" label="Hasil Pemeriksaan" icon="pi pi-external-link" class="p-button-text p-p-1" styleClass="p-button-sm"></button></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Evaluasi</div>
+                     <div class="col">
+                        -
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </fieldset>
+   </div>
+   <div class="col">
+      <fieldset class="form-fieldset">
+         <legend>Data Pasien</legend>
+         <div class="row">
+            <div class="col">
+               <div>
+                  <div class="row bg-silver p-p-2 tx-bold tx-info">Registrasi</div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Tanggal</div>
+                     <div class="col">24 Juni 2021</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Nama</div>
+                     <div class="col">{{registrasi.nama_pasien}}</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">No. RM</div>
+                     <div class="col">{{registrasi.no_rekam_medik}}</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Jns. Kelamin</div>
+                     <div class="col">{{registrasi.jns_kelamin}}</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Usia</div>
+                     <div class="col">{{registrasi.usia}} thn</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">Cara Bayar</div>
+                     <div class="col">{{registrasi.carabayar_nama}}</div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <div class="col-4 label-question">DPJP</div>
+                     <div class="col">
+                        <p-dropdown [options]="dataDokter" optionLabel="nama_pelaksana" optionValue="id_pelaksana" placeholder="Pilih..." [(ngModel)]="dpjp"></p-dropdown>
+                     </div>
+                  </div>
+                  <div class="row bd-b p-p-2">
+                     <!-- <div class="col-4 label-question">&nbsp;</div> -->
+                     <div class="col">
+                        <button pButton label="Simpan" (click)="simpan()" icon="pi pi-check" iconPos="left"></button>
+                        <button pButton label="Mulai Pelayanan" icon="pi pi-chevron-right" (click)="mulaiPelayanan()" iconPos="right"></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </fieldset>
+   </div>
+</div>

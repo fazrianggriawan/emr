@@ -1,17 +1,20 @@
 <div class="row p-p-3 header-content">
     <div class="col-1 p-mr-2">
-        <div class="avatar avatar-xl p-mr-3"><div class="avatar-initial rounded-circle"></div></div>
+        <div class="avatar avatar-xl p-mr-3 clickable"><div class="avatar-initial rounded-circle"><i class="pi pi-camera" style="font-size: 2rem;"></i></div></div>
     </div>
     <div class="col" style="line-height: 1.2rem;">
         <h4 class="white">{{registrasi.nama_pasien}}</h4>
         <span class="p-mb-1">{{registrasi.usia}} thn, {{registrasi.jns_kelamin}} - RM: {{registrasi.no_rekam_medik}}</span> <br>
         {{registrasi.tanggal_pendaftaran}}.
-        <span class="badge badge-success" *ngIf="registrasi.kunjungan_ke == 1">NEW</span>&nbsp;
-        <span class="badge badge-secondary">{{registrasi.carabayar_nama}}</span>&nbsp;
-        <span class="badge badge-secondary">{{registrasi.rs}}</span>&nbsp;
-        <div class="bd-t p-mt-2 p-pt-3">
-            <button pButton label="Riwayat Kunjungan" class="p-button-sm" icon="pi pi-clock"></button>
+        <div class="p-p-0">
+            <span class="badge badge-success p-mr-1" *ngIf="registrasi.kunjungan_ke == 1">NEW</span>
+            <span class="badge badge-light p-mr-1">{{registrasi.carabayar_nama}}</span>
+            <span class="badge badge-light p-mr-1">{{registrasi.rs}}</span>
         </div>
+
+        <!-- <div class="bd-t p-mt-2 p-pt-3">
+            <button pButton label="Riwayat Kunjungan" class="p-button-sm" icon="pi pi-clock"></button>
+        </div> -->
     </div>
     <div class="col-2 bd rounded box-kunjungan">
         <div class="text-center p-mt-2">Kunjungan Saat Ini</div>

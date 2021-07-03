@@ -10,6 +10,8 @@ import { PrimeNGConfig, MenuItem } from 'primeng/api';
 export class AppComponent implements OnInit{
   title = 'iniapps';
   items: MenuItem[] = [];
+  menus: any[] = [];
+  selectedMenu : any;
 
   constructor(
     private primeNgConfig: PrimeNGConfig,
@@ -26,7 +28,13 @@ export class AppComponent implements OnInit{
     this.getRouter();
     this.primeNgConfig.ripple = true;
     this.items = [
-      { label:'File', items: [{label:'New'}] }, { label: 'Edit' }
+      { label:'Edit Profile', icon:'pi pi-pencil'},
+      { label:'Change Password', icon:'pi pi-lock'},
+      { label:'Logout', icon:'pi pi-sign-out'},
+    ]
+    this.menus = [
+      {name: 'DASHBOARD'},
+      {name: 'UROLOGI'},
     ]
   }
 }
