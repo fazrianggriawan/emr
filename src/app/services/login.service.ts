@@ -16,7 +16,7 @@ export class LoginService {
   ) { }
 
   doLogin(data:any): Observable<any> {
-      return this.http.post<any>(config.api_url('login'), data).pipe(catchError(this.errorHandle.handleIt));
+      return this.http.post<any>(config.api_url('do_login'), data).pipe(catchError(this.errorHandle.handleIt));
   }
 
 }
