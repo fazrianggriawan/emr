@@ -16355,7 +16355,7 @@
         _createClass(_LoginService, [{
           key: "doLogin",
           value: function doLogin(data) {
-            return this.http.post(_config__WEBPACK_IMPORTED_MODULE_0__.config.api_url('login'), data).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(this.errorHandle.handleIt));
+            return this.http.post(_config__WEBPACK_IMPORTED_MODULE_0__.config.api_url('do_login'), data).pipe((0, rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.catchError)(this.errorHandle.handleIt));
           }
         }]);
 
