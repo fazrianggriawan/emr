@@ -4,6 +4,7 @@ import { IcdService } from "../../../services/icd.service";
 import { SaveStatusService } from "../../../services/save-status.service";
 import { FormBuilder } from '@angular/forms';
 import { CpptService } from "src/app/services/cppt.service";
+import { RegistrasiService } from 'src/app/services/registrasi.service';
 
 @Component({
   selector: 'app-cppt-form',

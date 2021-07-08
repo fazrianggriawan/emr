@@ -19,9 +19,13 @@ export class RegistrasiService {
 
   dataRegistrasi = new BehaviorSubject(undefined);
 
-  getDataRegistrasi(){
+  getLocalStorageReg(){
     var ls:any = localStorage.getItem('registrasi');
-    var aa = JSON.parse(ls);
+    return JSON.parse(ls);
+  }
+
+  getDataRegistrasi(){
+    var aa = this.getLocalStorageReg();
     this.dataRegistrasi.next(aa);
     return this.dataRegistrasi.asObservable();
   }
@@ -35,6 +39,11 @@ export class RegistrasiService {
   getAllRegistrasi(date: Date = new Date): Observable<any> {
     let a = this.datepipe.transform(date, 'yyyy-MM-dd');
     return this.http.post<any>(config.api_url('registrasi'), {tanggal: a}).pipe(catchError(this.errorHandle.handleIt));
+  }
+
+  getHistoryRegistrasi(date: Date = new Date): Observable<any> {
+    var data = this.getLocalStorageReg();
+    return this.http.post<any>(config.api_url('registrasi'), {id_pasien: data.id_pasien}).pipe(catchError(this.errorHandle.handleIt));
   }
 
   updateRegistrasiDPJP(data:any){

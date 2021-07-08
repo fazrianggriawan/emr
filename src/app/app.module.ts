@@ -27,6 +27,7 @@ import {CalendarModule} from 'primeng/calendar';
 import {SliderModule} from 'primeng/slider';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 import {EditorModule} from 'primeng/editor';
+import {FileUploadModule} from 'primeng/fileupload';
 
 import { FormOrderComponent } from './components/form-order/form-order.component';
 import { LoginComponent } from './components/login/login.component';
@@ -119,7 +120,8 @@ import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/
     SliderModule,
     InputTextareaModule,
     AutoCompleteModule,
-    SelectButtonModule
+    SelectButtonModule,
+    FileUploadModule
   ],
   providers: [
     DatePipe,

@@ -1,6 +1,23 @@
 <div class="row p-p-3 header-content">
     <div class="col-1 p-mr-2">
-        <div class="avatar avatar-xl p-mr-3 clickable"><div class="avatar-initial rounded-circle"><i class="pi pi-camera" style="font-size: 2rem;"></i></div></div>
+        <div class="avatar avatar-xl p-mr-3 clickable">
+            <div *ngIf="pasienImageUrl">
+                <img [src]="pasienImageUrl" class="rounded-circle" height="73px">
+            </div>
+            <div *ngIf="!pasienImageUrl" class="avatar-initial rounded-circle"><i class="pi pi-camera" style="font-size: 2rem;"></i></div>
+        </div>
+        <div class="avatar-upload">
+            <p-fileUpload
+                #fileInput
+                mode="basic"
+                accept="image/*"
+                (uploadHandler)="onUpload($event)"
+                [auto]="true"
+                [customUpload]="true"
+                styleClass="rounded-circle"
+                chooseIcon="pi pi-camera">
+            </p-fileUpload>
+        </div>
     </div>
     <div class="col" style="line-height: 1.2rem;">
         <h4 class="white">{{registrasi.nama_pasien}}</h4>

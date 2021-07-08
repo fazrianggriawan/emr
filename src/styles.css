@@ -279,3 +279,19 @@ input:read-only{ cursor: not-allowed; }
 .top-menu .p-dropdown .p-dropdown-label, .top-menu .p-dropdown .p-dropdown-trigger{
     color: white;
 }
+
+.avatar-upload{
+    margin-top: -72px;
+}
+
+.avatar-upload .p-button.p-button-icon-only{
+    width: 4.5rem;
+    padding: 19px;
+    background: transparent;
+    color: transparent;
+    border: 0;
+}
+
+.avatar-upload .pi{
+    font-size: 2rem;
+}
