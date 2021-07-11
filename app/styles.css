@@ -50260,3 +50260,5 @@ input:read-only{ cursor: not-allowed; }
 .top-menu .p-dropdown .p-dropdown-label, .top-menu .p-dropdown .p-dropdown-trigger{
     color: white;
 }
+
+.table-info-resep td{ padding: 2; }

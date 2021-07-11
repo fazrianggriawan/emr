@@ -84,7 +84,8 @@ export class UrologiComponent implements OnInit {
 
    selectRegistrasi(data:any){
       this.registrasiService.setDataRegistrasi(data);
-      this.dialogViewRegistrasi = true;
+      this.router.navigateByUrl('cppt');
+      // this.dialogViewRegistrasi = true;
    }
 
    // comparasion: boolean = false;

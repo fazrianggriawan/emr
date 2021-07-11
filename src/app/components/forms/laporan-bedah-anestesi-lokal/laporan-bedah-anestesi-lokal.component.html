@@ -14,11 +14,11 @@
                 <form [formGroup]="formLapBedahAnestLokal" class="p-mt-2">
                     <fieldset class="form-fieldset">
                         <div class="form-group row bd-b p-mb-2 p-pb-2">
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label class="d-block">Tgl. Pembedahan : </label>
                                 <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" formControlName="tglBedah"></p-calendar>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label class="d-block">Jam : </label>
                                 <p-calendar placeholder="Pilih Jam" [timeOnly]="true" formControlName="jamBedah"></p-calendar>
                             </div>
@@ -26,11 +26,11 @@
                         <div class="form-group row bd-b p-mb-2 p-pb-2">
                             <div class="col">
                                 <label class="d-block">Ahli Bedah : </label>
-                                <p-dropdown [options]="allDokter" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="ahliBedah"></p-dropdown>
+                                <p-dropdown [options]="allDokter" optionLabel="nama_pelaksana" placeholder="Pilih..." [showClear]="true" formControlName="ahliBedah"></p-dropdown>
                             </div>
                             <div class="col">
                                 <label class="d-block">Asisten : </label>
-                                <p-dropdown [options]="allDokter" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="asisten"></p-dropdown>
+                                <p-dropdown [options]="allDokter" optionLabel="nama_pelaksana" placeholder="Pilih..." [showClear]="true" formControlName="asisten"></p-dropdown>
                             </div>
                             <div class="col">
                                 <label class="d-block">instrumentator : </label>
@@ -134,6 +134,8 @@
                                 <label class="d-block">Posisi Pasien : </label>
                                 <input pInputText class="form-control"  formControlName="posisiPasien">
                             </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
                             <div class="col">
                                 <label class="d-block">Mulai : </label>
                                 <!-- <input pInputText class="form-control"  formControlName="mulaiJam"> -->
@@ -153,13 +155,45 @@
                                 <input pInputText class="form-control" formControlName="ok">
                             </div>
                         </div>
-                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                        <div class="form-group row p-mb-2 p-pb-2">
                             <div class="col-2">
                                 <label class="d-block">Uraian Pembedahan : </label>
                             </div>
                             <div class="col">
                                 <p>Uraian dimulai dari bagian tubuh yang dibedah, cara penemuan tindakan yang dilakukan, explorasi, indikasi dan tindakan macam penutupan luka, dengan lengkap dan jelas, jaringan yang dikeluarkan drainage, darah yang keluar.</p>
                                 <p-editor formControlName="uraianBedah" [style]="{'height':'320px'}"></p-editor>
+                            </div>
+                        </div>
+                        <div class="form-group row p-mb-2 p-pb-2">
+                            <div class="col-2">
+                                <label class="d-block">Photo Pra OP : </label>
+                            </div>
+                            <div class="col">
+                                <p-fileUpload
+                                    #fileInput
+                                    [multiple]="true"
+                                    accept="image/*"
+                                    (uploadHandler)="onUpload($event)"
+                                    styleClass="p-button-outlined p-button-sm"
+                                    chooseLabel="Upload Photo"
+                                    chooseIcon="pi pi-camera">
+                                </p-fileUpload>
+                            </div>
+                        </div>
+                        <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="col-2">
+                                <label class="d-block">Photo Post OP : </label>
+                            </div>
+                            <div class="col">
+                                <p-fileUpload
+                                    #fileInput
+                                    [multiple]="true"
+                                    accept="image/*"
+                                    (uploadHandler)="onUpload($event)"
+                                    styleClass="p-button-outlined p-button-sm"
+                                    chooseLabel="Upload Photo"
+                                    chooseIcon="pi pi-camera">
+                                </p-fileUpload>
                             </div>
                         </div>
                         <div class="form-group row bd-b p-mb-2 p-pb-2">

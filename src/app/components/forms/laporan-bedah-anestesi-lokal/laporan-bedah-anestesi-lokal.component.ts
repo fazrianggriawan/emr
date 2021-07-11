@@ -43,6 +43,10 @@ export class LaporanBedahAnestesiLokalComponent implements OnInit {
 
   allDokter: any;
 
+  onUpload(e:any){
+
+  }
+
   ngOnInit(): void {
     this.dokterService.getAllDokter().subscribe(data => {
       this.allDokter = data;
