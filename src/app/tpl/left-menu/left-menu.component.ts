@@ -13,7 +13,7 @@ import { RegistrasiService } from 'src/app/services/registrasi.service';
           animate('400ms ease-in-out', style({opacity:'1'}))
        ])
     ])
- ]
+  ]
 })
 export class LeftMenuComponent implements OnInit {
 
