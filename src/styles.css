@@ -2,6 +2,7 @@
 /* You can add global styles to this file, and also import other style files */
 body{
     background-color: rgb(0 0 0 / 10%);
+    line-height: unset;
 }
 
 .navbar-header .nav-link{
@@ -320,3 +321,7 @@ input:read-only{ cursor: not-allowed; }
 }
 
 .input-alergi input{ color: white !important; }
+
+.p-chips .p-chips-multiple-container .p-chips-token{
+    margin-bottom: 2px !important;
+}
