@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ObatService } from 'src/app/services/obat.service';
 import { AutoComplete } from "primeng/autocomplete/autocomplete";
+import { OverlayPanel } from "primeng/overlaypanel";
 import { RegistrasiService } from 'src/app/services/registrasi.service';
 import {TreeNode} from 'primeng/api';
 import { FarmasiService } from 'src/app/services/farmasi.service';
@@ -335,6 +336,39 @@ export class FarmasiComponent implements OnInit {
     this.dialogSig = false;
   }
 
+  parsingNumber : any[] = [];
+
+  parsingNomor(){
+    var a = [];
+    var b = [];
+    for (let index = 0; index <= 100; index++) { b.push(index) }
+
+    var i,j, temporary, chunk = 10;
+    for (i = 0,j = b.length; i < j; i += chunk) {
+        temporary = b.slice(i, i + chunk);
+        a.push(temporary)
+    }
+
+    this.parsingNumber = a;
+
+  }
+
+  selectJumlahObat(dd:OverlayPanel, item:any){
+    dd.hide();
+    this.formFarmasi.patchValue({jumlahObat: item})
+  }
+
+  selectJumlahHari(dd:OverlayPanel, item:any){
+    dd.hide();
+    this.formFarmasi.patchValue({jumlahHari: item})
+  }
+
+  getSigTemplate(){
+    this.farmasiService.getTemplateSig().subscribe(data => {
+      this.dataTemplateSig = data;
+    })
+  }
+
   ngOnInit(): void {
     this.obatService.getAllObat().subscribe(data => {
       this.masterObat = data;
@@ -351,6 +385,8 @@ export class FarmasiComponent implements OnInit {
     this.getDataFrekuensi();
     this.getDataPetunjuk();
     this.getDataDurasi();
+    this.parsingNomor();
+    this.getSigTemplate();
 
     this.getDataHari();
     this.getDataSigna2();

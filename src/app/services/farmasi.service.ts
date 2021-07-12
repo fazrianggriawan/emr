@@ -18,4 +18,8 @@ export class FarmasiService {
     return this.http.post<any>(config.api_url('save_sig_template'), data).pipe(catchError(this.errorHandle.handleIt));
   }
 
+  getTemplateSig(){
+    return this.http.get<any>(config.api_url('sig_template')).pipe(catchError(this.errorHandle.handleIt));
+  }
+
 }

@@ -1,11 +1,11 @@
 <fieldset class="form-fieldset">
     <legend>Resep Non Racikan</legend>
-    <div class="form-group row bd rounded p-mb-2 p-p-2" style="background:#ffcece; border-color: #d16868;">
+    <div class="form-group row bd rounded p-mb-2 p-p-2" style="background:#ffcece; border-color: #e8b0b0;">
         <div class="col-2 tx-right">
-            <label class="d-block">Alergi Obat </label>
+            <label class="d-block p-pt-2">Alergi Obat </label>
         </div>
         <div class="col">
-            <p-chips [allowDuplicate]="false" [(ngModel)]="dataAlergiObat" (onAdd)="updateAlergiObat()" separator=","></p-chips>
+            <p-chips [allowDuplicate]="false" styleClass="input-alergi" [(ngModel)]="dataAlergiObat" (onAdd)="updateAlergiObat()" separator=","></p-chips>
         </div>
     </div>
     <div class="p-p-2 p-mb-2 row bg-silver rounded bd">
@@ -19,9 +19,6 @@
                         <ng-template let-obat pTemplate="item">
                             <div class="obat-item">
                                 <div>{{obat.nama_obat}} ({{obat.satuan}}) :: <span class="badge" [ngClass]="obat.stok_gudang <= 0 ? 'badge-danger' : 'badge-info'">Stok : {{obat.stok_gudang}} {{obat.satuan}}</span></div>
-                                <!-- <div>
-                                    <span class="badge" [ngClass]="obat.stok_gudang <= 0 ? 'badge-danger' : 'badge-info'">Stok : {{obat.stok_gudang}} {{obat.satuan}}</span>
-                                </div> -->
                             </div>
                         </ng-template>
                     </p-autoComplete>
@@ -43,7 +40,10 @@
                     <label class="d-block">Jumlah Hari : </label>
                 </div>
                 <div class="col-4">
-                    <p-dropdown formControlName="jumlahHari" dropdownIcon="" [options]="dataHari" optionLabel="name" optionValue="name" placeholder="Pilih..."></p-dropdown>
+                    <div class="p-inputgroup">
+                        <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op.toggle($event)"></button>
+                        <input type="text" formControlName="jumlahHari" pInputText>
+                    </div>
                 </div>
             </div>
             <div class="form-group row bd-b p-mb-2 p-pb-2">
@@ -51,8 +51,10 @@
                     <label class="d-block">Jumlah Obat : </label>
                 </div>
                 <div class="col-4">
-                    <p-dropdown formControlName="jumlahObat" dropdownIcon="" [options]="dataHari" optionLabel="name" optionValue="name" placeholder="Pilih..."></p-dropdown>
-                    <!-- <input type="text" class="form-control" formControlName="jumlahObat" pInputText> -->
+                    <div class="p-inputgroup">
+                        <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op2.toggle($event)"></button>
+                        <input type="text" formControlName="jumlahObat" pInputText>
+                    </div>
                 </div>
             </div>
             <div class="form-group row">
@@ -75,7 +77,7 @@
             </div>
             <div class="row p-mb-3">
                 <div class="col">
-                    <b>Ruang/Poliklinik :</b> {{dataRegistrasi.ruangan_nama}}
+                    <b>Ruang/Poliklinik :</b> <br> {{dataRegistrasi.ruangan_nama}}
                 </div>
                 <div class="col">
                     <b>Tanggal :</b> 12 Jul 2021 <br>
@@ -189,6 +191,22 @@
         <div class="col"></div>
     </div>
 </fieldset>
+
+<p-overlayPanel #op appendTo="body" [style]="{width: '330px'}">
+    <ng-template pTemplate>
+        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
+            <div (click)="selectJumlahHari(op, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<p-overlayPanel #op2 appendTo="body" [style]="{width: '330px'}">
+    <ng-template pTemplate>
+        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
+            <div (click)="selectJumlahObat(op2, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
 
 <p-dialog header="SIG Generator" [(visible)]="dialogSig" [modal]="true" [style]="{width: '80vw'}">
     <div class="alert alert-success p-mb-1" *ngIf="alertSaveTemplate" @fadeInOut>
