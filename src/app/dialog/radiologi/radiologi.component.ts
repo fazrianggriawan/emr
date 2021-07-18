@@ -1,5 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { EditorModule } from '@tinymce/tinymce-angular';
+import { config } from 'src/app/config';
 import { RadiologiService } from 'src/app/services/radiologi.service';
 
 @Component({
@@ -18,6 +19,12 @@ export class RadiologiComponent implements OnInit {
       this.dataMasterRadiologi = data;
     })
   }
+
+    sendToRadiologi(){
+        window.open(config.api_url('print_rad'), '_blank');
+    }
+
+
 
   constructor(
     private radiologiService: RadiologiService

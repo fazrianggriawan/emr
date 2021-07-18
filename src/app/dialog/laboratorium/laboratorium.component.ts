@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { config } from 'src/app/config';
 import { IcdService } from 'src/app/services/icd.service';
 import { LaboratoriumService } from 'src/app/services/laboratorium.service';
 
@@ -51,6 +52,10 @@ export class LaboratoriumComponent implements OnInit {
     this.icdService.getIcd10().subscribe(data=>{
       this.icd10 = data;
     })
+  }
+
+  sendToLab(){
+      window.open(config.api_url('print_lab'), '_blank')
   }
 
   constructor(

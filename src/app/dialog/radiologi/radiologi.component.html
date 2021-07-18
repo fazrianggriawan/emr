@@ -53,5 +53,11 @@
                 <p-editor [(ngModel)]="dataKlinis" [style]="{'min-height':'150px'}"></p-editor>
             </div>
         </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-12 col-form-label"></label>
+            <div class="col-12">
+                <button pButton label="Send to Radiologi" (click)="sendToRadiologi()" icon="pi pi-send" iconPos="right"></button>
+            </div>
+        </div>
     </div>
 </div>

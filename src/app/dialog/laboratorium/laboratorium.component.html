@@ -13,9 +13,15 @@
             </div>
         </div>
         <div class="form-group row bd-b p-mb-2 p-pb-2">
-            <label for="inputEmail3" class="col-3 col-form-label">ICD 10</label>
+            <label for="inputEmail3" class="col-3 col-form-label">Diagnosa (ICD 10)</label>
             <div class="col">
                 <p-dropdown [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-3 col-form-label"></label>
+            <div class="col">
+                <button pButton label="Send to Laboratorium" (click)="sendToLab()" icon="pi pi-send" iconPos="right"></button>
             </div>
         </div>
     </fieldset>
