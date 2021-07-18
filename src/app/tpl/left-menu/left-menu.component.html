@@ -26,7 +26,28 @@
                 </table>
             </div>
         </div>
-        <div>
+        <div class="row">
+            <div class="col p-p-0">
+                <p-accordion>
+                    <p-accordionTab header="S O A P">
+                       S O A P
+                    </p-accordionTab>
+                    <p-accordionTab header="Alergi">
+                        Riwayat Alergi
+                    </p-accordionTab>
+                    <p-accordionTab header="Diagnosa">
+                        Riwayat Alergi
+                    </p-accordionTab>
+                    <p-accordionTab header="Pengkajian Awal Medis">
+                        Pengkajian Medis
+                    </p-accordionTab>
+                    <p-accordionTab header="Lap. Pembedahan">
+                        Lap. Pembedahan
+                    </p-accordionTab>
+                </p-accordion>
+            </div>
+        </div>
+        <div style="display: none;">
             <div class="row p-mt-1 p-mb-1 p-p-2 rounded bg-primary">
                 <div class="col"><span>Tanggal : </span> <br><span class="tx-highlight">{{selectedRegistrasi.tanggal_pendaftaran}}</span></div>
                 <div class="col"><span>DPJP : </span> <br><span class="tx-highlight">{{selectedRegistrasi.dokter_name}}</span></div>

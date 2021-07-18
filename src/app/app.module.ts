@@ -30,6 +30,8 @@ import {EditorModule} from 'primeng/editor';
 import {FileUploadModule} from 'primeng/fileupload';
 import {TreeModule} from 'primeng/tree';
 import {ChipsModule} from 'primeng/chips';
+import {AccordionModule} from 'primeng/accordion';
+import {TabMenuModule} from 'primeng/tabmenu';
 
 import { FormOrderComponent } from './components/form-order/form-order.component';
 import { LoginComponent } from './components/login/login.component';
@@ -125,7 +127,9 @@ import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/
     SelectButtonModule,
     FileUploadModule,
     TreeModule,
-    ChipsModule
+    ChipsModule,
+    AccordionModule,
+    TabMenuModule
   ],
   providers: [
     DatePipe,

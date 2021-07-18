@@ -35,6 +35,10 @@
     </div>
     <div class="col-2 bd rounded box-kunjungan">
         <div class="text-center p-mt-2">Kunjungan Saat Ini</div>
-        <h2 align="center" class="p-m-0 p-p-0" style="font-size: 5rem; color: #235d90">{{registrasi.kunjungan_ke}}</h2>
+        <h2 align="center" class="p-m-0 p-p-0" style="font-size: 3rem; color: #235d90">{{registrasi.kunjungan_ke}}</h2>
     </div>
+</div>
+<div class="row">
+    <div class="col-12 p-p-0"><p-tabMenu styleClass="mainmenu"  [model]="mainMenus" [activeItem]="activeMenu"></p-tabMenu></div>
+    <div class="col-12 p-p-0"><p-tabMenu styleClass="submenu" [model]="menus" [activeItem]="activeSubMenu"></p-tabMenu></div>
 </div>

@@ -1,227 +1,225 @@
-<fieldset class="form-fieldset">
-    <legend>Resep Non Racikan</legend>
-    <div class="row">
-        <div class="col">
-            <div class="form-group row bd rounded p-mb-2 p-p-2" style="background:#ffcece; border-color: #e8b0b0;">
-                <div class="col-3 tx-right">
-                    <label class="d-block p-pt-2">Alergi Obat </label>
-                </div>
-                <div class="col">
-                    <p-chips [allowDuplicate]="false" styleClass="input-alergi" [(ngModel)]="dataAlergiObat" (onAdd)="updateAlergiObat()" separator=","></p-chips>
-                </div>
-            </div>
-            <div class="p-p-2 p-mb-2 row rounded bd">
-                <form [formGroup]="formFarmasi" class="col">
-                    <div class="form-group row p-mb-1">
-                        <div class="col-3 tx-right">
-                            <label class="d-block">Obat </label>
-                        </div>
-                        <div class="col">
-                            <p-autoComplete #dd [forceSelection]="true" formControlName="obat" (onSelect)="hitungTotalObat()" field="label" [(ngModel)]="selectedObat" [suggestions]="filterDataObat" (completeMethod)="search($event)" placeholder="Cari Nama Obat" [dropdown]="true">
-                                <ng-template let-obat pTemplate="item">
-                                    <div class="obat-item">
-                                        <div>{{obat.nama_obat}} ({{obat.satuan}}) :: <span class="badge" [ngClass]="obat.stok_gudang <= 0 ? 'badge-danger' : 'badge-info'">Stok : {{obat.stok_gudang}} {{obat.satuan}}</span></div>
-                                    </div>
-                                </ng-template>
-                            </p-autoComplete>
-                        </div>
-                    </div>
-                    <div class="form-group row p-mb-1">
-                        <div class="col-3 tx-right">
-                            <label class="d-block">SIG </label>
-                        </div>
-                        <div class="col">
-                            <div class="p-inputgroup">
-                                <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="dialogSig=true"></button>
-                                <input type="text" formControlName="sig" pInputText>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row p-mb-1">
-                        <div class="col-3 tx-right">
-                            <label class="d-block">Jumlah Hari </label>
-                        </div>
-                        <div class="col">
-                            <div class="p-inputgroup">
-                                <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op.toggle($event)"></button>
-                                <input type="text" formControlName="jumlahHari" pInputText>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row p-mb-1">
-                        <div class="col-3 tx-right">
-                            <label class="d-block">Jumlah Obat</label>
-                        </div>
-                        <div class="col">
-                            <div class="p-inputgroup">
-                                <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op2.toggle($event)"></button>
-                                <input type="text" formControlName="jumlahObat" pInputText>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col-3 tx-right"></div>
-                        <div class="col">
-                            <button type="button" pButton pRipple icon="pi pi-plus" label="Simpan" (click)="tambahObatNonRacikan(dd)"></button>
-                        </div>
-                    </div>
-                </form>
+<div class="row">
+    <div class="col bg-white p-p-2">
+        <div class="row p-mb-1">
+            <div class="col button-group">
+                <span class="p-buttonset">
+                    <button pButton pRipple class="p-button-info" label="Back" icon="pi pi-chevron-left"></button>
+                    <button pButton pRipple class="p-button-info" label="Send Order" icon="pi pi-send"></button>
+                    <button pButton pRipple (click)="dialogAdd=true" class="p-button-info" label="Add" icon="pi pi-plus"></button>
+                    <button pButton pRipple class="p-button-info" label="Save as Template" icon="pi pi-save"></button>
+                    <button pButton pRipple class="p-button-info" label="Templates" icon="pi pi-star"></button>
+                    <button pButton pRipple class="p-button-info" label="Copy from History" icon="pi pi-copy"></button>
+                </span>
             </div>
         </div>
-        <div class="col">
-            <div class="bd p-p-3 bg-white rounded">
-                <div class="row p-mb-5">
-                    <div class="col tx-center">
-                        <h1 style="font-size:18px;">RSPAD GATOT SOEBROTO <br> INSTALASI FARMASI</h1>
-                        Jl. Dr. Abdul Rachman Saleh No.24 JAKARTA PUSAR <br>
-                        Telp 021 3441008 Ext. 2135
-                    </div>
-                </div>
-                <div class="row p-mb-3">
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group row">
+                    <div class="col-3">Tanggal</div>
                     <div class="col">
-                        <b>Ruang/Poliklinik :</b> <br> {{dataRegistrasi.ruangan_nama}}
+                        <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
                     </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">Lokasi Farmasi</div>
                     <div class="col">
-                        <b>Tanggal :</b> 12 Jul 2021 <br>
-                        <b>Riwayat Alergi Obat :</b><br> {{alergiObatText}}
+                        <input type="text" pInputText class="form-control">
                     </div>
                 </div>
-                <div class="row p-mb-4">
+                <div class="form-group row">
+                    <div class="col-3">No. Resep</div>
                     <div class="col">
-                        <div *ngFor="let item of dataObatNonRacikan; let i = index" class="bd-b p-pb-2 p-mb-2">
-                            <div>
-                                <span class="tx-bold" style="font-size: 16px;">R/</span> &nbsp; {{item.obat.label}} No. {{item.romanJumlahObat}}
-                            </div>
-                            <div class="p-pl-6">S {{item.sig}}</div>
-                            <div class="tx-right">
-                                <button type="button" pButton pRipple icon="pi pi-trash" label="Delete" (click)="hapusObat(i)" class="p-button-sm p-button-danger p-button-text"></button>
-                            </div>
-                        </div>
+                        <input type="text" pInputText class="form-control">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col-4">
-                        <table class="table table-bordered table-info-resep p-mb-1">
-                            <tr>
-                                <td width="20" class="tx-center">V</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="tx-center">H</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="tx-center">D</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td class="tx-center">S</td>
-                                <td></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="row">
+                <div class="form-group row">
+                    <div class="col-3">Physician</div>
                     <div class="col">
-                        <table>
-                            <tr>
-                                <td valign="top">Nama Pasien</td>
-                                <td valign="top" width="20" class="tx-center">:</td>
-                                <td>{{dataRegistrasi.nama_pasien}}</td>
-                            </tr>
-                            <tr>
-                                <td valign="top">No. Rm</td>
-                                <td valign="top" class="tx-center">:</td>
-                                <td>{{dataRegistrasi.no_rekam_medik}}</td>
-                            </tr>
-                            <tr>
-                                <td valign="top">Tgl.Lahir/Umur</td>
-                                <td valign="top" class="tx-center">:</td>
-                                <td>{{dataRegistrasi.tanggal_lahir}} / {{dataRegistrasi.usia}} thn</td>
-                            </tr>
-                            <!-- <tr>
-                                <td valign="top">Berat Badan</td>
-                                <td valign="top" class="tx-center">:</td>
-                                <td>61 kg</td>
-                            </tr> -->
-                            <tr>
-                                <td valign="top">Nama & SIP Dokter</td>
-                                <td valign="top" class="tx-center">:</td>
-                                <td>dr. R. Bebet Prasetyo SpU. <br>SIP. 03/SIP/SDK/2018</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="col-4">
-                        <table class="table table-bordered table-info-resep">
-                            <tr>
-                                <td width="20">Benar Pasien</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Benar Obat</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Benar Dosis</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Benar Waktu</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Benar Cara Pemberian</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Benar Informasi</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>Benar Pendokumentasian</td>
-                                <td></td>
-                            </tr>
-                        </table>
+                        <input type="text" pInputText class="form-control">
                     </div>
                 </div>
-                <div class="p-mt-3"><small>Resep ini hanya berlaku di lingkungan RSPAD GATOT SOEBROTO</small></div>
-                <div class="bd-t p-pt-3 p-mt-2 tx-right">
-                    <button type="button" pButton pRipple icon="pi pi-send" iconPos="right" label="Send Order to Farmasi" (click)="sendOrderFarmasi()" class="p-button-sm"></button>
-                </div>
+            </div>
+        </div>
+        <div class="row p-mt-2">
+            <div class="col">
+                <table class="table table-sm table-striped table-hover bd">
+                    <thead>
+                        <tr class="bg-primary">
+                            <th width="80"></th>
+                            <th>Nama Obat</th>
+                            <th width="10">Dosis</th>
+                            <th width="150">Unit</th>
+                            <th width="80">Route</th>
+                            <th>Signa</th>
+                            <th width="200">Keterangan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of dataObatNonRacikan; let i = index">
+                            <td>
+                                <button pButton pRipple class="p-button-sm p-button-danger p-mr-1" icon="pi pi-trash"></button>
+                                <button pButton pRipple class="p-button-sm p-button-info" icon="pi pi-pencil"></button>
+                            </td>
+                            <td>{{item.obat.label}}</td>
+                            <td>1</td>
+                            <td>Sendok makan</td>
+                            <td>Oral</td>
+                            <td>1x Sehari 1 Sendok makan</td>
+                            <td>Sesudah Makan</td>
+                        </tr>
+                        <tr>
+                            <td colspan="7" class="empty-data">Belum ada data saat ini.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</fieldset>
+</div>
 
-<p-overlayPanel #op appendTo="body" [style]="{width: '330px'}">
-    <ng-template pTemplate>
-        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
-            <div (click)="selectJumlahHari(op, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
+<p-dialog header="Add" [(visible)]="dialogAdd" [modal]="true" [style]="{width: '50vw'}">
+    <form [formGroup]="formFarmasi" class="p-pt-2">
+        <div class="row">
+            <div class="col">
+                <div class="form-group row p-mb-1">
+                    <div class="col-2 tx-right">
+                        <label class="d-block">Obat </label>
+                    </div>
+                    <div class="col">
+                        <p-autoComplete [(ngModel)]="selectedObat" placeholder="Cari Obat..." [autoHighlight]="true" [suggestions]="filterDataObat" (completeMethod)="search($event)">
+                            <ng-template pTemplate="header">
+                                <table class="table table-sm bd table-bordered p-m-0 p-p-0">
+                                    <tr class="bg-primary">
+                                        <td style="width: 300px;">Nama Obat</td>
+                                        <td style="width: 80px;">Stock</td>
+                                        <td style="width: 80px;">Unit</td>
+                                    </tr>
+                                </table>
+                            </ng-template>
+                            <ng-template let-obat pTemplate="item">
+                                <table class="table table-sm p-m-0 p-p-0">
+                                    <tr>
+                                        <td style="width: 300px;">{{obat.label}}</td>
+                                        <td style="width: 80px;">{{obat.stok_gudang}}</td>
+                                        <td style="width: 80px;">{{obat.satuan}}</td>
+                                    </tr>
+                                </table>
+                            </ng-template>
+                        </p-autoComplete>
+                        <!-- <input pInputText type="text" class="form-control" [(ngModel)]="filterBox" (focus)="opObat.show($event)" (input)="applyFilterGlobal($event, 'startsWith')" placeholder="Keyword.." /> -->
+                    </div>
+                </div>
+                <div class="form-group row p-mb-1">
+                    <div class="col-2 tx-right">
+                        <label class="d-block">Sig </label>
+                    </div>
+                    <div class="col">
+                        <div class="p-inputgroup" style="margin-bottom: 2px;">
+                            <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="dialogSig=true"></button>
+                            <input type="text" formControlName="sig" pInputText>
+                        </div>
+                        <table class="table table-sm bd p-m-0">
+                            <thead>
+                                <tr class="bg-primary">
+                                    <th>Dosis</th>
+                                    <th>Unit</th>
+                                    <th>Route</th>
+                                    <th>Frekuensi</th>
+                                    <th>Keterangan</th>
+                                    <th>Durasi</th>
+                                </tr>
+                            </thead>
+                            <thead>
+                                <tr>
+                                    <td>{{sigData[0].dosis}}</td>
+                                    <td>{{sigData[0].satuan}}</td>
+                                    <td>{{sigData[0].caraPakai}}</td>
+                                    <td>{{sigData[0].frekuensi}}</td>
+                                    <td>{{sigData[0].petunjuk}}</td>
+                                    <td>{{sigData[0].durasi}}</td>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group row" style="display: none;">
+                    <div class="col-2 tx-right">
+                        <label class="d-block">Jumlah Hari </label>
+                    </div>
+                    <div class="col-3">
+                        <div class="p-inputgroup">
+                            <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op.toggle($event)"></button>
+                            <input type="text" formControlName="jumlahHari" pInputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-2 tx-right">
+                        <label class="d-block">Quantity</label>
+                    </div>
+                    <div class="col-3">
+                        <div class="p-inputgroup">
+                            <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op2.toggle($event)"></button>
+                            <input type="text" formControlName="jumlahObat" pInputText>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row p-mt-1 p-mb-1">
+                    <div class="col-2 tx-right"></div>
+                    <div class="col">
+                        <button type="button" pButton pRipple class="p-button-sm" icon="pi pi-save" label="Save"></button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </ng-template>
-</p-overlayPanel>
-
-<p-overlayPanel #op2 appendTo="body" [style]="{width: '330px'}">
-    <ng-template pTemplate>
-        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
-            <div (click)="selectJumlahObat(op2, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
-        </div>
-    </ng-template>
-</p-overlayPanel>
+    </form>
+    <div class="bd-t p-pt-1">
+        <table class="table table-sm table-striped table-hover bd">
+            <thead>
+                <tr class="bg-primary">
+                    <th width="80"></th>
+                    <th>Nama Obat</th>
+                    <th width="10">Dosis</th>
+                    <th width="150">Unit</th>
+                    <th width="80">Route</th>
+                    <th>Signa</th>
+                    <th width="200">Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataObatNonRacikan; let i = index">
+                    <td>
+                        <button pButton pRipple class="p-button-sm p-button-danger p-mr-1" icon="pi pi-trash"></button>
+                        <button pButton pRipple class="p-button-sm p-button-info" icon="pi pi-pencil"></button>
+                    </td>
+                    <td>{{item.obat.label}}</td>
+                    <td>1</td>
+                    <td>Sendok makan</td>
+                    <td>Oral</td>
+                    <td>1x Sehari 1 Sendok makan</td>
+                    <td>Sesudah Makan</td>
+                </tr>
+                <tr>
+                    <td colspan="7" class="empty-data">Belum ada data saat ini.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</p-dialog>
 
 <p-dialog header="SIG Generator" [(visible)]="dialogSig" [modal]="true" [style]="{width: '80vw'}">
     <div class="alert alert-success p-mb-1" *ngIf="alertSaveTemplate" @fadeInOut>
         <i class="pi pi-check-circle"></i>   Template berhasil disimpan
     </div>
-    <div class="p-p-1">
-        <div class="p-inputgroup">
-            <input type="text" pInputText [(ngModel)]="sigText" class="form-control" placeholder="SIG Free Text...">
-            <button type="button" pButton pRipple icon="pi pi-save" label="Save as template" (click)="saveTemplateSig()"></button>
-        </div>
-    </div>
+
     <p-tabView>
         <p-tabPanel header="Generator">
+            <div class="p-p-1">
+                <div class="p-inputgroup">
+                    <input type="text" pInputText [(ngModel)]="sigText" class="form-control" placeholder="SIG Free Text...">
+                    <button type="button" pButton pRipple icon="pi pi-save" label="Save as template" (click)="saveTemplateSig()"></button>
+                </div>
+            </div>
             <div style="display: inline-flex;">
                 <div class="cola bd p-p-2 p-m-1 rounded">
                     <b>Dosis :</b>
@@ -310,8 +308,52 @@
             </div>
         </p-tabPanel>
     </p-tabView>
-
     <ng-template pTemplate="footer">
         <p-button icon="pi pi-chevron-right" iconPos="right" (click)="sendToForm()" label="Send to form"></p-button>
     </ng-template>
 </p-dialog>
+
+<p-overlayPanel styleClass="p-p-1" #opObat appendTo="body" [style]="{width: '330px'}">
+    <ng-template pTemplate>
+        <p-table #dtMasterObat
+            [value]="masterObat"
+            [paginator]="true"
+            selectionMode="single"
+            [(selection)]="selectedObat"
+            dataKey="nama_obat"
+            [rows]="5"
+            [globalFilterFields]="['nama_obat']"
+            styleClass="p-datatable-sm bd">
+            <ng-template pTemplate="header">
+                <tr class="bg-primary">
+                    <th>Nama Obat</th>
+                    <th width="60">Stock</th>
+                    <th width="80">Unit</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr [pSelectableRow]="item">
+                    <td>{{item.nama_obat}}</td>
+                    <td>{{item.stok_gudang}}</td>
+                    <td>{{item.satuan}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </ng-template>
+</p-overlayPanel>
+
+<p-overlayPanel #op appendTo="body" [style]="{width: '330px'}">
+    <ng-template pTemplate>
+        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
+            <div (click)="selectJumlahHari(op, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<p-overlayPanel #op2 appendTo="body" [style]="{width: '302px'}">
+    <ng-template pTemplate>
+        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
+            <div (click)="selectJumlahObat(op2, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
+        </div>
+    </ng-template>
+</p-overlayPanel>

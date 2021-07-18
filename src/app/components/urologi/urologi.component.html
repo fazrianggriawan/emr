@@ -6,7 +6,6 @@
             Total Seluruh Pasien : <span class="badge badge-secondary">{{dataRegistrasi.length}}</span>
          </div>
       </div>
-
       <p-table #dtRegistrasi [value]="dataRegistrasi" dataKey="no_pendaftaran" [rows]="10" [showCurrentPageReport]="true"
       [rowsPerPageOptions]="[10,25,50]" [loading]="loading" styleClass="p-datatable-striped p-datatable-hover"
       [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"

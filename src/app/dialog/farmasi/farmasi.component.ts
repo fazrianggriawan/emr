@@ -7,6 +7,7 @@ import { RegistrasiService } from 'src/app/services/registrasi.service';
 import {TreeNode} from 'primeng/api';
 import { FarmasiService } from 'src/app/services/farmasi.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-farmasi',
@@ -27,11 +28,12 @@ export class FarmasiComponent implements OnInit {
     private obatService: ObatService,
     private farmasiService: FarmasiService,
     private FormBuilder: FormBuilder,
-    private registrasiservice: RegistrasiService
+    private registrasiservice: RegistrasiService,
   ) { }
 
-  dialogSig: boolean = false;
-  dataObat: any;
+  dialogSig : boolean = false;
+  dialogAdd : boolean = false;
+  dataObat : any;
   filterDataObat: any;
   filterDataObatRacikan: any;
   masterObat: any[] = [];
@@ -212,10 +214,9 @@ export class FarmasiComponent implements OnInit {
 
   getDataCaraPakai(){
     this.dataCaraPakai = [
-      {label: 'Makan'},
-      {label: 'Minum'},
+      {label: 'Oral'},
       {label: 'Oles'},
-      {label: 'Suntik'}
+      {label: 'Inject'}
     ]
   }
 
@@ -288,6 +289,14 @@ export class FarmasiComponent implements OnInit {
     {dosis: '', satuan: '', caraPakai: '', frekuensi: '', petunjuk: '',durasi: ''}
   ];
   sigText : string = '';
+
+  filterBox : string = '';
+
+  @ViewChild('dtMasterObat') dt: Table | undefined;
+
+  applyFilterGlobal($event:any, stringVal:any) {
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
 
   onRowSigSelect(e:any, type:any, select:boolean){
     if( select == true ){

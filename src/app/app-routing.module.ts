@@ -16,6 +16,8 @@ import { PasienComponent } from './components/pasien/pasien.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormRadiologiComponent } from './components/forms/form-radiologi/form-radiologi.component';
 import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/form-laboratorium.component';
+import { HeaderRegistrasiComponent } from './components/tpl/header-registrasi/header-registrasi.component';
+import { FarmasiComponent } from './dialog/farmasi/farmasi.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -31,9 +33,11 @@ const routes: Routes = [
   {path: 'lap_pemantauan_anest_lokal', component: LaporanPemantauanTindakanAnestLokalComponent},
   {path: 'surat_masuk_perawatan', component: SuratMasukPerawatanComponent},
   {path: 'pengajuan_pembedahaan', component: PengajuanPembedahaanComponent},
-  {path: 'e_resep', component: EResepComponent},
+  {path: 'online_prescription', component: FarmasiComponent},
   {path: 'radiologi', component: FormRadiologiComponent},
   {path: 'laboratorium', component: FormLaboratoriumComponent},
+  {path: 'subjective/assessment_umum', component: CpptFormComponent},
+  {path: 'header', component: HeaderRegistrasiComponent, outlet: 'header'},
 ];
 
 @NgModule({

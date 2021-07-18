@@ -1,35 +1,391 @@
 <div class="row bd p-shadow-3 bg-white">
-    <div class="col-3">
+    <div class="col-3" style="display: none;">
         <app-left-menu></app-left-menu>
     </div>
-    <div class="col" style="background: #f7f9ff;">
-        <app-header-registrasi></app-header-registrasi>
+    <div class="col">
+        <!-- <app-header-registrasi></app-header-registrasi> -->
 
         <div class="row">
             <div class="col-2 p-p-0 bd-r bg-white">
                 <app-menu-emr></app-menu-emr>
             </div>
             <div class="col p-p-3">
-                <div class="bd-b p-mb-2"><h5>SOAP</h5></div>
+                <div class="bd-b p-mb-2"><h5>S O A P</h5></div>
                 <div style="position: relative;" class="p-pb-6">
                     <fieldset class="form-fieldset p-mb-3">
-                        <legend>Subjective (S)</legend>
+                        <!-- <legend>Subjective (S)</legend> -->
                         <form [formGroup]="formSubjective">
-                            <div class="form-group row bd-b p-mb-2 p-pb-2">
-                                <label for="inputEmail3" class="col-2 col-form-label">Keluhan Utama</label>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-3 tx-right">Keluhan Utama :</label>
                                 <div class="col">
-                                    <p-dropdown [options]="tplKeluhan" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="keluhanUtama"></p-dropdown>
-                                    <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanUtamaLainnya">
+                                    <p-dropdown [editable]="true" [options]="tplKeluhan" optionLabel="name" placeholder="Pilih.." [showClear]="true" formControlName="keluhanUtama"></p-dropdown>
+                                    <!-- <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanUtamaLainnya"> -->
+                                </div>
+                                <div class="col-4">
+                                    Sejak : <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" formControlName="tglBedah"></p-calendar>
                                 </div>
                             </div>
-                            <div class="form-group row bd-b p-mb-2 p-pb-2">
-                                <label for="inputEmail3" class="col-2 col-form-label">Keluhan Tambahan</label>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-3 tx-right">Keluhan Tambahan :</label>
                                 <div class="col">
-                                    <p-dropdown [options]="tplKeluhan" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="keluhanTambahan"></p-dropdown>
-                                    <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanTambahanLainnya">
+                                    <p-dropdown [editable]="true" [options]="tplKeluhan" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="keluhanTambahan"></p-dropdown>
+                                    <!-- <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanTambahanLainnya"> -->
+                                </div>
+                                <div class="col-4">
+                                    Sejak : <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" formControlName="tglBedah"></p-calendar>
                                 </div>
                             </div>
-                            <div class="form-group row bd-b p-mb-2 p-pb-2">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-3 tx-right">Pemeriksaan Fisik :</label>
+                                <div class="col">
+                                    <div class="form-group row p-pl-0">
+                                        <div class="input-group col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">BB</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="bb">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light">kg</button>
+                                            </div>
+                                        </div>
+                                        <div class="input-group col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">TB</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="tb">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light">cm</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">TD</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="td">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light">mmHg</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row p-pl-0">
+                                        <div class="input-group col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Nadi</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="nadi">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light">x/menit</button>
+                                                <!-- <span class="input-group-text">x/menit</span> -->
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">P</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="p">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light">x/menit</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group col">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Suhu</span>
+                                            </div>
+                                            <input class="form-control" pInputText formControlName="suhu">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-light"><sup>o</sup>C</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row p-mt-2">
+                                <div class="col">
+                                    <div class="p-mb-2 title-section">Objective Note :</div>
+                                    <p-editor formControlName="keluhanTambahan" [style]="{'min-height':'320px'}"></p-editor>
+                                </div>
+                            </div>
+                            <div class="form-group row p-mt-3">
+                                <div class="col">
+                                    <div class="p-mb-2 title-section">Hasil Pemeriksaan Penunjang :</div>
+                                    <p-tabView styleClass="bd p-p-2 rounded bg-white">
+                                        <p-tabPanel header="Laboratorium">
+                                            <table class="table table-hover table-striped bd">
+                                                <thead class="bg-primary">
+                                                    <tr>
+                                                        <th width="50">No.</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Tanggal Hasil</th>
+                                                        <th>Authorized By</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1.</td>
+                                                        <td>Hasil Pemeriksaan Lab Pasien LIM KHUN SENG</td>
+                                                        <td>12 Juli 2021</td>
+                                                        <td>dr. Lily</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="p-mb-1 tx-left">
+                                                <button pButton class="p-button-sm p-button-outlined" label="Tambahkan Hasil" icon="pi pi-plus"></button>
+                                            </div>
+                                        </p-tabPanel>
+                                        <p-tabPanel header="Radiologi">
+                                            <table class="table table-hover table-striped bd">
+                                                <thead class="bg-primary">
+                                                    <tr>
+                                                        <th width="50">No.</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Tanggal Hasil</th>
+                                                        <th>Authorized By</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="4" class="empty-data">Belum ada data untuk saat ini.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="p-mb-1 tx-left">
+                                                <button pButton class="p-button-sm p-button-outlined" label="Tambahkan Hasil" icon="pi pi-plus"></button>
+                                            </div>
+                                        </p-tabPanel>
+                                        <p-tabPanel header="Pat.Anatomi">
+                                            <table class="table table-hover table-striped bd">
+                                                <thead class="bg-primary">
+                                                    <tr>
+                                                        <th width="50">No.</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Tanggal Hasil</th>
+                                                        <th>Authorized By</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="4" class="empty-data">Belum ada data untuk saat ini.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="p-mb-1 tx-left">
+                                                <button pButton class="p-button-sm p-button-outlined" label="Tambahkan Hasil" icon="pi pi-plus"></button>
+                                            </div>
+                                        </p-tabPanel>
+                                    </p-tabView>
+                                </div>
+                            </div>
+                            <div class="form-group row p-mt-3">
+                                <div class="col">
+                                    <div class="p-mb-2 title-section">Diagnosa :</div>
+                                    <div class="bd p-p-2 rounded bg-white">
+                                        <p-dropdown [options]="icd10" optionLabel="name" placeholder="Pilih Diagnosa ICD10" [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
+                                        <table class="table table-hover table-striped bd p-mt-1 p-mb-1">
+                                            <thead class="bg-primary">
+                                                <tr>
+                                                    <th width="50">No.</th>
+                                                    <th>ICD 10</th>
+                                                    <th>Status</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1.</td>
+                                                    <td>C76.2 - ABDOMEN</td>
+                                                    <td><span class="badge badge-info">Primary</span></td>
+                                                    <td><button pButton class="p-button-icon p-button-sm p-button-text p-button-danger" icon="pi pi-trash"></button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2.</td>
+                                                    <td>A42.1 - ABDOMINAL ACTINOMYCOSIS</td>
+                                                    <td><button pButton class="p-button-icon p-button-sm p-button-text" icon="pi pi-key"></button></td>
+                                                    <td><button pButton class="p-button-icon p-button-sm p-button-text p-button-danger" icon="pi pi-trash"></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div>
+                                            <p-accordion>
+                                                <p-accordionTab header="History Diagnosa">
+                                                    <table class="table table-hover table-striped bd p-m-o">
+                                                        <thead class="bg-primary">
+                                                            <tr>
+                                                                <th width="50">K</th>
+                                                                <th>ICD 10</th>
+                                                                <th>Tanggal</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1.</td>
+                                                                <td>C76.2 - ABDOMEN <span class="badge badge-info">Primary</span></td>
+                                                                <td>12 Juli 2021</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2.</td>
+                                                                <td>A42.1 - ABDOMINAL ACTINOMYCOSIS</td>
+                                                                <td>12 Juli 2021</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </p-accordionTab>
+                                            </p-accordion>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="p-mb-2 title-section">Tindakan :</div>
+                                    <div class="bd p-p-2 rounded bg-white">
+                                        <p-dropdown [options]="icd9" optionLabel="name" placeholder="Pilih Tindakan ICD9" [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
+                                        <table class="table table-hover table-striped bd p-mt-1 p-mb-1">
+                                            <thead class="bg-primary">
+                                                <tr>
+                                                    <th width="50">No.</th>
+                                                    <th>ICD 9</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>1.</td>
+                                                    <td>C76.2 - ABDOMEN</td>
+                                                    <td><button pButton class="p-button-icon p-button-sm p-button-text p-button-danger" icon="pi pi-trash"></button></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2.</td>
+                                                    <td>A42.1 - ABDOMINAL ACTINOMYCOSIS</td>
+                                                    <td><button pButton class="p-button-icon p-button-sm p-button-text p-button-danger" icon="pi pi-trash"></button></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div>
+                                            <p-accordion>
+                                                <p-accordionTab header="History Tindakan">
+                                                    <table class="table table-hover table-striped bd p-m-o">
+                                                        <thead class="bg-primary">
+                                                            <tr>
+                                                                <th width="50">K</th>
+                                                                <th>ICD 9</th>
+                                                                <th>Tanggal</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1.</td>
+                                                                <td>C76.2 - ABDOMEN <span class="badge badge-info">Primary</span></td>
+                                                                <td>12 Juli 2021</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2.</td>
+                                                                <td>A42.1 - ABDOMINAL ACTINOMYCOSIS</td>
+                                                                <td>12 Juli 2021</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </p-accordionTab>
+                                            </p-accordion>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row p-mt-3">
+                                <div class="col">
+                                    <div class="p-mb-2 title-section">Order Farmasi & Penunjang :</div>
+                                    <p-tabView styleClass="bd p-p-2 rounded bg-white">
+                                        <p-tabPanel header="Farmasi">
+                                            <table class="table table-hover table-striped bd">
+                                                <thead class="bg-primary">
+                                                    <tr>
+                                                        <th width="50">No.</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Tanggal Hasil</th>
+                                                        <th>Authorized By</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1.</td>
+                                                        <td>Hasil Pemeriksaan Lab Pasien LIM KHUN SENG</td>
+                                                        <td>12 Juli 2021</td>
+                                                        <td>dr. Lily</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="p-mb-1 tx-left">
+                                                <button pButton class="p-button-sm p-button-outlined" label="Tambahkan Data" icon="pi pi-plus"></button>
+                                            </div>
+                                        </p-tabPanel>
+                                        <p-tabPanel header="Laboratorium">
+                                            <table class="table table-hover table-striped bd">
+                                                <thead class="bg-primary">
+                                                    <tr>
+                                                        <th width="50">No.</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Tanggal Hasil</th>
+                                                        <th>Authorized By</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1.</td>
+                                                        <td>Hasil Pemeriksaan Lab Pasien LIM KHUN SENG</td>
+                                                        <td>12 Juli 2021</td>
+                                                        <td>dr. Lily</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="p-mb-1 tx-left">
+                                                <button pButton class="p-button-sm p-button-outlined" label="Tambahkan Data" icon="pi pi-plus"></button>
+                                            </div>
+                                        </p-tabPanel>
+                                        <p-tabPanel header="Radiologi">
+                                            <table class="table table-hover table-striped bd">
+                                                <thead class="bg-primary">
+                                                    <tr>
+                                                        <th width="50">No.</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Tanggal Hasil</th>
+                                                        <th>Authorized By</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="4" class="empty-data">Belum ada data untuk saat ini.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="p-mb-1 tx-left">
+                                                <button pButton class="p-button-sm p-button-outlined" label="Tambahkan Data" icon="pi pi-plus"></button>
+                                            </div>
+                                        </p-tabPanel>
+                                        <p-tabPanel header="Pat.Anatomi">
+                                            <table class="table table-hover table-striped bd">
+                                                <thead class="bg-primary">
+                                                    <tr>
+                                                        <th width="50">No.</th>
+                                                        <th>Keterangan</th>
+                                                        <th>Tanggal Hasil</th>
+                                                        <th>Authorized By</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td colspan="4" class="empty-data">Belum ada data untuk saat ini.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="p-mb-1 tx-left">
+                                                <button pButton class="p-button-sm p-button-outlined" label="Tambahkan Data" icon="pi pi-plus"></button>
+                                            </div>
+                                        </p-tabPanel>
+                                    </p-tabView>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group row bd-b p-mb-2 p-pb-2">
                                 <label for="inputEmail3" class="col-2 col-form-label">Riwayat</label>
                                 <div class="col">
                                     <input class="form-control" pInputText formControlName="riwayat">
@@ -40,10 +396,10 @@
                                 <div class="col">
                                     <button pButton label="Simpan" icon="pi pi-check"></button>
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
                     </fieldset>
-                    <fieldset class="form-fieldset p-mb-3">
+                    <fieldset class="form-fieldset p-mb-3" style="display: none;">
                         <legend>Objective (O)</legend>
                         <form [formGroup]="formObjective">
                             <div class="form-group row bd-b p-mb-2 p-pb-2">
@@ -119,13 +475,13 @@
                             </div>
                         </form>
                     </fieldset>
-                    <fieldset class="form-fieldset p-mb-3">
+                    <fieldset class="form-fieldset p-mb-3" style="display: none;">
                         <legend>Assesment (A)</legend>
                         <form [formGroup]="formAssessment">
                             <div class="form-group row bd-b p-mb-2 p-pb-2">
                                 <label for="inputEmail3" class="col-2 col-form-label">Diagnosa Utama</label>
                                 <div class="col">
-                                    <p-dropdown formControlName="diagUtama" [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
+                                    <!-- <p-dropdown formControlName="diagUtama" [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown> -->
                                 </div>
                             </div>
                             <div class="form-group row bd-b p-mb-2 p-pb-2">
@@ -148,7 +504,7 @@
                             </div>
                         </form>
                     </fieldset>
-                    <fieldset class="form-fieldset p-mb-3">
+                    <fieldset class="form-fieldset p-mb-3" style="display: none;">
                         <legend>Plan (P)</legend>
                         <div class="form-group row p-pb-2">
                             <label for="inputEmail3" class="col-2 col-form-label">Terapi</label>
