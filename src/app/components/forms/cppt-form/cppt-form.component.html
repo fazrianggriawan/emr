@@ -1,5 +1,5 @@
 <div class="row bd p-shadow-3 bg-white">
-    <div class="col-3" style="display: none;">
+    <div class="col-3">
         <app-left-menu></app-left-menu>
     </div>
     <div class="col">
@@ -485,15 +485,16 @@
                                 </div>
                             </div>
                             <div class="form-group row bd-b p-mb-2 p-pb-2">
-                                <label for="inputEmail3" class="col-2 col-form-label">Diagnosa Differensial</label>
+                                <label for="inputEmail3" class="col-2 col-form-label">Diagnosa Sekunder</label>
                                 <div class="col">
-                                    <p-dropdown formControlName="diagDiff" [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
+                                    <p-dropdown formControlName="diagSek" [options]="icd10" optionLabel="name" placeholder="Pilih..."
+                                        [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
                                 </div>
                             </div>
                             <div class="form-group row bd-b p-mb-2 p-pb-2">
-                                <label for="inputEmail3" class="col-2 col-form-label">Diagnosa Sekunder</label>
+                                <label for="inputEmail3" class="col-2 col-form-label">Diagnosa Differensial</label>
                                 <div class="col">
-                                    <p-dropdown formControlName="diagSek" [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
+                                    <p-dropdown formControlName="diagDiff" [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
                                 </div>
                             </div>
                             <div class="form-group row bd-b p-mb-2 p-pb-2">

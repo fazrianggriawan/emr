@@ -1,130 +1,33 @@
-<!-- <div class="title-section">Laboratorium</div> -->
-<div class="row p-mb-1">
-    <div class="col button-group">
-        <span class="p-buttonset">
-            <button pButton pRipple class="p-button-info" label="Back" icon="pi pi-chevron-left"></button>
-            <button pButton pRipple class="p-button-info" label="Send Order" icon="pi pi-send"></button>
-            <button pButton pRipple class="p-button-info" label="Add" icon="pi pi-plus"></button>
-            <button pButton pRipple class="p-button-info" label="Choose from History" icon="pi pi-copy"></button>
-            <button pButton pRipple class="p-button-info" label="Templates" icon="pi pi-star"></button>
-            <button pButton pRipple class="p-button-info" label="Save as Template" icon="pi pi-save" [disabled]="selectedPemeriksaan.length == 0"></button>
-        </span>
-    </div>
-</div>
-<div class="row">
-    <div class="col-6">
-        <div class="form-group row">
-            <div class="col-3">Tanggal</div>
+<div class="p-mb-2">
+    <fieldset class="form-fieldset">
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-3 col-form-label">Tipe Pemeriksaan</label>
             <div class="col">
-                <p-calendar placeholder="Pilih Tanggal" [(ngModel)]="now" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                <p-selectButton [options]="cito" [(ngModel)]="selectedCito" optionLabel="name" optionValue="id"></p-selectButton>
             </div>
         </div>
-        <!-- <div class="form-group row">
-            <label class="col-3">Diagnosa Klinik</label>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-3 col-form-label">Diagnosa Klinik</label>
             <div class="col">
                 <input type="text" pInputText class="form-control">
             </div>
-        </div> -->
-        <div class="form-group row">
-            <label class="col-3">Tipe Pemeriksaan</label>
-            <div class="col-4">
-                <p-dropdown [options]="cito" optionLabel="name" placeholder="Pilih..."></p-dropdown>
-                <!-- <p-selectButton [options]="cito" [(ngModel)]="selectedCito" optionLabel="name" optionValue="id"></p-selectButton> -->
-            </div>
         </div>
-        <div class="form-group row">
-            <div class="col-3">
-                Data Pemeriksaan
-            </div>
-            <div class="col">
-                <p-autoComplete
-                    #masterLabNonCito
-                    appendTo="body"
-                    placeholder="Cari Pemeriksaan..."
-                    field="name"
-                    [(ngModel)]="selectedLab"
-                    [autoHighlight]="true"
-                    [suggestions]="filteredMasterLab"
-                    [forceSelection]="true"
-                    [showEmptyMessage]="true"
-                    (onSelect)="selectPemeriksaan($event, masterLabNonCito)"
-                    (completeMethod)="search($event)">
-                    <ng-template pTemplate="header">
-                        <table class="table table-sm bd table-bordered p-m-0 p-p-0">
-                            <tr class="bg-primary">
-                                <td style="width: 50px;">ID</td>
-                                <td style="width: 300px;">Nama Pemeriksaan</td>
-                                <td style="width: 100px;">Category</td>
-                            </tr>
-                        </table>
-                    </ng-template>
-                    <ng-template let-data pTemplate="item">
-                        <table class="table table-sm p-m-0 p-p-0">
-                            <tr>
-                                <td style="width: 50px;">{{data.id}}</td>
-                                <td style="width: 300px;">{{data.name}}</td>
-                                <td style="width: 100px;">{{data.cat_name}}</td>
-                            </tr>
-                        </table>
-                    </ng-template>
-                </p-autoComplete>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="form-group row">
-            <label class="col-3">ICD 10</label>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-3 col-form-label">Diagnosa (ICD 10)</label>
             <div class="col">
                 <p-dropdown [options]="icd10" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-3">Physician</div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-3 col-form-label"></label>
             <div class="col">
-                <input type="text" pInputText class="form-control">
+                <button pButton label="Send to Laboratorium" (click)="sendToLab()" icon="pi pi-send" iconPos="right"></button>
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-3">Order Remarks</div>
-            <div class="col">
-                <input type="text" pInputText class="form-control">
-            </div>
-        </div>
-    </div>
+    </fieldset>
 </div>
-
-<div class="row p-mt-2">
-    <div class="col-9">
-        <p-table [value]="dataPemeriksaan" [(selection)]="selectedPemeriksaan" dataKey="id" styleClass="bd">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th style="width: 50px;"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
-                    <th style="width: 100px;">ID</th>
-                    <th>Nama Pemeriksaan</th>
-                    <th style="width: 120px;">Category</th>
-                    <th style="width: 80px;">Action</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-data>
-                <tr>
-                    <td><p-tableCheckbox [value]="data"></p-tableCheckbox></td>
-                    <td>{{data.id}}</td>
-                    <td>{{data.name}}</td>
-                    <td>{{data.cat_name}}</td>
-                    <td><button pButton pRipple pTooltip="Delete" tooltipPosition="top" class="p-button-sm p-button-danger p-mr-1" icon="pi pi-trash"></button></td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="footer">
-                <tr *ngIf="dataPemeriksaan.length == 0">
-                    <td colspan="4" class="empty-data">Belum ada data saat ini.</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-</div>
-
-<div class="card-columns p-p-4 hidden" *ngIf="selectedCito=='reg'">
-    <div class="card rounded bd" *ngFor="let item of dataMasterLab; let i = index">
+<div class="card-columns" *ngIf="selectedCito=='cito'">
+    <div class="card rounded bd" *ngFor="let item of dataMasterLabCito; let i = index">
         <div class="card-body">
             <fieldset class="form-fieldset">
                 <legend>{{item.group}}</legend>
@@ -155,8 +58,8 @@
     </div>
 </div>
 
-<div class="card-columns p-p-4" *ngIf="selectedCito=='cito'">
-    <div class="card rounded bd" *ngFor="let item of dataMasterLabCito; let i = index">
+<div class="card-columns" *ngIf="selectedCito=='reg'">
+    <div class="card rounded bd" *ngFor="let item of dataMasterLab; let i = index">
         <div class="card-body">
             <fieldset class="form-fieldset">
                 <legend>{{item.group}}</legend>
