@@ -1,0 +1,176 @@
+<div class="row p-mb-1">
+    <div class="col button-group">
+        <span class="p-buttonset">
+            <button pButton pRipple class="p-button-info" label="Back" icon="pi pi-chevron-left"></button>
+            <button pButton pRipple class="p-button-info" label="Send Order" (click)="save()" icon="pi pi-send"></button>
+            <button pButton pRipple class="p-button-info" label="Add" icon="pi pi-plus"></button>
+            <button pButton pRipple class="p-button-info" label="Choose from History" icon="pi pi-copy"></button>
+            <button pButton pRipple class="p-button-info" label="Templates" icon="pi pi-star"></button>
+            <button pButton pRipple class="p-button-info" [disabled]="selectedPemeriksaan.length == 0" label="Save as Template" icon="pi pi-save"></button>
+        </span>
+    </div>
+</div>
+
+<form [formGroup]="form">
+    <div class="row">
+        <div class="col">
+            <div class="form-group row">
+                <div class="col-3">Tanggal</div>
+                <div class="col">
+                    <p-calendar placeholder="Pilih Tanggal" formControlName="tanggal" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3">Tipe Pemeriksaan</label>
+                <div class="col-4">
+                    <p-dropdown [options]="cito" formControlName="tipe" optionLabel="name" placeholder="Pilih..."></p-dropdown>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-3">Category Pemeriksaan</label>
+                <div class="col-4">
+                    <p-dropdown [options]="dataMasterRadiologi" (onChange)="getPemeriksaanDetail($event)" optionLabel="name" placeholder="Pilih..."></p-dropdown>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">
+                    Data Pemeriksaan
+                </div>
+                <div class="col">
+                    <p-autoComplete
+                        #masterLabNonCito
+                        appendTo="body"
+                        placeholder="Cari Pemeriksaan..."
+                        field="name"
+                        [autoHighlight]="true"
+                        [suggestions]="filteredMasterRad"
+                        [forceSelection]="true"
+                        [showEmptyMessage]="true"
+                        (onSelect)="selectPemeriksaan($event, masterLabNonCito)"
+                        (completeMethod)="search($event)">
+                        <ng-template pTemplate="header">
+                            <table class="table table-sm bd table-bordered p-m-0 p-p-0">
+                                <tr class="bg-primary">
+                                    <td style="width: 50px;">ID</td>
+                                    <td style="width: 300px;">Nama Pemeriksaan</td>
+                                </tr>
+                            </table>
+                        </ng-template>
+                        <ng-template let-data pTemplate="item">
+                            <table class="table table-sm p-m-0 p-p-0">
+                                <tr>
+                                    <td style="width: 50px;">{{data.id}}</td>
+                                    <td style="width: 300px;">{{data.name}}</td>
+                                </tr>
+                            </table>
+                        </ng-template>
+                    </p-autoComplete>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="form-group row">
+                <label class="col-3">ICD 10</label>
+                <div class="col">
+                    <p-dropdown [options]="icd10" formControlName="diagnosa" optionLabel="name" placeholder="Pilih..." [virtualScroll]="true" [itemSize]="31" [filter]="true" [showClear]="true"></p-dropdown>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">Physician</div>
+                <div class="col">
+                    <input type="text" pInputText formControlName="physician" class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-3">Order Remarks</div>
+                <div class="col">
+                    <input type="text" pInputText formControlName="remarks" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row p-mt-2">
+    <div class="col-6">
+        <p-table [value]="dataPemeriksaan" [(selection)]="selectedPemeriksaan" dataKey="id" styleClass="bd">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="width: 50px;"><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+                    <th style="width: 100px;">ID</th>
+                    <th>Nama Pemeriksaan</th>
+                    <th style="width: 80px;">Action</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-data>
+                <tr>
+                    <td><p-tableCheckbox [value]="data"></p-tableCheckbox></td>
+                    <td>{{data.id}}</td>
+                    <td>{{data.name}}</td>
+                    <td><button pButton pRipple pTooltip="Delete" tooltipPosition="top" class="p-button-sm p-button-danger p-mr-1" icon="pi pi-trash"></button></td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr *ngIf="dataPemeriksaan.length == 0">
+                    <td colspan="4" class="empty-data">Belum ada data saat ini.</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+<div class="hidden">
+    <div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Pemeriksaan Terakhir Tgl :</label>
+            <div class="col-2">
+                <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy"></p-calendar>
+            </div>
+            <label for="inputEmail3" class="col-2 col-form-label tx-right">Nomor :</label>
+            <div class="col">
+                <input class="form-control" pInputText class="form-control">
+            </div>
+        </div>
+    </div>
+    <fieldset class="form-fieldset p-mb-2">
+        <legend>Pemeriksaan Yang Diminta</legend>
+        <div class="row">
+            <div class="col-2" *ngFor="let item of dataMasterRadiologi">
+                <div class="p-field-checkbox">
+                    <p-checkbox name="group1" value="{{item.id}}" [(ngModel)]="selectedRad"></p-checkbox>
+                    <label for="ny">{{item.name}}</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="p-field-checkbox">
+                    <p-checkbox name="group1" value="lain" [(ngModel)]="selectedRad"></p-checkbox>
+                    <label for="ny">Lain-lain</label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Jenis Pemeriksaan</label>
+            <div class="col">
+                <input class="form-control" pInputText>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Lokasi</label>
+            <div class="col">
+                <input class="form-control" pInputText>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-2 col-form-label">Yang Diminta</label>
+            <div class="col">
+                <input class="form-control" pInputText>
+            </div>
+        </div>
+        <div class="form-group row bd-b p-mb-2 p-pb-2">
+            <label for="inputEmail3" class="col-12 col-form-label">Data Klinis / Lab / Pemeriksaan Terdahulu</label>
+            <div class="col-12">
+                <p-editor [(ngModel)]="dataKlinis" [style]="{'min-height':'150px'}"></p-editor>
+            </div>
+        </div>
+    </div>
+</div>

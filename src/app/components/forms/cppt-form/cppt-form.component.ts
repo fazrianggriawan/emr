@@ -85,6 +85,7 @@ export class CpptFormComponent implements OnInit {
       this.icd10 = data;
     })
   }
+
   getIcd9(){
     this.IcdService.getIcd10().subscribe(data => {
       this.icd9 = data;

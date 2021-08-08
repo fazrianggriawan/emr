@@ -39,6 +39,11 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-12 p-p-0"><p-tabMenu styleClass="mainmenu"  [model]="mainMenus" [activeItem]="activeMenu"></p-tabMenu></div>
+    <div class="col-12 p-p-0">
+        <div style="display: inline-flex;">
+            <button pButton class="p-m-0 p-pl-3 p-pr-3 p-button-info p-button-icon" style="border-radius: 0;" (click)="toHome()" icon="pi pi-home"></button>
+        <p-tabMenu styleClass="mainmenu"  [model]="mainMenus" [activeItem]="activeMenu"></p-tabMenu>
+        </div>
+    </div>
     <div class="col-12 p-p-0"><p-tabMenu styleClass="submenu" [model]="menus" [activeItem]="activeSubMenu"></p-tabMenu></div>
 </div>

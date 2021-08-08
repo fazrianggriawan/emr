@@ -16,7 +16,11 @@ export class RadiologiService {
   ) { }
 
   getMasterData(): Observable<any> {
-      return this.http.get<any>(config.api_url('master_rad')).pipe(catchError(this.errorHandle.handleIt));
+    return this.http.get<any>(config.api_url('master_rad')).pipe(catchError(this.errorHandle.handleIt));
+  }
+
+  getMasterDataDetail(id:any): Observable<any> {
+    return this.http.get<any>(config.api_url('master_rad_detail?id_head='+id)).pipe(catchError(this.errorHandle.handleIt));
   }
 
 }

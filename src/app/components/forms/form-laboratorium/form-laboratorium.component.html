@@ -1,20 +1,15 @@
-<div class="row bd p-shadow-3 bg-white">
-    <div class="col-3">
-        <app-left-menu></app-left-menu>
-    </div>
-    <div class="col" style="background: #f7f9ff;">
-        <app-header-registrasi></app-header-registrasi>
-
-        <div class="row">
-            <div class="col-2 p-p-0 bd-r bg-white">
-                <app-menu-emr></app-menu-emr>
-            </div>
-            <div class="col p-p-3">
-                <div class="bd-b p-mb-2"><h5>LABORATORIUM</h5></div>
-                <div class="p-mt-2">
-                    <app-laboratorium></app-laboratorium>
-                </div>
-            </div>
-        </div>
+<div class="row bd bg-white p-pb-5">
+    <div class="col p-pt-1">
+        <p-tabView>
+            <p-tabPanel header="Laboratorium">
+                <app-laboratorium></app-laboratorium>
+            </p-tabPanel>
+            <p-tabPanel header="Radiologi">
+                <app-radiologi></app-radiologi>
+            </p-tabPanel>
+            <p-tabPanel header="Pat. Anatomi">
+                Content 3
+            </p-tabPanel>
+        </p-tabView>
     </div>
 </div>

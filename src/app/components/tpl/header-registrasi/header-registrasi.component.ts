@@ -52,30 +52,38 @@ export class HeaderRegistrasiComponent implements OnInit {
   mainMenus !: MenuItem[];
   activeMenu !: MenuItem;
 
+  toHome(){
+    this.router.navigateByUrl('urologi');
+  }
+
   changeSubmenu(e:any){
     var key = e.item.label.toLowerCase();
 
     if( key == 'subjective' ){
       this.menus = [
         {label: 'Assessmen Umum', routerLink: '/subjective/assessment_umum'},
-        {label: 'Catatan Terintegrasi'},
-        {label: 'Kajian Rawat Inap'},
+        // {label: 'Catatan Terintegrasi'},
+        // {label: 'Kajian Rawat Inap'},
       ]
     }else if( key == 'objective' ){
       this.menus = [
-        {label: 'Diagnosa'}
+        {label: 'Diagnosa', routerLink: '/objective/diagnosa'},
       ]
     }else if( key == 'assessment' ){
       this.menus = [
-        {label: 'Tindakan'}
+        {label: 'Tindakan', routerLink: '/assessment/tindakan'},
       ]
     }else if( key == 'planning' ){
       this.menus = [
         {label: 'Online Prescription', routerLink: '/online_prescription'},
-        {label: 'Test Order'},
-        {label: 'Costult to Specialist'},
-        {label: 'Konsultasi/Rawat Bersama'},
+        {label: 'Test Order', routerLink: '/planning/test_order'},
+        {label: 'Konsultasi/Rawat Bersama', routerLink: '/planning/rawat_bersama'},
         {label: 'Hasil Konsultasi/Rawat Bersama'},
+      ]
+    }else if( key == 'summary discharge' ){
+      this.menus = [
+        {label: 'Disposisi Pasien', routerLink: '/summary_discharge/disposisi_pasien'},
+        {label: 'Medical Resume', routerLink: '/summary_discharge/medical_resume'}
       ]
     }
     var a : any = this.mainMenus.indexOf(e.item);
@@ -89,8 +97,10 @@ export class HeaderRegistrasiComponent implements OnInit {
 
   getActiveMainMenu(){
     var a : any = localStorage.getItem('mainMenu');
-    this.activeMenu = this.mainMenus[a];
-    this.changeSubmenu({item:this.activeMenu});
+    if( a ){
+      this.activeMenu = this.mainMenus[a];
+      this.changeSubmenu({item:this.activeMenu});
+    }
   }
 
   activeSubMenu !: MenuItem;
@@ -98,10 +108,14 @@ export class HeaderRegistrasiComponent implements OnInit {
   getActiveSubMenu(){
     var a : any = localStorage.getItem('mainMenu');
     this.activeSubMenu = this.mainMenus[a];
-    console.log(this.router.url)
+  }
+
+  activeRoute(){
+    let a = ''
   }
 
   ngOnInit(): void {
+    this.activeRoute();
     this.registrasiService.getDataRegistrasi().subscribe(data=>{
       this.registrasi = data;
     })
@@ -114,6 +128,7 @@ export class HeaderRegistrasiComponent implements OnInit {
       {label: 'Objective', id: 'label', command: (event)=>{this.changeSubmenu(event)} },
       {label: 'Assessment', id: 'label', command: (event)=>{this.changeSubmenu(event)} },
       {label: 'Planning', id: 'label', command: (event)=>{this.changeSubmenu(event)} },
+      {label: 'Summary Discharge', id: 'label', command: (event)=>{this.changeSubmenu(event)} },
     ]
 
     this.getActiveMainMenu();

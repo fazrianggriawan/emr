@@ -18,11 +18,11 @@ export class LaboratoriumService {
   ) { }
 
   getMasterLab(): Observable<any> {
-      return this.http.get<any>(config.api_url('master_lab')).pipe(catchError(this.errorHandle.handleIt));
+    return this.http.get<any>(config.api_url('master_lab')).pipe(catchError(this.errorHandle.handleIt));
   }
 
   getMasterLabCito(): Observable<any> {
     return this.http.get<any>(config.api_url('master_lab_cito')).pipe(catchError(this.errorHandle.handleIt));
-}
+  }
 
 }

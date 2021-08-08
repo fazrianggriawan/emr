@@ -18,4 +18,9 @@ export class DokterService {
   getAllDokter(): Observable<any> {
       return this.http.get<any>(config.api_url('master_dokter')).pipe(catchError(this.errorHandle.handleIt));
   }
+
+  getDokterByPoli(id_poli:any): Observable<any> {
+    return this.http.get<any>(config.api_url('master_dokter_by_poli?id_poli='+id_poli)).pipe(catchError(this.errorHandle.handleIt));
+}
+
 }

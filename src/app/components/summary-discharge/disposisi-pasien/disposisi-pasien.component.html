@@ -1,0 +1,35 @@
+<div class="row bd bg-white p-p-2">
+    <div class="col p-p-0">
+        <div class="row p-mb-1">
+            <div class="col">
+                <button pButton pRipple class="p-button-info" label="Save" icon="pi pi-save"></button>
+            </div>
+        </div>
+        <form [formGroup]="form">
+            <div class="row p-mt-2">
+                <div class="col-6">
+                    <div class="row form-group">
+                        <div class="col-3">Tanggal</div>
+                        <div class="col">
+                            <p-calendar placeholder="Pilih Tanggal" [(ngModel)]="now" formControlName="tanggal" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                            Jam :
+                            <p-calendar placeholder="Pilih Jam" [(ngModel)]="now" formControlName="jam" [timeOnly]="true" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-3">Cara Keluar</div>
+                        <div class="col-4">
+                            <p-dropdown [options]="caraKeluar" optionLabel="name" formControlName="caraKeluar"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-3">Keadaaan Keluar</div>
+                        <div class="col-4">
+                            <p-dropdown [options]="keadaanKeluar" optionLabel="name" formControlName="keadaanKeluar"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

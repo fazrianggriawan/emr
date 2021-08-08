@@ -18,6 +18,13 @@ import { FormRadiologiComponent } from './components/forms/form-radiologi/form-r
 import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/form-laboratorium.component';
 import { HeaderRegistrasiComponent } from './components/tpl/header-registrasi/header-registrasi.component';
 import { FarmasiComponent } from './dialog/farmasi/farmasi.component';
+import { TestOrderComponent } from './components/planning/test-order/test-order.component';
+import { RawatBersamaComponent } from './components/planning/rawat-bersama/rawat-bersama.component';
+import { DiagnosaComponent } from './components/objective/diagnosa/diagnosa.component';
+import { TindakanComponent } from './components/assessment/tindakan/tindakan.component';
+import { DisposisiPasienComponent } from './components/summary-discharge/disposisi-pasien/disposisi-pasien.component';
+import { MedicalResumeComponent } from './components/summary-discharge/medical-resume/medical-resume.component';
+import { AssessmentUmumComponent } from './components/subjective/assessment-umum/assessment-umum.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -36,7 +43,13 @@ const routes: Routes = [
   {path: 'online_prescription', component: FarmasiComponent},
   {path: 'radiologi', component: FormRadiologiComponent},
   {path: 'laboratorium', component: FormLaboratoriumComponent},
-  {path: 'subjective/assessment_umum', component: CpptFormComponent},
+  {path: 'subjective/assessment_umum', component: AssessmentUmumComponent},
+  {path: 'objective/diagnosa', component: DiagnosaComponent},
+  {path: 'assessment/tindakan', component: TindakanComponent},
+  {path: 'planning/test_order', component: TestOrderComponent},
+  {path: 'planning/rawat_bersama', component: RawatBersamaComponent},
+  {path: 'summary_discharge/disposisi_pasien', component: DisposisiPasienComponent},
+  {path: 'summary_discharge/medical_resume', component: MedicalResumeComponent},
   {path: 'header', component: HeaderRegistrasiComponent, outlet: 'header'},
 ];
 

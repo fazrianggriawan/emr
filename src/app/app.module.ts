@@ -32,6 +32,7 @@ import {TreeModule} from 'primeng/tree';
 import {ChipsModule} from 'primeng/chips';
 import {AccordionModule} from 'primeng/accordion';
 import {TabMenuModule} from 'primeng/tabmenu';
+import {TooltipModule} from 'primeng/tooltip';
 
 import { FormOrderComponent } from './components/form-order/form-order.component';
 import { LoginComponent } from './components/login/login.component';
@@ -57,12 +58,21 @@ import { HeaderRegistrasiComponent } from './components/tpl/header-registrasi/he
 import { MenuEmrComponent } from './components/tpl/menu-emr/menu-emr.component';
 import { LeftMenuComponent } from './tpl/left-menu/left-menu.component';
 import { ViewDataRegistrasiComponent } from './dialog/view-data-registrasi/view-data-registrasi.component';
-import { LaboratoriumComponent } from './dialog/laboratorium/laboratorium.component';
-import { RadiologiComponent } from './dialog/radiologi/radiologi.component';
+import { LaboratoriumComponent } from './components/planning/test-order/laboratorium/laboratorium.component';
+import { RadiologiComponent } from './components/planning/test-order/radiologi/radiologi.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FarmasiComponent } from './dialog/farmasi/farmasi.component';
 import { FormRadiologiComponent } from './components/forms/form-radiologi/form-radiologi.component';
 import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/form-laboratorium.component';
+import { DialogAddObatComponent } from './components/farmasi/dialog-add-obat/dialog-add-obat.component';
+import { TestOrderComponent } from './components/planning/test-order/test-order.component';
+import { PatAnatomiComponent } from './components/planning/test-order/pat-anatomi/pat-anatomi.component';
+import { RawatBersamaComponent } from './components/planning/rawat-bersama/rawat-bersama.component';
+import { TindakanComponent } from './components/assessment/tindakan/tindakan.component';
+import { DiagnosaComponent } from './components/objective/diagnosa/diagnosa.component';
+import { DisposisiPasienComponent } from './components/summary-discharge/disposisi-pasien/disposisi-pasien.component';
+import { MedicalResumeComponent } from './components/summary-discharge/medical-resume/medical-resume.component';
+import { AssessmentUmumComponent } from './components/subjective/assessment-umum/assessment-umum.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +103,16 @@ import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/
     RadiologiComponent,
     FarmasiComponent,
     FormRadiologiComponent,
-    FormLaboratoriumComponent
+    FormLaboratoriumComponent,
+    DialogAddObatComponent,
+    TestOrderComponent,
+    PatAnatomiComponent,
+    RawatBersamaComponent,
+    TindakanComponent,
+    DiagnosaComponent,
+    DisposisiPasienComponent,
+    MedicalResumeComponent,
+    AssessmentUmumComponent
   ],
   imports: [
     BrowserModule,
@@ -129,7 +148,8 @@ import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/
     TreeModule,
     ChipsModule,
     AccordionModule,
-    TabMenuModule
+    TabMenuModule,
+    TooltipModule
   ],
   providers: [
     DatePipe,

@@ -13,7 +13,7 @@ body{
 .p-component{ font-size: 0.9rem; font-family: unset; }
 
 .p-datatable .p-datatable-tbody > tr > td, .p-datatable .p-datatable-thead > tr > th{
-    padding: 0.8rem;
+    padding: 0.2rem;
 }
 
 .p-menubar{
@@ -35,7 +35,7 @@ body{
 
 .p-datatable .p-datatable-thead > tr > th{
     border-color: rgba(72, 94, 144, 0.16);
-    background: transparent;
+    background: #e6f1fe;
     border-width: 0 0 1px 0;
 }
 
@@ -44,7 +44,7 @@ body{
 }
 
 .p-datatable .p-datatable-tbody > tr.p-highlight, .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight{
-    background: #dae7f9;
+    background: #f9f1da;
 }
 
 .p-inputtext{ padding: 0.1rem 0.4rem; background-color: #f7f9ff; height: unset; }
@@ -61,8 +61,6 @@ body{
 }
 
 .p-tabview .p-tabview-nav li .p-tabview-nav-link{ padding: 0.5rem; }
-
-.p-disabled, .p-component:disabled{ background: #d3d9de; }
 
 .p-button.p-button-sm{ padding: 0.2rem 0.5rem; }
 
@@ -203,11 +201,12 @@ a.list-group-item[_ngcontent-foc-c115]{
 
 .form-fieldset legend {
     color: #e48f1f;
+    font-weight: 500;
 }
 
 .p-dropdown { min-width: 100%; max-width: 100%; background: #f7f9ff; }
 input:read-only{ cursor: not-allowed; }
-.p-datepicker{ width: 350px !important; }
+.p-datepicker{ min-width: 50px !important; }
 .p-field-radiobutton{ display: inline-flex; }
 .p-autocomplete{ width: 100%; }
 .tx-grey{ color: grey; }
@@ -245,6 +244,8 @@ input:read-only{ cursor: not-allowed; }
 .login-container a{ color: #e0aa51 !important; }
 
 .bg-primary{ background-color: #e6f1ff !important; color: #3e3e3e; }
+.bg-highlight{ background-color: #f7eae3 !important; color: #3e3e3e; }
+
 .tx-primary{ color: #0f4f86 !important; }
 .tx-highlight{ color: #e8b168; }
 
@@ -261,7 +262,7 @@ input:read-only{ cursor: not-allowed; }
 
 .p-selectbutton .p-button{ border: 0; border-bottom: 2px solid silver; }
 
-.badge{ font-weight: bold; }
+.badge{ font-weight: 500; font-size: 0.7rem; }
 
 .user-login{ color: white; background:rgb(0 0 0 / 20%); }
 .user-login .avatar-initial{
@@ -296,13 +297,14 @@ input:read-only{ cursor: not-allowed; }
 
 .table-info-resep td{ padding: 2px; font-size: 12px; }
 
-/* .table-sig .p-datatable .p-datatable-tbody > tr{
-    background: transparent;
-} */
-
 .table-sig td {
     padding: 2px 6px !important;
     border: 0 !important;
+}
+
+.table-template-sig td{
+    padding: 2px 6px !important;
+    border: 1px;
 }
 
 .node-number{
@@ -339,8 +341,10 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
 
 .empty-data{
     background: rgb(230, 230, 230);
-    color: grey;
-    text-align: center;
+    color: grey !important;
+    text-align: center !important;
+    font-weight: normal !important;
+    padding: 0.3rem !important;
 }
 
 .p-accordion .p-accordion-header .p-accordion-header-link{
@@ -350,7 +354,7 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
 
 .p-accordion .pi{ font-size: 0.6rem !important; font-weight: normal; }
 
-.title-section{ font-size: 1.2rem; color: #e28811; }
+.title-section{ font-size: 0.9rem; font-weight: 500; color: #e28811; padding: 5px 10px; background: #f7eae3; }
 
 .submenu ul{ background-color: #fff2d3  !important; }
 
@@ -376,13 +380,19 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
     box-shadow: none !important;
 }
 
+.p-button {
+    outline: 0 !important;
+    -moz-outline-style: none !important;
+    box-shadow: none !important;
+}
+
 .mainmenu ul a, .mainmenu ul{
     border: 0 !important;
     /* background: orange !important; */
 }
 
 .table-sm th, .table-sm td{
-    padding: 5px;
+    padding: 5px !important;
 }
 
 .table-sm .btn{
@@ -399,16 +409,35 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
 }
 
 .p-dialog .p-dialog-header {
-    padding: 0.3rem 1rem;
+    padding: 0rem 1rem;
     border-bottom: 1px solid #d4d4d4;
 }
 
-.p-dialog .p-dialog-content{ padding: 0.3rem; }
+.p-dialog .p-dialog-header .p-dialog-title{ font-size: 0.9rem; }
+
+.p-dialog .p-dialog-content{ padding: 0.3rem 1rem; }
 
 .p-autocomplete-panel .p-autocomplete-items:not(.p-autocomplete-virtualscroll){
     padding: 0;
 }
 
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item{ padding: 0; }
+.p-autocomplete-item{ white-space: unset !important; }
 
 .p-autocomplete .p-inputtext{ padding: 0.4rem; width: 100%; }
+
+.action-section{
+    background-color: #0f4f86;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.hidden{ display: none; }
+
+.p-datepicker table td{ padding: 0.2rem; }
+
+.p-autocomplete-panel{ min-height: 60px; }
+.p-autocomplete-panel::before{ content: 'No results found'; position: absolute; z-index: -1; top: 36px; left: 16px; }
+.p-autocomplete-panel .p-autocomplete-items, .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-empty-message{ background: white;  }
+
+.p-inputgroup-addon{ padding: 0 0.3rem; }
