@@ -7,14 +7,27 @@
         </div>
 
         <div class="row p-mt-2">
-            <div class="col-5">
+            <div class="col-8">
+                <div class="row form-group">
+                    <div class="col-2">Tindakan</div>
+                    <div class="col-6">
+                        <p-dropdown [options]="dataTindakan" (onChange)="setNamaOperasi()" optionLabel="name" placeholder="Pilih..."></p-dropdown>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-2">Nama Operasi</div>
+                    <div class="col-6">
+                        <p-dropdown [options]="dataOperasi" (onChange)="setNamaOperasi()" optionLabel="name" placeholder="Pilih...">
+                        </p-dropdown>
+                    </div>
+                </div>
                 <div class="row form-group">
                     <div class="col-2">Tanggal</div>
                     <div class="col">
                         <p-calendar placeholder="Pilih Tanggal" [(ngModel)]="now" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
                     </div>
                 </div>
-                <div class="row form-group">
+                <div class="row form-group hidden">
                     <div class="col-2">ICD 9</div>
                     <div class="col">
                         <p-autoComplete
@@ -53,7 +66,7 @@
 
                 </div>
             </div>
-            <div class="col">
+            <div class="col hidden">
                 <div class="title-section">ICD 9 Yang Terpilih :</div>
                 <p-table [value]="dataTable" dataKey="id" styleClass="bd">
                     <ng-template pTemplate="header">

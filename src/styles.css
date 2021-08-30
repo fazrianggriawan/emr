@@ -441,3 +441,13 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
 .p-autocomplete-panel .p-autocomplete-items, .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-empty-message{ background: white;  }
 
 .p-inputgroup-addon{ padding: 0 0.3rem; }
+
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

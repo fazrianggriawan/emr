@@ -1,6 +1,7 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { RegistrasiService } from 'src/app/services/registrasi.service';
 
 @Component({
   selector: 'app-disposisi-pasien',
@@ -14,12 +15,28 @@ export class DisposisiPasienComponent implements OnInit {
 
   getCaraKeluar(){
     this.caraKeluar = [
-      {id: 1, name:'Diijinkan Pulang'},
-      {id: 2, name:'Pulang Paksa'},
-      {id: 3, name:'Pindah Rumah Sakit'},
-      {id: 4, name:'Melarikan Diri'},
+      {id: 1, name:'Membaik / Selesai Pengobatan'},
+      {id: 2, name:'Kontrol Kembali'},
+      {id: 3, name:'Rujuk ke Rumah Sakit'},
+      {id: 4, name:'Masuk Rawat / IGD'},
     ]
   }
+
+  dataRegistrasi: any[] = []
+;
+  getDataRencana(e:any){
+      this.getDataRegistrasi(e);
+  }
+
+    getDataRegistrasi(date: Date) {
+        this.registrasiService.getAllRegistrasi(date).subscribe(data => {
+            if (data.status == 200) {
+                this.dataRegistrasi = data.data;
+            } else {
+                this.dataRegistrasi = [];
+            }
+        })
+    }
 
   form = this.fb.group({
     tanggal: [null, Validators.required],
@@ -42,7 +59,8 @@ export class DisposisiPasienComponent implements OnInit {
   }
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private registrasiService: RegistrasiService
   ) { }
 
   ngOnInit(): void {

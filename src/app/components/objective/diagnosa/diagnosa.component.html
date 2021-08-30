@@ -71,7 +71,8 @@
                         <ng-template pTemplate="body" let-data let-i="rowIndex">
                             <tr>
                                 <td>
-                                    <span class="badge badge-info" *ngIf="i==0">Primary</span>
+                                    <span class="badge badge-info" *ngIf="i==0">Utama</span>
+                                    <span class="badge badge-secondary" *ngIf="i>0">Sekunder</span>
                                     <p-tableRadioButton *ngIf="i>0" [value]="data"></p-tableRadioButton>
                                 </td>
                                 <td>{{data.id}}</td>

@@ -18,6 +18,32 @@ export class TindakanComponent implements OnInit {
   now : Date = new Date();
   registrasi : any = this.registrasiService.getLocalStorageReg();
 
+  dataTindakan : any[] = [
+      { id: '1', name: 'Operasi' },
+      { id: '2', name: 'ESWL' },
+      { id: '3', name: 'Li SWT' },
+      { id: '4', name: 'Urodinamik' },
+      { id: '5', name: 'Businasi' },
+  ]
+
+    dataOperasi: any[] = [
+        { id: '1', name: 'Open' },
+        { id: '2', name: 'Endoskopi' },
+        { id: '3', name: 'TUR Prostat' },
+        { id: '4', name: 'Penl' },
+    ]
+
+    dataOperasiDetail: any[] = [
+        { id: '1', name: 'Nefrektomi Kiri' },
+        { id: '1', name: 'Nefrektomi Kanan' },
+        { id: '3', name: '' }
+    ]
+
+    setNamaOperasi(){
+
+    }
+
+
   form = this.fb.group({
     noreg: [this.registrasi.no_pendaftaran],
     tanggal: [null, Validators.required],

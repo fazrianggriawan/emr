@@ -73,6 +73,7 @@ import { DiagnosaComponent } from './components/objective/diagnosa/diagnosa.comp
 import { DisposisiPasienComponent } from './components/summary-discharge/disposisi-pasien/disposisi-pasien.component';
 import { MedicalResumeComponent } from './components/summary-discharge/medical-resume/medical-resume.component';
 import { AssessmentUmumComponent } from './components/subjective/assessment-umum/assessment-umum.component';
+import { ObjectiveNoteComponent } from './components/objective/objective-note/objective-note.component';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { AssessmentUmumComponent } from './components/subjective/assessment-umum
     DiagnosaComponent,
     DisposisiPasienComponent,
     MedicalResumeComponent,
-    AssessmentUmumComponent
+    AssessmentUmumComponent,
+    ObjectiveNoteComponent
   ],
   imports: [
     BrowserModule,

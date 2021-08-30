@@ -25,6 +25,7 @@ import { TindakanComponent } from './components/assessment/tindakan/tindakan.com
 import { DisposisiPasienComponent } from './components/summary-discharge/disposisi-pasien/disposisi-pasien.component';
 import { MedicalResumeComponent } from './components/summary-discharge/medical-resume/medical-resume.component';
 import { AssessmentUmumComponent } from './components/subjective/assessment-umum/assessment-umum.component';
+import { ObjectiveNoteComponent } from './components/objective/objective-note/objective-note.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -45,6 +46,7 @@ const routes: Routes = [
   {path: 'laboratorium', component: FormLaboratoriumComponent},
   {path: 'subjective/assessment_umum', component: AssessmentUmumComponent},
   {path: 'objective/diagnosa', component: DiagnosaComponent},
+  {path: 'objective/objective_note', component: ObjectiveNoteComponent},
   {path: 'assessment/tindakan', component: TindakanComponent},
   {path: 'planning/test_order', component: TestOrderComponent},
   {path: 'planning/rawat_bersama', component: RawatBersamaComponent},

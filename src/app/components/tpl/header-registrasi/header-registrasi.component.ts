@@ -67,17 +67,18 @@ export class HeaderRegistrasiComponent implements OnInit {
       ]
     }else if( key == 'objective' ){
       this.menus = [
-        {label: 'Diagnosa', routerLink: '/objective/diagnosa'},
+        {label: 'Objective Note', routerLink: '/objective/objective_note'},
       ]
     }else if( key == 'assessment' ){
       this.menus = [
-        {label: 'Tindakan', routerLink: '/assessment/tindakan'},
+          { label: 'Diagnosa', routerLink: '/objective/diagnosa' },
       ]
     }else if( key == 'planning' ){
       this.menus = [
         {label: 'Online Prescription', routerLink: '/online_prescription'},
         {label: 'Test Order', routerLink: '/planning/test_order'},
         {label: 'Konsultasi/Rawat Bersama', routerLink: '/planning/rawat_bersama'},
+          { label: 'Tindakan', routerLink: '/assessment/tindakan' },
         {label: 'Hasil Konsultasi/Rawat Bersama'},
       ]
     }else if( key == 'summary discharge' ){

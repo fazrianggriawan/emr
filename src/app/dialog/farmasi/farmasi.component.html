@@ -5,19 +5,24 @@
                 <span class="p-buttonset">
                     <button pButton pRipple class="p-button-info" label="Back" icon="pi pi-chevron-left"></button>
                     <button pButton pRipple class="p-button-info" label="Send Order" icon="pi pi-send"></button>
-                    <button pButton pRipple (click)="dialogAdd=true" class="p-button-info" label="Add" icon="pi pi-plus"></button>
+                    <button pButton pRipple (click)="dialogAdd=true" class="p-button-info" label="Add"
+                        icon="pi pi-plus"></button>
                     <button pButton pRipple class="p-button-info" label="Save as Template" icon="pi pi-save"></button>
                     <button pButton pRipple class="p-button-info" label="Templates" icon="pi pi-star"></button>
                     <button pButton pRipple class="p-button-info" label="Copy from History" icon="pi pi-copy"></button>
                 </span>
             </div>
         </div>
+        <div class="alert alert-danger p-p-1 tx-bold" style="color: rgb(170, 5, 5);">
+            <span class="blink_me">Riwayat Alergi : Penicilin</span>
+        </div>
         <div class="row">
             <div class="col-4">
                 <div class="form-group row">
                     <div class="col-3">Tanggal</div>
                     <div class="col">
-                        <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                        <p-calendar placeholder="Pilih Tanggal" [(ngModel)]="now" dateFormat="dd-mm-yy"
+                            [showIcon]="true"></p-calendar>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -57,7 +62,8 @@
                     <tbody>
                         <tr *ngFor="let item of dataObatNonRacikan; let i = index">
                             <td>
-                                <button pButton pRipple class="p-button-sm p-button-danger p-mr-1" icon="pi pi-trash"></button>
+                                <button pButton pRipple class="p-button-sm p-button-danger p-mr-1"
+                                    icon="pi pi-trash"></button>
                                 <button pButton pRipple class="p-button-sm p-button-info" icon="pi pi-pencil"></button>
                             </td>
                             <td>{{item.obat.label}}</td>
@@ -77,258 +83,15 @@
     </div>
 </div>
 
-<p-dialog header="Add" [(visible)]="dialogAdd" [modal]="true" [style]="{width: '50vw'}">
-    <form [formGroup]="formFarmasi" class="p-pt-2">
-        <div class="row">
-            <div class="col">
-                <div class="form-group row p-mb-1">
-                    <div class="col-2 tx-right">
-                        <label class="d-block">Obat </label>
-                    </div>
-                    <div class="col">
-                        <p-autoComplete
-                            [(ngModel)]="selectedObat"
-                            placeholder="Cari Obat..."
-                            [autoHighlight]="true"
-                            [completeOnFocus]="true"
-                            [suggestions]="filterDataObat"
-                            (completeMethod)="search($event)">
-                            <ng-template pTemplate="header">
-                                <table class="table table-sm bd table-bordered p-m-0 p-p-0">
-                                    <tr class="bg-primary">
-                                        <td style="width: 300px;">Nama Obat</td>
-                                        <td style="width: 80px;">Stock</td>
-                                        <td style="width: 80px;">Unit</td>
-                                    </tr>
-                                </table>
-                            </ng-template>
-                            <ng-template let-obat pTemplate="item">
-                                <table class="table table-sm p-m-0 p-p-0">
-                                    <tr>
-                                        <td style="width: 300px;">{{obat.label}}</td>
-                                        <td style="width: 80px;">{{obat.stok_gudang}}</td>
-                                        <td style="width: 80px;">{{obat.satuan}}</td>
-                                    </tr>
-                                </table>
-                            </ng-template>
-                        </p-autoComplete>
-                        <!-- <input pInputText type="text" class="form-control" [(ngModel)]="filterBox" (focus)="opObat.show($event)" (input)="applyFilterGlobal($event, 'startsWith')" placeholder="Keyword.." /> -->
-                    </div>
-                </div>
-                <div class="form-group row p-mb-1">
-                    <div class="col-2 tx-right">
-                        <label class="d-block">Sig </label>
-                    </div>
-                    <div class="col">
-                        <div class="p-inputgroup" style="margin-bottom: 2px;">
-                            <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="dialogSig=true"></button>
-                            <input type="text" formControlName="sig" pInputText>
-                        </div>
-                        <table class="table table-sm bd p-m-0">
-                            <thead>
-                                <tr class="bg-primary">
-                                    <th>Dosis</th>
-                                    <th>Unit</th>
-                                    <th>Route</th>
-                                    <th>Frekuensi</th>
-                                    <th>Keterangan</th>
-                                    <th>Durasi</th>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <td>{{sigData[0].dosis}}</td>
-                                    <td>{{sigData[0].satuan}}</td>
-                                    <td>{{sigData[0].caraPakai}}</td>
-                                    <td>{{sigData[0].frekuensi}}</td>
-                                    <td>{{sigData[0].petunjuk}}</td>
-                                    <td>{{sigData[0].durasi}}</td>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-                <div class="form-group row" style="display: none;">
-                    <div class="col-2 tx-right">
-                        <label class="d-block">Jumlah Hari </label>
-                    </div>
-                    <div class="col-3">
-                        <div class="p-inputgroup">
-                            <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op.toggle($event)"></button>
-                            <input type="text" formControlName="jumlahHari" pInputText>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-2 tx-right">
-                        <label class="d-block">Quantity</label>
-                    </div>
-                    <div class="col-3">
-                        <div class="p-inputgroup">
-                            <button type="button" pButton pRipple class="p-button-secondary" icon="pi pi-cog" (click)="op2.toggle($event)"></button>
-                            <input type="text" formControlName="jumlahObat" pInputText>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group row p-mt-1 p-mb-1">
-                    <div class="col-2 tx-right"></div>
-                    <div class="col">
-                        <button type="button" pButton pRipple class="p-button-sm" icon="pi pi-save" label="Save"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-    <div class="bd-t p-pt-1">
-        <table class="table table-sm table-striped table-hover bd">
-            <thead>
-                <tr class="bg-primary">
-                    <th width="80"></th>
-                    <th>Nama Obat</th>
-                    <th width="10">Dosis</th>
-                    <th width="150">Unit</th>
-                    <th width="80">Route</th>
-                    <th>Signa</th>
-                    <th width="200">Keterangan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of dataObatNonRacikan; let i = index">
-                    <td>
-                        <button pButton pRipple class="p-button-sm p-button-danger p-mr-1" icon="pi pi-trash"></button>
-                        <button pButton pRipple class="p-button-sm p-button-info" icon="pi pi-pencil"></button>
-                    </td>
-                    <td>{{item.obat.label}}</td>
-                    <td>1</td>
-                    <td>Sendok makan</td>
-                    <td>Oral</td>
-                    <td>1x Sehari 1 Sendok makan</td>
-                    <td>Sesudah Makan</td>
-                </tr>
-                <tr>
-                    <td colspan="7" class="empty-data">Belum ada data saat ini.</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</p-dialog>
 
-<p-dialog header="SIG Generator" [(visible)]="dialogSig" [modal]="true" [style]="{width: '80vw'}">
-    <div class="alert alert-success p-mb-1" *ngIf="alertSaveTemplate" @fadeInOut>
-        <i class="pi pi-check-circle"></i>   Template berhasil disimpan
-    </div>
-
-    <p-tabView>
-        <p-tabPanel header="Generator">
-            <div class="p-p-1">
-                <div class="p-inputgroup">
-                    <input type="text" pInputText [(ngModel)]="sigText" class="form-control" placeholder="SIG Free Text...">
-                    <button type="button" pButton pRipple icon="pi pi-save" label="Save as template" (click)="saveTemplateSig()"></button>
-                </div>
-            </div>
-            <div style="display: inline-flex;">
-                <div class="cola bd p-p-2 p-m-1 rounded">
-                    <b>Dosis :</b>
-                    <div class="bd-t table-sig p-pt-1">
-                        <p-table [value]="dataDosis" selectionMode="single" [(selection)]="selectedDosis" (onRowSelect)="onRowSigSelect($event, 'dosis', true)" (onRowUnselect)="onRowSigSelect($event, 'dosis', false)" dataKey="label">
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td>{{item.label}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-                <div class="cola bd p-p-2 p-m-1 rounded">
-                    <b>Satuan :</b>
-                    <div class="bd-t table-sig p-pt-1">
-                        <p-table [value]="dataSatuan" selectionMode="single" [(selection)]="selectedSatuan" (onRowSelect)="onRowSigSelect($event, 'satuan', true)" (onRowUnselect)="onRowSigSelect($event, 'satuan', false)" dataKey="label">
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td>{{item.label}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-                <div class="cola bd p-p-2 p-m-1 rounded">
-                    <b>Cara Pakai :</b>
-                    <div class="bd-t table-sig p-pt-1">
-                        <p-table [value]="dataCaraPakai" selectionMode="single" [(selection)]="selectedCaraPakai" (onRowSelect)="onRowSigSelect($event, 'caraPakai', true)" (onRowUnselect)="onRowSigSelect($event, 'caraPakai', false)" dataKey="label">
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td>{{item.label}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-                <div class="cola bd p-p-2 p-m-1 rounded">
-                    <b>Frekuensi :</b>
-                    <div class="bd-t table-sig p-pt-1">
-                        <p-table [value]="dataFrekuensi" selectionMode="single" [(selection)]="selectedFrekuensi" (onRowSelect)="onRowSigSelect($event, 'frekuensi', true)" (onRowUnselect)="onRowSigSelect($event, 'frekuensi', false)" dataKey="label">
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td>{{item.label}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-                <div class="cola bd p-p-2 p-m-1 rounded">
-                    <b>Petunjuk :</b>
-                    <div class="bd-t table-sig p-pt-1">
-                        <p-table [value]="dataPetunjuk" selectionMode="single" [metaKeySelection]="false" [(selection)]="selectedPetunjuk" (onRowSelect)="onRowSigSelect($event, 'petunjuk', true)" (onRowUnselect)="onRowSigSelect($event, 'petunjuk', false)" dataKey="label">
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td>{{item.label}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-                <div class="cola bd p-p-2 p-m-1 rounded">
-                    <b>Durasi :</b>
-                    <div class="bd-t table-sig p-pt-1">
-                        <p-table [value]="dataDurasi" selectionMode="single" [(selection)]="selectedDurasi" (onRowSelect)="onRowSigSelect($event, 'durasi', true)" (onRowUnselect)="onRowSigSelect($event, 'durasi', false)" dataKey="label">
-                            <ng-template pTemplate="body" let-item>
-                                <tr [pSelectableRow]="item">
-                                    <td>{{item.label}}</td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-            </div>
-        </p-tabPanel>
-        <p-tabPanel header="Template">
-            <div class="bd table-sig p-p-1 rounded">
-                <p-table [value]="dataTemplateSig" selectionMode="single" (onRowSelect)="onRowSigTemplate($event)" [(selection)]="selectedTemplateSig" dataKey="value">
-                    <ng-template pTemplate="body" let-item>
-                        <tr [pSelectableRow]="item">
-                            <td>{{item.value}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-                <div class="tx-center tx-grey bg-silver p-p-3" *ngIf="dataTemplateSig.length == 0">Tidak ada data saat ini.</div>
-            </div>
-        </p-tabPanel>
-    </p-tabView>
-    <ng-template pTemplate="footer">
-        <p-button icon="pi pi-chevron-right" iconPos="right" (click)="sendToForm()" label="Send to form"></p-button>
-    </ng-template>
+<p-dialog header="Add" [(visible)]="dialogAdd" position="top" [modal]="true" [style]="{width: '90vw'}">
+    <app-dialog-add-obat></app-dialog-add-obat>
 </p-dialog>
 
 <p-overlayPanel styleClass="p-p-1" #opObat appendTo="body" [style]="{width: '330px'}">
     <ng-template pTemplate>
-        <p-table #dtMasterObat
-            [value]="masterObat"
-            [paginator]="true"
-            selectionMode="single"
-            [(selection)]="selectedObat"
-            dataKey="nama_obat"
-            [rows]="5"
-            [globalFilterFields]="['nama_obat']"
+        <p-table #dtMasterObat [value]="masterObat" [paginator]="true" selectionMode="single"
+            [(selection)]="selectedObat" dataKey="nama_obat" [rows]="5" [globalFilterFields]="['nama_obat']"
             styleClass="p-datatable-sm bd">
             <ng-template pTemplate="header">
                 <tr class="bg-primary">
@@ -345,21 +108,5 @@
                 </tr>
             </ng-template>
         </p-table>
-    </ng-template>
-</p-overlayPanel>
-
-<p-overlayPanel #op appendTo="body" [style]="{width: '330px'}">
-    <ng-template pTemplate>
-        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
-            <div (click)="selectJumlahHari(op, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
-        </div>
-    </ng-template>
-</p-overlayPanel>
-
-<p-overlayPanel #op2 appendTo="body" [style]="{width: '302px'}">
-    <ng-template pTemplate>
-        <div *ngFor="let item of parsingNumber" style="display: inline-flex;">
-            <div (click)="selectJumlahObat(op2, item2)" style="width: 30px; height: 23px;" class="node-number tx-center clickable bd" *ngFor="let item2 of item">{{item2}}</div>
-        </div>
     </ng-template>
 </p-overlayPanel>
