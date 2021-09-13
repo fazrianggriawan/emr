@@ -451,3 +451,5 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
     opacity: 0;
   }
 }
+
+.ql-toolbar.ql-snow{ padding: 0; }

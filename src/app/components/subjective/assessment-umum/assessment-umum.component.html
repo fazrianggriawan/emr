@@ -16,7 +16,7 @@
                             <!-- <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanUtamaLainnya"> -->
                         </div>
                         <div class="col">
-                            Sejak : <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                            Sejak : <p-calendar placeholder="Pilih Tanggal" formControlName="keluhanUtamaSejak" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -26,7 +26,7 @@
                             <!-- <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanTambahanLainnya"> -->
                         </div>
                         <div class="col">
-                            Sejak : <p-calendar placeholder="Pilih Tanggal" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                            Sejak : <p-calendar placeholder="Pilih Tanggal" formControlName="keluhanTambahanSejak" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
                         </div>
                     </div>
                     <div class="form-group row p-mt-1">
@@ -89,27 +89,11 @@
                 </div>
                 <div class="col">
                     <p-accordion>
-                        <p-accordionTab header="Pengkajian Perawat">
-                           <div class="p-p-2">
-                                <div class="form-group row">
-                                    <label for="inputEmail3" class="col-3">Anamnesa Perawat :</label>
-                                    <div class="col">
-                                        <input type="text" pInputText class="form-control">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="inputEmail3" class="col-3">Diagnosa Rujukan :</label>
-                                    <div class="col">
-                                        <input type="text" pInputText class="form-control">
-                                    </div>
-                                </div>
-                           </div>
-                        </p-accordionTab>
                         <p-accordionTab header="Riwayat Penyakit Sekarang">
                             <div class="p-p-2">
                                 <div class="form-group row">
                                     <div class="col">
-                                        <p-editor [style]="{'min-height':'320px'}"></p-editor>
+                                        <p-editor formControlName="riwayatPenyakitSkrg"></p-editor>
                                     </div>
                                 </div>
                             </div>
@@ -118,23 +102,39 @@
                             <div class="p-p-2">
                                 <div class="form-group row">
                                     <div class="col">
-                                        <p-editor [style]="{'min-height':'320px'}"></p-editor>
+                                        <p-editor formControlName="riwayatPenyakitDulu"></p-editor>
                                     </div>
                                 </div>
                             </div>
+                        </p-accordionTab>
+                        <p-accordionTab header="Pengkajian Perawat">
+                           <div class="p-p-2">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-3">Anamnesa Perawat :</label>
+                                    <div class="col">
+                                        <input type="text" formControlName="anamnesaPerawat" pInputText class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-3">Diagnosa Rujukan :</label>
+                                    <div class="col">
+                                        <input type="text" formControlName="diagnosaRujukan" pInputText class="form-control">
+                                    </div>
+                                </div>
+                           </div>
                         </p-accordionTab>
                         <p-accordionTab header="Riwayat Alergi">
                             <div class="p-p-2">
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-3">Obat :</label>
                                     <div class="col">
-                                        <input type="text" pInputText class="form-control">
+                                        <input type="text" formControlName="alergiObat" pInputText class="form-control">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputEmail3" class="col-3">Makanan :</label>
                                     <div class="col">
-                                        <input type="text" pInputText class="form-control">
+                                        <input type="text" formControlName="alergiMakanan" pInputText class="form-control">
                                     </div>
                                 </div>
                             </div>

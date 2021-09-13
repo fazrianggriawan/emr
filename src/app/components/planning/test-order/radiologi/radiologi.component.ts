@@ -31,17 +31,14 @@ export class RadiologiComponent implements OnInit {
 
   form = this.fb.group({
     noreg: [this.registrasi.no_pendaftaran, Validators.required],
-    tanggal: [new Date(), Validators.required],
-    tipe: ['nonCito', Validators.required],
-    diagnosa: [null, Validators.required],
-    physician: [null, Validators.required],
+    tipe: [{id: 'nonCito', name: 'Non Cito'}, Validators.required],
     remarks: [null],
     data: [null, Validators.required],
     unit: ['rad', Validators.required],
+    category: [null, Validators.required],
   })
 
   save(){
-    this.form.patchValue({data: this.dataPemeriksaan})
     this.testOrderService.save(this.form.value).subscribe(data=>{
       if( data.status ){
         alert(data.message);
@@ -76,9 +73,10 @@ export class RadiologiComponent implements OnInit {
   }
 
   selectPemeriksaan(e:any, ac: AutoComplete){
-    console.log(e);
-
     if(this.dataPemeriksaan.indexOf(e) < 0){
+      e.category = this.form.controls['category'].value;
+      this.form.patchValue({data: e});
+      this.save();
       this.dataPemeriksaan.push(e)
       setTimeout(()=>{
         ac.inputEL.nativeElement.value = null;
@@ -89,6 +87,21 @@ export class RadiologiComponent implements OnInit {
   getIcd10(){
     this.icdService.getIcd10().subscribe(data=>{
       this.icd10 = data;
+    })
+  }
+
+  getDataTest(){
+    this.testOrderService.getData(this.registrasi.no_pendaftaran, 'rad').subscribe(data=>{
+      let a : any;
+      data.forEach((e: any) => {
+        a = {
+          id: e.test_id,
+          name: e.test_name,
+          cat_name: e.test_cat_name,
+          group_name: e.test_group_name,
+        }
+        this.dataPemeriksaan.push(a)
+      });
     })
   }
 
@@ -103,6 +116,7 @@ export class RadiologiComponent implements OnInit {
   ngOnInit(): void {
     this.getMasterData();
     this.getIcd10();
+    this.getDataTest();
   }
 
 }

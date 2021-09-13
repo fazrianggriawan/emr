@@ -14,6 +14,10 @@ export class AssessmentUmumService {
     return this.http.post<any>(config.api_url('save_assessment_umum'), data).pipe(catchError(this.errorHandle.handleIt));
   }
 
+  getData(noreg:string): Observable<any> {
+    return this.http.get<any>(config.api_url('get_assessment_umum?noreg='+noreg)).pipe(catchError(this.errorHandle.handleIt));
+  }
+
   constructor(
     private http: HttpClient,
     private errorHandle: ErrorHandlerService

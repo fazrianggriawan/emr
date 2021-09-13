@@ -33,7 +33,6 @@ import {ChipsModule} from 'primeng/chips';
 import {AccordionModule} from 'primeng/accordion';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {TooltipModule} from 'primeng/tooltip';
-
 import { FormOrderComponent } from './components/form-order/form-order.component';
 import { LoginComponent } from './components/login/login.component';
 import { UrologiComponent } from './components/urologi/urologi.component';
@@ -62,8 +61,6 @@ import { LaboratoriumComponent } from './components/planning/test-order/laborato
 import { RadiologiComponent } from './components/planning/test-order/radiologi/radiologi.component';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FarmasiComponent } from './dialog/farmasi/farmasi.component';
-import { FormRadiologiComponent } from './components/forms/form-radiologi/form-radiologi.component';
-import { FormLaboratoriumComponent } from './components/forms/form-laboratorium/form-laboratorium.component';
 import { DialogAddObatComponent } from './components/farmasi/dialog-add-obat/dialog-add-obat.component';
 import { TestOrderComponent } from './components/planning/test-order/test-order.component';
 import { PatAnatomiComponent } from './components/planning/test-order/pat-anatomi/pat-anatomi.component';
@@ -103,8 +100,6 @@ import { ObjectiveNoteComponent } from './components/objective/objective-note/ob
     LaboratoriumComponent,
     RadiologiComponent,
     FarmasiComponent,
-    FormRadiologiComponent,
-    FormLaboratoriumComponent,
     DialogAddObatComponent,
     TestOrderComponent,
     PatAnatomiComponent,

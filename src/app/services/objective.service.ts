@@ -8,14 +8,14 @@ import { ErrorHandlerService } from '../error-handler.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TestOrderService {
+export class ObjectiveService {
 
   save(data:any): Observable<any> {
-    return this.http.post<any>(config.api_url('save_test_order'), data).pipe(catchError(this.errorHandle.handleIt));
+    return this.http.post<any>(config.api_url('save_objective'), data).pipe(catchError(this.errorHandle.handleIt));
   }
 
-  getData(noreg:string, unit:string): Observable<any> {
-    return this.http.get<any>(config.api_url('get_test_order?noreg='+noreg+'&unit='+unit)).pipe(catchError(this.errorHandle.handleIt));
+  getData(noreg:string): Observable<any> {
+    return this.http.get<any>(config.api_url('get_objective?noreg='+noreg)).pipe(catchError(this.errorHandle.handleIt));
   }
 
   constructor(
