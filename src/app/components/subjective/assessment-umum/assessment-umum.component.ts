@@ -15,10 +15,12 @@ export class AssessmentUmumComponent implements OnInit {
   tplKeluhan: any[] = [];
   icd10: any[] = [];
   icd9: any[] = [];
+  asalKunjungan : any = this.AssessmentUmumService.getDataAsalKunjungan();
   registrasi : any = this.registrasiService.getLocalStorageReg();
 
   form = this.fb.group({
     noreg: [this.registrasi.no_pendaftaran],
+    asalKunjungan: [null],
     keluhanUtama: [null],
     keluhanUtamaSejak: [null],
     keluhanTambahan: [null],
@@ -66,6 +68,7 @@ export class AssessmentUmumComponent implements OnInit {
     this.AssessmentUmumService.getData(this.registrasi.no_pendaftaran).subscribe(data => {
       let row = data[0];
       this.form.patchValue({
+        asalKunjungan: { id: row.asal_kunjungan_id, name: row.asal_kunjungan_name },
         keluhanUtama: { id: row.keluhan_utama_id, name: row.keluhan_utama_name, active: 1 },
         keluhanUtamaSejak: row.keluhan_utama_sejak,
         keluhanTambahan: { id: row.keluhan_tambahan_id, name: row.keluhan_tambahan_name, active: 1 },
@@ -87,6 +90,15 @@ export class AssessmentUmumComponent implements OnInit {
     })
   }
 
+  isPasienBaru(){
+      if( this.registrasi.kunjungan_ke == 1 ){
+
+      }
+
+    console.log(this.registrasi);
+  }
+
+
   constructor(
     private fb: FormBuilder,
     private IcdService: IcdService,
@@ -100,6 +112,7 @@ export class AssessmentUmumComponent implements OnInit {
     this.getIcd9();
     this.getTplKeluhan();
     this.getData();
+    this.isPasienBaru();
   }
 
 }

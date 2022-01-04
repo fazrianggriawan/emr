@@ -18,6 +18,17 @@ export class AssessmentUmumService {
     return this.http.get<any>(config.api_url('get_assessment_umum?noreg='+noreg)).pipe(catchError(this.errorHandle.handleIt));
   }
 
+  getDataAsalKunjungan(){
+    return [
+        { id: 1, name: 'Atas Permintaan Pasien' },
+        { id: 2, name: 'Rujukan Rumah Sakit Lain' },
+        { id: 3, name: 'Rujukan dari Internal Antar Departemen' },
+        { id: 4, name: 'Dari Medical Checkup' }
+    ]
+
+
+  }
+
   constructor(
     private http: HttpClient,
     private errorHandle: ErrorHandlerService

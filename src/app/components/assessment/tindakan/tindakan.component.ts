@@ -47,7 +47,9 @@ export class TindakanComponent implements OnInit {
   form = this.fb.group({
     noreg: [this.registrasi.no_pendaftaran],
     tanggal: [null, Validators.required],
-    icd: [null],
+    icd9: [null],
+    tindakan: [null],
+    operasi: [null],
   })
 
   getIcd9(){
@@ -63,7 +65,7 @@ export class TindakanComponent implements OnInit {
 
     for(let i = 0; i < this.dataIcd9.length; i++) {
         let data = this.dataIcd9[i];
-        if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.id.toLowerCase().indexOf(query.toLowerCase()) == 1) {
             filtered.push(data);
         }
     }

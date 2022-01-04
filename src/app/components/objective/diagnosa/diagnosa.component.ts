@@ -48,7 +48,7 @@ export class DiagnosaComponent implements OnInit {
 
     for(let i = 0; i < this.dataIcd10.length; i++) {
         let data = this.dataIcd10[i];
-        if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.id.toLowerCase().indexOf(query.toLowerCase()) == 0) {
             filtered.push(data);
         }
     }

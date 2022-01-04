@@ -71,6 +71,8 @@ import { DisposisiPasienComponent } from './components/summary-discharge/disposi
 import { MedicalResumeComponent } from './components/summary-discharge/medical-resume/medical-resume.component';
 import { AssessmentUmumComponent } from './components/subjective/assessment-umum/assessment-umum.component';
 import { ObjectiveNoteComponent } from './components/objective/objective-note/objective-note.component';
+import { DrawingComponent } from './components/tools/drawing/drawing.component';
+import { CanvasWhiteboardComponent, CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 
 @NgModule({
   declarations: [
@@ -109,7 +111,8 @@ import { ObjectiveNoteComponent } from './components/objective/objective-note/ob
     DisposisiPasienComponent,
     MedicalResumeComponent,
     AssessmentUmumComponent,
-    ObjectiveNoteComponent
+    ObjectiveNoteComponent,
+    DrawingComponent
   ],
   imports: [
     BrowserModule,
@@ -146,7 +149,8 @@ import { ObjectiveNoteComponent } from './components/objective/objective-note/ob
     ChipsModule,
     AccordionModule,
     TabMenuModule,
-    TooltipModule
+    TooltipModule,
+    CanvasWhiteboardModule
   ],
   providers: [
     DatePipe,
