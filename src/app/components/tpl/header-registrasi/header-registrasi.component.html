@@ -21,8 +21,10 @@
     </div>
     <div class="col" style="line-height: 1.2rem;">
         <h4 class="white">{{registrasi.nama_pasien}}</h4>
-        <span class="p-mb-1">{{registrasi.usia}} thn, {{registrasi.jns_kelamin}} - RM: {{registrasi.no_rekam_medik}}</span> <br>
-        {{registrasi.tanggal_pendaftaran}}.
+        <span class="p-mb-1">
+            <span *ngIf="registrasi.jns_kelamin == 'P'">PEREMPUAN</span>
+            <span *ngIf="registrasi.jns_kelamin != 'P'">LAKI-LAKI</span>
+             - RM: {{registrasi.no_rekam_medik}}</span>
         <div class="p-p-0">
             <span class="badge badge-success p-mr-1" *ngIf="registrasi.kunjungan_ke == 1">NEW</span>
             <span class="badge badge-light p-mr-1">{{registrasi.carabayar_nama}}</span>
@@ -33,9 +35,9 @@
             <button pButton label="Riwayat Kunjungan" class="p-button-sm" icon="pi pi-clock"></button>
         </div> -->
     </div>
-    <div class="col-2 bd rounded box-kunjungan">
-        <div class="text-center p-mt-2">Kunjungan Saat Ini</div>
-        <h2 align="center" class="p-m-0 p-p-0" style="font-size: 3rem; color: #235d90">{{registrasi.kunjungan_ke}}</h2>
+    <div class="col-4 bd rounded box-kunjungan">
+        <div class="p-mt-3" style="color: #54738c;">Dokter :</div>
+        <h2 class="p-m-0 p-p-0" style="font-size: 1rem; color: #d3ebff">{{registrasi.nama_dokter}}</h2>
     </div>
 </div>
 <div class="row">

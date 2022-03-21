@@ -22,7 +22,7 @@ export class RawatBersamaComponent implements OnInit {
 
   getMasterPoli(){
     this.poliService.getDataMaster().subscribe(data => {
-      this.masterPoli = data.data;
+      this.masterPoli = data;
     })
   }
 
@@ -33,7 +33,8 @@ export class RawatBersamaComponent implements OnInit {
   }
 
   selectedPoliTujuan(e:any){
-    this.getDokterByPoli(e.value.poliid);
+      console.log(e.value);
+    this.getDokterByPoli(e.value.kode);
   }
 
   getDokterByPoli(id_poli:any){

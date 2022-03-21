@@ -1,4 +1,4 @@
-var host = 'http://localhost';
+var host = 'http://localhost/emr/api_emr/public';
 export const config = {
-    api_url: function(url:string){ return host+'/emr/api_emr/public/'+url}
+    api_url: function(url:string){ return host+'/'+url}
 }
