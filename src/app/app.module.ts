@@ -37,7 +37,7 @@ import { FormOrderComponent } from './components/form-order/form-order.component
 import { LoginComponent } from './components/login/login.component';
 import { UrologiComponent } from './components/urologi/urologi.component';
 import { PasienComponent } from './components/pasien/pasien.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InitialAvatarDirective } from './directives/initial-avatar.directive';
 import { DateHumanDirective } from './directives/date-human.directive';
 import { CpptFormComponent } from './components/forms/cppt-form/cppt-form.component';
@@ -73,6 +73,7 @@ import { AssessmentUmumComponent } from './components/subjective/assessment-umum
 import { ObjectiveNoteComponent } from './components/objective/objective-note/objective-note.component';
 import { CanvasWhiteboardModule } from 'ng2-canvas-whiteboard';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { RippleModule } from 'primeng/ripple';
 import { FarmasiComponent as TabletFarmasiComponent } from './components/tablet/farmasi/farmasi.component';
 import { PanelPasienComponent } from './components/tablet/farmasi/panel-pasien/panel-pasien.component';
@@ -82,6 +83,8 @@ import { PanelSendOrderComponent } from './components/tablet/farmasi/panel-send-
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { PanelRacikanComponent } from './components/tablet/farmasi/panel-racikan/panel-racikan.component';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { DrawingComponent } from './components/tools/drawing/drawing.component';
+import { KonvaComponent } from './components/konva/konva.component';
 
 @NgModule({
     declarations: [
@@ -126,7 +129,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
         PanelSigComponent,
         PanelJumlahComponent,
         PanelSendOrderComponent,
-        PanelRacikanComponent
+        PanelRacikanComponent,
         DrawingComponent,
         KonvaComponent,
     ],
@@ -169,18 +172,14 @@ import { TokenInterceptor } from './auth/token.interceptor';
         CanvasWhiteboardModule,
         ConfirmPopupModule,
         RippleModule,
-        ToggleButtonModule
+        ToggleButtonModule,
+        ConfirmDialogModule
     ],
 
     providers: [
         DatePipe,
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
-        ConfirmDialogModule
-    ],
-    providers: [
-        DatePipe,
-        { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]
 })
