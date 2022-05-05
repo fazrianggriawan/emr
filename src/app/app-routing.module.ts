@@ -24,6 +24,7 @@ import { MedicalResumeComponent } from './components/summary-discharge/medical-r
 import { AssessmentUmumComponent } from './components/subjective/assessment-umum/assessment-umum.component';
 import { ObjectiveNoteComponent } from './components/objective/objective-note/objective-note.component';
 import { FarmasiComponent as TabletFarmasiComponent } from "./components/tablet/farmasi/farmasi.component";
+import { KonvaComponent } from './components/konva/konva.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -48,6 +49,7 @@ const routes: Routes = [
   {path: 'planning/rawat_bersama', component: RawatBersamaComponent},
   {path: 'summary_discharge/disposisi_pasien', component: DisposisiPasienComponent},
   {path: 'summary_discharge/medical_resume', component: MedicalResumeComponent},
+  {path: 'konva', component: KonvaComponent},
   {path: 'header', component: HeaderRegistrasiComponent, outlet: 'header'},
   {path: 'tablet/farmasi', component: TabletFarmasiComponent},
 ];

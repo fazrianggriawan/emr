@@ -411,7 +411,7 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
 
 .p-dialog .p-dialog-header .p-dialog-title{ font-size: 0.9rem; }
 
-.p-dialog .p-dialog-content{ padding: 0.3rem 1rem; }
+.p-dialog .p-dialog-content{ padding: 1rem; }
 
 .p-autocomplete-panel .p-autocomplete-items:not(.p-autocomplete-virtualscroll){
     padding: 0;
@@ -516,4 +516,8 @@ hr{ padding: 0.1rem; margin: 0.1rem; }
 
 .testDiv{
     color: #0e3c63;
+.btn-xs{
+    font-size: 13px;
 }
+
+.silver{ color: silver; }

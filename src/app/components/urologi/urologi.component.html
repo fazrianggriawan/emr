@@ -18,7 +18,7 @@
 
       <ng-template pTemplate="header">
          <tr>
-            <th colspan="7">
+            <th colspan="5">
                <div class="row">
                   <div class="col-2">
                      <label class="d-block p-mb-1 tx-grey">Tanggal </label>
@@ -44,13 +44,11 @@
             </th>
          </tr>
          <tr>
-            <th width="50">No.</th>
+            <th>No.</th>
             <th>Nama</th>
-            <th width="100">No.RM</th>
-            <th width="200">Jns.Kelamin / Usia</th>
-            <th>Status</th>
+            <th>No.RM</th>
+            <th>Jns.Kelamin</th>
             <th>DPJP</th>
-            <th>Kunjungan Ke</th>
          </tr>
       </ng-template>
       <ng-template pTemplate="body" let-item let-i="rowIndex">
@@ -58,12 +56,8 @@
             <td width="50">{{i+1}}</td>
             <td>{{item.nama_pasien}}</td>
             <td>{{item.no_rekam_medik}}</td>
-            <td>{{item.jns_kelamin}} / {{item.usia}} Thn</td>
-            <td>{{item.carabayar_nama}}</td>
-            <td>
-               <span *ngIf="!item.dpjp">{{item.dokter_name}}</span>
-            </td>
-            <td>{{item.kunjungan_ke}}</td>
+            <td>{{item.jns_kelamin}}</td>
+            <td>{{item.nama_dokter}}</td>
          </tr>
       </ng-template>
       <ng-template pTemplate="summary">
@@ -71,7 +65,7 @@
       </ng-template>
       <ng-template pTemplate="emptymessage">
          <tr>
-             <td colspan="6" class="tx-grey" style="text-align: center !important;">Tidak Ada Data Saat Ini.</td>
+             <td colspan="5" class="tx-grey" style="text-align: center !important;">Tidak Ada Data Saat Ini.</td>
          </tr>
      </ng-template>
    </p-table>

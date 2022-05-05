@@ -18,9 +18,9 @@
                             <p-autoComplete
                                 #acICD
                                 appendTo="body"
-                                placeholder="Cari ICD 10..."
+                                placeholder="Cari ICD 10... (Min. 3 Huruf)"
                                 field="name"
-                                [minLength]="2"
+                                [minLength]="3"
                                 [autoHighlight]="true"
                                 [showEmptyMessage]="true"
                                 [suggestions]="filteredIcd10"

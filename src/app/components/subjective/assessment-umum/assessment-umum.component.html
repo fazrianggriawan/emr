@@ -9,6 +9,14 @@
         <form [formGroup]="form">
             <div class="row p-mt-2">
                 <div class="col">
+                    <div class="form-group row" *ngIf="registrasi.kunjungan_ke == 1">
+                        <label for="inputEmail3" class="col-3">Asal Kunjungan :</label>
+                        <div class="col">
+                            <p-dropdown [options]="asalKunjungan" optionLabel="name"
+                                placeholder="Pilih.." [showClear]="true" formControlName="asalKunjungan"></p-dropdown>
+                            <!-- <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanUtamaLainnya"> -->
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-3">Asal Kunjungan :</label>
                         <div class="col">
@@ -64,7 +72,9 @@
                                         <td>
                                             <div class="p-inputgroup">
                                                 <input class="form-control" pInputText formControlName="td">
-                                                <span class="p-inputgroup-addon">Cm</span>
+                                                <span class="p-inputgroup-addon">Sys</span>
+                                                <input class="form-control" pInputText formControlName="td">
+                                                <span class="p-inputgroup-addon">Dias</span>
                                             </div>
                                         </td>
                                         <td>

@@ -37,7 +37,7 @@ import { FormOrderComponent } from './components/form-order/form-order.component
 import { LoginComponent } from './components/login/login.component';
 import { UrologiComponent } from './components/urologi/urologi.component';
 import { PasienComponent } from './components/pasien/pasien.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { InitialAvatarDirective } from './directives/initial-avatar.directive';
 import { DateHumanDirective } from './directives/date-human.directive';
 import { CpptFormComponent } from './components/forms/cppt-form/cppt-form.component';
@@ -127,6 +127,8 @@ import { TokenInterceptor } from './auth/token.interceptor';
         PanelJumlahComponent,
         PanelSendOrderComponent,
         PanelRacikanComponent
+        DrawingComponent,
+        KonvaComponent,
     ],
     imports: [
         BrowserModule,
@@ -174,6 +176,11 @@ import { TokenInterceptor } from './auth/token.interceptor';
         DatePipe,
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+        ConfirmDialogModule
+    ],
+    providers: [
+        DatePipe,
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
     ],
     bootstrap: [AppComponent]
 })
