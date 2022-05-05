@@ -20,7 +20,7 @@ export class PasienService {
   }
 
   getTplKeluhan(): Observable<any> {
-    return this.http.get<any>(config.api_url('tpl_keluhan')).pipe(catchError(this.errorHandle.handleIt));
+    return this.http.get<any>(config.api_url('master_keluhan')).pipe(catchError(this.errorHandle.handleIt));
   }
 
 }

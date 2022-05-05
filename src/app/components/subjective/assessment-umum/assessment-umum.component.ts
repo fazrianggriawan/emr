@@ -16,9 +16,11 @@ export class AssessmentUmumComponent implements OnInit {
   icd10: any[] = [];
   icd9: any[] = [];
   registrasi : any = this.registrasiService.getLocalStorageReg();
+  asalKunjungan = this.AssessmentUmumService.getDataAsalKunjungan();
 
   form = this.fb.group({
     noreg: [this.registrasi.no_pendaftaran],
+    asalKunjungan: [null],
     keluhanUtama: [null],
     keluhanUtamaSejak: [null],
     keluhanTambahan: [null],

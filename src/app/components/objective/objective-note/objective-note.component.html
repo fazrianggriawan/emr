@@ -10,6 +10,26 @@
                 <div class="col">
                     <p-editor formControlName="notes" [style]="{'min-height':'320px'}"></p-editor>
                 </div>
+                <div class="col">
+                    <canvas-whiteboard #canvasWhiteboard
+                        [drawButtonClass]="'drawButtonClass'"
+                        [drawButtonText]="'Draw'"
+                        [clearButtonClass]="'clearButtonClass'"
+                        [clearButtonText]="'Clear'"
+                        [undoButtonText]="'Undo'"
+                        [undoButtonEnabled]="true"
+                        [redoButtonText]="'Redo'"
+                        [redoButtonEnabled]="true"
+                        [colorPickerEnabled]="true"
+                        [fillColorPickerText]="'Fill'"
+                        [strokeColorPickerText]="'Stroke'"
+                        [saveDataButtonEnabled]="true"
+                        [saveDataButtonText]="'Save'"
+                        [lineWidth]="2"
+                        [strokeColor]="'rgb(0,0,0)'"
+                        [shouldDownloadDrawing]="true">
+                    </canvas-whiteboard>
+                </div>
             </div>
         </form>
     </div>

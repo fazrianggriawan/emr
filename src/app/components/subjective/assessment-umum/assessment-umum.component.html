@@ -10,23 +10,27 @@
             <div class="row p-mt-2">
                 <div class="col">
                     <div class="form-group row">
-                        <label for="inputEmail3" class="col-3">Keluhan Utama :</label>
+                        <label for="inputEmail3" class="col-3">Asal Kunjungan :</label>
                         <div class="col">
-                            <p-dropdown [editable]="true" [options]="tplKeluhan" optionLabel="name" formControlName="keluhanUtamaSejak" placeholder="Pilih.." [showClear]="true" formControlName="keluhanUtama"></p-dropdown>
-                            <!-- <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanUtamaLainnya"> -->
-                        </div>
-                        <div class="col">
-                            Sejak : <p-calendar placeholder="Pilih Tanggal" formControlName="keluhanUtamaSejak" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                            <p-dropdown [options]="asalKunjungan" optionLabel="name" formControlName="asalKunjungan" placeholder="Pilih.." [showClear]="true"></p-dropdown>
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="inputEmail3" class="col-3">Keluhan Utama :</label>
+                        <div class="col">
+                            <p-dropdown [options]="tplKeluhan" optionLabel="name" placeholder="Pilih.." [showClear]="true" formControlName="keluhanUtama"></p-dropdown>
+                            <div style="padding-top: 2px;">
+                                Sejak : <p-calendar placeholder="Pilih Tanggal" formControlName="keluhanUtamaSejak" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row p-mt-1">
                         <label for="inputEmail3" class="col-3">Keluhan Tambahan :</label>
                         <div class="col">
-                            <p-dropdown [editable]="true" [options]="tplKeluhan" optionLabel="name" formControlName="keluhanTambahanSejak" placeholder="Pilih..." [showClear]="true" formControlName="keluhanTambahan"></p-dropdown>
-                            <!-- <input class="form-control p-mt-1" pInputText placeholder="Lainnya..." formControlName="keluhanTambahanLainnya"> -->
-                        </div>
-                        <div class="col">
-                            Sejak : <p-calendar placeholder="Pilih Tanggal" formControlName="keluhanTambahanSejak" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                            <p-dropdown [editable]="true" [options]="tplKeluhan" optionLabel="name" placeholder="Pilih..." [showClear]="true" formControlName="keluhanTambahan"></p-dropdown>
+                            <div style="padding-top: 2px;">
+                                Sejak : <p-calendar placeholder="Pilih Tanggal" formControlName="keluhanTambahanSejak" dateFormat="dd-mm-yy" [showIcon]="true"></p-calendar>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row p-mt-1">

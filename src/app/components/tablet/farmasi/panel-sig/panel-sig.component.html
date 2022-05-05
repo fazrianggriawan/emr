@@ -1,0 +1,65 @@
+<p-sidebar header="Sig" [fullScreen]="true" [(visible)]="panelSig">
+    <div class="row p-p-5 bg-dark tx-white">
+        <div class="col-2 p-pt-6 tx-right">
+            <div style="font-size: 1.5rem; color: #ffc33e;">SIG :</div>
+        </div>
+        <div class="col-6 p-pt-6" style="height: 30px;">
+            <div style="font-size: 1.2rem;">
+                {{sigData.frekuensi}}
+                {{sigData.dosis}}
+                {{sigData.unit}}
+                {{sigData.arahan}}.
+                {{sigData.route}}
+            </div>
+        </div>
+        <button pButton pRipple class="p-button-success col p-p-3 p-mt-6" style="font-size: 1rem; font-weight: 600;" label="SELESAI" (click)="selesai()"></button>
+    </div>
+    <div class="row bg-white">
+        <div class="col"></div>
+        <div class="col-2 p-p-0">
+            <p-table [value]="dataFrekuensi" selectionMode="single" [(selection)]="sigData.frekuensi" styleClass="bd-b bd-r bd-l" class="item-obat" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="body" let-item>
+                    <tr [pSelectableRow]="item">
+                        <td class="tx-center">{{item}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="col-2 p-p-0">
+            <p-table [value]="dataDosis" selectionMode="single" [(selection)]="sigData.dosis" styleClass="bd-b bd-r bd-l" class="item-obat" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="body" let-item>
+                    <tr [pSelectableRow]="item">
+                        <td class="tx-center">{{item}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="col-2 p-p-0">
+            <p-table [value]="dataUnit" selectionMode="single" [(selection)]="sigData.unit" styleClass="bd-b bd-r bd-l" class="item-obat" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="body" let-item>
+                    <tr [pSelectableRow]="item">
+                        <td class="tx-center">{{item}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="col-2 p-p-0">
+            <p-table [value]="dataArahan" selectionMode="single" [(selection)]="sigData.arahan" styleClass="bd-b bd-r bd-l" class="item-obat" responsiveLayout="scroll" [scrollable]="true" scrollHeight="400px">
+                <ng-template pTemplate="body" let-item>
+                    <tr [pSelectableRow]="item">
+                        <td class="tx-center">{{item}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+        <div class="col-2 p-p-0">
+            <p-table [value]="dataRoute" selectionMode="single" [(selection)]="sigData.route" styleClass="bd-b bd-r bd-l" class="item-obat" responsiveLayout="scroll" [scrollable]="true" scrollHeight="430px">
+                <ng-template pTemplate="body" let-item>
+                    <tr [pSelectableRow]="item">
+                        <td class="tx-center">{{item}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</p-sidebar>

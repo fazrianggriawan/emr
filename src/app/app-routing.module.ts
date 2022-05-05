@@ -11,7 +11,6 @@ import { LaporanBedahAnestesiLokalComponent } from './components/forms/laporan-b
 import { LaporanPemantauanTindakanAnestLokalComponent } from './components/forms/laporan-pemantauan-tindakan-anest-lokal/laporan-pemantauan-tindakan-anest-lokal.component';
 import { SuratMasukPerawatanComponent } from './components/forms/surat-masuk-perawatan/surat-masuk-perawatan.component';
 import { PengajuanPembedahaanComponent } from './components/forms/pengajuan-pembedahaan/pengajuan-pembedahaan.component';
-import { EResepComponent } from './components/forms/e-resep/e-resep.component';
 import { PasienComponent } from './components/pasien/pasien.component';
 import { LoginComponent } from './components/login/login.component';
 import { HeaderRegistrasiComponent } from './components/tpl/header-registrasi/header-registrasi.component';
@@ -24,6 +23,7 @@ import { DisposisiPasienComponent } from './components/summary-discharge/disposi
 import { MedicalResumeComponent } from './components/summary-discharge/medical-resume/medical-resume.component';
 import { AssessmentUmumComponent } from './components/subjective/assessment-umum/assessment-umum.component';
 import { ObjectiveNoteComponent } from './components/objective/objective-note/objective-note.component';
+import { FarmasiComponent as TabletFarmasiComponent } from "./components/tablet/farmasi/farmasi.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -49,6 +49,7 @@ const routes: Routes = [
   {path: 'summary_discharge/disposisi_pasien', component: DisposisiPasienComponent},
   {path: 'summary_discharge/medical_resume', component: MedicalResumeComponent},
   {path: 'header', component: HeaderRegistrasiComponent, outlet: 'header'},
+  {path: 'tablet/farmasi', component: TabletFarmasiComponent},
 ];
 
 @NgModule({

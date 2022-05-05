@@ -27,7 +27,7 @@ export class FarmasiService {
   }
 
   getDataArahan(){
-    return [ 'Sebelum makan', 'Sesudah makan', 'Jika diperlukan', 'Dengan makan', 'Waktu pagi hari', 'Waktu siang hari', 'Waktu sore hari', 'Waktu malam hari', 'Sebelum tidur']
+    return [ 'Sesudah makan', 'Sebelum makan', 'Jika diperlukan', 'Dengan makan', 'Waktu pagi hari', 'Waktu siang hari', 'Waktu sore hari', 'Waktu malam hari', 'Sebelum tidur']
   }
 
   getDataDurasi(){
@@ -35,15 +35,15 @@ export class FarmasiService {
   }
 
   getDataDosis(){
-      return [ '0.1','0.25','0.5','1','2','3','4','1-2','2-3','2-4','3-4','5','5-10','6','7','8','9','10']
+      return [ '1','2','3','4','5','6','7','8','9','10','1-2','2-3','2-4','3-4','5-10','0.1','0.25','0.5']
     }
 
   getDataUnit(){
-    return ['Miligram', 'Mililiter', 'Gram', 'Tab', 'Sendok teh', 'Sendok makan', 'Tetes']
+    return ['Tab', 'Sendok teh', 'Sendok makan', 'Drop', 'Miligram', 'Mililiter', 'Gram']
   }
 
   getDataRoute(){
-    return ['Oral', 'Oles', 'Inject']
+    return ['Minum', 'Oles', 'Inject']
   }
 
   getDataHari(){

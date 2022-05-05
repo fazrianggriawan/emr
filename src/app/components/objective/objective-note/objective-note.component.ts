@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CanvasWhiteboardComponent } from 'ng2-canvas-whiteboard';
 import { ObjectiveService } from 'src/app/services/objective.service';
 import { RegistrasiService } from 'src/app/services/registrasi.service';
 
 @Component({
   selector: 'app-objective-note',
   templateUrl: './objective-note.component.html',
+  viewProviders: [CanvasWhiteboardComponent],
   styleUrls: ['./objective-note.component.css']
 })
 export class ObjectiveNoteComponent implements OnInit {

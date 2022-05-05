@@ -18,4 +18,17 @@ export class ObatService {
   getAllObat(): Observable<any> {
       return this.http.get<any>(config.api_url('master_obat')).pipe(catchError(this.errorHandle.handleIt));
   }
+
+  getAllObatSalak(): Observable<any> {
+    return this.http.get<any>(config.api_url_salak('get.php?req=master_obat')).pipe(catchError(this.errorHandle.handleIt));
+  }
+
+  getObatFavoritSalak(): Observable<any> {
+    return this.http.get<any>(config.api_url_salak('get.php?req=obat_favorit')).pipe(catchError(this.errorHandle.handleIt));
+  }
+
+  saveObatFavoritSalak(data:any): Observable<any> {
+    return this.http.post<any>(config.api_url_salak_online('post.php?req=obat_favorit'), data).pipe(catchError(this.errorHandle.handleIt));
+  }
+
 }

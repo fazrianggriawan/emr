@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { PrimeNGConfig, MenuItem } from 'primeng/api';
@@ -15,7 +16,8 @@ export class AppComponent implements OnInit{
 
   constructor(
     private primeNgConfig: PrimeNGConfig,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ){}
 
   getRouter(){
