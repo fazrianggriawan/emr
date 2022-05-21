@@ -20,10 +20,11 @@ export class AssessmentUmumService {
 
   getDataAsalKunjungan(){
     return [
-        { id: 1, name: 'Atas Permintaan Pasien' },
-        { id: 2, name: 'Rujukan Rumah Sakit Lain' },
-        { id: 3, name: 'Rujukan dari Internal Antar Departemen' },
-        { id: 4, name: 'Dari Medical Checkup' }
+        { id: 1, name: 'Atas Keinginan Pasien' },
+        { id: 2, name: 'Kontrol Kembali' },
+        { id: 3, name: 'Rujukan Rumah Sakit Lain' },
+        { id: 4, name: 'Rujukan dari Internal Antar Departemen' },
+        { id: 5, name: 'Dari Medical Checkup' }
     ]
 
 

@@ -1,0 +1,7 @@
+<p-overlayPanel #op appendTo="body" [style]="{width: '330px'}">
+    <ng-template pTemplate>
+        <div *ngFor="let item of numbers" style="display: inline-flex;">
+            <div (click)="selectNumber(item2)" class="node-number tx-center clickable bd pt-1" *ngFor="let item2 of item">{{item2}}</div>
+        </div>
+    </ng-template>
+</p-overlayPanel>

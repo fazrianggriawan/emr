@@ -1,22 +1,32 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { config } from '../config';
 import { ErrorHandlerService } from '../error-handler.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(
-    private http: HttpClient,
-    private errorHandle: ErrorHandlerService
-  ) { }
+    public userData = new BehaviorSubject<any>(null);
+    public errorMessage = new BehaviorSubject<string>('');
+    public loginData = new BehaviorSubject<any>(null);
 
-  doLogin(data:any): Observable<any> {
-      return this.http.post<any>(config.api_url('do_login'), data).pipe(catchError(this.errorHandle.handleIt));
-  }
+    constructor(
+        private http: HttpClient
+    ) { }
+
+    public login() {
+        this.http.post<any>(config.api_url('do_login'), this.userData.value)
+            .subscribe( data => {
+                if( data.auth ){
+                    this.loginData.next(data);
+                }else{
+                    this.errorMessage.next('Username atau Password anda salah.');
+                }
+            })
+    }
 
 }

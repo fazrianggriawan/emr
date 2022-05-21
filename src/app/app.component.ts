@@ -1,42 +1,34 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { PrimeNGConfig, MenuItem } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { PrimeNGConfig } from 'primeng/api';
+import { LoadingService } from './services/loading.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  title = 'iniapps';
-  items: MenuItem[] = [];
-  menus: any[] = [];
-  selectedMenu : any;
+export class AppComponent implements OnInit {
+    title = 'iniapps';
 
-  constructor(
-    private primeNgConfig: PrimeNGConfig,
-    private router: Router,
-    private http: HttpClient
-  ){}
+    loading: boolean = false;
 
-  getRouter(){
-    this.router.events.subscribe(a=>{
-      // console.log(a);
-    })
-  }
+    constructor(
+        private primeNgConfig: PrimeNGConfig,
+        private router: Router,
+        public loadingService: LoadingService
+    ) { }
 
-  ngOnInit(){
-    this.getRouter();
-    this.primeNgConfig.ripple = true;
-    this.items = [
-      { label:'Edit Profile', icon:'pi pi-pencil'},
-      { label:'Change Password', icon:'pi pi-lock'},
-      { label:'Logout', icon:'pi pi-sign-out'},
-    ]
-    this.menus = [
-      {name: 'DASHBOARD'},
-      {name: 'UROLOGI'},
-    ]
-  }
+    ngOnInit() {
+        this.primeNgConfig.ripple = true;
+
+        this.loadingService.status.subscribe(data => this.loading = data)
+
+        this.router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                // Hide progress spinner or progress bar
+                console.log(event.url);
+            }
+        })
+    }
 }

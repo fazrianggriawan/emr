@@ -1,0 +1,143 @@
+<div class="row pt-2">
+    <div class="col">
+        <div class="row pl-3">
+            <fieldset class="col-3 p-2 m-1">
+                <legend class="tx-pink">Suhu</legend>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> <sup>o</sup>C </span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="col-3 p-2 m-1">
+                <legend class="tx-pink">Tekanan Darah</legend>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                </div>
+            </fieldset>
+            <fieldset class="col-3-auto p-2 m-1">
+                <legend class="tx-pink">Nadi</legend>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> x/menit </span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="col-3 p-2 m-1">
+                <legend class="tx-pink">Berat Badan</legend>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> kg </span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="col-3 p-2 m-1">
+                <legend class="tx-pink">Tinggi Badan</legend>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> cm </span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="col-3-auto p-2 m-1">
+                <legend class="tx-pink">Pernapasan</legend>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> x/menit </span>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="col-3 p-2 m-1">
+                <legend class="tx-pink">BMI</legend>
+                <input type="text" class="form-control">
+            </fieldset>
+        </div>
+        <hr>
+        <h1 class="tx-title">Catatan</h1>
+        <textarea [rows]="5" [cols]="30" pInputTextarea [style]="{width: '100%'}" [autoResize]="true"></textarea>
+    </div>
+
+    <div class="col">
+        <div class="row mb-3">
+            <div class="col-3 bd-r">
+                <div class="tx-semibold">Keadaan Umum</div>
+            </div>
+            <div class="col">
+                <div class="pl-2">
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Baik</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Sedang</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Lemah</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Jelek</div>
+                </div>
+            </div>
+
+            <div class="w-100 m-2 bd-b"></div>
+            <div class="col-3 bd-r">
+                <div class="tx-semibold">Gizi</div>
+            </div>
+            <div class="col">
+                <div class="pl-2">
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Baik</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Kurang</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Lebih</div>
+                </div>
+            </div>
+
+            <div class="w-100 m-2 bd-b"></div>
+            <div class="col-3 bd-r">
+                <div class="tx-semibold">Sistem Pernapasan</div>
+            </div>
+            <div class="col">
+                <div class="pl-2">
+                    <div class="tx-bold">Keluhan</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Sesak</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Nyeri</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Batuk</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Tidak Ada</div>
+                    <div class="tx-bold mt-2">Irama Napas</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Teratur</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Tidak</div>
+                    <div class="tx-bold mt-2">Suara Napas</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Ronkhi</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Wheezing</div>
+                    <div class="tx-bold mt-2">Terpasang O<sup>2</sup></div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Ya</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Tidak</div>
+                </div>
+            </div>
+
+            <div class="w-100 m-2 bd-b"></div>
+            <div class="col-3 bd-r">
+                <div class="tx-semibold">Sistem Kardiovaskuler</div>
+            </div>
+            <div class="col">
+                <div class="pl-2">
+                    <div class="tx-bold">Keluhan Nyeri Dada</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Ya</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Tidak</div>
+                    <div class="tx-bold mt-2">Suara Jantung</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Reguler</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Ireguler</div>
+                </div>
+            </div>
+
+            <div class="w-100 m-2 bd-b"></div>
+            <div class="col-3 bd-r">
+                <div class="tx-semibold">Resiko Jatuh (Lansia)</div>
+            </div>
+            <div class="col">
+                <div class="pl-2">
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Tidak Beresiko</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Resiko Rendah</div>
+                    <div><p-radioButton name="groupname" value="val1"></p-radioButton> Resiko Tinggi</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

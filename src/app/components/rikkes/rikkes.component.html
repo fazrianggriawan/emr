@@ -1,0 +1,450 @@
+<div class="row pl-3 pr-3" style="margin-left: -14px; margin-right: -14px;">
+    <div class="col p-3 bg-gray-500">
+        <div class="row">
+            <div class="col-auto border-right border-light">
+                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-file-earmark-person mr-1"></i> Data Peserta</button>
+                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="form?.reset()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan</button>
+                <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
+            </div>
+            <div class="col tx-right">
+                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-trash mr-1"></i> Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row m-0 bg-light p-3 mb-3">
+    <div class="col"> Nama : <h4>ALYA HIJRIANISA</h4> </div>
+    <div class="col"> Nomor Peserta : <h4>529 / 1-3-5-000267</h4> </div>
+    <div class="col"> Jenis Kelamin : <h4>PEREMPUAN</h4> </div>
+</div>
+<div class="row pl-3 pr-3 mb-5">
+    <div class="col">
+        <form [formGroup]="form">
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Anamnese </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="tinggi">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Tinggi </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="tinggi">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Berat </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="berat">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Tekanan Darah </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="tekananDarah">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Nadi </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="nadi">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Tubuh </label>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-3">Bentuk</div>
+                        <div class="col"><input type="text" class="form-control" formControlName="tubuhBentuk"></div>
+                        <div class="w-100 mb-2"></div>
+                        <div class="col-3">Gerakan</div>
+                        <div class="col"><input type="text" class="form-control" formControlName="tubuhGerak"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Kepala </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="kepala">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Muka </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="muka">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> Leher </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="leher">
+                </div>
+            </div>
+
+            <h4 class="mt-4 bg-gray-100 p-3">MATA</h4>
+            <div class="row mb-2">
+                <div class="col">
+                    <table class="table">
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td class="tx-center">Visus Awal</td>
+                            <td class="tx-center">Lensa Koreksi</td>
+                            <td class="tx-center">Visus Koreksi</td>
+                        </tr>
+                        <tr>
+                            <td>O.D</td>
+                            <td><input type="text" class="form-control" formControlName="odVisusAwal"></td>
+                            <td><input type="text" class="form-control" formControlName="odLensaKoreksi"></td>
+                            <td><input type="text" class="form-control" formControlName="odVisusKoreksi"></td>
+                        </tr>
+                        <tr>
+                            <td>O.S</td>
+                            <td><input type="text" class="form-control" formControlName="osVisusAwal"></td>
+                            <td><input type="text" class="form-control" formControlName="osLensaKoreksi"></td>
+                            <td><input type="text" class="form-control" formControlName="osVisusKoreksi"></td>
+                        </tr>
+                    </table>
+
+                    <div class="row">
+                        <div class="col-4 pl-4">Campus</div>
+                        <div class="col"><input type="text" class="form-control" formControlName="campus"></div>
+                        <div class="w-100 mb-2"></div>
+                        <div class="col-4 pl-4">Kenal Warna</div>
+                        <div class="col"><input type="text" class="form-control" formControlName="kenalWarna"></div>
+                        <div class="w-100 mb-2"></div>
+                        <div class="col-4 pl-4">Lain-lain</div>
+                        <div class="col"><input type="text" class="form-control" formControlName="lainLain"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="mt-4 bg-gray-100 p-3">TELINGA</h4>
+
+            <div class="row mb-2 pl-3">
+                <div class="col-auto">AD</div>
+                <div class="col"><input type="text" class="form-control" formControlName="ad"></div>
+                <div class="col-auto">AS</div>
+                <div class="col"><input type="text" class="form-control" formControlName="as"></div>
+                <div class="w-100 mb-2"></div>
+                <div class="col-4">Tajam Pend.</div>
+                <div class="col"><input type="text" class="form-control" formControlName="tajamPend"></div>
+                <div class="w-100 mb-2"></div>
+                <div class="col-4">Membran Tymp</div>
+                <div class="col"><input type="text" class="form-control" formControlName="membranTymp"></div>
+                <div class="w-100 mb-2"></div>
+                <div class="col-4">Peny. Tel</div>
+                <div class="col"><input type="text" class="form-control" formControlName="penyTel"></div>
+            </div>
+
+        </form>
+    </div>
+    <div class="col">
+        <form [formGroup]="form">
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Hidung </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="hidung">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Tenggorokan </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="tenggorokan">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Thorax </label>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">a. Pernafasan</div>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="thoraxPernafasan">
+                        </div>
+                        <div class="w-100 mb-2"></div>
+                        <div class="col-4">b. Bentuk</div>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="thoraxBentuk">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> COR </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="cor">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Pulmo </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="pulmo">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Abdomen </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="abdomen">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Lien </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="lien">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Hepar </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="hepar">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Regio Inguinalis </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="regioInguinalis">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Genitalia </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="genitalia">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Perineum </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="perineum">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Ang. Gerak Atas </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="angGerakAtas">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Ang. Gerak Bawah </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="angGerakBawah">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Kulit </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="kulit">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Refleks </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="refleks">
+                </div>
+            </div>
+
+            <h4 class="mt-4 bg-gray-100 p-3">GINEKOLOGI</h4>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Hymen </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="hymen">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Palpasi </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="palpasi">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-100"></div>
+    <div class="col">
+        <form [formGroup]="form">
+            <h4 class="mt-4 bg-gray-100 p-3 mb-2">GIGI - MULUT</h4>
+
+            <div class="row mb-2">
+                <div class="col-4">
+                    <div class="row mb-2">
+                        <label class="col-2 col-form-label"> D </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="d">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-2 col-form-label"> M </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="m">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-2 col-form-label"> F </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="f">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row mb-2">
+                        <label class="col-3 col-form-label"> Karang </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="karang">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-3 col-form-label"> Protesa </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="protesa">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-3 col-form-label"> Peny. Mulut </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="penyMulut">
+                        </div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <h4 class="tx-15 mt-4 mb-0 border-bottom pb-2">ODONTOGRAM IDENTIFIKASI</h4>
+            <div class="row p-3">
+                <div class="col border-right pr-4">
+                    <div class="row">
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col tx-center m-1">8</div>
+                        <div class="col tx-center m-1">7</div>
+                        <div class="col tx-center m-1">6</div>
+                        <div class="col tx-center m-1">5</div>
+                        <div class="col tx-center m-1">4</div>
+                        <div class="col tx-center m-1">3</div>
+                        <div class="col tx-center m-1">2</div>
+                        <div class="col tx-center m-1">1</div>
+                    </div>
+                    <div class="row">
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col pl-4">
+                    <div class="row">
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col tx-center m-1">1</div>
+                        <div class="col tx-center m-1">2</div>
+                        <div class="col tx-center m-1">3</div>
+                        <div class="col tx-center m-1">4</div>
+                        <div class="col tx-center m-1">5</div>
+                        <div class="col tx-center m-1">6</div>
+                        <div class="col tx-center m-1">7</div>
+                        <div class="col tx-center m-1">8</div>
+                    </div>
+                    <div class="row">
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                        <div class="col bg-light m-1">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="w-100"></div>
+
+    <div class="col">
+        <form [formGroup]="form">
+            <h4 class="mt-4 bg-gray-100 p-3 mb-2">KESIMPULAN PEMERIKSAAN</h4>
+            <textarea pInputTextarea [autoResize]="true" [style]="{width: '100%'}" formControlName="kesimpulan"></textarea>
+
+            <div class="row mb-2">
+                <label class="col-auto col-form-label"> Rumus Lahir </label>
+                <div class="col-8">
+                    <table class="table border-bottom">
+                        <tr>
+                            <td class="tx-center">U</td>
+                            <td class="tx-center">A</td>
+                            <td class="tx-center">B</td>
+                            <td class="tx-center">D</td>
+                            <td class="tx-center">L</td>
+                            <td class="tx-center">G</td>
+                            <td class="tx-center">J</td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="form-control" formControlName="rumusLahirU"></td>
+                            <td><input type="text" class="form-control" formControlName="rumusLahirA"></td>
+                            <td><input type="text" class="form-control" formControlName="rumusLahirB"></td>
+                            <td><input type="text" class="form-control" formControlName="rumusLahirD"></td>
+                            <td><input type="text" class="form-control" formControlName="rumusLahirL"></td>
+                            <td><input type="text" class="form-control" formControlName="rumusLahirG"></td>
+                            <td><input type="text" class="form-control" formControlName="rumusLahirJ"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-1 col-form-label"> Stakes </label>
+                <div class="col-4 pl-5">
+                    <div class="ml-2">
+                        <input type="text" class="form-control mb-2" formControlName="stakes">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bg-gray-500 p-3 mt-4">
+                <div class="col tx-center">
+                    <p-selectButton [options]="hasil" optionLabel="name"  formControlName="hasil">
+                        <ng-template let-item>
+                            <div class="p-2 tx-bold pl-5 pr-5">{{item.name}}</div>
+                        </ng-template>
+                    </p-selectButton>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

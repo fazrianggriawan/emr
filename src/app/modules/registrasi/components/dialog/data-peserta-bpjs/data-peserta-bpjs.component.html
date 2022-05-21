@@ -1,0 +1,102 @@
+<p-dialog [(visible)]="showDialog" (onHide)="hideDialog()" header="Data Peserta BPJS" [style]="{width: '500px'}" [modal]="true" [draggable]="true">
+    <div>Informasi Online Data Kepesertaan BPJS.</div>
+    <div class="row pt-3">
+        <div class="col">
+            <form [formGroup]="form">
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Nomor BPJS
+                    </label>
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" class="form-control" formControlName="nomorKartu" (keyup)="cariPesertaByNomorKartu($event)" placeholder="Tekan Enter untuk memulai pencarian...">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary" pRipple (click)="vclaimService.getPesertaByNomorKartu(form.get('nomorKartu')?.value)"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        NIK
+                    </label>
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" class="form-control" formControlName="nik" (keyup)="cariPesertaByNik($event)" placeholder="Tekan Enter untuk memulai pencarian...">
+                            <div class="input-group-append">
+                              <button class="btn btn-primary" pRipple (click)="vclaimService.getPesertaByNik(form.get('nik')?.value)"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Nama
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="nama" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Status Peserta
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" [ngClass]="{'tx-danger': form.value.statusPeserta != 'AKTIF'}" formControlName="statusPeserta" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Jenis Kelamin
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="jnsKelamin" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Tanggal Lahir
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="tglLahir" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Umur
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="umur" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Jenis Peserta
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="jnsPeserta" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Hak Kelas
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="hakKelas">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        Provider
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="namaProvider">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button class="btn btn-sm btn-primary" (click)="daftarPasienBaru()" [disabled]="form.invalid"><i class="bi bi-plus-lg mr-2"></i>Daftar Pasien Baru</button>
+    </ng-template>
+</p-dialog>

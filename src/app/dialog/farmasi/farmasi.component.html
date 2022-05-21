@@ -1,57 +1,38 @@
-<div class="row">
-    <div class="col bg-white p-p-2">
-        <div class="row p-mb-1">
-            <div class="col button-group">
-                <span class="p-buttonset">
-                    <button pButton pRipple class="p-button-info" label="Back" icon="pi pi-chevron-left"></button>
+<div class="row mt-2">
+    <div class="col-4">
+        <app-table-master-obat></app-table-master-obat>
+        <app-form-obat></app-form-obat>
+    </div>
+    <div class="col">
+        <div class="row">
+            <div class="col-12">
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-send"></i> Send Order</button>
+                    <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-files"></i> Copy from History</button>
+                    <button type="button" class="btn btn-primary btn-sm"><i class="bi bi-star-fill"></i> Favorit</button>
+                  </div>
+
+                <!-- <span class="p-buttonset">
+                    <button pButton pRipple class="p-button-info" label="Back"
+                        icon="pi pi-chevron-left"></button>
                     <button pButton pRipple class="p-button-info" label="Send Order" icon="pi pi-send"></button>
                     <button pButton pRipple (click)="dialogAdd=true" class="p-button-info" label="Add"
                         icon="pi pi-plus"></button>
-                    <button pButton pRipple class="p-button-info" label="Save as Template" icon="pi pi-save"></button>
+                    <button pButton pRipple class="p-button-info" label="Save as Template"
+                        icon="pi pi-save"></button>
                     <button pButton pRipple class="p-button-info" label="Templates" icon="pi pi-star"></button>
-                    <button pButton pRipple class="p-button-info" label="Copy from History" icon="pi pi-copy"></button>
-                </span>
+                    <button pButton pRipple class="p-button-info" label="Copy from History"
+                        icon="pi pi-copy"></button>
+                </span> -->
             </div>
-        </div>
-        <div class="alert alert-danger p-p-1 tx-bold" style="color: rgb(170, 5, 5);">
-            <span class="blink_me">Riwayat Alergi : Penicilin</span>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <div class="form-group row">
-                    <div class="col-3">No. Transaksi</div>
-                    <div class="col">
-                        <input type="text" pInputText class="form-control">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-3">Lokasi Farmasi</div>
-                    <div class="col">
-                        <input type="text" pInputText class="form-control">
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="form-group row">
-                    <div class="col-3">Jenis Resep</div>
-                    <div class="col">
-                        <input type="text" pInputText class="form-control">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row p-mt-2">
-            <div class="col">
-                <table class="table table-sm table-striped table-hover bd">
+            <div class="col-12">
+                <table class="table table-striped table-hover bd mt-2">
                     <thead>
-                        <tr class="bg-primary">
+                        <tr>
                             <th width="80"></th>
                             <th>Nama Obat</th>
-                            <th width="10">Dosis</th>
-                            <th width="150">Unit</th>
-                            <th width="80">Route</th>
-                            <th>Signa</th>
-                            <th width="200">Keterangan</th>
+                            <th>Dosis</th>
+                            <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +40,8 @@
                             <td>
                                 <button pButton pRipple class="p-button-sm p-button-danger p-mr-1"
                                     icon="pi pi-trash"></button>
-                                <button pButton pRipple class="p-button-sm p-button-info" icon="pi pi-pencil"></button>
+                                <button pButton pRipple class="p-button-sm p-button-info"
+                                    icon="pi pi-pencil"></button>
                             </td>
                             <td>{{item.obat.label}}</td>
                             <td>1</td>
@@ -69,7 +51,7 @@
                             <td>Sesudah Makan</td>
                         </tr>
                         <tr>
-                            <td colspan="7" class="empty-data">Belum ada data saat ini.</td>
+                            <td colspan="7" class="empty-data tx-center">Belum ada data saat ini.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,7 +62,7 @@
 
 
 <p-dialog header="Add" [(visible)]="dialogAdd" position="top" [modal]="true" [style]="{width: '90vw'}">
-    <app-dialog-add-obat></app-dialog-add-obat>
+    <!-- <app-dialog-add-obat></app-dialog-add-obat> -->
 </p-dialog>
 
 <p-overlayPanel styleClass="p-p-1" #opObat appendTo="body" [style]="{width: '330px'}">

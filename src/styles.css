@@ -1,525 +1,139 @@
-
-/* You can add global styles to this file, and also import other style files */
-body{
-    background-color: rgb(0 0 0 / 10%);
-    line-height: unset;
-}
-
-.navbar-header .nav-link{
-    color: rgb(0 0 0 / 85%);
-}
-.navbar-menu .nav-link:hover{ color: black; }
-.clickable{ cursor: pointer; }
-.p-component{ font-size: 0.9rem; font-family: unset; }
-
-.p-datatable .p-datatable-tbody > tr > td, .p-datatable .p-datatable-thead > tr > th{
-    padding: 0.2rem;
-}
-
-.p-menubar{
-    background: transparent;
-    border: none;
-}
-
-.p-menubar .p-menuitem-link{
-    background: transparent;
-}
-
-.p-menubar .p-menuitem-link{
-    background: transparent;
-}
-
-.p-datatable .p-datatable-tbody > tr > td{
-    border-color: rgba(72, 94, 144, 0.16);
-}
-
-.p-datatable .p-datatable-thead > tr > th{
-    border-color: rgba(72, 94, 144, 0.16);
-    background: #e6f1fe;
-    border-width: 0 0 1px 0;
-}
-
-.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even){
-    /* background: #fff; */
-    background: #e8e8e8;
-}
-
-.p-datatable .p-datatable-tbody > tr.p-highlight, .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even).p-highlight{
-    background: #f9f1da;
-}
-
-.p-inputtext{ padding: 0.1rem 0.4rem; background-color: #f7f9ff; height: unset; }
-.p-calendar .p-inputtext{ padding: 0.1rem 0.4rem; }
-.p-dropdown .p-inputtext{ padding: 0.42rem; font-size: 0.9rem; }
-.input-group-text{ padding: 0.3rem 0.5rem; }
-.p-field{ margin-bottom: 0.5rem; }
-.p-tabview .p-tabview-panels{ padding: 0.2rem 0; }
-.p-tabview .p-tabview-nav a:focus{
-    text-decoration: unset;
-    outline: 0 !important;
-    -moz-outline-style: none !important;
-    box-shadow: none !important;
-}
-
-.p-tabview .p-tabview-nav li .p-tabview-nav-link{ padding: 0.5rem; }
-
-.p-button.p-button-sm{ padding: 0.2rem 0.5rem; }
-
-.p-datatable-unstriped .p-datatable-tbody > tr{
-    background: unset;
-}
-
-.p-datatable-unstriped .p-datatable-tbody > tr:hover{
-    background: #f3f4f7;
-}
-
-.header-row-group td{
-    background: #f3f4f7;
-}
-
-.p-button{ margin-right: 0.5rem; }
-.p-field-checkbox>label, .p-field-radiobutton>label, .p-checkbox-label {
-    margin-left: 0.5rem;
-    line-height: 1;
-    padding-top: 0.5rem;
-    cursor: pointer;
-}
-
-.p-field-checkbox{ margin-bottom: 0.2rem; }
-
-.p-datatable .p-datatable-header{
-    background: unset;
-    padding: 0.5rem;
-    border-top: unset;
-}
-
-.p-accordion .p-accordion-content{
-    border: none;
-    padding: 0rem;
-    /* padding-bottom: 1rem; */
-}
-
-.p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus{ box-shadow: unset; }
-.p-accordion .p-accordion-header:not(.p-disabled).p-highlight .p-accordion-header-link{
-   background: #2196f3;
-   color: white;
-}
-
-.p-chip{
-    padding: 0.1rem 0.5rem;
-    margin-bottom: 0.1rem;
-    margin-right: 0.5rem;
-}
-
-.p-menu{ width: unset; border: unset; }
-
-/* .p-menu .p-menuitem-link .p-menuitem-text{ color: #2096f3; } */
-.p-menu .p-menuitem-link .p-menuitem-text{ color: #111111; }
-
-.col-25{
-   flex: 0 0 18.66667%;
-   max-width: 18.66667%;
-}
-
-.navbar{  display: unset; }
-
-.card-header, .card-footer, .list-group-item, .table tr th, .table tr td, .bd {
-   border-color: #d6dadd;
-}
-
-.table th{ border-top: unset; }
-
-.thumbnailSelector[_ngcontent-foc-c115], .thumbnailSelector[_ngcontent-ioq-c115] {
-   width: 123px !important;
-}
-
-a.list-group-item[_ngcontent-foc-c115]{
-   padding: unset !important;
-}
-
-.df-example {
-    font-size: 0.875rem;
-    letter-spacing: normal;
-    padding: 10px;
-    background-color: #fff;
-    border: 1px solid rgba(72, 94, 144, 0.16);
-    position: relative;
-}
-
-.df-example::before {
-    content: attr(data-label);
-    display: block;
-    position: absolute;
-    top: -6px;
-    left: 5px;
-    font-size: 8px;
-    font-weight: 600;
+html,
+body {
     font-family: -apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    background-color: inherit;
-    color: #8392a5;
-    padding: 0 5px;
+    font-size: 14px;
 }
 
-.patient-list:hover{
-    background: rgb(241 241 241);
-    cursor: pointer;
-}
-
-.form-group{ margin-bottom: 0px; }
-
-.navbar-header{
-    background: #D1913C;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FFD194, #D1913C);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FFD194, #D1913C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    border-bottom-color: #e0b985;
-    box-shadow: 0 0 25px rgb(26 108 225 / 30%);
-}
-
-.header-content{
-    background: #0f4f86;
-    color: white;
-}
-
-.white{ color: white; }
-.box-kunjungan{
-    background: #0e3c63;
-    color: #235d90;
-    font-weight: 500;
-    border: none;
-
-}
-
-.p-scrollpanel.custombar1 .p-scrollpanel-bar{
-    background-color:#e1e3eb;
-}
-
-.form-fieldset legend {
-    color: #e48f1f;
-    font-weight: 500;
-}
-
-.p-dropdown { min-width: 100%; max-width: 100%; background: #f7f9ff; }
-input:read-only{ cursor: not-allowed; }
-.p-datepicker{ min-width: 50px !important; }
-.p-field-radiobutton{ display: inline-flex; }
-.p-autocomplete{ width: 100%; }
-.tx-grey{ color: grey; }
-.bg-silver{ background: #f3f4f7; }
-.p-datatable .p-datatable-tbody > tr:hover, .p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even):hover{ background: #ebeef8; }
-.label-question{
-    margin: 0;
-    font-weight: 600;
-}
-
-.login-page {
-    top: 0;
-    left: 0;
-    position: fixed;
-    z-index: 9999;
-    background: url(assets/manhood.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    padding-right: 100px;
-}
-
-.login-container {
-    background: rgba(0, 0, 0, 0.5);
-    padding: 30px;
-    margin-top: -10px;
-    margin-right: 0;
-    color: white;
-}
-
-.login-container .tx-color-01{ color: white; }
-.login-container .tx-color-03{ color: #a5a5a5; }
-.login-container a{ color: #e0aa51 !important; }
-
-.bg-primary{ background-color: #e6f1ff !important; color: #3e3e3e; }
-.bg-highlight{ background-color: #f7eae3 !important; color: #3e3e3e; }
-
-.tx-primary{ color: #0f4f86 !important; }
-.tx-highlight{ color: #e8b168; }
-
-.p-selectbutton .p-button.p-highlight:hover, .p-selectbutton .p-button.p-highlight{
-    background: #e9ecef;
-    color: black;
-    /* font-weight: bold; */
+.p-menubar {
+    padding: 0;
     border: 0;
-    border-bottom: 2px solid #cf9338;
-}
-.p-selectbutton .p-button.p-highlight .p-button-icon-left,
-.p-selectbutton .p-button.p-highlight .p-button-icon-left:hover,
-.p-selectbutton .p-button.p-highlight .p-button-icon-right{ color: black !important; }
-
-.p-selectbutton .p-button{ border: 0; border-bottom: 2px solid silver; }
-
-.badge{ font-weight: 500; font-size: 0.7rem; }
-
-.user-login{ color: white; background:rgb(0 0 0 / 20%); }
-.user-login .avatar-initial{
-    background:#8e632a;
-    color: #eab46c;
+    background: none;
 }
 
-.top-menu .p-dropdown{
-    background: #c5924d;
-    border: unset;
+.tx-title {
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 10px 0px;
+    font-weight: normal;
+}
+
+.p-dropdown,
+.form-control,
+.p-inputtext {
+    background: #f5f6fa;
+}
+
+.p-calendar .p-inputtext {
+    padding: 0.33rem 0.5rem;
+}
+
+.p-calendar .p-button {
+    background: #7987a1;
+    border-color: #7987a1;
+}
+
+fieldset {
+    border: 1px solid silver;
     padding: 0px 10px;
 }
-.top-menu .p-dropdown .p-dropdown-label, .top-menu .p-dropdown .p-dropdown-trigger{
-    color: white;
+
+legend {
+    width: unset;
+    font-size: 1rem;
+    padding: 0px 10px;
+    margin: 0;
+    font-weight: 50me0;
 }
 
-.avatar-upload{
-    margin-top: -72px;
+.p-checkbox .p-checkbox-box, .p-radiobutton .p-radiobutton-box {
+    width: 16px;
+    height: 16px;
 }
 
-.avatar-upload .p-button.p-button-icon-only{
-    width: 4.5rem;
-    padding: 19px;
-    background: transparent;
-    color: transparent;
-    border: 0;
+.p-checkbox .p-checkbox-box .p-checkbox-icon {
+    font-size: 11px;
 }
 
-.avatar-upload .pi{
-    font-size: 2rem;
+div.clickable {
+    cursor: pointer;
+    opacity: 0.85;
 }
 
-.table-info-resep td{ padding: 2px; font-size: 12px; }
-
-.table-sig td {
-    padding: 2px 6px !important;
-    border: 0 !important;
+div.clickable:hover {
+    box-shadow: 0px 0px 5px #b1b1b1;
+    opacity: 1;
 }
 
-.table-template-sig td{
-    padding: 2px 6px !important;
-    border: 1px;
-}
-
-.node-number{
-    width: 30px;
-    height: 23px;
-}
-
-.node-number:hover{
-    background: rgb(209, 234, 255);
-    border-color: rgb(162, 197, 228);
-}
-
-.p-chips{ width: 100%; }
-
-.input-alergi .p-inputtext{
-    background: #de9696;
-    border-color: #de9696;
-    width: 100%;
-}
-
-.input-alergi input{ color: white !important; }
-
-.p-chips .p-chips-multiple-container .p-chips-token{
-    margin-bottom: 2px !important;
-}
-
-.form-group{ padding: 1px; }
-/* .form-group:hover{ background:rgb(248, 248, 248); } */
-
-hr{ padding: 0.1rem; margin: 0.1rem; }
-
-.table th, .table td{ line-height: unset; }
-.table th{ border: 1px solid silver; }
-
-.empty-data{
-    background: rgb(230, 230, 230);
-    color: grey !important;
-    text-align: center !important;
-    font-weight: normal !important;
-    padding: 0.3rem !important;
-}
-
-.p-accordion .p-accordion-header .p-accordion-header-link{
-    padding: 5px;
-    font-weight: 500;
-}
-
-.p-accordion .pi{ font-size: 0.6rem !important; font-weight: normal; }
-
-.title-section{ font-size: 0.9rem; font-weight: 500; color: #e28811; padding: 5px 10px; background: #f7eae3; }
-
-.submenu ul{ background-color: #fff2d3  !important; }
-
-.submenu ul a{ background: transparent !important; font-weight: 500 !important; }
-.mainmenu ul a{ border-radius: 0; }
-
-.submenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link{ padding: 6px 10px !important; border-radius: 0; }
-
-.mainmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link{
-    background-color: #fff2d3;
-    color: #308cda;
-}
-
-.submenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link{
-    background-color: #318cd9 !important;
-    color: white;
-    border-color: #ffbb1a !important;
-}
-
-.mainmenu a:active, .mainmenu a:focus, .submenu a:active, .submenu a:focus {
-    outline: 0 !important;
-    -moz-outline-style: none !important;
-    box-shadow: none !important;
-}
-
-.p-button {
-    outline: 0 !important;
-    -moz-outline-style: none !important;
-    box-shadow: none !important;
-}
-
-.mainmenu ul a, .mainmenu ul{
-    border: 0 !important;
-    /* background: orange !important; */
-}
-
-.table-sm th, .table-sm td{
-    padding: 5px !important;
-}
-
-.table-sm .btn{
-    padding: 2px;
-}
-
-.p-button.p-button-icon-only{ padding: 0.3rem; width: auto; }
-
-.p-overlaypanel .p-overlaypanel-content{ padding: 0.1rem; }
-
-.p-datatable-sm .p-paginator .p-paginator-pages .p-paginator-page{
-    height: 1.2rem;
-    min-width: 1rem;
-}
-
-.p-dialog .p-dialog-header {
-    padding: 0rem 1rem;
-    border-bottom: 1px solid #d4d4d4;
-}
-
-.p-dialog .p-dialog-header .p-dialog-title{ font-size: 0.9rem; }
-
-.p-dialog .p-dialog-content{ padding: 1rem; }
-
-.p-autocomplete-panel .p-autocomplete-items:not(.p-autocomplete-virtualscroll){
-    padding: 0;
-}
-
-.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item{ padding: 0; }
-.p-autocomplete-item{ white-space: unset !important; }
-
-.p-autocomplete .p-inputtext{ padding: 0.4rem; width: 100%; }
-
-.action-section{
-    background-color: #0f4f86;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem 0;
-}
-
-.hidden{ display: none; }
-
-.p-datepicker table td{ padding: 0.2rem; }
-
-.p-autocomplete-panel{ min-height: 60px; }
-.p-autocomplete-panel::before{ content: 'No results found'; position: absolute; z-index: -1; top: 36px; left: 16px; }
-.p-autocomplete-panel .p-autocomplete-items, .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-empty-message{ background: white;  }
-
-.p-inputgroup-addon{ padding: 0 0.3rem; }
-
-.blink_me {
-  animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
-}
-
-.ql-toolbar.ql-snow{ padding: 0; }
-
-.p-sidebar .p-sidebar-header{
-    /* display: none; */
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 999999;
-
-}
-
-.option-obat .p-selectbutton .p-button.p-highlight:hover, .option-obat .p-selectbutton .p-button.p-highlight{
-    background-color: transparent !important;
-    color: rgb(255, 191, 72);
-    border: none;
-}
-
-.option-obat .p-selectbutton .p-button{
-    background-color: transparent !important;
-    border: none;
+.tx-silver {
     color: silver;
 }
 
-.number{
-    font-size: 1.5rem;
-    font-weight: 600;
-    padding: 15px;
-    border-radius: unset;
+.p-scrollpanel .p-scrollpanel-bar {
+    background: #e2e7ed;
 }
 
-.number2{
-    font-size: 1rem;
-    padding: 20px 19px 19px 19px;
-    border-radius: unset;
+.p-radiobutton .p-radiobutton-box .p-radiobutton-icon {
+    width: 8px;
+    height: 8px;
 }
 
-.item-obat td{
-    padding: 1rem !important;
-    font-size: medium;
-}
-.item-obat th{
-    padding: 0.5rem !important;
+.p-dialog .p-dialog-footer {
+    background: #1a3246;
+    padding-top: 1rem;
 }
 
-.table-sig-tablet td {
-    padding: 2rem !important;
+.p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background: none;
+    border-radius: 0;
+    padding: 1rem 2rem;
 }
 
-.p-scrollpanel-content{
-    height: calc(100%) !important;
+.p-tabview .p-tabview-nav {
+    background-color: #f5f6fa !important;
 }
 
-@keyframes fadein {
-    from { background: #85eb9f; color: transparent; }
-    to   { background: transparent; color: black; }
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none;
 }
 
-/* .last-child{
-    animation: fadein 0.4s linear;
-} */
-
-
-@media (min-width: 1026px) {
-    .testDiv { display: none; }
+.p-tabview .p-tabview-panels {
+    padding: 0 1rem;
 }
 
-.testDiv{
-    color: #0e3c63;
+.table th {
+    border-top: 0;
 }
 
-.btn-xs{
-    font-size: 13px;
+.timeline-body::before {
+    top: 10px;
 }
 
-.silver{ color: silver; }
+.timeline-body {
+    padding-top: 7px;
+}
+
+.timeline-time {
+    padding-top: 5px;
+}
+
+.timeline-label {
+    letter-spacing: normal;
+}
+
+.timeline-label:first-child {
+    padding-top: 25px;
+}
+
+.timeline-label:first-child::before {
+    top: 29px;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #98a3b9;
+    color: white;
+    border: none;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background-color: #f5f6fa;
+}

@@ -1,55 +1,61 @@
-<header class="navbar navbar-header navbar-header-fixed hidden">
-   <div class="row">
-      <div class="col-2">
-         <div class="p-pl-5 p-pt-3">
-            <span class="df-logo">EMR<span style="color: #0f4f86;">apps</span></span>
-         </div>
-      </div>
-      <div class="col-3">
-         <div class="top-menu tx-left p-pr-3 p-pt-0">
-            <small style="color: #654417;">Menu</small><br>
-            <p-dropdown [options]="menus" [(ngModel)]="selectedMenu" optionLabel="name"></p-dropdown>
-         </div>
-      </div>
-      <div class="col-3">
-         <div class="top-menu tx-left p-pr-3 p-pt-0">
-            <small style="color: #654417;">Kalender</small><br>
-            <div style="color: white; font-size: 1rem;" class="p-pt-1">Jumat, 1 Juli 2021 <i class="pi pi-calendar"></i> </div>
-         </div>
-      </div>
-      <div class="col tx-right">
-         <div style="display: inline-flex; padding-top: 2px;" class="user-login p-pl-4 p-pb-1 p-pr-3 clickable" (click)="op.toggle($event)">
-            <div class="avatar p-mr-3 p-mt-2">
-               <img [src]="'assets/drbebet.jpg'" class="rounded-circle">
+<header class="navbar navbar-header navbar-header-fixed">
+    <div class="row">
+        <div class="col-2">
+            <div class="p-pl-5 p-pt-3">
+                <span class="df-logo">SIMRSMANDIRI<span style="color: #0f4f86;">.io</span></span>
             </div>
-            <div class="p-pt-1 p-pb-2 p-pr-1 tx-left">
-               <small style="color: #ffc77c;">Dokter</small><br>
-               dr. R. Bebet Prasetyo SpU
-            </div>
-            <div class="p-pl-1 p-pr-2" style="padding-top: 26px; color: #f9d2a0;">
-               <i class="pi pi-chevron-circle-down"></i>
-            </div>
-         </div>
-      </div>
-   </div>
+        </div>
+        <div class="col-3">
+            <!-- <app-menu></app-menu> -->
+        </div>
+        <div class="col-3">
+            <!-- <app-calendar></app-calendar> -->
+        </div>
+        <div class="col tx-right">
+            <!-- <app-user></app-user> -->
+        </div>
+    </div>
 </header>
-<div class="row">
-   <div class="col">
-      <router-outlet name="header"></router-outlet>
-      <router-outlet></router-outlet>
-   </div>
+<div class="sidebar sidebar-fixed sidebar-components">
+    <div class="sidebar-header">
+        <a href="" id="mainMenuOpen"><i data-feather="menu"></i></a>
+        <h5>Components</h5>
+        <a href="" id="sidebarMenuClose"><i data-feather="x"></i></a>
+    </div><!-- sidebar-header -->
+    <div class="sidebar-body p-0">
+        <!-- <app-data-pasien></app-data-pasien> -->
+    </div>
 </div>
-<p-overlayPanel #op>
-   <ng-template pTemplate>
-      <div style="width: 200px;">
-         <!-- <div class="bd-b p-pb-2 p-mb-2" style="display: inline-flex;">
-            <div class="avatar avatar-md p-mr-3 clickable"><div class="avatar-initial rounded-circle"><i class="pi pi-user"></i></div></div>
-            <div>
-               <div>dr. R. Bebet Prasetyo SpU</div>
-               <div class="tx-grey">as Dokter</div>
-            </div>
-         </div> -->
-         <p-menu [model]="items"></p-menu>
-      </div>
-   </ng-template>
-</p-overlayPanel>
+<div class="section-nav">
+    <label class="nav-label">Ringkasan Konsultasi</label>
+    <div>
+        <label class="nav-label mb-0">Keluhan / Gejala</label>
+        <div>Sakit Kepala</div>
+    </div>
+
+    <div class="mt-3">
+        <label class="nav-label mb-0">Vital Sign</label>
+        <div>Suhu : 34 <sup>o</sup>C</div>
+        <div>BB : 36 kg</div>
+    </div>
+
+    <div class="mt-3">
+        <label class="nav-label mb-0">Diagnosa</label>
+        <div class="p-1">
+            <div class="border-bottom pb-1 mb-1">Z10.2 ROUTINE GENERAL HEALTH CHECK-UP OF ARMED FORCES</div>
+            <div class="border-bottom pb-1 mb-1">Z20.2 CONTACT WITH AND EXPOSURE TO INFECTIONS WITH A PREDOMINANTLY SEXUAL MODE OF TRANSMISSION</div>
+        </div>
+    </div>
+
+  </div><!-- df-section-nav -->
+<div class="content content-components p-1">
+    <app-menu-emr></app-menu-emr>
+    <div class="content p-0">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+
+<div class="loading" *ngIf="loadingService.status | async">
+    <p-progressSpinner strokeWidth="2"></p-progressSpinner>
+    <div>Loading...</div>
+</div>
