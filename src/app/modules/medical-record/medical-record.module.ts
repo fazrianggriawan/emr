@@ -8,38 +8,11 @@ import { DiagnosaProsedurComponent } from './components/diagnosa-prosedur/diagno
 import { SummaryReviewComponent } from './components/summary-review/summary-review.component';
 import { PlanningComponent } from './components/planning/planning.component';
 import { SubjectiveComponent } from './components/subjective/subjective.component';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { CheckboxModule } from 'primeng/checkbox';
-import { ScrollPanelModule } from 'primeng/scrollpanel';
-import { DropdownModule } from 'primeng/dropdown';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PemeriksaanComponent } from './components/pemeriksaan/pemeriksaan.component';
-import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormObatComponent } from './components/farmasi/form-obat/form-obat.component';
 import { TableMasterObatComponent } from './components/farmasi/table-master-obat/table-master-obat.component';
 import { TableOrderObatComponent } from './components/farmasi/table-order-obat/table-order-obat.component';
-import { TableModule } from 'primeng/table';
-import { TabViewModule } from 'primeng/tabview';
-import { NumpadComponent } from 'src/app/components/shared/numpad/numpad.component';
-import { NumpadRacikanComponent } from 'src/app/components/shared/numpad-racikan/numpad-racikan.component';
-import { DialogModule } from 'primeng/dialog';
-import { OverlayPanelModule } from 'primeng/overlaypanel';
-import { AutoCompleteModule } from 'primeng/autocomplete';
-import { CalendarModule } from 'primeng/calendar';
-
-let primeModules : any = [
-    InputTextareaModule,
-    CheckboxModule,
-    ScrollPanelModule,
-    DropdownModule,
-    RadioButtonModule,
-    TableModule,
-    TabViewModule,
-    DialogModule,
-    OverlayPanelModule,
-    AutoCompleteModule,
-    CalendarModule
-];
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -52,16 +25,12 @@ let primeModules : any = [
         PemeriksaanComponent,
         FormObatComponent,
         TableMasterObatComponent,
-        TableOrderObatComponent,
-        NumpadComponent,
-        NumpadRacikanComponent
+        TableOrderObatComponent
     ],
     imports: [
-        primeModules,
+        SharedModule,
         CommonModule,
-        MedicalRecordRoutingModule,
-        FormsModule,
-        ReactiveFormsModule
+        MedicalRecordRoutingModule
     ]
 })
 export class MedicalRecordModule { }

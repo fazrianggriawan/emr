@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NumpadRacikanService } from 'src/app/components/shared/numpad-racikan.service';
-import { NumpadService } from 'src/app/components/shared/numpad/numpad.service';
+import { NumpadRacikanService } from 'src/app/modules/shared/numpad-racikan/numpad-racikan.service';
+import { NumpadService } from 'src/app/modules/shared/numpad/numpad.service';
 import { FarmasiService } from 'src/app/services/farmasi.service';
 
 @Component({

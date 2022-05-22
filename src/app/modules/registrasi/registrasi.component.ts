@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DataPasienService } from './components/dialog/data-pasien/data-pasien.service';
-import { DataPesertaBpjsService } from './components/dialog/data-peserta-bpjs/data-peserta-bpjs.service';
+import { DataPasienService } from './components/data-pasien/data-pasien.service';
+import { DataPesertaBpjsService } from './components/data-peserta-bpjs/data-peserta-bpjs.service';
 import { MasterService } from './services/master.service';
 import { RegistrasiService } from './services/registrasi.service';
 import { VclaimService } from './services/vclaim.service';
