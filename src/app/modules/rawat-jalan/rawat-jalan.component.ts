@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { fadeIn } from 'src/app/animations';
 import { BillingService } from 'src/app/components/dialog/billing/billing.service';
 import { MasterService } from '../registrasi/services/master.service';
 
 @Component({
     selector: 'app-rawat-jalan',
     templateUrl: './rawat-jalan.component.html',
-    styleUrls: ['./rawat-jalan.component.css'],
-    animations: [fadeIn]
+    styleUrls: ['./rawat-jalan.component.css']
 })
 export class RawatJalanComponent implements OnInit {
 

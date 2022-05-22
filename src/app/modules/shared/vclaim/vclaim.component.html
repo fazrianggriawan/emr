@@ -1,0 +1,808 @@
+<!-- <p-dialog header="Bridging VClaim BPJS" [visible]="false" [modal]="true" [draggable]="true" [style]="{width: '85%'}"> -->
+    <div class="row mt-1">
+        <div class="col-4">
+            <form [formGroup]="formPeserta">
+                <!-- <div class="row mb-2">
+                    <div class="col">
+                        <h1 class="md-title" style="margin-bottom: 0;">Data Peserta</h1>
+                        <div style="margin-bottom: 5px;">Informasi data peserta BPJS</div>
+                    </div>
+                </div> -->
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Cari</label>
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="No. Kartu BPJS">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-4"></div>
+                    <div class="col">
+                        <div class="input-append">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="No. KTP / NIK">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary"><i class="bi bi-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Nama</label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="nama" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">No. Kartu</label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="noKartu" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">NIK</label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="nik" readonly>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Kelamin - Tgl. Lahir</label>
+                    <div class="col">
+                        <div style="display: inline-flex;">
+                            <div style="width: 102px;" class="mr-1">
+                                <input type="text" class="form-control" formControlName="kelamin" readonly>
+                            </div>
+                            <input type="text" class="form-control" formControlName="tglLahir" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Usia</label>
+                    <div class="col">
+                        <input type="text" class="form-control" formControlName="usia" readonly>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Status Peserta</label>
+                    <div class="col">
+                        <div style="display: inline-flex;">
+                            <div style="width: 102px;" class="mr-1">
+                                <input type="text" class="form-control" formControlName="status" readonly>
+                            </div>
+                            <input type="text" class="form-control" formControlName="status" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Jenis Peserta</label>
+                    <div class="col">
+                        <div style="display: inline-flex;">
+                            <div style="width: 102px;" class="mr-1">
+                                <input type="text" class="form-control" formControlName="jnsPeserta" readonly>
+                            </div>
+                            <input type="text" class="form-control" formControlName="jnsPeserta" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Hak Kelas</label>
+                    <div class="col">
+                        <div style="display: inline-flex;">
+                            <div style="width: 102px;" class="mr-1">
+                                <input type="text" class="form-control" formControlName="hakKelas" readonly>
+                            </div>
+                            <input type="text" class="form-control" formControlName="hakKelas" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">Provider</label>
+                    <div class="col">
+                        <div style="display: inline-flex;">
+                            <div style="width: 102px;" class="mr-1">
+                                <input type="text" class="form-control" formControlName="provider" readonly>
+                            </div>
+                            <input type="text" class="form-control" formControlName="provider" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <label class="col-4 col-form-label">
+                        <button class="btn btn-outline-light btn-xs"><i class="bi bi-plus-lg mr-1"></i>Lebih Detail</button>
+                    </label>
+                </div>
+                <div>
+                    <div class="row mb-2 border-bottom">
+                        <label class="col-4 col-form-label">COB</label>
+                        <div class="col border-left">
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label">Nama Asuransi</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="cobAsuransi" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label">No. Asuransi</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="cobNoAsuransi" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label">Tgl. TAT</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="cobTglTat" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label">Tgl. TMT</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="cobTglTmt" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 border-bottom">
+                        <label class="col-4 col-form-label">Med. Record</label>
+                        <div class="col border-left">
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label"> No. MR</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="norm" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label"> No. Tlp</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="tlp" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2 border-bottom">
+                        <label class="col-4 col-form-label">Informasi</label>
+                        <div class="col border-left">
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label"> Dinsos</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="dinsos" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label"> No. SKTM</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="noSktm" readonly>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <label class="col-4 col-form-label"> PRB</label>
+                                <div class="col">
+                                    <input type="text" class="form-control" formControlName="prb" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-8">
+            <p-tabView [scrollable]="true">
+                <p-tabPanel header="Form SEP">
+                    <div class="row pt-3 pb-3">
+                        <div class="col">
+                            <form [formGroup]="formSep">
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">Tanggal SEP</label>
+                                    <div class="col-auto">
+                                        <p-calendar [showIcon]="true" formControlName="tanggal" appendTo="body" [style]="{width:'150px'}"></p-calendar>
+                                    </div>
+                                    <div class="col pl-0">
+                                        <button class="btn btn-secondary"><i class="bi bi-file-earmark mr-1"></i> SEP Backdate / Fingerprint</button>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">Jenis Kunjungan</label>
+                                    <div class="col pt-2">
+                                        <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="rujukanBaru"></p-radioButton>Rujukan Baru
+                                        <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="kontrolKembali" styleClass="ml-2"></p-radioButton>Kontrol Kembali
+                                        <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="rawatInap" styleClass="ml-2"></p-radioButton>Rawat Inap
+                                        <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="igd" styleClass="ml-2"></p-radioButton>IGD
+                                        <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="antarPoli" styleClass="ml-2"></p-radioButton>Rujukan Internal
+
+                                        <!-- <md-radio-group ng-model="jnsPelayanan" name="jnsPelayanan" aria-labelledby="jnsPelayanan" layout="row" style="font-size:larger;" required>
+                                        <md-radio-button value="rujukanBaru" class="md-primary">Rujukan Baru</md-radio-button>
+                                        <md-radio-button value="kontrolKembali" class="md-primary">Kontrol Kembali</md-radio-button>
+                                        <md-radio-button value="rawatInap" class="md-primary">Rawat Inap</md-radio-button>
+                                        <md-radio-button value="igd" class="md-primary">IGD</md-radio-button>
+                                        <md-radio-button value="antarPoli" class="md-primary">Rujukan Internal</md-radio-button>
+                                    </md-radio-group> -->
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">
+                                        <span ng-show="jnsPelayanan=='kontrolKembali'">Surat Kontrol</span>
+                                        <!-- <span ng-show="jnsPelayanan=='rawatInap'">Surat Rawat Inap </span> -->
+                                    </label>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" formControlName="suratKontrol">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary"><i class="bi bi-plus-lg mr-1"></i>Data Baru</button>
+                                                <button class="btn btn-secondary"><i class="bi bi-table mr-1"></i> View Data</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2" ng-show="jnsPelayanan == 'rujukanBaru' || formSep.skdp.noSurat || jnsPelayanan == 'antarPoli' ">
+                                    <label class="col-3 col-form-label">No. Rujukan</label>
+                                    <div class="col">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" formControlName="noRujukan">
+                                            <div class="input-group-append">
+                                                <button class="btn btn-secondary"><i class="bi bi-table mr-1"></i> View Data</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="input-append">
+                                            <input type="text" name="noRujukan" ng-model="formSep.rujukan.noRujukan" ng-required="jnsPelayanan!='igd'">
+                                            <input type="text" class="form-control">
+                                            <a class="btn" ng-click="toTab(3)"><i class="fontello-icon-table"></i> View Data</a>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">Diagnosa <span
+                                            ng-show="formSepBaru.diagnosa.$error.required || !formSep.diagAwal"
+                                            class="fontello-icon-attention-circle error"></span></label>
+                                    <div class="col">
+                                        <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
+                                        <!-- <md-autocomplete
+                                        name="diagnosa"
+                                        md-selected-item="formSep.diagAwal"
+                                        md-min-length="3"
+                                        md-no-cache="true"
+                                        md-search-text="keyDiagnosa"
+                                        md-items="item in getDiagnosa(keyDiagnosa)"
+                                        md-item-text="item.nama"
+                                        md-delay="100"
+                                        placeholder="Cari Diagnosa"
+                                        required>
+                                        <md-item-template>
+                                            <span>{{item.nama | uppercase}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            Pencarian "{{keyDiagnosa}}" tidak ditemukan
+                                        </md-not-found>
+                                    </md-autocomplete> -->
+                                    </div>
+                                </div>
+                                <div class="row mb-2" ng-show="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
+                                    <label class="col-3 col-form-label">Poliklinik</label>
+                                    <div class="col">
+                                        <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" formControlName="poliklinik" [style]="{width: '100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
+                                        <!-- <md-autocomplete
+                                        name="poli"
+                                        md-selected-item="formSep.poli.tujuan"
+                                        md-min-length="3"
+                                        md-no-cache="true"
+                                        md-search-text="keyPoli"
+                                        md-items="item in getPoli(keyPoli)"
+                                        md-item-text="item.nama"
+                                        md-delay="100"
+                                        placeholder="Cari Spesialis / Sub Spesialis"
+                                        ng-required="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
+
+                                        <md-item-template>
+                                            <span>{{item.nama | uppercase}}</span>
+                                        </md-item-template>
+                                        <md-not-found>
+                                            Pencarian "{{keyPoli}}" tidak ditemukan
+                                        </md-not-found>
+                                    </md-autocomplete> -->
+                                    </div>
+                                </div>
+                                <div class="row mb-2" ng-show="jnsPelayanan!='rawatInap'">
+                                    <label class="col-3 col-form-label">Dokter / DPJP</label>
+                                    <div class="col">
+                                        <p-dropdown [options]="results" optionLabel="name" formControlName="dokter" [style]="{width: '100%'}"></p-dropdown>
+
+                                        <!-- <selectize
+                                        name="dpjp"
+                                        options='dataDpjp'
+                                        config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                        ng-model='formSep.dpjpLayan'
+                                        placeholder="Pilih..."
+                                        ng-required="jnsPelayanan!='rawatInap'">
+                                    </selectize> -->
+                                    </div>
+                                </div>
+                                <div class="row mb-2"
+                                    ng-show="formSep.poli.tujuan != poliRujukan && jnsPelayanan=='kontrolKembali' || jnsPelayanan=='antarPoli' ">
+                                    <label class="col-3 col-form-label">Assessment Pelayanan <span
+                                            ng-show="formSepBaru.assesmentPel.$error.required"
+                                            class="fontello-icon-attention-circle error"></span></label>
+                                    <div class="col">
+                                        <p-dropdown [options]="results" optionLabel="name" formControlName="assessmentPel" [style]="{width: '100%'}"></p-dropdown>
+                                        <!-- <selectize
+                                        name="assesmentPel"
+                                        options='dataAssessmentPel'
+                                        config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                        ng-model='formSep.assesmentPel'
+                                        placeholder="Pilih..."
+                                        ng-required="jnsPelayanan!='rawatInap' && jnsPelayanan=='kontrolKembali' || jnsPelayanan=='antarPoli' ">
+                                    </selectize> -->
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">Hak Kelas</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" formControlName="hakKelas">
+                                    </div>
+                                </div>
+                                <div class="row mb-2" *ngIf="formSep.get('hakKelas')?.value == '1'">
+                                    <label class="col-3 col-form-label">Naik Kelas</label>
+                                    <div class="col">
+                                        <p-dropdown [options]="results" optionLabel="name" formControlName="naikKelas" [style]="{width: '100%'}"></p-dropdown>
+                                        <div class="row pb-2 mb-2">
+                                            <div class="col">
+                                                <div class="mb-1">Pembiayaan :</div>
+                                                <div>
+                                                    <p-dropdown [options]="results" optionLabel="name" formControlName="naikKelasPembiayaan" [style]="{width: '100%'}"></p-dropdown>
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-1">Penanggung Jawab :</div>
+                                                <div>
+                                                    <p-dropdown [options]="results" optionLabel="name" formControlName="naikKelasPenanggungJawab" [style]="{width: '100%'}"></p-dropdown>
+                                                </div>
+                                            </div>
+                                        </div>
+                                                <!-- <selectize
+                                                name="naikKelas"
+                                                options='dataKelasRawat'
+                                                config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                                ng-model='formSep.klsRawat.klsRawatNaik'
+                                                placeholder="TIDAK">
+                                            </selectize>
+
+                                                <div style="display: inline-flex; margin-bottom: 10px;" ng-show="showNaikKelas">
+                                                    <div style="width: 200px;">
+                                                        <div style="padding: 5px;">Pembiayaan :</div>
+                                                        <selectize
+                                                        name="pembiayaan"
+                                                        options='dataPembiayaan'
+                                                        config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                                        ng-model='formSep.klsRawat.pembiayaan'
+                                                        placeholder="Pilih...">
+                                                    </selectize>
+                                                    </div>
+                                                    <div style="width: 200px; margin-left: 10px;">
+                                                        <div style="padding: 5px;">Penanggung Jawab :</div>
+                                                        <selectize
+                                                        name="penanggungJawab"
+                                                        options='dataPembiayaan'
+                                                        config='{maxItems: 1, valueField: "nama", labelField: "nama", searchField: "nama"}'
+                                                        ng-model='formSep.klsRawat.penanggungJawab'
+                                                        placeholder="Pilih...">
+                                                    </selectize> -->
+                                                    <!-- </div> -->
+                                                <!-- </div> -->
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">No. RM</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" formControlName="norm">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">No. Tlp</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" formControlName="tlp">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">Catatan</label>
+                                    <div class="col">
+                                        <input type="text" class="form-control" formControlName="catatan">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label class="col-3 col-form-label">Status Kecelakaan</label>
+                                    <div class="col">
+                                        <p-dropdown [options]="results" optionLabel="name" formControlName="statusKecelakaan" [style]="{width: '100%'}"></p-dropdown>
+
+                                        <!-- <selectize
+                                        name="statusLaka"
+                                        options='dataStatusLaka'
+                                        config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                        ng-model='formSep.isLakalantas'
+                                        placeholder="Pilih..."
+                                        required>
+                                        </selectize> -->
+                                    </div>
+                                </div>
+                                <div class="row mt-3 pt-3 border-top" *ngIf="formSep.get('statusKecelakaan')?.value == '2'">
+                                    <div class="col">
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">Tgl. Kejadian</label>
+                                            <div class="col">
+                                                <p-calendar [showIcon]="true" formControlName="tglKejadian"></p-calendar>
+                                                <!-- <md-datepicker name="tglSep" ng-model="formSep.laka.tglKejadian" md-placeholder="DD-MM-YYYY" md-open-on-focus></md-datepicker> -->
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">No. Lap. Polisi</label>
+                                            <div class="col">
+                                                <input type="text" class="form-control" formControlName="noLapPolisi">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">Keterangan</label>
+                                            <div class="col">
+                                                <input type="text" class="form-control" formControlName="keterangan">
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">Suplesi</label>
+                                            <div class="col">
+                                                <p-dropdown [options]="results" optionLabel="name" formControlName="suplesi" [style]="{width: '100%'}"></p-dropdown>
+                                                <!-- <selectize
+                                                name="kabupaten"
+                                                options='dataSuplesi'
+                                                config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                                ng-model='formSep.laka.suplesi'
+                                                placeholder="Pilih...">
+                                            </selectize> -->
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">No. Suplesi</label>
+                                            <div class="col">
+                                                <input type="text" class="form-control" formControlName="noSuplesi">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="row mb-2 border-bottom tx-bold">
+                                            <label class="col">Lokasi Laka</label>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">Provinsi</label>
+                                            <div class="col">
+                                                <p-dropdown [options]="results" optionLabel="name" formControlName="provinsi" [style]="{width: '100%'}"></p-dropdown>
+                                                <!-- <selectize
+                                                name="propinsi"
+                                                options='dataPropinsi'
+                                                config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                                ng-model='formSep.laka.propinsi'
+                                                placeholder="Pilih...">
+                                            </selectize> -->
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">Kabupaten</label>
+                                            <div class="col">
+                                                <p-dropdown [options]="results" optionLabel="name" formControlName="kabupaten" [style]="{width: '100%'}"></p-dropdown>
+                                                <!-- <selectize
+                                                name="kabupaten"
+                                                options='dataKabupaten'
+                                                config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                                ng-model='formSep.laka.kabupaten'
+                                                placeholder="Pilih...">
+                                            </selectize> -->
+                                            </div>
+                                        </div>
+                                        <div class="row mb-2">
+                                            <label class="col-4 col-form-label">Kecamatan</label>
+                                            <div class="col">
+                                                <p-dropdown [options]="results" optionLabel="name" formControlName="kecamatan" [style]="{width: '100%'}"></p-dropdown>
+                                                <!-- <selectize
+                                                name="kecamatan"
+                                                options='dataKecamatan'
+                                                config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
+                                                ng-model='formSep.laka.kecamatan'
+                                                placeholder="Pilih...">
+                                            </selectize> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col">
+                            <div class="row bg-gray-500 pt-3 pb-3 mt-3">
+                                <div class="col-3">&nbsp;</div>
+                                <div class="col">
+                                    <button class="btn btn-sm btn-primary"><i class="bi bi-save mr-1"></i> Simpan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Surat Kontrol">
+                    <div class="row pt-3 pb-3">
+                        <div class="col mb-2 clearfix">
+                            <div class="float-left">
+                                <button class="btn btn-sm btn-primary mr-1"><i class="bi bi-plus-lg"></i> Data Baru</button>
+                                <button class="btn btn-sm btn-secondary"><i class="bi bi-arrow-clockwise"></i></button>
+                            </div>
+                            <div class="float-left ml-3 pl-3 border-left">
+                                Dari : <p-calendar styleClass="mr-2" appendTo="body" [style]="{width:'120px'}"></p-calendar>
+                                Sampai : <p-calendar appendTo="body" [style]="{width:'120px'}"></p-calendar>
+                            </div>
+                            <div class="float-left ml-2">
+                                <button class="btn btn-sm btn-secondary"><i class="bi bi-filter"></i> Filter</button>
+                            </div>
+
+                        </div>
+                        <div class="w-100 border-bottom"></div>
+                        <div class="col p-0">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>No. Surat Kontrol</th>
+                                        <th>SEP Asal</th>
+                                        <th>Jns. Pelayanan</th>
+                                        <th>Poli Asal</th>
+                                        <th>Poli Tujuan</th>
+                                        <th>Dokter</th>
+                                        <th>Tgl. Terbit</th>
+                                        <th>Tgl. Kontrol</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Rujukan">
+                    <div class="row pt-3 pb-3">
+                        <div class="col mb-2 clearfix">
+                            <div class="float-left">
+                                <button class="btn btn-sm btn-primary mr-1"><i class="bi bi-plus-lg"></i> Data Baru</button>
+                                <button class="btn btn-sm btn-secondary"><i class="bi bi-arrow-clockwise"></i></button>
+                            </div>
+                        </div>
+                        <div class="w-100 border-bottom"></div>
+                        <div class="col p-0">
+                            <table class="table table-striped table-hover mb-3">
+                                <thead>
+                                    <tr>
+                                        <th colspan="6" class="tx-15 bg-light p-2">Puskesmas / PCare</th>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>No. Rujukan</th>
+                                        <th>Tgl. Rujukan</th>
+                                        <th>Jns. Pelayanan</th>
+                                        <th>Spesialis</th>
+                                        <th>PPK</th>
+                                        <th>Diagnosa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover mb-3">
+                                <thead>
+                                    <tr>
+                                        <th colspan="6" class="tx-15 bg-light p-2">Rumah Sakit</th>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>No. Rujukan</th>
+                                        <th>Tgl. Rujukan</th>
+                                        <th>Jns. Pelayanan</th>
+                                        <th>Spesialis</th>
+                                        <th>PPK</th>
+                                        <th>Diagnosa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped table-hover mb-3">
+                                <thead>
+                                    <tr>
+                                        <th colspan="6" class="tx-15 bg-light p-2">Rujukan Keluar</th>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>No. Rujukan</th>
+                                        <th>Tgl. Rujukan</th>
+                                        <th>Jns. Pelayanan</th>
+                                        <th>Spesialis</th>
+                                        <th>PPK</th>
+                                        <th>Diagnosa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="PRB">
+                    <div class="row pt-3 pb-3">
+                        <div class="col mb-2 clearfix">
+                            <div class="float-left">
+                                <button class="btn btn-sm btn-primary mr-1"><i class="bi bi-plus-lg"></i> Data Baru</button>
+                                <button class="btn btn-sm btn-secondary"><i class="bi bi-arrow-clockwise"></i></button>
+                            </div>
+                            <div class="float-left ml-3 pl-3 border-left">
+                                Dari : <p-calendar styleClass="mr-2" appendTo="body" [style]="{width:'120px'}"></p-calendar>
+                                Sampai : <p-calendar appendTo="body" [style]="{width:'120px'}"></p-calendar>
+                            </div>
+                            <div class="float-left ml-2">
+                                <button class="btn btn-sm btn-secondary"><i class="bi bi-filter"></i> Filter</button>
+                            </div>
+                        </div>
+                        <div class="w-100 border-bottom"></div>
+                        <div class="col p-0">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>SEP</th>
+                                        <th>No. SRB</th>
+                                        <th>Tgl. SRB</th>
+                                        <th>DPJP</th>
+                                        <th>Program PRB</th>
+                                        <th>Keterangan</th>
+                                        <th>Saran</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="History SEP">
+                    <div class="row pt-3 pb-3">
+                        <div class="col mb-2 clearfix">
+                            <div class="float-left">
+                                <button class="btn btn-sm btn-secondary"><i class="bi bi-arrow-clockwise"></i></button>
+                            </div>
+                            <div class="float-left ml-3 pl-3 border-left">
+                                Dari : <p-calendar styleClass="mr-2" appendTo="body" [style]="{width:'120px'}"></p-calendar>
+                                Sampai : <p-calendar appendTo="body" [style]="{width:'120px'}"></p-calendar>
+                            </div>
+                            <div class="float-left ml-2">
+                                <button class="btn btn-sm btn-secondary"><i class="bi bi-filter"></i> Filter</button>
+                            </div>
+                        </div>
+                        <div class="w-100 border-bottom"></div>
+                        <div class="col p-0">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>SEP</th>
+                                        <th>Tgl. SEP</th>
+                                        <th>Tgl. Pulang</th>
+                                        <th>Jns. Pelayanan</th>
+                                        <th>Poli / Ruangan</th>
+                                        <th>No. Rujukan</th>
+                                        <th>PPK</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Pulang Rawat Inap / IGD">
+                    <div class="row pt-3 pb-3">
+                        <div class="col mb-2 clearfix">
+                            <div class="float-left">
+                                Nomor SEP :
+                            </div>
+                            <div class="float-left ml-3">
+                                <div class="input-group">
+                                    <input type="text" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-100 border-bottom"></div>
+                        <div class="col p-0">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>SEP</th>
+                                        <th>Tgl. SEP</th>
+                                        <th>Tgl. Pulang</th>
+                                        <th>Jns. Pelayanan</th>
+                                        <th>Poli / Ruangan</th>
+                                        <th>No. Rujukan</th>
+                                        <th>PPK</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+<!-- </p-dialog> -->
