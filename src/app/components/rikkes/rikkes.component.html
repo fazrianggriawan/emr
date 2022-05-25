@@ -43,7 +43,6 @@
                 <div class="input-group-append">
                     <button class="btn btn-secondary" (click)="dataPesertaService.openDialog()"><i class="bi bi-search"></i></button>
                 </div>
-
             </div>
         </div>
         <div class="col">
@@ -66,19 +65,40 @@
             <div class="row mb-2">
                 <label class="col-3 col-form-label"> Anamnese </label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="tinggi">
+                    <input type="text" class="form-control" formControlName="anamnese">
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-3 col-form-label"> Tinggi </label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="tinggi">
+                    <div class="input-group">
+                        <input type="text" class="form-control" formControlName="tinggi" (blur)="hitungBmi()">
+                        <div class="input-group-append">
+                            <span class="input-group-text">Cm</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mb-2">
                 <label class="col-3 col-form-label"> Berat </label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="berat">
+                    <div class="input-group">
+                        <input type="text" class="form-control" formControlName="berat" (blur)="hitungBmi()">
+                        <div class="input-group-append">
+                            <span class="input-group-text">Kg</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-3 col-form-label"> IMT </label>
+                <div class="col">
+                    <div class="input-group">
+                        <input type="text" class="form-control" formControlName="imt">
+                        <div class="input-group-append">
+                            <span class="input-group-text pl-3 pr-3">{{hasilBmi}}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mb-2">
@@ -312,6 +332,48 @@
                     <input type="text" class="form-control" formControlName="palpasi">
                 </div>
             </div>
+
+            <h4 class="mt-4 bg-gray-100 p-3">LABORATORIUM</h4>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Kesimpulan </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="kesimpulanLab">
+                </div>
+            </div>
+
+            <h4 class="mt-4 bg-gray-100 p-3">EKG</h4>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Kesimpulan </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="kesimpulanLab">
+                </div>
+            </div>
+
+            <h4 class="mt-4 bg-gray-100 p-3">RADIOLOGI</h4>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Kesimpulan </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="kesimpulanLab">
+                </div>
+            </div>
+
+            <h4 class="mt-4 bg-gray-100 p-3">KESWA</h4>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Kesimpulan </label>
+                <div class="col">
+                    <p-dropdown
+                        [options]="keswaKesimpulan"
+                        optionLabel="name"
+                        optionValue="name"
+                        formControlName="kesimpulanKeswa"
+                        [style]="{width: '100%'}"
+                        styleClass="mb-1"
+                        [autoDisplayFirst]="false">
+                    </p-dropdown>
+                    <input type="text" class="form-control" formControlName="kesimpulanLab" placeholder="Keterangan">
+                </div>
+            </div>
+
         </form>
     </div>
 
@@ -441,7 +503,7 @@
             <textarea pInputTextarea [autoResize]="true" [style]="{width: '100%'}" formControlName="kesimpulan"></textarea>
 
             <div class="row mb-2">
-                <label class="col-2 col-form-label"> Rumus Lahir </label>
+                <label class="col-2 col-form-label"> Rumus </label>
                 <div class="col-8">
                     <table class="table border-bottom">
                         <tr>
@@ -475,7 +537,7 @@
 
             <div class="row mb-2">
                 <label class="col-2 col-form-label"> Hasil </label>
-                <div class="col-4">
+                <div class="col">
                     <p-selectButton [options]="hasil" optionLabel="name"  formControlName="hasil">
                         <ng-template let-item>
                             <div class="p-2 tx-bold pl-5 pr-5">{{item.name}}</div>

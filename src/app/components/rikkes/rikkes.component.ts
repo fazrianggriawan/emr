@@ -19,8 +19,14 @@ export class RikkesComponent implements OnInit {
     dialogRadiologi: boolean = false;
     dialogLaboratorium: boolean = false;
     peserta: any;
-    hasil: any = [{ id: 1, name: 'LULUS' }, { id: 0, name: 'TIDAK LULUS' }]
+    hasil: any = [{ id: 1, name: 'MS' }, { id: 0, name: 'TMS' }]
     form!: FormGroup
+    hasilBmi: string = '';
+    keswaKesimpulan: any = [
+        {name: 'TD'},
+        {name: 'DD'},
+        {name: 'D'}
+    ]
 
     constructor(
         private fb: FormBuilder,
@@ -67,8 +73,10 @@ export class RikkesComponent implements OnInit {
     public initForm() {
         this.initPeserta();
         this.form = this.fb.group({
+            anamnese: [''],
             tinggi: [''],
             berat: [''],
+            imt: [''],
             tekananDarah: [''],
             nadi: [''],
             tubuhBentuk: [''],
@@ -124,6 +132,8 @@ export class RikkesComponent implements OnInit {
             rumusLahirJ: [''],
             stakes: [''],
             hasil: [''],
+            kesimpulanLab: [''],
+            kesimpulanKeswa: [''],
             peserta: []
         })
     }
@@ -150,5 +160,48 @@ export class RikkesComponent implements OnInit {
     public update() {
 
     }
+
+    public hitungBmi() {
+        let tinggi = parseInt(this.form.get('tinggi')?.value) / 100;
+        let berat = parseInt(this.form.get('berat')?.value);
+
+        if(tinggi && berat ){
+            let bmi = berat / (tinggi * tinggi)
+            bmi = Math.round(bmi * 10) / 10;
+
+            if( this.peserta.jnsKelamin.toLowerCase() == 'perempuan' ){
+                if( bmi >= 19 && bmi <= 23.9 ){
+                    this.hasilBmi = 'STAKES 1'
+                }else if( bmi >= 24 && bmi <= 25.9 ){
+                    this.hasilBmi = 'STAKES 2'
+                }else if( bmi >= 18.5 && bmi <= 18.9 ){
+                    this.hasilBmi = 'STAKES 2'
+                }else if( bmi >= 26 && bmi <= 28.9 ){
+                    this.hasilBmi = 'STAKES 3'
+                }else if( bmi >= 15 && bmi <= 18.4 ){
+                    this.hasilBmi = 'STAKES 3'
+                }else if( bmi >= 29 || bmi <= 14.9 ){
+                    this.hasilBmi = 'STAKES 4'
+                }
+            }
+
+            if( this.peserta.jnsKelamin.toLowerCase() == 'laki-laki' ){
+                if( bmi >= 20 && bmi <= 24.9 ){
+                    this.hasilBmi = 'STAKES 1'
+                }else if( bmi >= 18.5 && bmi <= 19.9 ){
+                    this.hasilBmi = 'STAKES 2'
+                }else if( bmi >= 15 && bmi <= 18.4 ){
+                    this.hasilBmi = 'STAKES 2'
+                }else if( bmi >= 27 && bmi <= 29.9 ){
+                    this.hasilBmi = 'STAKES 3'
+                }else if( bmi >= 30 || bmi <= 14.9 ){
+                    this.hasilBmi = 'STAKES 4'
+                }
+            }
+
+            this.form.get('imt')?.patchValue(bmi);
+        }
+    }
+
 
 }
