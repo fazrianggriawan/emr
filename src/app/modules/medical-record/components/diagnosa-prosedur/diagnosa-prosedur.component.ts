@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AutoComplete } from 'primeng/autocomplete';
-import { RegistrasiService } from 'src/app/services/registrasi.service';
+import { RegistrasiService } from '../../../registrasi/services/registrasi.service';
 import { DiagnosaProsedurService } from './diagnosa-prosedur.service';
 
 @Component({
@@ -16,7 +16,6 @@ export class DiagnosaProsedurComponent implements OnInit {
     selectedData: any[] = [];
     filteredIcd10: any[] = [];
     now: Date = new Date();
-    registrasi: any = this.registrasiService.getLocalStorageReg();
 
     constructor(
         private diagnosaProsedurService: DiagnosaProsedurService,
@@ -30,9 +29,9 @@ export class DiagnosaProsedurComponent implements OnInit {
     }
 
     form = this.fb.group({
-        noreg: [this.registrasi.no_pendaftaran, Validators.required],
-        tanggal: [null, Validators.required],
-        icd: [null]
+        noreg: ['', Validators.required],
+        tanggal: ['', Validators.required],
+        icd: ['']
     })
 
     save() {

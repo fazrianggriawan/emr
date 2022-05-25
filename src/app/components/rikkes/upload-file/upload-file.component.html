@@ -1,0 +1,16 @@
+<div class="row">
+    <div class="col">
+        <p-fileUpload name="demo[]" url="./upload.php" (onUpload)="onUpload($event)"
+            [multiple]="true" chooseLabel="Pilih" [files]="uploadedFiles" (onSelect)="onSelect($event)" >
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+                <div class="rounded border bg-gray-100 tx-center p-5 tx-gray-500 mt-1">
+                    <h2 class="tx-gray-800"><i class="bi bi-cloud-upload-fill mr-2"></i> UPLOAD FILES</h2>
+                    <div class="tx-15">Pilih File atau Drag and Drop Di Sini.</div>
+                </div>
+            </ng-template>
+    </p-fileUpload>
+    </div>
+</div>

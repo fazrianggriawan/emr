@@ -1,34 +1,28 @@
-<p-dialog [visible]="true" header="Vclaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
+<p-dialog [(visible)]="dialogVclaim" (onShow)="getPesertaBpjs()" header="Bridging VClaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
     <app-vclaim></app-vclaim>
-    <!-- <ng-template pTemplate="footer">
-        <div class="clearfix">
-            <div class="float-right">
-                <button class="btn btn-sm btn-primary"><i class="bi bi-save mr-1"></i> Simpan</button>
-            </div>
-            <div class="float-right border-right border-secondary pr-2 mr-3">
-                <button class="btn btn-sm btn-outline-light"><i class="bi bi-trash mr-1"></i> Delete</button>
-                <button class="btn btn-sm btn-outline-light"><i class="bi bi-printer mr-1"></i> Print</button>
-            </div>
-        </div>
-    </ng-template> -->
 </p-dialog>
 
-<p-dialog [visible]="false" header="Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+<p-dialog [(visible)]="dialogDataPasien" header="Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
     <app-data-pasien></app-data-pasien>
-    <ng-template pTemplate="footer">
-    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogFormRawatJalan" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+    <app-form-rawat-jalan></app-form-rawat-jalan>
 </p-dialog>
 
 <div class="row pl-3 pr-3" style="margin-left: -14px; margin-right: -14px;">
     <div class="col p-3 bg-gray-500 mb-3">
         <div class="row">
             <div class="col-auto border-right border-light">
-                <button class="btn btn-sm btn-secondary mr-1" (click)="openDialogDataPasien()"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="openDialogDataPesertaBpjs()"><i class="bi bi-credit-card mr-1"></i> Vclaim BPJS</button>
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="dialogDataPasien = true"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
+                <!-- <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button> -->
+                <button class="btn btn-sm btn-secondary mr-1" (click)="submenuPendaftaran.toggle($event)"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button>
+                <p-menu #submenuPendaftaran [popup]="true" appendTo="body" [model]="menuPendaftaran"></p-menu>
+
                 <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
                 <!-- <p-menu #menu [popup]="true" appendTo="body" [model]="menuPrint"></p-menu> -->
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="form.reset()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
             </div>
             <div class="col-auto">
                 <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan Pasien Baru</button>

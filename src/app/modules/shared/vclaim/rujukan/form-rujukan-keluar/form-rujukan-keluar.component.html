@@ -1,0 +1,60 @@
+<div class="row mb-1">
+    <label class="col-4 col-form-label">Tgl. Rujukan <span ng-show="formRujukanBaru.tglRujukan.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-calendar appendTo="body" [showIcon]="true"></p-calendar>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">Tgl. Rencana Kunjungan <span ng-show="formRujukanBaru.tglRencanaKunjungan.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-calendar appendTo="body" [showIcon]="true"></p-calendar>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">Jns. Pelayanan <span ng-show="formRujukanBaru.jnsPelayanan.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-dropdown [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">No. SEP <span ng-show="formRujukanBaru.sep.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-dropdown [style]="{width: '100%'}" appendTo="body" styleClass="mb-1"></p-dropdown>
+        <input type="text" class="form-control" ng-model="rujukanBaru.noSep" placeholder="Ketikkan Manual No.SEP" >
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">Tipe Rujukan <span ng-show="formRujukanBaru.tipeRujukan.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-dropdown [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">Poliklinik / Spesialis <span ng-show="formRujukanBaru.poli.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-dropdown [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">PPK Tujuan <span ng-show="formRujukanBaru.ppk.$error.required || !rujukanBaru.ppk" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari..."></p-autoComplete>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">Diagnosa <span ng-show="formRujukanBaru.diagnosa.$error.required || !rujukanBaru.diagAwal" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari..."></p-autoComplete>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-4 col-form-label">Catatan <span ng-show="formRujukanBaru.catatan.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <input type="text" ng-model="rujukanBaru.catatan" class="form-control">
+    </div>
+</div>
+<div class="row mb-1 bg-gray-500 p-3 mt-3">
+    <div class="col tx-right">
+        <button class="btn btn-sm btn-primary"><i class="bi bi-save mr-1"></i> Simpan</button>
+    </div>
+</div>

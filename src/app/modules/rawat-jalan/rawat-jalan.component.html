@@ -1,4 +1,3 @@
-<app-vclaim></app-vclaim>
 <p-tabView>
     <p-tabPanel header="Registrasi" styleClass="p-0">
         <div class="row">
@@ -149,7 +148,6 @@
         </div>
     </p-tabPanel>
     <p-tabPanel header="Billing">
-        <app-form-billing></app-form-billing>
         <div class="row">
             <div class="col p-3 bg-gray-500 mb-2">
                 <div class="row">
@@ -330,5 +328,8 @@
             </div>
         </div>
     </p-tabPanel>
-
 </p-tabView>
+
+<p-dialog [(visible)]="dialogVclaim" header="Vclaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
+    <app-vclaim></app-vclaim>
+</p-dialog>

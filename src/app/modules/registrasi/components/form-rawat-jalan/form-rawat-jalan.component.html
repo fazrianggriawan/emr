@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col">
+        <form [formGroup]="formRawatJalan">
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Tanggal <span *ngIf="formRawatJalan.get('tanggal')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-calendar [showIcon]="true" appendTo="body" formControlName="tanggal"></p-calendar>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    RS <span *ngIf="formRawatJalan.get('rs')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="rs" optionLabel="name" optionValue="id" [autoDisplayFirst]="false" formControlName="rs" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Nama <span *ngIf="formRawatJalan.get('nama')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="nama" readonly>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Tgl. Lahir & Usia
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="tglLahir" readonly>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    No. RM <span *ngIf="formRawatJalan.get('norm')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="norm">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    No. Kartu BPJS / Asuransi <span *ngIf="formRawatJalan.get('noAsuransi')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="noAsuransi">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    NIK
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="nik">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col">
+        <form [formGroup]="formRawatJalan">
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    No. SEP <span *ngIf="formRawatJalan.get('nama')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <div class="input-group">
+                        <input type="text" class="form-control"  formControlName="noSep">
+                        <div class="input-group-append">
+                            <button class="btn btn-sm btn-secondary" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> Vclaim BPJS</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Poliklinik <span *ngIf="formRawatJalan.get('poliklinik')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="results" optionLabel="name" formControlName="poliklinik" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Dokter <span *ngIf="formRawatJalan.get('dokter')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="results" optionLabel="name" formControlName="dokter" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Jenis Pembayaran <span *ngIf="formRawatJalan.get('jnsPembayaran')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="results" optionLabel="name" formControlName="jnsPembayaran" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Catatan
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="catatan" formControlName="catatan">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    No. Registrasi
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="noreg"  formControlName="noreg" readonly>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-5 col-form-label">
+                    Status
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="status"  formControlName="status" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col bg-gray-500 p-3 mt-3 tx-right">
+        <button class="btn btn-sm btn-primary mr-1"><i class="bi bi-save mr-1"></i> Simpan</button>
+        <button class="btn btn-sm btn-primary mr-1"><i class="bi bi-save mr-1"></i> Update</button>
+    </div>
+</div>

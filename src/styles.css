@@ -45,7 +45,8 @@ legend {
     font-weight: 50me0;
 }
 
-.p-checkbox .p-checkbox-box, .p-radiobutton .p-radiobutton-box {
+.p-checkbox .p-checkbox-box,
+.p-radiobutton .p-radiobutton-box {
     width: 16px;
     height: 16px;
 }
@@ -136,4 +137,18 @@ div.clickable:hover {
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
     background-color: #f5f6fa;
+}
+
+.p-fileupload .p-fileupload-content {
+    padding: 0;
+    border: 0;
+}
+
+.p-fileupload .p-fileupload-buttonbar {
+    background: none;
+    border: 0;
+}
+
+.p-fileupload-row {
+    border-top: 1px solid #e3e3e3;
 }

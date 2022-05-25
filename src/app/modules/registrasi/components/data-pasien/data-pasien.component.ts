@@ -52,11 +52,10 @@ export class DataPasienComponent implements OnInit {
 
     public onSelectPasien() {
         this.dataPasienService.pasien.next(this.selectedPasien);
-        this.dataPasienService.sendToForm.next(true);
-        this.onHide()
+        this.closeDialog()
     }
 
-    public onHide() {
+    public closeDialog() {
         this.dataPasienService.dataPasien.next([]);
         this.dataPasienService.showDialog.next(false);
         this.form.reset();

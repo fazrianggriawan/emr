@@ -1,0 +1,106 @@
+<div class="row pt-3 pb-3">
+    <div class="col mb-2 clearfix">
+        <div class="float-left">
+            <button class="btn btn-sm btn-primary mr-1" (click)="formRujukanKeluarService.openDialog()"><i class="bi bi-plus-lg"></i> Form Rujukan Keluar</button>
+            <button class="btn btn-sm btn-secondary" (click)="getDataRujukan()"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+    </div>
+    <div class="w-100 border-bottom"></div>
+    <div class="col p-0">
+        <table class="table table-striped table-hover mb-3 border-bottom">
+            <thead>
+                <tr>
+                    <th colspan="6" class="tx-15 p-2">Puskesmas / PCare</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr class="bg-gray-300">
+                    <th>No. Rujukan</th>
+                    <th width="100">Tgl. Rujukan</th>
+                    <th>Jns. Pelayanan</th>
+                    <th>Spesialis</th>
+                    <th>PPK</th>
+                    <th>Diagnosa</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataRujukanFaskes">
+                <tr *ngFor="let item of dataRujukanFaskes.rujukan">
+                    <td><button class="btn btn-secondary btn-sm">{{item.noKunjungan}}</button></td>
+                    <td>{{item.tglKunjungan}}</td>
+                    <td>{{item.pelayanan.nama | uppercase}}</td>
+                    <td>{{item.poliRujukan.nama}}</td>
+                    <td>{{item.provPerujuk.nama}}</td>
+                    <td>{{item.diagnosa.kode}} - {{item.diagnosa.nama}}</td>
+                </tr>
+                <tr><td colspan="6" class="tx-center" *ngIf="dataRujukanFaskes.length === 0">Tidak ada saat ini.</td></tr>
+            </tbody>
+            <tfoot *ngIf="!dataRujukanFaskes">
+                <tr><td colspan="6" class="tx-center">Tidak ada saat ini.</td></tr>
+            </tfoot>
+        </table>
+        <table class="table table-striped table-hover mb-3 border-bottom">
+            <thead>
+                <tr>
+                    <th colspan="6" class="tx-15 p-2">Rumah Sakit</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr class="bg-gray-300">
+                    <th>No. Rujukan</th>
+                    <th width="100">Tgl. Rujukan</th>
+                    <th>Jns. Pelayanan</th>
+                    <th>Poliklinik / Spesialis</th>
+                    <th>PPK</th>
+                    <th>Diagnosa</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataRujukanRs">
+                <tr *ngFor="let item of dataRujukanRs.rujukan">
+                    <td>{{item.noKunjungan}}</td>
+                    <td>{{item.tglKunjungan}}</td>
+                    <td>{{item.pelayanan.nama | uppercase}}</td>
+                    <td>{{item.poliRujukan.nama}}</td>
+                    <td>{{item.provPerujuk.nama}}</td>
+                    <td>{{item.diagnosa.kode}} - {{item.diagnosa.nama}}</td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="!dataRujukanRs">
+                <tr><td colspan="6" class="tx-center">Tidak ada saat ini.</td></tr>
+            </tfoot>
+        </table>
+        <table class="table table-striped table-hover mb-3 border-bottom">
+            <thead>
+                <tr>
+                    <th colspan="6" class="tx-15 p-2">Rujukan Keluar</th>
+                </tr>
+            </thead>
+            <thead>
+                <tr class="bg-gray-300">
+                    <th>No. Rujukan</th>
+                    <th width="100">Tgl. Rujukan</th>
+                    <th>Jns. Pelayanan</th>
+                    <th>Spesialis</th>
+                    <th>PPK</th>
+                    <th>Diagnosa</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataRujukanKeluar">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="!dataRujukanKeluar">
+                <tr><td colspan="6" class="tx-center">Tidak ada saat ini.</td></tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<p-dialog header="Form Rujuk Keluar RS" [(visible)]="dialogFormRujukanKeluar" [style]="{width: '600px'}" appendTo="body" [modal]="true">
+    <app-form-rujukan-keluar></app-form-rujukan-keluar>
+</p-dialog>

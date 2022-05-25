@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NumpadRacikanService } from 'src/app/modules/shared/numpad-racikan/numpad-racikan.service';
-import { NumpadService } from 'src/app/modules/shared/numpad/numpad.service';
-import { FarmasiService } from 'src/app/services/farmasi.service';
+import { FarmasiService } from '../../../../farmasi/services/farmasi.service';
+import { NumpadRacikanService } from '../../../../shared/numpad-racikan/numpad-racikan.service';
 
 @Component({
     selector: 'app-form-obat',
@@ -22,7 +21,7 @@ export class FormObatComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private farmasiService: FarmasiService,
-        private numpadService: NumpadService,
+        private numpadService: NumpadRacikanService,
         private numpadRacikanService: NumpadRacikanService
     ) { }
 
@@ -30,7 +29,7 @@ export class FormObatComponent implements OnInit {
         this.initForm();
         this.getMasterDataSigna();
         this.farmasiService.selectedObat.subscribe(data => this.handleSelectedObat(data));
-        this.numpadService.number.subscribe(data => this.form.patchValue({ jumlah: data }));
+        this.numpadService.value.subscribe(data => this.form.patchValue({ jumlah: data }));
         this.numpadRacikanService.value.subscribe( data => this.form.patchValue({takaran : data}) )
         this.farmasiService.jenisResep.subscribe( data => this.handleJenisResep(data) );
     }

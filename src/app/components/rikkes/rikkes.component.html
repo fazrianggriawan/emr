@@ -1,14 +1,32 @@
+<p-dialog [(visible)]="dialogDataPeserta" (onHide)="dataPesertaService.closeDialog()" header="Data Peserta" [modal]="true" [draggable]="true" [style]="{width: '50%'}">
+    <app-data-peserta></app-data-peserta>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogUploadFile" (onHide)="uploadFileService.closeDialog()" header="Upload File / Photo" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+    <app-upload-file></app-upload-file>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogRadiologi" (onHide)="radiologiService.closeDialog()" header="Radiologi" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+    <app-radiologi></app-radiologi>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogLaboratorium" (onHide)="laboratoriumService.closeDialog()" header="Laboratorium" [modal]="true" [draggable]="true" [style]="{width: '600px'}">
+    <app-laboratorium></app-laboratorium>
+</p-dialog>
+
 <div class="row pl-3 pr-3" style="margin-left: -14px; margin-right: -14px;">
-    <div class="col p-3 bg-gray-500">
+    <div class="col p-3 bg-gray-400">
         <div class="row">
             <div class="col-auto border-right border-light">
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-file-earmark-person mr-1"></i> Data Peserta</button>
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="form?.reset()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="dataPesertaService.openDialog()"><i class="bi bi-file-earmark-person mr-1"></i> Data Peserta</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="uploadFileService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="radiologiService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-radioactive mr-1"></i> Radiologi</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="laboratoriumService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="initForm()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
             </div>
             <div class="col-auto">
-                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan</button>
-                <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
+                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid || !peserta.id" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan</button>
+                <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid || !peserta.id" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
             </div>
             <div class="col tx-right">
                 <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-trash mr-1"></i> Batal</button>
@@ -16,11 +34,32 @@
         </div>
     </div>
 </div>
-<div class="row m-0 bg-light p-3 mb-3">
-    <div class="col"> Nama : <h4>ALYA HIJRIANISA</h4> </div>
-    <div class="col"> Nomor Peserta : <h4>529 / 1-3-5-000267</h4> </div>
-    <div class="col"> Jenis Kelamin : <h4>PEREMPUAN</h4> </div>
-</div>
+    <div class="row m-0 bg-light p-3 mb-3">
+        <div class="col">
+            Nomor Peserta :
+            <div class="input-group">
+                <input type="text" class="form-control" [readOnly]="peserta.nama" placeholder="No. Urut" [(ngModel)]="peserta.noUrut" (keyup)="listenGetPeserta($event)">
+                <input type="text" class="form-control" placeholder="No. Peserta" [(ngModel)]="peserta.noPeserta" readonly>
+                <div class="input-group-append">
+                    <button class="btn btn-secondary" (click)="dataPesertaService.openDialog()"><i class="bi bi-search"></i></button>
+                </div>
+
+            </div>
+        </div>
+        <div class="col">
+            Nama :
+            <div>
+                <input type="text" class="form-control tx-uppercase" [(ngModel)]="peserta.nama" readonly>
+            </div>
+        </div>
+        <div class="col">
+            Jenis Kelamin :
+            <div>
+                <input type="text" class="form-control tx-uppercase" [(ngModel)]="peserta.jnsKelamin" readonly>
+            </div>
+        </div>
+    </div>
+
 <div class="row pl-3 pr-3 mb-5">
     <div class="col">
         <form [formGroup]="form">
@@ -402,11 +441,11 @@
             <textarea pInputTextarea [autoResize]="true" [style]="{width: '100%'}" formControlName="kesimpulan"></textarea>
 
             <div class="row mb-2">
-                <label class="col-auto col-form-label"> Rumus Lahir </label>
+                <label class="col-2 col-form-label"> Rumus Lahir </label>
                 <div class="col-8">
                     <table class="table border-bottom">
                         <tr>
-                            <td class="tx-center">U</td>
+                            <td class="tx-center pl-0">U</td>
                             <td class="tx-center">A</td>
                             <td class="tx-center">B</td>
                             <td class="tx-center">D</td>
@@ -415,7 +454,7 @@
                             <td class="tx-center">J</td>
                         </tr>
                         <tr>
-                            <td><input type="text" class="form-control" formControlName="rumusLahirU"></td>
+                            <td class="pl-0"><input type="text" class="form-control" formControlName="rumusLahirU"></td>
                             <td><input type="text" class="form-control" formControlName="rumusLahirA"></td>
                             <td><input type="text" class="form-control" formControlName="rumusLahirB"></td>
                             <td><input type="text" class="form-control" formControlName="rumusLahirD"></td>
@@ -428,16 +467,15 @@
             </div>
 
             <div class="row mb-2">
-                <label class="col-1 col-form-label"> Stakes </label>
-                <div class="col-4 pl-5">
-                    <div class="ml-2">
-                        <input type="text" class="form-control mb-2" formControlName="stakes">
-                    </div>
+                <label class="col-2 col-form-label"> Stakes </label>
+                <div class="col-4">
+                    <input type="text" class="form-control mb-2" formControlName="stakes">
                 </div>
             </div>
 
-            <div class="row bg-gray-500 p-3 mt-4">
-                <div class="col tx-center">
+            <div class="row mb-2">
+                <label class="col-2 col-form-label"> Hasil </label>
+                <div class="col-4">
                     <p-selectButton [options]="hasil" optionLabel="name"  formControlName="hasil">
                         <ng-template let-item>
                             <div class="p-2 tx-bold pl-5 pr-5">{{item.name}}</div>
@@ -446,5 +484,13 @@
                 </div>
             </div>
         </form>
+
+        <div class="row mb-2 mt-5 bg-gray-400 p-3 border-top mb-5">
+            <label class="col-2 col-form-label">&nbsp;</label>
+            <div class="col-4 pl-0">
+                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid || !peserta.id" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan</button>
+                <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid || !peserta.id" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
+            </div>
+        </div>
     </div>
 </div>

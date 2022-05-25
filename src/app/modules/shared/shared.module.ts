@@ -19,6 +19,14 @@ import { NumpadComponent } from 'src/app/modules/shared/numpad/numpad.component'
 import { NumpadRacikanComponent } from './numpad-racikan/numpad-racikan.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { FormSuratKontrolComponent } from './vclaim/surat-kontrol/form-surat-kontrol/form-surat-kontrol.component';
+import { FormPrbComponent } from './vclaim/prb/form-prb/form-prb.component';
+import { SuratKontrolComponent } from './vclaim/surat-kontrol/surat-kontrol.component';
+import { PrbComponent } from './vclaim/prb/prb.component';
+import { RujukanComponent } from './vclaim/rujukan/rujukan.component';
+import { HistoryComponent } from './vclaim/history/history.component';
+import { FormRujukanKeluarComponent } from './vclaim/rujukan/form-rujukan-keluar/form-rujukan-keluar.component';
+import { PulangSepComponent } from './vclaim/pulang-sep/pulang-sep.component';
 
 let primeModules = [
     DropdownModule,
@@ -35,18 +43,26 @@ let primeModules = [
     OverlayPanelModule,
     ProgressSpinnerModule,
     CheckboxModule,
-    ScrollPanelModule
+    ScrollPanelModule,
 ]
 
 let sharedComponent = [
     VclaimComponent,
     NumpadComponent,
-    NumpadRacikanComponent
+    NumpadRacikanComponent,
+    FormSuratKontrolComponent,
+    FormPrbComponent,
+    PrbComponent,
+    RujukanComponent,
+    HistoryComponent,
+    SuratKontrolComponent,
+    FormRujukanKeluarComponent,
 ]
 
 @NgModule({
     declarations: [
-        sharedComponent
+        sharedComponent,
+        PulangSepComponent
     ],
     imports: [
         primeModules,

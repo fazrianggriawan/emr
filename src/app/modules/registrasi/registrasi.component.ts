@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MenuItem } from 'primeng/api';
+import { VclaimService } from '../shared/vclaim/vclaim.service';
 import { DataPasienService } from './components/data-pasien/data-pasien.service';
-import { DataPesertaBpjsService } from './components/data-peserta-bpjs/data-peserta-bpjs.service';
 import { MasterService } from './services/master.service';
 import { RegistrasiService } from './services/registrasi.service';
-import { VclaimService } from './services/vclaim.service';
 
 @Component({
     selector: 'app-registrasi',
@@ -33,17 +33,21 @@ export class RegistrasiComponent implements OnInit {
     selectedPasien: any;
     dataPesertaBpjs: any;
     form!: FormGroup;
+    dialogVclaim: boolean = false;
+    dialogDataPasien: boolean = false;
+    dialogFormRawatJalan: boolean = false;
+    menuPendaftaran!: MenuItem[];
 
     constructor(
         private masterService: MasterService,
         private fb: FormBuilder,
-        private vclaimService: VclaimService,
-        private dataPesertaBpjsService: DataPesertaBpjsService,
-        private dataPasienService: DataPasienService,
-        private registrasiService: RegistrasiService
+        public dataPasienService: DataPasienService,
+        private registrasiService: RegistrasiService,
+        public vclaimService: VclaimService
     ) { }
 
     ngOnInit(): void {
+        this.initForm();
         this.masterService.rs.subscribe(data => this.rs = data)
         this.masterService.awalanNama.subscribe(data => this.awalanNama = data)
         this.masterService.negara.subscribe(data => this.negara = data)
@@ -61,55 +65,74 @@ export class RegistrasiComponent implements OnInit {
         this.masterService.groupPasien.subscribe(data => this.groupPasien = data)
         this.masterService.golonganPasien.subscribe(data => this.golonganPasien = data)
 
-        this.vclaimService.peserta.subscribe(data => this.dataPesertaBpjs = data);
-        this.vclaimService.sendToForm.subscribe(data => this.handleDataPeserta(data));
-        this.dataPasienService.pasien.subscribe(data => this.selectedPasien = data)
-        this.dataPasienService.sendToForm.subscribe(data => this.handleDataPasien(data))
+        this.dataPasienService.pasien.subscribe(data => this.setToForm(data))
+        this.dataPasienService.showDialog.subscribe( data => this.dialogDataPasien = data )
 
-        this.initForm();
+        this.vclaimService.dialog.subscribe( data => this.dialogVclaim = data )
+
+        this.menuPendaftaran = [
+            { label: 'Rawat Jalan', icon: 'bi bi-clipboard-pulse', command: (() => { this.openFormRawatJalan() }) },
+            { label: 'Rawat Inap', icon: 'bi bi-hospital' }
+        ]
+    }
+
+    public openFormRawatJalan() {
+        this.dialogFormRawatJalan = true;
+    }
+
+    public getPesertaBpjs() {
+        if( this.form.get('nomorAsuransi')?.value ){
+            this.vclaimService.getPesertaByNomorKartu( this.form.get('nomorAsuransi')?.value );
+        }else{
+            if( this.form.get('nik')?.value ){
+                this.vclaimService.getPesertaByNik( this.form.get('nik')?.value );
+            }
+        }
     }
 
     public handleDataPasien(data: boolean) {
         if (data) {
-            this.setToForm(this.selectedPasien);
+            this.setToForm(data);
         }
     }
 
     public setToForm(data: any) {
-        this.form.get('id')?.patchValue(data.id);
-        this.form.get('nomorRm')?.patchValue(data.norm);
-        this.form.get('rs')?.patchValue(data.rs);
-        this.form.get('awalanNama')?.patchValue(data.awalan);
-        this.form.get('nama')?.patchValue(data.nama);
-        this.form.get('tempatLahir')?.patchValue(data.tmpt_lahir);
-        this.form.get('jnsKelamin')?.patchValue(data.jns_kelamin);
-        this.form.get('alamat')?.patchValue(data.alamat);
-        this.form.get('negara')?.patchValue(data.negara);
-        this.form.get('provinsi')?.patchValue(data.provinsi);
-        this.form.get('kota')?.patchValue(data.kota);
-        this.form.get('kecamatan')?.patchValue(data.kecamatan);
-        this.form.get('kelurahan')?.patchValue(data.kelurahan);
-        this.form.get('suku')?.patchValue(data.suku);
-        this.form.get('statusNikah')?.patchValue(data.status_nikah);
-        this.form.get('agama')?.patchValue(data.agama);
-        this.form.get('tlpPasien')?.patchValue(data.tlp);
-        this.form.get('tlpKeluarga')?.patchValue(data.tlp_keluarga);
-        this.form.get('pekerjaan')?.patchValue(data.pekerjaan);
-        this.form.get('pendidikan')?.patchValue(data.pendidikan);
-        this.form.get('golonganDarah')?.patchValue(data.gol_darah);
-        this.form.get('nik')?.patchValue(data.nik);
-        this.form.get('nrpNip')?.patchValue(data.nrp_nip);
-        this.form.get('angkatan')?.patchValue(data.angkatan);
-        this.form.get('pangkat')?.patchValue(data.pangkat);
-        this.form.get('kesatuan')?.patchValue(data.kesatuan);
-        this.form.get('jabatan')?.patchValue(data.jabatan);
-        this.form.get('groupPasien')?.patchValue(data.group_pasien);
-        this.form.get('golonganPasien')?.patchValue(data.gol_pasien);
-        this.form.get('nomorAsuransi')?.patchValue(data.no_asuransi);
+        if( data ) {
+            this.form.get('id')?.patchValue(data.id);
+            this.form.get('nomorRm')?.patchValue(data.norm);
+            this.form.get('rs')?.patchValue(data.rs);
+            this.form.get('awalanNama')?.patchValue(data.awalan);
+            this.form.get('nama')?.patchValue(data.nama);
+            this.form.get('tempatLahir')?.patchValue(data.tmpt_lahir);
+            this.form.get('jnsKelamin')?.patchValue(data.jns_kelamin);
+            this.form.get('alamat')?.patchValue(data.alamat);
+            this.form.get('negara')?.patchValue(data.negara);
+            this.form.get('provinsi')?.patchValue(data.provinsi);
+            this.form.get('kota')?.patchValue(data.kota);
+            this.form.get('kecamatan')?.patchValue(data.kecamatan);
+            this.form.get('kelurahan')?.patchValue(data.kelurahan);
+            this.form.get('suku')?.patchValue(data.suku);
+            this.form.get('statusNikah')?.patchValue(data.status_nikah);
+            this.form.get('agama')?.patchValue(data.agama);
+            this.form.get('tlpPasien')?.patchValue(data.tlp);
+            this.form.get('tlpKeluarga')?.patchValue(data.tlp_keluarga);
+            this.form.get('pekerjaan')?.patchValue(data.pekerjaan);
+            this.form.get('pendidikan')?.patchValue(data.pendidikan);
+            this.form.get('golonganDarah')?.patchValue(data.gol_darah);
+            this.form.get('nik')?.patchValue(data.nik);
+            this.form.get('nrpNip')?.patchValue(data.nrp_nip);
+            this.form.get('angkatan')?.patchValue(data.angkatan);
+            this.form.get('pangkat')?.patchValue(data.pangkat);
+            this.form.get('kesatuan')?.patchValue(data.kesatuan);
+            this.form.get('jabatan')?.patchValue(data.jabatan);
+            this.form.get('groupPasien')?.patchValue(data.group_pasien);
+            this.form.get('golonganPasien')?.patchValue(data.gol_pasien);
+            this.form.get('nomorAsuransi')?.patchValue(data.no_asuransi);
 
-        if (data.tgl_lahir) {
-            let tglLahir = new Date(data.tgl_lahir);
-            this.form.get('tglLahir')?.patchValue(tglLahir);
+            if (data.tgl_lahir) {
+                let tglLahir = new Date(data.tgl_lahir);
+                this.form.get('tglLahir')?.patchValue(tglLahir);
+            }
         }
 
     }
@@ -179,14 +202,6 @@ export class RegistrasiComponent implements OnInit {
 
     public getGolonganPasien(groupPasien: string) {
         this.masterService.getGolonganPasien(groupPasien);
-    }
-
-    public openDialogDataPesertaBpjs() {
-        this.dataPesertaBpjsService.showDialog.next(true);
-    }
-
-    public openDialogDataPasien() {
-        this.dataPasienService.showDialog.next(true);
     }
 
     public save() {

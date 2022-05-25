@@ -9,11 +9,22 @@ import { CommonModule, DatePipe, HashLocationStrategy, LocationStrategy } from '
 import { UserComponent } from './templates/user/user.component';
 import { CalendarComponent } from './templates/calendar/calendar.component';
 import { MenuComponent } from './templates/menu/menu.component';
-import { MenuEmrComponent } from "./components/tpl/menu-emr/menu-emr.component";
-
-import { LoginComponent } from './components/login/login.component';
+import { MenuEmrComponent } from "./templates/menu-emr/menu-emr.component";
+import { LoginComponent } from './templates/login/login.component';
 import { DEFAULT_TIMEOUT, HttpProvider } from './providers/http.interceptor';
+import { MenuModule } from 'primeng/menu';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { DataPesertaComponent } from './components/rikkes/data-peserta/data-peserta.component';
+import { UploadFileComponent } from './components/rikkes/upload-file/upload-file.component';
+import { RikkesComponent } from './components/rikkes/rikkes.component';
 import { SharedModule } from './modules/shared/shared.module';
+import { FileUploadModule } from 'primeng/fileupload';
+import { RadiologiComponent } from './components/rikkes/radiologi/radiologi.component';
+import { LaboratoriumComponent } from './components/rikkes/laboratorium/laboratorium.component';
+
 
 @NgModule({
     declarations: [
@@ -22,7 +33,12 @@ import { SharedModule } from './modules/shared/shared.module';
         MenuEmrComponent,
         CalendarComponent,
         MenuComponent,
-        LoginComponent
+        LoginComponent,
+        RikkesComponent,
+        DataPesertaComponent,
+        UploadFileComponent,
+        RadiologiComponent,
+        LaboratoriumComponent
     ],
     imports: [
         CommonModule,
@@ -31,6 +47,13 @@ import { SharedModule } from './modules/shared/shared.module';
         HttpClientModule,
         BrowserAnimationsModule,
         DicomViewerModule,
+        MenuModule,
+        OverlayPanelModule,
+        DropdownModule,
+        FormsModule,
+        ReactiveFormsModule,
+        ProgressSpinnerModule,
+        FileUploadModule,
         SharedModule
     ],
     providers: [

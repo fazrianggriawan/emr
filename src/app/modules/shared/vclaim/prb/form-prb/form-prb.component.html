@@ -1,0 +1,75 @@
+<div class="row mb-1">
+    <label class="col-2 col-form-label">SEP Rawat Jalan  <span ng-show="formPrb.sep.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-dropdown appendTo="body" [style]="{width: '100%'}"></p-dropdown>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-2 col-form-label">Program PRB  <span ng-show="formPrb.programPrb.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-dropdown appendTo="body" [style]="{width: '100%'}"></p-dropdown>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-2 col-form-label">Dokter / DPJP  <span ng-show="formPrb.dokter.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <p-dropdown appendTo="body" [style]="{width: '100%'}"></p-dropdown>
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-2 col-form-label">Keterangan  <span ng-show="formPrb.keterangan.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <input type="text" name="keterangan" class="form-control">
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-2 col-form-label">Saran  <span ng-show="formPrb.saran.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <input type="text" name="saran" class="form-control">
+    </div>
+</div>
+<div class="row mb-1">
+    <label class="col-2 col-form-label">Email  <span ng-show="formPrb.email.$error.required" class="fontello-icon-attention-circle error"></span></label>
+    <div class="col">
+        <input type="text" name="email" class="form-control">
+    </div>
+</div>
+<hr>
+<div class="row mb-1">
+    <div class="col">
+        <div class="tx-16 tx-semibold">Obat-Obatan</div>
+        <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari Nama Obat..."></p-autoComplete>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nama Obat</th>
+                    <th>Signa 1</th>
+                    <th>Signa 2</th>
+                    <th width="100">Jumlah</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataObat">
+                    <td>{{item.obat.nama}}</td>
+                    <td><input type="text" class="input-block-level" ng-model="dataObatPrb[$index].signa1"></td>
+                    <td><input type="text" class="input-block-level" ng-model="dataObatPrb[$index].signa2"></td>
+                    <td><input type="text" class="input-block-level" ng-model="dataObatPrb[$index].jumlah"></td>
+                    <td align="center">
+                        <button class="btn btn-sm btn-secondary"><i class="bi bi-trash mr-1"></i> Hapus</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="dataObat.length < 1">
+                <tr>
+                    <td colspan="5" class="text-center">Tidak Ada Obat</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row bg-gray-500 p-3">
+    <div class="col tx-right">
+        <button class="btn btn-sm btn-primary"><i class="bi bi-save mr-1"></i> Simpan</button>
+    </div>
+</div>

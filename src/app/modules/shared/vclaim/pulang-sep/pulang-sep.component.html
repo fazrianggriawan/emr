@@ -1,0 +1,47 @@
+<div class="row pt-3 pb-3">
+    <div class="col mb-2 clearfix">
+        <div class="float-left">
+            Nomor SEP :
+        </div>
+        <div class="float-left ml-3">
+            <div class="input-group">
+                <input type="text" class="form-control">
+                <div class="input-group-append">
+                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-100 border-bottom"></div>
+    <div class="col p-0">
+        <table class="table table-striped table-hover border-bottom">
+            <thead>
+                <tr class="bg-gray-300">
+                    <th>SEP</th>
+                    <th>Tgl. SEP</th>
+                    <th>Tgl. Pulang</th>
+                    <th>Jns. Pelayanan</th>
+                    <th>Poli / Ruangan</th>
+                    <th>No. Rujukan</th>
+                    <th>PPK</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataSep">
+                <tr *ngFor="let item of dataSep">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="!dataSep">
+                <tr>
+                    <td colspan="7" class="tx-center">Tidak ada data saat ini.</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

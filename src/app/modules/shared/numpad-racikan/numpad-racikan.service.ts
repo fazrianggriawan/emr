@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class NumpadRacikanService {
 
     value = new BehaviorSubject<string>('');
+    event = new BehaviorSubject<boolean>(false);
 
     constructor() { }
 

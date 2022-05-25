@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" (click)="setActiveMenu($event)" routerLink="rikkes"><i class="bi bi-file-earmark-plus"></i>&nbsp; Rikkes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setActiveMenu($event)" routerLink="registrasi"><i class="bi bi-file-earmark-person"></i>&nbsp; Admisi & Pendaftaran</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setActiveMenu($event)" routerLink="medical_record"><i class="bi bi-file-earmark-text"></i>&nbsp; Medical Record</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setActiveMenu($event)" routerLink=""><i class="bi bi-clock-history"></i>&nbsp; Timeline</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setActiveMenu($event)" routerLink="rawatJalan"><i class="bi bi-clipboard-pulse"></i>&nbsp; Rawat Jalan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setActiveMenu($event)" routerLink=""><i class="bi bi-hospital"></i>&nbsp; Rawat Inap</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="setActiveMenu($event)" routerLink=""><i class="bi bi-cash-coin"></i>&nbsp; Kasir</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- <div class="pt-2">
+    <p-menubar [model]="subMenu"></p-menubar>
+</div> -->
+<!-- <hr class="m-0 p-0"> -->
+
+<!-- <div class="p-p-2 bd-b">
+    <input class="form-control" pInputText [(ngModel)]="term" placeholder="Search Menu...">
+</div>
+<div class="pd-10" *ngFor="let item of items">
+    <label class="tx-sans tx-uppercase tx-medium tx-10 tx-spacing-1 tx-color-03 pd-l-10">{{item.label}}</label>
+    <nav class="nav nav-sidebar">
+        <a class="nav-link" [routerLink]="[ item2.link ]"
+            *ngFor="let item2 of item.items | filter:term"><span>{{item2.label}}</span></a>
+    </nav>
+</div> -->

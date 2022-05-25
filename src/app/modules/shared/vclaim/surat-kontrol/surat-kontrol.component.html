@@ -1,0 +1,49 @@
+<div class="row pt-3 pb-3">
+    <div class="col mb-2 clearfix">
+        <div class="float-left">
+            <button class="btn btn-sm btn-primary mr-1" (click)="formSuratKontrolService.openDialog()"><i class="bi bi-plus-lg"></i> Data Baru</button>
+            <button class="btn btn-sm btn-secondary" (click)="getDataSuratKontrol()"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+        <div class="float-left ml-3 pl-3 border-left">
+            Bulan : <p-calendar (ngModelChange)="getDataSuratKontrol()" [(ngModel)]="filter.from" view="month" dateFormat="M yy" appendTo="body" [style]="{width:'120px'}" [readonlyInput]="true"></p-calendar>
+        </div>
+    </div>
+    <div class="w-100 border-bottom"></div>
+    <div class="col p-0">
+        <table class="table table-striped table-hover border-bottom">
+            <thead>
+                <tr class="bg-gray-300">
+                    <th>No. Surat Kontrol</th>
+                    <th>SEP Asal</th>
+                    <th>Jns. Pelayanan</th>
+                    <th>Poli Asal</th>
+                    <th>Poli Tujuan</th>
+                    <th>Dokter</th>
+                    <th width="100">Tgl. Terbit</th>
+                    <th width="100">Tgl. Kontrol</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataSuratKontrol">
+                <tr *ngFor="let item of dataSuratKontrol.list">
+                    <td><button class="btn btn-secondary btn-sm">{{item.noSuratKontrol}}</button></td>
+                    <td>{{item.noSepAsalKontrol}}</td>
+                    <td>{{item.jnsPelayanan | uppercase}}</td>
+                    <td>{{item.namaPoliAsal}}</td>
+                    <td>{{item.namaPoliTujuan}}</td>
+                    <td>{{item.namaDokter}}</td>
+                    <td>{{item.tglTerbitKontrol}}</td>
+                    <td>{{item.tglRencanaKontrol}}</td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="!dataSuratKontrol">
+                <tr>
+                    <td colspan="8" class="tx-center">Tidak ada data saat ini.</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<p-dialog header="Form Surat Kontrol" [(visible)]="dialogFormSuratKontrol" [style]="{width: '600px'}" appendTo="body" [modal]="true">
+    <app-form-surat-kontrol></app-form-surat-kontrol>
+</p-dialog>

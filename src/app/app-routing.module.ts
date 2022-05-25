@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
+import { RikkesComponent } from './components/rikkes/rikkes.component';
+import { LoginComponent } from './templates/login/login.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
+    { path: 'rikkes', component: RikkesComponent },
     { path: 'medical_record', loadChildren: () => import('./modules/medical-record/medical-record.module').then(m => m.MedicalRecordModule) },
     { path: 'registrasi', loadChildren: () => import('./modules/registrasi/registrasi.module').then(m => m.RegistrasiModule) },
-    { path: 'rawatJalan', loadChildren: () => import('./modules/rawat-jalan/rawat-jalan.module').then(m => m.RawatJalanModule) }
+    { path: 'rawatJalan', loadChildren: () => import('./modules/rawat-jalan/rawat-jalan.module').then(m => m.RawatJalanModule) },
+    { path: 'kasir', loadChildren: () => import('./modules/kasir/kasir.module').then(m => m.KasirModule) },
+    { path: 'farmasi', loadChildren: () => import('./modules/farmasi/farmasi.module').then(m => m.FarmasiModule) }
     // { path: 'subjective', component: SubjectiveComponent },
     // { path: 'diagnosa_prosedur', component: DiagnosaComponent },
     // { path: 'plan', component: PlanComponent },

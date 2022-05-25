@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 // Hide progress spinner or progress bar
-                console.log(event.url);
+                // console.log(event.url);
             }
         })
     }

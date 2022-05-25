@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
-import { BillingService } from 'src/app/components/dialog/billing/billing.service';
+import { BillingService } from '../kasir/components/billing/billing.service';
 import { MasterService } from '../registrasi/services/master.service';
 
 @Component({
@@ -19,6 +19,8 @@ export class RawatJalanComponent implements OnInit {
     tarif: any[] = [];
     categoryTarif: any[] = [];
     rs: any[] = [];
+
+    dialogVclaim: boolean = false;
 
     constructor(
         private fb: FormBuilder,

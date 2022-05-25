@@ -1,0 +1,52 @@
+<div class="row pt-3 pb-3">
+    <div class="col mb-2 clearfix">
+        <div class="float-left">
+            <button class="btn btn-sm btn-secondary" (click)="getDataHistory()"><i class="bi bi-arrow-clockwise"></i></button>
+        </div>
+        <div class="float-left ml-3 pl-3 border-left">
+            Dari : <p-calendar [(ngModel)]="filter.from" (ngModelChange)="getDataHistory()" dateFormat="d M yy" [readonlyInput]="true" [maxDate]="today" appendTo="body" [style]="{width:'120px'}" styleClass="mr-2"></p-calendar>
+            Sampai : <p-calendar [(ngModel)]="filter.to" (ngModelChange)="getDataHistory()" dateFormat="d M yy" [readonlyInput]="true" [maxDate]="today" appendTo="body" [style]="{width:'120px'}"></p-calendar>
+        </div>
+    </div>
+    <div class="w-100 border-bottom"></div>
+    <div class="col p-0">
+        <table class="table table-striped table-hover border-bottom">
+            <thead>
+                <tr class="bg-gray-300">
+                    <th>No. SEP</th>
+                    <th>Jns. Pelayanan</th>
+                    <th>Poli / Ruangan</th>
+                    <th>PPK</th>
+                    <th>No. Rujukan</th>
+                    <th width="100">Tgl. SEP</th>
+                    <th width="100">Tgl. Pulang</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="dataHistory">
+                <tr *ngFor="let item of dataHistory.histori">
+                    <td>{{item.noSep}}</td>
+                    <td>
+                        <span *ngIf="item.jnsPelayanan === '1'">RAWAT INAP</span>
+                        <span *ngIf="item.jnsPelayanan === '2'">RAWAT JALAN</span>
+                    </td>
+                    <td>
+                        <span *ngIf="item.poli">{{item.poli}}</span>
+                        <span *ngIf="!item.poli">-</span>
+                    </td>
+                    <td>{{item.ppkPelayanan}}</td>
+                    <td>{{item.noRujukan}}</td>
+                    <td>{{item.tglSep}}</td>
+                    <td>
+                        {{item.tglPlgSep}}
+                        <button class="btn btn-xs btn-outline-primary p-1" *ngIf="!item.tglPlgSep">Form Pulang</button>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot *ngIf="!dataHistory">
+                <tr>
+                    <td colspan="7" class="tx-center">Tidak ada data saat ini.</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>

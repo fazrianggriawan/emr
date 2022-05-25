@@ -1,0 +1,32 @@
+<form name="formSuratKontrol">
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">Tanggal <span ng-show="tgl.$error.required" class="fontello-icon-attention-circle error"></span></label>
+        <div class="col">
+            <p-calendar appendTo="body" [showIcon]="true"></p-calendar>
+        </div>
+    </div>
+    <div class="row mb-1" ng-show="jnsPelayanan=='kontrolKembali'">
+        <label class="col-4 col-form-label">No. SEP Sebelumnya  <span ng-show="formSuratKontrol.sep.$error.required" class="fontello-icon-attention-circle error"></span></label>
+        <div class="col">
+            <p-dropdown appendTo="body" [style]="{width: '100%'}" styleClass="mb-1"></p-dropdown>
+            <input type="text" placeholder="Ketikkan Manual No.SEP" class="form-control" ng-required="jnsPelayanan=='kontrolKembali'" >
+        </div>
+    </div>
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">Poliklinik Asal Rujukan <span ng-show="formSuratKontrol.poli.$error.required" class="fontello-icon-attention-circle error"></span></label>
+        <div class="col">
+            <p-dropdown appendTo="body" [style]="{width: '100%'}"></p-dropdown>
+        </div>
+    </div>
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">Dokter / DPJP  <span ng-show="formSuratKontrol.dokter.$error.required" class="fontello-icon-attention-circle error"></span></label>
+        <div class="col">
+            <p-dropdown appendTo="body" [style]="{width: '100%'}"></p-dropdown>
+        </div>
+    </div>
+    <div class="row mb-1 bg-gray-500 p-3 mt-3">
+        <div class="col tx-right">
+            <button class="btn btn-sm btn-primary"><i class="bi bi-save mr-1"></i> Simpan</button>
+        </div>
+    </div>
+</form>
