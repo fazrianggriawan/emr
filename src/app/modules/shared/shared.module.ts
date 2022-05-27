@@ -27,6 +27,8 @@ import { RujukanComponent } from './vclaim/rujukan/rujukan.component';
 import { HistoryComponent } from './vclaim/history/history.component';
 import { FormRujukanKeluarComponent } from './vclaim/rujukan/form-rujukan-keluar/form-rujukan-keluar.component';
 import { PulangSepComponent } from './vclaim/pulang-sep/pulang-sep.component';
+import { ProgressBarModule } from 'primeng/progressbar';
+
 
 let primeModules = [
     DropdownModule,
@@ -44,6 +46,7 @@ let primeModules = [
     ProgressSpinnerModule,
     CheckboxModule,
     ScrollPanelModule,
+    ProgressBarModule
 ]
 
 let sharedComponent = [
