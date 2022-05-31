@@ -152,3 +152,7 @@ div.clickable:hover {
 .p-fileupload-row {
     border-top: 1px solid #e3e3e3;
 }
+
+.p-image-toolbar{
+    z-index: 9999;
+}

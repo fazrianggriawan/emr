@@ -8,13 +8,25 @@ import { config } from 'src/app/config';
 })
 export class RikkesService {
 
+    dataRikkes = new BehaviorSubject<any>('');
+    saveStatus = new BehaviorSubject<boolean>(false);
+
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
     ) { }
 
     public save(data: any) {
-        this.http.post<any>( config.api_url('rikkes/save'), data )
-            .subscribe(data => console.log(data))
+        this.http.post<any>(config.api_url('rikkes/save'), data)
+            .subscribe(data => {
+                if( data.code == 200 ) {
+                    this.saveStatus.next(true)
+                }
+            })
+    }
+
+    public getDataRikkes(idPeserta: any) {
+        this.http.get<any>(config.api_url('rikkes/getData/idPeserta/'+idPeserta))
+            .subscribe(data => this.dataRikkes.next(data.data))
     }
 
 }

@@ -18,6 +18,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { NumpadComponent } from 'src/app/modules/shared/numpad/numpad.component';
 import { NumpadRacikanComponent } from './numpad-racikan/numpad-racikan.component';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ToastModule } from 'primeng/toast';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { FormSuratKontrolComponent } from './vclaim/surat-kontrol/form-surat-kontrol/form-surat-kontrol.component';
 import { FormPrbComponent } from './vclaim/prb/form-prb/form-prb.component';
@@ -28,6 +29,9 @@ import { HistoryComponent } from './vclaim/history/history.component';
 import { FormRujukanKeluarComponent } from './vclaim/rujukan/form-rujukan-keluar/form-rujukan-keluar.component';
 import { PulangSepComponent } from './vclaim/pulang-sep/pulang-sep.component';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ImageModule } from 'primeng/image';
+
+
 
 
 let primeModules = [
@@ -46,7 +50,9 @@ let primeModules = [
     ProgressSpinnerModule,
     CheckboxModule,
     ScrollPanelModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ToastModule,
+    ImageModule
 ]
 
 let sharedComponent = [

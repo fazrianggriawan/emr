@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="dialogDataPeserta" (onHide)="dataPesertaService.closeDialog()" header="Data Peserta" [modal]="true" [draggable]="true" [style]="{width: '50%'}">
+<p-dialog [(visible)]="dialogDataPeserta" (onHide)="dataPesertaService.closeDialog()" header="Data Peserta" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
     <app-data-peserta></app-data-peserta>
 </p-dialog>
 
@@ -6,66 +6,87 @@
     <app-upload-file></app-upload-file>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogRadiologi" (onHide)="radiologiService.closeDialog()" header="Radiologi" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
-    <app-radiologi></app-radiologi>
-</p-dialog>
-
 <p-dialog [(visible)]="dialogLaboratorium" (onHide)="laboratoriumService.closeDialog()" header="Laboratorium" [modal]="true" [draggable]="true" [style]="{width: '600px'}">
     <app-laboratorium></app-laboratorium>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogPrintSticker" header="Print Sticker Peserta" [modal]="true" [draggable]="true" [style]="{width: '50%'}">
+    <div class="row mb-3 pb-3 border-bottom">
+        <div class="col-4">Nama : <input type="text" class="form-control" [ngModel]="peserta.nama | uppercase"></div>
+        <div class="col-2">No.Urut : <input type="text" class="form-control" [ngModel]="peserta.noUrut"></div>
+        <div class="col-2">No.Peserta :<input type="text" class="form-control" [ngModel]="peserta.noPeserta"></div>
+        <div class="col-2">Jns.Kelamin :<input type="text" class="form-control" [ngModel]="peserta.jnsKelamin | uppercase"></div>
+        <div class="col-2">
+            <br>
+            <button class="btn btn-primary" [disabled]="!peserta.noUrut" (click)="printSticker()"><i class="bi bi-printer mr-1"></i> Print</button>
+        </div>
+    </div>
+    <h4>Print Sticker Berdasarkan Rentang No.Urut</h4>
+    <div class="row mt-0">
+        <div class="col-auto">
+            <input type="text" class="form-control" [(ngModel)]="printNoUrut.dari" placeholder="No.Urut Dari" maxlength="5">
+        </div>
+        <div class="col-auto">
+            <input type="text" class="form-control" [(ngModel)]="printNoUrut.sampai" placeholder="No.Urut Sampai" maxlength="5">
+        </div>
+        <div class="col">
+            <button class="btn btn-primary" [disabled]="!printNoUrut.dari || !printNoUrut.sampai" (click)="printStickerPesertaRange()"><i class="bi bi-printer mr-1"></i> Print</button>
+        </div>
+    </div>
 </p-dialog>
 
 <div class="row pl-3 pr-3" style="margin-left: -14px; margin-right: -14px;">
     <div class="col p-3 bg-gray-400">
         <div class="row">
-            <div class="col-auto border-right border-light">
-                <button class="btn btn-sm btn-secondary mr-1" (click)="dataPesertaService.openDialog()"><i class="bi bi-file-earmark-person mr-1"></i> Data Peserta</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="uploadFileService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="radiologiService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-radioactive mr-1"></i> Radiologi</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="laboratoriumService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="initForm()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
-            </div>
             <div class="col-auto">
-                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid || !peserta.id" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan</button>
-                <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid || !peserta.id" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
-            </div>
-            <div class="col tx-right">
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-trash mr-1"></i> Batal</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="dataPesertaService.openDialog()"><i class="bi bi-file-earmark-person mr-1"></i> Data Peserta</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="uploadFileService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="laboratoriumService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="dialogPrintSticker = true"><i class="bi bi-printer mr-1"></i> Print Sticker</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="exportExcel()"><i class="bi bi-file-earmark-ruled mr-1"></i> Export XSL</button>
+                <button class="btn btn-sm btn-secondary mr-5 mb-1" (click)="initForm()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
             </div>
         </div>
     </div>
 </div>
-    <div class="row m-0 bg-light p-3 mb-3">
-        <div class="col">
-            Nomor Peserta :
-            <div class="input-group">
-                <input type="text" class="form-control" [readOnly]="peserta.nama" placeholder="No. Urut" [(ngModel)]="peserta.noUrut" (keyup)="listenGetPeserta($event)">
-                <input type="text" class="form-control" placeholder="No. Peserta" [(ngModel)]="peserta.noPeserta" readonly>
-                <div class="input-group-append">
-                    <button class="btn btn-secondary" (click)="dataPesertaService.openDialog()"><i class="bi bi-search"></i></button>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            Nama :
-            <div>
-                <input type="text" class="form-control tx-uppercase" [(ngModel)]="peserta.nama" readonly>
-            </div>
-        </div>
-        <div class="col">
-            Jenis Kelamin :
-            <div>
-                <input type="text" class="form-control tx-uppercase" [(ngModel)]="peserta.jnsKelamin" readonly>
+<div class="row m-0 bg-light p-3 mb-3">
+    <div class="col-md-4 col-sm-6">
+        Nomor Peserta :
+        <div class="input-group">
+            <input type="text" class="form-control" (click)="clearForm()" [readOnly]="peserta.nama" placeholder="No. Urut" [(ngModel)]="peserta.noUrut" (keyup)="listenGetPeserta($event)">
+            <input type="text" class="form-control" placeholder="No. Peserta" [(ngModel)]="peserta.noPeserta" readonly>
+            <div class="input-group-append">
+                <button class="btn btn-secondary" (click)="getPeserta()"><i class="bi bi-search"></i></button>
             </div>
         </div>
     </div>
+    <div class="col-md-4 col-sm-6">
+        Nama :
+        <div>
+            <input type="text" class="form-control tx-uppercase" [(ngModel)]="peserta.nama" readonly>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        Tgl. Lahir :
+        <div>
+            <input type="text" class="form-control tx-uppercase" [(ngModel)]="peserta.tglLahir" readonly>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-6">
+        Jenis Kelamin :
+        <div>
+            <input type="text" class="form-control tx-uppercase" [(ngModel)]="peserta.jnsKelamin" readonly>
+        </div>
+    </div>
+</div>
 
-<div class="row pl-3 pr-3 mb-5">
-    <div class="col">
+<div class="row pl-3 pr-3 mb-3">
+    <div class="col-md-6 col-sm-12">
         <form [formGroup]="form">
             <div class="row mb-2">
                 <label class="col-3 col-form-label"> Anamnese </label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="anamnese">
+                    <input type="text" class="form-control" formControlName="anamnesa">
                 </div>
             </div>
             <div class="row mb-2">
@@ -143,28 +164,27 @@
                     <input type="text" class="form-control" formControlName="leher">
                 </div>
             </div>
-
-            <h4 class="mt-4 bg-gray-100 p-3">MATA</h4>
+            <hr>
             <div class="row mb-2">
+                <label class="col-3 col-form-label"> Mata </label>
                 <div class="col">
-                    <table class="table">
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td class="tx-center">Visus Awal</td>
-                            <td class="tx-center">Lensa Koreksi</td>
-                            <td class="tx-center">Visus Koreksi</td>
-                        </tr>
+                    <input type="text" class="form-control" formControlName="mata">
+                </div>
+                <div class="w-100"></div>
+                <label class="col-3"></label>
+                <div class="col mt-2">
+                    <table class="table border-bottom">
                         <tr>
                             <td>O.D</td>
-                            <td><input type="text" class="form-control" formControlName="odVisusAwal"></td>
-                            <td><input type="text" class="form-control" formControlName="odLensaKoreksi"></td>
-                            <td><input type="text" class="form-control" formControlName="odVisusKoreksi"></td>
+                            <td><input type="text" class="form-control" formControlName="od1"></td>
+                            <td><input type="text" class="form-control" formControlName="od2"></td>
+                            <td class="pr-0"><input type="text" class="form-control" formControlName="od3"></td>
                         </tr>
                         <tr>
                             <td>O.S</td>
-                            <td><input type="text" class="form-control" formControlName="osVisusAwal"></td>
-                            <td><input type="text" class="form-control" formControlName="osLensaKoreksi"></td>
-                            <td><input type="text" class="form-control" formControlName="osVisusKoreksi"></td>
+                            <td><input type="text" class="form-control" formControlName="os1"></td>
+                            <td><input type="text" class="form-control" formControlName="os2"></td>
+                            <td class="pr-0"><input type="text" class="form-control" formControlName="os3"></td>
                         </tr>
                     </table>
 
@@ -180,14 +200,24 @@
                     </div>
                 </div>
             </div>
-
-            <h4 class="mt-4 bg-gray-100 p-3">TELINGA</h4>
-
-            <div class="row mb-2 pl-3">
-                <div class="col-auto">AD</div>
-                <div class="col"><input type="text" class="form-control" formControlName="ad"></div>
-                <div class="col-auto">AS</div>
-                <div class="col"><input type="text" class="form-control" formControlName="as"></div>
+            <hr>
+            <div class="row mb-2">
+                <label class="col-auto col-form-label"> Telinga </label>
+                <div class="col">
+                    <div class="input-group">
+                        <input type="text" class="form-control" formControlName="telinga">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">AD</span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="ad">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">AS</span>
+                          </div>
+                          <input type="text" class="form-control" formControlName="as">
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-2">
                 <div class="w-100 mb-2"></div>
                 <div class="col-4">Tajam Pend.</div>
                 <div class="col"><input type="text" class="form-control" formControlName="tajamPend"></div>
@@ -198,11 +228,7 @@
                 <div class="col-4">Peny. Tel</div>
                 <div class="col"><input type="text" class="form-control" formControlName="penyTel"></div>
             </div>
-
-        </form>
-    </div>
-    <div class="col">
-        <form [formGroup]="form">
+            <hr>
             <div class="row mb-2">
                 <label class="col-4 col-form-label"> Hidung </label>
                 <div class="col">
@@ -216,9 +242,129 @@
                     <input type="text" class="form-control" formControlName="tenggorokan">
                 </div>
             </div>
-
+            <hr>
             <div class="row mb-2">
-                <label class="col-4 col-form-label"> Thorax </label>
+                <label class="col-4 col-form-label"> Gigi - Mulut </label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="gigiMulut">
+                </div>
+                <div class="w-100 mt-2 mb-1"></div>
+                <div class="col-5">
+                    <div class="row mb-2">
+                        <label class="col-2 col-form-label"> D </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="gigiD">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-2 col-form-label"> M </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="gigiM">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-2 col-form-label"> F </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="gigiF">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-7">
+                    <div class="row mb-2">
+                        <label class="col-4 col-form-label"> Karang </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="karang">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-4 col-form-label"> Protesa </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="protesa">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-4 col-form-label"> Peny. Mulut </label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="penyMulut">
+                        </div>
+                    </div>
+                </div>
+                <div class="w-100"></div>
+            </div>
+            <h4 class="tx-center tx-14">ODONTOGRAM IDENTIFIKASI</h4>
+            <div class="row pl-3 justify-content-center">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 p-0 tx-center m-1">8</div>
+                        <div class="col-1 p-0 tx-center m-1">7</div>
+                        <div class="col-1 p-0 tx-center m-1">6</div>
+                        <div class="col-1 p-0 tx-center m-1">5</div>
+                        <div class="col-1 p-0 tx-center m-1">4</div>
+                        <div class="col-1 p-0 tx-center m-1">3</div>
+                        <div class="col-1 p-0 tx-center m-1">2</div>
+                        <div class="col-1 p-0 tx-center m-1">1</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-auto pr-3 pl-1 border-left">&nbsp; </div>
+                <div class="col m-0">
+                    <div class="row">
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 p-0 tx-center m-1">1</div>
+                        <div class="col-1 p-0 tx-center m-1">2</div>
+                        <div class="col-1 p-0 tx-center m-1">3</div>
+                        <div class="col-1 p-0 tx-center m-1">4</div>
+                        <div class="col-1 p-0 tx-center m-1">5</div>
+                        <div class="col-1 p-0 tx-center m-1">6</div>
+                        <div class="col-1 p-0 tx-center m-1">7</div>
+                        <div class="col-1 p-0 tx-center m-1">8</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                        <div class="col-1 p-0 bg-light m-1">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <form [formGroup]="form">
+            <div class="row mb-2">
+                <label class="col-auto pt-0 col-form-label"> Thorax </label>
                 <div class="col">
                     <div class="row">
                         <div class="col-4">a. Pernafasan</div>
@@ -317,194 +463,72 @@
                     <input type="text" class="form-control" formControlName="refleks">
                 </div>
             </div>
-
-            <h4 class="mt-4 bg-gray-100 p-3">GINEKOLOGI</h4>
+            <hr>
             <div class="row mb-2">
-                <label class="col-4 col-form-label"> Hymen </label>
+                <label class="col col-form-label"> Hasil Lab </label>
+                <div class="w-100"></div>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="hymen">
+                    <textarea pInputTextarea formControlName="hasilLab" [autoResize]="true" [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
 
             <div class="row mb-2">
-                <label class="col-4 col-form-label"> Palpasi </label>
+                <label class="col col-form-label"> Hasil EKG </label>
+                <div class="w-100"></div>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="palpasi">
+                    <textarea pInputTextarea formControlName="hasilEkg" [autoResize]="true" [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
 
-            <h4 class="mt-4 bg-gray-100 p-3">LABORATORIUM</h4>
             <div class="row mb-2">
-                <label class="col-4 col-form-label"> Kesimpulan </label>
+                <label class="col col-form-label"> Hasil Radiologi </label>
+                <div class="w-100"></div>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="kesimpulanLab">
+                    <textarea pInputTextarea formControlName="hasilRadiologi" [autoResize]="true" [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
 
-            <h4 class="mt-4 bg-gray-100 p-3">EKG</h4>
             <div class="row mb-2">
-                <label class="col-4 col-form-label"> Kesimpulan </label>
+                <label class="col col-form-label"> Hasil Audiometri </label>
+                <div class="w-100"></div>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="kesimpulanLab">
+                    <textarea pInputTextarea formControlName="hasilAudiometri" [autoResize]="true" [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
 
-            <h4 class="mt-4 bg-gray-100 p-3">RADIOLOGI</h4>
             <div class="row mb-2">
-                <label class="col-4 col-form-label"> Kesimpulan </label>
-                <div class="col">
-                    <input type="text" class="form-control" formControlName="kesimpulanLab">
-                </div>
-            </div>
-
-            <h4 class="mt-4 bg-gray-100 p-3">KESWA</h4>
-            <div class="row mb-2">
-                <label class="col-4 col-form-label"> Kesimpulan </label>
+                <label class="col col-form-label"> Hasil Keswa </label>
+                <div class="w-100"></div>
                 <div class="col">
                     <p-dropdown
                         [options]="keswaKesimpulan"
                         optionLabel="name"
                         optionValue="name"
-                        formControlName="kesimpulanKeswa"
+                        formControlName="hasilKeswaKode"
                         [style]="{width: '100%'}"
                         styleClass="mb-1"
                         [autoDisplayFirst]="false">
                     </p-dropdown>
-                    <input type="text" class="form-control" formControlName="kesimpulanLab" placeholder="Keterangan">
+                    <textarea pInputTextarea formControlName="hasilKeswaKeterangan" [autoResize]="true" [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
-
         </form>
     </div>
+</div>
 
-    <div class="w-100"></div>
-    <div class="col">
+<div class="row pl-3 pr-3 mb-3">
+    <div class="col-12 mt-5">
         <form [formGroup]="form">
-            <h4 class="mt-4 bg-gray-100 p-3 mb-2">GIGI - MULUT</h4>
-
+            <h4 class="tx-16 mb-2">KESIMPULAN PEMERIKSAAN</h4>
             <div class="row mb-2">
-                <div class="col-4">
-                    <div class="row mb-2">
-                        <label class="col-2 col-form-label"> D </label>
-                        <div class="col">
-                            <input type="text" class="form-control" formControlName="d">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-2 col-form-label"> M </label>
-                        <div class="col">
-                            <input type="text" class="form-control" formControlName="m">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-2 col-form-label"> F </label>
-                        <div class="col">
-                            <input type="text" class="form-control" formControlName="f">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="row mb-2">
-                        <label class="col-3 col-form-label"> Karang </label>
-                        <div class="col">
-                            <input type="text" class="form-control" formControlName="karang">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-3 col-form-label"> Protesa </label>
-                        <div class="col">
-                            <input type="text" class="form-control" formControlName="protesa">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label class="col-3 col-form-label"> Peny. Mulut </label>
-                        <div class="col">
-                            <input type="text" class="form-control" formControlName="penyMulut">
-                        </div>
-                    </div>
-                </div>
-                <div class="col"></div>
-            </div>
-
-            <h4 class="tx-15 mt-4 mb-0 border-bottom pb-2">ODONTOGRAM IDENTIFIKASI</h4>
-            <div class="row p-3">
-                <div class="col border-right pr-4">
-                    <div class="row">
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                    </div>
-                    <div class="row">
-                        <div class="col tx-center m-1">8</div>
-                        <div class="col tx-center m-1">7</div>
-                        <div class="col tx-center m-1">6</div>
-                        <div class="col tx-center m-1">5</div>
-                        <div class="col tx-center m-1">4</div>
-                        <div class="col tx-center m-1">3</div>
-                        <div class="col tx-center m-1">2</div>
-                        <div class="col tx-center m-1">1</div>
-                    </div>
-                    <div class="row">
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                    </div>
-                </div>
-                <div class="col pl-4">
-                    <div class="row">
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                    </div>
-                    <div class="row">
-                        <div class="col tx-center m-1">1</div>
-                        <div class="col tx-center m-1">2</div>
-                        <div class="col tx-center m-1">3</div>
-                        <div class="col tx-center m-1">4</div>
-                        <div class="col tx-center m-1">5</div>
-                        <div class="col tx-center m-1">6</div>
-                        <div class="col tx-center m-1">7</div>
-                        <div class="col tx-center m-1">8</div>
-                    </div>
-                    <div class="row">
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                        <div class="col bg-light m-1">&nbsp;</div>
-                    </div>
+                <div class="col">
+                    <textarea pInputTextarea [autoResize]="true" [style]="{width: '100%'}" formControlName="kesimpulanPemeriksaan"></textarea>
                 </div>
             </div>
-        </form>
-    </div>
-    <div class="w-100"></div>
-
-    <div class="col">
-        <form [formGroup]="form">
-            <h4 class="mt-4 bg-gray-100 p-3 mb-2">KESIMPULAN PEMERIKSAAN</h4>
-            <textarea pInputTextarea [autoResize]="true" [style]="{width: '100%'}" formControlName="kesimpulan"></textarea>
 
             <div class="row mb-2">
                 <label class="col-2 col-form-label"> Rumus </label>
-                <div class="col-8">
+                <div class="col">
                     <table class="table border-bottom">
                         <tr>
                             <td class="tx-center pl-0">U</td>
@@ -516,13 +540,13 @@
                             <td class="tx-center">J</td>
                         </tr>
                         <tr>
-                            <td class="pl-0"><input type="text" class="form-control" formControlName="rumusLahirU"></td>
-                            <td><input type="text" class="form-control" formControlName="rumusLahirA"></td>
-                            <td><input type="text" class="form-control" formControlName="rumusLahirB"></td>
-                            <td><input type="text" class="form-control" formControlName="rumusLahirD"></td>
-                            <td><input type="text" class="form-control" formControlName="rumusLahirL"></td>
-                            <td><input type="text" class="form-control" formControlName="rumusLahirG"></td>
-                            <td><input type="text" class="form-control" formControlName="rumusLahirJ"></td>
+                            <td class="pl-0"><input type="text" class="form-control" formControlName="U"></td>
+                            <td><input type="text" class="form-control" formControlName="A"></td>
+                            <td><input type="text" class="form-control" formControlName="B"></td>
+                            <td><input type="text" class="form-control" formControlName="D"></td>
+                            <td><input type="text" class="form-control" formControlName="L"></td>
+                            <td><input type="text" class="form-control" formControlName="G"></td>
+                            <td><input type="text" class="form-control" formControlName="J"></td>
                         </tr>
                     </table>
                 </div>
@@ -530,7 +554,7 @@
 
             <div class="row mb-2">
                 <label class="col-2 col-form-label"> Stakes </label>
-                <div class="col-4">
+                <div class="col-auto">
                     <input type="text" class="form-control mb-2" formControlName="stakes">
                 </div>
             </div>
@@ -538,21 +562,27 @@
             <div class="row mb-2">
                 <label class="col-2 col-form-label"> Hasil </label>
                 <div class="col">
-                    <p-selectButton [options]="hasil" optionLabel="name"  formControlName="hasil">
+                    <p-selectButton [options]="hasil" optionLabel="name" optionValue="name" formControlName="hasil">
                         <ng-template let-item>
-                            <div class="p-2 tx-bold pl-5 pr-5">{{item.name}}</div>
+                            <div class="p-2 tx-bold pl-4 pr-4">{{item.name}}</div>
                         </ng-template>
                     </p-selectButton>
                 </div>
             </div>
         </form>
-
-        <div class="row mb-2 mt-5 bg-gray-400 p-3 border-top mb-5">
-            <label class="col-2 col-form-label">&nbsp;</label>
-            <div class="col-4 pl-0">
-                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid || !peserta.id" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan</button>
-                <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid || !peserta.id" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
-            </div>
-        </div>
     </div>
 </div>
+
+<div class="row bg-gray-400 p-3">
+    <label class="col-2 col-form-label">&nbsp;</label>
+    <div class="col-10">
+        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid || !peserta.id">
+            <i class="bi bi-save mr-1"></i>
+            <span *ngIf="!this.form.get('id')?.value"> Simpan</span>
+            <span *ngIf="this.form.get('id')?.value"> Update</span>
+        </button>
+    </div>
+</div>
+
+<p-toast position="top-center"></p-toast>
+
