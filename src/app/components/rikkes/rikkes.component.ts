@@ -22,7 +22,10 @@ export class RikkesComponent implements OnInit {
     dialogRadiologi: boolean = false;
     dialogLaboratorium: boolean = false;
     dialogPrintSticker: boolean = false;
+    dialogSimbolOdontogram: boolean = false;
+
     peserta: any;
+    odontogram: any = {kiri: [], kanan: []};
     hasil: any = [{ id: 1, name: 'MS' }, { id: 0, name: 'TMS' }]
     printNoUrut: any = { dari: '', sampai: '' };
     form!: FormGroup
@@ -53,8 +56,8 @@ export class RikkesComponent implements OnInit {
         this.rikkesService.dataRikkes.subscribe(data => this.setFormRikkes(data))
 
         this.rikkesService.saveStatus.subscribe(data => {
-            if( data ){
-                this.messageService.add({severity:'success', summary:'Sukses !', detail:'Data Berhasil Disimpan.'});
+            if (data) {
+                this.messageService.add({ severity: 'success', summary: 'Sukses !', detail: 'Data Berhasil Disimpan.' });
             }
         })
         this.initPeserta();
@@ -86,6 +89,7 @@ export class RikkesComponent implements OnInit {
 
     public initForm() {
         this.initPeserta();
+        this.initOdontogram();
         this.form = this.fb.group({
             id: [''],
             anamnesa: [''],
@@ -156,6 +160,30 @@ export class RikkesComponent implements OnInit {
             hasilKeswaKeterangan: [''],
             peserta: []
         })
+    }
+
+    public initOdontogram() {
+        this.odontogram.kiri = [
+            { keterangan: '8', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '7', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '6', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '5', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '4', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '3', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '2', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '1', atas: '', bawah: '', idPeserta: '' }
+        ]
+
+        this.odontogram.kanan = [
+            { keterangan: '1', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '2', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '3', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '4', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '5', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '6', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '7', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '8', atas: '', bawah: '', idPeserta: '' }
+        ]
     }
 
     public clearForm() {
@@ -260,7 +288,7 @@ export class RikkesComponent implements OnInit {
     }
 
     public update() {
-        this.messageService.add({severity:'success', summary:'Sukses!', detail:'Data Berhasil Disimpan.'});
+        this.messageService.add({ severity: 'success', summary: 'Sukses!', detail: 'Data Berhasil Disimpan.' });
     }
 
     public hitungBmi() {
@@ -304,6 +332,12 @@ export class RikkesComponent implements OnInit {
             this.form.get('imt')?.patchValue(bmi);
         }
     }
+
+    public openDialogSimbolOdontogram(idx: number, data: any, location: string) {
+        this.dialogSimbolOdontogram = true;
+        console.log(data);
+    }
+
 
     public printSticker() {
         let iframe = '<iframe src="' + config.api_url('rikkes/printSticker/noUrut/' + this.peserta.noUrut) + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';

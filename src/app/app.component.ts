@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
     title = 'iniapps';
 
     loading: boolean = false;
+    currentRoute: string = '';
 
     constructor(
         private primeNgConfig: PrimeNGConfig,
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 // Hide progress spinner or progress bar
-                // console.log(event.url);
+                this.currentRoute = event.url;
             }
         })
     }

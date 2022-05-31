@@ -1,4 +1,4 @@
-<header class="navbar navbar-header navbar-header-fixed">
+<header class="navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != '/'">
     <div class="row">
         <div class="col-2">
             <div class="p-pl-5 p-pt-3">
@@ -50,8 +50,8 @@
 <div class="content content-components p-4 ml-0 mr-0">
     <div class="content p-0">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-sm-12">
-                <app-menu-emr></app-menu-emr>
+            <div class="col-md-10 col-sm-12">
+                <app-menu-emr *ngIf="currentRoute != '/'"></app-menu-emr>
                 <router-outlet></router-outlet>
             </div>
         </div>
