@@ -1,8 +1,8 @@
-<p-dialog [(visible)]="dialogVclaim" (onShow)="getPesertaBpjs()" header="Bridging VClaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
+<p-dialog [(visible)]="dialogVclaim" (onHide)="vclaimService.closeDialog()" (onShow)="getPesertaBpjs()" header="Bridging VClaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
     <app-vclaim></app-vclaim>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogDataPasien" header="Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+<p-dialog [(visible)]="dialogDataPasien" (onHide)="dataPasienService.closeDialog()" header="Cari Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
     <app-data-pasien></app-data-pasien>
 </p-dialog>
 
@@ -10,14 +10,14 @@
     <app-form-rawat-jalan></app-form-rawat-jalan>
 </p-dialog>
 
-<div class="row pl-3 pr-3" style="margin-left: -14px; margin-right: -14px;">
-    <div class="col p-3 bg-gray-500 mb-3">
+<div class="row p-3" style="margin-left: -14px; margin-right: -14px;">
+    <div class="col p-3 bg-gray-500 mb-3 sticky-top" style="top: 60px;">
         <div class="row">
             <div class="col-auto border-right border-light">
                 <button class="btn btn-sm btn-secondary mr-1" (click)="dialogDataPasien = true"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
                 <!-- <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button> -->
                 <button class="btn btn-sm btn-secondary mr-1" (click)="submenuPendaftaran.toggle($event)"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button>
-                <p-menu #submenuPendaftaran [popup]="true" appendTo="body" [model]="menuPendaftaran"></p-menu>
+                <p-menu #submenuPendaftaran appendTo="body" [popup]="true" appendTo="body" [model]="menuPendaftaran"></p-menu>
 
                 <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
                 <!-- <p-menu #menu [popup]="true" appendTo="body" [model]="menuPrint"></p-menu> -->
@@ -41,83 +41,97 @@
     <div class="w-100"></div>
     <div class="col">
         <form [formGroup]="form" name="form">
-            <div class="row mb-2" style="display: none;">
-                <label class="col-4 col-form-label">
-                    ID Pasien
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="id" readonly="readonly">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="bg-light p-3 rounded border tx-center tx-gray-500">
+                        <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
+                    </div>
+                    <button class="btn btn-xs btn-light btn-block mt-2"><i class="bi bi-camera mr-1"></i> Ambil Photo</button>
                 </div>
-            </div>
-            <div class="row mb-2">
-                <label class="col-4 col-form-label">
-                    RS <span *ngIf="form.get('rs')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
                 <div class="col">
-                    <p-dropdown [options]="rs" [autoDisplayFirst]="false" formControlName="rs" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label class="col-4 col-form-label">
-                    No. RM
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="nomorRm" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="noAsuransi" class="col-4 col-form-label">
-                    No. BPJS / Asuransi
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="nomorAsuransi" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="nik" class="col-4 col-form-label">
-                    NIK <span *ngIf="form.get('nik')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="nik" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="nama" class="col-4 col-form-label">
-                    Nama <span *ngIf="form.get('nama')?.errors || form.get('awalanNama')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <p-dropdown [options]="awalanNama" [autoDisplayFirst]="false" formControlName="awalanNama" optionValue="id" optionLabel="ket"></p-dropdown>
+                    <div class="row mb-2" style="display: none;">
+                        <label class="col-4 col-form-label">
+                            ID Pasien
+                        </label>
+                        <div class="col">
+                            <input type="text" formControlName="id" readonly="readonly">
                         </div>
-                        <input type="text" formControlName="nama" class="form-control">
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-4 col-form-label">
+                            RS <span *ngIf="form.get('rs')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                        </label>
+                        <div class="col">
+                            <p-dropdown [options]="rs" [autoDisplayFirst]="false" formControlName="rs" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label class="col-4 col-form-label">
+                            No. RM
+                        </label>
+                        <div class="col">
+                            <input type="text" formControlName="nomorRm" class="form-control" placeholder="Cari...">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="noAsuransi" class="col-4 col-form-label">
+                            No. BPJS / Asuransi
+                        </label>
+                        <div class="col">
+                            <input type="text" formControlName="nomorAsuransi" class="form-control" placeholder="Cari...">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="nik" class="col-4 col-form-label">
+                            NIK <span *ngIf="form.get('nik')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                        </label>
+                        <div class="col">
+                            <input type="text" formControlName="nik" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="nama" class="col-4 col-form-label">
+                            Nama <span *ngIf="form.get('nama')?.errors || form.get('awalanNama')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                        </label>
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <p-dropdown [options]="awalanNama" [autoDisplayFirst]="false" formControlName="awalanNama" optionValue="id" optionLabel="ket"></p-dropdown>
+                                </div>
+                                <input type="text" formControlName="nama" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="tmptLahir" class="col-4 col-form-label">
+                            Tempat Lahir <span *ngIf="form.get('tempatLahir')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                        </label>
+                        <div class="col">
+                            <input type="text" formControlName="tempatLahir" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="tglLahir" class="col-4 col-form-label">
+                            Tanggal Lahir <span *ngIf="form.get('tglLahir')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                        </label>
+                        <div class="col">
+                            <p-calendar formControlName="tglLahir" [showIcon]="true" dateFormat="dd-mm-yy"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="jnsKelamin" class="col-4 col-form-label">
+                            Jenis Kelamin <span *ngIf="form.get('jnsKelamin')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                        </label>
+                        <div class="col pt-2">
+                            <p-radioButton name="jnsKelamin" value="L" formControlName="jnsKelamin"></p-radioButton> LAKI-LAKI
+                            <p-radioButton name="jnsKelamin" value="P" formControlName="jnsKelamin" class="ml-3"></p-radioButton> <span>PEREMPUAN</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row mb-2">
-                <label for="tmptLahir" class="col-4 col-form-label">
-                    Tempat Lahir <span *ngIf="form.get('tempatLahir')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="tempatLahir" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="tglLahir" class="col-4 col-form-label">
-                    Tanggal Lahir <span *ngIf="form.get('tglLahir')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <p-calendar formControlName="tglLahir" [showIcon]="true" dateFormat="dd-mm-yy"></p-calendar>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="jnsKelamin" class="col-4 col-form-label">
-                    Jenis Kelamin <span *ngIf="form.get('jnsKelamin')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col pt-2">
-                    <p-radioButton name="jnsKelamin" value="L" formControlName="jnsKelamin"></p-radioButton> LAKI-LAKI
-                    <p-radioButton name="jnsKelamin" value="P" formControlName="jnsKelamin" class="ml-3"></p-radioButton> <span>PEREMPUAN</span>
-                </div>
+            <hr>
+            <div class="row">
+                <div class="col"><h4>ALAMAT PASIEN</h4></div>
             </div>
             <div class="row mb-2">
                 <label for="alamat" class="col-4 col-form-label">
@@ -125,6 +139,14 @@
                 </label>
                 <div class="col">
                     <textarea pInputTextarea formControlName="alamat" [autoResize]="true" [style]="{width: '100%'}"></textarea>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="notlp" class="col-4 col-form-label">
+                    Telepon Pasien <span *ngIf="form.get('tlpPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <input type="text" formControlName="tlpPasien" class="form-control">
                 </div>
             </div>
             <div class="row mb-2">
@@ -173,14 +195,6 @@
     <div class="col">
         <form [formGroup]="form">
             <div class="row mb-2">
-                <label for="suku" class="col-4 col-form-label">
-                    Suku
-                </label>
-                <div class="col">
-                    <p-dropdown [options]="suku" [filter]="true" [autoDisplayFirst]="false" formControlName="suku" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-2">
                 <label for="statusKawin" class="col-4 col-form-label">
                     Status Perkawinan  <span *ngIf="form.get('statusNikah')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -213,28 +227,44 @@
                 </div>
             </div>
             <div class="row mb-2">
-                <label for="notlp" class="col-4 col-form-label">
-                    Telepon Pasien <span *ngIf="form.get('tlpPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="tlpPasien" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="notlpklg" class="col-4 col-form-label">
-                    Telepon Keluarga
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="tlpKeluarga" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
                 <label for="goldar" class="col-4 col-form-label">
                     Golongan Darah
                 </label>
                 <div class="col">
                     <input type="text" formControlName="golonganDarah" maxlength="3" class="form-control">
                 </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col"><h4>KELUARGA / KONTAK DARURAT</h4></div>
+            </div>
+            <div class="row mb-2">
+                <label for="suku" class="col-4 col-form-label">
+                    Nama Kerabat / Keluarga
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="suku" class="col-4 col-form-label">
+                    Hubungan dengan pasien
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="suku" [filter]="true" [autoDisplayFirst]="false" formControlName="suku" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="suku" class="col-4 col-form-label">
+                    No. Telepon
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col"><h4>DATA KEANGGOTAAN</h4></div>
             </div>
             <div class="row mb-2">
                 <label for="nrp" class="col-4 col-form-label">
@@ -276,7 +306,35 @@
                     <input type="text" formControlName="jabatan" class="form-control">
                 </div>
             </div>
+            <hr>
+            <div class="row">
+                <div class="col"><h4>DATA PENJAMIN / ASURANSI</h4></div>
+            </div>
             <div class="row mb-2">
+                <label for="golpas" class="col-4 col-form-label">
+                    Asuransi / Penjamin <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="golpas" class="col-4 col-form-label">
+                    Jenis Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="golpas" class="col-4 col-form-label">
+                    No. Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <!-- <div class="row mb-2">
                 <label for="golpas" class="col-4 col-form-label">
                     Group Pasien <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -291,7 +349,7 @@
                 <div class="col">
                     <p-dropdown [options]="golonganPasien" [autoDisplayFirst]="false" formControlName="golonganPasien" optionValue="golpasID" optionLabel="golpasName" [style]="{width: '100%'}"></p-dropdown>
                 </div>
-            </div>
+            </div> -->
             <!-- <div class="row mb-2">
                 <label for="hubPasien" class="col-4 col-form-label">
                     Status Pasien <span ng-show="form2.hubPasien.$error.required" class="fontello-icon-attention-circle error"></span>

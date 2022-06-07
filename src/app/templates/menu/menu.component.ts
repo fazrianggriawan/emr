@@ -14,8 +14,12 @@ export class MenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.menus = [
-            { name: 'DASHBOARD' },
-            { name: 'UROLOGI' },
+            { label: 'Rikkes', icon: 'bi bi-file-text', routerLink: 'rikkes' },
+            // { label: 'Admisi & Pendaftaran', icon: 'bi bi-file-earmark-person', routerLink: 'registrasi' },
+            // { label: 'Medical Record', icon: 'bi bi-file-earmark-text', routerLink: 'medicalRecord' },
+            // { label: 'Rawat Jalan', icon: 'bi bi-clipboard-pulse', routerLink: 'rawatJalan' },
+            // { label: 'Rawat Inap', icon: 'bi bi-hospital' },
+            // { label: 'Kasir', icon: 'bi bi-cash-coin' }
         ]
     }
 

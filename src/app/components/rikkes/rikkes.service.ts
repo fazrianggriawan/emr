@@ -10,6 +10,7 @@ export class RikkesService {
 
     dataRikkes = new BehaviorSubject<any>('');
     saveStatus = new BehaviorSubject<boolean>(false);
+    dataPsikometri = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient,
@@ -17,9 +18,10 @@ export class RikkesService {
 
     public save(data: any) {
         this.http.post<any>(config.api_url('rikkes/save'), data)
-            .subscribe(data => {
-                if( data.code == 200 ) {
-                    this.saveStatus.next(true)
+            .subscribe(res => {
+                if( res.code == 200 ) {
+                    this.saveStatus.next(true);
+                    this.getDataRikkes(data.peserta.id);
                 }
             })
     }
@@ -27,6 +29,11 @@ export class RikkesService {
     public getDataRikkes(idPeserta: any) {
         this.http.get<any>(config.api_url('rikkes/getData/idPeserta/'+idPeserta))
             .subscribe(data => this.dataRikkes.next(data.data))
+    }
+
+    public getDataHasilPsikometri(noUrut: string){
+        this.http.get<any>(config.api_url('rikkes/getHasilPsikometri/noUrut/'+noUrut))
+            .subscribe(data => this.dataPsikometri.next(data.data))
     }
 
 }

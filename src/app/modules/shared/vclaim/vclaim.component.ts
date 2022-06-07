@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataPasienService } from '../../registrasi/components/data-pasien/data-pasien.service';
 import { FormSuratKontrolService } from './surat-kontrol/form-surat-kontrol/form-surat-kontrol.service';
 import { VclaimService } from './vclaim.service';
 
@@ -21,7 +22,8 @@ export class VclaimComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         public vclaimService: VclaimService,
-        public formSuratKontrolService: FormSuratKontrolService
+        public formSuratKontrolService: FormSuratKontrolService,
+        private dataPasienService: DataPasienService
     ) { }
 
     ngOnInit(): void {
@@ -29,6 +31,17 @@ export class VclaimComponent implements OnInit {
         this.initFormPeserta();
 
         this.vclaimService.peserta.subscribe(data => this.setFormPeserta(data));
+        this.vclaimService.dialog.subscribe(data => {
+            this.formSep.get('tanggal')?.patchValue(new Date());
+        })
+        // this.dataPasienService.pasien.subscribe(data => this.vclaimService.getPesertaByNomorKartu())
+
+        this.vclaimService.dialog.subscribe(data => {
+            if( data ){
+                this.vclaimService.getPesertaByNomorKartu();
+            }
+        })
+
     }
 
     public initFormSep() {
@@ -112,13 +125,13 @@ export class VclaimComponent implements OnInit {
 
     public getPesertaByNomorKartu(e: KeyboardEvent) {
         if (e.code === 'Enter') {
-            this.vclaimService.getPesertaByNomorKartu(this.keyNomorKartu);
+            this.vclaimService.getPesertaByNomorKartu();
         }
     }
 
     public getPesertaByNik(e: KeyboardEvent) {
         if (e.code === 'Enter') {
-            this.vclaimService.getPesertaByNik(this.keyNik);
+            this.vclaimService.getPesertaByNik();
         }
     }
 

@@ -22,6 +22,18 @@ export class RawatJalanComponent implements OnInit {
 
     dialogVclaim: boolean = false;
 
+    selectedCatTarif: string = '';
+
+    catTarif: any = [
+        { name: 'All' },
+        { name: 'Perawatan' },
+        { name: 'Laboratorium' },
+        { name: 'Radiologi' },
+        { name: 'Farmasi' },
+        { name: 'Operasi' },
+        { name: 'Kamar Rawat' },
+    ];
+
     constructor(
         private fb: FormBuilder,
         private masterService: MasterService,
@@ -30,7 +42,7 @@ export class RawatJalanComponent implements OnInit {
 
     ngOnInit(): void {
         this.initForm();
-        this.masterService.rs.subscribe( data => this.rs = data )
+        this.masterService.rs.subscribe(data => this.rs = data)
         this.billingService.tarif.subscribe(data => this.tarif = data);
         this.billingService.categoryTarif.subscribe(data => this.categoryTarif = data);
 

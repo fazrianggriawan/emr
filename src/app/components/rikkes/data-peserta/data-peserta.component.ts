@@ -36,6 +36,10 @@ export class DataPesertaComponent implements OnInit {
     public filtering(e: KeyboardEvent) {
         if( e.code == 'Enter' ){
             this.dt!.filterGlobal(this.filterKey, 'startsWith');
+        }else{
+            if( this.filterKey == '' ){
+                this.dt!.filterGlobal(this.filterKey, 'startsWith');
+            }
         }
     }
 

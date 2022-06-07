@@ -22,7 +22,7 @@ export class DataPasienComponent implements OnInit {
     ngOnInit(): void {
         this.initForm();
         this.dataPasienService.dataPasien.subscribe(data => this.dataPasien = data)
-        this.dataPasienService.showDialog.subscribe(data => this.showDialog = data)
+        this.dataPasienService.dialog.subscribe(data => this.showDialog = data)
     }
 
     public initForm() {
@@ -57,7 +57,7 @@ export class DataPasienComponent implements OnInit {
 
     public closeDialog() {
         this.dataPasienService.dataPasien.next([]);
-        this.dataPasienService.showDialog.next(false);
+        this.dataPasienService.dialog.next(false);
         this.form.reset();
     }
 

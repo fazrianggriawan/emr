@@ -30,8 +30,8 @@ import { FormRujukanKeluarComponent } from './vclaim/rujukan/form-rujukan-keluar
 import { PulangSepComponent } from './vclaim/pulang-sep/pulang-sep.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ImageModule } from 'primeng/image';
-
-
+import { EditorModule } from 'primeng/editor';
+import {MenubarModule} from 'primeng/menubar';
 
 
 let primeModules = [
@@ -52,7 +52,9 @@ let primeModules = [
     ScrollPanelModule,
     ProgressBarModule,
     ToastModule,
-    ImageModule
+    ImageModule,
+    EditorModule,
+    MenubarModule
 ]
 
 let sharedComponent = [

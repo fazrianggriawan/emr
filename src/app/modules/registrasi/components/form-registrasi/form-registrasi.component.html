@@ -1,0 +1,192 @@
+<div class="row m-0 pb-2 border-bottom sticky-top">
+    <div class="col pl-0">
+        <button class="btn btn-secondary btn-sm mr-1" (click)="dataPasienService.openDialog()"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
+        <button class="btn btn-secondary btn-sm mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
+        <button class="btn btn-primary btn-sm mr-1"><i class="bi bi-save mr-1"></i> Simpan</button>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col">
+        <h4>Data Pasien</h4>
+        <div class="row">
+            <div class="col-auto">
+                <div class="bg-light p-3 rounded border tx-center tx-gray-500 mb-2">
+                    <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
+                </div>
+                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-camera mr-1"></i> Ambil Photo</button>
+                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-pencil mr-1"></i> Edit Pasien</button>
+            </div>
+            <div class="col">
+                <div class="row mb-1">
+                    <label class="col-4 col-form-label">No. RM</label>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input type="text" (keyup)="searchPasien($event)" name="norm" class="form-control" value="{{pasien.norm}}" #noRm placeholder="Cari...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label class="col-4 col-form-label">Nama</label>
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" (keyup)="searchPasien($event)" class="form-control" name="nama" value="{{pasien.nama | uppercase}}" placeholder="Cari...">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label class="col-4 col-form-label">No. Asuransi/BPJS</label>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noAsuransi" value="{{pasien.no_asuransi}}" placeholder="Cari...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label class="col-4 col-form-label">No. Tlp</label>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp" value="{{pasien.tlp}}" placeholder="Cari...">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label class="col-4 col-form-label">Kode Booking</label>
+                    <div class="col">
+                        <div class="input-group">
+                            <div class="input-group">
+                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp" value="{{pasien.tlp}}" placeholder="Scan Barcode / Ketik Kode Booking">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label class="col-4 col-form-label">Jns. Kelamin</label>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" value="{{pasien.jns_kelamin}}">
+                    </div>
+                </div>
+                <div class="row mb-1">
+                    <label class="col-4 col-form-label">Usia</label>
+                    <div class="col-auto">
+                        <input type="text" class="form-control" value="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <h4>Riwayat Kunjungan</h4>
+        <div class="row">
+            <div class="col">
+                <p-table [value]="dataRegistrasi" styleClass="p-datatable-sm table-striped table-hover border-top mb-3" responsiveLayout="scroll">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Jns. Perawatan</th>
+                            <th>Ruangan / Poliklinik</th>
+                            <th>Tanggal Masuk</th>
+                            <th>Tanggal Pulang</th>
+                            <th>Dokter / DPJP</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>{{item.jnsPerawatan}}</td>
+                            <td>{{item.ruanganPoli}}</td>
+                            <td>{{item.tanggal}}</td>
+                            <td>{{item.tanggal}}</td>
+                            <td>{{item.dokter}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <h4>Data Registrasi</h4>
+        <form [formGroup]="form">
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Status</label>
+                <div class="col-auto">
+                    <input type="text" formControlName="status" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">No. Registrasi</label>
+                <div class="col-auto">
+                    <input type="text" formControlName="noreg" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Tanggal</label>
+                <div class="col-auto">
+                    <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" [maxDate]="today" formControlName="tanggal"></p-calendar>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">No. SEP</label>
+                <div class="col-auto">
+                    <div class="input-group">
+                        <input type="text" formControlName="noSep" class="form-control">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" (click)="vclaimService.openDialog()"><i class="bi bi-plus-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Jns. Kunjungan</label>
+                <div class="col">
+                    <input type="text" formControlName="jnsKunjungan" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Ruangan / Poliklinik</label>
+                <div class="col">
+                    <input type="text" formControlName="ruangan" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Dokter / DPJP</label>
+                <div class="col">
+                    <input type="text" formControlName="dokterDpjp" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Jenis Pembayaran</label>
+                <div class="col-auto">
+                    <input type="text" formControlName="jnsPembayaran" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Catatan</label>
+                <div class="col">
+                    <input type="text" formControlName="catatan" class="form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p-dialog [(visible)]="dialogDataPasien" (onHide)="dataPasienService.closeDialog()" header="Cari Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}" appendTo="body">
+    <app-data-pasien></app-data-pasien>
+</p-dialog>

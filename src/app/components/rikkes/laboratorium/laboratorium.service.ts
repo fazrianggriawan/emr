@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { config } from 'src/app/config';
 
 @Injectable({
     providedIn: 'root'
@@ -7,8 +9,34 @@ import { BehaviorSubject } from 'rxjs';
 export class LaboratoriumService {
 
     dialog = new BehaviorSubject<boolean>(false)
+    hasilLab = new BehaviorSubject<any>('')
+    saveStatus = new BehaviorSubject<boolean>(false);
+    hasilLabKeterangan = new BehaviorSubject<any>('')
 
-    constructor() { }
+    constructor(
+        private http: HttpClient
+    ) {}
+
+    public save(data: any) {
+        this.http.post<any>( config.api_url('rikkes/save/hasilLab'), data )
+            .subscribe(data => {
+                if( data.code == 200 ){
+                    this.saveStatus.next(true);
+                }else{
+                    this.saveStatus.next(false);
+                }
+            })
+    }
+
+    public getHasilLab(idPeserta: number) {
+        this.http.get<any>( config.api_url('rikkes/getHasilLab/idPeserta/'+idPeserta) )
+            .subscribe(data => this.hasilLab.next(data.data));
+    }
+
+    public getHasilLabKeterangan(idPeserta: number) {
+        this.http.get<any>( config.api_url('rikkes/getHasilLabKeterangan/idPeserta/'+idPeserta) )
+            .subscribe(data => this.hasilLabKeterangan.next(data.data));
+    }
 
     public openDialog() {
         this.dialog.next(true)

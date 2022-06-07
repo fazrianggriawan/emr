@@ -15,6 +15,7 @@ export class RujukanComponent implements OnInit {
     dataRujukanRs: any = [];
     dataRujukanKeluar: any = [];
     peserta: any;
+    today = new Date();
 
     constructor(
         public formRujukanKeluarService: FormRujukanKeluarService,

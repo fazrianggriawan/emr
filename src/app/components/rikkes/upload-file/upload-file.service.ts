@@ -11,6 +11,7 @@ export class UploadFileService {
     dialog = new BehaviorSubject<boolean>(false)
     filesUplaoded = new BehaviorSubject<any>('');
     loading = new BehaviorSubject<boolean>(false);
+    deleteStatus = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient
@@ -23,6 +24,12 @@ export class UploadFileService {
                 this.filesUplaoded.next(data.data);
                 this.loading.next(false);
             })
+    }
+
+    public deleteImage(item: any){
+        this.loading
+        this.http.post<any>( config.api_url('upload/delete/image'), item )
+            .subscribe(data => this.deleteStatus.next(true))
     }
 
     public openDialog() {

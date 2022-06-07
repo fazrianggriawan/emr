@@ -12,7 +12,8 @@ export class DataPasienService {
     dataPasien = new BehaviorSubject<any>('');
     sendToForm = new BehaviorSubject<boolean>(false);
     pasien = new BehaviorSubject<any>('');
-    showDialog = new BehaviorSubject<boolean>(false);
+    // showDialog = new BehaviorSubject<boolean>(false);
+    dialog = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
@@ -22,5 +23,13 @@ export class DataPasienService {
     public getDataPasien(data: any) {
         this.loadingService.status.next(true);
         this.http.post<any>( config.api_url('pasien/filtering'), data ).subscribe( data => this.dataPasien.next(data.data) )
+    }
+
+    public openDialog(){
+        this.dialog.next(true);
+    }
+
+    public closeDialog(){
+        this.dialog.next(false);
     }
 }

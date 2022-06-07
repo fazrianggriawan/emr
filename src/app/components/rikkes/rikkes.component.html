@@ -1,73 +1,128 @@
-<p-dialog [(visible)]="dialogDataPeserta" (onHide)="dataPesertaService.closeDialog()" header="Data Peserta" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+<p-dialog
+    [(visible)]="dialogDataPeserta"
+    (onHide)="dataPesertaService.closeDialog()"
+    header="Data Peserta"
+    [modal]="true"
+    [draggable]="true"
+    [breakpoints]="{'640px': '100vw'}"
+    appendTo="body">
     <app-data-peserta></app-data-peserta>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogUploadFile" (onHide)="uploadFileService.closeDialog()" header="Upload File / Photo" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+<p-dialog [(visible)]="dialogUploadFile" (onHide)="uploadFileService.closeDialog()" header="Upload File / Photo"
+    [modal]="true" [draggable]="true" [style]="{width: '75%'}">
     <app-upload-file></app-upload-file>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogLaboratorium" (onHide)="laboratoriumService.closeDialog()" header="Laboratorium" [modal]="true" [draggable]="true" [style]="{width: '600px'}">
+<p-dialog [(visible)]="dialogLaboratorium" (onHide)="laboratoriumService.closeDialog()" header="Laboratorium"
+    [modal]="true" [draggable]="true" [style]="{width: '700px'}">
     <app-laboratorium></app-laboratorium>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogSimbolOdontogram" [modal]="true" appendTo="body" header="Simbol Identifikasi" [showHeader]="true">
-    <div class="row tx-24">
-        <div class="col p-2">
-            <button class="btn btn-light"><i class="bi bi-square"></i></button>
-        </div>
-        <div class="col p-2">
-            <button class="btn btn-light"><i class="bi bi-circle"></i></button>
-        </div>
-        <div class="col p-2">
-            <button class="btn btn-light"><i class="bi bi-x-lg"></i></button>
-        </div>
-        <div class="col p-2">
-            <button class="btn btn-light"><i class="bi bi-check-lg"></i></button>
-        </div>
-        <div class="col p-2">
-            <button class="btn btn-light"><i class="bi bi-circle-fill"></i></button>
-        </div>
-        <div class="col p-2">
-            <button class="btn btn-light"><i class="bi bi-activity"></i></button>
-        </div>
-    </div>
+<p-dialog [(visible)]="dialogRadiologi" (onHide)="radiologiService.closeDialog()" header="Radiologi"
+    [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+    <app-radiologi></app-radiologi>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogPrintSticker" header="Print Sticker Peserta" [modal]="true" [draggable]="true" [style]="{width: '50%'}">
+<p-dialog [(visible)]="dialogSimbolOdontogram" [modal]="true" appendTo="body" header="Simbol Identifikasi"
+    [showHeader]="true">
+    <div class="row tx-24">
+        <div class="col p-2">
+            <button class="btn btn-light tx-black" (click)="setSimbolOdontogram('s')"><i class="bi bi-square"></i></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black" (click)="setSimbolOdontogram('c')"><i class="bi bi-circle"></i></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black" (click)="setSimbolOdontogram('x')"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black" (click)="setSimbolOdontogram('ck')"><i class="bi bi-check-lg"></i></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black" (click)="setSimbolOdontogram('cf')"><i class="bi bi-circle-fill"></i></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black" (click)="setSimbolOdontogram('a')"><i class="bi bi-activity"></i></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black pt-2" (click)="setSimbolOdontogram('ac')"><img [src]="'assets/ac.png'" height="25" class="mb-1"></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black pt-2" (click)="setSimbolOdontogram('dc')"><img [src]="'assets/dc.png'" height="28" class="mb-1"></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black pt-2" (click)="setSimbolOdontogram('ds')"><img [src]="'assets/ds.png'" height="28" class="mb-1"></button>
+        </div>
+        <div class="col p-2">
+            <button class="btn btn-light tx-black pt-2" (click)="setSimbolOdontogram('cs')"><img [src]="'assets/cs.png'" height="28" class="mb-1"></button>
+        </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <button class="btn btn-xs btn-icon btn-dark" (click)="setSimbolOdontogram('')"><i class="bi bi-trash mr-1"></i> Hapus</button>
+    </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogPrintSticker" [breakpoints]="{'960px': '75vw'}" header="Print Sticker Peserta" [modal]="true" [draggable]="true"
+    [style]="{width: '50%'}">
     <div class="row mb-3 pb-3 border-bottom">
         <div class="col-4">Nama : <input type="text" class="form-control" [ngModel]="peserta.nama | uppercase"></div>
         <div class="col-2">No.Urut : <input type="text" class="form-control" [ngModel]="peserta.noUrut"></div>
         <div class="col-2">No.Peserta :<input type="text" class="form-control" [ngModel]="peserta.noPeserta"></div>
-        <div class="col-2">Jns.Kelamin :<input type="text" class="form-control" [ngModel]="peserta.jnsKelamin | uppercase"></div>
+        <div class="col-2">Jns.Kelamin :<input type="text" class="form-control"
+                [ngModel]="peserta.jnsKelamin | uppercase"></div>
         <div class="col-2">
             <br>
-            <button class="btn btn-primary" [disabled]="!peserta.noUrut" (click)="printSticker()"><i class="bi bi-printer mr-1"></i> Print</button>
+            <button class="btn btn-primary" [disabled]="!peserta.noUrut" (click)="printSticker()"><i
+                    class="bi bi-printer mr-1"></i> Print</button>
         </div>
     </div>
     <h4>Print Sticker Berdasarkan Rentang No.Urut</h4>
     <div class="row mt-0">
         <div class="col-auto">
-            <input type="text" class="form-control" [(ngModel)]="printNoUrut.dari" placeholder="No.Urut Dari" maxlength="5">
+            <input type="text" class="form-control" [(ngModel)]="printNoUrut.dari" placeholder="No.Urut Dari"
+                maxlength="5">
         </div>
         <div class="col-auto">
-            <input type="text" class="form-control" [(ngModel)]="printNoUrut.sampai" placeholder="No.Urut Sampai" maxlength="5">
+            <input type="text" class="form-control" [(ngModel)]="printNoUrut.sampai" placeholder="No.Urut Sampai"
+                maxlength="5">
         </div>
         <div class="col">
-            <button class="btn btn-primary" [disabled]="!printNoUrut.dari || !printNoUrut.sampai" (click)="printStickerPesertaRange()"><i class="bi bi-printer mr-1"></i> Print</button>
+            <button class="btn btn-primary" [disabled]="!printNoUrut.dari || !printNoUrut.sampai"
+                (click)="printStickerPesertaRange()"><i class="bi bi-printer mr-1"></i> Print</button>
         </div>
     </div>
 </p-dialog>
 
-<div class="row pl-3 pr-3 sticky-top" style="margin-left: -14px; margin-right: -14px; top: 60px;">
+<div class="row pl-3 pr-3 sticky-top" style="margin-left: -14px; margin-right: -14px; top: 45px;">
     <div class="col p-3 bg-gray-400">
         <div class="row">
+            <div class="col-auto pr-0">
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="dataPesertaService.openDialog()"><i
+                    class="bi bi-file-earmark-person mr-1"></i> Data Peserta</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="uploadFileService.openDialog()"
+                    [disabled]="!peserta.id"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
+            </div>
+
+            <div class="col-auto pr-0 pl-0" *ngIf="username == 'admin'">
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="submenuExport.toggle($event)"><i
+                    class="bi bi-file-earmark-ruled mr-1"></i> Export XSL <i class="bi bi-chevron-down"></i></button>
+                    <p-menu #submenuExport appendTo="body" [popup]="true" appendTo="body" [model]="menuExport"></p-menu>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="dialogPrintSticker = true"><i
+                            class="bi bi-printer mr-1"></i> Print Sticker</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="laboratoriumService.openDialog()"
+                            [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="radiologiService.openDialog()"
+                            [disabled]="!peserta.id"><i class="bi bi-radioactive mr-1"></i> Radiologi</button>
+            </div>
+            <div class="col-auto pr-0 pl-0" *ngIf="username == 'admin2'">
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="laboratoriumService.openDialog()"
+                    [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
+                    <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="radiologiService.openDialog()"
+                    [disabled]="!peserta.id"><i class="bi bi-radioactive mr-1"></i> Radiologi</button>
+            </div>
             <div class="col-auto">
-                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="dataPesertaService.openDialog()"><i class="bi bi-file-earmark-person mr-1"></i> Data Peserta</button>
-                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="uploadFileService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
-                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="laboratoriumService.openDialog()" [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
-                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="dialogPrintSticker = true"><i class="bi bi-printer mr-1"></i> Print Sticker</button>
-                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="exportExcel()"><i class="bi bi-file-earmark-ruled mr-1"></i> Export XSL</button>
-                <button class="btn btn-sm btn-secondary mr-5 mb-1" (click)="initForm()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="initForm()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
             </div>
         </div>
     </div>
@@ -76,7 +131,8 @@
     <div class="col-md-4 col-sm-6">
         Nomor Peserta :
         <div class="input-group">
-            <input type="text" class="form-control" (click)="clearForm()" [readOnly]="peserta.nama" placeholder="No. Urut" [(ngModel)]="peserta.noUrut" (keyup)="listenGetPeserta($event)">
+            <input type="text" class="form-control" (click)="clearForm()" [readOnly]="peserta.nama"
+                placeholder="No. Urut" [(ngModel)]="peserta.noUrut" (keyup)="listenGetPeserta($event)">
             <input type="text" class="form-control" placeholder="No. Peserta" [(ngModel)]="peserta.noPeserta" readonly>
             <div class="input-group-append">
                 <button class="btn btn-secondary" (click)="getPeserta()"><i class="bi bi-search"></i></button>
@@ -103,7 +159,7 @@
     </div>
 </div>
 
-<div class="row pl-3 pr-3 mb-3">
+<div class="row pl-3 pr-3 mb-3" *ngIf="username == 'admin'">
     <div class="col-md-6 col-sm-12">
         <form [formGroup]="form">
             <div class="row mb-2">
@@ -230,13 +286,13 @@
                     <div class="input-group">
                         <input type="text" class="form-control" formControlName="telinga">
                         <div class="input-group-prepend">
-                          <span class="input-group-text">AD</span>
+                            <span class="input-group-text">AD</span>
                         </div>
                         <input type="text" class="form-control" formControlName="ad">
                         <div class="input-group-prepend">
                             <span class="input-group-text">AS</span>
-                          </div>
-                          <input type="text" class="form-control" formControlName="as">
+                        </div>
+                        <input type="text" class="form-control" formControlName="as">
                     </div>
                 </div>
             </div>
@@ -315,24 +371,43 @@
                 <div class="w-100"></div>
             </div>
             <h4 class="tx-center tx-14">ODONTOGRAM IDENTIFIKASI</h4>
-            <div class="row pl-3 justify-content-center">
-                <div class="col">
-                    <div class="row">
-                        <div class="col-1 p-0 m-1 tx-center" *ngFor="let item of odontogram.kiri; let idx = index">
-                            <div class="clickable bg-light tx-16" (click)="openDialogSimbolOdontogram(idx, item, 'atas')"><span *ngIf="!item.atas">&nbsp;</span></div>
-                            <div>{{item.keterangan}}</div>
-                            <div class="clickable bg-light tx-16" (click)="openDialogSimbolOdontogram(idx, item, 'bawah')"><span *ngIf="!item.atas">&nbsp;</span></div>
-                        </div>
+            <div class="mb-2">
+                <input type="text" class="form-control" formControlName="odontogramIdentifikasi">
+            </div>
+            <div class="d-flex flex-row mb-3 justify-content-center">
+                <div class="mr-1 flex-fill tx-center" [ngClass]="{ 'ml-3 pl-3 border-left': idx === 8 }" *ngFor="let item of odontogram; let idx = index">
+                    <div class="clickable bg-gray-200 tx-16"
+                        (click)="openDialogSimbolOdontogram(idx, item, 'atas')">
+                        <span *ngIf="!item.atas">&nbsp;</span>
+                        <span *ngIf="item.atas" class="tx-black">
+                            <i class="bi bi-square" *ngIf="item.atas == 's'"></i>
+                            <i class="bi bi-circle" *ngIf="item.atas == 'c'"></i>
+                            <i class="bi bi-x-lg" *ngIf="item.atas == 'x'"></i>
+                            <i class="bi bi-check-lg" *ngIf="item.atas == 'ck'"></i>
+                            <i class="bi bi-circle-fill" *ngIf="item.atas == 'cf'"></i>
+                            <i class="bi bi-activity" *ngIf="item.atas == 'a'"></i>
+                            <img [src]="'assets/ac.png'" *ngIf="item.atas == 'ac'" height="16" style="margin-top: -4px;">
+                            <img [src]="'assets/ds.png'" *ngIf="item.atas == 'ds'" height="16" style="margin-top: -4px;">
+                            <img [src]="'assets/dc.png'" *ngIf="item.atas == 'dc'" height="16" style="margin-top: -4px;">
+                            <img [src]="'assets/cs.png'" *ngIf="item.atas == 'cs'" height="16" style="margin-top: -2px;">
+                        </span>
                     </div>
-                </div>
-                <div class="col-auto pr-3 pl-1 border-left">&nbsp; </div>
-                <div class="col m-0">
-                    <div class="row">
-                        <div class="col-1 p-0 m-1 tx-center" *ngFor="let item of odontogram.kanan; let idx = index">
-                            <div class="clickable bg-light tx-16" (click)="openDialogSimbolOdontogram(idx, item, 'atas')">&nbsp;</div>
-                            <div>{{item.keterangan}}</div>
-                            <div class="clickable bg-light tx-16" (click)="openDialogSimbolOdontogram(idx, item, 'bawah')">&nbsp;</div>
-                        </div>
+                    <div>{{item.keterangan}}</div>
+                    <div class="clickable bg-gray-200 tx-16"
+                        (click)="openDialogSimbolOdontogram(idx, item, 'bawah')">
+                        <span *ngIf="!item.bawah">&nbsp;</span>
+                        <span *ngIf="item.bawah" class="tx-black">
+                            <i class="bi bi-square" *ngIf="item.bawah == 's'"></i>
+                            <i class="bi bi-circle" *ngIf="item.bawah == 'c'"></i>
+                            <i class="bi bi-x-lg" *ngIf="item.bawah == 'x'"></i>
+                            <i class="bi bi-check-lg" *ngIf="item.bawah == 'ck'"></i>
+                            <i class="bi bi-circle-fill" *ngIf="item.bawah == 'cf'"></i>
+                            <i class="bi bi-activity" *ngIf="item.bawah == 'a'"></i>
+                            <img [src]="'assets/ac.png'" *ngIf="item.bawah == 'ac'" height="16" style="margin-top: -4px;">
+                            <img [src]="'assets/ds.png'" *ngIf="item.bawah == 'ds'" height="16" style="margin-top: -4px;">
+                            <img [src]="'assets/dc.png'" *ngIf="item.bawah == 'dc'" height="16" style="margin-top: -4px;">
+                            <img [src]="'assets/cs.png'" *ngIf="item.bawah == 'cs'" height="16" style="margin-top: -2px;">
+                        </span>
                     </div>
                 </div>
             </div>
@@ -445,7 +520,8 @@
                 <label class="col col-form-label"> Hasil Lab </label>
                 <div class="w-100"></div>
                 <div class="col">
-                    <textarea pInputTextarea formControlName="hasilLab" [autoResize]="true" [style]="{width: '100%'}"></textarea>
+                    <textarea pInputTextarea formControlName="hasilLab" [autoResize]="true"
+                        [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
 
@@ -453,7 +529,8 @@
                 <label class="col col-form-label"> Hasil EKG </label>
                 <div class="w-100"></div>
                 <div class="col">
-                    <textarea pInputTextarea formControlName="hasilEkg" [autoResize]="true" [style]="{width: '100%'}"></textarea>
+                    <textarea pInputTextarea formControlName="hasilEkg" [autoResize]="true"
+                        [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
 
@@ -461,7 +538,9 @@
                 <label class="col col-form-label"> Hasil Radiologi </label>
                 <div class="w-100"></div>
                 <div class="col">
-                    <textarea pInputTextarea formControlName="hasilRadiologi" [autoResize]="true" [style]="{width: '100%'}"></textarea>
+                    <p-editor styleClass="hiddenToolbar" formControlName="hasilRadiologi"></p-editor>
+                    <!-- <textarea pInputTextarea formControlName="hasilRadiologi" [autoResize]="true"
+                        [style]="{width: '100%'}"></textarea> -->
                 </div>
             </div>
 
@@ -469,37 +548,51 @@
                 <label class="col col-form-label"> Hasil Audiometri </label>
                 <div class="w-100"></div>
                 <div class="col">
-                    <textarea pInputTextarea formControlName="hasilAudiometri" [autoResize]="true" [style]="{width: '100%'}"></textarea>
+                    <textarea pInputTextarea formControlName="hasilAudiometri" [autoResize]="true"
+                        [style]="{width: '100%'}"></textarea>
                 </div>
             </div>
 
             <div class="row mb-2">
                 <label class="col col-form-label"> Hasil Keswa </label>
                 <div class="w-100"></div>
-                <div class="col">
-                    <p-dropdown
-                        [options]="keswaKesimpulan"
-                        optionLabel="name"
-                        optionValue="name"
-                        formControlName="hasilKeswaKode"
-                        [style]="{width: '100%'}"
-                        styleClass="mb-1"
-                        [autoDisplayFirst]="false">
-                    </p-dropdown>
-                    <textarea pInputTextarea formControlName="hasilKeswaKeterangan" [autoResize]="true" [style]="{width: '100%'}"></textarea>
+                <div class="col pl-5">
+                    <div class="row mb-1">
+                        <div class="col-3">Pleton</div>
+                        <div class="col-auto">
+                            <input type="text" class="form-control" formControlName="hasilKeswaPleton">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">Hasil</div>
+                        <div class="col">
+                            <p-dropdown [options]="keswaKesimpulan" optionLabel="name" optionValue="name"
+                                formControlName="hasilKeswaKode" [style]="{width: '100%'}" styleClass="mb-1"
+                                [autoDisplayFirst]="false" [showClear]="true">
+                            </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">Keterangan</div>
+                        <div class="col">
+                            <textarea pInputTextarea rows="8" formControlName="hasilKeswaKeterangan" [autoResize]="true"
+                                [style]="{width: '100%'}"></textarea>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 </div>
 
-<div class="row pl-3 pr-3 mb-3">
+<div class="row pl-3 pr-3 mb-3" *ngIf="username == 'admin'">
     <div class="col-12 mt-5">
         <form [formGroup]="form">
             <h4 class="tx-16 mb-2">KESIMPULAN PEMERIKSAAN</h4>
             <div class="row mb-2">
                 <div class="col">
-                    <textarea pInputTextarea [autoResize]="true" [style]="{width: '100%'}" formControlName="kesimpulanPemeriksaan"></textarea>
+                    <textarea pInputTextarea [autoResize]="true" [style]="{width: '100%'}"
+                        formControlName="kesimpulanPemeriksaan"></textarea>
                 </div>
             </div>
 
@@ -550,7 +643,7 @@
     </div>
 </div>
 
-<div class="row bg-gray-400 p-3">
+<div class="row bg-gray-400 p-3" *ngIf="username == 'admin'">
     <label class="col-2 col-form-label">&nbsp;</label>
     <div class="col-10">
         <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid || !peserta.id">
@@ -562,4 +655,3 @@
 </div>
 
 <p-toast position="top-center"></p-toast>
-

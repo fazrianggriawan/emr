@@ -44,6 +44,6 @@
     </div>
 </div>
 
-<p-dialog header="Form Surat Kontrol" [(visible)]="dialogFormSuratKontrol" [style]="{width: '600px'}" appendTo="body" [modal]="true">
+<p-dialog header="Form Surat Kontrol" (onHide)="formSuratKontrolService.closeDialog()" [(visible)]="dialogFormSuratKontrol" [style]="{width: '600px'}" appendTo="body" [modal]="true">
     <app-form-surat-kontrol></app-form-surat-kontrol>
 </p-dialog>

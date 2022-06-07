@@ -5,6 +5,7 @@ import { RawatJalanRoutingModule } from './rawat-jalan-routing.module';
 import { RawatJalanComponent } from './rawat-jalan.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { RegistrasiModule } from '../registrasi/registrasi.module';
 
 @NgModule({
     declarations: [
@@ -15,7 +16,8 @@ import { SharedModule } from '../shared/shared.module';
         CommonModule,
         RawatJalanRoutingModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RegistrasiModule
     ]
 })
 export class RawatJalanModule { }

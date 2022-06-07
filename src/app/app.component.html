@@ -1,12 +1,12 @@
 <header class="navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != '/'">
     <div class="row">
-        <div class="col-2">
-            <div class="p-pl-5 p-pt-3">
-                <span class="df-logo">SIMRSMANDIRI<span style="color: #0f4f86;">.io</span></span>
+        <div class="col-auto">
+            <div class="p-pl-3 p-pt-2">
+                <span class="df-logo" style="color: white;">SIMRSMANDIRI<span style="color: #75bfff;">.io</span></span>
             </div>
         </div>
-        <div class="col-3">
-            <!-- <app-menu></app-menu> -->
+        <div class="col-auto">
+            <app-menu></app-menu>
         </div>
         <div class="col-3">
             <!-- <app-calendar></app-calendar> -->
@@ -50,7 +50,24 @@
 <div class="content content-components p-4 ml-0 mr-0">
     <div class="content p-0">
         <div class="row justify-content-center">
-            <div class="col-md-10 col-sm-12">
+            <!-- <div class="col-auto">
+                <div style="width: 175px;">
+                    <strong>PASIEN</strong>
+                    <div>
+                        <h5 class="m-0">FAZRI ANGGRIAWAN</h5>
+                        <span>34 Thn, Laki-laki</span>
+                    </div>
+                    <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-pencil mr-2"></i>Edit Data Pasien</button>
+                    <hr>
+                    <div>
+                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-arrow-clockwise mr-2"></i>Riwayat Pelayanan</button>
+                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-exclamation-triangle mr-2"></i>Alergi <span class="badge badge-danger">2</span> </button>
+                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Penyakit</button>
+                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Operasi</button>
+                    </div>
+                </div>
+            </div> -->
+            <div class="col-10 pb-3 pt-0" style="background: #f9f9f9;">
                 <app-menu-emr *ngIf="currentRoute != '/'"></app-menu-emr>
                 <router-outlet></router-outlet>
             </div>

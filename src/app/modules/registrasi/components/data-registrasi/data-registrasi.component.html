@@ -1,0 +1,78 @@
+
+<div class="row p-2 sticky-top caption-title">
+    <div class="col-auto border-right"><h5>Data Registrasi</h5></div>
+    <div class="col">
+        <!-- <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-search mr-1"></i> Cari Pasien</button> -->
+        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1" (click)="formRegistrasiService.openDialog()"><i class="bi bi-plus-lg mr-1"></i> Registrasi Baru</button>
+        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> Vclaim BPJS</button>
+        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
+        <!-- <p-menu #menu [popup]="true" appendTo="body" [model]="menuPrint"></p-menu> -->
+        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+        <!-- <span class="border-left ml-2 mr-2 border-white"></span>
+        <button class="btn btn-sm p-1 pl-2 pr-2 btn-primary mr-1"><i class="bi bi-save mr-1"></i> Simpan Registrasi</button> -->
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col">
+        <p-table [value]="dataRegistrasi" styleClass="p-datatable-sm table-striped table-hover border-top mb-3" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>No. Antrian</th>
+                    <th>Tanggal</th>
+                    <th>Nama</th>
+                    <th>No. RM</th>
+                    <th>Jns. Perawatan</th>
+                    <th>Ruangan / Poliklinik</th>
+                    <th>Dokter</th>
+                    <th>Jenis Tagihan</th>
+                </tr>
+                <tr>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                    <th class="bg-white"><input type="text" class="form-control"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>A1-01</td>
+                    <td>{{item.tanggal}}</td>
+                    <td>{{item.nama}}</td>
+                    <td>{{item.norm}}</td>
+                    <td>{{item.jnsPerawatan}}</td>
+                    <td>{{item.ruanganPoli}}</td>
+                    <td>{{item.dokter}}</td>
+                    <td>{{item.jnsTagihan}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<p-dialog
+    [(visible)]="dialogFormRegistrasi"
+    (onHide)="formRegistrasiService.closeDialog()"
+    header="Form Registrasi"
+    [modal]="true"
+    [draggable]="true"
+    [breakpoints]="{'640px': '100vw', '3000px': '75vw'}"
+    appendTo="body">
+    <app-form-registrasi></app-form-registrasi>
+</p-dialog>
+
+<p-dialog
+    [(visible)]="dialogVclaim"
+    [closeOnEscape]="false"
+    (onHide)="vclaimService.closeDialog()"
+    header="Bridging VClaim BPJS"
+    [modal]="true"
+    [draggable]="true"
+    [breakpoints]="{'640px': '100vw', '3000px': '90vw'}"
+    appendTo="body">
+    <app-vclaim></app-vclaim>
+</p-dialog>

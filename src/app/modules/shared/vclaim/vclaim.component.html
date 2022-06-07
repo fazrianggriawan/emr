@@ -3,139 +3,117 @@
         <!-- <div style="position: absolute; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9; padding-top: 25%; padding-left: 45%;">
             <p-progressSpinner [style]="{width: '25px', height: '25px'}" strokeWidth="5"></p-progressSpinner>
         </div> -->
-        <div class="row mb-2">
+        <div class="row mb-1">
             <label class="col-4 col-form-label">Cari</label>
             <div class="col">
                 <div class="input-group">
                     <input type="text" class="form-control" [(ngModel)]="keyNomorKartu" placeholder="No. Kartu BPJS" (keyup)="getPesertaByNomorKartu($event)">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" (click)="vclaimService.getPesertaByNomorKartu(keyNomorKartu)"><i class="bi bi-search"></i></button>
+                        <button class="btn btn-primary" (click)="vclaimService.getPesertaByNomorKartu()"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mb-2">
+        <div class="row mb-1">
             <div class="col-4"></div>
             <div class="col">
                 <div class="input-append">
                     <div class="input-group">
                         <input type="text" class="form-control" [(ngModel)]="keyNik" placeholder="No. KTP / NIK" (keyup)="getPesertaByNik($event)">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="vclaimService.getPesertaByNik(keyNik)"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-primary" (click)="vclaimService.getPesertaByNik()"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <form [formGroup]="formPeserta">
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">Nama</label>
                 <div class="col">
                     <input type="text" class="form-control" formControlName="nama" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">No. Kartu</label>
                 <div class="col">
                     <input type="text" class="form-control" formControlName="noKartu" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">NIK</label>
                 <div class="col">
                     <input type="text" class="form-control" formControlName="nik" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">Kelamin - Tgl. Lahir</label>
-                <div class="col">
-                    <div style="display: inline-flex;">
-                        <div style="width: 102px;" class="mr-1">
-                            <input type="text" class="form-control" formControlName="kelamin" readonly>
-                        </div>
-                        <input type="text" class="form-control" formControlName="tglLahir" readonly>
-                    </div>
+                <div class="col pr-2">
+                    <input type="text" class="form-control" formControlName="kelamin" readonly>
+                </div>
+                <div class="col pl-0">
+                    <input type="text" class="form-control" formControlName="tglLahir" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">Usia</label>
                 <div class="col">
                     <input type="text" class="form-control" formControlName="usia" readonly>
                 </div>
             </div>
 
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">Status Peserta</label>
                 <div class="col">
-                    <div style="display: inline-flex;">
-                        <div style="width: 102px;" class="mr-1">
-                            <input type="text" class="form-control" formControlName="status" readonly>
-                        </div>
-                        <input type="text" class="form-control" formControlName="status" readonly>
-                    </div>
+                    <input type="text" class="form-control" formControlName="status" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">Jenis Peserta</label>
                 <div class="col">
-                    <div style="display: inline-flex;">
-                        <div style="width: 102px;" class="mr-1">
-                            <input type="text" class="form-control" formControlName="jnsPeserta" readonly>
-                        </div>
-                        <input type="text" class="form-control" formControlName="jnsPeserta" readonly>
-                    </div>
+                    <input type="text" class="form-control" formControlName="jnsPeserta" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">Hak Kelas</label>
                 <div class="col">
-                    <div style="display: inline-flex;">
-                        <div style="width: 102px;" class="mr-1">
-                            <input type="text" class="form-control" formControlName="hakKelas" readonly>
-                        </div>
-                        <input type="text" class="form-control" formControlName="hakKelas" readonly>
-                    </div>
+                    <input type="text" class="form-control" formControlName="hakKelas" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">Provider</label>
                 <div class="col">
-                    <div style="display: inline-flex;">
-                        <div style="width: 102px;" class="mr-1">
-                            <input type="text" class="form-control" formControlName="provider" readonly>
-                        </div>
-                        <input type="text" class="form-control" formControlName="provider" readonly>
-                    </div>
+                    <input type="text" class="form-control" formControlName="provider" readonly>
                 </div>
             </div>
-            <div class="row mb-2">
+            <div class="row mb-1">
                 <label class="col-4 col-form-label">
                     <button class="btn btn-outline-light btn-xs"><i class="bi bi-plus-lg mr-1"></i>Lebih Detail</button>
                 </label>
             </div>
             <div>
-                <div class="row mb-2 border-bottom">
+                <div class="row mb-1 border-bottom">
                     <label class="col-4 col-form-label">COB</label>
                     <div class="col border-left">
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label">Nama Asuransi</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="cobAsuransi" readonly>
                             </div>
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label">No. Asuransi</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="cobNoAsuransi" readonly>
                             </div>
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label">Tgl. TAT</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="cobTglTat" readonly>
                             </div>
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label">Tgl. TMT</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="cobTglTmt" readonly>
@@ -144,16 +122,16 @@
                     </div>
                 </div>
 
-                <div class="row mb-2 border-bottom">
+                <div class="row mb-1 border-bottom">
                     <label class="col-4 col-form-label">Med. Record</label>
                     <div class="col border-left">
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label"> No. MR</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="norm" readonly>
                             </div>
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label"> No. Tlp</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="tlp" readonly>
@@ -162,22 +140,22 @@
                     </div>
                 </div>
 
-                <div class="row mb-2 border-bottom">
+                <div class="row mb-1 border-bottom">
                     <label class="col-4 col-form-label">Informasi</label>
                     <div class="col border-left">
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label"> Dinsos</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="dinsos" readonly>
                             </div>
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label"> No. SKTM</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="noSktm" readonly>
                             </div>
                         </div>
-                        <div class="row mb-2">
+                        <div class="row mb-1">
                             <label class="col-4 col-form-label"> PRB</label>
                             <div class="col">
                                 <input type="text" class="form-control" formControlName="prb" readonly>
@@ -194,7 +172,7 @@
                 <div class="row pt-3 pb-3">
                     <div class="col">
                         <form [formGroup]="formSep">
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">Tanggal SEP</label>
                                 <div class="col-auto">
                                     <p-calendar [showIcon]="true" formControlName="tanggal" appendTo="body" [style]="{width:'150px'}"></p-calendar>
@@ -203,7 +181,7 @@
                                     <button class="btn btn-secondary"><i class="bi bi-file-earmark mr-1"></i> SEP Backdate / Fingerprint</button>
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">Jenis Kunjungan</label>
                                 <div class="col pt-2">
                                     <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="rujukanBaru"></p-radioButton>Rujukan Baru
@@ -221,12 +199,12 @@
                                 </md-radio-group> -->
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">
                                     <span ng-show="jnsPelayanan=='kontrolKembali'">Surat Kontrol</span>
                                     <!-- <span ng-show="jnsPelayanan=='rawatInap'">Surat Rawat Inap </span> -->
                                 </label>
-                                <div class="col">
+                                <div class="col-auto">
                                     <div class="input-group">
                                         <input type="text" class="form-control" formControlName="suratKontrol">
                                         <div class="input-group-append">
@@ -236,9 +214,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-2" ng-show="jnsPelayanan == 'rujukanBaru' || formSep.skdp.noSurat || jnsPelayanan == 'antarPoli' ">
+                            <div class="row mb-1" ng-show="jnsPelayanan == 'rujukanBaru' || formSep.skdp.noSurat || jnsPelayanan == 'antarPoli' ">
                                 <label class="col-3 col-form-label">No. Rujukan</label>
-                                <div class="col">
+                                <div class="col-auto">
                                     <div class="input-group">
                                         <input type="text" class="form-control" formControlName="noRujukan">
                                         <div class="input-group-append">
@@ -255,11 +233,11 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">Diagnosa <span
                                         ng-show="formSepBaru.diagnosa.$error.required || !formSep.diagAwal"
                                         class="fontello-icon-attention-circle error"></span></label>
-                                <div class="col">
+                                <div class="col-5">
                                     <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
                                     <!-- <md-autocomplete
                                     name="diagnosa"
@@ -281,9 +259,9 @@
                                 </md-autocomplete> -->
                                 </div>
                             </div>
-                            <div class="row mb-2" ng-show="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
+                            <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
                                 <label class="col-3 col-form-label">Poliklinik</label>
-                                <div class="col">
+                                <div class="col-auto">
                                     <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" formControlName="poliklinik" [style]="{width: '100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
                                     <!-- <md-autocomplete
                                     name="poli"
@@ -306,9 +284,9 @@
                                 </md-autocomplete> -->
                                 </div>
                             </div>
-                            <div class="row mb-2" ng-show="jnsPelayanan!='rawatInap'">
+                            <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap'">
                                 <label class="col-3 col-form-label">Dokter / DPJP</label>
-                                <div class="col">
+                                <div class="col-auto">
                                     <p-dropdown [options]="results" optionLabel="name" formControlName="dokter" [style]="{width: '100%'}"></p-dropdown>
 
                                     <!-- <selectize
@@ -321,12 +299,12 @@
                                 </selectize> -->
                                 </div>
                             </div>
-                            <div class="row mb-2"
+                            <div class="row mb-1"
                                 ng-show="formSep.poli.tujuan != poliRujukan && jnsPelayanan=='kontrolKembali' || jnsPelayanan=='antarPoli' ">
                                 <label class="col-3 col-form-label">Assessment Pelayanan <span
                                         ng-show="formSepBaru.assesmentPel.$error.required"
                                         class="fontello-icon-attention-circle error"></span></label>
-                                <div class="col">
+                                <div class="col-auto">
                                     <p-dropdown [options]="results" optionLabel="name" formControlName="assessmentPel" [style]="{width: '100%'}"></p-dropdown>
                                     <!-- <selectize
                                     name="assesmentPel"
@@ -338,13 +316,17 @@
                                 </selectize> -->
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">Hak Kelas</label>
-                                <div class="col">
+                                <div class="col-auto pr-2">
+                                    <input type="text" class="form-control" formControlName="hakKelas">
+                                </div>
+                                <label class="col-auto pl-0 pr-2 col-form-label">Naik Kelas</label>
+                                <div class="col-auto pl-0">
                                     <input type="text" class="form-control" formControlName="hakKelas">
                                 </div>
                             </div>
-                            <div class="row mb-2" *ngIf="formSep.get('hakKelas')?.value == '1'">
+                            <div class="row mb-1" *ngIf="formSep.get('hakKelas')?.value == '1'">
                                 <label class="col-3 col-form-label">Naik Kelas</label>
                                 <div class="col">
                                     <p-dropdown [options]="results" optionLabel="name" formControlName="naikKelas" [style]="{width: '100%'}"></p-dropdown>
@@ -394,25 +376,25 @@
                                             <!-- </div> -->
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">No. RM</label>
-                                <div class="col">
+                                <div class="col-auto">
                                     <input type="text" class="form-control" formControlName="norm">
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">No. Tlp</label>
-                                <div class="col">
+                                <div class="col-auto">
                                     <input type="text" class="form-control" formControlName="tlp">
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">Catatan</label>
                                 <div class="col">
                                     <input type="text" class="form-control" formControlName="catatan">
                                 </div>
                             </div>
-                            <div class="row mb-2">
+                            <div class="row mb-1">
                                 <label class="col-3 col-form-label">Status Kecelakaan</label>
                                 <div class="col">
                                     <p-dropdown [options]="results" optionLabel="name" formControlName="statusKecelakaan" [style]="{width: '100%'}"></p-dropdown>
@@ -429,26 +411,26 @@
                             </div>
                             <div class="row mt-3 pt-3 border-top" *ngIf="formSep.get('statusKecelakaan')?.value == '2'">
                                 <div class="col">
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">Tgl. Kejadian</label>
                                         <div class="col">
                                             <p-calendar [showIcon]="true" formControlName="tglKejadian"></p-calendar>
                                             <!-- <md-datepicker name="tglSep" ng-model="formSep.laka.tglKejadian" md-placeholder="DD-MM-YYYY" md-open-on-focus></md-datepicker> -->
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">No. Lap. Polisi</label>
                                         <div class="col">
                                             <input type="text" class="form-control" formControlName="noLapPolisi">
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">Keterangan</label>
                                         <div class="col">
                                             <input type="text" class="form-control" formControlName="keterangan">
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">Suplesi</label>
                                         <div class="col">
                                             <p-dropdown [options]="results" optionLabel="name" formControlName="suplesi" [style]="{width: '100%'}"></p-dropdown>
@@ -461,7 +443,7 @@
                                         </selectize> -->
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">No. Suplesi</label>
                                         <div class="col">
                                             <input type="text" class="form-control" formControlName="noSuplesi">
@@ -469,10 +451,10 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="row mb-2 border-bottom tx-bold">
+                                    <div class="row mb-1 border-bottom tx-bold">
                                         <label class="col">Lokasi Laka</label>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">Provinsi</label>
                                         <div class="col">
                                             <p-dropdown [options]="results" optionLabel="name" formControlName="provinsi" [style]="{width: '100%'}"></p-dropdown>
@@ -485,7 +467,7 @@
                                         </selectize> -->
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">Kabupaten</label>
                                         <div class="col">
                                             <p-dropdown [options]="results" optionLabel="name" formControlName="kabupaten" [style]="{width: '100%'}"></p-dropdown>
@@ -498,7 +480,7 @@
                                         </selectize> -->
                                         </div>
                                     </div>
-                                    <div class="row mb-2">
+                                    <div class="row mb-1">
                                         <label class="col-4 col-form-label">Kecamatan</label>
                                         <div class="col">
                                             <p-dropdown [options]="results" optionLabel="name" formControlName="kecamatan" [style]="{width: '100%'}"></p-dropdown>

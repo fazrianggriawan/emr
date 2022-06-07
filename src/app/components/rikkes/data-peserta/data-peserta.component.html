@@ -1,9 +1,16 @@
 <div class="row">
-    <div class="col" style="height: 80%;">
-        <input type="text" class="form-control mb-1 mt-1" [(ngModel)]="filterKey" (keyup)="filtering($event)" placeholder="Keyword Pencarian... Tekan Enter Untuk Memulai">
+    <div class="col">
+        <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="filterKey" (keyup)="filtering($event)" placeholder="Keyword Pencarian... Tekan Enter Untuk Memulai">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" (click)="dt!.filterGlobal(this.filterKey, 'startsWith')"><i class="bi bi-search mr-1"></i> Cari</button>
+            </div>
+        </div>
+
         <p-table
             #dt
             [value]="dataPeserta"
+            responsiveLayout="scroll"
             [globalFilterFields]="['noUrut','noPeserta','nama','tglLahir','jnsKelamin']">
             <ng-template pTemplate="header">
                 <tr class="bg-gray-300">

@@ -1,7 +1,7 @@
 <div class="row pt-3 pb-3">
     <div class="col mb-2 clearfix">
         <div class="float-left">
-            <button class="btn btn-sm btn-primary mr-1" (click)="formRujukanKeluarService.openDialog()"><i class="bi bi-plus-lg"></i> Form Rujukan Keluar</button>
+            <button class="btn btn-sm btn-primary mr-1" (click)="formRujukanKeluarService.openDialog()"><i class="bi bi-plus-lg"></i> Form Rujuk Keluar</button>
             <button class="btn btn-sm btn-secondary" (click)="getDataRujukan()"><i class="bi bi-arrow-clockwise"></i></button>
         </div>
     </div>
@@ -101,6 +101,6 @@
     </div>
 </div>
 
-<p-dialog header="Form Rujuk Keluar RS" [(visible)]="dialogFormRujukanKeluar" [style]="{width: '600px'}" appendTo="body" [modal]="true">
+<p-dialog header="Form Rujuk Keluar" [(visible)]="dialogFormRujukanKeluar" [style]="{width: '600px'}" appendTo="body" [modal]="true">
     <app-form-rujukan-keluar></app-form-rujukan-keluar>
 </p-dialog>

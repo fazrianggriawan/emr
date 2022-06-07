@@ -89,10 +89,6 @@ div.clickable:hover {
     padding: 1rem 2rem;
 }
 
-.p-tabview .p-tabview-nav {
-    background-color: #f5f6fa !important;
-}
-
 .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
     box-shadow: none;
 }
@@ -136,7 +132,8 @@ div.clickable:hover {
 }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-    background-color: #f5f6fa;
+    background-color: #7987a1;
+    color: white;
 }
 
 .p-fileupload .p-fileupload-content {
@@ -155,4 +152,55 @@ div.clickable:hover {
 
 .p-image-toolbar{
     z-index: 9999;
+}
+
+.content-components{
+    margin-top: 25px;
+}
+
+.navbar-header{
+    background: #3e5d97;
+    height: 45px;
+}
+
+.p-menu.p-menu-overlay{
+    z-index: 9999 !important;
+}
+
+.hiddenToolbar .ql-toolbar.ql-snow {
+    display: none;
+}
+
+.hiddenToolbar .ql-container.ql-snow {
+    border: 1px solid #ced4da !important;
+    border-radius: 3px !important;
+}
+
+.hiddenToolbar.p-editor-container .p-editor-content .ql-editor {
+    background: #f5f6fa !important;
+    border-radius: 3px !important;
+}
+
+.caption-title {
+    background-color: #f9f9f9;
+    top: 60px;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-text,
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-menuitem-icon {
+    color: white;
+}
+
+.p-dialog .p-dialog-header {
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid #bbbbbb;
+}
+
+.p-dialog .p-dialog-content {
+    padding: 1rem 1.5rem;
+    color: black;
+}
+
+.btn, .ui-datepicker-buttonpane button, .sp-container button, .form-control, .p-button, .p-button.p-button-icon-only {
+    padding: 0.4rem 0.6rem;
 }

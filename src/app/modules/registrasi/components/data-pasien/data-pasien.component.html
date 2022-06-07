@@ -1,9 +1,8 @@
-<!-- <p-dialog [(visible)]="showDialog" header="Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}" (onHide)="onHide()"> -->
     <form [formGroup]="form">
         <p-table
             [value]="dataPasien"
             responsiveLayout="scroll"
-            [style]="{height: '500px'}"
+            [style]="{'min-height': '200px'}"
             [(selection)]="selectedPasien"
             selectionMode="single"
             (onRowSelect)="onSelectPasien()">
@@ -43,7 +42,3 @@
             </ng-template>
         </p-table>
     </form>
-
-    <!-- <ng-template pTemplate="footer">
-    </ng-template> -->
-<!-- </p-dialog> -->

@@ -21,8 +21,8 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.loginService.loginData.subscribe(data => this.handleLogin(data))
-        this.loginService.errorMessage.subscribe(data => this.messageErrorLogin = data)
+        // this.loginService.loginData.subscribe(data => this.handleLogin(data))
+        // this.loginService.errorMessage.subscribe(data => this.messageErrorLogin = data)
 
         this.formLogin = this.form.group({
             username: [null, Validators.required],
@@ -37,8 +37,15 @@ export class LoginComponent implements OnInit {
     }
 
     public doLogin() {
-        this.loginService.userData.next(this.formLogin.value);
-        this.loginService.login();
+        if( this.formLogin.value.username == 'admin' && this.formLogin.value.password == '440699' ){
+            sessionStorage.setItem('login', 'admin')
+            this.gotoDashboarPage();
+        }
+
+        if( this.formLogin.value.username == 'admin2' && this.formLogin.value.password == 'admin2' ){
+            sessionStorage.setItem('login', 'admin2')
+            this.gotoDashboarPage();
+        }
     }
 
     public handleLogin(responseLogin: any) {
@@ -49,7 +56,7 @@ export class LoginComponent implements OnInit {
     }
 
     public gotoDashboarPage() {
-        this.router.navigateByUrl('urologi');
+        this.router.navigateByUrl('rikkes');
     }
 
 }

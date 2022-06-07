@@ -29,6 +29,9 @@ export class UploadFileComponent implements OnInit {
         this.dataPesertaService.peserta.subscribe(data => this.handleGetPeserta(data))
         this.uploadFileService.filesUplaoded.subscribe(data => this.uploadedFiles = data)
         this.uploadFileService.loading.subscribe(data => this.loading = data)
+        this.uploadFileService.deleteStatus.subscribe(data => {
+            if( data ) this.uploadFileService.getFilesUploaded(this.peserta.id);
+        })
     }
 
     @ViewChild('fileInput') fileInput!: FileUpload;
@@ -62,8 +65,8 @@ export class UploadFileComponent implements OnInit {
         return config.host + '/' + image;
     }
 
-    public onRemove(e: any) {
-        // console.log(e);
+    public deleteImage(item: any) {
+        this.uploadFileService.deleteImage(item);
     }
 
     public view(e: any) {

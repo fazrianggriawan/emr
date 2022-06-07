@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { config } from 'src/app/config';
 import { DataPesertaService } from './data-peserta/data-peserta.service';
@@ -24,17 +25,20 @@ export class RikkesComponent implements OnInit {
     dialogPrintSticker: boolean = false;
     dialogSimbolOdontogram: boolean = false;
 
+    username: any;
+
     peserta: any;
-    odontogram: any = {kiri: [], kanan: []};
+    odontogram: any = [];
+    selectedOdontogram: any;
     hasil: any = [{ id: 1, name: 'MS' }, { id: 0, name: 'TMS' }]
     printNoUrut: any = { dari: '', sampai: '' };
     form!: FormGroup
     hasilBmi: string = '';
     keswaKesimpulan: any = [
-        { name: 'TD' },
-        { name: 'DD' },
-        { name: 'D' }
+        { name: 'direkomendasikan' },
+        { name: 'tidak direkomendasikan' }
     ]
+    menuExport: any;
 
     constructor(
         private fb: FormBuilder,
@@ -43,10 +47,15 @@ export class RikkesComponent implements OnInit {
         public uploadFileService: UploadFileService,
         public radiologiService: RadiologiService,
         public laboratoriumService: LaboratoriumService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
+        this.username = sessionStorage.getItem('login');
+        if( this.username != 'admin' && this.username != 'admin2' ){
+            this.router.navigateByUrl('');
+        }
         this.initForm();
         this.dataPesertaService.peserta.subscribe(data => this.setFormPeserta(data))
         this.dataPesertaService.dialog.subscribe(data => this.dialogDataPeserta = data)
@@ -54,12 +63,37 @@ export class RikkesComponent implements OnInit {
         this.radiologiService.dialog.subscribe(data => this.dialogRadiologi = data)
         this.laboratoriumService.dialog.subscribe(data => this.dialogLaboratorium = data)
         this.rikkesService.dataRikkes.subscribe(data => this.setFormRikkes(data))
+        this.laboratoriumService.hasilLabKeterangan.subscribe(data => {
+            if( data ){
+                if( data.length > 0 ) this.form.get('hasilLab')?.patchValue(data[0].catatan)
+            }
+        })
+
+        this.radiologiService.hasil.subscribe(data => {
+            if( data ){
+                this.form.get('hasilRadiologi')?.patchValue(data.keterangan)
+            }
+        })
 
         this.rikkesService.saveStatus.subscribe(data => {
             if (data) {
                 this.messageService.add({ severity: 'success', summary: 'Sukses !', detail: 'Data Berhasil Disimpan.' });
             }
         })
+
+        this.rikkesService.dataPsikometri.subscribe(data => {
+            if( data ){
+                this.form.get('hasilKeswaKode')?.patchValue(data.hasil);
+                this.form.get('hasilKeswaKeterangan')?.patchValue(data.keterangan);
+                this.form.get('hasilKeswaPleton')?.patchValue(data.pleton);
+            }
+        })
+
+        this.menuExport = [
+            { label: 'Summary', icon: 'bi bi-file-earmark-ruled', command: (() => { this.exportExcel() }) },
+            { label: 'All Data', icon: 'bi bi-file-earmark-ruled', command: (() => { this.exportExcelAllData() }) },
+        ]
+
         this.initPeserta();
     }
 
@@ -74,6 +108,9 @@ export class RikkesComponent implements OnInit {
                 tglLahir: data.tglLahir
             }
             this.rikkesService.getDataRikkes(this.peserta.id);
+            this.laboratoriumService.getHasilLabKeterangan(this.peserta.id);
+            this.radiologiService.getDataHasil(this.peserta.id);
+            this.rikkesService.getDataHasilPsikometri(this.peserta.noUrut);
         }
     }
 
@@ -88,6 +125,7 @@ export class RikkesComponent implements OnInit {
     }
 
     public initForm() {
+        this.hasilBmi = '';
         this.initPeserta();
         this.initOdontogram();
         this.form = this.fb.group({
@@ -158,31 +196,30 @@ export class RikkesComponent implements OnInit {
             hasilAudiometri: [''],
             hasilKeswaKode: [''],
             hasilKeswaKeterangan: [''],
+            hasilKeswaPleton: [''],
+            odontogramIdentifikasi: [''],
             peserta: []
         })
     }
 
     public initOdontogram() {
-        this.odontogram.kiri = [
-            { keterangan: '8', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '7', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '6', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '5', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '4', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '3', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '2', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '1', atas: '', bawah: '', idPeserta: '' }
-        ]
-
-        this.odontogram.kanan = [
-            { keterangan: '1', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '2', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '3', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '4', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '5', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '6', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '7', atas: '', bawah: '', idPeserta: '' },
-            { keterangan: '8', atas: '', bawah: '', idPeserta: '' }
+        this.odontogram = [
+            { keterangan: '8', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '7', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '6', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '5', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '4', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '3', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '2', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '1', posisi: 'kiri', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '1', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '2', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '3', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '4', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '5', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '6', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '7', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' },
+            { keterangan: '8', posisi: 'kanan', atas: '', bawah: '', idPeserta: '' }
         ]
     }
 
@@ -193,74 +230,80 @@ export class RikkesComponent implements OnInit {
     }
 
     public setFormRikkes(data: any) {
-        if (data) {
-            this.form.get('id')?.patchValue(data.id);
-            this.form.get('anamnesa')?.patchValue(data.anamnesa);
-            this.form.get('tinggi')?.patchValue(data.tinggi);
-            this.form.get('berat')?.patchValue(data.berat);
-            this.form.get('imt')?.patchValue(data.imt);
-            this.form.get('tekananDarah')?.patchValue(data.tekananDarah);
-            this.form.get('nadi')?.patchValue(data.nadi);
-            this.form.get('tubuhBentuk')?.patchValue(data.tubuhBentuk);
-            this.form.get('tubuhGerak')?.patchValue(data.tubuhGerak);
-            this.form.get('kepala')?.patchValue(data.kepala);
-            this.form.get('muka')?.patchValue(data.muka);
-            this.form.get('leher')?.patchValue(data.leher);
-            this.form.get('mata')?.patchValue(data.mata);
-            this.form.get('od1')?.patchValue(data.od1);
-            this.form.get('od2')?.patchValue(data.od2);
-            this.form.get('od3')?.patchValue(data.od3);
-            this.form.get('os1')?.patchValue(data.os1);
-            this.form.get('os2')?.patchValue(data.os2);
-            this.form.get('os3')?.patchValue(data.os3);
-            this.form.get('campus')?.patchValue(data.campus);
-            this.form.get('kenalWarna')?.patchValue(data.kenalWarna);
-            this.form.get('lainLain')?.patchValue(data.lainLain);
-            this.form.get('telinga')?.patchValue(data.telinga);
-            this.form.get('ad')?.patchValue(data.ad);
-            this.form.get('as')?.patchValue(data.as);
-            this.form.get('tajamPend')?.patchValue(data.tajamPend);
-            this.form.get('membranTymp')?.patchValue(data.membranTymp);
-            this.form.get('penyTel')?.patchValue(data.penyTel);
-            this.form.get('gigiMulut')?.patchValue(data.gigiMulut);
-            this.form.get('gigiD')?.patchValue(data.gigiD);
-            this.form.get('gigiM')?.patchValue(data.gigiM);
-            this.form.get('gigiF')?.patchValue(data.gigiF);
-            this.form.get('karang')?.patchValue(data.karang);
-            this.form.get('protesa')?.patchValue(data.protesa);
-            this.form.get('penyMulut')?.patchValue(data.penyMulut);
-            this.form.get('hidung')?.patchValue(data.hidung);
-            this.form.get('tenggorokan')?.patchValue(data.tenggorokan);
-            this.form.get('thoraxPernafasan')?.patchValue(data.thoraxPernafasan);
-            this.form.get('thoraxBentuk')?.patchValue(data.thoraxBentuk);
-            this.form.get('cor')?.patchValue(data.cor);
-            this.form.get('pulmo')?.patchValue(data.pulmo);
-            this.form.get('abdomen')?.patchValue(data.abdomen);
-            this.form.get('lien')?.patchValue(data.lien);
-            this.form.get('hepar')?.patchValue(data.hepar);
-            this.form.get('regioInguinalis')?.patchValue(data.regioInguinalis);
-            this.form.get('genitalia')?.patchValue(data.genitalia);
-            this.form.get('perineum')?.patchValue(data.perineum);
-            this.form.get('angGerakAtas')?.patchValue(data.angGerakAtas);
-            this.form.get('angGerakBawah')?.patchValue(data.angGerakBawah);
-            this.form.get('kulit')?.patchValue(data.kulit);
-            this.form.get('refleks')?.patchValue(data.refleks);
-            this.form.get('kesimpulanPemeriksaan')?.patchValue(data.kesimpulanPemeriksaan);
-            this.form.get('U')?.patchValue(data.U);
-            this.form.get('A')?.patchValue(data.A);
-            this.form.get('B')?.patchValue(data.B);
-            this.form.get('D')?.patchValue(data.D);
-            this.form.get('L')?.patchValue(data.L);
-            this.form.get('G')?.patchValue(data.G);
-            this.form.get('J')?.patchValue(data.J);
-            this.form.get('stakes')?.patchValue(data.stakes);
-            this.form.get('hasil')?.patchValue(data.hasil);
-            this.form.get('hasilLab')?.patchValue(data.hasilLab);
-            this.form.get('hasilEkg')?.patchValue(data.hasilEkg);
-            this.form.get('hasilRadiologi')?.patchValue(data.hasilRadiologi);
-            this.form.get('hasilAudiometri')?.patchValue(data.hasilAudiometri);
-            this.form.get('hasilKeswaKode')?.patchValue(data.hasilKeswaKode);
-            this.form.get('hasilKeswaKeterangan')?.patchValue(data.hasilKeswaKeterangan);
+        if (data.rikkes) {
+            let rikkes = data.rikkes;
+            this.form.get('id')?.patchValue(rikkes.id);
+            this.form.get('anamnesa')?.patchValue(rikkes.anamnesa);
+            this.form.get('tinggi')?.patchValue(rikkes.tinggi);
+            this.form.get('berat')?.patchValue(rikkes.berat);
+            this.form.get('imt')?.patchValue(rikkes.imt);
+            this.form.get('tekananDarah')?.patchValue(rikkes.tekananDarah);
+            this.form.get('nadi')?.patchValue(rikkes.nadi);
+            this.form.get('tubuhBentuk')?.patchValue(rikkes.tubuhBentuk);
+            this.form.get('tubuhGerak')?.patchValue(rikkes.tubuhGerak);
+            this.form.get('kepala')?.patchValue(rikkes.kepala);
+            this.form.get('muka')?.patchValue(rikkes.muka);
+            this.form.get('leher')?.patchValue(rikkes.leher);
+            this.form.get('mata')?.patchValue(rikkes.mata);
+            this.form.get('od1')?.patchValue(rikkes.od1);
+            this.form.get('od2')?.patchValue(rikkes.od2);
+            this.form.get('od3')?.patchValue(rikkes.od3);
+            this.form.get('os1')?.patchValue(rikkes.os1);
+            this.form.get('os2')?.patchValue(rikkes.os2);
+            this.form.get('os3')?.patchValue(rikkes.os3);
+            this.form.get('campus')?.patchValue(rikkes.campus);
+            this.form.get('kenalWarna')?.patchValue(rikkes.kenalWarna);
+            this.form.get('lainLain')?.patchValue(rikkes.lainLain);
+            this.form.get('telinga')?.patchValue(rikkes.telinga);
+            this.form.get('ad')?.patchValue(rikkes.ad);
+            this.form.get('as')?.patchValue(rikkes.as);
+            this.form.get('tajamPend')?.patchValue(rikkes.tajamPend);
+            this.form.get('membranTymp')?.patchValue(rikkes.membranTymp);
+            this.form.get('penyTel')?.patchValue(rikkes.penyTel);
+            this.form.get('gigiMulut')?.patchValue(rikkes.gigiMulut);
+            this.form.get('gigiD')?.patchValue(rikkes.gigiD);
+            this.form.get('gigiM')?.patchValue(rikkes.gigiM);
+            this.form.get('gigiF')?.patchValue(rikkes.gigiF);
+            this.form.get('karang')?.patchValue(rikkes.karang);
+            this.form.get('protesa')?.patchValue(rikkes.protesa);
+            this.form.get('penyMulut')?.patchValue(rikkes.penyMulut);
+            this.form.get('hidung')?.patchValue(rikkes.hidung);
+            this.form.get('tenggorokan')?.patchValue(rikkes.tenggorokan);
+            this.form.get('thoraxPernafasan')?.patchValue(rikkes.thoraxPernafasan);
+            this.form.get('thoraxBentuk')?.patchValue(rikkes.thoraxBentuk);
+            this.form.get('cor')?.patchValue(rikkes.cor);
+            this.form.get('pulmo')?.patchValue(rikkes.pulmo);
+            this.form.get('abdomen')?.patchValue(rikkes.abdomen);
+            this.form.get('lien')?.patchValue(rikkes.lien);
+            this.form.get('hepar')?.patchValue(rikkes.hepar);
+            this.form.get('regioInguinalis')?.patchValue(rikkes.regioInguinalis);
+            this.form.get('genitalia')?.patchValue(rikkes.genitalia);
+            this.form.get('perineum')?.patchValue(rikkes.perineum);
+            this.form.get('angGerakAtas')?.patchValue(rikkes.angGerakAtas);
+            this.form.get('angGerakBawah')?.patchValue(rikkes.angGerakBawah);
+            this.form.get('kulit')?.patchValue(rikkes.kulit);
+            this.form.get('refleks')?.patchValue(rikkes.refleks);
+            this.form.get('kesimpulanPemeriksaan')?.patchValue(rikkes.kesimpulanPemeriksaan);
+            this.form.get('U')?.patchValue(rikkes.U);
+            this.form.get('A')?.patchValue(rikkes.A);
+            this.form.get('B')?.patchValue(rikkes.B);
+            this.form.get('D')?.patchValue(rikkes.D);
+            this.form.get('L')?.patchValue(rikkes.L);
+            this.form.get('G')?.patchValue(rikkes.G);
+            this.form.get('J')?.patchValue(rikkes.J);
+            this.form.get('stakes')?.patchValue(rikkes.stakes);
+            this.form.get('hasil')?.patchValue(rikkes.hasil);
+            this.form.get('hasilLab')?.patchValue(rikkes.hasilLab);
+            this.form.get('hasilEkg')?.patchValue(rikkes.hasilEkg);
+            this.form.get('hasilRadiologi')?.patchValue(rikkes.hasilRadiologi);
+            this.form.get('hasilAudiometri')?.patchValue(rikkes.hasilAudiometri);
+            this.form.get('hasilKeswaKode')?.patchValue(rikkes.hasilKeswaKode);
+            this.form.get('hasilKeswaKeterangan')?.patchValue(rikkes.hasilKeswaKeterangan);
+            this.form.get('hasilKeswaPleton')?.patchValue(rikkes.hasilKeswaPleton);
+            this.form.get('odontogramIdentifikasi')?.patchValue(rikkes.odontogramIdentifikasi);
+
+            this.hitungBmi();
+            this.odontogram = data.odontogram;
         }
     }
 
@@ -284,6 +327,7 @@ export class RikkesComponent implements OnInit {
 
     public save() {
         this.form.get('peserta')?.patchValue(this.peserta);
+        this.form.value.odontogram = this.odontogram;
         this.rikkesService.save(this.form.value);
     }
 
@@ -334,8 +378,22 @@ export class RikkesComponent implements OnInit {
     }
 
     public openDialogSimbolOdontogram(idx: number, data: any, location: string) {
+        data.idx = idx;
+        data.location = location;
+        this.selectedOdontogram = data;
         this.dialogSimbolOdontogram = true;
-        console.log(data);
+    }
+
+    public setSimbolOdontogram(simbol: string){
+        let idx = this.selectedOdontogram.idx;
+
+        if( this.selectedOdontogram.location == 'atas' ){
+            this.odontogram[idx].atas = simbol;
+        }else if( this.selectedOdontogram.location == 'bawah' ){
+            this.odontogram[idx].bawah = simbol;
+        }
+
+        this.dialogSimbolOdontogram = false;
     }
 
 
@@ -353,6 +411,12 @@ export class RikkesComponent implements OnInit {
 
     public exportExcel() {
         let iframe = '<iframe src="' + config.api_url('rikkes/export') + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
+        let win: any = window.open("", "", "width=1024,height=510,toolbar=no,menubar=no,resizable=yes");
+        win.document.write(iframe);
+    }
+
+    public exportExcelAllData() {
+        let iframe = '<iframe src="' + config.api_url('rikkes/exportAllData') + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
         let win: any = window.open("", "", "width=1024,height=510,toolbar=no,menubar=no,resizable=yes");
         win.document.write(iframe);
     }

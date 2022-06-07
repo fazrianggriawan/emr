@@ -66,7 +66,7 @@ export class RegistrasiComponent implements OnInit {
         this.masterService.golonganPasien.subscribe(data => this.golonganPasien = data)
 
         this.dataPasienService.pasien.subscribe(data => this.setToForm(data))
-        this.dataPasienService.showDialog.subscribe( data => this.dialogDataPasien = data )
+        this.dataPasienService.dialog.subscribe( data => this.dialogDataPasien = data )
 
         this.vclaimService.dialog.subscribe( data => this.dialogVclaim = data )
 
@@ -82,10 +82,10 @@ export class RegistrasiComponent implements OnInit {
 
     public getPesertaBpjs() {
         if( this.form.get('nomorAsuransi')?.value ){
-            this.vclaimService.getPesertaByNomorKartu( this.form.get('nomorAsuransi')?.value );
+            this.vclaimService.getPesertaByNomorKartu();
         }else{
             if( this.form.get('nik')?.value ){
-                this.vclaimService.getPesertaByNik( this.form.get('nik')?.value );
+                this.vclaimService.getPesertaByNik();
             }
         }
     }

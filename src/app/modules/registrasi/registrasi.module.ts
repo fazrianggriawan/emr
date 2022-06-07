@@ -6,12 +6,16 @@ import { RegistrasiComponent } from './registrasi.component';
 import { DataPasienComponent } from './components/data-pasien/data-pasien.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormRawatJalanComponent } from './components/form-rawat-jalan/form-rawat-jalan.component';
+import { DataRegistrasiComponent } from './components/data-registrasi/data-registrasi.component';
+import { FormRegistrasiComponent } from './components/form-registrasi/form-registrasi.component';
 
 @NgModule({
     declarations: [
         RegistrasiComponent,
         DataPasienComponent,
-        FormRawatJalanComponent
+        FormRawatJalanComponent,
+        DataRegistrasiComponent,
+        FormRegistrasiComponent
     ],
     imports: [
         SharedModule,
@@ -19,7 +23,8 @@ import { FormRawatJalanComponent } from './components/form-rawat-jalan/form-rawa
         RegistrasiRoutingModule
     ],
     exports: [
-        SharedModule
+        DataRegistrasiComponent,
+        FormRegistrasiComponent
     ]
 })
 export class RegistrasiModule { }
