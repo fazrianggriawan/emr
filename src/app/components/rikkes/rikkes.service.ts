@@ -11,6 +11,7 @@ export class RikkesService {
     dataRikkes = new BehaviorSubject<any>('');
     saveStatus = new BehaviorSubject<boolean>(false);
     dataPsikometri = new BehaviorSubject<any>('');
+    dataEkg = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient,
@@ -34,6 +35,11 @@ export class RikkesService {
     public getDataHasilPsikometri(noUrut: string){
         this.http.get<any>(config.api_url('rikkes/getHasilPsikometri/noUrut/'+noUrut))
             .subscribe(data => this.dataPsikometri.next(data.data))
+    }
+
+    public getDataHasilEkg(noUrut: string){
+        this.http.get<any>(config.api_url('rikkes/getHasilEkg/noUrut/'+noUrut))
+            .subscribe(data => this.dataEkg.next(data.data))
     }
 
 }

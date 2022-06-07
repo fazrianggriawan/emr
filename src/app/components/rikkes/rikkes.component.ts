@@ -89,6 +89,12 @@ export class RikkesComponent implements OnInit {
             }
         })
 
+        this.rikkesService.dataEkg.subscribe(data => {
+            if( data ){
+                this.form.get('hasilEkg')?.patchValue(data.hasil);
+            }
+        })
+
         this.menuExport = [
             { label: 'Summary', icon: 'bi bi-file-earmark-ruled', command: (() => { this.exportExcel() }) },
             { label: 'All Data', icon: 'bi bi-file-earmark-ruled', command: (() => { this.exportExcelAllData() }) },
@@ -111,6 +117,7 @@ export class RikkesComponent implements OnInit {
             this.laboratoriumService.getHasilLabKeterangan(this.peserta.id);
             this.radiologiService.getDataHasil(this.peserta.id);
             this.rikkesService.getDataHasilPsikometri(this.peserta.noUrut);
+            this.rikkesService.getDataHasilEkg(this.peserta.noUrut);
         }
     }
 
