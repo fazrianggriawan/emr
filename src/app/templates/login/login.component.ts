@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     }
 
     public gotoDashboarPage() {
-        this.router.navigateByUrl('rikkes');
+        this.router.navigateByUrl('vclaim');
     }
 
 }

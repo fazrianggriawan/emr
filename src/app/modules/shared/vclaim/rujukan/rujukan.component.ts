@@ -19,7 +19,7 @@ export class RujukanComponent implements OnInit {
 
     constructor(
         public formRujukanKeluarService: FormRujukanKeluarService,
-        private rujukanService: RujukanService,
+        public rujukanService: RujukanService,
         private vclaimService: VclaimService
     ) { }
 

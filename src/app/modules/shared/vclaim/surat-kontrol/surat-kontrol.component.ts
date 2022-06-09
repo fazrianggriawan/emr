@@ -17,7 +17,7 @@ export class SuratKontrolComponent implements OnInit {
     filterBulan: any;
 
     constructor(
-        private suratKontrolService: SuratKontrolService,
+        public suratKontrolService: SuratKontrolService,
         public formSuratKontrolService: FormSuratKontrolService,
         private vclaimService: VclaimService
     ) { }
@@ -26,6 +26,8 @@ export class SuratKontrolComponent implements OnInit {
         this.suratKontrolService.dataSuratKontrol.subscribe(data => this.dataSuratKontrol = data)
         this.formSuratKontrolService.dialog.subscribe(data => this.dialogFormSuratKontrol = data)
         this.vclaimService.peserta.subscribe(data => this.handlePeserta(data))
+        this.formSuratKontrolService.saveStatus.subscribe(data => { if (data) this.getDataSuratKontrol() })
+        this.suratKontrolService.actionStatus.subscribe(data => { if (data) this.getDataSuratKontrol() })
     }
 
     public handlePeserta(data: any) {
@@ -39,6 +41,12 @@ export class SuratKontrolComponent implements OnInit {
         setTimeout(() => {
             this.suratKontrolService.getDataSuratKontrol(this.peserta.noKartu, this.filter.from, '1');
         }, 50);
+    }
+
+    public delete(noSuratKontrol: string) {
+        if (confirm('Yakin ingn menghapus data ini?')) {
+            this.suratKontrolService.delete(noSuratKontrol);
+        }
     }
 
 }

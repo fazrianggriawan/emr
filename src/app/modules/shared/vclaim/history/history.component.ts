@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { DataPasienService } from 'src/app/modules/registrasi/components/data-pasien/data-pasien.service';
 import { VclaimService } from '../vclaim.service';
 import { HistoryService } from './history.service';
@@ -6,7 +7,8 @@ import { HistoryService } from './history.service';
 @Component({
     selector: 'app-history',
     templateUrl: './history.component.html',
-    styleUrls: ['./history.component.css']
+    styleUrls: ['./history.component.css'],
+    providers: [ConfirmationService]
 })
 export class HistoryComponent implements OnInit {
 
@@ -16,13 +18,16 @@ export class HistoryComponent implements OnInit {
     today: Date = new Date;
 
     constructor(
-        private vclaimService: VclaimService,
-        private historyService: HistoryService
+        public vclaimService: VclaimService,
+        private historyService: HistoryService,
+        private confirmationService: ConfirmationService
     ) { }
 
     ngOnInit(): void {
         this.vclaimService.peserta.subscribe(data => this.handlePeserta(data))
         this.historyService.dataHistory.subscribe(data => this.dataHistory = data)
+        this.historyService.actionStatus.subscribe(data => { if (data) this.getDataHistory() })
+        this.vclaimService.saveStatus.subscribe(data => { if (data) this.getDataHistory() })
 
         let defaultFilterFrom = new Date().setDate(this.today.getDate() - 30);
         this.filter.from = new Date(defaultFilterFrom);
@@ -30,7 +35,7 @@ export class HistoryComponent implements OnInit {
     }
 
     public handlePeserta(data: any) {
-        if(data){
+        if (data) {
             this.peserta = data.peserta;
             this.getDataHistory();
         }
@@ -40,6 +45,15 @@ export class HistoryComponent implements OnInit {
         setTimeout(() => {
             this.historyService.getDataHistory(this.peserta.noKartu, this.filter.from, this.filter.to);
         }, 50);
+    }
+
+    public delete(noSep: string) {
+        this.confirmationService.confirm({
+            message: 'Anda yakin ingin menghapus data ini ?',
+            accept: () => {
+                this.historyService.deleteSep({ noSep: noSep });
+            }
+        });
     }
 
 }

@@ -73,4 +73,11 @@ export class UploadFileComponent implements OnInit {
         console.log(e)
     }
 
+    public openFile(filelocation:string) {
+        let link = config.host + '/' + filelocation;
+        let iframe = '<iframe src="' + link + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
+        let win: any = window.open("", "", "width=1024,height=510,toolbar=no,menubar=no,resizable=yes");
+        win.document.write(iframe);
+    }
+
 }

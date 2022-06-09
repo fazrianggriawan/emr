@@ -3,6 +3,7 @@
         <p-fileUpload
             #fileInput
             chooseLabel="Pilih File"
+            [maxFileSize]="20000000"
             [multiple]="true"
             [customUpload]="true"
             [auto]="false"
@@ -27,7 +28,10 @@
                         <tr *ngFor="let item of uploadedFiles">
                             <td>
                                 <!-- <img [src]="getImage(item.file_location)" height="50"> -->
-                                <p-image appendTo="body" [src]="getImage(item.file_location)" alt="{{item.filename}}" height="50" [preview]="true"></p-image>
+                                <p-image *ngIf="item.type == 'image/jpeg' || item.type == 'image/png'" appendTo="body" [src]="getImage(item.file_location)" alt="{{item.filename}}" height="50" [preview]="true"></p-image>
+                                <button class="btn btn-secondary btn-icon btn-sm" *ngIf="item.type != 'image/jpeg' && item.type != 'image/png'" (click)="openFile(item.file_location)">
+                                    <i class="bi bi-camera-reels mr-1"></i> <br> View Video
+                                </button>
                             </td>
                             <td>{{item.filename}}</td>
                             <td>{{item.size}}</td>

@@ -21,11 +21,12 @@
                     <th>Dokter</th>
                     <th width="100">Tgl. Terbit</th>
                     <th width="100">Tgl. Kontrol</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody *ngIf="dataSuratKontrol">
                 <tr *ngFor="let item of dataSuratKontrol.list">
-                    <td><button class="btn btn-secondary btn-sm">{{item.noSuratKontrol}}</button></td>
+                    <td><button class="btn btn-secondary btn-sm" (click)="suratKontrolService.getSuratKontrol(item.noSuratKontrol)">{{item.noSuratKontrol}}</button></td>
                     <td>{{item.noSepAsalKontrol}}</td>
                     <td>{{item.jnsPelayanan | uppercase}}</td>
                     <td>{{item.namaPoliAsal}}</td>
@@ -33,6 +34,7 @@
                     <td>{{item.namaDokter}}</td>
                     <td>{{item.tglTerbitKontrol}}</td>
                     <td>{{item.tglRencanaKontrol}}</td>
+                    <td><button class="btn btn-sm btn-icon btn-light" (click)="delete(item.noSuratKontrol)"><i class="bi bi-trash"></i></button></td>
                 </tr>
             </tbody>
             <tfoot *ngIf="!dataSuratKontrol">

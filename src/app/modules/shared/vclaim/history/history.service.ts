@@ -10,6 +10,7 @@ import { AppService } from 'src/app/services/app.service';
 export class HistoryService {
 
     dataHistory = new BehaviorSubject<any>('');
+    actionStatus = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
@@ -22,5 +23,18 @@ export class HistoryService {
 
         this.http.get<any>( config.api_vclaim('history/nomorKartu/'+nomorKartu+'/from/'+filterFrom+'/to/'+filterTo) )
             .subscribe( data => this.dataHistory.next(data.response) )
+    }
+
+    public deleteSep(data: any) {
+        this.http.post<any>( config.api_vclaim('sep/delete'), data )
+            .subscribe(data => {
+                if( data.metaData.code == '200' ){
+                    this.actionStatus.next(true);
+                    this.appService.setNotification('success', data.metaData.message)
+                }else{
+                    this.actionStatus.next(false);
+                    this.appService.setNotification('error', data.metaData.message)
+                }
+            })
     }
 }

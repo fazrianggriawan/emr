@@ -204,3 +204,7 @@ div.clickable:hover {
 .btn, .ui-datepicker-buttonpane button, .sp-container button, .form-control, .p-button, .p-button.p-button-icon-only {
     padding: 0.4rem 0.6rem;
 }
+
+.p-button:focus, .form-control:focus{
+    box-shadow: none;
+}

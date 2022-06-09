@@ -7,9 +7,9 @@
             <label class="col-4 col-form-label">Cari</label>
             <div class="col">
                 <div class="input-group">
-                    <input type="text" class="form-control" [(ngModel)]="keyNomorKartu" placeholder="No. Kartu BPJS" (keyup)="getPesertaByNomorKartu($event)">
+                    <input type="text" class="form-control" name="noPeserta" [(ngModel)]="keyNomorKartu" placeholder="No. Kartu BPJS" (keyup)="listenCariPeserta($event)">
                     <div class="input-group-append">
-                        <button class="btn btn-primary" (click)="vclaimService.getPesertaByNomorKartu()"><i class="bi bi-search"></i></button>
+                        <button class="btn btn-primary" (click)="vclaimService.getPesertaByNomorKartu(keyNomorKartu)"><i class="bi bi-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -19,71 +19,71 @@
             <div class="col">
                 <div class="input-append">
                     <div class="input-group">
-                        <input type="text" class="form-control" [(ngModel)]="keyNik" placeholder="No. KTP / NIK" (keyup)="getPesertaByNik($event)">
+                        <input type="text" class="form-control" name="nik" [(ngModel)]="keyNik" placeholder="No. KTP / NIK" (keyup)="listenCariPeserta($event)">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="vclaimService.getPesertaByNik()"><i class="bi bi-search"></i></button>
+                            <button class="btn btn-primary" (click)="vclaimService.getPesertaByNik(keyNik)"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <form [formGroup]="formPeserta">
+        <form>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Nama</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="nama" readonly>
+                    <input type="text" class="form-control" value="{{peserta.nama}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">No. Kartu</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="noKartu" readonly>
+                    <input type="text" class="form-control" value="{{peserta.noKartu}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">NIK</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="nik" readonly>
+                    <input type="text" class="form-control" value="{{peserta.nik}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Kelamin - Tgl. Lahir</label>
                 <div class="col pr-2">
-                    <input type="text" class="form-control" formControlName="kelamin" readonly>
+                    <input type="text" class="form-control" value="{{peserta.sex}}" readonly>
                 </div>
                 <div class="col pl-0">
-                    <input type="text" class="form-control" formControlName="tglLahir" readonly>
+                    <input type="text" class="form-control" value="{{peserta.tglLahir}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Usia</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="usia" readonly>
+                    <input type="text" class="form-control" value="{{peserta.umur.umurSekarang}}" readonly>
                 </div>
             </div>
 
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Status Peserta</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="status" readonly>
+                    <input type="text" class="form-control" value="{{peserta.statusPeserta.keterangan}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Jenis Peserta</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="jnsPeserta" readonly>
+                    <input type="text" class="form-control" value="{{peserta.jenisPeserta.keterangan}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Hak Kelas</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="hakKelas" readonly>
+                    <input type="text" class="form-control" value="{{peserta.hakKelas.keterangan}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Provider</label>
                 <div class="col">
-                    <input type="text" class="form-control" formControlName="provider" readonly>
+                    <input type="text" class="form-control" value="{{peserta.provUmum.nmProvider}}" readonly>
                 </div>
             </div>
             <div class="row mb-1">
@@ -98,25 +98,25 @@
                         <div class="row mb-1">
                             <label class="col-4 col-form-label">Nama Asuransi</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="cobAsuransi" readonly>
+                                <input type="text" class="form-control" value="{{peserta.cob.nmAsuransi}}" readonly>
                             </div>
                         </div>
                         <div class="row mb-1">
                             <label class="col-4 col-form-label">No. Asuransi</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="cobNoAsuransi" readonly>
+                                <input type="text" class="form-control" value="{{peserta.cob.noAsuransi}}" readonly>
                             </div>
                         </div>
                         <div class="row mb-1">
                             <label class="col-4 col-form-label">Tgl. TAT</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="cobTglTat" readonly>
+                                <input type="text" class="form-control" value="{{peserta.cob.tglTAT}}" readonly>
                             </div>
                         </div>
                         <div class="row mb-1">
                             <label class="col-4 col-form-label">Tgl. TMT</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="cobTglTmt" readonly>
+                                <input type="text" class="form-control" value="{{peserta.cob.tglTMT}}" readonly>
                             </div>
                         </div>
                     </div>
@@ -128,13 +128,13 @@
                         <div class="row mb-1">
                             <label class="col-4 col-form-label"> No. MR</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="norm" readonly>
+                                <input type="text" class="form-control" value="{{peserta.mr.noMR}}" readonly>
                             </div>
                         </div>
                         <div class="row mb-1">
                             <label class="col-4 col-form-label"> No. Tlp</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="tlp" readonly>
+                                <input type="text" class="form-control" value="{{peserta.mr.noTelepon}}" readonly>
                             </div>
                         </div>
                     </div>
@@ -146,19 +146,19 @@
                         <div class="row mb-1">
                             <label class="col-4 col-form-label"> Dinsos</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="dinsos" readonly>
+                                <input type="text" class="form-control" value="{{peserta.informasi.dinsos}}" readonly>
                             </div>
                         </div>
                         <div class="row mb-1">
                             <label class="col-4 col-form-label"> No. SKTM</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="noSktm" readonly>
+                                <input type="text" class="form-control" value="{{peserta.informasi.noSKTM}}" readonly>
                             </div>
                         </div>
                         <div class="row mb-1">
                             <label class="col-4 col-form-label"> PRB</label>
                             <div class="col">
-                                <input type="text" class="form-control" formControlName="prb" readonly>
+                                <input type="text" class="form-control" value="{{peserta.informasi.prolanisPRB}}" readonly>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@
         </form>
     </div>
     <div class="col-8">
-        <p-tabView [scrollable]="true">
+        <p-tabView [scrollable]="true" [(activeIndex)]="tabIndex">
             <p-tabPanel header="Form SEP">
                 <div class="row pt-3 pb-3">
                     <div class="col">
@@ -175,217 +175,118 @@
                             <div class="row mb-1">
                                 <label class="col-3 col-form-label">Tanggal SEP</label>
                                 <div class="col-auto">
-                                    <p-calendar [showIcon]="true" formControlName="tanggal" appendTo="body" [style]="{width:'150px'}"></p-calendar>
+                                    <p-calendar [showIcon]="true" dateFormat="dd M yy" formControlName="tglSep" appendTo="body" [style]="{width:'150px'}"></p-calendar>
                                 </div>
                                 <div class="col pl-0">
                                     <button class="btn btn-secondary"><i class="bi bi-file-earmark mr-1"></i> SEP Backdate / Fingerprint</button>
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <label class="col-3 col-form-label">Jenis Kunjungan</label>
-                                <div class="col pt-2">
-                                    <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="rujukanBaru"></p-radioButton>Rujukan Baru
-                                    <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="kontrolKembali" styleClass="ml-2"></p-radioButton>Kontrol Kembali
-                                    <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="rawatInap" styleClass="ml-2"></p-radioButton>Rawat Inap
-                                    <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="igd" styleClass="ml-2"></p-radioButton>IGD
-                                    <p-radioButton name="jnsKunjungan" formControlName="jnsKunjungan" value="antarPoli" styleClass="ml-2"></p-radioButton>Rujukan Internal
-
-                                    <!-- <md-radio-group ng-model="jnsPelayanan" name="jnsPelayanan" aria-labelledby="jnsPelayanan" layout="row" style="font-size:larger;" required>
-                                    <md-radio-button value="rujukanBaru" class="md-primary">Rujukan Baru</md-radio-button>
-                                    <md-radio-button value="kontrolKembali" class="md-primary">Kontrol Kembali</md-radio-button>
-                                    <md-radio-button value="rawatInap" class="md-primary">Rawat Inap</md-radio-button>
-                                    <md-radio-button value="igd" class="md-primary">IGD</md-radio-button>
-                                    <md-radio-button value="antarPoli" class="md-primary">Rujukan Internal</md-radio-button>
-                                </md-radio-group> -->
+                                <label class="col-3 col-form-label">
+                                    Jenis Kunjungan <span *ngIf="formSep.get('jnsKunjungan')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col">
+                                    <p-selectButton [options]="dataJnsKunjungan" (ngModelChange)="onSelectJnsKunjungan()" optionLabel="nama" formControlName="jnsKunjungan"></p-selectButton>
                                 </div>
                             </div>
-                            <div class="row mb-1">
+                            <div class="row mb-1" *ngIf="formSep.value.jnsKunjungan.kode == 'kontrolKembali' || formSep.value.jnsKunjungan.kode == 'rawatInap'">
                                 <label class="col-3 col-form-label">
-                                    <span ng-show="jnsPelayanan=='kontrolKembali'">Surat Kontrol</span>
-                                    <!-- <span ng-show="jnsPelayanan=='rawatInap'">Surat Rawat Inap </span> -->
+                                    <span *ngIf="formSep.value.jnsKunjungan.kode == 'kontrolKembali'">Surat Kontrol</span>
+                                    <span *ngIf="formSep.value.jnsKunjungan.kode == 'rawatInap'">Surat Rawat Inap </span>
                                 </label>
                                 <div class="col-auto">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" formControlName="suratKontrol">
+                                        <input type="text" class="form-control" formControlName="suratKontrol" placeholder="Nomor Surat" readonly>
                                         <div class="input-group-append">
                                             <button class="btn btn-secondary" (click)="formSuratKontrolService.openDialog()"><i class="bi bi-plus-lg mr-1"></i>Data Baru</button>
-                                            <button class="btn btn-secondary"><i class="bi bi-table mr-1"></i> View Data</button>
+                                            <button class="btn btn-secondary" (click)="tabIndex=1"><i class="bi bi-table mr-1"></i> View Data</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-1" ng-show="jnsPelayanan == 'rujukanBaru' || formSep.skdp.noSurat || jnsPelayanan == 'antarPoli' ">
-                                <label class="col-3 col-form-label">No. Rujukan</label>
+                            <div class="row mb-1" *ngIf="formSep.value.jnsKunjungan.kode == 'rujukanBaru' || formSep.value.jnsKunjungan.kode == 'antarPoli'">
+                                <label class="col-3 col-form-label">Surat Rujukan</label>
                                 <div class="col-auto">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" formControlName="noRujukan">
+                                        <input type="text" class="form-control" formControlName="noRujukan" placeholder="Nomor Rujukan" readonly>
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary"><i class="bi bi-table mr-1"></i> View Data</button>
+                                            <button class="btn btn-secondary" (click)="tabIndex=2"><i class="bi bi-table mr-1"></i> View Data</button>
                                         </div>
                                     </div>
-
-                                    <!-- <div class="input-append">
-                                        <input type="text" name="noRujukan" ng-model="formSep.rujukan.noRujukan" ng-required="jnsPelayanan!='igd'">
-                                        <input type="text" class="form-control">
-                                        <a class="btn" ng-click="toTab(3)"><i class="fontello-icon-table"></i> View Data</a>
-                                    </div> -->
-
                                 </div>
                             </div>
                             <hr>
                             <div class="row mb-1">
-                                <label class="col-3 col-form-label">Diagnosa <span
-                                        ng-show="formSepBaru.diagnosa.$error.required || !formSep.diagAwal"
-                                        class="fontello-icon-attention-circle error"></span></label>
-                                <div class="col-5">
-                                    <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
-                                    <!-- <md-autocomplete
-                                    name="diagnosa"
-                                    md-selected-item="formSep.diagAwal"
-                                    md-min-length="3"
-                                    md-no-cache="true"
-                                    md-search-text="keyDiagnosa"
-                                    md-items="item in getDiagnosa(keyDiagnosa)"
-                                    md-item-text="item.nama"
-                                    md-delay="100"
-                                    placeholder="Cari Diagnosa"
-                                    required>
-                                    <md-item-template>
-                                        <span>{{item.nama | uppercase}}</span>
-                                    </md-item-template>
-                                    <md-not-found>
-                                        Pencarian "{{keyDiagnosa}}" tidak ditemukan
-                                    </md-not-found>
-                                </md-autocomplete> -->
+                                <label class="col-3 col-form-label">
+                                    Diagnosa <span *ngIf="formSep.get('diagnosa')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col">
+                                    <p-autoComplete (completeMethod)="vclaimService.getDiagnosa($event.query)" [suggestions]="dataDiagnosa" [forceSelection]="true" field="nama" [minLength]="3" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                                        <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
+                                    </p-autoComplete>
                                 </div>
                             </div>
                             <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
-                                <label class="col-3 col-form-label">Poliklinik</label>
-                                <div class="col-auto">
-                                    <p-autoComplete [suggestions]="results" (completeMethod)="search($event)" formControlName="poliklinik" [style]="{width: '100%'}" [inputStyle]="{'width':'100%'}"></p-autoComplete>
-                                    <!-- <md-autocomplete
-                                    name="poli"
-                                    md-selected-item="formSep.poli.tujuan"
-                                    md-min-length="3"
-                                    md-no-cache="true"
-                                    md-search-text="keyPoli"
-                                    md-items="item in getPoli(keyPoli)"
-                                    md-item-text="item.nama"
-                                    md-delay="100"
-                                    placeholder="Cari Spesialis / Sub Spesialis"
-                                    ng-required="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
-
-                                    <md-item-template>
-                                        <span>{{item.nama | uppercase}}</span>
-                                    </md-item-template>
-                                    <md-not-found>
-                                        Pencarian "{{keyPoli}}" tidak ditemukan
-                                    </md-not-found>
-                                </md-autocomplete> -->
+                                <label class="col-3 col-form-label">
+                                    Poliklinik <span *ngIf="formSep.get('poliklinik')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col-6">
+                                    <p-autoComplete (ngModelChange)="getDpjp()" (completeMethod)="vclaimService.getPoliklinik($event.query)" [suggestions]="dataPoliklinik" [forceSelection]="true" field="nama" [minLength]="3" formControlName="poliklinik" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                                        <ng-template let-value pTemplate="item"><span>{{value.nama | uppercase}}</span></ng-template>
+                                    </p-autoComplete>
                                 </div>
                             </div>
                             <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap'">
-                                <label class="col-3 col-form-label">Dokter / DPJP</label>
-                                <div class="col-auto">
-                                    <p-dropdown [options]="results" optionLabel="name" formControlName="dokter" [style]="{width: '100%'}"></p-dropdown>
-
-                                    <!-- <selectize
-                                    name="dpjp"
-                                    options='dataDpjp'
-                                    config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                    ng-model='formSep.dpjpLayan'
-                                    placeholder="Pilih..."
-                                    ng-required="jnsPelayanan!='rawatInap'">
-                                </selectize> -->
+                                <label class="col-3 col-form-label">
+                                    Dokter / DPJP <span *ngIf="formSep.get('dokter')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col-6">
+                                    <p-dropdown [options]="dataDokter" [autoDisplayFirst]="false" optionLabel="nama" formControlName="dokter" [style]="{width: '100%'}"></p-dropdown>
                                 </div>
                             </div>
-                            <div class="row mb-1"
-                                ng-show="formSep.poli.tujuan != poliRujukan && jnsPelayanan=='kontrolKembali' || jnsPelayanan=='antarPoli' ">
-                                <label class="col-3 col-form-label">Assessment Pelayanan <span
-                                        ng-show="formSepBaru.assesmentPel.$error.required"
-                                        class="fontello-icon-attention-circle error"></span></label>
-                                <div class="col-auto">
-                                    <p-dropdown [options]="results" optionLabel="name" formControlName="assessmentPel" [style]="{width: '100%'}"></p-dropdown>
-                                    <!-- <selectize
-                                    name="assesmentPel"
-                                    options='dataAssessmentPel'
-                                    config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                    ng-model='formSep.assesmentPel'
-                                    placeholder="Pilih..."
-                                    ng-required="jnsPelayanan!='rawatInap' && jnsPelayanan=='kontrolKembali' || jnsPelayanan=='antarPoli' ">
-                                </selectize> -->
+                            <div class="row mb-1" *ngIf="formSep.value.jnsKunjungan.kode == 'antarPoli' ">
+                                <label class="col-3 col-form-label">
+                                    Assessment Pelayanan <span *ngIf="formSep.get('assessmentPel')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                    </label>
+                                <div class="col-6">
+                                    <p-dropdown [options]="dataAssessmentPelayanan" optionValue="kode" optionLabel="nama" formControlName="assessmentPel" [style]="{width: '100%'}" [autoDisplayFirst]="false"></p-dropdown>
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <label class="col-3 col-form-label">Hak Kelas</label>
-                                <div class="col-auto pr-2">
-                                    <input type="text" class="form-control" formControlName="hakKelas">
-                                </div>
-                                <label class="col-auto pl-0 pr-2 col-form-label">Naik Kelas</label>
-                                <div class="col-auto pl-0">
-                                    <input type="text" class="form-control" formControlName="hakKelas">
+                                <label class="col-3 col-form-label">Naik Kelas ?</label>
+                                <div class="col-6">
+                                    <p-dropdown [options]="dataKelas" optionValue="kode" optionLabel="nama" formControlName="naikKelas" [style]="{width: '100%'}"></p-dropdown>
                                 </div>
                             </div>
-                            <div class="row mb-1" *ngIf="formSep.get('hakKelas')?.value == '1'">
-                                <label class="col-3 col-form-label">Naik Kelas</label>
+                            <div class="row mb-1" *ngIf="formSep.value.naikKelas != ''">
+                                <label class="col-3 col-form-label">&nbsp;</label>
                                 <div class="col">
-                                    <p-dropdown [options]="results" optionLabel="name" formControlName="naikKelas" [style]="{width: '100%'}"></p-dropdown>
-                                    <div class="row pb-2 mb-2">
-                                        <div class="col">
-                                            <div class="mb-1">Pembiayaan :</div>
-                                            <div>
-                                                <p-dropdown [options]="results" optionLabel="name" formControlName="naikKelasPembiayaan" [style]="{width: '100%'}"></p-dropdown>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="mb-1">Penanggung Jawab :</div>
-                                            <div>
-                                                <p-dropdown [options]="results" optionLabel="name" formControlName="naikKelasPenanggungJawab" [style]="{width: '100%'}"></p-dropdown>
-                                            </div>
-                                        </div>
+                                    <div class="mb-1">Pembiayaan :</div>
+                                    <div>
+                                        <p-dropdown [options]="dataPembiayaanNaikKelas" optionLabel="name" formControlName="naikKelasPembiayaan" [style]="{width: '100%'}"></p-dropdown>
                                     </div>
-                                            <!-- <selectize
-                                            name="naikKelas"
-                                            options='dataKelasRawat'
-                                            config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                            ng-model='formSep.klsRawat.klsRawatNaik'
-                                            placeholder="TIDAK">
-                                        </selectize>
-
-                                            <div style="display: inline-flex; margin-bottom: 10px;" ng-show="showNaikKelas">
-                                                <div style="width: 200px;">
-                                                    <div style="padding: 5px;">Pembiayaan :</div>
-                                                    <selectize
-                                                    name="pembiayaan"
-                                                    options='dataPembiayaan'
-                                                    config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                                    ng-model='formSep.klsRawat.pembiayaan'
-                                                    placeholder="Pilih...">
-                                                </selectize>
-                                                </div>
-                                                <div style="width: 200px; margin-left: 10px;">
-                                                    <div style="padding: 5px;">Penanggung Jawab :</div>
-                                                    <selectize
-                                                    name="penanggungJawab"
-                                                    options='dataPembiayaan'
-                                                    config='{maxItems: 1, valueField: "nama", labelField: "nama", searchField: "nama"}'
-                                                    ng-model='formSep.klsRawat.penanggungJawab'
-                                                    placeholder="Pilih...">
-                                                </selectize> -->
-                                                <!-- </div> -->
-                                            <!-- </div> -->
+                                </div>
+                                <div class="col">
+                                    <div class="mb-1">Penanggung Jawab :</div>
+                                    <div>
+                                        <p-dropdown [options]="dataPembiayaanNaikKelas" optionLabel="name" formControlName="naikKelasPenanggungJawab" [style]="{width: '100%'}"></p-dropdown>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <label class="col-3 col-form-label">No. RM</label>
-                                <div class="col-auto">
-                                    <input type="text" class="form-control" formControlName="norm">
+                                <label class="col-3 col-form-label">
+                                    No. RM <span *ngIf="formSep.get('norm')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" formControlName="norm" placeholder="Minimal 6 Digit">
                                 </div>
                             </div>
                             <div class="row mb-1">
-                                <label class="col-3 col-form-label">No. Tlp</label>
-                                <div class="col-auto">
-                                    <input type="text" class="form-control" formControlName="tlp">
+                                <label class="col-3 col-form-label">
+                                    No. Tlp <span *ngIf="formSep.get('tlp')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" formControlName="tlp" placeholder="Minimal 9 Digit">
                                 </div>
                             </div>
                             <div class="row mb-1">
@@ -397,56 +298,39 @@
                             <div class="row mb-1">
                                 <label class="col-3 col-form-label">Status Kecelakaan</label>
                                 <div class="col">
-                                    <p-dropdown [options]="results" optionLabel="name" formControlName="statusKecelakaan" [style]="{width: '100%'}"></p-dropdown>
-
-                                    <!-- <selectize
-                                    name="statusLaka"
-                                    options='dataStatusLaka'
-                                    config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                    ng-model='formSep.isLakalantas'
-                                    placeholder="Pilih..."
-                                    required>
-                                    </selectize> -->
+                                    <p-dropdown [options]="dataStatusLaka" optionValue="kode" optionLabel="nama" formControlName="isLakaLantas" [style]="{width: '100%'}"></p-dropdown>
                                 </div>
                             </div>
-                            <div class="row mt-3 pt-3 border-top" *ngIf="formSep.get('statusKecelakaan')?.value == '2'">
+                            <div class="row mt-3 pt-3 border-top" *ngIf="formSep.get('isLakaLantas')?.value != '0'">
                                 <div class="col">
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">Tgl. Kejadian</label>
                                         <div class="col">
-                                            <p-calendar [showIcon]="true" formControlName="tglKejadian"></p-calendar>
-                                            <!-- <md-datepicker name="tglSep" ng-model="formSep.laka.tglKejadian" md-placeholder="DD-MM-YYYY" md-open-on-focus></md-datepicker> -->
+                                            <p-calendar [showIcon]="true" formControlName="lakaTglKejadian"></p-calendar>
                                         </div>
                                     </div>
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">No. Lap. Polisi</label>
                                         <div class="col">
-                                            <input type="text" class="form-control" formControlName="noLapPolisi">
+                                            <input type="text" class="form-control" formControlName="lakaNoLp">
                                         </div>
                                     </div>
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">Keterangan</label>
                                         <div class="col">
-                                            <input type="text" class="form-control" formControlName="keterangan">
+                                            <input type="text" class="form-control" formControlName="lakaKeterangan">
                                         </div>
                                     </div>
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">Suplesi</label>
                                         <div class="col">
-                                            <p-dropdown [options]="results" optionLabel="name" formControlName="suplesi" [style]="{width: '100%'}"></p-dropdown>
-                                            <!-- <selectize
-                                            name="kabupaten"
-                                            options='dataSuplesi'
-                                            config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                            ng-model='formSep.laka.suplesi'
-                                            placeholder="Pilih...">
-                                        </selectize> -->
+                                            <p-dropdown [options]="results" optionLabel="name" formControlName="lakaSuplesi" [style]="{width: '100%'}"></p-dropdown>
                                         </div>
                                     </div>
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">No. Suplesi</label>
                                         <div class="col">
-                                            <input type="text" class="form-control" formControlName="noSuplesi">
+                                            <input type="text" class="form-control" formControlName="lakaNoSuplesi">
                                         </div>
                                     </div>
                                 </div>
@@ -457,40 +341,19 @@
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">Provinsi</label>
                                         <div class="col">
-                                            <p-dropdown [options]="results" optionLabel="name" formControlName="provinsi" [style]="{width: '100%'}"></p-dropdown>
-                                            <!-- <selectize
-                                            name="propinsi"
-                                            options='dataPropinsi'
-                                            config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                            ng-model='formSep.laka.propinsi'
-                                            placeholder="Pilih...">
-                                        </selectize> -->
+                                            <p-dropdown [options]="results" optionLabel="name" formControlName="lakaPropinsi" [style]="{width: '100%'}"></p-dropdown>
                                         </div>
                                     </div>
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">Kabupaten</label>
                                         <div class="col">
-                                            <p-dropdown [options]="results" optionLabel="name" formControlName="kabupaten" [style]="{width: '100%'}"></p-dropdown>
-                                            <!-- <selectize
-                                            name="kabupaten"
-                                            options='dataKabupaten'
-                                            config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                            ng-model='formSep.laka.kabupaten'
-                                            placeholder="Pilih...">
-                                        </selectize> -->
+                                            <p-dropdown [options]="results" optionLabel="name" formControlName="lakaKabupaten" [style]="{width: '100%'}"></p-dropdown>
                                         </div>
                                     </div>
                                     <div class="row mb-1">
                                         <label class="col-4 col-form-label">Kecamatan</label>
                                         <div class="col">
-                                            <p-dropdown [options]="results" optionLabel="name" formControlName="kecamatan" [style]="{width: '100%'}"></p-dropdown>
-                                            <!-- <selectize
-                                            name="kecamatan"
-                                            options='dataKecamatan'
-                                            config='{maxItems: 1, valueField: "kode", labelField: "nama", searchField: "nama"}'
-                                            ng-model='formSep.laka.kecamatan'
-                                            placeholder="Pilih...">
-                                        </selectize> -->
+                                            <p-dropdown [options]="results" optionLabel="name" formControlName="lakaKecamatan" [style]="{width: '100%'}"></p-dropdown>
                                         </div>
                                     </div>
                                 </div>
@@ -500,9 +363,8 @@
                     <div class="w-100"></div>
                     <div class="col">
                         <div class="row bg-gray-500 pt-3 pb-3 mt-3">
-                            <div class="col-3">&nbsp;</div>
-                            <div class="col">
-                                <button class="btn btn-sm btn-primary"><i class="bi bi-save mr-1"></i> Simpan</button>
+                            <div class="col tx-right">
+                                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="formSep.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
                             </div>
                         </div>
                     </div>

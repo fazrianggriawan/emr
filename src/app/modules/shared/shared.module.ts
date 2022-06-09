@@ -31,7 +31,9 @@ import { PulangSepComponent } from './vclaim/pulang-sep/pulang-sep.component';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { ImageModule } from 'primeng/image';
 import { EditorModule } from 'primeng/editor';
-import {MenubarModule} from 'primeng/menubar';
+import { MenubarModule } from 'primeng/menubar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 
 let primeModules = [
@@ -54,7 +56,8 @@ let primeModules = [
     ToastModule,
     ImageModule,
     EditorModule,
-    MenubarModule
+    MenubarModule,
+    ConfirmDialogModule
 ]
 
 let sharedComponent = [

@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RikkesComponent } from './components/rikkes/rikkes.component';
+import { VclaimComponent } from './modules/shared/vclaim/vclaim.component';
 import { LoginComponent } from './templates/login/login.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'rikkes', component: RikkesComponent },
+    { path: 'vclaim', component: VclaimComponent },
     { path: 'medical_record', loadChildren: () => import('./modules/medical-record/medical-record.module').then(m => m.MedicalRecordModule) },
     { path: 'registrasi', loadChildren: () => import('./modules/registrasi/registrasi.module').then(m => m.RegistrasiModule) },
     { path: 'rawatJalan', loadChildren: () => import('./modules/rawat-jalan/rawat-jalan.module').then(m => m.RawatJalanModule) },
