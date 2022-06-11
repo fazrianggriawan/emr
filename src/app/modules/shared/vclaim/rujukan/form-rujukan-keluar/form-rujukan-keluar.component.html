@@ -1,74 +1,88 @@
 <form [formGroup]="form">
     <div class="row mb-1">
-        <label class="col-4 col-form-label">Tgl. Rujukan <span ng-show="formRujukanBaru.tglRujukan.$error.required" class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            Tgl. Rujukan <span *ngIf="form.get('tanggal')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
         <div class="col">
-            <p-calendar formControlName="tanggal" appendTo="body" [showIcon]="true"></p-calendar>
+            <p-calendar formControlName="tanggal" appendTo="body" [showIcon]="true" dateFormat="yy-mm-dd"></p-calendar>
         </div>
     </div>
     <div class="row mb-1">
-        <label class="col-4 col-form-label">Tgl. Rencana Kunjungan <span
-                ng-show="formRujukanBaru.tglRencanaKunjungan.$error.required"
-                class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            Tgl. Rencana Kunjungan <span *ngIf="form.get('tglRencana')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
         <div class="col">
-            <p-calendar appendTo="body" [showIcon]="true"></p-calendar>
+            <p-calendar appendTo="body" formControlName="tglRencana" [showIcon]="true" dateFormat="yy-mm-dd"></p-calendar>
         </div>
     </div>
     <div class="row mb-1">
-        <label class="col-4 col-form-label">Jns. Pelayanan <span ng-show="formRujukanBaru.jnsPelayanan.$error.required"
-                class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            Jns. Pelayanan  <span *ngIf="form.get('jnsPelayanan')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
         <div class="col">
-            <p-dropdown [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+            <p-dropdown formControlName="jnsPelayanan" optionLabel="nama" optionValue="kode" appendTo="body" [options]="dataJnsPelayanan"  [style]="{width: '100%'}" appendTo="body" [autoDisplayFirst]="false"></p-dropdown>
         </div>
     </div>
     <div class="row mb-1">
-        <label class="col-4 col-form-label">No. SEP <span ng-show="formRujukanBaru.sep.$error.required"
-                class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            No. SEP <span *ngIf="form.get('noSep')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
         <div class="col">
-            <p-dropdown [style]="{width: '100%'}" [editable]="true" appendTo="body"></p-dropdown>
+            <p-dropdown formControlName="noSep" [options]="dataSep" appendTo="body" [style]="{width: '100%'}" [autoDisplayFirst]="false">
+                <ng-template let-item pTemplate="item"><span>{{item.tglSep}} - {{item.poli}} / {{item.noSep}}</span></ng-template>
+                <ng-template let-item pTemplate="selectedItem"><span>{{item.tglSep}} - {{item.poli}} / {{item.noSep}}</span></ng-template>
+            </p-dropdown>
         </div>
     </div>
     <div class="row mb-1">
-        <label class="col-4 col-form-label">Tipe Rujukan <span ng-show="formRujukanBaru.tipeRujukan.$error.required"
-                class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            Tipe Rujukan <span *ngIf="form.get('tipeRujukan')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+            </label>
         <div class="col">
-            <p-dropdown [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+            <p-dropdown [options]="dataJnsRujukan" optionLabel="nama" optionValue="kode" appendTo="body" formControlName="tipeRujukan" [style]="{width: '100%'}" appendTo="body" [autoDisplayFirst]="false"></p-dropdown>
         </div>
     </div>
     <div class="row mb-1">
-        <label class="col-4 col-form-label">Poliklinik / Spesialis <span ng-show="formRujukanBaru.poli.$error.required"
-                class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            Poliklinik / Spesialis <span *ngIf="form.get('poli')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
         <div class="col">
-            <p-dropdown [style]="{width: '100%'}" appendTo="body"></p-dropdown>
-        </div>
-    </div>
-    <div class="row mb-1">
-        <label class="col-4 col-form-label">PPK Tujuan <span
-                ng-show="formRujukanBaru.ppk.$error.required || !rujukanBaru.ppk"
-                class="fontello-icon-attention-circle error"></span></label>
-        <div class="col">
-            <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari...">
+            <p-autoComplete formControlName="poli" appendTo="body" field="nama" (completeMethod)="vclaimService.getPoliklinik($event.query)" [suggestions]="dataPoli" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari...">
+                <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
             </p-autoComplete>
         </div>
     </div>
     <div class="row mb-1">
-        <label class="col-4 col-form-label">Diagnosa <span
-                ng-show="formRujukanBaru.diagnosa.$error.required || !rujukanBaru.diagAwal"
-                class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            PPK Tujuan <span *ngIf="form.get('ppk')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
         <div class="col">
-            <p-autoComplete [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari...">
+            <p-autoComplete formControlName="ppk" appendTo="body" field="nama" (completeMethod)="formRujukanKeluarService.getPPKTujuan($event.query)" [suggestions]="dataFaskes" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari...">
+                <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
             </p-autoComplete>
         </div>
     </div>
     <div class="row mb-1">
-        <label class="col-4 col-form-label">Catatan <span ng-show="formRujukanBaru.catatan.$error.required"
-                class="fontello-icon-attention-circle error"></span></label>
+        <label class="col-4 col-form-label">
+            Diagnosa <span *ngIf="form.get('diagnosa')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
         <div class="col">
-            <input type="text" ng-model="rujukanBaru.catatan" class="form-control">
+            <p-autoComplete formControlName="diagnosa" field="nama" appendTo="body" (completeMethod)="vclaimService.getDiagnosa($event.query)" [suggestions]="dataDiagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" placeholder="Cari...">
+                <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
+            </p-autoComplete>
+        </div>
+    </div>
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">
+            Catatan <span *ngIf="form.get('catatan')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
+        <div class="col">
+            <input type="text" formControlName="catatan" class="form-control" placeholder="Minimal 5 Karakter">
         </div>
     </div>
     <div class="row mb-1 bg-gray-200 pt-3 pb-3 mt-3">
         <div class="col tx-right">
-            <button class="btn btn-sm btn-primary"><i class="bi bi-save mr-1"></i> Simpan</button>
+            <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
         </div>
     </div>
 </form>

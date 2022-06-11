@@ -10,9 +10,9 @@
     </div>
     <div class="w-100 border-bottom"></div>
     <div class="col p-0">
-        <p-table [value]="dataHistory.histori" styleClass="p-datatable-sm table-striped table-hover" responsiveLayout="scroll">
-            <ng-template pTemplate="header">
-                <tr>
+        <table class="table table-striped table-hover border-bottom">
+            <thead>
+                <tr class="bg-gray-300">
                     <th>No. SEP</th>
                     <th>Jns. Pelayanan</th>
                     <th>Poli / Ruangan</th>
@@ -20,11 +20,11 @@
                     <th>No. Rujukan</th>
                     <th width="100">Tgl. SEP</th>
                     <th width="100">Tgl. Pulang</th>
-                    <th [width]="100">&nbsp;</th>
+                    <th width="100">&nbsp;</th>
                 </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-                <tr>
+            </thead>
+            <tbody *ngIf="dataHistory">
+                <tr *ngFor="let item of dataHistory.histori">
                     <td>{{item.noSep}}</td>
                     <td>
                         <span *ngIf="item.jnsPelayanan === '1'">RAWAT INAP</span>
@@ -39,16 +39,26 @@
                     <td>{{item.tglSep}}</td>
                     <td>
                         {{item.tglPlgSep}}
-                        <!-- <button class="btn btn-xs btn-outline-primary p-1" *ngIf="!item.tglPlgSep">Form Pulang</button> -->
+                        <button *ngIf="!item.tglPlgSep" class="btn btn-icon btn-light mr-1" (click)="pasienPulang(item)">Form Pulang</button>
                     </td>
                     <td>
-                        <button class="btn btn-icon btn-light mr-1" (click)="vclaimService.printSep(item.noSep)"><i class="bi bi-printer"></i></button>
+                        <button class="btn btn-icon btn-secondary mr-1" (click)="vclaimService.printSep(item.noSep)"><i class="bi bi-printer"></i></button>
                         <button class="btn btn-icon btn-light" (click)="delete(item.noSep)"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
-            </ng-template>
-        </p-table>
+            </tbody>
+            <tfoot *ngIf="!dataHistory">
+                <tr>
+                    <td colspan="7" class="tx-center">Tidak ada data saat ini.</td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 </div>
 
 <p-confirmDialog header="Konfirmasi" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+
+<p-dialog header="Form Pasien Pulang" (onHide)="formPasienPulangService.closeDialog()" [(visible)]="dialogFormPasienPulang" [style]="{width: '600px'}" appendTo="body" [modal]="true">
+    <app-form-pasien-pulang></app-form-pasien-pulang>
+</p-dialog>

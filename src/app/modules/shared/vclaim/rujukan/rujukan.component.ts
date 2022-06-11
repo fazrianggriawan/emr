@@ -41,6 +41,7 @@ export class RujukanComponent implements OnInit {
     public getDataRujukan() {
         this.rujukanService.getDataRujukanFaskes( this.peserta.noKartu );
         this.rujukanService.getDataRujukanRs( this.peserta.noKartu );
+        // this.rujukanService.getDataRujukanKeluar();
     }
 
 }

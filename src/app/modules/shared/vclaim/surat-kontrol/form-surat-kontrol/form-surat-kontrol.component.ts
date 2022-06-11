@@ -65,7 +65,7 @@ export class FormSuratKontrolComponent implements OnInit {
     }
 
     save() {
-        this.form.value.tgl = this.appService.reformatDate(this.form.value.tgl)
+        this.form.value.tgl = this.appService.reformatDate(this.form.get('tgl')?.value)
         this.form.value.noSep = this.form.value.sep.noSep;
         this.formSuratKontrolService.save(this.form.value);
     }

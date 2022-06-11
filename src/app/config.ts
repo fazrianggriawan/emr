@@ -1,5 +1,5 @@
 var host = 'http://simrsmandiri.com/emr/api';
-var hostVclaim = 'http://simrsmandiri.com/vclaim';
+var hostVclaim = 'http://localhost/vclaim';
 var hostPublic = 'http://182.253.22.220';
 export const config = {
     host: host,

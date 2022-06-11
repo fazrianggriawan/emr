@@ -21,6 +21,7 @@
                     <th>Spesialis</th>
                     <th>PPK</th>
                     <th>Diagnosa</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody *ngIf="dataRujukanFaskes">
@@ -31,6 +32,9 @@
                     <td>{{item.poliRujukan.nama}}</td>
                     <td>{{item.provPerujuk.nama}}</td>
                     <td>{{item.diagnosa.kode}} - {{item.diagnosa.nama}}</td>
+                    <td>
+                        <button class="btn btn-icon btn-light mr-1" (click)="rujukanService.print(item.noKunjungan)"><i class="bi bi-printer"></i></button>
+                    </td>
                 </tr>
                 <tr><td colspan="6" class="tx-center" *ngIf="dataRujukanFaskes.length === 0">Tidak ada saat ini.</td></tr>
             </tbody>

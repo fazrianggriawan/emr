@@ -40,9 +40,21 @@ export class RujukanService {
             .subscribe(data => this.dataRujukanFaskes.next(data.response))
     }
 
-    public getDataRujukanKeluar(nomorKartu: string) {
-        this.http.get<any>( config.api_vclaim('rujukan/rs/nomorKartu/'+nomorKartu) )
+    public getDataRujukanKeluar() {
+        this.http.get<any>( config.api_vclaim('keluarRs') )
             .subscribe(data => this.dataRujukanKeluar.next(data.response))
+    }
+
+    public print(nomor: string) {
+        let iframe = '<iframe src="' + config.api_vclaim('rujukan/print/'+nomor) + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
+        let win: any = window.open("", "", "width=1024,height=510,toolbar=no,menubar=no,resizable=yes");
+        win.document.write(iframe);
+    }
+
+    public printRujukanKeluar(data: string) {
+        let iframe = '<iframe src="' + config.api_vclaim('rujukan/print/keluar/'+data) + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
+        let win: any = window.open("", "", "width=1024,height=510,toolbar=no,menubar=no,resizable=yes");
+        win.document.write(iframe);
     }
 
 

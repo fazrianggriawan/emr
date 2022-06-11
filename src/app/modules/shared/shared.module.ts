@@ -33,6 +33,7 @@ import { ImageModule } from 'primeng/image';
 import { EditorModule } from 'primeng/editor';
 import { MenubarModule } from 'primeng/menubar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { FormPasienPulangComponent } from './vclaim/history/form-pasien-pulang/form-pasien-pulang.component';
 
 
 
@@ -76,7 +77,8 @@ let sharedComponent = [
 @NgModule({
     declarations: [
         sharedComponent,
-        PulangSepComponent
+        PulangSepComponent,
+        FormPasienPulangComponent
     ],
     imports: [
         primeModules,

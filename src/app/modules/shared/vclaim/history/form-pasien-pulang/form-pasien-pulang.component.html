@@ -1,0 +1,55 @@
+<form [formGroup]="form">
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">
+            Tgl. Pulang <span *ngIf="form.get('tanggal')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
+        <div class="col">
+            <p-calendar formControlName="tanggal" appendTo="body" [showIcon]="true" dateFormat="yy-mm-dd"></p-calendar>
+        </div>
+    </div>
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">
+            No. SEP <span *ngIf="form.get('noSep')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
+        <div class="col">
+            <input type="text" class="form-control" formControlName="noSep" readonly>
+        </div>
+    </div>
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">
+            Status Pulang <span *ngIf="form.get('statusPulang')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
+        <div class="col">
+            <p-dropdown [options]="dataStatusPulang" optionValue="kode" optionLabel="nama" formControlName="statusPulang" appendTo="body" [style]="{width: '100%'}" [autoDisplayFirst]="false"></p-dropdown>
+        </div>
+    </div>
+    <div class="row mb-1" *ngIf="this.form.get('statusPulang')?.value == '4'">
+        <label class="col-4 col-form-label">
+            Tgl. Meninggal <span *ngIf="form.get('tglMeninggal')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
+        <div class="col">
+            <p-calendar formControlName="tglMeninggal" appendTo="body" [showIcon]="true" dateFormat="yy-mm-dd"></p-calendar>
+        </div>
+    </div>
+    <div class="row mb-1" *ngIf="this.form.get('statusPulang')?.value == '4'">
+        <label class="col-4 col-form-label">
+            No. Surat Meninggal <span *ngIf="form.get('noSuratMeninggal')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+        </label>
+        <div class="col">
+            <input type="text" class="form-control" formControlName="noSuratMeninggal">
+        </div>
+    </div>
+    <div class="row mb-1">
+        <label class="col-4 col-form-label">
+            No. Laporan Polisi
+        </label>
+        <div class="col">
+            <input type="text" class="form-control" formControlName="noLp">
+        </div>
+    </div>
+    <div class="row mb-1 bg-gray-200 pt-3 pb-3 mt-3">
+        <div class="col tx-right">
+            <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
+        </div>
+    </div>
+</form>

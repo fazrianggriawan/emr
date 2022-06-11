@@ -11,6 +11,7 @@ export class HistoryService {
 
     dataHistory = new BehaviorSubject<any>('');
     actionStatus = new BehaviorSubject<boolean>(false);
+    sep = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient,
