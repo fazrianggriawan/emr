@@ -69,6 +69,8 @@ export class VclaimComponent implements OnInit {
             this.peserta = data.peserta;
             this.formSep.get('hakKelas')?.patchValue(this.peserta.hakKelas);
             this.formSep.get('noKartu')?.patchValue(this.peserta.noKartu);
+            this.formSep.get('norm')?.patchValue(this.peserta.mr.noMR);
+            this.formSep.get('tlp')?.patchValue(this.peserta.mr.noTelepon);
         } else {
             this.peserta = { statusPeserta: {}, jenisPeserta: {}, hakKelas: {}, provUmum: {}, cob: {}, mr: {}, informasi: {}, umur: {} }
         }

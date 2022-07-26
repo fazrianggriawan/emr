@@ -18,44 +18,16 @@ export class MenuEmrComponent implements OnInit {
     ngOnInit(): void {
 
         this.subMenu = [
-            { label: 'Subjective', routerLink: 'medical_record/subjective' },
-            { label: 'Pemeriksaan', routerLink: 'medical_record/pemeriksaan' },
-            { label: 'Diagnosa & Prosedur', routerLink: 'medical_record/diagnosa_prosedur' },
-            { label: 'E-Resep', routerLink: 'medical_record/farmasi' },
-            {
-                label: 'Penunjang',
-                items: [
-                    {label: 'Laboratorium'},
-                    {label: 'Radiologi'},
-                ]
-            },
-            { label: 'Planning', routerLink: 'medical_record/planning' },
-            { label: 'Summary Review', routerLink: 'medical_record' },
+            { label: 'Pasien', routerLink: 'medicalRecord', icon: 'bi bi-people-fill' },
+            { label: 'CPPT', routerLink: 'medicalRecord/cppt' },
+            { label: 'Radiologi', routerLink: 'medicalRecord/radiologi' },
+            { label: 'Laboratorium', routerLink: 'medicalRecord/laboratorium' },
+            { label: 'Diagnosa & Prosedur', routerLink: 'medicalRecord/diagnosa_prosedur' },
+            { label: 'E-Resep', routerLink: 'medicalRecord/farmasi' },
+            { label: 'Konsul', routerLink: 'medicalRecord/konsul' },
+            { label: 'Summary Review', routerLink: 'medicalRecord/planning' },
+            { label: 'Penanda Organ', routerLink: 'medicalRecord/konva' },
         ];
-
-        this.items = [{
-            label: 'Menu',
-            items: [
-                { label: 'SOAP', link: '/cppt' },
-                { label: 'Pengkajian Awal Medis', link: '/pengkajian_awal_medis' },
-                { label: 'Laporan Pembedahaan Dengan Anestesi Lokal', link: '/lap_bedah_anest_lokal' },
-                { label: 'Surat Masuk Perawatan', link: '/surat_masuk_perawatan' },
-                { label: 'Pengajuan Pembedahaan', link: '/pengajuan_pembedahaan' },
-                // {label: 'Catatan Edukasi dan Informasi Terintegrasi Pasien / Keluarga'},
-                // {label: 'Persetujuan Tindakan Medis'},
-                // {label: 'DPJP dan PPJA'},
-                // {label: 'Catatan Pemindahan Pasien Antar Ruangan'},
-                // {label: 'Penandaaan Lokasi Operasi'},
-                // {label: 'Daftar Tilik Catatan Keperawatan Perioperatif'},
-            ]
-        }, {
-            label: 'Penunjang',
-            items: [
-                { label: 'Laboratorium', link: '/laboratorium' },
-                { label: 'Radiologi', link: '/radiologi' },
-                { label: 'Farmasi', link: '/e_resep' },
-            ]
-        }]
     }
 
     public setActiveMenu(e: any){

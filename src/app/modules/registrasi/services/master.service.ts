@@ -24,6 +24,10 @@ export class MasterService {
     pangkat = new BehaviorSubject<any>('');
     groupPasien = new BehaviorSubject<any>('');
     golonganPasien = new BehaviorSubject<any>('');
+    dokter = new BehaviorSubject<any>('');
+    poli = new BehaviorSubject<any>('');
+    jnsPerawatan = new BehaviorSubject<any>('');
+    waktuPelayanan = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient
@@ -40,6 +44,10 @@ export class MasterService {
         this.getAngkatan();
         this.getPangkat();
         this.getGroupPasien();
+        this.getDokter();
+        this.getPoli();
+        this.getJnsPerawatan();
+        this.getDataWaktuPelayanan();
     }
 
     public getRs() {
@@ -106,6 +114,29 @@ export class MasterService {
         this.http.get<any>( config.api_url('master/golongan_pasien/id_grouppasien/'+idGroupPasien) ).subscribe( data => this.golonganPasien.next(data.data) )
     }
 
+    public getDokter() {
+        this.http.get<any>( config.api_url('master/dokter') ).subscribe( data => this.dokter.next(data.data) )
+    }
+
+    public getPoli() {
+        this.http.get<any>( config.api_url('master/poliklinik') ).subscribe( data => this.poli.next(data.data) )
+    }
+
+    public getJnsPerawatan() {
+        this.http.get<any>( config.api_url('master/jnsPerawatan') ).subscribe( data => this.jnsPerawatan.next(data.data) )
+    }
+
+    public getDataWaktuPelayanan() {
+        this.http.get<any>( config.api_url('master/waktuPelayanan') ).subscribe( data => this.waktuPelayanan.next(data.data) )
+    }
+
+    public getDokterByPoli(idPoli: string){
+        this.http.get<any>( config.api_url('master/dokterByPoli/'+idPoli) ).subscribe( data => this.dokter.next(data.data) )
+    }
+
+    public getGolPasienByGroup(idGroup: string){
+        this.http.get<any>( config.api_url('master/golongan_pasien/id_grouppasien/'+idGroup) ).subscribe( data => this.golonganPasien.next(data.data) )
+    }
 
 
 }

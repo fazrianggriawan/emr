@@ -18,7 +18,6 @@ export class LoginService {
     ) { }
 
     public login(data: any) {
-        console.log(data);
         this.http.post<any>( config.api_url('do_login'), data ).subscribe(data => console.log(data))
     }
 

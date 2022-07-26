@@ -9,7 +9,6 @@ import { CommonModule, DatePipe, HashLocationStrategy, LocationStrategy } from '
 import { UserComponent } from './templates/user/user.component';
 import { CalendarComponent } from './templates/calendar/calendar.component';
 import { MenuComponent } from './templates/menu/menu.component';
-import { MenuEmrComponent } from "./templates/menu-emr/menu-emr.component";
 import { LoginComponent } from './templates/login/login.component';
 import { DEFAULT_TIMEOUT, HttpProvider } from './providers/http.interceptor';
 import { MenuModule } from 'primeng/menu';
@@ -30,7 +29,6 @@ import { LaboratoriumComponent } from './components/rikkes/laboratorium/laborato
     declarations: [
         AppComponent,
         UserComponent,
-        MenuEmrComponent,
         CalendarComponent,
         MenuComponent,
         LoginComponent,

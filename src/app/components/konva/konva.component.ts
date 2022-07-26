@@ -100,6 +100,7 @@ export class KonvaComponent implements OnInit, AfterViewInit {
                     }
                     circle.attrs.content = { lokasi: '', keterangan: ''}
                     self.a.push(circle.attrs);
+                    console.log(self.a);
                 }
             })
             self.group.add(img);
@@ -171,7 +172,7 @@ export class KonvaComponent implements OnInit, AfterViewInit {
     public showInputPanel(e: any) {
         this.el.style.position = 'absolute';
         this.el.style.left = String(e.evt.clientX - this.startPos.x + 20) + 'px';
-        this.el.style.top = String(e.evt.clientY - this.startPos.y + 60) + 'px';
+        this.el.style.top = String(e.evt.clientY - this.startPos.y + 80) + 'px';
         this.el.style.display = 'unset';
     }
 
@@ -206,10 +207,10 @@ export class KonvaComponent implements OnInit, AfterViewInit {
             message: 'Anda yakin ingin menghapus?',
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
-                let g = this.group.find('#'+this.currentCircle);
+                let g = this.group.find('#'+this.currentCircle.id);
                 g[0].destroy();
 
-                let index = this.a.findIndex( (item: any) => item.i == this.currentCircle);
+                let index = this.a.findIndex( (item: any) => item.id == this.currentCircle.id);
                 this.a.splice(index, 1);
 
                 this.hideInputPanel();

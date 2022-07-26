@@ -1,4 +1,33 @@
-<div style="display: inline-flex;" class="user-login p-pl-4 p-pb-2 p-pr-3 p-pt-1 clickable"
+<div class="row">
+    <div class="col-auto pr-2" style="padding-top: 2px;">
+        <img [src]="'assets/drbebet.jpg'" class="rounded-circle" height="35">
+    </div>
+    <div class="col pl-2 pt-1 clickable" style="line-height: 15px;">
+        <div>dr. Bambang Budiarto Sp.B</div>
+        <div class="tx-13 tx-gray-500">Spesialis Bedah</div>
+    </div>
+    <div class="col-auto pl-0">
+        <div class="pr-3" style="padding-top: 2px;">
+            <button class="btn btn-outline-light tx-white p-0 m-0 pl-1 pr-1" (click)="dialogBarcode=true">
+                <i class="bi bi-qr-code tx-22 p-0 m-0"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="QR Code" [(visible)]="dialogBarcode" [modal]="true">
+    <div class="row">
+        <div class="col">
+            <qrcode [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        </div>
+        <div class="col">
+            <div>Untuk mengijinkan perawat terhubung dengan akun anda.</div>
+        </div>
+    </div>
+
+</p-dialog>
+
+<!-- <div style="display: inline-flex;" class="user-login p-pl-4 p-pb-2 p-pr-3 p-pt-1 clickable"
     (click)="op.toggle($event)">
     <div class="avatar p-mr-3 p-mt-2">
         <img [src]="'assets/drbebet.jpg'" class="rounded-circle">
@@ -18,4 +47,4 @@
             <p-menu [model]="menuItems"></p-menu>
         </div>
     </ng-template>
-</p-overlayPanel>
+</p-overlayPanel> -->

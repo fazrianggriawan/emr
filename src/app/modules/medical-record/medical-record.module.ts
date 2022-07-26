@@ -13,6 +13,11 @@ import { FormObatComponent } from './components/farmasi/form-obat/form-obat.comp
 import { TableMasterObatComponent } from './components/farmasi/table-master-obat/table-master-obat.component';
 import { TableOrderObatComponent } from './components/farmasi/table-order-obat/table-order-obat.component';
 import { SharedModule } from '../shared/shared.module';
+import { LaboratoriumComponent } from './components/laboratorium/laboratorium.component';
+import { RadiologiComponent } from './components/radiologi/radiologi.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { KonsulComponent } from './components/konsul/konsul.component';
+import { CpptComponent } from './components/cppt/cppt.component';
 
 @NgModule({
     declarations: [
@@ -25,7 +30,12 @@ import { SharedModule } from '../shared/shared.module';
         PemeriksaanComponent,
         FormObatComponent,
         TableMasterObatComponent,
-        TableOrderObatComponent
+        TableOrderObatComponent,
+        LaboratoriumComponent,
+        RadiologiComponent,
+        FileUploadComponent,
+        KonsulComponent,
+        CpptComponent
     ],
     imports: [
         SharedModule,
@@ -33,4 +43,4 @@ import { SharedModule } from '../shared/shared.module';
         MedicalRecordRoutingModule
     ]
 })
-export class MedicalRecordModule { }
+export class MedicalRecordModule {}

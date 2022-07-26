@@ -1,11 +1,33 @@
 <div class="row pt-3 pb-3">
     <div class="col mb-2 clearfix">
         <div class="float-left">
-            Dari : <p-calendar [(ngModel)]="filter.from" (ngModelChange)="getDataHistory()" dateFormat="d M yy" [readonlyInput]="true" [maxDate]="today" appendTo="body" [style]="{width:'120px'}" styleClass="mr-2"></p-calendar>
-            Sampai : <p-calendar [(ngModel)]="filter.to" (ngModelChange)="getDataHistory()" dateFormat="d M yy" [readonlyInput]="true" [maxDate]="today" appendTo="body" [style]="{width:'120px'}"></p-calendar>
+            Dari :
+                <p-calendar
+                    (ngModelChange)="getDataHistory()"
+                    [(ngModel)]="filter.from"
+                    [readonlyInput]="true"
+                    [maxDate]="today"
+                    [style]="{width:'120px'}"
+                    appendTo="body"
+                    dateFormat="d M yy"
+                    styleClass="mr-2">
+                </p-calendar>
+
+            Sampai :
+                <p-calendar
+                    (ngModelChange)="getDataHistory()"
+                    [(ngModel)]="filter.to"
+                    [readonlyInput]="true"
+                    [maxDate]="today"
+                    [style]="{width:'120px'}"
+                    dateFormat="d M yy"
+                    appendTo="body">
+                </p-calendar>
         </div>
         <div class="float-left ml-3 pl-3 border-left">
-            <button class="btn btn-sm btn-secondary" (click)="getDataHistory()"><i class="bi bi-arrow-clockwise"></i></button>
+            <button class="btn btn-sm btn-secondary" (click)="getDataHistory()">
+                <i class="bi bi-arrow-clockwise"></i>
+            </button>
         </div>
     </div>
     <div class="w-100 border-bottom"></div>
@@ -39,11 +61,20 @@
                     <td>{{item.tglSep}}</td>
                     <td>
                         {{item.tglPlgSep}}
-                        <button *ngIf="!item.tglPlgSep" class="btn btn-icon btn-light mr-1" (click)="pasienPulang(item)">Form Pulang</button>
+                        <button
+                            *ngIf="!item.tglPlgSep"
+                            class="btn btn-icon btn-light mr-1"
+                            (click)="pasienPulang(item)">
+                                Form Pulang
+                        </button>
                     </td>
                     <td>
-                        <button class="btn btn-icon btn-secondary mr-1" (click)="vclaimService.printSep(item.noSep)"><i class="bi bi-printer"></i></button>
-                        <button class="btn btn-icon btn-light" (click)="delete(item.noSep)"><i class="bi bi-trash"></i></button>
+                        <button class="btn btn-icon btn-secondary mr-1" (click)="vclaimService.printSep(item.noSep)">
+                            <i class="bi bi-printer"></i>
+                        </button>
+                        <button class="btn btn-icon btn-light" (click)="delete(item.noSep)">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
@@ -58,7 +89,12 @@
 
 <p-confirmDialog header="Konfirmasi" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-
-<p-dialog header="Form Pasien Pulang" (onHide)="formPasienPulangService.closeDialog()" [(visible)]="dialogFormPasienPulang" [style]="{width: '600px'}" appendTo="body" [modal]="true">
-    <app-form-pasien-pulang></app-form-pasien-pulang>
+<p-dialog
+    header="Form Pasien Pulang"
+    (onHide)="formPasienPulangService.closeDialog()"
+    [(visible)]="dialogFormPasienPulang"
+    [style]="{width: '600px'}"
+    appendTo="body"
+    [modal]="true">
+        <app-form-pasien-pulang></app-form-pasien-pulang>
 </p-dialog>

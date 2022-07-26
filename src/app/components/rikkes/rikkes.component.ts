@@ -53,9 +53,10 @@ export class RikkesComponent implements OnInit {
 
     ngOnInit(): void {
         this.username = sessionStorage.getItem('login');
-        if( this.username != 'admin' && this.username != 'admin2' ){
-            this.router.navigateByUrl('');
-        }
+
+        // if( this.username != 'adminOld' && this.username != 'admin2Old' ){
+        //     this.router.navigateByUrl('');
+        // }
         this.initForm();
         this.dataPesertaService.peserta.subscribe(data => this.setFormPeserta(data))
         this.dataPesertaService.dialog.subscribe(data => this.dialogDataPeserta = data)

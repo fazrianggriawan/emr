@@ -1,50 +1,23 @@
 <div class="row p-mt-2">
     <div class="col-6">
-        <div class="form-group mb-0 mt-1">
+        <div><p-checkbox name="groupname" value="val1"></p-checkbox> Membaik / Selesai Pengobatan</div>
+        <hr class="mt-1 mb-2">
+        <div><p-checkbox name="groupname" value="val1"></p-checkbox> Kontrol Kembali</div>
+        <div class="p-2 mb-3">
+            <div class="pl-3">
+                <p-calendar inputId="basic" placeholder="Tanggal ?" [showIcon]="true"></p-calendar>
+            </div>
+        </div>
+        <hr class="mt-1 mb-2">
+        <div><p-checkbox name="groupname" value="val1"></p-checkbox> Rujuk keluar RS</div>
+        <hr class="mt-1 mb-2">
+        <div><p-checkbox name="groupname" value="val1"></p-checkbox> Masuk Rawat Inap</div>
+        <hr class="mt-1 mb-2">
+        <div class="form-group">
             <label for="formGroupExampleInput" class="d-block">Catatan</label>
             <textarea [style]="{width: '100%'}" pInputTextarea [autoResize]="true"></textarea>
         </div>
         <hr>
-        <div>
-            <div><p-checkbox name="groupname" value="val1"></p-checkbox> Membaik / Selesai Pengobatan</div>
-            <hr class="mt-1 mb-2">
-            <div class="tx-bold"><p-checkbox name="groupname" value="val1"></p-checkbox> Kontrol Kembali</div>
-            <div class="p-2 mb-3">
-                <div>
-                    <p-calendar inputId="basic" placeholder="Tanggal ?" [showIcon]="true"></p-calendar>
-                    <div class="p-1">Rabu, 8 Mei 2022</div>
-                </div>
-                <div class="mt-2">
-                    <button class="btn btn-xs btn-outline-primary mr-1"><i class="bi bi-plus-lg"></i> Buat Surat Kontrol</button>
-                    <button class="btn btn-xs btn-outline-primary mr-1" disabled><i class="bi bi-printer"></i> Print</button>
-                    <button class="btn btn-xs btn-outline-primary mr-1" disabled><i class="bi bi-send"></i> Kirim via Email</button>
-                </div>
-            </div>
-            <hr class="mt-1 mb-2">
-            <div><p-checkbox name="groupname" value="val1"></p-checkbox> Laboratorium</div>
-            <div class="p-2 mb-3">
-                <ul>
-                    <li>Hematologi Rutin</li>
-                    <li>Retikulosit</li>
-                </ul>
-                <div class="mt-2">
-                    <button class="btn btn-xs btn-outline-primary mr-1"><i class="bi bi-send"></i> Kirim ke Lab</button>
-                </div>
-            </div>
-            <hr class="mt-1 mb-2">
-            <div class="mt-1"><p-checkbox name="groupname" value="val1"></p-checkbox> Radiologi</div>
-            <div class="p-2 mb-3">
-                <button class="btn btn-xs btn-outline-primary"><i class="bi bi-plus-lg"></i> Data Pemeriksaan</button>
-            </div>
-
-            <hr class="mt-1 mb-2">
-            <div><p-checkbox name="groupname" value="val1"></p-checkbox> Rujuk Internal</div>
-            <hr class="mt-1 mb-2">
-            <div><p-checkbox name="groupname" value="val1"></p-checkbox> Rujuk keluar RS</div>
-            <hr class="mt-1 mb-2">
-            <div><p-checkbox name="groupname" value="val1"></p-checkbox> Rujuk Balik</div>
-            <hr class="mt-1 mb-2">
-            <div><p-checkbox name="groupname" value="val1"></p-checkbox> Rawat Inap</div>
-        </div>
+        <button class="btn btn-primary pl-5 pr-5"><i class="bi bi-check-lg"></i> Selesai</button>
     </div>
 </div>

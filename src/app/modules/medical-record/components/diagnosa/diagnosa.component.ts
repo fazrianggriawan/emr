@@ -4,7 +4,7 @@ import { AutoComplete } from 'primeng/autocomplete';
 import { DiagnosaService } from 'src/app/services/diagnosa.service';
 import { IcdService } from 'src/app/services/icd.service';
 import { RegistrasiService } from 'src/app/services/registrasi.service';
-import { Icd } from "./icd";
+// import { Icd } from "./icd";
 
 @Component({
     selector: 'app-diagnosa',
@@ -14,7 +14,7 @@ import { Icd } from "./icd";
 export class DiagnosaComponent implements OnInit {
 
     dataTable: any[] = [];
-    dataIcd10: Icd[] = [];
+    dataIcd10: any[] = [];
     selectedData: any[] = [];
     filteredIcd10: any[] = [];
     now: Date = new Date();

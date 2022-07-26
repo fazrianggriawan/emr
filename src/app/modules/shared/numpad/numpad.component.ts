@@ -19,6 +19,7 @@ export class NumpadComponent implements OnInit {
     ngOnInit(): void {
         this.numpadService.event.subscribe(event => {
             if (event) {
+                console.log(event);
                 this.openPanel(event);
             }
         })
@@ -30,7 +31,7 @@ export class NumpadComponent implements OnInit {
     }
 
     public selectNumber(number: string) {
-        this.numpadService.number.next(number);
+        this.numpadService.value.next(number);
         this.op.hide();
     }
 

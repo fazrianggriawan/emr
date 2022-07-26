@@ -25,6 +25,10 @@ export class DataPasienService {
         this.http.post<any>( config.api_url('pasien/filtering'), data ).subscribe( data => this.dataPasien.next(data.data) )
     }
 
+    public getAllDataPasien(){
+        this.http.get<any>( config.api_url('pasien/allData') ).subscribe(data => this.dataPasien.next(data.data))
+    }
+
     public openDialog(){
         this.dialog.next(true);
     }

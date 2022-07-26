@@ -34,7 +34,10 @@ import { EditorModule } from 'primeng/editor';
 import { MenubarModule } from 'primeng/menubar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FormPasienPulangComponent } from './vclaim/history/form-pasien-pulang/form-pasien-pulang.component';
-
+import { MenuEmrComponent } from 'src/app/templates/menu-emr/menu-emr.component';
+import { KonvaComponent } from 'src/app/components/konva/konva.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 let primeModules = [
@@ -58,7 +61,9 @@ let primeModules = [
     ImageModule,
     EditorModule,
     MenubarModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TabMenuModule,
+    QRCodeModule
 ]
 
 let sharedComponent = [
@@ -72,6 +77,8 @@ let sharedComponent = [
     HistoryComponent,
     SuratKontrolComponent,
     FormRujukanKeluarComponent,
+    MenuEmrComponent,
+    KonvaComponent
 ]
 
 @NgModule({

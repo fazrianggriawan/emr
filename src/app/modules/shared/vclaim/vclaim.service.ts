@@ -11,7 +11,7 @@ import { DataPasienService } from '../../registrasi/components/data-pasien/data-
 export class VclaimService {
 
     peserta = new BehaviorSubject<any>('');
-    dialog = new BehaviorSubject<boolean>(true);
+    dialog = new BehaviorSubject<boolean>(false);
     diagnosa = new BehaviorSubject<any>('');
     poliklinik = new BehaviorSubject<any>('');
     dokter = new BehaviorSubject<any>('');

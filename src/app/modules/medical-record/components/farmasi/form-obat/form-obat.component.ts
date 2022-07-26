@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NumpadService } from 'src/app/modules/shared/numpad/numpad.service';
 import { FarmasiService } from '../../../../farmasi/services/farmasi.service';
 import { NumpadRacikanService } from '../../../../shared/numpad-racikan/numpad-racikan.service';
 
@@ -8,12 +9,13 @@ import { NumpadRacikanService } from '../../../../shared/numpad-racikan/numpad-r
     templateUrl: './form-obat.component.html',
     styleUrls: ['./form-obat.component.css']
 })
-export class FormObatComponent implements OnInit {
+export class FormObatComponent implements OnInit, OnDestroy {
 
     form!: FormGroup;
     selectedObat!: any;
     displayDialog: boolean = false;
     jenisResep: string = '';
+    kronis: boolean = false;
 
     signa: any = { dosis: '', unit: '', route: '', frekuensi: '', arahan: '', durasi: '' };
     data: any = { arahan: [], frekuensi: [], route: [], unit: [], dosis: [], hari: [], durasi: [] }
@@ -21,7 +23,7 @@ export class FormObatComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private farmasiService: FarmasiService,
-        private numpadService: NumpadRacikanService,
+        private numpadService: NumpadService,
         private numpadRacikanService: NumpadRacikanService
     ) { }
 
@@ -34,13 +36,17 @@ export class FormObatComponent implements OnInit {
         this.farmasiService.jenisResep.subscribe( data => this.handleJenisResep(data) );
     }
 
+    ngOnDestroy(): void {
+        this.closeDialog();
+    }
+
     public initForm() {
         this.form = this.fb.group({
             obat: [this.selectedObat, Validators.required],
             signaText: ['', Validators.required],
             signaValue: [this.signa, Validators.required],
             jumlah: ['1', Validators.required],
-            kronis: [false, Validators.required],
+            kronis: [false],
             takaran: [''],
             catatan: [''],
         })

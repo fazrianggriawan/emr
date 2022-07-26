@@ -24,24 +24,22 @@
 </div>
 <div id="container-konva" class="viewer"></div>
 <div class="thumbnail-image">
-    <img src="https://thumb.mp-farm.com/3972272/preview.jpg" class="img-thumbnail" alt="Image 1" width="100%"
-        (click)="rebuild('https://thumb.mp-farm.com/3972272/preview.jpg')">
-    <img src="http://localhost/emr/api_emr/public/get_image" class="img-thumbnail" width="100%"
-        (click)="rebuild('http://localhost/emr/api_emr/public/get_image')">
-    <button class="btn btn-primary" (click)="saveImage()">Save Image</button>
+    <img src="http://localhost/emr/api/public/get_image" class="img-thumbnail" width="100%"
+        (click)="rebuild('http://localhost/emr/api/public/get_image')">
+     <button class="btn btn-primary" (click)="saveImage()">Save Image</button> -->
 </div>
 <div class="panel-legend">
     <div class="legend" *ngFor="let item of a; let i = index">
-        <div class="number">{{item.i}}</div>
+        <div class="number">{{item.id}}</div>
         <h1>Lokasi</h1>
         <div class="content">
             {{item.content.lokasi}}
-            <span *ngIf="!item.lokasi" class="silver">Empty</span>
+            <span *ngIf="!item.content.lokasi" class="tx-gray-200">Belum terinput</span>
         </div>
         <h1>Keterangan</h1>
         <div class="content">
             {{item.content.keterangan}}
-            <span *ngIf="!item.keterangan" class="silver">Empty</span>
+            <span *ngIf="!item.content.keterangan" class="tx-gray-200">Belum terinput</span>
         </div>
     </div>
 </div>

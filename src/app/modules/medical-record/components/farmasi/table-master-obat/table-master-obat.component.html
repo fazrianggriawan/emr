@@ -36,18 +36,27 @@
             </div>
         </p-scrollPanel>
     </div>
-    <div>
+    <div style="width: 100%;">
+        <!-- <p-table
+            #dtObat
+            [value]="masterObat"
+            [scrollable]="true"
+            [rows]="100"
+            scrollHeight="600px"
+            [virtualScroll]="true"
+            [virtualRowHeight]="40"
+            styleClass="table-striped table-hover p-datatable-sm"> -->
+
         <p-table
             #dtObat
             styleClass="p-datatable-striped bd"
             class="table-obat item-obat"
             responsiveLayout="scroll"
             scrollHeight="flex"
-            selectionMode="single"
-            (onRowSelect)="onSelectObat()"
             [style]="{ height: 'calc(100% - 300px)' }"
+            [rows]="100"
+            [virtualRowHeight]="40"
             [value]="masterObat"
-            [(selection)]="selectedObat"
             [globalFilterFields]="['nama']"
             [virtualScroll]="true"
             [scrollable]="true">
@@ -57,8 +66,8 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
-                <tr [pSelectableRow]="item">
-                    <td class="clearfix">
+                <tr (click)="onSelectObat(item)">
+                    <td class="clearfix clickable">
                         <div class="float-left">{{item.nama}}</div>
                         <span class="badge badge-secondary bg-gray-200 tx-gray-700 tx-11 float-right">{{item.stok}} {{item.satuan}}</span>
                     </td>

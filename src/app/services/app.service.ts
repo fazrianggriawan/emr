@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AppService {
 
     notification = new BehaviorSubject<any>('');
+    currentRoute = new BehaviorSubject<string>('');
 
     constructor() { }
 
@@ -21,6 +22,17 @@ export class AppService {
             message: message
         }
         this.notification.next(data)
+    }
+
+    public setLocalStorage(key:string, value:string){
+        localStorage.setItem(key, value);
+    }
+
+    public getLocalStorage(key:string){
+        if( localStorage.getItem(key) ){
+            let data:any = localStorage.getItem(key);
+            return data;
+        }
     }
 
 }

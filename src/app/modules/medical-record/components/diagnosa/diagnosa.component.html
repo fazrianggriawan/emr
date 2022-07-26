@@ -1,21 +1,21 @@
 <div class="row">
     <div class="col-6">
-        <h1 class="tx-title">Diagnosa</h1>
+        <h1 class="tx-title">Diagnosa asdasd</h1>
         <table class="table table-striped table-hover bd m-0 p-0">
             <thead>
                 <tr>
                     <th colspan="3">
-                        <p-autoComplete #acICD appendTo="body"
+                        <p-autoComplete #acICD10 appendTo="body"
                             placeholder="Cari ICD-10 (Min. 3 huruf)" field="name"
                             [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [minLength]="3"
                             [autoHighlight]="true" [showEmptyMessage]="true" [suggestions]="filteredIcd10"
                             [showEmptyMessage]="true" [forceSelection]="true"
-                            (onSelect)="selected($event, acICD)" (completeMethod)="search($event)">
+                            (onSelect)="selected($event, acICD10)" (completeMethod)="search($event)">
 
                             <ng-template pTemplate="header">
                                 <table class="table p-m-0 p-p-0">
                                     <tr>
-                                        <td style="width: 90px;">ICD Code</td>
+                                        <td style="width: 90px;">ICD Code sfsfsdf</td>
                                         <td style="width: 400px;">ICD Name</td>
                                     </tr>
                                 </table>
@@ -66,12 +66,12 @@
             <thead>
                 <tr>
                     <th colspan="3">
-                        <p-autoComplete #acICD appendTo="body"
+                        <p-autoComplete #acICD9 appendTo="body"
                             placeholder="Cari ICD-9 (Min. 3 huruf)" field="name"
                             [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [minLength]="3"
-                            [autoHighlight]="true" [showEmptyMessage]="true" [suggestions]="filteredIcd10"
+                            [autoHighlight]="true" [showEmptyMessage]="true" [suggestions]="filteredIcd9"
                             [showEmptyMessage]="true" [forceSelection]="true"
-                            (onSelect)="selected($event, acICD)" (completeMethod)="search($event)">
+                            (onSelect)="selected($event, acICD9)" (completeMethod)="search($event)">
 
                             <ng-template pTemplate="header">
                                 <table class="table p-m-0 p-p-0">

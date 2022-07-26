@@ -29,7 +29,6 @@ export class TableOrderObatComponent implements OnInit {
 
     public handleDataObat(data: any) {
         if (data) {
-            console.log(this.jenisResep);
             if (this.jenisResep == 'biasa') this.dataObatBiasa.push(data);
             if (this.jenisResep == 'racikan') this.dataObatRacikan.push(data);
 
@@ -43,8 +42,6 @@ export class TableOrderObatComponent implements OnInit {
     public change(e: any) {
         this.dataResepRacikan.push({});
         this.ac.initTabs();
-        console.log(this.ac);
-        console.log(this.ac.tabs);
     }
 
     public test() {
@@ -56,4 +53,11 @@ export class TableOrderObatComponent implements OnInit {
         if (e.index == 1) this.farmasiService.jenisResep.next('racikan');
     }
 
+    deleteObatNonRacikan(i: number) {
+        this.dataObatBiasa.splice(i, 1);
+    }
+
+    deleteObatRacikan(i: number) {
+        this.dataObatRacikan.splice(i, 1);
+    }
 }

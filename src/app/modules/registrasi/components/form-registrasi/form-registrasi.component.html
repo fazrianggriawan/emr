@@ -94,87 +94,88 @@
                 </div>
             </div>
         </div>
-        <hr>
-        <h4>Riwayat Kunjungan</h4>
-        <div class="row">
-            <div class="col">
-                <p-table [value]="dataRegistrasi" styleClass="p-datatable-sm table-striped table-hover border-top mb-3" responsiveLayout="scroll">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Jns. Perawatan</th>
-                            <th>Ruangan / Poliklinik</th>
-                            <th>Tanggal Masuk</th>
-                            <th>Tanggal Pulang</th>
-                            <th>Dokter / DPJP</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-item>
-                        <tr>
-                            <td>{{item.jnsPerawatan}}</td>
-                            <td>{{item.ruanganPoli}}</td>
-                            <td>{{item.tanggal}}</td>
-                            <td>{{item.tanggal}}</td>
-                            <td>{{item.dokter}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
     </div>
     <div class="col">
         <h4>Data Registrasi</h4>
         <form [formGroup]="form">
             <div class="row mb-1">
-                <label class="col-4 col-form-label">Status</label>
-                <div class="col-auto">
-                    <input type="text" formControlName="status" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-1">
-                <label class="col-4 col-form-label">No. Registrasi</label>
-                <div class="col-auto">
-                    <input type="text" formControlName="noreg" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-1">
-                <label class="col-4 col-form-label">Tanggal</label>
+                <label class="col-4 col-form-label">
+                    Tanggal <span *ngIf="form.get('tanggal')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
                 <div class="col-auto">
                     <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" [maxDate]="today" formControlName="tanggal"></p-calendar>
                 </div>
             </div>
             <div class="row mb-1">
-                <label class="col-4 col-form-label">No. SEP</label>
+                <label class="col-4 col-form-label">
+                    Status <span *ngIf="form.get('status')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
                 <div class="col-auto">
-                    <div class="input-group">
-                        <input type="text" formControlName="noSep" class="form-control">
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary" (click)="vclaimService.openDialog()"><i class="bi bi-plus-lg"></i></button>
-                        </div>
-                    </div>
+                    <input type="text" formControlName="status" class="form-control" readonly>
                 </div>
             </div>
             <div class="row mb-1">
-                <label class="col-4 col-form-label">Jns. Kunjungan</label>
+                <label class="col-4 col-form-label">
+                    No. Registrasi <span *ngIf="form.get('noreg')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col-auto">
+                    <input type="text" formControlName="noreg" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">
+                    Jns. Perawatan  <span *ngIf="form.get('jnsPerawatan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
                 <div class="col">
-                    <input type="text" formControlName="jnsKunjungan" class="form-control">
+                    <p-dropdown [options]="dataJnsPerawatan" formControlName="jnsPerawatan" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">Ruangan / Poliklinik</label>
                 <div class="col">
-                    <input type="text" formControlName="ruangan" class="form-control">
+                    <p-dropdown
+                        [options]="dataPoli"
+                        (ngModelChange)="getDokterByPoli($event)"
+                        formControlName="ruanganPoli"
+                        optionValue="id"
+                        optionLabel="name"
+                        [style]="{width: '100%'}"
+                        appendTo="body">
+                    </p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
-                <label class="col-4 col-form-label">Dokter / DPJP</label>
+                <label class="col-4 col-form-label">Waktu Pelayanan</label>
                 <div class="col">
-                    <input type="text" formControlName="dokterDpjp" class="form-control">
+                    <p-dropdown [options]="dataWaktuPelayanan" formControlName="waktuPelayanan" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
-                <label class="col-4 col-form-label">Jenis Pembayaran</label>
+                <label class="col-4 col-form-label">
+                    Dokter / DPJP <span *ngIf="form.get('dokter')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="dataDokter" formControlName="dokter" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">
+                    Jenis Pembayaran <span *ngIf="form.get('grouPasien')?.errors || form.get('golPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="dataGroupPasien" formControlName="groupPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body" styleClass="mb-1" (ngModelChange)="getGolPasienByGroup($event)"></p-dropdown>
+                    <p-dropdown [options]="dataGolPasien" formControlName="golPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">Nomor SEP</label>
                 <div class="col-auto">
-                    <input type="text" formControlName="jnsPembayaran" class="form-control">
+                    <div class="input-group">
+                        <input type="text" formControlName="noSep" class="form-control">
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary" (click)="vclaimService.openDialog()"><i class="bi bi-table"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="row mb-1">

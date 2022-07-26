@@ -8,7 +8,7 @@ const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'rikkes', component: RikkesComponent },
     { path: 'vclaim', component: VclaimComponent },
-    { path: 'medical_record', loadChildren: () => import('./modules/medical-record/medical-record.module').then(m => m.MedicalRecordModule) },
+    { path: 'medicalRecord', loadChildren: () => import('./modules/medical-record/medical-record.module').then(m => m.MedicalRecordModule) },
     { path: 'registrasi', loadChildren: () => import('./modules/registrasi/registrasi.module').then(m => m.RegistrasiModule) },
     { path: 'rawatJalan', loadChildren: () => import('./modules/rawat-jalan/rawat-jalan.module').then(m => m.RawatJalanModule) },
     { path: 'kasir', loadChildren: () => import('./modules/kasir/kasir.module').then(m => m.KasirModule) },

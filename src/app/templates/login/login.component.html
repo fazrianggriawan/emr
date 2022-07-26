@@ -1,26 +1,36 @@
 <div class="login-page">
+    <div class="row justify-content-center mb-5">
+        <div class="col-auto">
+            <img [src]="'assets/logo.svg'" alt="Logo" height="50px">
+        </div>
+    </div>
     <div class="row justify-content-center">
-        <div class="col-auto login-container sign-wrapper rounded">
+        <div class="col-lg-3 col-md-4 col-sm-10 login-container bg-gray-100 sign-wrapper p-5 bd" style="border-radius: 1rem;">
             <div class="wd-100p">
-                <h3 class="tx-color-01 mg-b-5">Sign In</h3>
-                <p class="tx-16 mg-b-20">Welcome back! Please signin to continue.</p>
+                <h3 class="tx-color-01 mb-5 tx-center tx-bold">Login</h3>
                 <form [formGroup]="formLogin">
                     <div class="form-group">
-                        <label>Username</label>
-                        <input type="email" (keyup)="listenLogin($event)" class="form-control" formControlName="username" placeholder="Enter your username">
+                        <label class="tx-bold">Username atau Email</label>
+                        <input type="email" (keyup)="listenLogin($event)" tabindex="1" class="form-control bg-white"
+                            formControlName="username" placeholder="Masukkan Username atau Email">
                     </div>
-                    <div class="form-group p-mt-2">
-                        <div class="d-flex justify-content-between mg-b-5">
-                            <label class="mg-b-0-f">Password</label>
-                        </div>
-                        <input type="password" (keyup)="listenLogin($event)" class="form-control" formControlName="password" placeholder="Enter your password">
+                    <div class="form-group">
+                        <label class="tx-bold">Password</label>
+                        <label class="float-right"><a href="">Lupa password ?</a></label>
+                        <input type="password" tabindex="2" (keyup)="listenLogin($event)" class="form-control bg-white"
+                            formControlName="password" placeholder="Masukkan Password">
                     </div>
                 </form>
-                <p class="alert alert-danger p-mt-1 p-mb-1 tx-center" *ngIf="messageErrorLogin">{{messageErrorLogin}}</p>
-                <button class="btn btn-brand-02 btn-block p-mt-2" (click)="doLogin()">Sign In</button>
-                <!-- <a href="" class="tx-13">Forgot password?</a>
-                <div class="tx-13 mg-t-20 tx-center">Don't have an account? <a href="page-signup.html">Create an Account</a></div> -->
+                <p class="alert alert-danger p-mt-1 p-mb-1 tx-center" *ngIf="messageErrorLogin">{{messageErrorLogin}}
+                </p>
+                <button class="btn btn-primary btn-block tx-bold" (click)="doLogin()">Login</button>
+                <p class="mt-3 tx-center">Belum memiliki akun? <a href="#" class="tx-bold">Daftar Sekarang</a></p>
             </div>
         </div><!-- sign-wrapper -->
     </div>
+    <p class="tx-center mt-3">PT. Solusi Berteknologi Indonesia &copy; 2022</p>
+</div>
+
+<div style="position: fixed; bottom: -25%; width: 100%; left: 0; z-index: -1;">
+    <svg width="100%" height="100%" id="svg" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" class="transition duration-300 ease-in-out delay-150"><defs><linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="5%" stop-color="#002bdc88"></stop><stop offset="95%" stop-color="#32ded488"></stop></linearGradient></defs><path d="M 0,600 C 0,600 0,200 0,200 C 83.25358851674642,167.2535885167464 166.50717703349284,134.5071770334928 255,150 C 343.49282296650716,165.4928229665072 437.22488038277504,229.2248803827751 554,227 C 670.775119617225,224.7751196172249 810.5933014354066,156.59330143540672 898,139 C 985.4066985645934,121.4066985645933 1020.4019138755982,154.4019138755981 1102,173 C 1183.5980861244018,191.5980861244019 1311.7990430622008,195.79904306220095 1440,200 C 1440,200 1440,600 1440,600 Z" stroke="none" stroke-width="0" fill="url(#gradient)" class="transition-all duration-300 ease-in-out delay-150 path-0"></path><defs><linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%"><stop offset="5%" stop-color="#002bdcff"></stop><stop offset="95%" stop-color="#32ded4ff"></stop></linearGradient></defs><path d="M 0,600 C 0,600 0,400 0,400 C 120.92822966507177,380.9569377990431 241.85645933014354,361.9138755980861 341,363 C 440.14354066985646,364.0861244019139 517.5023923444976,385.30143540669854 606,403 C 694.4976076555024,420.69856459330146 794.133971291866,434.8803827751196 895,413 C 995.866028708134,391.1196172248804 1097.9617224880383,333.177033492823 1189,325 C 1280.0382775119617,316.822966507177 1360.0191387559807,358.4114832535885 1440,400 C 1440,400 1440,600 1440,600 Z" stroke="none" stroke-width="0" fill="url(#gradient)" class="transition-all duration-300 ease-in-out delay-150 path-1"></path></svg>
 </div>

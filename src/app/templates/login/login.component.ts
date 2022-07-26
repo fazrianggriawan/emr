@@ -37,13 +37,8 @@ export class LoginComponent implements OnInit {
     }
 
     public doLogin() {
-        if( this.formLogin.value.username == 'admin' && this.formLogin.value.password == '440699' ){
-            sessionStorage.setItem('login', 'admin')
-            this.gotoDashboarPage();
-        }
-
-        if( this.formLogin.value.username == 'admin2' && this.formLogin.value.password == 'admin2' ){
-            sessionStorage.setItem('login', 'admin2')
+        if( this.formLogin.value.username == 'demo' && this.formLogin.value.password == 'demo' ){
+            sessionStorage.setItem('login', 'demo')
             this.gotoDashboarPage();
         }
     }
@@ -56,7 +51,7 @@ export class LoginComponent implements OnInit {
     }
 
     public gotoDashboarPage() {
-        this.router.navigateByUrl('vclaim');
+        this.router.navigateByUrl('medicalRecord');
     }
 
 }

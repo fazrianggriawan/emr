@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { DataPasienService } from './modules/registrasi/components/data-pasien/data-pasien.service';
 import { AppService } from './services/app.service';
 import { LoadingService } from './services/loading.service';
 
@@ -15,13 +16,15 @@ export class AppComponent implements OnInit {
 
     loading: boolean = false;
     currentRoute: string = '';
+    pasien: any;
 
     constructor(
+        public loadingService: LoadingService,
         private primeNgConfig: PrimeNGConfig,
         private router: Router,
-        public loadingService: LoadingService,
         private appService: AppService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private dataPasienService: DataPasienService
     ) { }
 
     ngOnInit() {
@@ -33,11 +36,21 @@ export class AppComponent implements OnInit {
             if( data.type == 'success' ) this.messageService.add({severity:'success', summary:'Sukses', detail:data.message});
         })
 
+        this.appService.currentRoute.subscribe(data => this.currentRoute = data)
+
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
-                // Hide progress spinner or progress bar
-                this.currentRoute = event.url;
+                let split = event.url.split('/');
+                if( split[1] ){
+                    this.appService.currentRoute.next(split[1]);
+                }else{
+                    this.appService.currentRoute.next(split[0]);
+                }
+
             }
         })
+
+        this.dataPasienService.pasien.subscribe(data => this.pasien = data);
+
     }
 }

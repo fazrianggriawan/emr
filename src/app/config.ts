@@ -1,4 +1,4 @@
-var host = 'http://simrsmandiri.com/emr/api';
+var host = 'http://localhost/BiHealth/api';
 var hostVclaim = 'http://localhost/vclaim';
 var hostPublic = 'http://182.253.22.220';
 export const config = {

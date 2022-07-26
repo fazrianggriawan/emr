@@ -8,7 +8,8 @@ import { MenuItem } from 'primeng/api';
 })
 export class UserComponent implements OnInit {
 
-    public menuItems : MenuItem[] = [];
+    menuItems: MenuItem[] = [];
+    dialogBarcode: boolean = false;
 
     constructor() { }
 

@@ -1,74 +1,123 @@
-<header class="navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != '/'">
-    <div class="row">
-        <div class="col-auto">
-            <div class="p-pl-3 p-pt-2">
-                <span class="df-logo" style="color: white;">SIMRSMANDIRI<span style="color: #75bfff;">.io</span></span>
-            </div>
-        </div>
-        <div class="col-auto">
-            <app-menu></app-menu>
-        </div>
-        <div class="col-3">
-            <!-- <app-calendar></app-calendar> -->
-        </div>
-        <div class="col tx-right">
-            <!-- <app-user></app-user> -->
+<div class="row navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != ''">
+    <div class="col-auto">
+        <div class="p-pl-3 p-pt-2">
+            <span class="df-logo" style="color: white;">SIMRSMANDIRI<span style="color: #75bfff;">.io</span></span>
         </div>
     </div>
-</header>
-<!-- <div class="sidebar sidebar-fixed sidebar-components">
-    <div class="sidebar-header">
-        <a href="" id="mainMenuOpen"><i data-feather="menu"></i></a>
-        <h5>Components</h5>
-        <a href="" id="sidebarMenuClose"><i data-feather="x"></i></a>
+    <div class="col topMenu">
+        <app-menu></app-menu>
     </div>
-    <div class="sidebar-body p-0">
-        <app-data-pasien></app-data-pasien>
+    <div class="col-auto">
+        <button class="btn btn-icon tx-white tx-16">
+            <i class="bi bi-bell mr-1"></i>
+            <span class="badge badge-danger">1</span>
+        </button>
     </div>
-</div> -->
-<!-- <div class="section-nav">
-    <label class="nav-label">Ringkasan Konsultasi</label>
-    <div>
-        <label class="nav-label mb-0">Keluhan / Gejala</label>
-        <div>Sakit Kepala</div>
+    <div class="col-auto tx-white" style="padding-top: 3px; background-color: #324183;">
+        <app-user></app-user>
     </div>
+</div>
 
-    <div class="mt-3">
-        <label class="nav-label mb-0">Vital Sign</label>
-        <div>Suhu : 34 <sup>o</sup>C</div>
-        <div>BB : 36 kg</div>
-    </div>
-
-    <div class="mt-3">
-        <label class="nav-label mb-0">Diagnosa</label>
-        <div class="p-1">
-            <div class="border-bottom pb-1 mb-1">Z10.2 ROUTINE GENERAL HEALTH CHECK-UP OF ARMED FORCES</div>
-            <div class="border-bottom pb-1 mb-1">Z20.2 CONTACT WITH AND EXPOSURE TO INFECTIONS WITH A PREDOMINANTLY SEXUAL MODE OF TRANSMISSION</div>
-        </div>
-    </div>
-</div>-->
 <div class="content content-components p-4 ml-0 mr-0">
     <div class="content p-0">
-        <div class="row justify-content-center">
-            <!-- <div class="col-auto">
-                <div style="width: 175px;">
-                    <strong>PASIEN</strong>
-                    <div>
-                        <h5 class="m-0">FAZRI ANGGRIAWAN</h5>
-                        <span>34 Thn, Laki-laki</span>
-                    </div>
-                    <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-pencil mr-2"></i>Edit Data Pasien</button>
-                    <hr>
-                    <div>
-                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-arrow-clockwise mr-2"></i>Riwayat Pelayanan</button>
-                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-exclamation-triangle mr-2"></i>Alergi <span class="badge badge-danger">2</span> </button>
-                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Penyakit</button>
-                        <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Operasi</button>
+        <div class="row justify-content-center" >
+            <div class="col-auto" *ngIf="pasien">
+                <div style="width: 200px;">
+                    <div *ngIf="pasien.nama">
+                        <div class="bg-light p-3 rounded border tx-center tx-gray-500 mb-2 mt-3">
+                            <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
+                        </div>
+
+                        <div>
+                            <div>Nomor RM : {{pasien.norm}}</div>
+                            <h5 class="m-0">{{pasien.nama | uppercase}}</h5>
+                            <small *ngIf="pasien.jns_kelamin== 'P'">PEREMPUAN</small>
+                            <small *ngIf="pasien.jns_kelamin== 'L'">LAKI-LAKI</small>
+                            <div class="tx-12">{{pasien.alamat | uppercase}}</div>
+                        </div>
+                        <!-- <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-pencil mr-2"></i>Edit Data Pasien</button> -->
+                        <hr>
+                        <div>
+                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-arrow-clockwise mr-2"></i>Riwayat Pelayanan</button>
+                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-exclamation-triangle mr-2"></i>Alergi <span class="badge badge-danger float-right mt-1">2</span> </button>
+                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Penyakit</button>
+                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Operasi</button>
+                        </div>
                     </div>
                 </div>
-            </div> -->
-            <div class="col-10 pb-3 pt-0" style="background: #f9f9f9;">
-                <app-menu-emr *ngIf="currentRoute != '/'"></app-menu-emr>
+            </div>
+            <div class="col pb-5 pt-0 border-left">
+                <div class="row">
+                    <div class="col"><app-menu-emr *ngIf="currentRoute == 'medicalRecord'"></app-menu-emr></div>
+                </div>
+                <div class="row mb-3 border-bottom border-top pt-2 pb-2" style="background-color: #e6ecef;" *ngIf="currentRoute == 'medicalRecord'">
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text tx-pink" id="basic-addon1"> Suhu </span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1"> <sup>o</sup>C </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text tx-pink" id="basic-addon1"> Tensi </span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1"> mmHg </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text tx-pink" id="basic-addon1"> Nadi </span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1"> x/menit </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text tx-pink" id="basic-addon1"> BB </span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1"> kg </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text tx-pink" id="basic-addon1"> Tinggi </span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1"> cm </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text tx-pink" id="basic-addon1"> Pernapasan </span>
+                            </div>
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon1"> x/menit </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <router-outlet></router-outlet>
             </div>
         </div>

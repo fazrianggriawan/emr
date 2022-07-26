@@ -1,7 +1,7 @@
-<p-dialog header="OBAT RESEP" [(visible)]="displayDialog" [style]="{width: '800px'}" [modal]="true" [draggable]="true" (onHide)="closeDialog()">
+<p-dialog header="OBAT RESEP" [(visible)]="displayDialog" [modal]="true" [draggable]="true" (onHide)="closeDialog()">
     <form [formGroup]="form">
         <div class="row mb-2">
-            <div class="col-auto">
+            <div class="col-6">
                 <div class="tx-16 mb-1 tx-semibold" *ngIf="selectedObat">{{selectedObat.nama}}</div>
                 <input type="text" placeholder="Signa" class="form-control" formControlName="signaText" *ngIf="jenisResep == 'biasa'">
             </div>
@@ -11,7 +11,7 @@
                     <div class="input-group">
                         <input type="number" class="form-control" formControlName="jumlah">
                         <div class="input-group-append">
-                            <button class="btn btn-light" type="button" (click)="openNumpad($event)"><i class="bi bi-view-list"></i></button>
+                            <button class="btn btn-light" type="button" (click)="openNumpad($event)"><i class="bi bi-123"></i></button>
                         </div>
                     </div>
                     <app-numpad></app-numpad>
@@ -20,12 +20,12 @@
                     <input type="text" class="form-control" formControlName="takaran" placeholder="Takaran">
                 </fieldset>
             </div>
-            <div class="col" *ngIf="jenisResep == 'biasa'">
+            <!-- <div class="col">
                 <fieldset class="bd-0">
                     <legend class="p-0 pb-1 tx-16 tx-gray-600">Obat Kronis</legend>
                     <p-inputSwitch formControlName="kronis"></p-inputSwitch>
                 </fieldset>
-            </div>
+            </div> -->
         </div>
         <div *ngIf="jenisResep == 'biasa'">
             <p-scrollPanel [style]="{width: '100%', height: '300px'}">

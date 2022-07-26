@@ -6,13 +6,13 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class NumpadService {
 
-    number = new BehaviorSubject<string>('1');
+    value = new BehaviorSubject<string>('1');
     event = new BehaviorSubject<any>('');
 
     constructor() { }
 
     public reset() {
-        this.number.next('1');
+        this.value.next('1');
         this.event.next('');
     }
 }

@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col">
+        <div>
+            <div class="row mb-3">
+                <div class="col-auto"><h5>Data Permintaan Konsultasi</h5></div>
+                <div class="col border-left">
+                    <button class="btn btn-secondary btn-xs"><i class="bi bi-plus-lg mr-2"></i>Form Konsultasi Baru</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p-table
+                        [value]="dataKonsul" [rows]="50" [style]="{width: '100%'}" scrollHeight="600px"
+                        [virtualScroll]="true" responsiveLayout="scroll" styleClass="table-striped table-hover p-datatable-sm bd">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [width]="100">Tanggal</th>
+                                <th [width]="200">Dari</th>
+                                <th [width]="200">Tujuan</th>
+                                <th>Keterangan</th>
+                                <th>Jawaban Konsul</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr>
+                                <td style="vertical-align: top;">
+                                    {{item.tanggal}}
+                                </td>
+                                <td style="vertical-align: top;">
+                                    {{item.dari}} <br>
+                                    <span class="tx-gray-500">Penyakit Dalam</span>
+                                </td>
+                                <td style="vertical-align: top;">
+                                    Dokter Urologi<br>
+                                    <span class="tx-gray-500">Urologi</span>
+                                </td>
+                                <td>
+                                    <div>Diagnosis Sementara : </div>
+                                    <ul>
+                                        <li>C00.0 - Malignant neoplasm of external upper lip</li>
+                                    </ul>
+                                    <div class="tx-semibold border-bottom">Alasan : </div>
+                                    <div>pelayanan anestesi untuk op</div>
+                                    <br>
+                                    <div class="tx-semibold border-bottom">Konsul Yang Diminta : </div>
+                                    <div>Yth ts dr anestesi. mohon pem dan pelayanan anestesi pada pasien ini yg akan kami rencakan op. terima kasih</div>
+                                    <br>
+                                </td>
+                                <td style="vertical-align: top;">
+                                    <div class="bg-gray-200 rounded tx-center tx-16 p-5 tx-gray-500">
+                                        <div class="border-bottom pb-2 mb-2">Belum Ada Jawaban Saat Ini.</div>
+                                        <button class="btn btn-sm mt-2 btn-outline-light"><i class="bi bi-plus-lg mr-2"></i>Form Jawaban Konsul</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+        </div>
+        <div hidden>
+            <h5 class="border-bottom pb-2">Form Permintaan Konsultasi</h5>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Jenis Konsul </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Tanggal </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Kepada Yth </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Bagian / Departemen </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-4 col-form-label"> Diagnosis </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col">
+                    <div class="mb-2 mt-3">Data Klinis & Hasil Pemeriksaan Penunjang</div>
+                    <p-editor></p-editor>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

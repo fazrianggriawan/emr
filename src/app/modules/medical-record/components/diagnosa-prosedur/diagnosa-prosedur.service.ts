@@ -13,7 +13,10 @@ export class DiagnosaProsedurService {
 
     constructor(
         private http: HttpClient
-    ) { }
+    ) {
+        this.getIcd10();
+        this.getIcd9();
+    }
 
     getIcd10() {
         this.http.get<any>(config.api_url('icd10')).subscribe(data => this.icd10.next(data));
