@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { config } from '../../../../config';
-import { ErrorHandlerService } from '../../../../error-handler.service';
+import { config } from 'src/app/config';
+import { ErrorHandlerService } from 'src/app/services/error-handler.service';
 
 @Injectable({
     providedIn: 'root'

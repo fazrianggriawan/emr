@@ -2,14 +2,9 @@
 <div class="row p-2 sticky-top caption-title">
     <div class="col-auto border-right"><h5>Data Registrasi</h5></div>
     <div class="col">
-        <!-- <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-search mr-1"></i> Cari Pasien</button> -->
-        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1" (click)="formRegistrasiService.openDialog()"><i class="bi bi-plus-lg mr-1"></i> Registrasi Baru</button>
-        <!-- <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> Vclaim BPJS</button> -->
+        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1" (click)="registrasiBaru()"><i class="bi bi-plus-lg mr-1"></i> Registrasi Baru</button>
         <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
-        <!-- <p-menu #menu [popup]="true" appendTo="body" [model]="menuPrint"></p-menu> -->
         <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
-        <!-- <span class="border-left ml-2 mr-2 border-white"></span>
-        <button class="btn btn-sm p-1 pl-2 pr-2 btn-primary mr-1"><i class="bi bi-save mr-1"></i> Simpan Registrasi</button> -->
     </div>
 </div>
 
@@ -60,9 +55,9 @@
     header="Form Registrasi"
     [modal]="true"
     [draggable]="true"
-    [breakpoints]="{'640px': '100vw', '3000px': '75vw'}"
+    [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
     appendTo="body">
-    <app-form-registrasi></app-form-registrasi>
+    <app-form-registrasi *ngIf="dialogFormRegistrasi"></app-form-registrasi>
 </p-dialog>
 
 <p-dialog
@@ -74,5 +69,5 @@
     [draggable]="true"
     [breakpoints]="{'640px': '100vw', '3000px': '90vw'}"
     appendTo="body">
-    <app-vclaim></app-vclaim>
+    <app-vclaim *ngIf="dialogVclaim"></app-vclaim>
 </p-dialog>

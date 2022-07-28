@@ -31,4 +31,9 @@ export class DataRegistrasiComponent implements OnInit {
         this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data)
     }
 
+    registrasiBaru() {
+        this.formRegistrasiService.jnsPelayanan.next('RJ')
+        this.formRegistrasiService.dialog.next(true)
+    }
+
 }

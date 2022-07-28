@@ -25,29 +25,25 @@ export class MasterService {
     groupPasien = new BehaviorSubject<any>('');
     golonganPasien = new BehaviorSubject<any>('');
     dokter = new BehaviorSubject<any>('');
-    poli = new BehaviorSubject<any>('');
+    ruangan = new BehaviorSubject<any>('');
     jnsPerawatan = new BehaviorSubject<any>('');
     waktuPelayanan = new BehaviorSubject<any>('');
+    kelasRuangan = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient
     ) {
-        this.getRs();
-        this.getAwalanNama();
-        this.getNegara();
-        this.getProvinsi();
-        this.getSuku();
-        this.getStatusNikah();
-        this.getAgama();
-        this.getPekerjaan();
-        this.getPendidikan();
-        this.getAngkatan();
-        this.getPangkat();
-        this.getGroupPasien();
-        this.getDokter();
-        this.getPoli();
-        this.getJnsPerawatan();
-        this.getDataWaktuPelayanan();
+        // this.getRs();
+        // this.getAwalanNama();
+        // this.getNegara();
+        // this.getProvinsi();
+        // this.getSuku();
+        // this.getStatusNikah();
+        // this.getAgama();
+        // this.getPekerjaan();
+        // this.getPendidikan();
+        // this.getAngkatan();
+        // this.getPangkat();
     }
 
     public getRs() {
@@ -119,7 +115,7 @@ export class MasterService {
     }
 
     public getPoli() {
-        this.http.get<any>( config.api_url('master/poliklinik') ).subscribe( data => this.poli.next(data.data) )
+        this.http.get<any>( config.api_url('master/poliklinik') ).subscribe( data => this.ruangan.next(data.data) )
     }
 
     public getJnsPerawatan() {
@@ -136,6 +132,14 @@ export class MasterService {
 
     public getGolPasienByGroup(idGroup: string){
         this.http.get<any>( config.api_url('master/golongan_pasien/id_grouppasien/'+idGroup) ).subscribe( data => this.golonganPasien.next(data.data) )
+    }
+
+    public getRuangRawatInap(){
+        this.http.get<any>( config.api_url('master/ruangRawatInap') ).subscribe( data => this.ruangan.next(data.data) )
+    }
+
+    public getKelasRuangan(){
+        this.http.get<any>( config.api_url('master/kelasRuangan') ).subscribe( data => this.kelasRuangan.next(data.data) )
     }
 
 

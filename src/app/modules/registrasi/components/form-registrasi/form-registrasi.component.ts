@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AfterContentInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
 import { MasterService } from '../../services/master.service';
+import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
 import { FormRegistrasiService } from './form-registrasi.service';
 
@@ -14,8 +15,9 @@ export class FormRegistrasiComponent implements OnInit {
 
     @ViewChild('noRm') input!: ElementRef;
 
-    dataRegistrasi: any;
+    registrasi: any;
     dialogDataPasien: boolean = false;
+    dialogRegistrasiSuccess: boolean = false;
     pasien: any;
     form: any;
     today: any;
@@ -25,39 +27,46 @@ export class FormRegistrasiComponent implements OnInit {
     dataGolPasien: any;
     dataJnsPerawatan: any;
     dataWaktuPelayanan: any;
+    dataKelasRuangan: any;
 
     constructor(
         public vclaimService: VclaimService,
         public dataPasienService: DataPasienService,
         public formRegistrasiService: FormRegistrasiService,
         private fb: FormBuilder,
-        private masterService: MasterService
-    ) { }
+        private masterService: MasterService,
+        private registrasiService: RegistrasiService
+    ) {}
 
     ngOnInit(): void {
-        this.initForm();
+        this.masterService.getGroupPasien();
+        this.masterService.getDokter();
+        this.masterService.getPoli();
+        this.masterService.getJnsPerawatan();
+        this.masterService.getDataWaktuPelayanan();
+
         this.masterService.dokter.subscribe(data => this.dataDokter = data)
-        this.masterService.poli.subscribe(data => this.dataPoli = data)
+        this.masterService.ruangan.subscribe(data => this.dataPoli = data)
         this.masterService.groupPasien.subscribe(data => this.dataGroupPasien = data)
         this.masterService.golonganPasien.subscribe(data => this.dataGolPasien = data)
         this.masterService.jnsPerawatan.subscribe(data => this.dataJnsPerawatan = data)
         this.masterService.waktuPelayanan.subscribe(data => this.dataWaktuPelayanan = data)
+        this.masterService.kelasRuangan.subscribe(data => this.dataKelasRuangan = data)
 
         this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data)
         this.dataPasienService.pasien.subscribe(data => this.handleDataPasien(data))
-
-        this.dataRegistrasi = [
-            { tanggal: '12-08-2022', nama: 'Fazri Anggriawan', norm: '808112', jnsPerawatan: 'RAWAT JALAN', ruanganPoli: 'POLIKLINIK ANAK', dokter: 'dr. Ahmad subagja, Sp.B', jnsTagihan: 'BPJS' },
-            { tanggal: '12-08-2022', nama: 'Fazri Anggriawan', norm: '808112', jnsPerawatan: 'RAWAT JALAN', ruanganPoli: 'POLIKLINIK ANAK', dokter: 'dr. Ahmad subagja, Sp.B', jnsTagihan: 'BPJS' },
-            { tanggal: '12-08-2022', nama: 'Fazri Anggriawan', norm: '808112', jnsPerawatan: 'RAWAT JALAN', ruanganPoli: 'POLIKLINIK ANAK', dokter: 'dr. Ahmad subagja, Sp.B', jnsTagihan: 'BPJS' },
-            { tanggal: '12-08-2022', nama: 'Fazri Anggriawan', norm: '808112', jnsPerawatan: 'RAWAT JALAN', ruanganPoli: 'POLIKLINIK ANAK', dokter: 'dr. Ahmad subagja, Sp.B', jnsTagihan: 'BPJS' },
-            { tanggal: '12-08-2022', nama: 'Fazri Anggriawan', norm: '808112', jnsPerawatan: 'RAWAT JALAN', ruanganPoli: 'POLIKLINIK ANAK', dokter: 'dr. Ahmad subagja, Sp.B', jnsTagihan: 'BPJS' },
-        ]
+        this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
+        this.formRegistrasiService.saveStatus.subscribe(data => this.dialogRegistrasiSuccess = data)
 
         this.formRegistrasiService.dialog.subscribe(data => {
             if (data) {
                 this.initForm();
                 setTimeout(() => { this.input.nativeElement.focus() }, 0);
+                this.formRegistrasiService.jnsPelayanan.subscribe(data => {
+                    if( data ){
+                        this.form.get('jnsPerawatan')?.patchValue(data);
+                    }
+                })
             }
         })
     }
@@ -65,18 +74,18 @@ export class FormRegistrasiComponent implements OnInit {
     initForm() {
         this.today = new Date();
         this.form = this.fb.group({
-            status: ['OPEN'],
-            noreg: [''],
+            rs: [1],
+            status: ['OPEN', [Validators.required]],
+            noreg: [null],
             tanggal: [this.today, [Validators.required]],
-            noSep: [''],
-            jnsPerawatan: ['', [Validators.required]],
-            ruanganPoli: ['', [Validators.required]],
-            dokter: ['', [Validators.required]],
-            groupPasien: ['', [Validators.required]],
-            golPasien: ['', [Validators.required]],
-            jnsPembayaran: ['', [Validators.required]],
-            waktuPelayanan: [''],
-            catatan: ['']
+            noSep: [null],
+            jnsPerawatan: [null, [Validators.required]],
+            ruanganPoli: [null, [Validators.required]],
+            dokter: [null, [Validators.required]],
+            groupPasien: [null, [Validators.required]],
+            golPasien: [null, [Validators.required]],
+            waktuPelayanan: [null],
+            catatan: [null]
         })
     }
 
@@ -103,13 +112,21 @@ export class FormRegistrasiComponent implements OnInit {
         this.masterService.getGolPasienByGroup(value);
     }
 
+    getDataRuangan(jnsPerawatan: string){
+        if( jnsPerawatan == 'RJ' )
+            this.masterService.getPoli();
+        if( jnsPerawatan == 'RI' )
+            this.masterService.getRuangRawatInap();
+            this.masterService.getKelasRuangan();
+    }
+
     save(){
-        let data = this.form.value;
-
-        if( data.jnsPerawatan == 'RJ' ){
-            // RAWAT JALAN
-
+        let data = {
+            registrasi: this.form.value,
+            pasien: this.pasien
         }
+
+        this.formRegistrasiService.save(data)
     }
 
 }
