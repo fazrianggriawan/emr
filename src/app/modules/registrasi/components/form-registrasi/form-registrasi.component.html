@@ -1,65 +1,11 @@
-<style>
-
-    .checkmark {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        display: block;
-        stroke-width: 2;
-        stroke: #4bb71b;
-        stroke-miterlimit: 10;
-        box-shadow: inset 0px 0px 0px #4bb71b;
-        animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
-        position:relative;
-        top: 5px;
-        right: 5px;
-    margin: 0 auto;
-    }
-    .checkmark__circle {
-        stroke-dasharray: 166;
-        stroke-dashoffset: 166;
-        stroke-width: 2;
-        stroke-miterlimit: 10;
-        stroke: #4bb71b;
-        fill: #fff;
-        animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
-
-    }
-
-    .checkmark__check {
-        transform-origin: 50% 50%;
-        stroke-dasharray: 48;
-        stroke-dashoffset: 48;
-        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
-    }
-
-    @keyframes stroke {
-        100% {
-            stroke-dashoffset: 0;
-        }
-    }
-
-    @keyframes scale {
-        0%, 100% {
-            transform: none;
-        }
-
-        50% {
-            transform: scale3d(1.1, 1.1, 1);
-        }
-    }
-
-    @keyframes fill {
-        100% {
-            box-shadow: inset 0px 0px 0px 30px #4bb71b;
-        }
-    }
-</style>
 <div class="row m-0 pb-2 border-bottom sticky-top">
     <div class="col pl-0">
-        <button class="btn btn-secondary btn-sm mr-1" (click)="dataPasienService.openDialog()"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
-        <button class="btn btn-secondary btn-sm mr-1" (click)="vclaimService.openDialog()" [disabled]="!pasien.no_asuransi"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
-        <button class="btn btn-primary btn-sm mr-1" (click)="save()" [disabled]="form.invalid || !pasien.norm"><i class="bi bi-save mr-1"></i> Simpan</button>
+        <button class="btn btn-secondary btn-sm mr-1" (click)="dataPasienService.openDialog()"><i
+                class="bi bi-search mr-1"></i> Cari Pasien</button>
+        <button class="btn btn-secondary btn-sm mr-1" (click)="vclaimService.openDialog()"
+            [disabled]="!pasien.no_asuransi"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="save()" [disabled]="form.invalid || !pasien.norm"><i
+                class="bi bi-save mr-1"></i> Simpan</button>
     </div>
 </div>
 <div class="row mt-2">
@@ -70,8 +16,10 @@
                 <div class="bg-light p-3 rounded border tx-center tx-gray-500 mb-2">
                     <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
                 </div>
-                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-camera mr-1"></i> Ambil Photo</button>
-                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-pencil mr-1"></i> Edit Pasien</button>
+                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-camera mr-1"></i> Ambil
+                    Photo</button>
+                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-pencil mr-1"></i> Edit
+                    Pasien</button>
             </div>
             <div class="col">
                 <div class="row mb-1">
@@ -79,9 +27,10 @@
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" name="norm" class="form-control" value="{{pasien.norm}}" #noRm placeholder="Cari...">
+                                <input type="text" (keyup)="searchPasien($event)" name="norm" class="form-control"
+                                    value="{{pasien.norm}}" #noRm placeholder="Cari...">
                                 <div class="input-group-append">
-                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+                                    <button class="btn btn-secondary" (click)="goSearchPasienBy('norm')"><i class="bi bi-search"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +40,8 @@
                     <label class="col-4 col-form-label">Nama</label>
                     <div class="col">
                         <div class="input-group">
-                            <input type="text" (keyup)="searchPasien($event)" class="form-control" name="nama" value="{{pasien.nama | uppercase}}" placeholder="Cari...">
+                            <input type="text" (keyup)="searchPasien($event)" class="form-control" name="nama"
+                                value="{{pasien.nama | uppercase}}" #nama placeholder="Cari...">
                             <div class="input-group-append">
                                 <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
                             </div>
@@ -103,7 +53,8 @@
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noAsuransi" value="{{pasien.no_asuransi}}" placeholder="Cari...">
+                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noAsuransi"
+                                    value="{{pasien.no_asuransi}}" #noAskes placeholder="Cari...">
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
                                 </div>
@@ -116,7 +67,8 @@
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp" value="{{pasien.tlp}}" placeholder="Cari...">
+                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp"
+                                    value="{{pasien.tlp}}" #noTlp placeholder="Cari...">
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
                                 </div>
@@ -129,7 +81,8 @@
                     <div class="col">
                         <div class="input-group">
                             <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp" value="{{pasien.tlp}}" placeholder="Scan Barcode / Ketik Kode Booking">
+                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp"
+                                    value="{{pasien.tlp}}" #kodeBooking placeholder="Scan Barcode / Ketik Kode Booking">
                                 <div class="input-group-append">
                                     <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
                                 </div>
@@ -157,23 +110,8 @@
         <form [formGroup]="form">
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    Tanggal <span *ngIf="form.get('tanggal')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col-auto">
-                    <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" [maxDate]="today" formControlName="tanggal"></p-calendar>
-                </div>
-            </div>
-            <div class="row mb-1">
-                <label class="col-4 col-form-label">
-                    Status <span *ngIf="form.get('status')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col-auto">
-                    <input type="text" formControlName="status" class="form-control" readonly>
-                </div>
-            </div>
-            <div class="row mb-1">
-                <label class="col-4 col-form-label">
-                    No. Registrasi <span *ngIf="form.get('noreg')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    No. Registrasi <span *ngIf="form.get('noreg')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col-auto">
                     <input type="text" formControlName="noreg" class="form-control" readonly>
@@ -181,123 +119,126 @@
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    Jns. Perawatan <span *ngIf="form.get('jnsPerawatan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Tanggal <span *ngIf="form.get('tanggal')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col-auto">
+                    <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" [maxDate]="today" formControlName="tanggal">
+                    </p-calendar>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">
+                    Status <span *ngIf="form.get('status')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col-auto">
+                    <input type="text" formControlName="status" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="row mb-1">
+                <label class="col-4 col-form-label">
+                    Jns. Perawatan <span *ngIf="form.get('jnsPerawatan')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown
-                        [options]="dataJnsPerawatan"
-                        (ngModelChange)="getDataRuangan($event)"
-                        [autoDisplayFirst]="false"
-                        formControlName="jnsPerawatan"
-                        optionValue="id"
-                        optionLabel="name"
-                        [style]="{width: '100%'}"
-                        appendTo="body">
+                    <p-dropdown [options]="dataJnsPerawatan" (ngModelChange)="getDataRuangan($event)"
+                        [autoDisplayFirst]="false" formControlName="jnsPerawatan" optionValue="id" optionLabel="name"
+                        [style]="{width: '100%'}" appendTo="body">
                     </p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    Ruangan / Poliklinik <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Ruangan / Poliklinik <span *ngIf="form.get('ruanganPoli')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown
-                        [options]="dataPoli"
-                        [autoDisplayFirst]="false"
-                        (ngModelChange)="getDokterByPoli($event)"
-                        formControlName="ruanganPoli"
-                        optionValue="id"
-                        optionLabel="name"
-                        [style]="{width: '100%'}"
-                        appendTo="body">
+                    <p-dropdown [options]="dataPoli" [autoDisplayFirst]="false"
+                        (ngModelChange)="getDokterByPoli($event)" formControlName="ruanganPoli" optionValue="id"
+                        optionLabel="name" [style]="{width: '100%'}" appendTo="body">
                     </p-dropdown>
                 </div>
             </div>
             <div class="row mb-1" *ngIf="form.get('jnsPerawatan').value == 'RI'">
                 <label class="col-4 col-form-label">
-                    Kelas <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Kelas <span *ngIf="form.get('ruanganPoli')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown
-                        [options]="dataKelasRuangan"
-                        [autoDisplayFirst]="false"
-                        (ngModelChange)="getDokterByPoli($event)"
-                        formControlName="ruanganPoli"
-                        optionValue="id"
-                        optionLabel="name"
-                        [style]="{width: '100%'}"
-                        appendTo="body">
+                    <p-dropdown [options]="dataKelasRuangan" [autoDisplayFirst]="false"
+                        (ngModelChange)="getDokterByPoli($event)" formControlName="ruanganPoli" optionValue="id"
+                        optionLabel="name" [style]="{width: '100%'}" appendTo="body">
                     </p-dropdown>
                 </div>
             </div>
             <div class="row mb-1" *ngIf="form.get('jnsPerawatan').value == 'RI'">
                 <label class="col-4 col-form-label">
-                    Tempat Tidur <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Tempat Tidur <span *ngIf="form.get('ruanganPoli')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown
-                        [options]="dataPoli"
-                        [autoDisplayFirst]="false"
-                        (ngModelChange)="getDokterByPoli($event)"
-                        formControlName="ruanganPoli"
-                        optionValue="id"
-                        optionLabel="name"
-                        [style]="{width: '100%'}"
-                        appendTo="body">
+                    <p-dropdown [options]="dataPoli" [autoDisplayFirst]="false"
+                        (ngModelChange)="getDokterByPoli($event)" formControlName="ruanganPoli" optionValue="id"
+                        optionLabel="name" [style]="{width: '100%'}" appendTo="body">
                     </p-dropdown>
                     <div class="pt-1" *ngIf="form.get('ruanganPoli').value != null">
                         <button type="button" class="btn btn-secondary btn-xs p-1 pl-3 pr-3 position-relative mr-3">
                             Kapasitas
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark ml-1">
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark ml-1">
                                 20
                             </span>
                         </button>
                         <button type="button" class="btn btn-danger btn-xs p-1 pl-3 pr-3 position-relative mr-3">
                             Terisi
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark ml-1">
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark ml-1">
                                 0
                             </span>
                         </button>
                         <button type="button" class="btn btn-success btn-xs p-1 pl-3 pr-3 position-relative mr-3">
                             Tersedia
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark ml-1">
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark ml-1">
                                 20
                             </span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="row mb-1" *ngIf="form.get('jnsPerawatan').value == 'RJ'">
+            <div class="row mb-1" *ngIf="form.get('jnsPerawatan').value == 'rj'">
                 <label class="col-4 col-form-label">
-                    Waktu Pelayanan <span *ngIf="form.get('waktuPelayanan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Waktu Pelayanan <span *ngIf="form.get('waktuPelayanan')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="dataWaktuPelayanan" formControlName="waktuPelayanan" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+                    <p-dropdown [options]="dataWaktuPelayanan" formControlName="waktuPelayanan" optionValue="id"
+                        optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    Dokter / DPJP <span *ngIf="form.get('dokter')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Dokter / DPJP <span *ngIf="form.get('dokter')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown
-                        [options]="dataDokter"
-                        [autoDisplayFirst]="false"
-                        formControlName="dokter"
-                        optionValue="id"
-                        optionLabel="name"
-                        [style]="{width: '100%'}"
-                        appendTo="body">
+                    <p-dropdown [options]="dataDokter" [autoDisplayFirst]="false" formControlName="dokter"
+                        optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body">
                     </p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    Jenis Pembayaran  <span *ngIf="form.get('groupPasien')?.errors || form.get('golPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Jenis Pembayaran <span *ngIf="form.get('groupPasien')?.errors || form.get('golPasien')?.errors"
+                        class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="dataGroupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body" styleClass="mb-1" (ngModelChange)="getGolPasienByGroup($event)"></p-dropdown>
-                    <p-dropdown [options]="dataGolPasien" [autoDisplayFirst]="false" formControlName="golPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+                    <p-dropdown [options]="dataGroupPasien" [autoDisplayFirst]="false" formControlName="groupPasien"
+                        optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body" styleClass="mb-1"
+                        (ngModelChange)="getGolPasienByGroup($event)"></p-dropdown>
+                    <p-dropdown [options]="dataGolPasien" [autoDisplayFirst]="false" formControlName="golPasien"
+                        optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
@@ -306,7 +247,8 @@
                     <div class="input-group">
                         <input type="text" formControlName="noSep" class="form-control">
                         <div class="input-group-append">
-                            <button class="btn btn-secondary" (click)="vclaimService.openDialog()"><i class="bi bi-table"></i></button>
+                            <button class="btn btn-secondary" (click)="vclaimService.openDialog()"><i
+                                    class="bi bi-table"></i></button>
                         </div>
                     </div>
                 </div>
@@ -321,31 +263,23 @@
     </div>
 </div>
 
-<p-dialog
-    [(visible)]="dialogDataPasien"
-    (onHide)="dataPasienService.closeDialog()"
-    header="Cari Data Pasien"
-    [modal]="true"
-    [draggable]="true"
-    [style]="{width: '75%'}"
-    appendTo="body">
+<p-dialog [(visible)]="dialogDataPasien" (onHide)="dataPasienService.closeDialog()" header="Cari Data Pasien"
+    [modal]="true" [draggable]="true" [style]="{width: '75%'}" appendTo="body" [closeOnEscape]="false">
     <div *ngIf="dialogDataPasien">
         <app-data-pasien></app-data-pasien>
     </div>
 </p-dialog>
 
-<p-dialog
-    [(visible)]="dialogRegistrasiSuccess"
-    (onHide)="dataPasienService.closeDialog()"
-    [showHeader]="false"
-    [modal]="true"
-    [draggable]="true"
-    appendTo="body">
+<p-dialog [(visible)]="dialogRegistrasiSuccess" (onHide)="dataPasienService.closeDialog()"
+    [modal]="true" [draggable]="true" appendTo="body" [closeOnEscape]="false">
     <div *ngIf="dialogRegistrasiSuccess">
         <div class="row">
             <div class="col">
                 <div class="success-animation text-center">
-                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                    </svg>
                 </div>
                 <hr>
                 <div class="text-center">

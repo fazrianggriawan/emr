@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     }
 
     public gotoDashboarPage() {
-        this.router.navigateByUrl('medicalRecord');
+        this.router.navigateByUrl('registrasi');
     }
 
 }

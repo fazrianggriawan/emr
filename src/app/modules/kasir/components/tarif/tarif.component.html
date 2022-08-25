@@ -1,0 +1,47 @@
+<div class="mb-2">
+    <div class="tx-secondary pt-1 pb-1">Paket Tarif : </div>
+    <button class="btn btn-xs btn-light mr-1 mb-1"><i class="bi bi-archive-fill"></i> Pemeriksaan Dokter</button>
+    <button class="btn btn-xs btn-light mr-1 mb-1"><i class="bi bi-archive-fill"></i> Pasien Baru</button>
+    <button class="btn btn-xs btn-secondary mr-1 mb-1"><i class="bi bi-gear"></i></button>
+</div>
+<div class="row">
+    <div class="col-auto pr-1">
+        <p-dropdown
+            placeholder="Pilih Kategori"
+            [options]="categoryTarif"
+            optionLabel="name"
+            optionValue="id"
+            [(ngModel)]="selectedCategoryTarif"
+            (ngModelChange)="tarifService.getTarifByCategory(selectedCategoryTarif)"
+            [filter]="true"
+            [style]="{width: '100%'}">
+        </p-dropdown>
+    </div>
+    <div class="col pl-0">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Cari Tarif...">
+            <div class="input-group-append">
+                <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-hover bd rounded mt-2">
+    <thead>
+        <tr>
+            <th>Nama Tarif</th>
+            <th>Harga</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of tarif" class="clickable" (click)="selectTarif(item)">
+            <td>{{item.tarif_name}}</td>
+            <td>{{item.harga | number}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" *ngIf="tarif.length == 0" class="text-center text-muted">Tidak ada data saat ini.</td>
+        </tr>
+
+
+    </tbody>
+</table>

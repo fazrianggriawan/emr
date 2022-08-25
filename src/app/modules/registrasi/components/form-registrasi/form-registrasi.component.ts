@@ -13,7 +13,11 @@ import { FormRegistrasiService } from './form-registrasi.service';
 })
 export class FormRegistrasiComponent implements OnInit {
 
-    @ViewChild('noRm') input!: ElementRef;
+    @ViewChild('noRm') elNorm!: ElementRef;
+    @ViewChild('nama') elNama!: ElementRef;
+    @ViewChild('noAskes') elNoAskes!: ElementRef;
+    @ViewChild('noTlp') elNoTlp!: ElementRef;
+    @ViewChild('kodeBooking') elKodeBooking!: ElementRef;
 
     registrasi: any;
     dialogDataPasien: boolean = false;
@@ -56,12 +60,12 @@ export class FormRegistrasiComponent implements OnInit {
         this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data)
         this.dataPasienService.pasien.subscribe(data => this.handleDataPasien(data))
         this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
-        this.formRegistrasiService.saveStatus.subscribe(data => this.dialogRegistrasiSuccess = data)
+        this.formRegistrasiService.saveStatus.subscribe(data => this.handleSaveRegistrasi(data))
 
         this.formRegistrasiService.dialog.subscribe(data => {
             if (data) {
                 this.initForm();
-                setTimeout(() => { this.input.nativeElement.focus() }, 0);
+                setTimeout(() => { this.elNorm.nativeElement.focus() }, 0);
                 this.formRegistrasiService.jnsPelayanan.subscribe(data => {
                     if( data ){
                         this.form.get('jnsPerawatan')?.patchValue(data);
@@ -89,6 +93,13 @@ export class FormRegistrasiComponent implements OnInit {
         })
     }
 
+    handleSaveRegistrasi(data: any){
+        if( data ){
+            this.dialogRegistrasiSuccess = data;
+            this.registrasiService.getDataRegistrasi();
+        }
+    }
+
     handleDataPasien(data: any) {
         this.pasien = data;
     }
@@ -102,6 +113,14 @@ export class FormRegistrasiComponent implements OnInit {
         }else if(e.srcElement.value == ''){
             this.dataPasienService.pasien.next('');
         }
+    }
+
+    goSearchPasienBy(key: string){
+        if( key == 'norm' ) this.formRegistrasiService.searchPasien('norm', this.elNorm.nativeElement.value)
+        if( key == 'nama' ) this.formRegistrasiService.searchPasien('nama', this.elNama.nativeElement.value)
+        if( key == 'noTlp' ) this.formRegistrasiService.searchPasien('noTlp', this.elNoTlp.nativeElement.value)
+        if( key == 'noAskes' ) this.formRegistrasiService.searchPasien('noAskes', this.elNoAskes.nativeElement.value)
+        if( key == 'kodeBooking' ) this.formRegistrasiService.searchPasien('kodeBooking', this.elKodeBooking.nativeElement.value)
     }
 
     getDokterByPoli(value:string){

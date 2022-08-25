@@ -1,41 +1,24 @@
-<p-dialog [(visible)]="dialogVclaim" (onHide)="vclaimService.closeDialog()" (onShow)="getPesertaBpjs()" header="Bridging VClaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
-    <app-vclaim></app-vclaim>
-</p-dialog>
-
-<p-dialog [(visible)]="dialogDataPasien" (onHide)="dataPasienService.closeDialog()" header="Cari Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
-    <app-data-pasien></app-data-pasien>
-</p-dialog>
-
-<p-dialog [(visible)]="dialogFormRawatJalan" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
-    <app-form-rawat-jalan></app-form-rawat-jalan>
-</p-dialog>
-
-<div class="row p-3" style="margin-left: -14px; margin-right: -14px;">
-    <div class="col p-3 bg-gray-500 mb-3 sticky-top" style="top: 60px;">
+<div class="row mb-3 d-none d-sm-block">
+    <div class="col p-3 bg-gray-300">
         <div class="row">
             <div class="col-auto border-right border-light">
-                <button class="btn btn-sm btn-secondary mr-1" (click)="dialogDataPasien = true"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="submenuPendaftaran.toggle($event)"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button>
-                <p-menu #submenuPendaftaran appendTo="body" [popup]="true" appendTo="body" [model]="menuPendaftaran"></p-menu>
-
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="dialogDataPasien = true"><i class="bi bi-table mr-1"></i> Data Pasien</button>
+                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran</button>
                 <button class="btn btn-sm btn-secondary mr-1" (click)="form.reset()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
             </div>
             <div class="col-auto">
                 <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan Pasien Baru</button>
                 <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
             </div>
-            <div class="col tx-right">
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-trash mr-1"></i> Batal</button>
-            </div>
         </div>
     </div>
-    <div class="w-100"></div>
-    <div class="col">
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-12">
         <form [formGroup]="form" name="form">
             <div class="row">
-                <div class="col-auto">
+                <div class="col-md-auto pb-3">
                     <div class="bg-light p-3 rounded border tx-center tx-gray-500">
                         <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
                     </div>
@@ -185,7 +168,7 @@
         </form>
     </div>
 
-    <div class="col">
+    <div class="col-md-6 col-sm-12">
         <form [formGroup]="form">
             <div class="row mb-2">
                 <label for="statusKawin" class="col-4 col-form-label">
@@ -229,6 +212,34 @@
             </div>
             <hr>
             <div class="row">
+                <div class="col"><h4>DATA PENJAMIN / ASURANSI</h4></div>
+            </div>
+            <div class="row mb-2">
+                <label for="golpas" class="col-4 col-form-label">
+                    Asuransi / Penjamin <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="golpas" class="col-4 col-form-label">
+                    Jenis Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <p-dropdown [options]="golonganPasien" [autoDisplayFirst]="false" [filter]="true" formControlName="golonganPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label for="golpas" class="col-4 col-form-label">
+                    No. Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
+                <div class="col">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <hr>
+            <div class="row">
                 <div class="col"><h4>KELUARGA / KONTAK DARURAT</h4></div>
             </div>
             <div class="row mb-2">
@@ -255,102 +266,18 @@
                     <input type="text" class="form-control">
                 </div>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col"><h4>DATA KEANGGOTAAN</h4></div>
-            </div>
-            <div class="row mb-2">
-                <label for="nrp" class="col-4 col-form-label">
-                    NRP / NIP
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="nrpNip" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="angkatan" class="col-4 col-form-label">
-                    Angkatan <span *ngIf="form.get('angkatan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <p-dropdown [options]="angkatan" [autoDisplayFirst]="false" formControlName="angkatan" optionValue="angkatanID" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="pangkat" class="col-4 col-form-label">
-                    Pangkat / Golongan
-                </label>
-                <div class="col">
-                    <p-dropdown [options]="pangkat" [autoDisplayFirst]="false" formControlName="pangkat" optionValue="pangkatID" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="kesatuan" class="col-4 col-form-label">
-                    Kesatuan
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="kesatuan" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="jabatan" class="col-4 col-form-label">
-                    Jabatan
-                </label>
-                <div class="col">
-                    <input type="text" formControlName="jabatan" class="form-control">
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col"><h4>DATA PENJAMIN / ASURANSI</h4></div>
-            </div>
-            <div class="row mb-2">
-                <label for="golpas" class="col-4 col-form-label">
-                    Asuransi / Penjamin <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="golpas" class="col-4 col-form-label">
-                    Jenis Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="golpas" class="col-4 col-form-label">
-                    No. Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <!-- <div class="row mb-2">
-                <label for="golpas" class="col-4 col-form-label">
-                    Group Pasien <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <label for="golpas" class="col-4 col-form-label">
-                    Golongan Pasien <span *ngIf="form.get('golonganPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <p-dropdown [options]="golonganPasien" [autoDisplayFirst]="false" formControlName="golonganPasien" optionValue="golpasID" optionLabel="golpasName" [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div> -->
-            <!-- <div class="row mb-2">
-                <label for="hubPasien" class="col-4 col-form-label">
-                    Status Pasien <span ng-show="form2.hubPasien.$error.required" class="fontello-icon-attention-circle error"></span>
-                </label>
-                <div class="col">
-                    <p-dropdown [style]="{width: '100%'}"></p-dropdown>
-                </div>
-            </div> -->
         </form>
     </div>
 </div>
+
+<p-dialog [(visible)]="dialogVclaim" (onHide)="vclaimService.closeDialog()" (onShow)="getPesertaBpjs()" header="Bridging VClaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
+    <app-vclaim *ngIf="dialogVclaim"></app-vclaim>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogDataPasien" (onHide)="dataPasienService.closeDialog()" header="Cari Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+    <app-data-pasien *ngIf="dialogDataPasien"></app-data-pasien>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogFormRawatJalan" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+    <app-form-rawat-jalan *ngIf="dialogFormRawatJalan"></app-form-rawat-jalan>
+</p-dialog>

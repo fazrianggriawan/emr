@@ -94,7 +94,7 @@
     </div>
 </p-dialog>
 
-<div class="row pl-3 pr-3 sticky-top" style="margin-left: -14px; margin-right: -14px; top: 45px;">
+<div class="row p-3 sticky-top" style="margin-left: -14px; margin-right: -14px; top: 45px;">
     <div class="col p-3 bg-gray-400">
         <div class="row">
             <div class="col-auto pr-0">
@@ -104,18 +104,18 @@
                     [disabled]="!peserta.id"><i class="bi bi-upload mr-1"></i> Upload File / Photo</button>
             </div>
 
-            <div class="col-auto pr-0 pl-0" *ngIf="username == 'admin'">
+            <div class="col-auto pr-0 pl-0" *ngIf="username == 'demo'">
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="laboratoriumService.openDialog()"
+                            [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
+                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="radiologiService.openDialog()"
+                            [disabled]="!peserta.id"><i class="bi bi-radioactive mr-1"></i> Radiologi</button>
                 <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="submenuExport.toggle($event)"><i
                     class="bi bi-file-earmark-ruled mr-1"></i> Export XSL <i class="bi bi-chevron-down"></i></button>
                     <p-menu #submenuExport appendTo="body" [popup]="true" appendTo="body" [model]="menuExport"></p-menu>
                 <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="dialogPrintSticker = true"><i
                             class="bi bi-printer mr-1"></i> Print Sticker</button>
-                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="laboratoriumService.openDialog()"
-                            [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
-                <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="radiologiService.openDialog()"
-                            [disabled]="!peserta.id"><i class="bi bi-radioactive mr-1"></i> Radiologi</button>
             </div>
-            <div class="col-auto pr-0 pl-0" *ngIf="username == 'admin2'">
+            <div class="col-auto pr-0 pl-0" *ngIf="username == 'aa'">
                 <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="laboratoriumService.openDialog()"
                     [disabled]="!peserta.id"><i class="bi bi-droplet-half mr-1"></i> Laboratorium</button>
                     <button class="btn btn-sm btn-secondary mr-1 mb-1" (click)="radiologiService.openDialog()"
@@ -159,7 +159,7 @@
     </div>
 </div>
 
-<div class="row pl-3 pr-3 mb-3" *ngIf="username == 'admin'">
+<div class="row pl-3 pr-3 mb-3" *ngIf="username == 'demo'">
     <div class="col-md-6 col-sm-12">
         <form [formGroup]="form">
             <div class="row mb-2">

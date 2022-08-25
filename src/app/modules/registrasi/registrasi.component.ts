@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { AppService } from 'src/app/services/app.service';
 import { VclaimService } from '../shared/vclaim/vclaim.service';
 import { DataPasienService } from './components/data-pasien/data-pasien.service';
 import { MasterService } from './services/master.service';
@@ -41,13 +42,15 @@ export class RegistrasiComponent implements OnInit {
     constructor(
         private masterService: MasterService,
         private fb: FormBuilder,
-        public dataPasienService: DataPasienService,
         private registrasiService: RegistrasiService,
-        public vclaimService: VclaimService
+        public dataPasienService: DataPasienService,
+        public vclaimService: VclaimService,
+        public appService: AppService
     ) { }
 
     ngOnInit(): void {
         this.initForm();
+        this.getMasterData();
         this.masterService.rs.subscribe(data => this.rs = data)
         this.masterService.awalanNama.subscribe(data => this.awalanNama = data)
         this.masterService.negara.subscribe(data => this.negara = data)
@@ -74,6 +77,21 @@ export class RegistrasiComponent implements OnInit {
             { label: 'Rawat Jalan', icon: 'bi bi-clipboard-pulse', command: (() => { this.openFormRawatJalan() }) },
             { label: 'Rawat Inap', icon: 'bi bi-hospital' }
         ]
+    }
+
+    public getMasterData() {
+        this.masterService.getRs();
+        this.masterService.getAwalanNama();
+        this.masterService.getNegara();
+        this.masterService.getProvinsi();
+        this.masterService.getSuku();
+        this.masterService.getStatusNikah();
+        this.masterService.getAgama();
+        this.masterService.getPekerjaan();
+        this.masterService.getPendidikan();
+        this.masterService.getAngkatan();
+        this.masterService.getPangkat();
+        this.masterService.getGroupPasien();
     }
 
     public openFormRawatJalan() {
@@ -205,7 +223,9 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public save() {
-
+        let data = this.form.value;
+        data.tglLahir = this.appService.reformatDate(data.tglLahir);
+        this.registrasiService.savePasien(data);
     }
 
     public update() {

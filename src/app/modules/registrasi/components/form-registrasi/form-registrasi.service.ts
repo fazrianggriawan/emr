@@ -10,7 +10,7 @@ import { DataPasienService } from '../data-pasien/data-pasien.service';
 })
 export class FormRegistrasiService {
 
-    dialog = new BehaviorSubject<boolean>(true)
+    dialog = new BehaviorSubject<boolean>(false)
     saveStatus = new BehaviorSubject<boolean>(false)
     jnsPelayanan = new BehaviorSubject<string>('')
 
@@ -33,12 +33,14 @@ export class FormRegistrasiService {
     }
 
     searchPasien(searchBy: string, key: string){
-        this.http.get<any>( config.api_url('pasien/searchBy/'+searchBy+'/key/'+key) )
-            .subscribe(data => {
-                if( data.data ) {
-                    this.dataPasienService.pasien.next(data.data);
-                }
-            })
+        if( searchBy && key ){
+            this.http.get<any>( config.api_url('pasien/searchBy/'+searchBy+'/key/'+key) )
+                .subscribe(data => {
+                    if( data.data ) {
+                        this.dataPasienService.pasien.next(data.data);
+                    }
+                })
+        }
     }
 
     openDialog() {
