@@ -22,7 +22,8 @@ import { SharedModule } from '../shared/shared.module';
     KasirRoutingModule
   ],
   exports: [
-    TarifComponent
+    TarifComponent,
+    BillingComponent
   ]
 })
 export class KasirModule { }

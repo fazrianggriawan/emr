@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FormRawatJalanComponent } from './components/form-rawat-jalan/form-rawat-jalan.component';
 import { DataRegistrasiComponent } from './components/data-registrasi/data-registrasi.component';
 import { FormRegistrasiComponent } from './components/form-registrasi/form-registrasi.component';
+import { MenuModule } from 'primeng/menu';
+import { KasirModule } from '../kasir/kasir.module';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import { FormRegistrasiComponent } from './components/form-registrasi/form-regis
     imports: [
         SharedModule,
         CommonModule,
-        RegistrasiRoutingModule
+        RegistrasiRoutingModule,
+        MenuModule,
+        KasirModule
     ],
     exports: [
         DataRegistrasiComponent,

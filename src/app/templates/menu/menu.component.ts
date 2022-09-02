@@ -14,11 +14,11 @@ export class MenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.menus = [
-            { label: 'Pendaftaran', icon: 'bi bi-file-earmark-person', routerLink: 'registrasi' },
-            { label: 'MCU', icon: 'bi bi-file-text', routerLink: 'rikkes' },
-            { label: 'Kasir', icon: 'bi bi-cash-coin' },
-            { label: 'Admin Website', icon: 'bi bi-globe' },
-            { label: 'Setting', icon: 'bi bi-gear' },
+            { label: 'Pendaftaran', routerLink: 'registrasi' },
+            { label: 'MCU', routerLink: 'rikkes' },
+            { label: 'Kasir', routerLink: 'kasir' },
+            { label: 'Admin Website' },
+            { label: 'Setting' },
         ]
     }
 

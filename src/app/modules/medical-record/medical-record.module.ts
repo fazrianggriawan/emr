@@ -9,9 +9,6 @@ import { SummaryReviewComponent } from './components/summary-review/summary-revi
 import { PlanningComponent } from './components/planning/planning.component';
 import { SubjectiveComponent } from './components/subjective/subjective.component';
 import { PemeriksaanComponent } from './components/pemeriksaan/pemeriksaan.component';
-import { FormObatComponent } from './components/farmasi/form-obat/form-obat.component';
-import { TableMasterObatComponent } from './components/farmasi/table-master-obat/table-master-obat.component';
-import { TableOrderObatComponent } from './components/farmasi/table-order-obat/table-order-obat.component';
 import { SharedModule } from '../shared/shared.module';
 import { LaboratoriumComponent } from './components/laboratorium/laboratorium.component';
 import { RadiologiComponent } from './components/radiologi/radiologi.component';
@@ -28,9 +25,6 @@ import { CpptComponent } from './components/cppt/cppt.component';
         DiagnosaProsedurComponent,
         SummaryReviewComponent,
         PemeriksaanComponent,
-        FormObatComponent,
-        TableMasterObatComponent,
-        TableOrderObatComponent,
         LaboratoriumComponent,
         RadiologiComponent,
         FileUploadComponent,

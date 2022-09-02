@@ -63,15 +63,21 @@ export class MasterService {
     }
 
     public getKota(idProvinsi: string) {
-        this.http.get<any>( config.api_url('master/kota/id_provinsi/'+idProvinsi) ).subscribe( data => this.kota.next(data.data) )
+        if(idProvinsi){
+            this.http.get<any>( config.api_url('master/kota/id_provinsi/'+idProvinsi) ).subscribe( data => this.kota.next(data.data) )
+        }
     }
 
     public getKecamatan(idKota: string) {
-        this.http.get<any>( config.api_url('master/kecamatan/id_kota/'+idKota) ).subscribe( data => this.kecamatan.next(data.data) )
+        if(idKota){
+            this.http.get<any>( config.api_url('master/kecamatan/id_kota/'+idKota) ).subscribe( data => this.kecamatan.next(data.data) )
+        }
     }
 
     public getKelurahan(idKecamatan: string) {
-        this.http.get<any>( config.api_url('master/kelurahan/id_kecamatan/'+idKecamatan) ).subscribe( data => this.kelurahan.next(data.data) )
+        if(idKecamatan){
+            this.http.get<any>( config.api_url('master/kelurahan/id_kecamatan/'+idKecamatan) ).subscribe( data => this.kelurahan.next(data.data) )
+        }
     }
 
     public getSuku() {
@@ -106,10 +112,6 @@ export class MasterService {
         this.http.get<any>( config.api_url('master/group_pasien') ).subscribe( data => this.groupPasien.next(data.data) )
     }
 
-    public getGolonganPasien(idGroupPasien: string) {
-        this.http.get<any>( config.api_url('master/golongan_pasien/id_grouppasien/'+idGroupPasien) ).subscribe( data => this.golonganPasien.next(data.data) )
-    }
-
     public getDokter() {
         this.http.get<any>( config.api_url('master/dokter') ).subscribe( data => this.dokter.next(data.data) )
     }
@@ -127,11 +129,15 @@ export class MasterService {
     }
 
     public getDokterByPoli(idPoli: string){
-        this.http.get<any>( config.api_url('master/dokterByPoli/'+idPoli) ).subscribe( data => this.dokter.next(data.data) )
+        if(idPoli){
+            this.http.get<any>( config.api_url('master/dokterByPoli/'+idPoli) ).subscribe( data => this.dokter.next(data.data) )
+        }
     }
 
     public getGolPasienByGroup(idGroup: string){
-        this.http.get<any>( config.api_url('master/golongan_pasien/id_grouppasien/'+idGroup) ).subscribe( data => this.golonganPasien.next(data.data) )
+        if(idGroup){
+            this.http.get<any>( config.api_url('master/golongan_pasien/id_grouppasien/'+idGroup) ).subscribe( data => this.golonganPasien.next(data.data) )
+        }
     }
 
     public getRuangRawatInap(){

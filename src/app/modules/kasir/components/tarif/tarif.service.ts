@@ -18,8 +18,10 @@ export class TarifService {
     ) { }
 
     public getTarifByCategory(categoryId: string) {
-        this.http.get<any>(config.api_url('tarif/byCategory/' + categoryId))
-            .subscribe(data => this.tarif.next(data.data))
+        if (categoryId) {
+            this.http.get<any>(config.api_url('tarif/byCategory/' + categoryId))
+                .subscribe(data => this.tarif.next(data.data))
+        }
     }
 
     public getCategory() {
@@ -28,17 +30,21 @@ export class TarifService {
     }
 
     public getTarifJasa(idTarifHarga: any) {
-        this.http.get<any>(config.api_url('tarif/jasa/' + idTarifHarga))
-            .subscribe(data => {
-                this.tarifJasa.next(data.data)
-            })
+        if (idTarifHarga) {
+            this.http.get<any>(config.api_url('tarif/jasa/' + idTarifHarga))
+                .subscribe(data => {
+                    this.tarifJasa.next(data.data)
+                })
+        }
     }
 
     public getDefaultPelaksana(data: any) {
-        this.http.post<any>(config.api_url('tarif/defaultPelaksana'), data)
-            .subscribe(data => {
-                this.defaultPelaksana.next(data.data)
-            })
+        if (data) {
+            this.http.post<any>(config.api_url('tarif/defaultPelaksana'), data)
+                .subscribe(data => {
+                    this.defaultPelaksana.next(data.data)
+                })
+        }
     }
 
 }

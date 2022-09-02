@@ -1,10 +1,16 @@
+<div class="row">
+    <div class="col">
+        <app-billing></app-billing>
+    </div>
+</div>
+
 <div class="row mb-3 d-none d-sm-block">
     <div class="col p-3 bg-gray-300">
         <div class="row">
             <div class="col-auto border-right border-light">
                 <button class="btn btn-sm btn-secondary mr-1" (click)="dialogDataPasien = true"><i class="bi bi-table mr-1"></i> Data Pasien</button>
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="form.reset()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="addRegistrasi()"><i class="bi bi-plus-lg"></i> Registrasi</button>
+                <button class="btn btn-sm btn-secondary mr-1" (click)="resetForm()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
             </div>
             <div class="col-auto">
                 <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan Pasien Baru</button>
@@ -278,6 +284,27 @@
     <app-data-pasien *ngIf="dialogDataPasien"></app-data-pasien>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogFormRawatJalan" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
-    <app-form-rawat-jalan *ngIf="dialogFormRawatJalan"></app-form-rawat-jalan>
+<p-dialog [(visible)]="dialogRegistrasi" (onHide)="formRegistrasiService.dialog.next(false)" header="Form Registrasi" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
+    <app-form-registrasi *ngIf="dialogRegistrasi"></app-form-registrasi>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogSavePasien" [showHeader]="false" [modal]="true" [draggable]="true">
+    <div class="row" *ngIf="dialogSavePasien && pasien">
+        <div class="col">
+            <div class="text-center alert alert-success tx-bold mt-1">
+                <i class="bi bi-check-circle" style="font-size: 5rem;"></i> <br>
+                PASIEN BERHASIL DISIMPAN
+            </div>
+            <div class="text-center mt-3">
+                <div>No. RM : {{pasien.norm}}</div>
+                <div>{{pasien.nama | uppercase}}</div>
+                <div style="width: 300px;">{{pasien.alamat | uppercase}}</div>
+            </div>
+            <hr>
+            <div class="text-center">
+                <button class="btn btn-primary mr-2"><i class="bi bi-printer mr-1"></i> Print</button>
+                <button class="btn btn-primary" (click)="dialogRegistrasi = true"><i class="bi bi-plus-lg"></i> Registrasi</button>
+            </div>
+        </div>
+    </div>
 </p-dialog>
