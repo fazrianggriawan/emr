@@ -136,9 +136,6 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
         if (data) {
             this.initForm();
             this.dialogRegistrasiSuccess = data;
-            setTimeout(() => {
-                this.dialogBilling = true;
-            }, 300);
         }
     }
 

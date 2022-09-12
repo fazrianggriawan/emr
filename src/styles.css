@@ -321,3 +321,7 @@ a {
 .p-menubar .p-menuitem:hover {
     color: orange !important;
 }
+
+a.clickable {
+    border-bottom: 1px dashed var(--primary);
+}

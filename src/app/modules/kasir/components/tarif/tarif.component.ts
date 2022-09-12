@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
+import { AppService } from 'src/app/services/app.service';
+import { BillingService } from '../billing/billing.service';
 import { TarifService } from './tarif.service';
 
 @Component({
@@ -13,9 +16,13 @@ export class TarifComponent implements OnInit {
     categoryTarif: any[] = [];
     selectedCatTarif: string = '';
     selectedCategoryTarif: string = '';
+    registrasi: any;
 
     constructor(
-        public tarifService: TarifService
+        public tarifService: TarifService,
+        private billingService: BillingService,
+        private appService: AppService,
+        private registrasiService: RegistrasiService
     ) { }
 
     ngOnInit(): void {
@@ -24,6 +31,7 @@ export class TarifComponent implements OnInit {
         this.tarifService.tarifJasa.subscribe(data => this.handleTarifJasa(data))
         this.tarifService.defaultPelaksana.subscribe(data => console.log(data))
         this.tarifService.getCategory();
+        this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
     }
 
     handleTarifJasa(data: any) {
@@ -37,7 +45,15 @@ export class TarifComponent implements OnInit {
     }
 
     selectTarif(tarif: any) {
-        this.tarifService.getTarifJasa(tarif.id_tarif_harga);
+        if( tarif ){
+            let data = tarif;
+            data.tanggal = this.appService.reformatDate(new Date());
+            data.rs = 1;
+            data.ruangan = 34;
+            data.noreg = this.registrasi.noreg;
+
+            this.billingService.save(tarif);
+        }
     }
 
 }

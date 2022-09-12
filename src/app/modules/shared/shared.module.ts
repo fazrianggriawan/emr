@@ -38,6 +38,7 @@ import { MenuEmrComponent } from 'src/app/templates/menu-emr/menu-emr.component'
 import { KonvaComponent } from 'src/app/components/konva/konva.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 
 let primeModules = [
@@ -63,7 +64,8 @@ let primeModules = [
     MenubarModule,
     ConfirmDialogModule,
     TabMenuModule,
-    QRCodeModule
+    QRCodeModule,
+    ConfirmPopupModule
 ]
 
 let sharedComponent = [
