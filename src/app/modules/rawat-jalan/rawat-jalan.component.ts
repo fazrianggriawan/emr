@@ -20,7 +20,7 @@ export class RawatJalanComponent implements OnInit {
     categoryTarif: any[] = [];
     rs: any[] = [];
 
-    dialogVclaim: boolean = true;
+    dialogVclaim: boolean = false;
 
     selectedCatTarif: string = '';
 

@@ -14,11 +14,25 @@ export class DataPasienService {
     pasien = new BehaviorSubject<any>('');
     // showDialog = new BehaviorSubject<boolean>(false);
     dialog = new BehaviorSubject<boolean>(false);
+    saveStatusPasien = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
         private loadingService: LoadingService
     ) { }
+
+    public savePasien(data: any){
+        this.http.post<any>(config.api_url('pasien/save'), data)
+            .subscribe(data => {
+                if(data.code == 200){
+                    this.pasien.next(data.data)
+                    this.saveStatusPasien.next(true);
+                }else{
+                    this.saveStatusPasien.next(false);
+                    alert(data.message);
+                }
+            })
+    }
 
     public getDataPasien(data: any) {
         this.loadingService.status.next(true);

@@ -18,8 +18,10 @@ export class BillingService {
     }
 
     public getTarifByCategory(categoryId: string) {
-        this.http.get<any>(config.api_url('tarif/byCategory/' + categoryId))
-            .subscribe(data => this.tarif.next(data.data))
+        if( categoryId ){
+            this.http.get<any>(config.api_url('tarif/byCategory/' + categoryId))
+                .subscribe(data => this.tarif.next(data.data))
+        }
     }
 
     public getCategory() {

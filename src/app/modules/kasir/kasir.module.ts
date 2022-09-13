@@ -5,17 +5,25 @@ import { KasirRoutingModule } from './kasir-routing.module';
 import { KasirComponent } from './kasir.component';
 import { FormBillingComponent } from './components/form-billing/form-billing.component';
 import { BillingComponent } from './components/billing/billing.component';
+import { TarifComponent } from './components/tarif/tarif.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     KasirComponent,
     FormBillingComponent,
-    BillingComponent
+    BillingComponent,
+    TarifComponent
   ],
   imports: [
     CommonModule,
-    KasirRoutingModule
+    KasirRoutingModule,
+    SharedModule
+  ],
+  exports: [
+    TarifComponent,
+    BillingComponent
   ]
 })
 export class KasirModule { }

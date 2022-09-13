@@ -10,7 +10,7 @@ import { DataPasienService } from '../data-pasien/data-pasien.service';
 })
 export class FormRegistrasiService {
 
-    dialog = new BehaviorSubject<boolean>(true)
+    dialog = new BehaviorSubject<boolean>(false)
     saveStatus = new BehaviorSubject<boolean>(false)
     jnsPelayanan = new BehaviorSubject<string>('')
 

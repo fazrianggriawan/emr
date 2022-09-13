@@ -10,8 +10,8 @@
     <app-form-rawat-jalan></app-form-rawat-jalan>
 </p-dialog>
 
-<div class="row p-3" style="margin-left: -14px; margin-right: -14px;">
-    <div class="col p-3 bg-gray-500 mb-3 sticky-top" style="top: 60px;">
+<div class="row">
+    <div class="col p-3 bg-gray-500 mb-3 rounded">
         <div class="row">
             <div class="col-auto border-right border-light">
                 <button class="btn btn-sm btn-secondary mr-1" (click)="dialogDataPasien = true"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
@@ -63,15 +63,7 @@
                             No. RM
                         </label>
                         <div class="col">
-                            <input type="text" formControlName="nomorRm" class="form-control" placeholder="Cari...">
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="noAsuransi" class="col-4 col-form-label">
-                            No. BPJS / Asuransi
-                        </label>
-                        <div class="col">
-                            <input type="text" formControlName="nomorAsuransi" class="form-control" placeholder="Cari...">
+                            <input type="text" formControlName="nomorRm" class="form-control" readonly>
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -305,7 +297,7 @@
             </div>
             <div class="row mb-2">
                 <label for="golpas" class="col-4 col-form-label">
-                    Asuransi / Penjamin <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Penjamin <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
                     <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
@@ -313,18 +305,18 @@
             </div>
             <div class="row mb-2">
                 <label for="golpas" class="col-4 col-form-label">
-                    Jenis Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Jenis Penjamin <span *ngIf="form.get('golonganPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="groupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" (ngModelChange)="getGolonganPasien(form.get('groupPasien')?.value)" [style]="{width: '100%'}"></p-dropdown>
+                    <p-dropdown [options]="golonganPasien" [autoDisplayFirst]="false" formControlName="golonganPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-2">
                 <label for="golpas" class="col-4 col-form-label">
-                    No. Asuransi <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    No. Asuransi / BPJS <span *ngIf="form.get('groupPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <input type="text" class="form-control">
+                    <input type="text" formControlName="nomorAsuransi" class="form-control">
                 </div>
             </div>
             <!-- <div class="row mb-2">

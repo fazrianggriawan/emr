@@ -32,19 +32,7 @@ export class MasterService {
 
     constructor(
         private http: HttpClient
-    ) {
-        // this.getRs();
-        // this.getAwalanNama();
-        // this.getNegara();
-        // this.getProvinsi();
-        // this.getSuku();
-        // this.getStatusNikah();
-        // this.getAgama();
-        // this.getPekerjaan();
-        // this.getPendidikan();
-        // this.getAngkatan();
-        // this.getPangkat();
-    }
+    ) {}
 
     public getRs() {
         this.http.get<any>( config.api_url('master/rs') ).subscribe( data => this.rs.next(data.data) )

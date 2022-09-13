@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { AppService } from 'src/app/services/app.service';
 import { VclaimService } from '../shared/vclaim/vclaim.service';
 import { DataPasienService } from './components/data-pasien/data-pasien.service';
 import { MasterService } from './services/master.service';
@@ -41,13 +42,15 @@ export class RegistrasiComponent implements OnInit {
     constructor(
         private masterService: MasterService,
         private fb: FormBuilder,
-        public dataPasienService: DataPasienService,
         private registrasiService: RegistrasiService,
-        public vclaimService: VclaimService
+        private appService: AppService,
+        public vclaimService: VclaimService,
+        public dataPasienService: DataPasienService,
     ) { }
 
     ngOnInit(): void {
         this.initForm();
+        this.getMasterData();
         this.masterService.rs.subscribe(data => this.rs = data)
         this.masterService.awalanNama.subscribe(data => this.awalanNama = data)
         this.masterService.negara.subscribe(data => this.negara = data)
@@ -66,9 +69,9 @@ export class RegistrasiComponent implements OnInit {
         this.masterService.golonganPasien.subscribe(data => this.golonganPasien = data)
 
         this.dataPasienService.pasien.subscribe(data => this.setToForm(data))
-        this.dataPasienService.dialog.subscribe( data => this.dialogDataPasien = data )
+        this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data)
 
-        this.vclaimService.dialog.subscribe( data => this.dialogVclaim = data )
+        this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data)
 
         this.menuPendaftaran = [
             { label: 'Rawat Jalan', icon: 'bi bi-clipboard-pulse', command: (() => { this.openFormRawatJalan() }) },
@@ -76,15 +79,30 @@ export class RegistrasiComponent implements OnInit {
         ]
     }
 
+    public getMasterData() {
+        this.masterService.getRs();
+        this.masterService.getAwalanNama();
+        this.masterService.getNegara();
+        this.masterService.getProvinsi();
+        this.masterService.getSuku();
+        this.masterService.getStatusNikah();
+        this.masterService.getAgama();
+        this.masterService.getPekerjaan();
+        this.masterService.getPendidikan();
+        this.masterService.getAngkatan();
+        this.masterService.getPangkat();
+        this.masterService.getGroupPasien();
+    }
+
     public openFormRawatJalan() {
         this.dialogFormRawatJalan = true;
     }
 
     public getPesertaBpjs() {
-        if( this.form.get('nomorAsuransi')?.value ){
+        if (this.form.get('nomorAsuransi')?.value) {
             this.vclaimService.getPesertaByNomorKartu();
-        }else{
-            if( this.form.get('nik')?.value ){
+        } else {
+            if (this.form.get('nik')?.value) {
                 this.vclaimService.getPesertaByNik();
             }
         }
@@ -97,7 +115,7 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public setToForm(data: any) {
-        if( data ) {
+        if (data) {
             this.form.get('id')?.patchValue(data.id);
             this.form.get('nomorRm')?.patchValue(data.norm);
             this.form.get('rs')?.patchValue(data.rs);
@@ -189,29 +207,38 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public getKota(provinsi: string) {
-        this.masterService.getKota(provinsi);
+        if(provinsi){
+            this.masterService.getKota(provinsi);
+        }
     }
 
     public getKecamatan(kota: string) {
-        this.masterService.getKecamatan(kota);
+        if(kota){
+            this.masterService.getKecamatan(kota);
+        }
     }
 
     public getKelurahan(kecamatan: string) {
-        this.masterService.getKelurahan(kecamatan);
+        if(kecamatan){
+            this.masterService.getKelurahan(kecamatan);
+        }
     }
 
     public getGolonganPasien(groupPasien: string) {
-        this.masterService.getGolonganPasien(groupPasien);
+        if( groupPasien ){
+            this.masterService.getGolonganPasien(groupPasien);
+        }
     }
 
     public save() {
-
+        let tglLahir = this.reformatDate(this.form.get('tglLahir')?.value);
+        this.form.value.tglLahir = tglLahir;
+        this.dataPasienService.savePasien(this.form.value);
     }
 
     public update() {
 
         let tglLahir = this.reformatDate(this.form.get('tglLahir')?.value);
-        // this.form.get('tglLahir')?.patchValue(tglLahir);
         this.form.value.tglLahir = tglLahir;
 
         this.registrasiService.updatePasien(this.form.value);
