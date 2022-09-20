@@ -23,6 +23,10 @@ body {
     background: #f5f6fa;
 }
 
+.p-dropdown .p-inputtext{
+    padding: 0.4rem;
+}
+
 .p-calendar .p-inputtext {
     padding: 0.33rem 0.5rem;
 }
@@ -236,7 +240,19 @@ legend {
     border-color: #1a6de7;
 }
 
-a {
+.table a:any-link {
     color: #0052cc;
-    text-decoration: underline;
+    border-bottom: 1px dashed;
+}
+
+.spinner-border {
+    display: block;
+}
+
+.p-overlaypanel::before, .p-overlaypanel::after{
+    margin-left: -20px !important;
+}
+
+.p-overlaypanel::after, .p-overlaypanel::before {
+    left: calc(var(--overlayArrowLeft, 0) + 1.45rem) !important;
 }

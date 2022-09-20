@@ -122,8 +122,8 @@ export class MasterService {
         this.http.get<any>( config.api_url('master/golongan_pasien/id_grouppasien/'+idGroup) ).subscribe( data => this.golonganPasien.next(data.data) )
     }
 
-    public getRuangRawatInap(){
-        this.http.get<any>( config.api_url('master/ruangRawatInap') ).subscribe( data => this.ruangan.next(data.data) )
+    public getRuangan(){
+        this.http.get<any>( config.api_url('master/ruangan') ).subscribe( data => this.ruangan.next(data.data) )
     }
 
     public getKelasRuangan(){

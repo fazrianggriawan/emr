@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col p-0">
-        <div class="pb-2">
+        <div class="pb-2" hidden>
             <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-printer"></i> Print</button>
             <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-filetype-xls"></i> XLS</button>
             <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-trash"></i> Hapus</button>
@@ -13,98 +13,59 @@
                 <tr>
                     <th>Tanggal</th>
                     <th>Nama Tarif</th>
-                    <th>Pelaksana Medis / Non Medis</th>
+                    <th>Pelaksana Medis</th>
                     <th>Harga</th>
                     <th>Qty</th>
-                    <th>Discount %</th>
+                    <th>Disc %</th>
                     <th>Total</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td colspan="8" class="p-2 bg-gray-300">&nbsp;<strong>PERAWATAN</strong></td>
-                </tr>
-                <tr>
-                    <td>11 Jun 2022</td>
-                    <td>KONSULTASI DOKTER SPESIALIS</td>
+                <tr *ngFor="let item of dataBilling; let idx = index">
+                    <td>{{appService.dateHuman(item.tgl_tindakan)}}</td>
+                    <td>{{item.nama_tarif | uppercase}}</td>
+                    <td></td>
+                    <td>{{item.harga | number}}</td>
+                    <td><a href="javascript:void(0)" class="clickable" (click)="openOpJumlah($event, item)">{{item.qty}}</a></td>
+                    <td><a href="javascript:void(0)" class="clickable" (click)="openOpDisc($event, item)">{{item.discount}}%</a></td>
+                    <td>{{this.billingService.hitungTotalBilling(item) | number}}</td>
                     <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">dr. Bebet Sunaryo, S.pd</button>
-                        <button class="btn btn-xs btn-light tx-danger tx-14 p-0 pl-3 pr-3 w-100">-- Pilih Perawat --</button>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <a href="javascript:void(0)" class="link-primary">1</a>
-                    </td>
-                    <td>
-                        <a href="javascript:void(0)" class="link-primary">0%</a>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <button class="btn btn-xs btn-icon btn-secondary"><i class="bi bi-list"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>11 Jun 2022</td>
-                    <td>KARTU PASIEN</td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">dr. Bebet Sunaryo, S.pd</button>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">Perawat Bedah</button>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">1</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">0</button>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <button class="btn btn-xs btn-icon btn-secondary"><i class="bi bi-list"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>11 Jun 2022</td>
-                    <td>KARTU PASIEN</td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">dr. Bebet Sunaryo, S.pd</button>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">Perawat Bedah</button>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">1</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">0</button>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <button class="btn btn-xs btn-icon btn-secondary"><i class="bi bi-list"></i></button>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="8" class="p-2 bg-gray-300">&nbsp;<strong>LABORATORIUM</strong></td>
-                </tr>
-                <tr>
-                    <td>11 Jun 2022</td>
-                    <td>DARAH LENGKAP</td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">dr. Bebet Sunaryo, S.pd</button>
-                        <button class="btn btn-xs btn-light tx-danger tx-14 p-0 pl-3 pr-3 w-100">-- Pilih Perawat --</button>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">1</button>
-                    </td>
-                    <td>
-                        <button class="btn btn-xs btn-light tx-14 p-0 pl-3 pr-3 w-100">0</button>
-                    </td>
-                    <td>250,000</td>
-                    <td>
-                        <button class="btn btn-xs btn-icon btn-secondary"><i class="bi bi-list"></i></button>
+                        <button class="btn btn-icon"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+
+<p-overlayPanel #opDisc>
+    <ng-template pTemplate>
+        Disc %
+        <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="selectedBilling.discount" placeholder="Discount %" aria-label="Discount %" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary btn-icon" type="button" (click)="addDiscount()" [disabled]="true">
+                    <!-- <i class="bi bi-check-lg"></i> -->
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                </button>
+                <button class="btn btn-light btn-icon" type="button"><i class="bi bi-x-lg"></i></button>
+            </div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<p-overlayPanel #opJumlah>
+    <ng-template pTemplate>
+        Jumlah
+        <div class="input-group">
+            <input type="number" class="form-control"  [(ngModel)]="selectedBilling.qty" placeholder="Qty" aria-label="Qty" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary btn-icon" (click)="updateJumlah()" type="button"><i class="bi bi-check-lg"></i></button>
+                <button class="btn btn-light btn-icon" type="button"><i class="bi bi-x-lg"></i></button>
+            </div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+<p-confirmPopup></p-confirmPopup>

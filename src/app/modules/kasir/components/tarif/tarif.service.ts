@@ -12,6 +12,7 @@ export class TarifService {
     tarifJasa = new BehaviorSubject<any>('');
     categoryTarif = new BehaviorSubject<any>('');
     defaultPelaksana = new BehaviorSubject<any>('');
+    loading = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient
@@ -29,11 +30,13 @@ export class TarifService {
             .subscribe(data => this.categoryTarif.next(data.data))
     }
 
-    public getTarifJasa(idTarifHarga: any) {
+    public getTarifJasa(idTarifHarga: any, noreg: string, ruangan: any) {
         if (idTarifHarga) {
-            this.http.get<any>(config.api_url('tarif/jasa/' + idTarifHarga))
+            this.loading.next(true);
+            this.http.get<any>(config.api_url('tarif/jasa/' + idTarifHarga + '/' + noreg + '/' + ruangan))
                 .subscribe(data => {
                     this.tarifJasa.next(data.data)
+                    this.loading.next(false);
                 })
         }
     }

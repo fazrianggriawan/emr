@@ -59,6 +59,7 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
     selectRegistrasi(data: any) {
         if (data) {
             this.registrasiService.registrasi.next(data);
+            sessionStorage.setItem('noreg', data.noreg);
         }
     }
 

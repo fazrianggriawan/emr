@@ -15,7 +15,17 @@ export class WidgetRegistrasiComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
+        this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data))
+
+        if( sessionStorage.getItem('noreg') ){
+            this.registrasiService.getRegistrasiByNoreg(sessionStorage.getItem('noreg'));
+        }
+    }
+
+    handleRegistrasi(data: any){
+        if( data ){
+            this.registrasi = data;
+        }
     }
 
 }

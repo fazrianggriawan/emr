@@ -31,4 +31,15 @@ export class RegistrasiService {
             })
     }
 
+    getRegistrasiByNoreg(noreg: any) {
+        this.http.get<any>(config.api_url('registrasi/registrasiByNoreg/' + noreg))
+            .subscribe(data => {
+                if (data.code == 200) {
+                    this.registrasi.next(data.data);
+                }else{
+                    this.registrasi.next('');
+                }
+            })
+    }
+
 }

@@ -23,6 +23,7 @@ import { SharedModule } from './modules/shared/shared.module';
 import { FileUploadModule } from 'primeng/fileupload';
 import { RadiologiComponent } from './components/rikkes/radiologi/radiologi.component';
 import { LaboratoriumComponent } from './components/rikkes/laboratorium/laboratorium.component';
+import { RegistrasiModule } from './modules/registrasi/registrasi.module';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { LaboratoriumComponent } from './components/rikkes/laboratorium/laborato
         ReactiveFormsModule,
         ProgressSpinnerModule,
         FileUploadModule,
-        SharedModule
+        SharedModule,
+        RegistrasiModule
     ],
     providers: [
         DatePipe,

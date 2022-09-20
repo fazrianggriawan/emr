@@ -7,6 +7,8 @@ import { FormBillingComponent } from './components/form-billing/form-billing.com
 import { BillingComponent } from './components/billing/billing.component';
 import { TarifComponent } from './components/tarif/tarif.component';
 import { SharedModule } from '../shared/shared.module';
+import { DynamicFormQuestionComponent } from './components/tarif/dynamic-form/dynamic-form-question.component';
+import { DynamicFormComponent } from './components/tarif/dynamic-form/dynamic-form.component';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { SharedModule } from '../shared/shared.module';
     KasirComponent,
     FormBillingComponent,
     BillingComponent,
-    TarifComponent
+    TarifComponent,
+    DynamicFormComponent,
+    DynamicFormQuestionComponent,
   ],
   imports: [
     CommonModule,

@@ -116,7 +116,7 @@ export class FormRegistrasiComponent implements OnInit {
         if( jnsPerawatan == 'RJ' )
             this.masterService.getPoli();
         if( jnsPerawatan == 'RI' )
-            this.masterService.getRuangRawatInap();
+            this.masterService.getRuangan();
             this.masterService.getKelasRuangan();
     }
 
