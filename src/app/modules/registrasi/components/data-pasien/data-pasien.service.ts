@@ -21,33 +21,41 @@ export class DataPasienService {
         private loadingService: LoadingService
     ) { }
 
-    public savePasien(data: any){
+    public savePasien(data: any) {
         this.http.post<any>(config.api_url('pasien/save'), data)
             .subscribe(data => {
-                if(data.code == 200){
+                if (data.code == 200) {
                     this.pasien.next(data.data)
                     this.saveStatusPasien.next(true);
-                }else{
+                } else {
                     this.saveStatusPasien.next(false);
                     alert(data.message);
                 }
             })
     }
 
+    public searchBy(key: string, value: string){
+        this.http.get<any>(config.api_url('pasien/searchBy/'+key+'/key/'+value))
+            .subscribe(data => {
+                this.dataPasien.next(data.data)
+                console.log(data.data);
+            })
+    }
+
     public getDataPasien(data: any) {
         this.loadingService.status.next(true);
-        this.http.post<any>( config.api_url('pasien/filtering'), data ).subscribe( data => this.dataPasien.next(data.data) )
+        this.http.post<any>(config.api_url('pasien/filtering'), data).subscribe(data => this.dataPasien.next(data.data))
     }
 
-    public getAllDataPasien(){
-        this.http.get<any>( config.api_url('pasien/allData') ).subscribe(data => this.dataPasien.next(data.data))
+    public getAllDataPasien() {
+        this.http.get<any>(config.api_url('pasien/allData')).subscribe(data => this.dataPasien.next(data.data))
     }
 
-    public openDialog(){
+    public openDialog() {
         this.dialog.next(true);
     }
 
-    public closeDialog(){
+    public closeDialog() {
         this.dialog.next(false);
     }
 }

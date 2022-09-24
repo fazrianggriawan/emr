@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { LoginService } from './login.service';
 
 @Component({
@@ -17,12 +18,17 @@ export class LoginComponent implements OnInit {
     constructor(
         private form: FormBuilder,
         private loginService: LoginService,
-        private router: Router
+        private router: Router,
+        private registrasiService: RegistrasiService
     ) { }
 
     ngOnInit(): void {
         // this.loginService.loginData.subscribe(data => this.handleLogin(data))
         // this.loginService.errorMessage.subscribe(data => this.messageErrorLogin = data)
+
+        sessionStorage.clear();
+
+        this.registrasiService.registrasi.next('');
 
         this.formLogin = this.form.group({
             username: [null, Validators.required],
@@ -51,7 +57,7 @@ export class LoginComponent implements OnInit {
     }
 
     public gotoDashboarPage() {
-        this.router.navigateByUrl('medicalRecord');
+        this.router.navigateByUrl('registrasi');
     }
 
 }

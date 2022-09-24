@@ -1,22 +1,18 @@
 <div class="row mb-2" *ngIf="registrasi">
-    <div class="col p-2 pl-3 shadow-sm bg-gray-200 rounded">
-        <div class="row">
-            <div class="col-auto border-right pt-2"><h5 class="m-0">DATA REGISTRASI</h5></div>
-            <div class="col-auto border-right">
-                <input type="text" class="form-control" placeholder="Cari...">
-            </div>
-            <div class="col-auto mr-4">
-                <div><span class="mr-1 tx-12 text-muted">NAMA :</span> <span>{{registrasi.nama | uppercase}} <span hidden>(34 thn , LAKI-LAKI)</span></span></div>
-                <div><span class="mr-1 tx-12 text-muted">NO.RM :</span> <span>{{registrasi.norm}}</span></div>
-            </div>
-            <div class="col-auto mr-4">
-                <div><span class="mr-1 tx-12 text-muted">DOKTER :</span> <span>{{registrasi.dokter | uppercase}}</span></div>
-                <div><span class="mr-1 tx-12 text-muted">RUANGAN :</span> <span>{{registrasi.ruanganName | uppercase}}</span></div>
-            </div>
-            <div class="col-auto mr-4">
-                <div><span class="mr-1 tx-12 text-muted">JNS.PERAWATAN :</span> <span>{{registrasi.jnsPerawatanName | uppercase}}</span></div>
-                <div><span class="mr-1 tx-12 text-muted">PEMBAYARAN :</span> <span>{{registrasi.golpasName | uppercase}}</span></div>
-            </div>
-        </div>
+    <div class="col-auto border-right pt-2"><h5 class="m-0">DATA REGISTRASI</h5></div>
+    <div class="col-auto border-right">
+        <input type="text" class="form-control" placeholder="Cari...">
+    </div>
+    <div class="col-auto mr-4">
+        <div><span class="mr-1 tx-12 text-muted">NAMA :</span> <span>{{registrasi.nama | uppercase}} <span hidden>(34 thn , LAKI-LAKI)</span></span></div>
+        <div><span class="mr-1 tx-12 text-muted">NO.RM :</span> <span>{{registrasi.norm}}</span></div>
+    </div>
+    <div class="col-auto mr-4">
+        <div><span class="mr-1 tx-12 text-muted">DOKTER :</span> <span>{{registrasi.dokter | uppercase}}</span></div>
+        <div><span class="mr-1 tx-12 text-muted">RUANGAN :</span> <span>{{registrasi.ruanganName | uppercase}}</span></div>
+    </div>
+    <div class="col-auto mr-4">
+        <div><span class="mr-1 tx-12 text-muted">JNS.PERAWATAN :</span> <span>{{registrasi.jnsPerawatanName | uppercase}}</span></div>
+        <div><span class="mr-1 tx-12 text-muted">PEMBAYARAN :</span> <span>{{registrasi.golpasName | uppercase}}</span></div>
     </div>
 </div>

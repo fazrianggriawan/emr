@@ -27,6 +27,7 @@ export class MenuEmrComponent implements OnInit {
             { label: 'Konsul', routerLink: 'medicalRecord/konsul' },
             { label: 'Summary Review', routerLink: 'medicalRecord/planning' },
             { label: 'Penanda Organ', routerLink: 'medicalRecord/konva' },
+            { label: 'Resume Medis', routerLink: 'medicalRecord/resume_medis' },
         ];
     }
 

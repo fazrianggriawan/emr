@@ -22,7 +22,7 @@ export class RadiologiComponent implements OnInit {
 
         for (let i = 0; i < this.dataRadiologi.length; i++) {
             let data = this.dataRadiologi[i];
-            if (data.pemeriksaan.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.category.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.category.toLowerCase().indexOf(query.toLowerCase()) == 0) {
                 filtered.push(data);
             }
         }

@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import Konva from 'konva';
 import { ConfirmationService } from 'primeng/api';
+import { config } from 'src/app/config';
 
 @Component({
     selector: 'app-konva',
@@ -20,6 +21,7 @@ export class KonvaComponent implements OnInit, AfterViewInit {
     public el: any;
     public currentCircle: any;
     public form: any;
+    public config: any;
 
     constructor(
         private confirmService: ConfirmationService,
@@ -27,6 +29,7 @@ export class KonvaComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit(): void {
+        this.config = config;
         this.el = document.getElementById('panelInput');
 
         this.stage = new Konva.Stage({

@@ -18,6 +18,8 @@ import { RadiologiComponent } from './components/radiologi/radiologi.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { KonsulComponent } from './components/konsul/konsul.component';
 import { CpptComponent } from './components/cppt/cppt.component';
+import { RegistrasiModule } from '../registrasi/registrasi.module';
+import { ResumeMedisComponent } from './components/resume-medis/resume-medis.component';
 
 @NgModule({
     declarations: [
@@ -35,12 +37,14 @@ import { CpptComponent } from './components/cppt/cppt.component';
         RadiologiComponent,
         FileUploadComponent,
         KonsulComponent,
-        CpptComponent
+        CpptComponent,
+        ResumeMedisComponent
     ],
     imports: [
         SharedModule,
         CommonModule,
-        MedicalRecordRoutingModule
+        MedicalRecordRoutingModule,
+        RegistrasiModule,
     ]
 })
 export class MedicalRecordModule {}

@@ -1,33 +1,33 @@
-<p-dialog [(visible)]="dialogVclaim" (onHide)="vclaimService.closeDialog()" (onShow)="getPesertaBpjs()" header="Bridging VClaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
-    <app-vclaim></app-vclaim>
+<p-dialog [(visible)]="dialogVclaim" position="top" (onHide)="vclaimService.closeDialog()" (onShow)="getPesertaBpjs()" header="Bridging VClaim BPJS" [modal]="true" [draggable]="true" [style]="{width: '85%'}">
+    <app-vclaim *ngIf="dialogVclaim"></app-vclaim>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogDataPasien" (onHide)="dataPasienService.closeDialog()" header="Cari Data Pasien" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
-    <app-data-pasien></app-data-pasien>
+<p-dialog [(visible)]="dialogDataPasien" position="top" (onHide)="dataPasienService.closeDialog()" header="Data Pasien" [modal]="true" [breakpoints]="{'1300px': '85vw'}" [style]="{width: '80vw'}" [resizable]="false">
+    <app-data-pasien *ngIf="dialogDataPasien"></app-data-pasien>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogFormRawatJalan" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75%'}">
-    <app-form-rawat-jalan></app-form-rawat-jalan>
+<p-dialog [(visible)]="dialogFormRawatJalan" position="top" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75vw'}">
+    <app-form-rawat-jalan *ngIf="dialogFormRawatJalan"></app-form-rawat-jalan>
 </p-dialog>
 
 <div class="row">
-    <div class="col p-3 bg-gray-500 mb-3 rounded">
+    <div class="col p-3 mb-3 rounded">
         <div class="row">
             <div class="col-auto border-right border-light">
-                <button class="btn btn-sm btn-secondary mr-1" (click)="dialogDataPasien = true"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="submenuPendaftaran.toggle($event)"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button>
+                <button class="btn btn-sm btn-light mr-2" (click)="dataPasienService.openDialog()"><i class="bi bi-search mr-1"></i> Data Pasien</button>
+                <button class="btn btn-sm btn-light mr-2" (click)="submenuPendaftaran.toggle($event)"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button>
                 <p-menu #submenuPendaftaran appendTo="body" [popup]="true" appendTo="body" [model]="menuPendaftaran"></p-menu>
 
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
-                <button class="btn btn-sm btn-secondary mr-1" (click)="form.reset()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+                <button class="btn btn-sm btn-light mr-2"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
+                <button class="btn btn-sm btn-light mr-2" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
+                <button class="btn btn-sm btn-light" (click)="form.reset()"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
             </div>
             <div class="col-auto">
                 <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan Pasien Baru</button>
                 <button class="btn btn-sm btn-primary" (click)="update()" [disabled]="form.invalid" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update</button>
             </div>
             <div class="col tx-right">
-                <button class="btn btn-sm btn-secondary mr-1"><i class="bi bi-trash mr-1"></i> Batal</button>
+                <button class="btn btn-sm btn-light"><i class="bi bi-trash mr-1"></i> Batal</button>
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
                             RS <span *ngIf="form.get('rs')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                         </label>
                         <div class="col">
-                            <p-dropdown [options]="rs" [autoDisplayFirst]="false" formControlName="rs" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                            <!-- <p-dropdown [options]="rs" [autoDisplayFirst]="false" formControlName="rs" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown> -->
                         </div>
                     </div>
                     <div class="row mb-2">
@@ -139,7 +139,7 @@
                     Warga Negara <span *ngIf="form.get('negara')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="negara" [filter]="true" [autoDisplayFirst]="false" formControlName="negara" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                    <!-- <p-dropdown [options]="negara" [filter]="true" [autoDisplayFirst]="false" formControlName="negara" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown> -->
                 </div>
             </div>
             <div class="row mb-2">

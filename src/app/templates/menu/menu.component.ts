@@ -14,12 +14,12 @@ export class MenuComponent implements OnInit {
 
     ngOnInit(): void {
         this.menus = [
-            { label: 'Admisi & Pendaftaran', icon: 'bi bi-file-earmark-person', routerLink: 'registrasi' },
-            { label: 'Rawat Jalan', icon: 'bi bi-clipboard-pulse', routerLink: 'rawatJalan' },
-            { label: 'Rawat Inap', icon: 'bi bi-hospital' },
-            { label: 'Kasir', icon: 'bi bi-cash-coin', routerLink: 'kasir' },
-            { label: 'VClaim BPJS', icon: 'bi bi-file-text', routerLink: 'vclaim' },
-            { label: 'Medical Record', icon: 'bi bi-file-earmark-text', routerLink: 'medicalRecord' },
+            { label: 'Admisi & Pendaftaran', routerLink: 'registrasi' },
+            { label: 'Rawat Jalan', routerLink: 'rawatJalan' },
+            { label: 'Rawat Inap' },
+            { label: 'Kasir', routerLink: 'kasir' },
+            { label: 'VClaim BPJS', routerLink: 'vclaim' },
+            { label: 'Medical Record', routerLink: 'medicalRecord' },
         ]
     }
 

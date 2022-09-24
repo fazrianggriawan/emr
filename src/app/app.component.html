@@ -1,6 +1,6 @@
 <div class="row navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != ''">
     <div class="col-auto">
-        <div class="p-pl-3 p-pt-2">
+        <div class="pl-4 pt-3">
             <span class="df-logo" style="color: white;">BiHealth<span style="color: #75bfff;">.io</span></span>
         </div>
     </div>
@@ -18,40 +18,15 @@
     </div>
 </div>
 
-<div class="content content-components m-4 p-0 shadow rounded bg-white" style="margin-top: 31px !important;">
+<div class="content content-components m-4 p-0 rounded " style="margin-top: 56px !important;">
     <div class="content p-3">
         <app-widget-registrasi></app-widget-registrasi>
         <div class="row justify-content-center" >
-            <div class="col-auto" *ngIf="pasien">
-                <div style="width: 200px;">
-                    <div *ngIf="pasien.nama">
-                        <div class="bg-light p-3 rounded border tx-center tx-gray-500 mb-2 mt-3">
-                            <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
-                        </div>
-
-                        <div>
-                            <div>Nomor RM : {{pasien.norm}}</div>
-                            <h5 class="m-0">{{pasien.nama | uppercase}}</h5>
-                            <small *ngIf="pasien.jns_kelamin== 'P'">PEREMPUAN</small>
-                            <small *ngIf="pasien.jns_kelamin== 'L'">LAKI-LAKI</small>
-                            <div class="tx-12">{{pasien.alamat | uppercase}}</div>
-                        </div>
-                        <!-- <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-pencil mr-2"></i>Edit Data Pasien</button> -->
-                        <hr>
-                        <div>
-                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-arrow-clockwise mr-2"></i>Riwayat Pelayanan</button>
-                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-exclamation-triangle mr-2"></i>Alergi <span class="badge badge-danger float-right mt-1">2</span> </button>
-                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Penyakit</button>
-                            <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Operasi</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col pb-5 pt-0">
+            <div class="col pt-0">
                 <div class="row">
                     <div class="col"><app-menu-emr *ngIf="currentRoute == 'medicalRecord'"></app-menu-emr></div>
                 </div>
-                <div class="row mb-3 border-bottom border-top pt-2 pb-2" style="background-color: #e6ecef;" *ngIf="currentRoute == 'medicalRecord'">
+                <div class="row border-bottom border-top pt-2 pb-2" style="background-color: #e6ecef;" *ngIf="currentRoute == 'medicalRecord'">
                     <div class="col-2">
                         <div class="input-group">
                             <div class="input-group-prepend">

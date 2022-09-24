@@ -88,7 +88,7 @@ legend {
 .p-tabview .p-tabview-nav li .p-tabview-nav-link {
     background: none;
     border-radius: 0;
-    padding: 0.75rem 1.75rem;
+    padding: 0.85rem 1.75rem;
 }
 
 .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
@@ -134,8 +134,8 @@ legend {
 }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-    background-color: #7987a1;
-    color: white;
+    /* background-color: #7987a1;
+    color: white; */
 }
 
 .p-fileupload .p-fileupload-content {
@@ -162,7 +162,7 @@ legend {
 
 .navbar-header {
     background: #495EAB;
-    height: 45px;
+    height: 55px;
 }
 
 .p-menu.p-menu-overlay {
@@ -235,14 +235,26 @@ legend {
     border-color: #0052CC;
 }
 
+.p-selectbutton .p-button.p-highlight, .p-selectbutton .p-button.p-highlight:hover {
+    background-color: #eef2f9;
+    border-color: #dce3f3;
+    border-bottom-color: #407cd3;
+    color: #407cd3;
+    border-bottom-width: initial;
+}
+
 .btn-primary:hover {
     background-color: #1a6de7;
     border-color: #1a6de7;
 }
 
 .table a:any-link {
-    color: #0052cc;
+    color: #0052CC;
     border-bottom: 1px dashed;
+}
+
+a:any-link{
+    color: #0052CC;
 }
 
 .spinner-border {
@@ -255,4 +267,26 @@ legend {
 
 .p-overlaypanel::after, .p-overlaypanel::before {
     left: calc(var(--overlayArrowLeft, 0) + 1.45rem) !important;
+}
+
+.btn-light, .p-selectbutton .p-button{
+    border-color: #dce3f3;
+    color: #4e5b6c;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+    padding: 0.25rem 1rem;
+    border-bottom-width: 2px;
+    background-color: unset;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.65rem 1rem;
+}
+
+a.link {
+    border-bottom: 1px dashed;
+}
+a.link:hover{
+    border-bottom: none;
 }

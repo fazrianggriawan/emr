@@ -9,6 +9,7 @@ import { LaboratoriumComponent } from './components/laboratorium/laboratorium.co
 import { PemeriksaanComponent } from './components/pemeriksaan/pemeriksaan.component';
 import { PlanningComponent } from './components/planning/planning.component';
 import { RadiologiComponent } from './components/radiologi/radiologi.component';
+import { ResumeMedisComponent } from './components/resume-medis/resume-medis.component';
 import { MedicalRecordComponent } from './medical-record.component';
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'laboratorium', component: LaboratoriumComponent },
     { path: 'konsul', component: KonsulComponent },
     { path: 'konva', component: KonvaComponent },
+    { path: 'resume_medis', component: ResumeMedisComponent },
 ];
 
 @NgModule({

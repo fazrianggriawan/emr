@@ -5,5 +5,5 @@ export const config = {
     host: host,
     api_url: function (url: string) { return host + '/public/' + url },
     api_vclaim: function (url: string) { return hostVclaim + '/public/' + url },
-    api_public: function (url: string) { return hostPublic + '/vclaim/index.php' + url },
+    api_public: function (url: string) { return hostPublic + '/vclaim/index.php/' + url },
 }

@@ -1,7 +1,8 @@
 <div class="login-page">
-    <div class="row justify-content-center mb-5">
+    <div class="row justify-content-center mb-3">
         <div class="col-auto">
-            <img [src]="'assets/logo.svg'" alt="Logo" height="50px">
+            <span class="df-logo" style="font-size: 3rem; color: rgb(32, 32, 32);">BiHealth<span style="color: #0c67b8;">.io</span></span>
+            <img [src]="'assets/logo.svg'" alt="Logo" height="50px" hidden>
         </div>
     </div>
     <div class="row justify-content-center">
@@ -16,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         <label class="tx-bold">Password</label>
-                        <label class="float-right"><a href="">Lupa password ?</a></label>
+                        <label class="float-right"><a href="" hidden>Lupa password ?</a></label>
                         <input type="password" tabindex="2" (keyup)="listenLogin($event)" class="form-control bg-white"
                             formControlName="password" placeholder="Masukkan Password">
                     </div>
@@ -24,11 +25,11 @@
                 <p class="alert alert-danger p-mt-1 p-mb-1 tx-center" *ngIf="messageErrorLogin">{{messageErrorLogin}}
                 </p>
                 <button class="btn btn-primary btn-block tx-bold" (click)="doLogin()">Login</button>
-                <p class="mt-3 tx-center">Belum memiliki akun? <a href="#" class="tx-bold">Daftar Sekarang</a></p>
+                <p class="mt-3 tx-center" hidden>Belum memiliki akun? <a href="#" class="tx-bold">Daftar Sekarang</a></p>
             </div>
         </div><!-- sign-wrapper -->
     </div>
-    <p class="tx-center mt-3">PT. Solusi Berteknologi Indonesia &copy; 2022</p>
+    <p class="tx-center mt-3">CV. Bercomp Mandiri &copy; 2022</p>
 </div>
 
 <div style="position: fixed; bottom: -25%; width: 100%; left: 0; z-index: -1;">

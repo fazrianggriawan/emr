@@ -25,13 +25,13 @@
             <ng-template pTemplate="header">
                 <tr>
                     <th>Pemeriksaan</th>
-                    <th [width]="100">Kategori</th>
+                    <!-- <th [width]="100">Kategori</th> -->
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
                 <tr class="clickable" (click)="selectPemeriksaan(item, ac)">
-                    <td>{{item.pemeriksaan | uppercase}}</td>
-                    <td>{{item.category | uppercase}}</td>
+                    <td>{{item.name | uppercase}}</td>
+                    <!-- <td>{{item.name | uppercase}}</td> -->
                 </tr>
             </ng-template>
         </p-table>
