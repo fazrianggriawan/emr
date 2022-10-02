@@ -146,6 +146,8 @@ legend {
 .p-fileupload .p-fileupload-buttonbar {
     background: none;
     border: 0;
+    padding: unset;
+    padding-bottom: 10px;
 }
 
 .p-fileupload-row {
@@ -286,7 +288,13 @@ a:any-link{
 
 a.link {
     border-bottom: 1px dashed;
+    cursor: pointer;
 }
 a.link:hover{
     border-bottom: none;
+}
+
+.hover:hover{
+    background-color: rgba(255, 246, 113, 0.2);
+    border-color:  rgba(255, 193, 113, 0.5) !important;
 }

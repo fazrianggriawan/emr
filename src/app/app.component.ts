@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
 
         this.loadingService.status.subscribe(data => this.loading = data)
         this.appService.notification.subscribe(data => {
-            if( data.type == 'error' ) this.messageService.add({severity:'error', summary:'Error', detail:data.message});
+            if( data.type == 'error' ) this.messageService.add({severity:'error', summary:'Error', detail:data.message, life: 5000});
             if( data.type == 'success' ) this.messageService.add({severity:'success', summary:'Sukses', detail:data.message});
         })
 

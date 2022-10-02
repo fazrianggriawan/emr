@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AppService } from 'src/app/services/app.service';
@@ -7,13 +7,14 @@ import { FormSuratKontrolService } from './surat-kontrol/form-surat-kontrol/form
 import { SuratKontrolService } from './surat-kontrol/surat-kontrol.service';
 import { VclaimService } from './vclaim.service';
 import { RujukanService } from "./rujukan/rujukan.service";
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-vclaim',
     templateUrl: './vclaim.component.html',
     styleUrls: ['./vclaim.component.css']
 })
-export class VclaimComponent implements OnInit {
+export class VclaimComponent implements OnInit, OnDestroy {
 
     peserta: any;
     formSep!: FormGroup;
@@ -33,19 +34,21 @@ export class VclaimComponent implements OnInit {
     dataJnsKunjungan: any;
     suratKontrol: any;
 
+    subs: Subscription[] = [];
+
     constructor(
         private fb: FormBuilder,
         public vclaimService: VclaimService,
         public formSuratKontrolService: FormSuratKontrolService,
         private suratKontrolService: SuratKontrolService,
         private appService: AppService,
-        private rujukanService: RujukanService
+        private rujukanService: RujukanService,
+        private dataPasienService: DataPasienService
     ) { }
 
     ngOnInit(): void {
         this.initFormSep();
         this.vclaimService.peserta.subscribe(data => this.onSelectPeserta(data));
-        this.vclaimService.dialog.subscribe(data => this.initFormSep() )
         this.vclaimService.diagnosa.subscribe(data => this.dataDiagnosa = data)
         this.vclaimService.poliklinik.subscribe(data => this.dataPoliklinik = data)
         this.vclaimService.dokter.subscribe(data => this.dataDokter = data)
@@ -60,7 +63,29 @@ export class VclaimComponent implements OnInit {
         this.vclaimService.dialog.subscribe(data => {
             if (data) this.vclaimService.getPesertaByNomorKartu();
         })
+        this.subs.push(this.dataPasienService.pasien.subscribe(data => this.handlePasien(data)))
+    }
 
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.subs.forEach(element => {
+            element.unsubscribe();
+        });
+    }
+
+    handlePasien(data: any){
+        this.initFormSep();
+        if(data){
+            if(data.no_asuransi){
+                this.vclaimService.getPesertaByNomorKartu(data.no_asuransi);
+            }else{
+                if(data.nik){
+                    this.vclaimService.getPesertaByNik(data.nik);
+                }
+            }
+
+        }
     }
 
     public onSelectPeserta(data: any) {

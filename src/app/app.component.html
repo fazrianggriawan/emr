@@ -7,13 +7,13 @@
     <div class="col topMenu">
         <app-menu></app-menu>
     </div>
-    <div class="col-auto">
+    <div class="col-auto" hidden>
         <button class="btn btn-icon tx-white tx-16">
             <i class="bi bi-bell mr-1"></i>
             <span class="badge badge-danger">1</span>
         </button>
     </div>
-    <div class="col-auto tx-white" style="padding-top: 3px; background-color: #324183;">
+    <div class="col-auto tx-white" style="padding-top: 3px; background-color: #324183;" hidden>
         <app-user></app-user>
     </div>
 </div>
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="col"><app-menu-emr *ngIf="currentRoute == 'medicalRecord'"></app-menu-emr></div>
                 </div>
-                <div class="row border-bottom border-top pt-2 pb-2" style="background-color: #e6ecef;" *ngIf="currentRoute == 'medicalRecord'">
+                <div class="row border-bottom border-top pt-2 pb-2 mb-4" style="background-color: #e6ecef;" *ngIf="currentRoute == 'medicalRecord'">
                     <div class="col-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -105,4 +105,17 @@
     <div>Loading...</div>
 </div>
 
-<p-toast position="top-center"></p-toast>
+<p-toast position="top-center">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="grid p-fluid">
+                <div class="col-auto">
+                    <b>{{message.summary | uppercase}}!</b>
+                </div>
+                <div class="col">
+                    <p innerHtml="{{message.detail}}"></p>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

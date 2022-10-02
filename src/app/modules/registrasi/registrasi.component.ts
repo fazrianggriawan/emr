@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { VclaimService } from '../shared/vclaim/vclaim.service';
 import { DataPasienService } from './components/data-pasien/data-pasien.service';
+import { FormRegistrasiService } from './components/form-registrasi/form-registrasi.service';
 import { MasterService } from './services/master.service';
 import { RegistrasiService } from './services/registrasi.service';
 
@@ -37,13 +39,18 @@ export class RegistrasiComponent implements OnInit {
     dialogVclaim: boolean = false;
     dialogDataPasien: boolean = false;
     dialogFormRawatJalan: boolean = false;
+    dialogFormRawatInap: boolean = false;
+
     menuPendaftaran!: MenuItem[];
+
+    subs: Subscription[] = [];
 
     constructor(
         private masterService: MasterService,
         private fb: FormBuilder,
         private registrasiService: RegistrasiService,
         private appService: AppService,
+        public formRegistrasiService: FormRegistrasiService,
         public vclaimService: VclaimService,
         public dataPasienService: DataPasienService,
     ) { }
@@ -68,15 +75,25 @@ export class RegistrasiComponent implements OnInit {
         this.masterService.groupPasien.subscribe(data => this.groupPasien = data)
         this.masterService.golonganPasien.subscribe(data => this.golonganPasien = data)
 
-        this.dataPasienService.pasien.subscribe(data => this.setToForm(data))
+        this.subs.push(this.dataPasienService.pasien.subscribe(data => this.setToForm(data)))
         this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data)
 
         this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data)
+        this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRawatJalan = data)
 
         this.menuPendaftaran = [
-            { label: 'Rawat Jalan', icon: 'bi bi-clipboard-pulse', command: (() => { this.openFormRawatJalan() }) },
-            { label: 'Rawat Inap', icon: 'bi bi-hospital' }
+            { label: 'Rawat Jalan', command: (() => { this.openFormRawatJalan() }) },
+            { label: 'Rawat Inap', command: (() => { this.openFormRawatInap() }) },
         ]
+    }
+
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.formRegistrasiService.dialog.next(false);
+        this.subs.forEach(element => {
+            element.unsubscribe();
+        });
     }
 
     public getMasterData() {
@@ -95,7 +112,11 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public openFormRawatJalan() {
-        this.dialogFormRawatJalan = true;
+        this.formRegistrasiService.dialog.next(true);
+    }
+
+    public openFormRawatInap() {
+        this.dialogFormRawatInap = true;
     }
 
     public getPesertaBpjs() {

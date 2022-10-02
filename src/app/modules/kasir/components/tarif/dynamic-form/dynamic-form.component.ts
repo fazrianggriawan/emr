@@ -23,7 +23,7 @@ export class DynamicFormComponent implements OnInit {
 
     constructor(
         private qcs: QuestionControlService,
-        private billings: BillingService,
+        private billingService: BillingService,
         private apps: AppService
     ) { }
 
@@ -40,7 +40,7 @@ export class DynamicFormComponent implements OnInit {
             tanggal: this.apps.reformatDate(this.tanggal)
         }
 
-        this.billings.save(data);
+        this.billingService.save(data);
 
     }
 }

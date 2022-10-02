@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { config } from 'src/app/config';
+import { AppService } from 'src/app/services/app.service';
 import { LoadingService } from 'src/app/services/loading.service';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 })
 export class DataPasienService {
 
-    dataPasien = new BehaviorSubject<any>('');
+    dataPasien = new BehaviorSubject<any[]>([]);
     sendToForm = new BehaviorSubject<boolean>(false);
     pasien = new BehaviorSubject<any>('');
     // showDialog = new BehaviorSubject<boolean>(false);
@@ -18,7 +19,8 @@ export class DataPasienService {
 
     constructor(
         private http: HttpClient,
-        private loadingService: LoadingService
+        private loadingService: LoadingService,
+        private appService: AppService
     ) { }
 
     public savePasien(data: any) {
@@ -37,8 +39,11 @@ export class DataPasienService {
     public searchBy(key: string, value: string){
         this.http.get<any>(config.api_url('pasien/searchBy/'+key+'/key/'+value))
             .subscribe(data => {
-                this.dataPasien.next(data.data)
-                console.log(data.data);
+                if(data.data.length > 0){
+                    this.dataPasien.next(data.data)
+                }else{
+                    this.appService.setNotification('error', 'Data Pasien Tidak Ditemukan.');
+                }
             })
     }
 

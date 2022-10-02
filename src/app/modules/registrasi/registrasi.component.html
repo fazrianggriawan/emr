@@ -7,7 +7,11 @@
 </p-dialog>
 
 <p-dialog [(visible)]="dialogFormRawatJalan" position="top" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75vw'}">
-    <app-form-rawat-jalan *ngIf="dialogFormRawatJalan"></app-form-rawat-jalan>
+    <app-form-registrasi *ngIf="dialogFormRawatJalan"></app-form-registrasi>
+</p-dialog>
+
+<p-dialog [(visible)]="dialogFormRawatInap" position="top" header="Form Rawat Jalan" [modal]="true" [draggable]="true" [style]="{width: '75vw'}">
+    <app-form-rawat-inap *ngIf="dialogFormRawatInap"></app-form-rawat-inap>
 </p-dialog>
 
 <div class="row">
@@ -15,7 +19,7 @@
         <div class="row">
             <div class="col-auto border-right border-light">
                 <button class="btn btn-sm btn-light mr-2" (click)="dataPasienService.openDialog()"><i class="bi bi-search mr-1"></i> Data Pasien</button>
-                <button class="btn btn-sm btn-light mr-2" (click)="submenuPendaftaran.toggle($event)"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran <i class="bi bi-chevron-down ml-2"></i></button>
+                <button class="btn btn-sm btn-light mr-2" (click)="openFormRawatJalan()"><i class="bi bi-plus-lg mr-1"></i> Pendaftaran</button>
                 <p-menu #submenuPendaftaran appendTo="body" [popup]="true" appendTo="body" [model]="menuPendaftaran"></p-menu>
 
                 <button class="btn btn-sm btn-light mr-2"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
@@ -184,7 +188,7 @@
                     Status Perkawinan  <span *ngIf="form.get('statusNikah')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="statusNikah" [autoDisplayFirst]="false" formControlName="statusNikah" optionValue="statusNikahID" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                    <p-dropdown [options]="statusNikah" [autoDisplayFirst]="false" formControlName="statusNikah" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-2">
@@ -192,7 +196,7 @@
                     Agama <span *ngIf="form.get('agama')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="agama" [autoDisplayFirst]="false" formControlName="agama" optionValue="agamaID" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                    <p-dropdown [options]="agama" [autoDisplayFirst]="false" formControlName="agama" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-2">
@@ -200,7 +204,7 @@
                     Pekerjaan <span *ngIf="form.get('pekerjaan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="pekerjaan" [autoDisplayFirst]="false" formControlName="pekerjaan" optionValue="pekerjaanid" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                    <p-dropdown [options]="pekerjaan" [autoDisplayFirst]="false" formControlName="pekerjaan" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-2">
@@ -208,7 +212,7 @@
                     Pendidikan <span *ngIf="form.get('pendidikan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="pendidikan" [autoDisplayFirst]="false" formControlName="pendidikan" optionValue="pendidikanID" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
+                    <p-dropdown [options]="pendidikan" [autoDisplayFirst]="false" formControlName="pendidikan" optionValue="id" optionLabel="name" [style]="{width: '100%'}"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-2">

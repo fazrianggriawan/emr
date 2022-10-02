@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
 import { AppService } from 'src/app/services/app.service';
 import { RegistrasiService } from '../../services/registrasi.service';
@@ -16,20 +17,20 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
     dialogFormRegistrasi: boolean = false;
     dialogVclaim: boolean = false;
 
-    subs: any = [];
+    subs: Subscription[] = [];
 
     constructor(
         public formRegistrasiService: FormRegistrasiService,
         public vclaimService: VclaimService,
         public appService: AppService,
-        private registrasiService: RegistrasiService
+        private registrasiService: RegistrasiService,
+        private dataPasienService: DataPasienService
     ) { }
 
     ngOnInit(): void {
         this.registrasiService.getDataRegistrasi();
-        this.subs['dataRegistrasi'] = this.registrasiService.dataRegistrasi.subscribe(data => this.handleDataRegistrasi(data))
-        this.subs['dialog'] = this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRegistrasi = data)
-        this.subs['dialogVclaim'] = this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data)
+        this.subs.push(this.registrasiService.dataRegistrasi.subscribe(data => this.handleDataRegistrasi(data)))
+        this.subs.push(this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRegistrasi = data))
     }
 
     ngOnDestroy(): void {
@@ -59,6 +60,7 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
     selectRegistrasi(data: any) {
         if (data) {
             this.registrasiService.registrasi.next(data);
+            this.dataPasienService.pasien.next(data.pasien);
             sessionStorage.setItem('noreg', data.noreg);
         }
     }

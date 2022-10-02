@@ -1,6 +1,8 @@
-import { AfterContentInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterContentInit, Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
+import { AppService } from 'src/app/services/app.service';
 import { MasterService } from '../../services/master.service';
 import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
@@ -11,7 +13,7 @@ import { FormRegistrasiService } from './form-registrasi.service';
     templateUrl: './form-registrasi.component.html',
     styleUrls: ['./form-registrasi.component.css']
 })
-export class FormRegistrasiComponent implements OnInit {
+export class FormRegistrasiComponent implements OnInit, OnDestroy {
 
     @ViewChild('noRm') input!: ElementRef;
 
@@ -19,7 +21,7 @@ export class FormRegistrasiComponent implements OnInit {
     dialogDataPasien: boolean = false;
     dialogRegistrasiSuccess: boolean = false;
     pasien: any;
-    form: any;
+    form!: FormGroup;
     today: any;
     dataDokter: any;
     dataPoli: any;
@@ -28,6 +30,10 @@ export class FormRegistrasiComponent implements OnInit {
     dataJnsPerawatan: any;
     dataWaktuPelayanan: any;
     dataKelasRuangan: any;
+    dataTempatTidur: any;
+    dialogVclaim: boolean = false;
+
+    subs: Subscription[] = [];
 
     constructor(
         public vclaimService: VclaimService,
@@ -35,52 +41,57 @@ export class FormRegistrasiComponent implements OnInit {
         public formRegistrasiService: FormRegistrasiService,
         private fb: FormBuilder,
         private masterService: MasterService,
-        private registrasiService: RegistrasiService
+        private registrasiService: RegistrasiService,
+        private appService: AppService
     ) {}
 
     ngOnInit(): void {
-        this.masterService.getGroupPasien();
-        this.masterService.getDokter();
-        this.masterService.getPoli();
-        this.masterService.getJnsPerawatan();
-        this.masterService.getDataWaktuPelayanan();
 
         this.masterService.dokter.subscribe(data => this.dataDokter = data)
-        this.masterService.ruangan.subscribe(data => this.dataPoli = data)
+        this.masterService.ruangan.subscribe(data => {if(data){ this.dataPoli = data }else{ this.dataPoli = [] }} )
         this.masterService.groupPasien.subscribe(data => this.dataGroupPasien = data)
         this.masterService.golonganPasien.subscribe(data => this.dataGolPasien = data)
         this.masterService.jnsPerawatan.subscribe(data => this.dataJnsPerawatan = data)
-        this.masterService.waktuPelayanan.subscribe(data => this.dataWaktuPelayanan = data)
+        this.masterService.waktuPelayanan.subscribe(data => this.handleWaktuPelayanan(data))
         this.masterService.kelasRuangan.subscribe(data => this.dataKelasRuangan = data)
+        this.masterService.tempatTidur.subscribe(data => this.dataTempatTidur = data)
 
-        this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data)
-        this.dataPasienService.pasien.subscribe(data => this.handleDataPasien(data))
+        this.subs.push(this.formRegistrasiService.dialog.subscribe(data => this.handleDialog(data)));
+        this.subs.push(this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data ))
+        this.subs.push(this.dataPasienService.pasien.subscribe(data => this.handleDataPasien(data)))
+        this.subs.push(this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data))
+
         this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
         this.formRegistrasiService.saveStatus.subscribe(data => this.dialogRegistrasiSuccess = data)
+    }
 
-        this.formRegistrasiService.dialog.subscribe(data => {
-            if (data) {
-                this.initForm();
-                setTimeout(() => { this.input.nativeElement.focus() }, 0);
-                this.formRegistrasiService.jnsPelayanan.subscribe(data => {
-                    if( data ){
-                        this.form.get('jnsPerawatan')?.patchValue(data);
-                    }
-                })
-            }
-        })
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.formRegistrasiService.dialog.next(false);
+        this.subs.forEach(element => {
+            element.unsubscribe();
+        });
     }
 
     initForm() {
         this.today = new Date();
         this.form = this.fb.group({
             rs: [1],
+            idPasien: [null, [Validators.required]],
+            norm: [null, [Validators.required]],
+            nama: [null, [Validators.required]],
+            alamat: [null],
+            noAsuransi: [null],
+            noTelp: [null],
+            jnsKelamin: [null],
             status: ['OPEN', [Validators.required]],
             noreg: [null],
             tanggal: [this.today, [Validators.required]],
             noSep: [null],
-            jnsPerawatan: [null, [Validators.required]],
+            jnsPerawatan: ['rj', [Validators.required]],
             ruanganPoli: [null, [Validators.required]],
+            tempatTidur: [null],
             dokter: [null, [Validators.required]],
             groupPasien: [null, [Validators.required]],
             golPasien: [null, [Validators.required]],
@@ -89,8 +100,34 @@ export class FormRegistrasiComponent implements OnInit {
         })
     }
 
+    handleWaktuPelayanan(data: any[]){
+        this.dataWaktuPelayanan = data
+    }
+
+    handleDialog(data: boolean){
+        if (data) {
+            this.initForm();
+            this.masterService.getGroupPasien();
+            this.masterService.getDokter();
+            this.masterService.getPoli();
+            this.masterService.getJnsPerawatan();
+            this.masterService.getDataWaktuPelayanan();
+        }
+    }
+
     handleDataPasien(data: any) {
-        this.pasien = data;
+        if(data){
+            this.form.get('idPasien')?.patchValue(data.id);
+            this.form.get('norm')?.patchValue(data.norm);
+            this.form.get('nama')?.patchValue(data.nama);
+            this.form.get('noAsuransi')?.patchValue(data.no_asuransi);
+            this.form.get('alamat')?.patchValue(data.alamat);
+            this.form.get('noTelp')?.patchValue(data.tlp);
+            this.form.get('jnsKelamin')?.patchValue(data.r_jns_kelamin.name);
+            this.form.get('groupPasien')?.patchValue(data.r_golpas.group);
+            this.form.get('golPasien')?.patchValue(data.gol_pasien);
+            this.getGolPasienByGroup(data.r_golpas.group);
+        }
     }
 
     searchPasien(e: any) {
@@ -104,8 +141,15 @@ export class FormRegistrasiComponent implements OnInit {
         }
     }
 
-    getDokterByPoli(value:string){
-        this.masterService.getDokterByPoli(value);
+    changeRuangan(value: any){
+        if(value){
+            if( this.form.get('jnsPerawatan')?.value == 'rj' ){
+                this.masterService.getDokterByPoli(value);
+            }else{
+                this.masterService.getTempatTidur(value);
+                this.masterService.getDokter();
+            }
+        }
     }
 
     getGolPasienByGroup(value: string){
@@ -113,18 +157,14 @@ export class FormRegistrasiComponent implements OnInit {
     }
 
     getDataRuangan(jnsPerawatan: string){
-        if( jnsPerawatan == 'RJ' )
-            this.masterService.getPoli();
-        if( jnsPerawatan == 'RI' )
-            this.masterService.getRuangan();
-            this.masterService.getKelasRuangan();
+        if(jnsPerawatan){
+            this.masterService.getRuangan(jnsPerawatan);
+        }
     }
 
     save(){
-        let data = {
-            registrasi: this.form.value,
-            pasien: this.pasien
-        }
+        let data = this.form.value;
+        data.tanggal = this.appService.reformatDate(this.form.get('tanggal')?.value);
 
         this.formRegistrasiService.save(data)
     }

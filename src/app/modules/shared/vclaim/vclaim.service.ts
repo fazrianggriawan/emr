@@ -169,4 +169,24 @@ export class VclaimService {
         this.dialog.next(false)
     }
 
+    public getExpiredRujukan(tanggalRujukan: string) {
+
+        let tanggal : any = tanggalRujukan.split('-');
+        let tglRujukan = new Date(tanggal[0], tanggal[1]-1, tanggal[2]);
+        let expiredDate = new Date(tglRujukan.setDate(tglRujukan.getDate()+90));
+
+        let start =  new Date(this.appService.reformatDate(new Date()));
+        let end = new Date(this.appService.reformatDate(expiredDate));
+
+        let Time = end.getTime() - start.getTime();
+        let Days = Time / (1000 * 3600 * 24); //Diference in Days
+
+        let expiredAt = {
+            expired: this.appService.reformatDate(expiredDate),
+            hariExpired: Days
+        }
+
+        return expiredAt;
+    }
+
 }

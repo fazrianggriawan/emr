@@ -1,5 +1,4 @@
 <style>
-
     .checkmark {
         width: 100px;
         height: 100px;
@@ -57,110 +56,79 @@
 </style>
 <div class="row m-0 pb-2 border-bottom sticky-top">
     <div class="col pl-0">
-        <button class="btn btn-secondary btn-sm mr-1" (click)="dataPasienService.openDialog()"><i class="bi bi-search mr-1"></i> Cari Pasien</button>
-        <button class="btn btn-secondary btn-sm mr-1" (click)="vclaimService.openDialog()" [disabled]="!pasien.no_asuransi"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
-        <button class="btn btn-primary btn-sm mr-1" (click)="save()" [disabled]="form.invalid || !pasien.norm"><i class="bi bi-save mr-1"></i> Simpan</button>
+        <button class="btn btn-secondary btn-sm mr-1" (click)="dataPasienService.openDialog()"><i class="bi bi-search mr-1"></i> Data Pasien</button>
+        <button class="btn btn-secondary btn-sm mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
+        <button class="btn btn-primary btn-sm mr-1" (click)="save()" [disabled]="form.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
     </div>
 </div>
 <div class="row mt-2">
     <div class="col">
         <h4>Data Pasien</h4>
-        <div class="row">
-            <div class="col-auto">
-                <div class="bg-light p-3 rounded border tx-center tx-gray-500 mb-2">
-                    <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-auto" hidden>
+                    <div class="bg-light p-3 rounded border tx-center tx-gray-500 mb-2">
+                        <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
+                    </div>
+                    <!-- <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-camera mr-1"></i> Ambil Photo</button>
+                    <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-pencil mr-1"></i> Edit Pasien</button> -->
                 </div>
-                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-camera mr-1"></i> Ambil Photo</button>
-                <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-pencil mr-1"></i> Edit Pasien</button>
-            </div>
-            <div class="col">
-                <div class="row mb-1">
-                    <label class="col-4 col-form-label">No. RM</label>
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" name="norm" class="form-control" value="{{pasien.norm}}" #noRm placeholder="Cari...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
-                                </div>
-                            </div>
+                <div class="col">
+                    <div class="row mb-1">
+                        <label class="col-4 col-form-label">Cari Pasien</label>
+                        <div class="col">
+                            <app-cari-pasien></app-cari-pasien>
                         </div>
                     </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-4 col-form-label">Nama</label>
-                    <div class="col">
-                        <div class="input-group">
-                            <input type="text" (keyup)="searchPasien($event)" class="form-control" name="nama" value="{{pasien.nama | uppercase}}" placeholder="Cari...">
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
-                            </div>
+                    <div class="row mb-1">
+                        <label class="col-4 col-form-label">No. RM</label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="norm">
                         </div>
                     </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-4 col-form-label">No. Asuransi/BPJS</label>
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noAsuransi" value="{{pasien.no_asuransi}}" placeholder="Cari...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
-                                </div>
-                            </div>
+                    <div class="row mb-1">
+                        <label class="col-4 col-form-label">Nama</label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="nama">
                         </div>
                     </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-4 col-form-label">No. Tlp</label>
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp" value="{{pasien.tlp}}" placeholder="Cari...">
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
-                                </div>
-                            </div>
+                    <div class="row mb-1">
+                        <label class="col-4 col-form-label">Alamat</label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="alamat">
                         </div>
                     </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-4 col-form-label">Kode Booking</label>
-                    <div class="col">
-                        <div class="input-group">
-                            <div class="input-group">
-                                <input type="text" (keyup)="searchPasien($event)" class="form-control" name="noTlp" value="{{pasien.tlp}}" placeholder="Scan Barcode / Ketik Kode Booking">
-                                <div class="input-group-append">
-                                    <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
-                                </div>
-                            </div>
+                    <div class="row mb-1">
+                        <label class="col-4 col-form-label">No. BPJS / Asuransi</label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="noAsuransi">
                         </div>
                     </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-4 col-form-label">Jns. Kelamin</label>
-                    <div class="col-auto">
-                        <input type="text" class="form-control" value="{{pasien.jns_kelamin}}">
+                    <div class="row mb-1">
+                        <label class="col-4 col-form-label">No. Tlp</label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="noTelp">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-1">
-                    <label class="col-4 col-form-label">Usia</label>
-                    <div class="col-auto">
-                        <input type="text" class="form-control" value="">
+                    <div class="row mb-1">
+                        <label class="col-4 col-form-label">Jns. Kelamin</label>
+                        <div class="col">
+                            <input type="text" class="form-control" formControlName="jnsKelamin">
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <div class="col">
         <h4>Data Registrasi</h4>
         <form [formGroup]="form">
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    Tanggal <span *ngIf="form.get('tanggal')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    No. Registrasi <span *ngIf="form.get('noreg')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col-auto">
-                    <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" [maxDate]="today" formControlName="tanggal"></p-calendar>
+                    <input type="text" formControlName="noreg" class="form-control" readonly>
                 </div>
             </div>
             <div class="row mb-1">
@@ -173,10 +141,10 @@
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    No. Registrasi <span *ngIf="form.get('noreg')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Tanggal <span *ngIf="form.get('tanggal')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col-auto">
-                    <input type="text" formControlName="noreg" class="form-control" readonly>
+                    <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" [maxDate]="today" formControlName="tanggal"></p-calendar>
                 </div>
             </div>
             <div class="row mb-1">
@@ -198,13 +166,16 @@
             </div>
             <div class="row mb-1">
                 <label class="col-4 col-form-label">
-                    Ruangan / Poliklinik <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    <!-- <span *ngIf="form.get('jnsPerawatan')?.value == 'rj'">Poliklinik</span>
+                    <span *ngIf="form.get('jnsPerawatan')?.value == 'ri'">Ruang Perawatan</span> -->
+                    Ruang Perawatan
+                    <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
                     <p-dropdown
                         [options]="dataPoli"
                         [autoDisplayFirst]="false"
-                        (ngModelChange)="getDokterByPoli($event)"
+                        (ngModelChange)="changeRuangan($event)"
                         formControlName="ruanganPoli"
                         optionValue="id"
                         optionLabel="name"
@@ -213,39 +184,25 @@
                     </p-dropdown>
                 </div>
             </div>
-            <div class="row mb-1" *ngIf="form.get('jnsPerawatan').value == 'RI'">
-                <label class="col-4 col-form-label">
-                    Kelas <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
-                </label>
-                <div class="col">
-                    <p-dropdown
-                        [options]="dataKelasRuangan"
-                        [autoDisplayFirst]="false"
-                        (ngModelChange)="getDokterByPoli($event)"
-                        formControlName="ruanganPoli"
-                        optionValue="id"
-                        optionLabel="name"
-                        [style]="{width: '100%'}"
-                        appendTo="body">
-                    </p-dropdown>
-                </div>
-            </div>
-            <div class="row mb-1" *ngIf="form.get('jnsPerawatan').value == 'RI'">
+            <div class="row mb-1" *ngIf="form.get('jnsPerawatan')?.value == 'ri'">
                 <label class="col-4 col-form-label">
                     Tempat Tidur <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
-                <div class="col">
+                <div class="col-8">
                     <p-dropdown
-                        [options]="dataPoli"
+                        [options]="dataTempatTidur"
                         [autoDisplayFirst]="false"
-                        (ngModelChange)="getDokterByPoli($event)"
-                        formControlName="ruanganPoli"
-                        optionValue="id"
-                        optionLabel="name"
+                        formControlName="tempatTidur"
                         [style]="{width: '100%'}"
                         appendTo="body">
+                        <ng-template let-item pTemplate="item">
+                            <div>{{item.r_kelas_ruangan.r_kelas.name}} - {{item.kamar}} - No. {{item.no_bed}}</div>
+                        </ng-template>
+                        <ng-template let-item pTemplate="selectedItem">
+                            <div>{{item.r_kelas_ruangan.r_kelas.name}} - {{item.kamar}} - No. {{item.no_bed}}</div>
+                        </ng-template>
                     </p-dropdown>
-                    <div class="pt-1" *ngIf="form.get('ruanganPoli').value != null">
+                    <div class="pt-1" *ngIf="form.get('ruanganPoli')?.value != null" hidden>
                         <button type="button" class="btn btn-secondary btn-xs p-1 pl-3 pr-3 position-relative mr-3">
                             Kapasitas
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark ml-1">
@@ -267,12 +224,12 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-1" *ngIf="form.get('jnsPerawatan').value == 'RJ'">
+            <div class="row mb-1" *ngIf="form.get('jnsPerawatan')?.value == 'rj'">
                 <label class="col-4 col-form-label">
                     Waktu Pelayanan <span *ngIf="form.get('waktuPelayanan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
-                    <p-dropdown [options]="dataWaktuPelayanan" formControlName="waktuPelayanan" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+                    <p-dropdown [options]="dataWaktuPelayanan" formControlName="waktuPelayanan" optionValue="id" optionLabel="name" [style]="{width: '100%'}" [autoDisplayFirst]="false" appendTo="body"></p-dropdown>
                 </div>
             </div>
             <div class="row mb-1">
@@ -284,8 +241,8 @@
                         [options]="dataDokter"
                         [autoDisplayFirst]="false"
                         formControlName="dokter"
-                        optionValue="id"
-                        optionLabel="name"
+                        optionValue="id_pelaksana"
+                        optionLabel="r_pelaksana.name"
                         [style]="{width: '100%'}"
                         appendTo="body">
                     </p-dropdown>
@@ -324,7 +281,8 @@
 <p-dialog
     [(visible)]="dialogDataPasien"
     (onHide)="dataPasienService.closeDialog()"
-    header="Cari Data Pasien"
+    header="Data Pasien"
+    position="top"
     [modal]="true"
     [draggable]="true"
     [style]="{width: '75%'}"
@@ -335,10 +293,26 @@
 </p-dialog>
 
 <p-dialog
+    [(visible)]="dialogVclaim"
+    [closeOnEscape]="false"
+    (onHide)="vclaimService.closeDialog()"
+    header="Bridging VClaim BPJS"
+    position="top"
+    [modal]="true"
+    [draggable]="true"
+    [breakpoints]="{'640px': '100vw', '3000px': '90vw'}"
+    appendTo="body">
+    <div class="pl-3 pr-3 pb-3">
+        <app-vclaim *ngIf="dialogVclaim"></app-vclaim>
+    </div>
+</p-dialog>
+
+<p-dialog
     [(visible)]="dialogRegistrasiSuccess"
     (onHide)="dataPasienService.closeDialog()"
     [showHeader]="false"
     [modal]="true"
+    position="top"
     [draggable]="true"
     appendTo="body">
     <div *ngIf="dialogRegistrasiSuccess">
@@ -350,15 +324,19 @@
                 <hr>
                 <div class="text-center">
                     <div>{{registrasi.noreg}}</div>
-                    <div>{{pasien.nama}}</div>
-                    <div>POLIKLINIK ANAK</div>
-                    <div>dr. Novelia Z.L Mardin, Sp.A</div>
+                    <div>{{registrasi.jns_perawatan.name | uppercase}}</div>
+                    <div>
+                        <span *ngIf="registrasi.jns_perawatan.id == 'rj'">POLIKLINIK</span>
+                        {{registrasi.ruang_perawatan.name}}
+                    </div>
+                    <div>{{registrasi.dokter.name}}</div>
                 </div>
                 <hr>
                 <div>
                     <button class="btn btn-primary mr-1"><i class="bi bi-info-circle mr-1"></i> Data Registrasi</button>
                     <button class="btn btn-primary mr-1"><i class="bi bi-cash-coin mr-1"></i> Billing</button>
                     <button class="btn btn-primary mr-1"><i class="bi bi-printer mr-1"></i> Print</button>
+                    <button class="btn btn-light mr-1" (click)="dialogRegistrasiSuccess=false">Close</button>
                 </div>
             </div>
         </div>

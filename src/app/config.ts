@@ -1,5 +1,6 @@
+// var host = 'http://36.94.176.218/bihealth_api';
 var host = 'http://localhost/bihealth_api';
-var hostVclaim = 'http://localhost/vclaim';
+var hostVclaim = 'http://localhost/bihealth_vclaim';
 var hostPublic = 'http://182.253.22.220';
 export const config = {
     host: host,

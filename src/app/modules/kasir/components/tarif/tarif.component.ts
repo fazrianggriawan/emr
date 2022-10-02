@@ -9,6 +9,7 @@ import { DropdownQuestion } from './dynamic-form/question-dropdown';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { FormGroup } from '@angular/forms';
 import { MasterService } from 'src/app/modules/registrasi/services/master.service';
+import { BillingService } from '../billing/billing.service';
 
 @Component({
     selector: 'app-tarif',
@@ -40,14 +41,15 @@ export class TarifComponent implements OnInit {
     constructor(
         public tarifService: TarifService,
         private registrasiService: RegistrasiService,
-        private masterService: MasterService
+        private masterService: MasterService,
+        private billingService: BillingService
     ) {}
 
     ngOnInit(): void {
-        this.masterService.getRuangan();
         this.tarifService.getCategory();
 
         this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data)))
+        this.subs.push(this.billingService.saveStatus.subscribe(data => this.handleBillingSave(data)))
         this.tarifService.tarif.subscribe(data => this.tarif = data);
         this.tarifService.categoryTarif.subscribe(data => this.categoryTarif = data);
         this.tarifService.tarifJasa.subscribe(data => this.handleTarifJasa(data))
@@ -68,10 +70,16 @@ export class TarifComponent implements OnInit {
         if(data){
             this.registrasi = data;
             this.selectedRuangan = this.registrasi.ruangan;
+            this.masterService.getRuangan(this.registrasi.jns_perawatan.id);
         }else{
             this.registrasi = '';
         }
+    }
 
+    handleBillingSave(data: boolean){
+        if(data){
+            this.op.hide();
+        }
     }
 
     handleDefaultPelaksana(data: any) {

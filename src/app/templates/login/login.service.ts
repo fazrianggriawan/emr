@@ -18,7 +18,11 @@ export class LoginService {
     ) { }
 
     public login(data: any) {
-        this.http.post<any>( config.api_url('do_login'), data ).subscribe(data => console.log(data))
+        this.http.post<any>( config.api_url('do_login'), data ).subscribe(data =>  {
+            if(data.auth){
+                this.loginData.next(data);
+            }
+        } )
     }
 
 }

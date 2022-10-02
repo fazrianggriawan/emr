@@ -39,6 +39,8 @@ import { KonvaComponent } from 'src/app/components/konva/konva.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { FileUploadModule } from 'primeng/fileupload';
+import { AgGridModule } from "ag-grid-angular";
 
 
 let primeModules = [
@@ -65,7 +67,8 @@ let primeModules = [
     ConfirmDialogModule,
     TabMenuModule,
     QRCodeModule,
-    ConfirmPopupModule
+    ConfirmPopupModule,
+    FileUploadModule
 ]
 
 let sharedComponent = [
@@ -93,13 +96,15 @@ let sharedComponent = [
         primeModules,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AgGridModule
     ],
     exports: [
         sharedComponent,
         primeModules,
         FormsModule,
         ReactiveFormsModule,
+        AgGridModule
     ]
 })
 export class SharedModule { }

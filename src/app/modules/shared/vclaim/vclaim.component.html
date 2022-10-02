@@ -1,4 +1,4 @@
-<div class="row mt-1">
+<div class="row mt-3">
     <div class="col-4">
         <!-- <div style="position: absolute; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9; padding-top: 25%; padding-left: 45%;">
             <p-progressSpinner [style]="{width: '25px', height: '25px'}" strokeWidth="5"></p-progressSpinner>
@@ -91,7 +91,7 @@
                     <button class="btn btn-outline-light btn-xs"><i class="bi bi-plus-lg mr-1"></i>Lebih Detail</button>
                 </label>
             </div>
-            <div>
+            <div hidden>
                 <div class="row mb-1 border-bottom">
                     <label class="col-4 col-form-label">COB</label>
                     <div class="col border-left">
@@ -166,7 +166,7 @@
             </div>
         </form>
     </div>
-    <div class="col-8">
+    <div class="col-8 p-3 shadow border rounded">
         <p-tabView [scrollable]="true" [(activeIndex)]="tabIndex">
             <p-tabPanel header="Form SEP">
                 <div class="row pt-3 pb-3">
@@ -362,7 +362,7 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col">
-                        <div class="row bg-gray-500 pt-3 pb-3 mt-3">
+                        <div class="row bg-gray-100 pt-3 pb-3 mt-3">
                             <div class="col tx-right">
                                 <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="formSep.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
                             </div>
@@ -379,7 +379,7 @@
             <p-tabPanel header="PRB">
                 <app-prb></app-prb>
             </p-tabPanel>
-            <p-tabPanel header="History SEP">
+            <p-tabPanel header="Riwayat SEP">
                 <app-history></app-history>
             </p-tabPanel>
         </p-tabView>

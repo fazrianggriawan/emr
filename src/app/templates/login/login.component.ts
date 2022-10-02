@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        // this.loginService.loginData.subscribe(data => this.handleLogin(data))
+        this.loginService.loginData.subscribe(data => this.handleLogin(data))
         // this.loginService.errorMessage.subscribe(data => this.messageErrorLogin = data)
 
         sessionStorage.clear();
@@ -43,16 +43,16 @@ export class LoginComponent implements OnInit {
     }
 
     public doLogin() {
-        if( this.formLogin.value.username == 'demo' && this.formLogin.value.password == 'demo' ){
-            sessionStorage.setItem('login', 'demo')
-            this.gotoDashboarPage();
-        }
+        this.loginService.login(this.formLogin.value)
     }
 
     public handleLogin(responseLogin: any) {
-        if (responseLogin && responseLogin.auth) {
-            localStorage.setItem('login', JSON.stringify(responseLogin))
-            this.gotoDashboarPage();
+
+        if (responseLogin) {
+            if(responseLogin.auth){
+                localStorage.setItem('login', JSON.stringify(responseLogin))
+                this.gotoDashboarPage();
+            }
         }
     }
 

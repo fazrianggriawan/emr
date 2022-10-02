@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegistrasiService } from '../../services/registrasi.service';
+import { DataPasienService } from '../data-pasien/data-pasien.service';
 
 @Component({
     selector: 'app-widget-registrasi',
@@ -11,7 +12,8 @@ export class WidgetRegistrasiComponent implements OnInit {
     registrasi: any;
 
     constructor(
-        private registrasiService: RegistrasiService
+        private registrasiService: RegistrasiService,
+        private dataPasienService: DataPasienService
     ) { }
 
     ngOnInit(): void {
@@ -23,8 +25,9 @@ export class WidgetRegistrasiComponent implements OnInit {
     }
 
     handleRegistrasi(data: any){
+        this.registrasi = data;
         if( data ){
-            this.registrasi = data;
+            this.dataPasienService.pasien.next(this.registrasi.pasien);
         }
     }
 

@@ -1,0 +1,23 @@
+<p-autoComplete
+    #acSearch
+    placeholder="Mulai Cari..."
+    [minLength]="1"
+    [showEmptyMessage]="true"
+    [suggestions]="searchOptions"
+    [(ngModel)]="selectedSearch"
+    (completeMethod)="filterData($event)"
+    (onSelect)="filterBy($event)"
+    field="name"
+    [style]="{'width':'100%'}"
+    [appendTo]="'body'"
+    [inputStyle]="{'width':'100%'}">
+
+    <ng-template let-item pTemplate="item">
+        <div>
+            <span class="badge badge-light text-left" innerHtml="{{item.name}}" style="font-size: 11px;">
+                <i class="bi bi-search" style="font-size: 10px;"></i>
+            </span>
+            {{selectedSearch}}
+        </div>
+    </ng-template>
+</p-autoComplete>

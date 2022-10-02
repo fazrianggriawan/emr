@@ -1,27 +1,6 @@
-    <div class="row mb-3">
-        <div class="col-5">
-            <p-autoComplete
-                #acSearch
-                placeholder="Cari Pasien..."
-                [minLength]="1"
-                [showEmptyMessage]="true"
-                [suggestions]="searchOptions"
-                [(ngModel)]="selectedSearch"
-                (completeMethod)="filterData($event)"
-                (onSelect)="filterBy($event)"
-                field="name"
-                [style]="{'width':'100%'}"
-                [appendTo]="'body'"
-                [inputStyle]="{'width':'100%'}">
-
-                <ng-template let-item pTemplate="item">
-                    <div><span class="badge badge-light" style="font-size: 11px;"><i class="bi bi-search" style="font-size: 10px;"></i>&nbsp;{{item.name}}</span> {{selectedSearch}}</div>
-                </ng-template>
-            </p-autoComplete>
-
-        </div>
-        <div class="col-auto">
-            <button class="btn btn-light"><i class="bi bi-plus-lg"></i></button>
+    <div class="row">
+        <div class="col-4">
+            <app-cari-pasien></app-cari-pasien>
         </div>
     </div>
     <form [formGroup]="form">
@@ -56,7 +35,7 @@
             <ng-template pTemplate="body" let-item>
                 <tr [pSelectableRow]="item">
                     <td>{{item.norm}}</td>
-                    <td><a href="javascript:void()">{{item.nama | uppercase}}</a></td>
+                    <td>{{item.nama | uppercase}}</td>
                     <td>{{item.tgl_lahir}}</td>
                     <td>{{item.alamat | uppercase}}</td>
                     <td>{{item.tlp}}</td>

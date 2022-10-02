@@ -55,12 +55,12 @@
                     <th></th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-item let-ri="rowIndex">
+            <ng-template pTemplate="body" let-item let-i="rowIndex">
                 <tr>
                     <td>{{item.name}}</td>
                     <td>{{item.cat_name}}</td>
                     <td>
-                        <button class="btn btn-xs btn-icon btn-outline-secondary" (click)="deleteOrder(ri)"><i class="bi bi-trash"></i></button>
+                        <button class="btn btn-xs btn-icon btn-outline-secondary" (click)="deleteOrder($event, i)"><i class="bi bi-trash"></i></button>
                     </td>
                 </tr>
             </ng-template>
@@ -120,3 +120,5 @@
         </div>
     </div>
 </div>
+
+<p-confirmPopup></p-confirmPopup>

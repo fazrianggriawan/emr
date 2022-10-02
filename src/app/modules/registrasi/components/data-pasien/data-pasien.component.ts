@@ -62,7 +62,9 @@ export class DataPasienComponent implements OnInit, OnDestroy {
     handleDialog(data: boolean){
         this.showDialog = data
         if( data ){
-            this.dataPasienService.getAllDataPasien();
+            if( this.dataPasienService.dataPasien.value.length == 0 ){
+                this.dataPasienService.getAllDataPasien();
+            }
         }
     }
 

@@ -24,6 +24,9 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { RadiologiComponent } from './components/rikkes/radiologi/radiologi.component';
 import { LaboratoriumComponent } from './components/rikkes/laboratorium/laboratorium.component';
 import { RegistrasiModule } from './modules/registrasi/registrasi.module';
+import { RadiologiModule } from './modules/radiologi/radiologi.module';
+import { LaporanModule } from './modules/laporan/laporan.module';
+import { EKlaimModule } from './modules/e-klaim/e-klaim.module';
 
 
 @NgModule({
@@ -54,7 +57,10 @@ import { RegistrasiModule } from './modules/registrasi/registrasi.module';
         ProgressSpinnerModule,
         FileUploadModule,
         SharedModule,
-        RegistrasiModule
+        RegistrasiModule,
+        RadiologiModule,
+        LaporanModule,
+        EKlaimModule
     ],
     providers: [
         DatePipe,

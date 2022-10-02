@@ -27,7 +27,11 @@
             <tbody *ngIf="dataRujukanFaskes">
                 <tr *ngFor="let item of dataRujukanFaskes.rujukan">
                     <td><button class="btn btn-secondary btn-sm" (click)="rujukanService.getRujukan(item.noKunjungan)">{{item.noKunjungan}}</button></td>
-                    <td>{{item.tglKunjungan}}</td>
+                    <td>
+                        <div>{{dateHuman(item.tglKunjungan)}}</div>
+                        <div class="badge badge-success" *ngIf="expiredAt(item.tglKunjungan) > 0">{{expiredAt(item.tglKunjungan)}} hari lagi</div>
+                        <div class="badge badge-danger" *ngIf="expiredAt(item.tglKunjungan) < 0">Expired : {{expiredAt(item.tglKunjungan)}} hari</div>
+                    </td>
                     <td>{{item.pelayanan.nama | uppercase}}</td>
                     <td>{{item.poliRujukan.nama}}</td>
                     <td>{{item.provPerujuk.nama}}</td>
@@ -61,7 +65,11 @@
             <tbody *ngIf="dataRujukanRs">
                 <tr *ngFor="let item of dataRujukanRs.rujukan">
                     <td>{{item.noKunjungan}}</td>
-                    <td>{{item.tglKunjungan}}</td>
+                    <td>
+                        <div>{{dateHuman(item.tglKunjungan)}}</div>
+                        <div class="badge badge-success" *ngIf="expiredAt(item.tglKunjungan) > 0">{{expiredAt(item.tglKunjungan)}} hari lagi</div>
+                        <div class="badge badge-danger" *ngIf="expiredAt(item.tglKunjungan) < 0">Expired : {{expiredAt(item.tglKunjungan)}} hari</div>
+                    </td>
                     <td>{{item.pelayanan.nama | uppercase}}</td>
                     <td>{{item.poliRujukan.nama}}</td>
                     <td>{{item.provPerujuk.nama}}</td>
@@ -105,6 +113,12 @@
     </div>
 </div>
 
-<p-dialog header="Form Rujuk Keluar" [(visible)]="dialogFormRujukanKeluar" [style]="{width: '600px'}" appendTo="body" [modal]="true">
-    <app-form-rujukan-keluar></app-form-rujukan-keluar>
+<p-dialog
+    header="Form Rujuk Keluar"
+    [(visible)]="dialogFormRujukanKeluar"
+    [style]="{width: '600px'}"
+    position="top"
+    appendTo="body"
+    [modal]="true">
+    <app-form-rujukan-keluar *ngIf="dialogFormRujukanKeluar"></app-form-rujukan-keluar>
 </p-dialog>
