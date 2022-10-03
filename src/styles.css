@@ -298,3 +298,7 @@ a.link:hover{
     background-color: rgba(255, 246, 113, 0.2);
     border-color:  rgba(255, 193, 113, 0.5) !important;
 }
+
+h1, h2, h3, h4, h5{
+    font-weight: 600 !important;
+}

@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { Subscription } from 'rxjs';
+import { config } from 'src/app/config';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { AppService } from 'src/app/services/app.service';
 import { BillingService } from './billing.service';
@@ -135,6 +136,10 @@ export class BillingComponent implements OnInit, OnDestroy {
                 //reject action
             }
         });
+    }
+
+    printBilling() {
+        this.appService.print( config.api_url('print/rincianBilling/'+this.registrasi.noreg) );
     }
 
 }

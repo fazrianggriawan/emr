@@ -40,4 +40,13 @@ export class AppService {
         }
     }
 
+    public print(url: string) {
+        let width = screen.width / 1.5;
+        let center = (screen.width / 2) - (width /2);
+        let iframe = '<iframe src="' + url + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
+        let win: any = window.open("", "", "width="+width+",height="+screen.height+",left="+center+",top=0,toolbar=no,menubar=no,resizable=yes");
+        win.document.write(iframe);
+    }
+
+
 }

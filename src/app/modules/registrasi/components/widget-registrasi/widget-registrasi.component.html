@@ -1,6 +1,6 @@
 <div class="row mb-2 border-bottom pb-2" *ngIf="registrasi">
-    <div class="col-auto border-right pt-2"><h5 class="m-0">DATA REGISTRASI</h5></div>
-    <div class="col-auto border-right">
+    <div class="col-auto border-right pt-1"><h5 class="m-0">REGISTRASI</h5></div>
+    <div class="col-auto border-right" hidden>
         <input type="text" class="form-control" placeholder="Cari...">
     </div>
     <div class="col-auto mr-4">
@@ -12,7 +12,11 @@
         <div><span class="mr-1 tx-12 text-muted">Ruangan / Poliklinik :</span> <span>{{registrasi.ruang_perawatan.name | uppercase}}</span></div>
     </div>
     <div class="col-auto mr-4">
-        <div><span class="mr-1 tx-12 text-muted">Jns. PErawatan :</span> <span>{{registrasi.jns_perawatan.name | uppercase}}</span></div>
+        <div><span class="mr-1 tx-12 text-muted">Jns. Perawatan :</span> <span>{{registrasi.jns_perawatan.name | uppercase}}</span></div>
         <div><span class="mr-1 tx-12 text-muted">Pembayaran :</span> <span>{{registrasi.golpas.r_grouppas.name | uppercase}} - {{registrasi.golpas.name | uppercase}}</span></div>
+    </div>
+    <div class="col"></div>
+    <div class="col-auto border-left">
+        <app-widget-estimasi-klaim></app-widget-estimasi-klaim>
     </div>
 </div>

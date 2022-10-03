@@ -37,7 +37,7 @@ export class RujukanService {
 
     public getDataRujukanRs(nomorKartu: string) {
         this.http.get<any>( config.api_vclaim('rujukan/rs/nomorKartu/'+nomorKartu) )
-            .subscribe(data => this.dataRujukanFaskes.next(data.response))
+            .subscribe(data => this.dataRujukanRs.next(data.response))
     }
 
     public getDataRujukanKeluar() {

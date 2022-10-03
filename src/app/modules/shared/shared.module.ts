@@ -41,6 +41,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { FileUploadModule } from 'primeng/fileupload';
 import { AgGridModule } from "ag-grid-angular";
+import { WidgetEstimasiKlaimComponent } from './vclaim/widget-estimasi-klaim/widget-estimasi-klaim.component';
 
 
 let primeModules = [
@@ -83,14 +84,16 @@ let sharedComponent = [
     SuratKontrolComponent,
     FormRujukanKeluarComponent,
     MenuEmrComponent,
-    KonvaComponent
+    KonvaComponent,
+    WidgetEstimasiKlaimComponent
 ]
 
 @NgModule({
     declarations: [
         sharedComponent,
         PulangSepComponent,
-        FormPasienPulangComponent
+        FormPasienPulangComponent,
+        WidgetEstimasiKlaimComponent
     ],
     imports: [
         primeModules,
