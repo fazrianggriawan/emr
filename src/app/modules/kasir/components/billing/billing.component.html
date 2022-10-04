@@ -1,12 +1,20 @@
 <div class="row">
     <div class="col">
-        <div class="pb-2">
-            <button class="btn btn-light btn-sm mr-1" (click)="printBilling()"><i class="bi bi-printer"></i> Print Billing</button>
-            <!-- <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-filetype-xls"></i> XLS</button>
-            <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-trash"></i> Hapus</button> -->
+        <div class="row">
+            <div class="col-auto border-right">
+                <h5>Billing Perawatan</h5>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-light btn-sm mr-1" (click)="printBilling()"><i class="bi bi-printer"></i> Print Billing</button>
+                <button class="btn btn-light btn-sm mr-1" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
+                <!-- <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-filetype-xls"></i> XLS</button>
+                <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-trash"></i> Hapus</button> -->
+            </div>
         </div>
-        <div class="border-bottom pb-2">
-            <p-selectButton [options]="catTarif" [(ngModel)]="selectedCatTarif" optionLabel="name"></p-selectButton>
+        <div class="row mt-2">
+            <div class="col">
+                <p-selectButton [options]="catTarif" [(ngModel)]="selectedCatTarif" optionValue="id" optionLabel="name"></p-selectButton>
+            </div>
         </div>
         <!-- <div>
             <ag-grid-angular></ag-grid-angular>
@@ -19,7 +27,7 @@
                     <th>Dokter</th>
                     <th>Harga</th>
                     <th>Qty</th>
-                    <th>Disc %</th>
+                    <th>Disc</th>
                     <th>Total</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -30,7 +38,7 @@
                     <td>{{item.r_tarif_harga.r_tarif.name | uppercase}}</td>
                     <td>
                         <ng-container *ngFor="let jasa of item.r_billing_jasa">
-                            <a class="link text-primary" *ngIf="jasa.r_pelaksana.group == 'dokter'">{{jasa.r_pelaksana.name}}</a>
+                            <div><a class="link text-primary" *ngIf="jasa.r_pelaksana.group == 'dokter'">{{jasa.r_pelaksana.name}}</a></div>
                         </ng-container>
                     </td>
                     <td>{{item.r_tarif_harga.harga | number}}</td>

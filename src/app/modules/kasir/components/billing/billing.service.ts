@@ -18,6 +18,7 @@ export class BillingService {
     addDiscountStatus = new BehaviorSubject<boolean>(false);
     addPembayaranStatus = new BehaviorSubject<boolean>(false);
     deletePembayaranStatus = new BehaviorSubject<boolean>(false);
+    totalBilling = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient
@@ -118,6 +119,19 @@ export class BillingService {
             total = total - (total * (parseInt(item.discount) / 100))
         }
         return total;
+    }
+
+    public getTotalBilling(dataBilling: any) {
+        if (dataBilling.length > 0) {
+
+            let totalBilling = 0;
+            dataBilling.forEach((item: any) => {
+                totalBilling = totalBilling + this.hitungTotalBilling(item)
+            });
+
+            this.totalBilling.next(totalBilling);
+        }
+
     }
 
 }

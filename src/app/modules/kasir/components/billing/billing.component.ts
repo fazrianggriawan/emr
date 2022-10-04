@@ -42,15 +42,16 @@ export class BillingComponent implements OnInit, OnDestroy {
         this.billingService.dataBilling.subscribe(data => this.handleDataBilling(data))
         this.subs.push(this.billingService.updateStatus.subscribe(data => this.handleUpdate(data)))
         this.subs.push(this.billingService.addDiscountStatus.subscribe(data => this.handleAddDiscount(data)))
+        this.selectedCatTarif = 'all';
 
         this.catTarif = [
-            { name: 'All' },
-            { name: 'Perawatan' },
-            { name: 'Laboratorium' },
-            { name: 'Radiologi' },
-            { name: 'Farmasi' },
-            { name: 'Operasi' },
-            { name: 'Kamar Rawat' },
+            { id: 'all', name: 'All' },
+            { id: 'perawatan', name: 'Perawatan' },
+            { id: 'lab', name: 'Laboratorium' },
+            { id: 'rad', name: 'Radiologi' },
+            { id: 'farmasi', name: 'Farmasi' },
+            { id: 'operasi', name: 'Operasi' },
+            { id: 'kamar', name: 'Kamar Rawat' },
         ];
 
     }
@@ -79,6 +80,7 @@ export class BillingComponent implements OnInit, OnDestroy {
             this.dataBilling.forEach((item: any) => {
                 this.totalBilling = this.totalBilling + this.billingService.hitungTotalBilling(item)
             });
+            this.billingService.getTotalBilling(data);
         }
     }
 
@@ -136,6 +138,12 @@ export class BillingComponent implements OnInit, OnDestroy {
                 //reject action
             }
         });
+    }
+
+    refresh(){
+        if( this.registrasi.noreg ){
+            this.billingService.getBillingByNoreg(this.registrasi.noreg);
+        }
     }
 
     printBilling() {
