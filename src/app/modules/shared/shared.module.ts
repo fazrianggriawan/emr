@@ -42,6 +42,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { FileUploadModule } from 'primeng/fileupload';
 import { AgGridModule } from "ag-grid-angular";
 import { WidgetEstimasiKlaimComponent } from './vclaim/widget-estimasi-klaim/widget-estimasi-klaim.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 
 let primeModules = [
@@ -85,7 +86,8 @@ let sharedComponent = [
     FormRujukanKeluarComponent,
     MenuEmrComponent,
     KonvaComponent,
-    WidgetEstimasiKlaimComponent
+    WidgetEstimasiKlaimComponent,
+    FileUploadComponent
 ]
 
 @NgModule({
@@ -93,7 +95,7 @@ let sharedComponent = [
         sharedComponent,
         PulangSepComponent,
         FormPasienPulangComponent,
-        WidgetEstimasiKlaimComponent
+        WidgetEstimasiKlaimComponent,
     ],
     imports: [
         primeModules,

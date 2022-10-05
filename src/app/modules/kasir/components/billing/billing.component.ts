@@ -80,7 +80,6 @@ export class BillingComponent implements OnInit, OnDestroy {
             this.dataBilling.forEach((item: any) => {
                 this.totalBilling = this.totalBilling + this.billingService.hitungTotalBilling(item)
             });
-            this.billingService.getTotalBilling(data);
         }
     }
 

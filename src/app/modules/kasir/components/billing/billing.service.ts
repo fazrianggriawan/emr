@@ -62,6 +62,9 @@ export class BillingService {
                 .subscribe(data => {
                     if( data.data.length > 0 ){
                         this.dataBilling.next(data.data)
+                        this.getTotalBilling(data.data);
+                    }else{
+                        this.totalBilling.next(0);
                     }
                 })
         }
@@ -130,6 +133,8 @@ export class BillingService {
             });
 
             this.totalBilling.next(totalBilling);
+        }else{
+            this.totalBilling.next('0');
         }
 
     }
