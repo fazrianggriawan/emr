@@ -7,22 +7,19 @@ import { config } from '../../config';
 @Injectable({
     providedIn: 'root'
 })
-export class LoginService {
+export class MenuService {
 
-    public errorMessage = new BehaviorSubject<string>('');
-    public loginData = new BehaviorSubject<any>(null);
+    public menuData = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient,
         private router: Router
     ) { }
 
-    public login(data: any) {
-        this.http.post<any>( config.api_url('do_login'), data ).subscribe(data =>  {
+    public GetMenu(username: string) {
+        this.http.get<any>( config.api_url('app/getMenu/'+username) ).subscribe(data =>  {
             if(data.code == 200){
-                this.loginData.next(data.data);
-            }else{
-                this.errorMessage.next('Username atau password anda salah.')
+                this.menuData.next(data.data);
             }
         } )
     }

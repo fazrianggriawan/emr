@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuService } from './menu.service';
 
 @Component({
     selector: 'app-menu',
@@ -10,9 +11,16 @@ export class MenuComponent implements OnInit {
     public menus : any = [];
     public selectedMenu: any;
 
-    constructor() { }
+    constructor(
+        private menuService: MenuService
+    ) { }
 
     ngOnInit(): void {
+        this.menuService.GetMenu('dokter');
+
+        this.menuService.menuData.subscribe(data => {
+            this.menus = data;
+        })
         this.menus = [
             { label: 'Admisi & Pendaftaran', routerLink: 'registrasi' },
             { label: 'Rawat Jalan', routerLink: 'rawatJalan' },

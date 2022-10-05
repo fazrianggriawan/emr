@@ -1,6 +1,6 @@
 html,
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 14px;
 }
 
@@ -134,8 +134,9 @@ legend {
 }
 
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-    /* background-color: #7987a1;
-    color: white; */
+    background-color: transparent;
+    color: #0052CC;
+    border-color: #0052CC;
 }
 
 .p-fileupload .p-fileupload-content {
@@ -211,7 +212,12 @@ legend {
 .form-control,
 .p-button,
 .p-button.p-button-icon-only {
-    padding: 0.4rem 0.6rem;
+    padding: 0.3rem 0.75rem;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: 400;
+    font-family: inherit;
+    letter-spacing: -0.2px;
 }
 
 .p-button:focus,
@@ -232,7 +238,7 @@ legend {
     outline: none;
 }
 
-.btn-primary {
+.btn-primary, .p-button {
     background-color: #0052CC;
     border-color: #0052CC;
 }
@@ -240,8 +246,8 @@ legend {
 .p-selectbutton .p-button.p-highlight, .p-selectbutton .p-button.p-highlight:hover {
     background-color: #eef2f9;
     border-color: #dce3f3;
-    border-bottom-color: #407cd3;
-    color: #407cd3;
+    border-bottom-color: #0052CC;
+    color: #0052CC;
     border-bottom-width: initial;
 }
 
@@ -302,3 +308,5 @@ a.link:hover{
 h1, h2, h3, h4, h5{
     font-weight: 600 !important;
 }
+
+.border-light{ border-color: #e2e2e2 !important; }

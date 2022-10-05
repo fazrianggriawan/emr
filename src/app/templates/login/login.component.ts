@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { LoginService } from './login.service';
+import { Subscription } from "rxjs";
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
     public loginData: any;
     public messageErrorLogin: string = '';
     public formLogin: any;
+
+    subs: Subscription[] = [];
 
     constructor(
         private form: FormBuilder,
@@ -23,10 +26,8 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.loginService.loginData.subscribe(data => this.handleLogin(data))
-        // this.loginService.errorMessage.subscribe(data => this.messageErrorLogin = data)
-
         sessionStorage.clear();
+        this.subs.push(this.loginService.loginData.subscribe(data => this.handleLogin(data)))
 
         this.registrasiService.registrasi.next('');
 
@@ -34,6 +35,14 @@ export class LoginComponent implements OnInit {
             username: [null, Validators.required],
             password: [null, Validators.required]
         })
+    }
+
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.subs.forEach(element => {
+            element.unsubscribe();
+        });
     }
 
     public listenLogin(e: KeyboardEvent) {
@@ -47,9 +56,8 @@ export class LoginComponent implements OnInit {
     }
 
     public handleLogin(responseLogin: any) {
-
         if (responseLogin) {
-            if(responseLogin.auth){
+            if (responseLogin.auth) {
                 localStorage.setItem('login', JSON.stringify(responseLogin))
                 this.gotoDashboarPage();
             }

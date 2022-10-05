@@ -1,32 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FileUpload } from 'primeng/fileupload';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class FileUploadService {
-    private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'http://localhost:8080';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    upload(file: File, fileIinput: FileUpload): Observable<HttpEvent<any>> {
-        console.log('upload')
-        const formData: FormData = new FormData();
+  upload(file: File): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
 
-        formData.append('file', file);
+    formData.append('file', file);
 
-        this.http.post<any>(`${this.baseUrl}/upload`, formData).subscribe(data => {
-            console.log(data);
-        })
+    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
 
-        const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData);
+    return this.http.request(req);
+  }
 
-        return this.http.request(req);
-    }
-
-    getFiles(): Observable<any> {
-        return this.http.get(`${this.baseUrl}/files`);
-    }
+  getFiles(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/files`);
+  }
 }

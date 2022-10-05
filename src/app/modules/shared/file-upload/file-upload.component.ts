@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DataPesertaService } from 'src/app/components/rikkes/data-peserta/data-peserta.service';
 import { UploadFileService } from 'src/app/components/rikkes/upload-file/upload-file.service';
@@ -6,6 +6,7 @@ import { FormGroup } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
 import { config } from 'src/app/config';
 import { FileUploadService } from './file-upload.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-file-upload',
@@ -13,6 +14,8 @@ import { FileUploadService } from './file-upload.service';
     styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
+
+    @Input() autoUpload: boolean = false;
 
     uploadedFiles: any[] = [];
     peserta: any;
@@ -24,7 +27,8 @@ export class FileUploadComponent implements OnInit {
         private http: HttpClient,
         private dataPesertaService: DataPesertaService,
         private uploadFileService: UploadFileService,
-        private fileUploadService: FileUploadService
+        private fileUploadService: FileUploadService,
+        public sanitizer: DomSanitizer
     ) { }
 
     ngOnInit(): void {
@@ -32,43 +36,43 @@ export class FileUploadComponent implements OnInit {
         this.uploadFileService.filesUplaoded.subscribe(data => this.uploadedFiles = data)
         this.uploadFileService.loading.subscribe(data => this.loading = data)
         this.uploadFileService.deleteStatus.subscribe(data => {
-            if( data ) this.uploadFileService.getFilesUploaded(this.peserta.id);
+            if (data) this.uploadFileService.getFilesUploaded(this.peserta.id);
         })
     }
 
     @ViewChild('fileInput') fileInput!: FileUpload;
 
     public handleGetPeserta(data: any) {
-        if( data ) {
+        if (data) {
             this.peserta = data;
             this.uploadFileService.getFilesUploaded(this.peserta.id);
-        }else{
+        } else {
             this.uploadedFiles = [];
         }
     }
 
-    public onUpload(event: any) {
-        console.log(this.fileInput._files);
-        event.files.forEach((element: any, index: number) => {
+    public onUpload(event: any, uploader: FileUpload) {
+        event.files.forEach((file: any) => {
             const formData: FormData = new FormData();
-
-            formData.append('file', element);
-
+            formData.append('file', file);
             this.http.post<any>('http://192.168.101.1:8080/upload', formData).subscribe(data => {
-                console.log(index);
-                console.log(data);
+                this.removeFile(event, file, uploader);
             })
-
-            // this.fileUploadService.upload(element, this.fileInput).subscribe(
-            //     (res: any) => {
-            //         console.log('sukses');
-            //     },
-            //     (err: any) => {
-            //       console.log('gagagal');
-            //     }
-            // );
         });
     }
+
+    public selectedFile(e: any) {
+        e.currentFiles.forEach((element: any) => {
+            console.log(element.objectURL.changingThisBreaksApplicationSecurity);
+        });
+    }
+
+    public removeFile(e: Event, file: File, uploader: FileUpload){
+        const index = uploader.files.indexOf(file);
+        uploader.remove(e, index);
+    }
+
+    public remove(e: any){}
 
     public getImage(image: string) {
         return config.host + '/' + image;
@@ -82,7 +86,7 @@ export class FileUploadComponent implements OnInit {
         console.log(e)
     }
 
-    public openFile(filelocation:string) {
+    public openFile(filelocation: string) {
         let link = config.host + '/' + filelocation;
         let iframe = '<iframe src="' + link + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
         let win: any = window.open("", "", "width=1024,height=510,toolbar=no,menubar=no,resizable=yes");

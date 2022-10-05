@@ -1,19 +1,25 @@
 <p-fileUpload
     #fileInput
-    chooseLabel="Pilih File"
+    chooseLabel="Upload File"
     [maxFileSize]="20000000"
     [multiple]="true"
     [customUpload]="true"
-    [auto]="false"
+    [auto]="autoUpload"
+    (onRemove)="true"
+    chooseStyleClass="btn btn-sm btn-outline-primary"
     [chooseIcon]="'bi bi-upload'"
-    (uploadHandler)="onUpload($event)">
-    <ng-template let-file let-i="index" pTemplate="file">
-        <div class="ui-fileupload-row">
-          <div>{{file.name}}</div>
+    (uploadHandler)="onUpload($event, fileInput)">
+    <ng-template let-file let-i="index" pTemplate="file" *ngIf="!autoUpload">
+        <div class="float-left m-1" *ngIf="file">
+            <div class="float-left"><img [src]="this.sanitizer.bypassSecurityTrustUrl(file.objectURL.changingThisBreaksApplicationSecurity)" class="img-thumbnail m-1 p-1" style="height: 100px;" alt="{{file.name}}"></div>
+            <div class="float-left clickable" (click)="removeFile($event, file, fileInput)"><span class="badge badge-danger shadow" style="margin-left: -15px;"><i class="bi bi-x-lg"></i></span></div>
+            <div class="clearfix"></div>
+            <div>{{file.name}}</div>
         </div>
     </ng-template>
 
-    <ng-template pTemplate="content">
+    <ng-template pTemplate="content" *ngIf="!autoUpload">
+        <div class="clearfix"></div>
         <p-progressBar *ngIf="loading" mode="indeterminate" [style]="{height: '4px'}"></p-progressBar>
         <div class="rounded border bg-gray-100 tx-center p-5 tx-gray-500 mt-1">
             <h2 class="tx-gray-800"><i class="bi bi-cloud-upload-fill mr-2"></i> UPLOAD FILES</h2>

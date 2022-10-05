@@ -20,8 +20,12 @@ export class HttpProvider implements HttpInterceptor {
 
         const timeoutValue = req.headers.get('timeout') || this.defaultTimeout;
         const timeoutValueNumeric = Number(timeoutValue);
+        let login : any = localStorage.getItem('login');
+        const request = req.clone({
+            headers: req.headers.set('Token', JSON.parse(login).token)
+        });
 
-        return next.handle(req).pipe(
+        return next.handle(request).pipe(
             timeout(timeoutValueNumeric),
             finalize(() => {
                 this.loadingService.status.next(false);

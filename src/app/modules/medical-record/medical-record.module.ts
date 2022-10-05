@@ -15,7 +15,6 @@ import { TableOrderObatComponent } from './components/farmasi/table-order-obat/t
 import { SharedModule } from '../shared/shared.module';
 import { LaboratoriumComponent } from './components/laboratorium/laboratorium.component';
 import { RadiologiComponent } from './components/radiologi/radiologi.component';
-import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { KonsulComponent } from './components/konsul/konsul.component';
 import { CpptComponent } from './components/cppt/cppt.component';
 import { RegistrasiModule } from '../registrasi/registrasi.module';
@@ -35,7 +34,6 @@ import { ResumeMedisComponent } from './components/resume-medis/resume-medis.com
         TableOrderObatComponent,
         LaboratoriumComponent,
         RadiologiComponent,
-        FileUploadComponent,
         KonsulComponent,
         CpptComponent,
         ResumeMedisComponent

@@ -38,10 +38,14 @@
     </div>
     <div class="col">
         <div class="row mb-2">
-            <div class="col-auto"><h5>Data Permintaan</h5></div>
-            <div class="col-auto border-left">
+            <div class="col-auto border-right mr-2"><h5>Data Permintaan</h5></div>
+            <div class="col-auto p-0">
                 <button class="btn btn-sm p-1 pl-3 pr-3 btn-outline-secondary mr-2"><i class="bi bi-clock mr-2"></i>Riwayat</button>
-                <button class="btn btn-sm p-1 pl-3 pr-3 btn-secondary"><i class="bi bi-camera mr-2"></i>Upload File</button>
+                <!-- <button class="btn btn-sm p-1 pl-3 pr-3 btn-secondary"><i class="bi bi-camera mr-2"></i>Upload File</button> -->
+
+            </div>
+            <div class="col-auto p-0">
+                <app-file-upload [autoUpload]="true"></app-file-upload>
             </div>
         </div>
 
@@ -109,52 +113,7 @@
                 <div class="col">
                     <h5 class="bg-gray-200 p-3"><i class="bi bi-image"></i> Photo & Files</h5>
                     <div class="row">
-                        <p-fileUpload
-                            #fileInput
-                            chooseLabel="Pilih File"
-                            [maxFileSize]="20000000"
-                            [multiple]="true"
-                            [customUpload]="true"
-                            [auto]="false"
-                            [chooseIcon]="'bi bi-upload'"
-                            (uploadHandler)="onUpload($event)">
-                            <ng-template pTemplate="content">
-                                <p-progressBar *ngIf="loading" mode="indeterminate" [style]="{height: '4px'}"></p-progressBar>
-                                <div class="rounded border bg-gray-100 tx-center p-5 tx-gray-500 mt-1">
-                                    <h2 class="tx-gray-800"><i class="bi bi-cloud-upload-fill mr-2"></i> UPLOAD FILES</h2>
-                                    <div class="tx-15">Pilih File atau Drag and Drop Di Sini.</div>
-                                </div>
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Photo / File</th>
-                                            <th>Filename</th>
-                                            <th>Size</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of uploadedFiles">
-                                            <td>
-                                                <!-- <img [src]="getImage(item.file_location)" height="50"> -->
-                                                <p-image *ngIf="item.type == 'image/jpeg' || item.type == 'image/png'" appendTo="body" [src]="getImage(item.file_location)" alt="{{item.filename}}" height="50" [preview]="true"></p-image>
-                                                <button class="btn btn-secondary btn-icon btn-sm" *ngIf="item.type != 'image/jpeg' && item.type != 'image/png'" (click)="openFile(item.file_location)">
-                                                    <i class="bi bi-camera-reels mr-1"></i> <br> View Video
-                                                </button>
-                                            </td>
-                                            <td>{{item.filename}}</td>
-                                            <td>{{item.size}}</td>
-                                            <td><button class="btn btn-sm btn-outline-secondary" (click)="deleteImage(item)"><i class="bi bi-trash mr-1"></i> Hapus</button></td>
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <!-- <ul *ngIf="uploadedFiles.length">
-                                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes asdasd</li>
-                                </ul> -->
-                            </ng-template>
-                    </p-fileUpload>
-
+                        <app-file-upload [autoUpload]="true"></app-file-upload>
                         <div class="col-3 mb-2"><p-image [preview]="true" src="http://simrsmandiri.com/emr/api2/public/uploads/THORAX_PA_45919-HERDIANA%20CANDRA%20KUSUMA%20W.bmp" alt="Image" width="100%"></p-image></div>
                     </div>
                 </div>
