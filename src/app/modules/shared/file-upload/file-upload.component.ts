@@ -54,7 +54,7 @@ export class FileUploadComponent implements OnInit {
 
             formData.append('file', element);
 
-            this.http.post<any>('http://localhost:8080/upload', formData).subscribe(data => {
+            this.http.post<any>('http://192.168.101.1:8080/upload', formData).subscribe(data => {
                 console.log(index);
                 console.log(data);
             })
