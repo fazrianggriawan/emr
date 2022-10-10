@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { KonvaComponent } from 'src/app/components/konva/konva.component';
+import { MenuEmrComponent } from 'src/app/templates/menu-emr/menu-emr.component';
 import { CpptComponent } from './components/cppt/cppt.component';
 import { DiagnosaProsedurComponent } from './components/diagnosa-prosedur/diagnosa-prosedur.component';
 import { FarmasiComponent } from './components/farmasi/farmasi.component';

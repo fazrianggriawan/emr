@@ -50,6 +50,8 @@ export class AppComponent implements OnInit {
             }
         })
 
+        this.appService.getLoginData();
+
         this.dataPasienService.pasien.subscribe(data => this.pasien = data);
 
     }

@@ -1,0 +1,131 @@
+<form [formGroup]="form">
+    <div class="row mb-3">
+        <div class="col-2 tx-right">Tanggal</div>
+        <div class="col">
+            <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" formControlName="tanggal"></p-calendar>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-2 tx-right">Catatan SOAP</div>
+        <div class="col">
+            <p-editor formControlName="soap">
+                <ng-template pTemplate="header">
+                    <span class="ql-formats">
+                        <button type="button" class="ql-bold" aria-label="Bold"></button>
+                        <button type="button" class="ql-italic" aria-label="Italic"></button>
+                        <button type="button" class="ql-underline" aria-label="Underline"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <button type="button" class="ql-list" value="bullet" aria-label="Ordered List"></button>
+                        <button type="button" class="ql-list" value="ordered" aria-label="Ordered List"></button>
+                    </span>
+                </ng-template>
+            </p-editor>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-2 tx-right">&nbsp;</div>
+        <div class="col-4">
+            <div class="border p-3 rounded">
+                <h5 border-bottom>Diagnosa ICD-10</h5>
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="Tambah ICD-10">
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="badge badge-primary">C00.0</div>
+                    </div>
+                    <div class="col pl-0">
+                        Anterior two-thirds of tongue, part unspecified
+                    </div>
+                    <div class="col-auto tx-right">
+                        <div class="badge badge-success">Utama</div>
+                    </div>
+                    <div class="w-100 border-bottom ml-3 mr-3 mt-2 mb-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="badge badge-primary">C00.0</div>
+                    </div>
+                    <div class="col pl-0">
+                        Anterior two-thirds of tongue, part unspecified
+                    </div>
+                    <div class="col-auto tx-right">
+                        <button class="btn btn-light pt-0 pb-0 pl-1 pr-1"><i class="bi bi-key"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="border p-3 rounded">
+                <h5 border-bottom>Diagnosa ICD-9</h5>
+                <div class="mb-2">
+                    <input type="text" class="form-control" placeholder="Tambah ICD-9">
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="badge badge-primary">C00.0</div>
+                    </div>
+                    <div class="col pl-0">
+                        Anterior two-thirds of tongue, part unspecified
+                    </div>
+                    <div class="col-auto tx-right">
+                        <div class="badge badge-success">Utama</div>
+                    </div>
+                    <div class="w-100 border-bottom ml-3 mr-3 mt-2 mb-2"></div>
+                </div>
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="badge badge-primary">C00.0</div>
+                    </div>
+                    <div class="col pl-0">
+                        Anterior two-thirds of tongue, part unspecified
+                    </div>
+                    <div class="col-auto tx-right">
+                        <button class="btn btn-light pt-0 pb-0 pl-1 pr-1"><i class="bi bi-key"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-2 tx-right">Instruksi</div>
+        <div class="col">
+            <p-editor>
+                <ng-template pTemplate="header">
+                    <span class="ql-formats">
+                        <button type="button" class="ql-bold" aria-label="Bold"></button>
+                        <button type="button" class="ql-italic" aria-label="Italic"></button>
+                        <button type="button" class="ql-underline" aria-label="Underline"></button>
+                    </span>
+                    <span class="ql-formats">
+                        <button type="button" class="ql-list" value="bullet" aria-label="Ordered List"></button>
+                        <button type="button" class="ql-list" value="ordered" aria-label="Ordered List"></button>
+                    </span>
+                </ng-template>
+            </p-editor>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-2"></div>
+        <div class="col-auto">
+            <div class="p-3 border rounded">
+                <div>dr. Mona Elga Kailola, M.Pd</div>
+                <div class="badge badge-light mt-2">Dokter</div>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2 tx-right">Upload File</div>
+        <div class="col">
+            <app-file-upload></app-file-upload>
+        </div>
+    </div>
+    <div class="row mb-2 border-top pt-3">
+        <div class="col-2"></div>
+        <div class="col">
+            <button class="btn btn-primary" (click)="save()"><i class="bi bi-check-lg"></i> Simpan</button>
+        </div>
+    </div>
+</form>

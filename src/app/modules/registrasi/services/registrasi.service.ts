@@ -42,4 +42,11 @@ export class RegistrasiService {
             })
     }
 
+    filterDataRegistrasi(filter: any){
+        this.http.post<any>(config.api_url('registrasi/filtering'), filter)
+            .subscribe(data => {
+                this.dataRegistrasi.next(data.data);
+            })
+    }
+
 }

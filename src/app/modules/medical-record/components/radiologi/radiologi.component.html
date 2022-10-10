@@ -1,123 +1,171 @@
-<div class="row">
-    <div class="col-3">
-        <div class="mb-2">
-            <p-autoComplete
-                #ac
-                placeholder="Cari Pemeriksaan..."
-                [minLength]="3"
-                [showEmptyMessage]="true"
-                [suggestions]="results"
-                (completeMethod)="search($event)"
-                (onSelect)="selectPemeriksaan($event, ac)"
-                field="pemeriksaan"
-                [style]="{'width':'100%'}"
-                [inputStyle]="{'width':'100%'}">
-            </p-autoComplete>
-        </div>
-        <p-table
-            [value]="dataRadiologi"
-            [rows]="50"
-            [style]="{width: '100%'}"
-            [virtualScroll]="true"
-            scrollHeight="600px"
-            responsiveLayout="scroll"
-            styleClass="table-striped table-hover p-datatable-sm bd">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Pemeriksaan</th>
-                    <!-- <th [width]="100">Kategori</th> -->
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-                <tr class="clickable" (click)="selectPemeriksaan(item, ac)">
-                    <td>{{item.name | uppercase}}</td>
-                    <!-- <td>{{item.name | uppercase}}</td> -->
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
+<div class="row shadow rounded p-3">
     <div class="col">
-        <div class="row mb-2">
-            <div class="col-auto border-right mr-2"><h5>Data Permintaan</h5></div>
-            <div class="col-auto p-0">
-                <button class="btn btn-sm p-1 pl-3 pr-3 btn-outline-secondary mr-2"><i class="bi bi-clock mr-2"></i>Riwayat</button>
-                <!-- <button class="btn btn-sm p-1 pl-3 pr-3 btn-secondary"><i class="bi bi-camera mr-2"></i>Upload File</button> -->
-
+        <div class="row border-bottom pb-2 pt-2">
+            <div class="col-auto border-right">
+                <h4>Radiologi</h4>
             </div>
-            <div class="col-auto p-0">
-                <app-file-upload [autoUpload]="true"></app-file-upload>
+            <div class="col-auto">
+                <button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i> Tambah Permintaan Baru</button>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-3">
             <div class="col">
-                <div class="bg-gray-200 p-3 rounded mb-2">
-                    <p-image [preview]="true" src="https://imgv2-1-f.scribdassets.com/img/document/346277131/original/d451095294/1650677661?v=1" alt="Image" height="100" class="mr-2"></p-image>
-                    <p-image [preview]="true" src="https://imgv2-1-f.scribdassets.com/img/document/346277131/original/d451095294/1650677661?v=1" alt="Image" height="100" class="mr-2"></p-image>
-                    <p-image [preview]="true" src="https://imgv2-1-f.scribdassets.com/img/document/346277131/original/d451095294/1650677661?v=1" alt="Image" height="100" class="mr-2"></p-image>
-                </div>
+                <table class="table table-border table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tanggal / Ruangan</th>
+                            <th>Permintaan Pemeriksaan</th>
+                            <th>Hasil</th>
+                            <th>File Upload</th>
+                            <th>Dokter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div>PENYAKIT DALAM</div>
+                                <div class="badge badge-light">RAWAT JALAN</div> <br>
+                                <div class="badge badge-primary">12-02-2022 - 22:00</div>
+                            </td>
+                            <td>
+                                <ul class="pl-3 pr-3 pt-1 pb-1 m-0">
+                                    <li>ABDOMEN ATAS</li>
+                                    <li>ORBITA</li>
+                                </ul>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <p-table [value]="dataOrder" dataKey="pemeriksaan" scrollHeight="600px" responsiveLayout="scroll" styleClass="p-datatable-sm table-striped table-hover bd">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>Pemeriksaan</th>
-                    <th [width]="60"></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item let-i="rowIndex">
-                <tr>
-                    <td>{{item.name}}</td>
-                    <td>
-                        <button class="btn btn-xs btn-icon btn-outline-secondary" (click)="deleteOrder($event, i)"><i class="bi bi-trash"></i></button>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="footer">
-                <tr *ngIf="dataOrder.length == 0">
-                    <td colspan="4" style="font-weight: normal; text-align: center; color: gray;">Tidak ada order saat ini.</td>
-                </tr>
-            </ng-template>
-        </p-table>
-    </div>
-    <div class="col rounded bd bg-gray-100 pt-3">
-        <h5 class="border-bottom pb-3">Hasil Radiologi</h5>
-        <div class="tx-center p-3 mb-3 mt-3">
-            <img [src]="'assets/icons/mri.svg'" class="mt-5" alt="Image Empty" height="100vw">
-            <div class="mt-3">Belum ada hasil saat ini.</div>
-        </div>
-        <div class="bd p-3 rounded" hidden>
-            <div class="row mb-2">
-                <div class="col-auto">
-                    Tanggal Order
-                    <input type="text" value="12 Jun 2022" name="tglHasil" class="form-control" style="width: 120px;">
+        <div class="row" hidden>
+            <div class="col-3">
+                <div class="mb-2">
+                    <p-autoComplete
+                        #ac
+                        placeholder="Cari Pemeriksaan..."
+                        [minLength]="3"
+                        [showEmptyMessage]="true"
+                        [suggestions]="results"
+                        (completeMethod)="search($event)"
+                        (onSelect)="selectPemeriksaan($event, ac)"
+                        field="pemeriksaan"
+                        [style]="{'width':'100%'}"
+                        [inputStyle]="{'width':'100%'}">
+                    </p-autoComplete>
                 </div>
-                <div class="col-auto">
-                    Tanggal Hasil
-                    <input type="text" value="12 Jun 2022" name="tglHasil" class="form-control" style="width: 120px;">
-                </div>
+                <p-table
+                    [value]="dataRadiologi"
+                    [rows]="50"
+                    [style]="{width: '100%'}"
+                    [virtualScroll]="true"
+                    scrollHeight="600px"
+                    responsiveLayout="scroll"
+                    styleClass="table-striped table-hover p-datatable-sm bd">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Pemeriksaan</th>
+                            <!-- <th [width]="100">Kategori</th> -->
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr class="clickable" (click)="selectPemeriksaan(item, ac)">
+                            <td>{{item.name | uppercase}}</td>
+                            <!-- <td>{{item.name | uppercase}}</td> -->
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
-            <div class="row mb-2">
-                <div class="col">
-                    <p-editor [(ngModel)]="hasil" name="hasil"></p-editor>
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col">
-                    Dokter Pemeriksa
-                    <input type="text" value="dr.Priatna,Sp.Rad" name="tglHasil" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col">
-                    <h5 class="bg-gray-200 p-3"><i class="bi bi-image"></i> Photo & Files</h5>
-                    <div class="row">
+            <div class="col">
+                <div class="row mb-2">
+                    <div class="col-auto border-right mr-2"><h5>Data Permintaan</h5></div>
+                    <div class="col-auto p-0">
+                        <button class="btn btn-sm p-1 pl-3 pr-3 btn-outline-secondary mr-2"><i class="bi bi-clock mr-2"></i>Riwayat</button>
+                        <!-- <button class="btn btn-sm p-1 pl-3 pr-3 btn-secondary"><i class="bi bi-camera mr-2"></i>Upload File</button> -->
+
+                    </div>
+                    <div class="col-auto p-0">
                         <app-file-upload [autoUpload]="true"></app-file-upload>
-                        <div class="col-3 mb-2"><p-image [preview]="true" src="http://simrsmandiri.com/emr/api2/public/uploads/THORAX_PA_45919-HERDIANA%20CANDRA%20KUSUMA%20W.bmp" alt="Image" width="100%"></p-image></div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="bg-gray-200 p-3 rounded mb-2">
+                            <p-image [preview]="true" src="https://imgv2-1-f.scribdassets.com/img/document/346277131/original/d451095294/1650677661?v=1" alt="Image" height="100" class="mr-2"></p-image>
+                            <p-image [preview]="true" src="https://imgv2-1-f.scribdassets.com/img/document/346277131/original/d451095294/1650677661?v=1" alt="Image" height="100" class="mr-2"></p-image>
+                            <p-image [preview]="true" src="https://imgv2-1-f.scribdassets.com/img/document/346277131/original/d451095294/1650677661?v=1" alt="Image" height="100" class="mr-2"></p-image>
+                        </div>
+                    </div>
+                </div>
+
+                <p-table [value]="dataOrder" dataKey="pemeriksaan" scrollHeight="600px" responsiveLayout="scroll" styleClass="p-datatable-sm table-striped table-hover bd">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Pemeriksaan</th>
+                            <th [width]="60"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item let-i="rowIndex">
+                        <tr>
+                            <td>{{item.name}}</td>
+                            <td>
+                                <button class="btn btn-xs btn-icon btn-outline-secondary" (click)="deleteOrder($event, i)"><i class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                        <tr *ngIf="dataOrder.length == 0">
+                            <td colspan="4" style="font-weight: normal; text-align: center; color: gray;">Tidak ada order saat ini.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col rounded bd bg-gray-100 pt-3">
+                <h5 class="border-bottom pb-3">Hasil Radiologi</h5>
+                <div class="tx-center p-3 mb-3 mt-3">
+                    <img [src]="'assets/icons/mri.svg'" class="mt-5" alt="Image Empty" height="100vw">
+                    <div class="mt-3">Belum ada hasil saat ini.</div>
+                </div>
+                <div class="bd p-3 rounded" hidden>
+                    <div class="row mb-2">
+                        <div class="col-auto">
+                            Tanggal Order
+                            <input type="text" value="12 Jun 2022" name="tglHasil" class="form-control" style="width: 120px;">
+                        </div>
+                        <div class="col-auto">
+                            Tanggal Hasil
+                            <input type="text" value="12 Jun 2022" name="tglHasil" class="form-control" style="width: 120px;">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <p-editor [(ngModel)]="hasil" name="hasil"></p-editor>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            Dokter Pemeriksa
+                            <input type="text" value="dr.Priatna,Sp.Rad" name="tglHasil" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <h5 class="bg-gray-200 p-3"><i class="bi bi-image"></i> Photo & Files</h5>
+                            <div class="row">
+                                <app-file-upload [autoUpload]="true"></app-file-upload>
+                                <div class="col-3 mb-2"><p-image [preview]="true" src="http://simrsmandiri.com/emr/api2/public/uploads/THORAX_PA_45919-HERDIANA%20CANDRA%20KUSUMA%20W.bmp" alt="Image" width="100%"></p-image></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>

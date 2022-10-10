@@ -28,7 +28,6 @@ import { RadiologiModule } from './modules/radiologi/radiologi.module';
 import { LaporanModule } from './modules/laporan/laporan.module';
 import { EKlaimModule } from './modules/e-klaim/e-klaim.module';
 
-
 @NgModule({
     declarations: [
         AppComponent,

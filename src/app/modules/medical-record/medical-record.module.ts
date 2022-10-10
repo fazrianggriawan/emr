@@ -19,6 +19,7 @@ import { KonsulComponent } from './components/konsul/konsul.component';
 import { CpptComponent } from './components/cppt/cppt.component';
 import { RegistrasiModule } from '../registrasi/registrasi.module';
 import { ResumeMedisComponent } from './components/resume-medis/resume-medis.component';
+import { FormCpptComponent } from './components/cppt/form-cppt/form-cppt.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { ResumeMedisComponent } from './components/resume-medis/resume-medis.com
         RadiologiComponent,
         KonsulComponent,
         CpptComponent,
-        ResumeMedisComponent
+        ResumeMedisComponent,
+        FormCpptComponent
     ],
     imports: [
         SharedModule,

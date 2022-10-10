@@ -16,22 +16,30 @@ export class MenuComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.menuService.GetMenu('dokter');
 
-        this.menuService.menuData.subscribe(data => {
+        this.getModuleByUser();
+
+        this.menuService.dataMenu.subscribe(data => {
             this.menus = data;
         })
-        this.menus = [
-            { label: 'Admisi & Pendaftaran', routerLink: 'registrasi' },
-            { label: 'Rawat Jalan', routerLink: 'rawatJalan' },
-            { label: 'Radiologi', routerLink: 'radiologi' },
-            { label: 'Rawat Inap' },
-            { label: 'Kasir', routerLink: 'kasir' },
-            { label: 'VClaim BPJS', routerLink: 'vclaim' },
-            { label: 'E-Klaim-CBG', routerLink: 'e-klaim' },
-            { label: 'eMedical Record', routerLink: 'medicalRecord' },
-            { label: 'Laporan', routerLink: 'laporan' },
-        ]
+        // this.menus = [
+        //     { label: 'Admisi & Pendaftaran', routerLink: 'registrasi' },
+        //     { label: 'Rawat Jalan', routerLink: 'rawatJalan' },
+        //     { label: 'Radiologi', routerLink: 'radiologi' },
+        //     { label: 'Rawat Inap' },
+        //     { label: 'Kasir', routerLink: 'kasir' },
+        //     { label: 'VClaim BPJS', routerLink: 'vclaim' },
+        //     { label: 'E-Klaim-CBG', routerLink: 'e-klaim' },
+        //     { label: 'eMedical Record', routerLink: 'medicalRecord' },
+        //     { label: 'Laporan', routerLink: 'laporan' },
+        // ]
+    }
+
+    getModuleByUser(){
+        let login : any = localStorage.getItem('login');
+        let data = JSON.parse(login);
+
+        this.menuService.GetModule(data.username);
     }
 
 }

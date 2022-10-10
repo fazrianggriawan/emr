@@ -20,13 +20,12 @@
 
 <div class="content content-components m-4 p-0 rounded " style="margin-top: 56px !important;">
     <div class="content p-3">
-        <app-widget-registrasi></app-widget-registrasi>
-        <div class="row justify-content-center" >
-            <div class="col pt-0">
-                <div class="row">
-                    <div class="col"><app-menu-emr *ngIf="currentRoute == 'medicalRecord'"></app-menu-emr></div>
-                </div>
-                <div class="row border-bottom border-top pt-2 pb-2 mb-4" style="background-color: #e6ecef;" *ngIf="currentRoute == 'medicalRecord'">
+        <!-- <div class="row justify-content-center" *ngIf="currentRoute == 'medicalRecord'">
+            <div class="col">
+                <app-menu-emr></app-menu-emr>
+            </div>
+            <div class="col">
+                <div class="row border-bottom border-top pt-2 pb-2 mb-4" style="background-color: #e6ecef;">
                     <div class="col-2">
                         <div class="input-group">
                             <div class="input-group-prepend">
@@ -94,6 +93,22 @@
                         </div>
                     </div>
                 </div>
+                <router-outlet></router-outlet>
+            </div>
+            <div class="col pt-0">
+                <div class="row">
+                    <div class="col">
+                        <app-menu-emr></app-menu-emr>
+                    </div>
+                </div>
+
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-auto" *ngIf="currentRoute == 'medicalRecord'">
+                <app-menu-emr></app-menu-emr>
+            </div>
+            <div class="col">
                 <router-outlet></router-outlet>
             </div>
         </div>

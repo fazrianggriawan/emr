@@ -9,17 +9,25 @@ import { config } from '../../config';
 })
 export class MenuService {
 
-    public menuData = new BehaviorSubject<any>('');
+    public dataMenu = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient,
         private router: Router
     ) { }
 
+    public GetModule(username: any) {
+        this.http.get<any>( config.api_url('app/modules/'+username) ).subscribe(data =>  {
+            if(data.code == 200){
+                this.dataMenu.next(data.data);
+            }
+        } )
+    }
+
     public GetMenu(username: string) {
         this.http.get<any>( config.api_url('app/getMenu/'+username) ).subscribe(data =>  {
             if(data.code == 200){
-                this.menuData.next(data.data);
+                this.dataMenu.next(data.data);
             }
         } )
     }

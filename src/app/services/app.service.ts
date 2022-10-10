@@ -8,6 +8,7 @@ export class AppService {
 
     notification = new BehaviorSubject<any>('');
     currentRoute = new BehaviorSubject<string>('');
+    loginData = new BehaviorSubject<any>('');
 
     constructor() { }
 
@@ -46,6 +47,13 @@ export class AppService {
         let iframe = '<iframe src="' + url + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
         let win: any = window.open("", "", "width="+width+",height="+screen.height+",left="+center+",top=0,toolbar=no,menubar=no,resizable=yes");
         win.document.write(iframe);
+    }
+
+    public getLoginData(){
+        if( localStorage.getItem('login') ){
+            let data : any = localStorage.getItem('login');
+            this.loginData.next(JSON.parse(data));
+        }
     }
 
 
