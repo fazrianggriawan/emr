@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     public handleLogin(responseLogin: any) {
+        console.log(responseLogin);
         if (responseLogin) {
             if (responseLogin.auth) {
                 localStorage.setItem('login', JSON.stringify(responseLogin))

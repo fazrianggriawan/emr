@@ -20,6 +20,9 @@ import { CpptComponent } from './components/cppt/cppt.component';
 import { RegistrasiModule } from '../registrasi/registrasi.module';
 import { ResumeMedisComponent } from './components/resume-medis/resume-medis.component';
 import { FormCpptComponent } from './components/cppt/form-cppt/form-cppt.component';
+import { AssessmentAwalComponent } from './components/assessment-awal/assessment-awal.component';
+import { DynamicFormQuestionComponent } from './components/assessment-awal/dynamic-form/dynamic-form-question.component';
+import { DynamicFormComponent } from './components/assessment-awal/dynamic-form/dynamic-form.component';
 
 @NgModule({
     declarations: [
@@ -38,7 +41,10 @@ import { FormCpptComponent } from './components/cppt/form-cppt/form-cppt.compone
         KonsulComponent,
         CpptComponent,
         ResumeMedisComponent,
-        FormCpptComponent
+        FormCpptComponent,
+        AssessmentAwalComponent,
+        DynamicFormComponent,
+        DynamicFormQuestionComponent
     ],
     imports: [
         SharedModule,

@@ -1,0 +1,17 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div *ngFor="let question of questions">
+        <app-question [question]="question" [form]="form"></app-question>
+    </div>
+    <div class="row">
+        <div class="col">
+            <app-konva></app-konva>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-3"></div>
+        <div class="col">
+            <button class="btn btn-sm btn-primary" [disabled]="!form.valid"><i class="bi bi-check-lg"></i> Simpan</button>
+        </div>
+    </div>
+</form>
+<hr>
