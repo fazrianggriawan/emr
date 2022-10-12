@@ -58,7 +58,6 @@
     <div class="col pl-0">
         <button class="btn btn-secondary btn-sm mr-1" (click)="dataPasienService.openDialog()"><i class="bi bi-search mr-1"></i> Data Pasien</button>
         <button class="btn btn-secondary btn-sm mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
-        <button class="btn btn-primary btn-sm mr-1" (click)="save()" [disabled]="form.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
     </div>
 </div>
 <div class="row mt-2">
@@ -275,6 +274,12 @@
                 </div>
             </div>
         </form>
+        <div class="row border-top pt-3 mb-3">
+            <div class="col-4"></div>
+            <div class="col">
+                <button class="btn btn-primary btn-sm mr-1" (click)="save()" [disabled]="form.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
+            </div>
+        </div>
     </div>
 </div>
 
