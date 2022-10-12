@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 // var host        = 'http://localhost';
 var host        = 'http://192.168.107.3';
+=======
+// var host        = 'http://192.168.107.3';
+var host        = 'http://localhost';
+>>>>>>> Stashed changes
 var public_host = 'http://182.253.22.220';
 
 export const config = {
