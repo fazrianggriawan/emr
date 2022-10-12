@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { config } from 'src/app/config';
 import { AppService } from 'src/app/services/app.service';
 import { VclaimService } from '../shared/vclaim/vclaim.service';
 import { DataPasienService } from './components/data-pasien/data-pasien.service';
@@ -82,8 +83,8 @@ export class RegistrasiComponent implements OnInit {
         this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRawatJalan = data)
 
         this.menuPendaftaran = [
-            { label: 'Rawat Jalan', command: (() => { this.openFormRawatJalan() }) },
-            { label: 'Rawat Inap', command: (() => { this.openFormRawatInap() }) },
+            { label: 'Barcode Pasien', command: (() => { this.appService.print(config.api_url('print/stickerBarcode/'+this.selectedPasien.id)) }) },
+            { label: 'Kartu Identitas Pasien', command: (() => { this.appService.print(config.api_url('print/biodataPasien/'+this.selectedPasien.id)) }) },
         ]
     }
 
@@ -136,6 +137,7 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public setToForm(data: any) {
+        this.selectedPasien = data;
         if (data) {
             this.form.get('id')?.patchValue(data.id);
             this.form.get('nomorRm')?.patchValue(data.norm);

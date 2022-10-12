@@ -44,6 +44,8 @@ import { AgGridModule } from "ag-grid-angular";
 import { WidgetEstimasiKlaimComponent } from './vclaim/widget-estimasi-klaim/widget-estimasi-klaim.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { TagModule } from 'primeng/tag';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 let primeModules = [
@@ -72,7 +74,9 @@ let primeModules = [
     QRCodeModule,
     ConfirmPopupModule,
     FileUploadModule,
-    TieredMenuModule
+    TieredMenuModule,
+    TagModule,
+    InputSwitchModule
 ]
 
 let sharedComponent = [

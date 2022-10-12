@@ -311,3 +311,12 @@ h1, h2, h3, h4, h5{
 }
 
 .border-light{ border-color: #e2e2e2 !important; }
+
+.p-inputswitch{
+    height: 1.45rem;
+    width: 2.76rem;
+}
+
+.p-inputswitch .p-inputswitch-slider::before {
+    left: 0.15rem;
+}

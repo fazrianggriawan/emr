@@ -1,3 +1,4 @@
+// var host        = 'http://localhost';
 var host        = 'http://192.168.107.3';
 var public_host = 'http://182.253.22.220';
 
