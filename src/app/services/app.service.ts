@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
+import { config } from '../config';
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +13,10 @@ export class AppService {
     currentRoute = new BehaviorSubject<string>('');
     loginData = new BehaviorSubject<any>('');
 
-    constructor() { }
+    constructor(
+        private http: HttpClient,
+        private router: Router
+    ) { }
 
     public reformatDate(date: Date) {
         let parsingTanggal = date.toLocaleDateString('id-ID').toString().split('/');
@@ -54,6 +60,15 @@ export class AppService {
             let data : any = localStorage.getItem('login');
             this.loginData.next(JSON.parse(data));
         }
+    }
+
+    public roleAccess(url: string){
+        this.http.post<any>(config.api_url('role_access'), {url: url})
+            .subscribe(data => {
+                if( data.code != 200 ){
+                    this.router.navigateByUrl('/login');
+                }
+            })
     }
 
 

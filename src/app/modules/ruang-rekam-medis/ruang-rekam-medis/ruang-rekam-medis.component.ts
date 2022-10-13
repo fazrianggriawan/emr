@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { config } from 'src/app/config';
 import { AppService } from 'src/app/services/app.service';
 import { MasterService } from '../../registrasi/services/master.service';
@@ -9,7 +9,7 @@ import { RuangRekamMedisService } from './ruang-rekam-medis.service';
     templateUrl: './ruang-rekam-medis.component.html',
     styleUrls: ['./ruang-rekam-medis.component.css']
 })
-export class RuangRekamMedisComponent implements OnInit {
+export class RuangRekamMedisComponent implements OnInit, OnDestroy {
 
     data: any[] = [];
     options: any[] = [];
@@ -53,7 +53,7 @@ export class RuangRekamMedisComponent implements OnInit {
                 this.data = data;
                 if( this.autoprint ){
                     if( this.data.length > 0 ){
-                        clearInterval(this.interval);
+                        window.clearInterval(this.interval);
                         this.data.reduce((p, val) => {
                             return p.then(() => {
                                 // this.printRequestRm(val.id);
@@ -69,9 +69,14 @@ export class RuangRekamMedisComponent implements OnInit {
                 }
             }else{
                 this.data = [];
-
             }
         });
+    }
+
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        window.clearInterval(this.interval);
     }
 
     goInterval(){
@@ -88,7 +93,7 @@ export class RuangRekamMedisComponent implements OnInit {
         if(val){
             this.goInterval();
         }else{
-            clearInterval(this.interval);
+            window.clearInterval(this.interval);
         }
     }
 

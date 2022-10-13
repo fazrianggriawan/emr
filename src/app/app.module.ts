@@ -28,6 +28,7 @@ import { RadiologiModule } from './modules/radiologi/radiologi.module';
 import { LaporanModule } from './modules/laporan/laporan.module';
 import { EKlaimModule } from './modules/e-klaim/e-klaim.module';
 import { RuangRekamMedisModule } from './modules/ruang-rekam-medis/ruang-rekam-medis.module';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { RuangRekamMedisModule } from './modules/ruang-rekam-medis/ruang-rekam-m
         DataPesertaComponent,
         UploadFileComponent,
         RadiologiComponent,
-        LaboratoriumComponent
+        LaboratoriumComponent,
+        HomeComponent
     ],
     imports: [
         CommonModule,
