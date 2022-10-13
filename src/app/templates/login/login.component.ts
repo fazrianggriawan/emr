@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { LoginService } from './login.service';
 import { Subscription } from "rxjs";
+import { MenuService } from '../menu/menu.service';
 
 @Component({
     selector: 'app-login',
@@ -22,13 +23,15 @@ export class LoginComponent implements OnInit, OnDestroy {
         private form: FormBuilder,
         private loginService: LoginService,
         private router: Router,
-        private registrasiService: RegistrasiService
+        private registrasiService: RegistrasiService,
+        private menuService: MenuService
     ) { }
 
     ngOnInit(): void {
         localStorage.clear();
         sessionStorage.clear();
         this.loginService.loginData.next('');
+        this.menuService.dataMenu.next('');
         this.subs.push(this.loginService.loginData.subscribe(data => this.handleLogin(data)))
 
         this.registrasiService.registrasi.next('');

@@ -5,7 +5,7 @@
     <div class="col ml-3 shadow p-3 border rounded">
         <app-billing></app-billing>
     </div>
-    <div class="col-2 ml-3">
+    <div class="col-3 ml-3">
         <div class="shadow border p-3 rounded" style="background-color: cornsilk; top: 50px !important;">
             <div class="row">
                 <div class="col">
@@ -60,16 +60,24 @@
                     </p-dropdown>
                 </div>
             </div>
-            <div class="row" *ngIf="tagihan == 0">
+            <div class="row" *ngIf="tagihan == 0 && dataBilling.length > 0">
                 <div class="col text-center">
                     <div class="alert alert-success mt-2 mb-0">
                         <h3 class="m-0">LUNAS</h3>
                     </div>
                 </div>
             </div>
+
             <div class="row mt-2" *ngIf="tagihan > 0">
-                <div class="col">
-                    <div>Jumlah Bayar</div>
+                <div class="col text-right">
+                    <button
+                        class="btn btn-primary"
+                        [disabled]="!selectedJnsBayar || totalBayar == 0"
+                        (click)="confirmAddPembayaran($event)">
+                            <i class="bi bi-plus-lg mr-1"></i>Bayar
+                    </button>
+
+                    <!-- <div>Jumlah Bayar</div>
                     <div class="input-group">
                         <input class="form-control tx-18 tx-bold bg-white text-dark" type="text" (ngModelChange)="formatNumber($event)" [(ngModel)]="totalBayar">
                         <div class="input-group-append">
@@ -81,7 +89,7 @@
                                     <i class="bi bi-plus-lg mr-1"></i>Bayar
                             </button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="row">
@@ -98,13 +106,13 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of dataPembayaran">
-                                <td>{{item.name | uppercase}}</td>
+                                <td>{{item.r_cara_bayar.name | uppercase}}</td>
                                 <td>{{item.jumlah | number}}</td>
                                 <td>
                                     <button (click)="confirmDeletePembayaran($event, item)" pButton pRipple type="button" icon="pi pi-times" class="p-button-sm p-button-rounded p-button-danger p-button-text"></button>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr *ngIf="dataPembayaran.length == 0">
                                 <td colspan="3" class="text-center text-muted">Tidak ada data pembayaran</td>
                             </tr>
                         </tbody>

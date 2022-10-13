@@ -283,12 +283,6 @@ a:any-link{
     color: #4e5b6c;
 }
 
-.p-datatable .p-datatable-thead > tr > th {
-    padding: 0.25rem 1rem;
-    border-bottom-width: 2px;
-    background-color: unset;
-}
-
 .p-datatable .p-datatable-tbody > tr > td {
     padding: 0.65rem 1rem;
 }

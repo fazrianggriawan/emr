@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'radiologi', loadChildren: () => import('./modules/radiologi/radiologi.module').then(m => m.RadiologiModule) },
     { path: 'laporan', loadChildren: () => import('./modules/laporan/laporan.module').then(m => m.LaporanModule) },
     { path: 'ruangRekamMedis', loadChildren: () => import('./modules/ruang-rekam-medis/ruang-rekam-medis.module').then(m => m.RuangRekamMedisModule) },
+    { path: 'setting', loadChildren: () => import('./modules/setting/setting.module').then(m => m.SettingModule) },
 ];
 
 @NgModule({

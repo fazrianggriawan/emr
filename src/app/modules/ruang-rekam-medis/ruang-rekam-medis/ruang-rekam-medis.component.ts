@@ -3,6 +3,7 @@ import { config } from 'src/app/config';
 import { AppService } from 'src/app/services/app.service';
 import { MasterService } from '../../registrasi/services/master.service';
 import { RuangRekamMedisService } from './ruang-rekam-medis.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'app-ruang-rekam-medis',
@@ -15,7 +16,7 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
     options: any[] = [];
     optFilterRuangan: any[] = [];
     selectedOption = 1;
-    autoprint : boolean = true;
+    autoprint : boolean = false;
     ruangan: any[] = [];
     selectedRuangan: any[] = [];
     selectedFilterRuangan: any = 'all';
@@ -25,7 +26,7 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
     constructor(
         private masterService: MasterService,
         private ruangRekamMedisService: RuangRekamMedisService,
-        public appService: AppService
+        public appService: AppService,
     ) { }
 
     ngOnInit(): void {
@@ -45,7 +46,7 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
         this.masterService.ruangan.subscribe(data => {
             this.ruangan = data;
             this.selectedRuangan = data;
-            this.getData();
+            this.goInterval();
         });
 
         this.ruangRekamMedisService.dataRequestRm.subscribe(data => {
@@ -54,16 +55,18 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
                 if( this.autoprint ){
                     if( this.data.length > 0 ){
                         window.clearInterval(this.interval);
-                        this.data.reduce((p, val) => {
-                            return p.then(() => {
-                                // this.printRequestRm(val.id);
-                                console.log('print '+val.id);
-                            });
-                        }, Promise.resolve()).then((finalResult: any) => {
-                            // done here
-                            this.goInterval();
-                        }, function(err: any) {
-                            // error here
+                        this.interval = '';
+
+                        let intrvl = 1500;
+
+                        data.forEach((item: any, index: number) => {
+                            setTimeout(() => {
+                                this.printRequestRm(item.id);
+                                if( data.length-1 == index ){
+                                    this.goInterval();
+                                }
+
+                            }, index * intrvl);
                         });
                     }
                 }
@@ -80,21 +83,15 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
     }
 
     goInterval(){
-        this.interval = setInterval(() => {
-            this.getData();
-        }, 2000);
+        if( !this.interval ){
+            this.interval = window.setInterval(() => {
+                this.getData();
+            }, 2000);
+        }
     }
 
     getData() {
         this.ruangRekamMedisService.getDataRequestRm(this.selectedRuangan);
-    }
-
-    changeAutoPrint(val: boolean){
-        if(val){
-            this.goInterval();
-        }else{
-            window.clearInterval(this.interval);
-        }
     }
 
     filterChanged(val: any) {
@@ -103,7 +100,7 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
 
     public printRequestRm(id: number) {
         if( id ){
-            this.appService.print(config.api_url('print/requestRm/' + id));
+            (<HTMLIFrameElement>document.getElementById('printFrame')).src = config.api_url('print/requestRm/' + id);
         }
     }
 

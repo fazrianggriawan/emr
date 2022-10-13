@@ -1,7 +1,7 @@
 <div class="login-page">
     <div class="row justify-content-center mb-3">
         <div class="col-auto">
-            <span class="df-logo" style="font-size: 3rem; color: rgb(32, 32, 32);">BiHealth<span style="color: #0c67b8;">.io</span></span>
+            <span class="df-logo" style="font-size: 3rem; color: rgb(32, 32, 32);">BiHealth</span>
             <img [src]="'assets/logo.svg'" alt="Logo" height="50px" hidden>
         </div>
     </div>
@@ -11,9 +11,9 @@
                 <h3 class="tx-color-01 mb-5 tx-center tx-bold">Login</h3>
                 <form [formGroup]="formLogin">
                     <div class="form-group">
-                        <label class="tx-bold">Username atau Email</label>
+                        <label class="tx-bold">Username</label>
                         <input type="email" (keyup)="listenLogin($event)" tabindex="1" class="form-control bg-white"
-                            formControlName="username" placeholder="Masukkan Username atau Email">
+                            formControlName="username" placeholder="Masukkan Username">
                     </div>
                     <div class="form-group">
                         <label class="tx-bold">Password</label>

@@ -14,7 +14,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class KasirComponent implements OnInit, OnDestroy {
 
-    dataBilling: any;
+    dataBilling: any[] = [];
     totalBilling: number = 0;
     tagihan: number = 0;
     totalBayar: any = 0;
@@ -37,15 +37,18 @@ export class KasirComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleDataRegistrasi(data)))
-        this.billingService.dataPembayaran.subscribe(data => this.handleDataPembayaran(data))
-        this.billingService.dataBilling.subscribe(data => this.handleDataBilling(data))
+        this.subs.push(this.billingService.dataPembayaran.subscribe(data => this.handleDataPembayaran(data)))
+        this.subs.push(this.billingService.dataBilling.subscribe(data => this.handleDataBilling(data)))
+        this.subs.push(this.billingService.addPembayaranStatus.subscribe(data => this.handleSavePembayaran(data)))
+        this.subs.push(this.billingService.deletePembayaranStatus.subscribe(data => {if(data){ this.billingService.getDataPembayaran(this.registrasi.noreg) }}))
 
         this.jnsBayar = [
-            { id: 'CASH', name: 'TUNAI' },
-            { id: 'DC', name: 'KARTU DEBIT' },
-            { id: 'CC', name: 'KARTU KREDIT' },
-            { id: 'TR', name: 'TRANSFER BANK' },
-            { id: 'ASU', name: 'ASURANSI' }
+            { id: 'cash', name: 'TUNAI' },
+            { id: 'dc', name: 'KARTU DEBIT' },
+            { id: 'cc', name: 'KARTU KREDIT' },
+            { id: 'tr', name: 'TRANSFER BANK' },
+            { id: 'asu', name: 'ASURANSI' },
+            { id: 'bpjs', name: 'BPJS' },
         ]
     }
 
@@ -66,8 +69,15 @@ export class KasirComponent implements OnInit, OnDestroy {
             });
 
             setTimeout(() => {
-                let tagihan = this.totalBayar.replace(/[^0-9]/g, '');
-                this.totalBayar = this.formatNumber(tagihan - totalBayar)
+                let tagihan = this.totalBayar;
+                let total = tagihan - totalBayar;
+                this.totalBayar = total
+                // if( total > 0 ){
+                //     // this.totalBayar = this.formatNumber(total)
+                //     this.totalBayar = total
+                // }else{
+                //     this.totalBayar = total;
+                // }
             }, 500);
         }else{
             this.dataPembayaran = [];
@@ -75,8 +85,14 @@ export class KasirComponent implements OnInit, OnDestroy {
 
     }
 
+    handleSavePembayaran(data: any){
+        if( data ){
+            this.billingService.getDataPembayaran(this.registrasi.noreg);
+        }
+    }
+
     handleDataBilling(data: any) {
-        this.dataBilling = '';
+        this.dataBilling = [];
         if (data.length > 0) {
             this.dataBilling = data;
 
@@ -104,6 +120,7 @@ export class KasirComponent implements OnInit, OnDestroy {
         if (data) {
             this.registrasi = data;
             this.billingService.getBillingByNoreg(this.registrasi.noreg)
+            this.billingService.getDataPembayaran(this.registrasi.noreg)
         }
     }
 
@@ -135,7 +152,7 @@ export class KasirComponent implements OnInit, OnDestroy {
                 //confirm action
                 let data = {
                     jnsPembayaran: this.selectedJnsBayar,
-                    jumlah: this.totalBayar.replace(/[^0-9]/g, ''),
+                    jumlah: this.tagihan,
                     noreg: this.registrasi.noreg
                 }
                 this.billingService.addPembayaran(data);

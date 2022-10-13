@@ -30,13 +30,8 @@ export class DynamicFormComponent implements OnInit {
     }
 
     onSubmit() {
-        let data = {
-            noreg: this.registrasi.noreg,
-            ruangan: this.ruangan,
-            tarif: this.tarif,
-            jasa: this.form.getRawValue(),
-            tanggal: this.apps.reformatDate(this.tanggal)
-        }
+        let data = this.form.getRawValue()
+        console.log(data);
 
     }
 }

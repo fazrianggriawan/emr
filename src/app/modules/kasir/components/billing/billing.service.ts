@@ -118,8 +118,8 @@ export class BillingService {
     public hitungTotalBilling(item: any) {
         let total = 0;
         total = (parseInt(item.r_tarif_harga.harga) * parseInt(item.qty));
-        if (parseInt(item.discount) > 0) {
-            total = total - (total * (parseInt(item.discount) / 100))
+        if (parseInt(item.discount_percent) > 0) {
+            total = total - (total * (parseInt(item.discount_percent) / 100))
         }
         return total;
     }

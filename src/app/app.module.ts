@@ -29,6 +29,7 @@ import { LaporanModule } from './modules/laporan/laporan.module';
 import { EKlaimModule } from './modules/e-klaim/e-klaim.module';
 import { RuangRekamMedisModule } from './modules/ruang-rekam-medis/ruang-rekam-medis.module';
 import { HomeComponent } from './components/home/home.component';
+import { SettingModule } from './modules/setting/setting.module';
 
 @NgModule({
     declarations: [
@@ -63,7 +64,8 @@ import { HomeComponent } from './components/home/home.component';
         RadiologiModule,
         LaporanModule,
         EKlaimModule,
-        RuangRekamMedisModule
+        RuangRekamMedisModule,
+        SettingModule
     ],
     providers: [
         DatePipe,

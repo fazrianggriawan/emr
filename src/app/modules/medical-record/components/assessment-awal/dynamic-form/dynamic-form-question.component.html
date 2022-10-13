@@ -1,5 +1,5 @@
 <div [formGroup]="form">
-    <div class="row mb-2">
+    <div class="row mb-2" *ngIf="!question.id_parent">
         <div class="col-3 text-right">
             <label [attr.for]="question.key">{{question.label}}</label>
         </div>
@@ -22,7 +22,7 @@
                             optionValue="key">
                         </p-dropdown>
 
-                        <p-checkbox *ngSwitchCase="'checkbox'" [value]="question.value" [formControlName]="question.key" [id]="question.key"></p-checkbox>
+                        <p-checkbox *ngSwitchCase="'checkbox'" [value]="question.value" [formControlName]="question.key" [id]="question.key" [binary]="question.value_checkbox"></p-checkbox>
 
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                                         optionValue="key">
                                     </p-dropdown>
 
-                                    <p-checkbox *ngSwitchCase="'checkbox'" [value]="item.value" [formControlName]="item.key" [id]="item.key"></p-checkbox>
+                                    <p-checkbox *ngSwitchCase="'checkbox'" [value]="item.value" [formControlName]="item.key" [id]="item.key" [binary]="item.value_checkbox"></p-checkbox>
 
                                 </div>
                             </div>

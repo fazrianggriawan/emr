@@ -11,6 +11,8 @@ export class QuestionBase<T> {
   child: any[];
   prefix: string;
   postfix: string;
+  id_parent: string;
+  value_checkbox: boolean;
 
   constructor(options: {
       value?: T;
@@ -25,6 +27,8 @@ export class QuestionBase<T> {
       child?: any[];
       prefix?: string;
       postfix?: string;
+      id_parent?: string;
+      value_checkbox?: boolean;
     } = {}) {
     this.value = options.value;
     this.key = options.key || '';
@@ -38,5 +42,7 @@ export class QuestionBase<T> {
     this.child = options.child || [];
     this.prefix = options.prefix || '';
     this.postfix = options.postfix || '';
+    this.id_parent = options.id_parent || '';
+    this.value_checkbox = options.value_checkbox || false;
   }
 }

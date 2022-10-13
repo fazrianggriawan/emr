@@ -30,7 +30,7 @@
                             <div>Auto Print</div>
                         </div>
                         <div class="col-auto pl-0">
-                            <p-inputSwitch [(ngModel)]="autoprint" (ngModelChange)="changeAutoPrint($event)"></p-inputSwitch>
+                            <p-inputSwitch [(ngModel)]="autoprint"></p-inputSwitch>
                         </div>
                     </div>
                     <table class="table table-striped">
@@ -59,9 +59,17 @@
                                     <button class="btn btn-light" (click)="printRequestRm(item.id)"><i class="bi bi-printer"></i></button>
                                 </td>
                             </tr>
+                            <tr *ngIf="data.length == 0">
+                                <td colspan="6" class="text-center text-muted">Belum Ada Data Saat Ini.</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+            </div>
+        </div>
+        <div class="row" hidden>
+            <div class="col">
+                <iframe id="printFrame" frameborder="0" width="300px" height="300px;" src=""></iframe>
             </div>
         </div>
     </div>
