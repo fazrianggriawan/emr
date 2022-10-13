@@ -26,7 +26,9 @@ export class LoginComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+        localStorage.clear();
         sessionStorage.clear();
+        this.loginService.loginData.next('');
         this.subs.push(this.loginService.loginData.subscribe(data => this.handleLogin(data)))
 
         this.registrasiService.registrasi.next('');
@@ -56,7 +58,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     public handleLogin(responseLogin: any) {
-        console.log(responseLogin);
         if (responseLogin) {
             if (responseLogin.auth) {
                 localStorage.setItem('login', JSON.stringify(responseLogin))
@@ -66,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     public gotoDashboarPage() {
-        this.router.navigateByUrl('registrasi');
+        this.router.navigateByUrl('home');
     }
 
 }

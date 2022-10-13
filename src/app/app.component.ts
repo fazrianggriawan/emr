@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { DataPasienService } from './modules/registrasi/components/data-pasien/data-pasien.service';
 import { AppService } from './services/app.service';
@@ -28,6 +28,18 @@ export class AppComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.router.events.subscribe((event: any): void => {
+            if (event instanceof NavigationStart) {
+                if( localStorage.getItem('login') ){
+                    this.appService.roleAccess(event.url);
+                }else{
+                    if( event.url != '/login' ){
+                        this.router.navigateByUrl('/login');
+                    }
+                }
+            }
+          });
+
         this.primeNgConfig.ripple = true;
 
         this.loadingService.status.subscribe(data => this.loading = data)
