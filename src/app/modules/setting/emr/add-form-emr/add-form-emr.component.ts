@@ -46,7 +46,7 @@ export class AddFormEmrComponent implements OnInit {
             parent: [null],
             key: [null, [Validators.required]],
             pertanyaan: [null, [Validators.required]],
-            controlType: ['dropdown', [Validators.required]],
+            controlType: ['textbox', [Validators.required]],
             prefix: [null],
             postfix: [null],
             required: [false, [Validators.required]],
