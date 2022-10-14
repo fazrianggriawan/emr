@@ -8,16 +8,32 @@ import { MenuItem } from 'primeng/api';
 })
 export class MenuComponent implements OnInit {
 
-    menuItems!: MenuItem[];
+    menuItems!: any[];
 
     constructor() { }
 
     ngOnInit(): void {
         this.menuItems = [
-            { label: 'Dashboard' },
             {
                 label: 'EMR', items: [
-                    { label: 'Form EMR', routerLink: '/setting/form-emr' },
+                    { label: 'Form Builder', routerLink: '/setting/form-emr' },
+                    { label: 'Integrasi Form & SOAP', routerLink: '/setting/integrasi-form-soap' },
+                ]
+            },
+            {
+                label: 'Master Data', items: [
+                    { label: 'General', routerLink: 'form-emr' },
+                    { label: 'Farmasi', routerLink: 'form-emr' },
+                    { label: 'Laboratorium', routerLink: 'form-emr' },
+                    { label: 'Radiologi', routerLink: 'form-emr' },
+                    { label: 'Rawat Inap', routerLink: 'form-emr' },
+                    { label: 'Rawat Jalan', routerLink: 'form-emr' },
+                ]
+            },
+            {
+                label: 'Tarif', items: [
+                    { label: 'Buku Tarif', routerLink: 'form-emr' },
+                    { label: 'Setting Tarif', routerLink: 'form-emr' },
                 ]
             }
         ];

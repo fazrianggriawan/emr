@@ -25,7 +25,7 @@ body {
 }
 
 .p-dropdown .p-inputtext{
-    padding: 0.4rem;
+    padding: 0.3rem;
 }
 
 .p-calendar .p-inputtext {
@@ -207,7 +207,7 @@ legend {
     color: black;
 }
 
-.btn,
+/* .btn, */
 .ui-datepicker-buttonpane button,
 .sp-container button,
 .form-control,
@@ -314,4 +314,16 @@ h1, h2, h3, h4, h5{
 .p-inputswitch .p-inputswitch-slider::before {
     left: 0.15rem;
     margin-top: -0.636rem;
+}
+
+.nav-aside .nav-link {
+    height: unset;
+    font-size: 13.5px;
+}
+
+.nav-aside .nav-label{
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: unset;
+    margin-top: 10px;
 }

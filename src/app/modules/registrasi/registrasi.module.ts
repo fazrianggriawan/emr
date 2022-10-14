@@ -31,7 +31,8 @@ import { CariPasienComponent } from './components/cari-pasien/cari-pasien.compon
     exports: [
         DataRegistrasiComponent,
         FormRegistrasiComponent,
-        WidgetRegistrasiComponent
+        WidgetRegistrasiComponent,
+        CariPasienComponent
     ]
 })
 export class RegistrasiModule { }

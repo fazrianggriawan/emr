@@ -6,13 +6,15 @@ import { FormEmrComponent } from './emr/form-emr/form-emr.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { SharedModule } from '../shared/shared.module';
+import { AddFormEmrComponent } from './emr/add-form-emr/add-form-emr.component';
 
 
 @NgModule({
   declarations: [
     FormEmrComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    AddFormEmrComponent
   ],
   imports: [
     CommonModule,

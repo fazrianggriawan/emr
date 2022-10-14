@@ -46,6 +46,8 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { TagModule } from 'primeng/tag';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { ToggleButtonModule } from 'primeng/togglebutton';
 
 
 let primeModules = [
@@ -76,7 +78,9 @@ let primeModules = [
     FileUploadModule,
     TieredMenuModule,
     TagModule,
-    InputSwitchModule
+    InputSwitchModule,
+    PanelMenuModule,
+    ToggleButtonModule
 ]
 
 let sharedComponent = [

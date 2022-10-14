@@ -1,0 +1,45 @@
+
+<div class="bg-gray-100 p-3">
+    <div class="row">
+        <div class="col-auto pr-2">
+            Tambah Obat
+        </div>
+        <div class="col-3 pl-2">
+            <p-autoComplete
+                [(ngModel)]="obat"
+                [suggestions]="results"
+                (completeMethod)="search($event)"
+                placeholder="Mulai Cari Obat..."
+                [style]="{'width':'100%'}"
+                [appendTo]="'body'"
+                [inputStyle]="{'width':'100%'}">
+            </p-autoComplete>
+        </div>
+        <div class="col-auto pl-1">
+            <button class="btn btn-sm btn-light"><i class="bi bi-table"></i> Master Data Obat</button>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p-table [value]="data" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Kode Obat</th>
+                    <th>Nama Obat</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Total</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>{{item.code}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.category}}</td>
+                    <td>{{item.quantity}}</td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
