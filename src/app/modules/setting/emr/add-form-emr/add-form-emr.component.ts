@@ -37,6 +37,7 @@ export class AddFormEmrComponent implements OnInit {
 
         this.addFormEmrService.dataParent.subscribe(data => this.parent = data)
         this.addFormEmrService.dataControlType.subscribe(data => this.controlType = data)
+        this.addFormEmrService.save.subscribe(data => { if(data) this.initForm(); })
 
         this.initForm();
     }
@@ -78,6 +79,10 @@ export class AddFormEmrComponent implements OnInit {
                 this.toKey(this.form.get('pertanyaan')?.value);
             }
         }, 500);
+
+        if( e.ctrlKey && e.keyCode == 13 ){
+            this.save();
+        }
     }
 
     toKey(text: string) {
