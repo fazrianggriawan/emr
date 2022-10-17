@@ -60,12 +60,8 @@ export class BillingService {
         if (noreg) {
             this.http.get<any>(config.api_url('billing/billingByNoreg/' + noreg))
                 .subscribe(data => {
-                    if( data.data.length > 0 ){
-                        this.dataBilling.next(data.data)
-                        this.getTotalBilling(data.data);
-                    }else{
-                        this.totalBilling.next(0);
-                    }
+                    this.dataBilling.next(data.data);
+                    this.getTotalBilling(data.data);
                 })
         }
     }
@@ -126,12 +122,10 @@ export class BillingService {
 
     public getTotalBilling(dataBilling: any) {
         if (dataBilling.length > 0) {
-
             let totalBilling = 0;
             dataBilling.forEach((item: any) => {
                 totalBilling = totalBilling + this.hitungTotalBilling(item)
             });
-
             this.totalBilling.next(totalBilling);
         }else{
             this.totalBilling.next('0');

@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     loading: boolean = false;
     currentRoute: string = '';
     pasien: any;
+    splashScreen: boolean = true;
 
     constructor(
         public loadingService: LoadingService,
@@ -65,6 +66,10 @@ export class AppComponent implements OnInit {
         this.appService.getLoginData();
 
         this.dataPasienService.pasien.subscribe(data => this.pasien = data);
+
+        setTimeout(() => {
+            this.splashScreen = false;
+        }, 500);
 
     }
 }

@@ -6,17 +6,21 @@ import { RadiologiComponent } from './components/radiologi/radiologi.component';
 import { RegistrasiModule } from '../registrasi/registrasi.module';
 import { KasirModule } from '../kasir/kasir.module';
 import { SharedModule } from '../shared/shared.module';
+import { BillingModule } from '../billing/billing.module';
+import { HasilRadiologiComponent } from './components/hasil-radiologi/hasil-radiologi.component';
 
 
 @NgModule({
     declarations: [
-        RadiologiComponent
+        RadiologiComponent,
+        HasilRadiologiComponent
     ],
     imports: [
         CommonModule,
         RadiologiRoutingModule,
         RegistrasiModule,
         KasirModule,
+        BillingModule,
         SharedModule
     ]
 })

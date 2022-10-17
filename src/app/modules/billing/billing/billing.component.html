@@ -74,9 +74,11 @@
             <input type="text" class="form-control" [(ngModel)]="selectedBilling.discount_percent" placeholder="Discount %" aria-label="Discount %" aria-describedby="button-addon2">
             <div class="input-group-append">
                 <button class="btn btn-primary btn-icon" type="button" (click)="addDiscount()">
-                    <i class="bi bi-check-lg"></i>
+                    <div><i class="bi bi-check-lg"></i></div>
                 </button>
-                <button class="btn btn-light btn-icon" type="button"><i class="bi bi-x-lg"></i></button>
+                <button class="btn btn-icon" type="button">
+                    <div><i class="bi bi-x-lg"></i></div>
+                </button>
             </div>
         </div>
     </ng-template>
@@ -88,8 +90,12 @@
         <div class="input-group">
             <input type="number" class="form-control"  [(ngModel)]="selectedBilling.qty" placeholder="Qty" aria-label="Qty" aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-primary btn-icon" (click)="updateJumlah()" type="button"><i class="bi bi-check-lg"></i></button>
-                <button class="btn btn-light btn-icon" type="button"><i class="bi bi-x-lg"></i></button>
+                <button class="btn btn-primary btn-icon" (click)="updateJumlah()" type="button">
+                    <div><i class="bi bi-check-lg"></i></div>
+                </button>
+                <button class="btn btn-icon" type="button">
+                    <div><i class="bi bi-x-lg"></i></div>
+                </button>
             </div>
         </div>
     </ng-template>

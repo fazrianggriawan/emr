@@ -11,16 +11,16 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^12.1.2",
+    "@angular/animations": "^13.3.11",
     "@angular/cdk": "^12.1.2",
-    "@angular/common": "^12.1.2",
-    "@angular/compiler": "^12.1.2",
-    "@angular/core": "^12.1.2",
-    "@angular/forms": "^12.1.2",
+    "@angular/common": "^13.3.11",
+    "@angular/compiler": "^13.3.11",
+    "@angular/core": "^13.3.11",
+    "@angular/forms": "^13.3.11",
     "@angular/material": "^12.1.2",
-    "@angular/platform-browser": "^12.1.2",
-    "@angular/platform-browser-dynamic": "^12.1.2",
-    "@angular/router": "^12.1.2",
+    "@angular/platform-browser": "^13.3.11",
+    "@angular/platform-browser-dynamic": "^13.3.11",
+    "@angular/router": "^13.3.11",
     "@ckeditor/ckeditor5-angular": "^2.0.2",
     "@ng-dynamic-forms/core": "^15.0.0",
     "@ng-dynamic-forms/ui-material": "^15.0.0",
@@ -48,9 +48,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^12.1.2",
-    "@angular/cli": "^12.1.2",
-    "@angular/compiler-cli": "^12.1.2",
+    "@angular-devkit/build-angular": "^13.3.9",
+    "@angular/cli": "^13.3.9",
+    "@angular/compiler-cli": "^13.3.11",
     "@ckeditor/ckeditor5-build-classic": "^27.1.0",
     "@types/jasmine": "^3.8.1",
     "@types/node": "^12.20.54",
@@ -65,6 +65,6 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.2"
+    "typescript": "~4.6.4"
   }
 }

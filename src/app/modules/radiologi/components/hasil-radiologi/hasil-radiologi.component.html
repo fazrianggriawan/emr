@@ -1,0 +1,39 @@
+<div class="row bg-white pd-t-0 pd-b-10 sticky-top border-bottom shadow-sm">
+    <div class="col-auto border-right">
+        <app-widget-registrasi></app-widget-registrasi>
+    </div>
+    <div class="col text-right">
+        <button class="btn btn-primary mr-1" (click)="save()"><i class="bi bi-save mr-1"></i> Simpan</button>
+    </div>
+</div>
+
+<div class="row mg-t-20">
+    <div class="col-auto">
+        <div>Tanggal</div>
+        <p-calendar dateFormat="dd M yy"></p-calendar>
+        <!-- <input type="text" value="12 Jun 2022" name="tglHasil" class="form-control" style="width: 120px;"> -->
+    </div>
+    <div class="col">
+        <div>Dokter Radiologi</div>
+        <input type="text" value="dr.Priatna,Sp.Rad" name="tglHasil" class="form-control">
+    </div>
+</div>
+<div class="row mg-t-10">
+    <div class="col bg-gray-100 p-3">
+        <h5 class="mb-3">Kesimpulan Pemeriksaan</h5>
+        <div class="mb-2">
+            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-card-text"></i> Template Hasil</button>
+        </div>
+        <p-editor name="hasil" placeholder="Ketikan hasil di sini..."></p-editor>
+    </div>
+</div>
+<div class="row mg-t-10">
+    <div class="col">
+        <h5 class="mb-3"><i class="bi bi-image"></i> Photo & Files</h5>
+        <div class="row">
+            <div class="col">
+                <app-file-upload [autoUpload]="false"></app-file-upload>
+            </div>
+        </div>
+    </div>
+</div>

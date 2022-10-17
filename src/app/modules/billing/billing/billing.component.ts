@@ -67,17 +67,14 @@ export class BillingComponent implements OnInit, OnDestroy {
 
     handleRegistrasi(data: any) {
         this.registrasi = data;
-        this.dataBilling = [];
         if (data) {
             this.billingService.getBillingByNoreg(this.registrasi.noreg);
         }
     }
 
     handleDataBilling(data: any) {
-        this.dataBilling = '';
+        this.dataBilling = data;
         if (data.length > 0) {
-            this.dataBilling = data;
-
             this.totalBilling = 0;
             this.dataBilling.forEach((item: any) => {
                 this.totalBilling = this.totalBilling + this.billingService.hitungTotalBilling(item)

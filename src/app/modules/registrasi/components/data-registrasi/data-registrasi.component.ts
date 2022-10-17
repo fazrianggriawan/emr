@@ -62,6 +62,7 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subs.forEach(element => { element.unsubscribe(); });
+        this.registrasiService.dataRegistrasi.next([]);
     }
 
     initForm() {

@@ -19,6 +19,7 @@ export class RadiologiComponent implements OnInit {
     selectedPemeriksaan: any;
     uploadedFiles: any;
     loading: boolean = false;
+    dialogHasilRadiologi: boolean = false;
 
     subs: Subscription[] = [];
 

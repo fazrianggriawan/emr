@@ -1,3 +1,24 @@
+<div class="row">
+    <div class="col-auto border-right">
+        <h5>Pemeriksaan Radiologi</h5>
+    </div>
+    <div class="col-auto border-right">
+        <app-cari-registrasi [showForm]="false"></app-cari-registrasi>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary mg-r-5">
+            <i class="bi bi-plus-lg"></i> Tambah Pemeriksaan
+        </button>
+        <button class="btn" (click)="dialogHasilRadiologi = true">
+            <i class="bi bi-file-check"></i> Hasil Pemeriksaan
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <app-billing [header]="false" [showTarif]="false"></app-billing>
+    </div>
+</div>
 <div class="row mt-3">
     <div class="col-3">
         <div class="border-bottom pb-2">
@@ -66,46 +87,16 @@
 
     </div>
     <div class="col rounded border bg-white shadow pt-3 ml-3">
-        <div class="row">
-            <div class="col">
-                <h5 class="border-bottom pb-3">Hasil Radiologi</h5>
-                <div class="tx-center p-3 mb-3 mt-3" hidden>
-                    <img [src]="'assets/icons/mri.svg'" class="mt-5" alt="Image Empty" height="100vw">
-                    <div class="mt-3">Belum ada hasil saat ini.</div>
-                </div>
-            </div>
-        </div>
-        <div class="">
-            <div class="row mb-3">
-                <div class="col-auto">
-                    <div>Tanggal Hasil</div>
-                    <p-calendar dateFormat="dd-mm-yy"></p-calendar>
-                    <!-- <input type="text" value="12 Jun 2022" name="tglHasil" class="form-control" style="width: 120px;"> -->
-                </div>
-                <div class="col">
-                    <div>Dokter Radiologi</div>
-                    <input type="text" value="dr.Priatna,Sp.Rad" name="tglHasil" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col bg-gray-100 p-3">
-                    <h5 class="mb-3">Kesimpulan Pemeriksaan</h5>
-                    <div class="mb-2">
-                        <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-card-text"></i> Template Hasil</button>
-                    </div>
-                    <p-editor name="hasil" placeholder="Ketikan hasil di sini..."></p-editor>
-                </div>
-            </div>
-            <div class="row mb-2 mt-4">
-                <div class="col">
-                    <h5 class="mb-3"><i class="bi bi-image"></i> Photo & Files</h5>
-                    <div class="row">
-                        <div class="col">
-                            <app-file-upload [autoUpload]="false"></app-file-upload>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </div>
 </div>
+
+<p-dialog
+    [(visible)]="dialogHasilRadiologi"
+    header="Hasil Radiologi"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
+    appendTo="body">
+    <app-hasil-radiologi></app-hasil-radiologi>
+</p-dialog>
