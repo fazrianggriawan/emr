@@ -31,7 +31,7 @@ export class HttpProvider implements HttpInterceptor {
         return next.handle(req).pipe(
             timeout(timeoutValueNumeric),
             retry(4),
-            delay(300),
+            delay(150),
             finalize(() => {
                 this.loadingService.status.next(false);
             }),

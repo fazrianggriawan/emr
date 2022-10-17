@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
 import { AppService } from 'src/app/services/app.service';
@@ -42,7 +43,8 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         private masterService: MasterService,
         private registrasiService: RegistrasiService,
-        private appService: AppService
+        private appService: AppService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -172,10 +174,14 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
     }
 
     handleSaveStatus(data: any){
-        // this.dialogRegistrasiSuccess = data
+        this.dialogRegistrasiSuccess = data
         if( data ){
             this.initForm();
         }
+    }
+
+    toBilling(){
+        this.router.navigateByUrl('/billing');
     }
 
 }
