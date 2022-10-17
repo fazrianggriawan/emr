@@ -48,7 +48,7 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-
+        this.dialogRegistrasiSuccess = false;
         this.masterService.dokter.subscribe(data => this.dataDokter = data)
         this.masterService.ruangan.subscribe(data => {if(data){ this.dataPoli = data }else{ this.dataPoli = [] }} )
         this.masterService.groupPasien.subscribe(data => this.dataGroupPasien = data)
@@ -61,7 +61,6 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
         this.subs.push(this.formRegistrasiService.dialog.subscribe(data => this.handleDialog(data)));
 
         this.subs.push(this.dataPasienService.pasien.subscribe(data => this.handleDataPasien(data)))
-
 
         this.subs.push(this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data))
 
@@ -174,14 +173,18 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
     }
 
     handleSaveStatus(data: any){
-        this.dialogRegistrasiSuccess = data
         if( data ){
+            this.dialogRegistrasiSuccess = true;
             this.initForm();
+            this.formRegistrasiService.saveStatus.next(false);
         }
     }
 
     toBilling(){
-        this.router.navigateByUrl('/billing');
+        this.dialogRegistrasiSuccess = false;
+        setTimeout(() => {
+            this.router.navigateByUrl('/billing');
+        }, 100);
     }
 
 }
