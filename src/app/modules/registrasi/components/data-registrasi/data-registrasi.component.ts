@@ -56,6 +56,7 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         this.masterService.ruangan.subscribe(data => this.dataRuangan = data)
         this.masterService.groupPasien.subscribe(data => this.dataJnsPembayaran = data);
         this.registrasiService.dataRegistrasi.subscribe(data => this.dataRegistrasi = data);
+        this.formRegistrasiService.saveStatus.subscribe(data => {if(data) this.filterForm()})
 
         this.initForm();
     }

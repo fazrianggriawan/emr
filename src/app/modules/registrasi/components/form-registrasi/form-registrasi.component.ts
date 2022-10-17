@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
 import { AppService } from 'src/app/services/app.service';
@@ -42,11 +43,12 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
         private fb: FormBuilder,
         private masterService: MasterService,
         private registrasiService: RegistrasiService,
-        private appService: AppService
+        private appService: AppService,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
-
+        this.dialogRegistrasiSuccess = false;
         this.masterService.dokter.subscribe(data => this.dataDokter = data)
         this.masterService.ruangan.subscribe(data => {if(data){ this.dataPoli = data }else{ this.dataPoli = [] }} )
         this.masterService.groupPasien.subscribe(data => this.dataGroupPasien = data)
@@ -59,7 +61,6 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
         this.subs.push(this.formRegistrasiService.dialog.subscribe(data => this.handleDialog(data)));
 
         this.subs.push(this.dataPasienService.pasien.subscribe(data => this.handleDataPasien(data)))
-
 
         this.subs.push(this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data))
 
@@ -172,10 +173,18 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
     }
 
     handleSaveStatus(data: any){
-        // this.dialogRegistrasiSuccess = data
         if( data ){
+            this.dialogRegistrasiSuccess = true;
             this.initForm();
+            this.formRegistrasiService.saveStatus.next(false);
         }
+    }
+
+    toBilling(){
+        this.dialogRegistrasiSuccess = false;
+        setTimeout(() => {
+            this.router.navigateByUrl('/billing');
+        }, 100);
     }
 
 }
