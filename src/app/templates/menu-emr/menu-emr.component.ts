@@ -87,17 +87,17 @@ export class MenuEmrComponent implements OnInit {
 
         this.items = [
             { label: 'Data Pasien', routerLink: 'medicalRecord' },
-            {
-                label: 'Form', items: [
-                    { label: 'Assessment Awal' },
-                    { label: 'Surat Masuk Perawatan' },
-                    { label: 'Laporan Operasi' },
-                ]
-            },
+            // {
+            //     label: 'Form', items: [
+            //         { label: 'Assessment Awal' },
+            //         { label: 'Surat Masuk Perawatan' },
+            //         { label: 'Laporan Operasi' },
+            //     ]
+            // },
             { label: 'CPPT', routerLink: 'medicalRecord/cppt' },
             { label: 'Radiologi', routerLink: 'medicalRecord/radiologi' },
             { label: 'Laboratorium', routerLink: 'medicalRecord/laboratorium' },
-            // { label: 'Diagnosa & Prosedur', routerLink: 'medicalRecord/diagnosa_prosedur' },
+            { label: 'Diagnosa & Prosedur', routerLink: 'medicalRecord/diagnosa_prosedur' },
             { label: 'E-Resep', routerLink: 'medicalRecord/farmasi' },
             { label: 'Konsul', routerLink: 'medicalRecord/konsul' },
             { label: 'Summary Review', routerLink: 'medicalRecord/planning' },

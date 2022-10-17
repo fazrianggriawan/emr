@@ -13,7 +13,6 @@ export class DataPasienService {
     dataPasien = new BehaviorSubject<any[]>([]);
     sendToForm = new BehaviorSubject<boolean>(false);
     pasien = new BehaviorSubject<any>('');
-    // showDialog = new BehaviorSubject<boolean>(false);
     dialog = new BehaviorSubject<boolean>(false);
     saveStatusPasien = new BehaviorSubject<boolean>(false);
 

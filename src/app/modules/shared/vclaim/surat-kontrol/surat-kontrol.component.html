@@ -1,15 +1,14 @@
-<div class="row pt-3 pb-3">
-    <div class="col mb-2 clearfix">
-        <div class="float-left">
-            <button class="btn btn-sm btn-primary mr-1" (click)="formSuratKontrolService.openDialog()"><i class="bi bi-plus-lg"></i> Data Baru</button>
-            <button class="btn btn-sm btn-secondary" (click)="getDataSuratKontrol()"><i class="bi bi-arrow-clockwise"></i></button>
-        </div>
-        <div class="float-left ml-3 pl-3 border-left">
-            Bulan : <p-calendar (ngModelChange)="getDataSuratKontrol()" [(ngModel)]="filter.from" view="month" dateFormat="M yy" appendTo="body" [style]="{width:'120px'}" [readonlyInput]="true"></p-calendar>
-        </div>
+<div class="row">
+    <div class="col-auto">
+        <button class="btn btn-primary mr-2" (click)="formSuratKontrolService.openDialog()"><i class="bi bi-plus-lg"></i> Data Baru</button>
+        <button class="btn" (click)="getDataSuratKontrol()"><i class="bi bi-arrow-clockwise"></i></button>
     </div>
-    <div class="w-100 border-bottom"></div>
-    <div class="col p-0">
+    <div class="col-auto">
+        Bulan : <p-calendar (ngModelChange)="getDataSuratKontrol()" [(ngModel)]="filter.from" view="month" dateFormat="M yy" appendTo="body" [style]="{width:'150px'}" [readonlyInput]="true"></p-calendar>
+    </div>
+</div>
+<div class="row mg-t-10">
+    <div class="col">
         <table class="table table-striped table-hover border-bottom">
             <thead>
                 <tr class="bg-gray-300">
@@ -34,7 +33,11 @@
                     <td>{{item.namaDokter}}</td>
                     <td>{{item.tglTerbitKontrol}}</td>
                     <td>{{item.tglRencanaKontrol}}</td>
-                    <td><button class="btn btn-sm btn-icon btn-light" (click)="delete(item.noSuratKontrol)"><i class="bi bi-trash"></i></button></td>
+                    <td>
+                        <button class="btn btn-icon btn-outline-secondary rounded-circle" (click)="delete(item.noSuratKontrol)">
+                            <div><i class="bi bi-trash"></i></div>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
             <tfoot *ngIf="!dataSuratKontrol">

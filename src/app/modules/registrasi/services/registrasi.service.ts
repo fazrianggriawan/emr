@@ -11,6 +11,7 @@ export class RegistrasiService {
 
     registrasi = new BehaviorSubject<any>('')
     dataRegistrasi = new BehaviorSubject<any>('')
+    dialog = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
@@ -47,6 +48,23 @@ export class RegistrasiService {
             .subscribe(data => {
                 this.dataRegistrasi.next(data.data);
             })
+    }
+
+    formFilter(){
+        return {
+            tanggal: [[new Date()]],
+            nama: [null],
+            norm: [null],
+            jnsPerawatan: [null],
+            ruangan: [null],
+            dokter: [null],
+            jnsPembayaran: [null],
+            noreg: [null],
+        }
+    }
+
+    showDialog(val: boolean){
+        this.dialog.next(val)
     }
 
 }

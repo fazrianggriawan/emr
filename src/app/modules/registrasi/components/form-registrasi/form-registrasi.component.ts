@@ -57,12 +57,14 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
         this.masterService.tempatTidur.subscribe(data => this.dataTempatTidur = data)
 
         this.subs.push(this.formRegistrasiService.dialog.subscribe(data => this.handleDialog(data)));
-        this.subs.push(this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data ))
+
         this.subs.push(this.dataPasienService.pasien.subscribe(data => this.handleDataPasien(data)))
+
+
         this.subs.push(this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data))
 
         this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
-        this.formRegistrasiService.saveStatus.subscribe(data => this.dialogRegistrasiSuccess = data)
+        this.formRegistrasiService.saveStatus.subscribe(data => this.handleSaveStatus(data) )
     }
 
     ngOnDestroy(): void {
@@ -167,6 +169,13 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
         data.tanggal = this.appService.reformatDate(this.form.get('tanggal')?.value);
 
         this.formRegistrasiService.save(data)
+    }
+
+    handleSaveStatus(data: any){
+        // this.dialogRegistrasiSuccess = data
+        if( data ){
+            this.initForm();
+        }
     }
 
 }

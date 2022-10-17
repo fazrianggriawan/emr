@@ -1,0 +1,135 @@
+<div class="row bg-white pd-t-0 pd-b-10 sticky-top border-bottom shadow-sm">
+    <div class="col-auto border-right">
+        <app-widget-registrasi></app-widget-registrasi>
+    </div>
+    <div class="col text-right">
+        <button class="btn btn-primary mr-1" (click)="save()"><i class="bi bi-save mr-1"></i> Simpan</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <p-table [value]="hasilLab" editMode="column" dataKey="name" responsiveLayout="scroll" rowGroupMode="subheader" groupRowsBy="group">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Pemeriksaan</th>
+                    <th>Hasil</th>
+                    <th>Nilai Rujukan</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="groupheader" let-item>
+                <tr pRowGroupHeader>
+                    <td colspan="5" class="tx-bold">{{item.group | uppercase}}</td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td>
+                        <span class="ml-3">{{item.name}}</span>
+                    </td>
+                    <td pEditableColumn>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <div *ngIf="
+                                    item.name != 'ANTIGEN SARS COV-2' &&
+                                    item.name != 'TES KEHAMILAN' &&
+                                    item.name != 'AMPHETAMINE' &&
+                                    item.name != 'METAMPHETAMINE' &&
+                                    item.name != 'THC' &&
+                                    item.name != 'BENZODIAZEPINES' &&
+                                    item.name != 'MORPHINE' &&
+                                    item.name != 'SILINDER' &&
+                                    item.name != 'KRISTAL' &&
+                                    item.name != 'BAKTERI' &&
+                                    item.name != 'GOLONGAN DARAH' &&
+                                    item.name != 'PROTEIN' &&
+                                    item.name != 'BILIRUBIN' &&
+                                    item.name != 'REDUKSI' &&
+                                    item.name != 'NITRIT' &&
+                                    item.name != 'KETON' &&
+                                    item.name != 'DARAH' &&
+                                    item.name != 'UROBILINOGE' &&
+                                    item.name != 'ANTI - HIV (RAPID T)' &&
+                                    item.name != 'HBSAG' &&
+                                    item.name != 'PROTEIN' &&
+                                    item.name != 'BILIRUBIN' &&
+                                    item.name != 'REDUKSI' &&
+                                    item.name != 'NITRIT' &&
+                                    item.name != 'KETON' &&
+                                    item.name != 'DARAH' &&
+                                    item.name != 'UROBILINOGEN'
+                                ">
+                                    <input pInputText class="form-control" type="text" [(ngModel)]="item.hasil">
+                                </div>
+
+                                <div *ngIf="item.name === 'GOLONGAN DARAH'">
+                                    <p-dropdown [showClear]="true" appendTo="body" [options]="golDarah" [autoDisplayFirst]="false" *ngIf="item.name === 'GOLONGAN DARAH'" [(ngModel)]="item.hasil" optionValue="name" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+                                </div>
+
+                                <div *ngIf="
+                                    item.name === 'ANTIGEN SARS COV-2' ||
+                                    item.name === 'TES KEHAMILAN' ||
+                                    item.name === 'AMPHETAMINE' ||
+                                    item.name === 'METAMPHETAMINE' ||
+                                    item.name === 'THC' ||
+                                    item.name === 'BENZODIAZEPINES' ||
+                                    item.name === 'MORPHINE' ||
+                                    item.name === 'SILINDER' ||
+                                    item.name === 'KRISTAL' ||
+                                    item.name === 'BAKTERI'
+                                ">
+                                    <p-dropdown [showClear]="true" appendTo="body" [options]="positiveNegative" [autoDisplayFirst]="false" [(ngModel)]="item.hasil" optionValue="name" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+                                </div>
+
+                                <div *ngIf="item.name === 'ANTI - HIV (RAPID T)' || item.name === 'HBSAG'">
+                                    <p-dropdown [showClear]="true" appendTo="body" [options]="reactive" [autoDisplayFirst]="false" [(ngModel)]="item.hasil" optionValue="name" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+                                </div>
+
+                                <div *ngIf="
+                                    item.name === 'PROTEIN' ||
+                                    item.name === 'BILIRUBIN' ||
+                                    item.name === 'REDUKSI' ||
+                                    item.name === 'NITRIT' ||
+                                    item.name === 'KETON' ||
+                                    item.name === 'DARAH'
+                                ">
+                                    <p-dropdown [showClear]="true" appendTo="body" [options]="positiveNegative2" [autoDisplayFirst]="false" [(ngModel)]="item.hasil" optionValue="name" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+                                </div>
+
+                                <div *ngIf="item.name === 'UROBILINOGEN'">
+                                    <p-dropdown [showClear]="true" appendTo="body" [options]="normalAbnormal" [autoDisplayFirst]="false" [(ngModel)]="item.hasil" optionValue="name" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+                                </div>
+
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <input type="text" class="form-control" value="{{item.hasil}}" readOnly>
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                    <td pEditableColumn>
+                        <p-cellEditor>
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="item.nilaiRujukan">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                {{item.nilaiRujukan}}
+                            </ng-template>
+                        </p-cellEditor>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="col-12 mt-2">
+        <div class="row">
+            <div class="col">
+                <div>Catatan :</div>
+                <textarea pInputTextarea [(ngModel)]="keterangan.catatan" [autoResize]="true" [style]="{width: '100%', minHeight: '80px'}"></textarea>
+            </div>
+            <div class="col">
+                <div>Pemeriksa :</div>
+                <input type="text" class="form-control" [(ngModel)]="keterangan.pemeriksa">
+            </div>
+        </div>
+    </div>
+</div>

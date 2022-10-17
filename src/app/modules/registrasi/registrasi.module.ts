@@ -11,6 +11,7 @@ import { FormRegistrasiComponent } from './components/form-registrasi/form-regis
 import { WidgetRegistrasiComponent } from './components/widget-registrasi/widget-registrasi.component';
 import { FormRawatInapComponent } from './components/form-rawat-inap/form-rawat-inap.component';
 import { CariPasienComponent } from './components/cari-pasien/cari-pasien.component';
+import { CariRegistrasiComponent } from './components/cari-registrasi/cari-registrasi.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { CariPasienComponent } from './components/cari-pasien/cari-pasien.compon
         FormRegistrasiComponent,
         WidgetRegistrasiComponent,
         FormRawatInapComponent,
-        CariPasienComponent
+        CariPasienComponent,
+        CariRegistrasiComponent
     ],
     imports: [
         SharedModule,
@@ -32,7 +34,8 @@ import { CariPasienComponent } from './components/cari-pasien/cari-pasien.compon
         DataRegistrasiComponent,
         FormRegistrasiComponent,
         WidgetRegistrasiComponent,
-        CariPasienComponent
+        CariPasienComponent,
+        CariRegistrasiComponent
     ]
 })
 export class RegistrasiModule { }

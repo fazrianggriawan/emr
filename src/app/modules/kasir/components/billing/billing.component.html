@@ -1,24 +1,25 @@
 <div class="row">
+    <div class="col-auto border-right">
+        <h5>Billing Perawatan</h5>
+    </div>
+    <div class="col-auto">
+        <button class="btn mr-1" (click)="printBilling()"><i class="bi bi-plus-lg"></i> Tambah Billing</button>
+        <button class="btn mr-1" (click)="printBilling()"><i class="bi bi-printer"></i> Print Billing</button>
+        <button class="btn btn-light mr-1" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
+        <!-- <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-filetype-xls"></i> XLS</button>
+        <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-trash"></i> Hapus</button> -->
+    </div>
+</div>
+<div class="row mg-t-10">
     <div class="col">
-        <div class="row">
-            <div class="col-auto border-right">
-                <h5>Billing Perawatan</h5>
-            </div>
-            <div class="col-auto">
-                <button class="btn btn-light btn-sm mr-1" (click)="printBilling()"><i class="bi bi-printer"></i> Print Billing</button>
-                <button class="btn btn-light btn-sm mr-1" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
-                <!-- <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-filetype-xls"></i> XLS</button>
-                <button class="btn btn-outline-light btn-xs p-1 pl-2 pr-2 mr-1"><i class="bi bi-trash"></i> Hapus</button> -->
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col">
-                <p-selectButton [options]="catTarif" [(ngModel)]="selectedCatTarif" optionValue="id" optionLabel="name"></p-selectButton>
-            </div>
-        </div>
-        <!-- <div>
-            <ag-grid-angular></ag-grid-angular>
-        </div> -->
+        <p-selectButton [options]="catTarif" [(ngModel)]="selectedCatTarif" optionValue="id" optionLabel="name"></p-selectButton>
+    </div>
+</div>
+<!-- <div>
+    <ag-grid-angular></ag-grid-angular>
+</div> -->
+<div class="row mg-t-10">
+    <div class="col">
         <table class="table table-striped table-hover border-bottom">
             <thead>
                 <tr>
@@ -38,12 +39,12 @@
                     <td>{{item.r_tarif_harga.r_tarif.name | uppercase}}</td>
                     <td>
                         <ng-container *ngFor="let jasa of item.r_billing_jasa">
-                            <div><a class="link text-primary" *ngIf="jasa.r_pelaksana.group == 'dokter'">{{jasa.r_pelaksana.name}}</a></div>
+                            <div><a class="text-primary clickable" *ngIf="jasa.r_pelaksana.group == 'dokter'">{{jasa.r_pelaksana.name}}</a></div>
                         </ng-container>
                     </td>
                     <td>{{item.r_tarif_harga.harga | number}}</td>
-                    <td><a class="link text-primary" (click)="openOpJumlah($event, item)">{{item.qty}}</a></td>
-                    <td><a class="link text-primary" (click)="openOpDisc($event, item)">{{item.discount_percent}}%</a></td>
+                    <td><a class="text-primary clickable" (click)="openOpJumlah($event, item)">{{item.qty}}</a></td>
+                    <td><a class="text-primary clickable" (click)="openOpDisc($event, item)">{{item.discount_percent}}%</a></td>
                     <td>{{this.billingService.hitungTotalBilling(item) | number}}</td>
                     <td>
                         <button class="btn btn-icon" (click)="confirmDeleteBilling($event, item)"><i class="bi bi-trash"></i></button>

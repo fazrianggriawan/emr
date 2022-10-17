@@ -30,6 +30,11 @@ import { EKlaimModule } from './modules/e-klaim/e-klaim.module';
 import { RuangRekamMedisModule } from './modules/ruang-rekam-medis/ruang-rekam-medis.module';
 import { HomeComponent } from './components/home/home.component';
 import { SettingModule } from './modules/setting/setting.module';
+import { LeftPanelComponent } from './template/left-panel/left-panel.component';
+import { TopPanelComponent } from './template/top-panel/top-panel.component';
+import { RightPanelComponent } from './template/right-panel/right-panel.component';
+import { MainPanelComponent } from './template/main-panel/main-panel.component';
+import { BillingModule } from './modules/billing/billing.module';
 
 @NgModule({
     declarations: [
@@ -43,7 +48,11 @@ import { SettingModule } from './modules/setting/setting.module';
         UploadFileComponent,
         RadiologiComponent,
         LaboratoriumComponent,
-        HomeComponent
+        HomeComponent,
+        LeftPanelComponent,
+        TopPanelComponent,
+        RightPanelComponent,
+        MainPanelComponent
     ],
     imports: [
         CommonModule,
@@ -65,7 +74,8 @@ import { SettingModule } from './modules/setting/setting.module';
         LaporanModule,
         EKlaimModule,
         RuangRekamMedisModule,
-        SettingModule
+        SettingModule,
+        BillingModule
     ],
     providers: [
         DatePipe,

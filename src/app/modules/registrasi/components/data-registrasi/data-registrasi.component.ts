@@ -1,10 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
 import { AppService } from 'src/app/services/app.service';
+import { MasterService } from '../../services/master.service';
 import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
 import { FormRegistrasiService } from '../form-registrasi/form-registrasi.service';
+import { DataRegistrasiService } from './data-registrasi.service';
 
 @Component({
     selector: 'app-data-registrasi',
@@ -13,9 +16,20 @@ import { FormRegistrasiService } from '../form-registrasi/form-registrasi.servic
 })
 export class DataRegistrasiComponent implements OnInit, OnDestroy {
 
-    dataRegistrasi: any = [];
+    @Input() showForm : Boolean = true;
+
+    registrasi: any;
+    dataRegistrasi: any[] = [];
     dialogFormRegistrasi: boolean = false;
     dialogVclaim: boolean = false;
+    tanggal: Date[] = [];
+    form!: FormGroup;
+
+    jnsPerawatan: any;
+    dataDokter: any[] = [];
+    dataJnsPerawatan: any[] = [];
+    dataRuangan: any[] = [];
+    dataJnsPembayaran: any[] = [];
 
     subs: Subscription[] = [];
 
@@ -24,21 +38,53 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         public vclaimService: VclaimService,
         public appService: AppService,
         private registrasiService: RegistrasiService,
-        private dataPasienService: DataPasienService
+        private dataPasienService: DataPasienService,
+        private masterService: MasterService,
+        private fb: FormBuilder
     ) { }
 
     ngOnInit(): void {
-        this.registrasiService.getDataRegistrasi();
+        this.masterService.getDokter();
+        this.masterService.getJnsPerawatan();
+        this.masterService.getRuangan(this.jnsPerawatan);
+        this.masterService.getGroupPasien();
         this.subs.push(this.registrasiService.dataRegistrasi.subscribe(data => this.handleDataRegistrasi(data)))
         this.subs.push(this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRegistrasi = data))
+        this.registrasiService.registrasi.subscribe(data => this.registrasi = data);
+        this.masterService.dokter.subscribe(data => this.dataDokter = data)
+        this.masterService.jnsPerawatan.subscribe(data => this.dataJnsPerawatan = data)
+        this.masterService.ruangan.subscribe(data => this.dataRuangan = data)
+        this.masterService.groupPasien.subscribe(data => this.dataJnsPembayaran = data);
+        this.registrasiService.dataRegistrasi.subscribe(data => this.dataRegistrasi = data);
+
+        this.initForm();
     }
 
     ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subs.forEach((item: any) => {
-            item.unsubscribe();
-        });
+        this.subs.forEach(element => { element.unsubscribe(); });
+    }
+
+    initForm() {
+        this.form = this.fb.group(this.registrasiService.formFilter());
+        if( this.dataRegistrasi.length == 0 ){
+            this.filterForm();
+        }
+    }
+
+    filterForm(){
+        let data = this.form.value;
+        if( data.tanggal ){
+            if( data.tanggal[0] ) data.from = data.tanggal[0].toLocaleDateString('id-ID').toString();
+            if( data.tanggal[1] ) data.to = data.tanggal[1].toLocaleDateString('id-ID').toString();
+        }
+        this.registrasiService.filterDataRegistrasi(data);
+    }
+
+    getRuangan(e: any) {
+        if (e.value) {
+            this.masterService.getRuangan(e.value);
+            this.filterForm();
+        }
     }
 
     handleDataRegistrasi(data: any) {
@@ -47,9 +93,14 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         }
     }
 
-    refresh(){
-        this.dataRegistrasi = '';
-        this.registrasiService.getDataRegistrasi();
+    refresh() {
+        console.log(this.tanggal);
+        // this.dataRegistrasi = '';
+        // this.registrasiService.getDataRegistrasi();
+    }
+
+    clearTanggal(){
+        this.form.get('tanggal')?.patchValue([]);
     }
 
     registrasiBaru() {
@@ -59,10 +110,15 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
 
     selectRegistrasi(data: any) {
         if (data) {
+            this.registrasiService.showDialog(false)
             this.registrasiService.registrasi.next(data);
             this.dataPasienService.pasien.next(data.pasien);
             sessionStorage.setItem('noreg', data.noreg);
         }
+    }
+
+    changeTanggal() {
+        console.log(this.tanggal);
     }
 
 }

@@ -1,16 +1,15 @@
-<div class="row pt-3 pb-3">
-    <div class="col mb-2 clearfix">
-        <div class="float-left">
-            <button class="btn btn-sm btn-primary mr-1" (click)="formPrbService.openDialog()"><i class="bi bi-plus-lg"></i> Data Baru</button>
-            <button class="btn btn-sm btn-secondary" (click)="getDataPrb()"><i class="bi bi-arrow-clockwise"></i></button>
-        </div>
-        <div class="float-left ml-3 pl-3 border-left">
-            Dari : <p-calendar [(ngModel)]="filter.from" (ngModelChange)="getDataPrb()" [readonlyInput]="true" [maxDate]="today" dateFormat="d M yy" appendTo="body" [style]="{width:'120px'}" styleClass="mr-2"></p-calendar>
-            Sampai : <p-calendar [(ngModel)]="filter.to" (ngModelChange)="getDataPrb()" [readonlyInput]="true" [maxDate]="today" dateFormat="d M yy" appendTo="body" [style]="{width:'120px'}"></p-calendar>
-        </div>
+<div class="row">
+    <div class="col-auto">
+        <button class="btn btn-primary mr-2" (click)="formPrbService.openDialog()"><i class="bi bi-plus-lg"></i> Data Baru</button>
+        <button class="btn" (click)="getDataPrb()"><i class="bi bi-arrow-clockwise"></i></button>
     </div>
-    <div class="w-100 border-bottom"></div>
-    <div class="col p-0">
+    <div class="col-auto">
+        Dari : <p-calendar [(ngModel)]="filter.from" (ngModelChange)="getDataPrb()" [readonlyInput]="true" [maxDate]="today" dateFormat="d M yy" appendTo="body" [style]="{width:'120px'}" styleClass="mr-2"></p-calendar>
+        Sampai : <p-calendar [(ngModel)]="filter.to" (ngModelChange)="getDataPrb()" [readonlyInput]="true" [maxDate]="today" dateFormat="d M yy" appendTo="body" [style]="{width:'120px'}"></p-calendar>
+    </div>
+</div>
+<div class="row mg-t-10">
+    <div class="col">
         <table class="table table-striped table-hover border-bottom">
             <thead>
                 <tr class="bg-gray-300">

@@ -262,10 +262,6 @@ legend {
     border-bottom: 1px dashed;
 }
 
-a:any-link{
-    color: #0052CC;
-}
-
 .spinner-border {
     display: block;
 }

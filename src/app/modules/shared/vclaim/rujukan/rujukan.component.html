@@ -1,17 +1,16 @@
-<div class="row pt-3 pb-3">
-    <div class="col mb-2 clearfix">
-        <div class="float-left">
-            <button class="btn btn-sm btn-primary mr-1" (click)="formRujukanKeluarService.openDialog()"><i class="bi bi-plus-lg"></i> Form Rujuk Keluar</button>
-            <button class="btn btn-sm btn-secondary" (click)="getDataRujukan()"><i class="bi bi-arrow-clockwise"></i></button>
-        </div>
+<div class="row">
+    <div class="col-auto">
+        <button class="btn btn-primary mr-2" (click)="formRujukanKeluarService.openDialog()"><i class="bi bi-plus-lg"></i> Form Rujukan Keluar</button>
+        <button class="btn" (click)="getDataRujukan()"><i class="bi bi-arrow-clockwise"></i></button>
     </div>
-    <div class="w-100 border-bottom"></div>
-    <div class="col p-0">
+</div>
+<div class="row mg-t-10">
+    <div class="col">
 
         <table class="table table-striped table-hover mb-3 border-bottom">
             <thead>
                 <tr>
-                    <th colspan="6" class="tx-15 p-2">Puskesmas / PCare</th>
+                    <th colspan="6"><div class="tx-15">Puskesmas / PCare</div></th>
                 </tr>
             </thead>
             <thead>
@@ -38,7 +37,9 @@
                     <td>{{item.provPerujuk.nama}}</td>
                     <td>{{item.diagnosa.kode}} - {{item.diagnosa.nama}}</td>
                     <td>
-                        <button class="btn btn-icon btn-light mr-1" (click)="rujukanService.print(item.noKunjungan)"><i class="bi bi-printer"></i></button>
+                        <button class="btn btn-icon btn-outline-secondary rounded-circle" (click)="rujukanService.print(item.noKunjungan)">
+                            <div><i class="bi bi-trash"></i></div>
+                        </button>
                     </td>
                 </tr>
                 <tr><td colspan="6" class="tx-center" *ngIf="dataRujukanFaskes.length === 0">Tidak ada saat ini.</td></tr>
@@ -50,7 +51,7 @@
         <table class="table table-striped table-hover mb-3 border-bottom">
             <thead>
                 <tr>
-                    <th colspan="6" class="tx-15 p-2">Rumah Sakit</th>
+                    <th colspan="6"><div class="tx-15">Rumah Sakit</div></th>
                 </tr>
             </thead>
             <thead>
@@ -84,7 +85,7 @@
         <table class="table table-striped table-hover mb-3 border-bottom">
             <thead>
                 <tr>
-                    <th colspan="6" class="tx-15 p-2">Rujukan Keluar</th>
+                    <th colspan="6"><div class="tx-15">Rujukan Ke Luar</div></th>
                 </tr>
             </thead>
             <thead>

@@ -1,3 +1,16 @@
+<ng-container *ngIf="currentRoute != 'login'">
+    <app-left-panel></app-left-panel>
+
+    <app-top-panel></app-top-panel>
+
+    <app-right-panel></app-right-panel>
+</ng-container>
+
+<app-main-panel></app-main-panel>
+
+
+
+<!--
 <div class="row navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != 'login'">
     <div class="col-auto">
         <div class="pl-4 pt-3">
@@ -16,11 +29,11 @@
     <div class="col-auto tx-white" style="padding-top: 3px;">
         <app-user></app-user>
     </div>
-</div>
-
+</div> -->
+<!--
 <div class="content content-components m-4 p-0 rounded " style="margin-top: 56px !important;">
     <div class="content p-3">
-        <!-- <div class="row justify-content-center" *ngIf="currentRoute == 'medicalRecord'">
+        <div class="row justify-content-center" *ngIf="currentRoute == 'medicalRecord'">
             <div class="col">
                 <app-menu-emr></app-menu-emr>
             </div>
@@ -103,7 +116,7 @@
                 </div>
 
             </div>
-        </div> -->
+        </div>
         <div class="row">
             <div class="col">
                 <app-widget-registrasi></app-widget-registrasi>
@@ -118,7 +131,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="loading" *ngIf="loadingService.status | async">
     <p-progressSpinner strokeWidth="2"></p-progressSpinner>

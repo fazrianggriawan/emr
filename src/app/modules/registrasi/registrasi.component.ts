@@ -33,13 +33,14 @@ export class RegistrasiComponent implements OnInit {
     pangkat: any[] = [];
     groupPasien: any[] = [];
     golonganPasien: any[] = [];
+    hubkel: any[] = [];
 
     selectedPasien: any;
     dataPesertaBpjs: any;
     form!: FormGroup;
     dialogVclaim: boolean = false;
     dialogDataPasien: boolean = false;
-    dialogFormRawatJalan: boolean = false;
+    dialogFormRegistrasi: boolean = false;
     dialogFormRawatInap: boolean = false;
 
     menuPendaftaran!: MenuItem[];
@@ -77,10 +78,10 @@ export class RegistrasiComponent implements OnInit {
         this.masterService.golonganPasien.subscribe(data => this.golonganPasien = data)
 
         this.subs.push(this.dataPasienService.pasien.subscribe(data => this.setToForm(data)))
-        this.dataPasienService.dialog.subscribe(data => this.dialogDataPasien = data)
+        this.dataPasienService.dialog.subscribe(data => { this.dialogDataPasien = data; if(!data) this.dataPasienService.dataPasien.next([]) })
 
         this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data)
-        this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRawatJalan = data)
+        this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRegistrasi = data)
 
         this.menuPendaftaran = [
             { label: 'Barcode Pasien', command: (() => { this.appService.print(config.api_url('print/stickerBarcode/'+this.selectedPasien.id)) }) },

@@ -1,0 +1,20 @@
+<!-- ########## START: MAIN PANEL ########## -->
+<div [ngClass]="{'br-mainpanel': (currentRoute != 'login'), '': (currentRoute == 'login')}">
+    <div class="panel-submenu pd-10" *ngIf="currentRoute=='medicalRecord'">
+        <app-menu-emr></app-menu-emr>
+    </div>
+    <div class="br-pagebody mg-t-20" [ngClass]="{'have-submenu': (currentRoute == 'medicalRecord')}">
+        <div class="pd-t-20 pd-b-20 pd-l-0 pd-r-0">
+            <app-widget-registrasi></app-widget-registrasi>
+        </div>
+        <div class="br-section-wrapper"
+            [ngClass]="{'br-section-wrapper': (currentRoute != 'login'), 'login-page mg-t-20': (currentRoute == 'login')}">
+            <div class="row">
+                <div class="col">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div><!-- br-pagebody -->
+</div><!-- br-mainpanel -->
+<!-- ########## END: MAIN PANEL ########## -->

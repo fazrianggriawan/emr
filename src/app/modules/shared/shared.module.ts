@@ -105,7 +105,7 @@ let sharedComponent = [
         sharedComponent,
         PulangSepComponent,
         FormPasienPulangComponent,
-        WidgetEstimasiKlaimComponent,
+        WidgetEstimasiKlaimComponent
     ],
     imports: [
         primeModules,

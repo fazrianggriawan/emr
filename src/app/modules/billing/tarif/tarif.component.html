@@ -1,0 +1,94 @@
+<div class="row">
+    <div class="col">
+        <div class="row mb-2">
+            <div class="col">
+                <div>Tanggal :</div>
+                <div class="mg-t-5">
+                    <p-calendar [showIcon]="true" dateFormat="d M yy" [(ngModel)]="tanggal"></p-calendar>
+                </div>
+            </div>
+            <div class="col">
+                <div>Ruang Tindakan :</div>
+                <div class="mg-t-5">
+                    <p-dropdown
+                        placeholder="Pilih Ruangan"
+                        [options]="dataRuangan"
+                        [autoDisplayFirst]="false"
+                        optionLabel="name"
+                        optionValue="id"
+                        [(ngModel)]="selectedRuangan"
+                        [filter]="true"
+                        [style]="{width: '100%'}">
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p-dropdown
+                    placeholder="Kategori Tarif"
+                    [options]="categoryTarif"
+                    [autoDisplayFirst]="false"
+                    [resetFilterOnHide]="true"
+                    optionLabel="name"
+                    optionValue="id"
+                    [(ngModel)]="selectedCategoryTarif"
+                    (ngModelChange)="changeCategoryTarif($event)"
+                    [filter]="true"
+                    [style]="{width: '100%'}">
+                </p-dropdown>
+            </div>
+        </div>
+    </div>
+    <div class="col pl-0" hidden>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Cari Tarif...">
+            <div class="input-group-append">
+                <button class="btn btn-secondary"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped table-hover bd rounded mt-2">
+    <thead>
+        <tr>
+            <th>Nama Tarif</th>
+            <th>Harga</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of tarif" class="clickable" (click)="selectTarif(item, $event)">
+            <td>{{item.tarif_name}}</td>
+            <td>{{item.harga | number}}</td>
+        </tr>
+        <tr>
+            <td colspan="2" *ngIf="tarif.length == 0" class="text-center text-muted">Tidak ada data saat ini.</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-striped table-hover">
+    <tr *ngFor="let item of tarifJasa">
+        <td>{{item.group_jasa_name | uppercase}}</td>
+        <td><input type="text" class="form-control"></td>
+    </tr>
+</table>
+
+
+<p-overlayPanel #op [appendTo]="'body'" [dismissable]="true" [showCloseIcon]="true" [baseZIndex]="9999">
+    <ng-template pTemplate>
+        <div style="width: 20vw">
+            <div class="d-flex justify-content-center p-3 mb-2" *ngIf="loadingTarifJasa">
+                <div class="spinner-border text-primary text-center spinner-border" role="status"></div>
+            </div>
+            <div class="row" *ngIf="!loadingTarifJasa">
+                <div class="col">
+                    <div class="tx-14 border-bottom mb-2 tx-bold pt-2 pb-2">PELAKSANA MEDIS</div>
+                    <app-dynamic-form *ngIf="questions$" [tanggal]="tanggal" [tarif]="selectedTarif" [registrasi]="registrasi" [ruangan]="selectedRuangan" [questions]="questions$ | async"></app-dynamic-form>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-overlayPanel>
+
+

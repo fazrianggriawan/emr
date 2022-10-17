@@ -1,9 +1,9 @@
-<div class="row mt-3">
-    <div class="col-3">
+<div class="row">
+    <div class="col-3" hidden>
         <app-tarif></app-tarif>
     </div>
-    <div class="col ml-3 shadow p-3 border rounded">
-        <app-billing></app-billing>
+    <div class="col">
+        <app-billing [showTarif]="false"></app-billing>
     </div>
     <div class="col-3 ml-3">
         <div class="shadow border p-3 rounded" style="background-color: cornsilk; top: 50px !important;">
@@ -46,11 +46,11 @@
             <hr>
             <div class="row">
                 <div class="col">
-                    <div class="bold">Tagihan</div>
-                    <div class="bg-gray-100 rounded border p-1 pl-2 pr-2 tx-16">{{tagihan | number}}</div>
+                    <div class="mg-b-5">Tagihan</div>
+                    <div class="bg-gray-100 rounded border pd-10 tx-16 tx-right">{{tagihan | number}}</div>
                 </div>
                 <div class="col">
-                    <div>Jns. Pembayaran</div>
+                    <div class="mg-b-5">Jns. Pembayaran</div>
                     <p-dropdown
                         [autoDisplayFirst]="false"
                         [options]="jnsBayar"
@@ -71,7 +71,7 @@
             <div class="row mt-2" *ngIf="tagihan > 0">
                 <div class="col text-right">
                     <button
-                        class="btn btn-primary"
+                        class="btn btn-primary btn-block"
                         [disabled]="!selectedJnsBayar || totalBayar == 0"
                         (click)="confirmAddPembayaran($event)">
                             <i class="bi bi-plus-lg mr-1"></i>Bayar

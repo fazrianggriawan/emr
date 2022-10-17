@@ -1,6 +1,6 @@
 <p-autoComplete
     #acSearch
-    placeholder="Mulai Cari Pasien..."
+    placeholder="Cari Data Pasien..."
     [minLength]="1"
     [showEmptyMessage]="true"
     [suggestions]="searchOptions"
@@ -14,7 +14,7 @@
 
     <ng-template let-item pTemplate="item">
         <div>
-            <span class="badge badge-light text-left" innerHtml="{{item.name}}" style="font-size: 11px;">
+            <span class="badge border mg-r-2 pd-5 bg-light text-left" innerHtml="{{item.name}}" style="font-size: 11px;">
                 <i class="bi bi-search" style="font-size: 10px;"></i>
             </span>
             {{selectedSearch}}

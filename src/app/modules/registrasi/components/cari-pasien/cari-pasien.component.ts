@@ -39,6 +39,7 @@ export class CariPasienComponent implements OnInit, OnDestroy {
         //Called once, before the instance is destroyed.
         //Add 'implements OnDestroy' to the class.
         this.subs.forEach(element => element.unsubscribe())
+        this.registrasiService.showDialog(false);
     }
 
     filterData(e: any) {

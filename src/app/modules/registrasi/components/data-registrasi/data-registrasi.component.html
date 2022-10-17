@@ -1,58 +1,96 @@
-<div class="row mt-3">
+<div class="row">
     <div class="col-auto border-right"><h5>Data Registrasi</h5></div>
-    <div class="col">
-        <button class="btn btn-sm btn-primary mr-2" (click)="registrasiBaru()"><i class="bi bi-plus-lg mr-1"></i> Form Registrasi</button>
-        <button class="btn btn-sm btn-light mr-2" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
+    <div class="col-auto">
+        <button class="btn btn-primary mr-2" *ngIf="showForm" (click)="registrasiBaru()"><i class="bi bi-plus-lg mr-1"></i> Form Registrasi</button>
+        <button class="btn mr-2" (click)="registrasiBaru()" [disabled]="!registrasi.noreg"><i class="bi bi-clock-history mr-1"></i> Riwayat Kunjungan</button>
+        <button class="btn btn-light mr-2" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
     </div>
 </div>
 
-<div class="row mt-3">
+<div class="row mg-t-10">
     <div class="col">
-        <p-table [value]="dataRegistrasi" styleClass="p-datatable-sm table-striped table-hover border-top mb-3" responsiveLayout="scroll">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>No. Registrasi</th>
-                    <th>Tanggal</th>
-                    <th>Nama</th>
-                    <th>No. RM</th>
-                    <th>Jns. Perawatan</th>
-                    <th>Ruangan / Poliklinik</th>
-                    <th>Dokter</th>
-                    <th>Jenis Tagihan</th>
-                </tr>
-                <tr>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-                <tr (click)="selectRegistrasi(item)" class="clickable">
-                    <td>{{item.noreg}}</td>
-                    <td>{{appService.dateHuman(item.tglReg)}}</td>
-                    <td>{{item.pasien.nama | uppercase}}</td>
-                    <td>{{item.norm}}</td>
-                    <td>{{item.jns_perawatan.name}}</td>
-                    <td>{{item.ruang_perawatan.name}}</td>
-                    <td>{{item.dokter.name}}</td>
-                    <td>{{item.golpas.name}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <form [formGroup]="form">
+            <p-table [value]="dataRegistrasi" styleClass="p-datatable-sm table-striped table-hover border-top mb-3" responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Nama</th>
+                        <th>No. RM</th>
+                        <th>Jns. Perawatan</th>
+                        <th>Ruangan / Poliklinik</th>
+                        <th>Dokter</th>
+                        <th>Jenis Pembayaran</th>
+                        <th>No. Registrasi</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th class="bg-white">
+                            <p-calendar formControlName="tanggal" (onClose)="filterForm()" (onShow)="clearTanggal()" [showClear]="true" placeholder="Cari Tanggal..." selectionMode="range" [readonlyInput]="true" inputId="range" dateFormat="d M yy" appendTo="body"></p-calendar>
+                        </th>
+                        <th class="bg-white">
+                            <input type="text" formControlName="nama" class="form-control" placeholder="Cari Nama">
+                        </th>
+                        <th class="bg-white">
+                            <input type="text" formControlName="norm" class="form-control" placeholder="Cari No.RM">
+                        </th>
+                        <th class="bg-white">
+                            <p-dropdown formControlName="jnsPerawatan" [options]="dataJnsPerawatan" [showClear]="true" appendTo="body" (onChange)="getRuangan($event)" (onClear)="filterForm()" [autoDisplayFirst]="false" optionLabel="name" optionValue="id" placeholder="Pilih Jns. Perawatan"></p-dropdown>
+                        </th>
+                        <th class="bg-white">
+                            <p-dropdown formControlName="ruangan" (onChange)="filterForm()" (onClear)="filterForm()" [options]="dataRuangan" [filter]="true" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" optionLabel="name" optionValue="id" placeholder="Pilih Ruangan"></p-dropdown>
+                        </th>
+                        <th class="bg-white">
+                            <p-dropdown formControlName="dokter" (onChange)="filterForm()" (onClear)="filterForm()" [options]="dataDokter" [filter]="true" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" optionLabel="r_pelaksana.name" optionValue="r_pelaksana.id" placeholder="Pilih Dokter"></p-dropdown>
+                        </th>
+                        <th class="bg-white">
+                            <p-dropdown formControlName="jnsPembayaran" (onChange)="filterForm()" (onClear)="filterForm()" [options]="dataJnsPembayaran" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" optionLabel="name" optionValue="id" placeholder="Pilih Jenis Pembayaran"></p-dropdown>
+                        </th>
+                        <th class="bg-white">
+                            <input type="text" formControlName="noreg" class="form-control" placeholder="Cari No.Registrasi">
+                        </th>
+                        <th class="bg-white">
+                            <button class="btn btn-primary btn-icon" (click)="filterForm()">
+                                <div><i class="bi bi-funnel"></i></div>
+                            </button>
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-item>
+                    <tr [ngClass]="{'text-muted': (item.status==='closed')}">
+                        <td>{{appService.dateHuman(item.tglReg)}}</td>
+                        <td (click)="selectRegistrasi(item)" class="clickable">{{item.pasien.nama | uppercase}}</td>
+                        <td>{{item.norm}}</td>
+                        <td>{{item.jns_perawatan.name}}</td>
+                        <td>{{item.ruang_perawatan.name}}</td>
+                        <td>{{item.dokter.name}}</td>
+                        <td>
+                            <div class="text-muted">{{item.golpas.r_grouppas.name | uppercase}}</div>
+                            <div>{{item.golpas.name | uppercase}}</div>
+                        </td>
+                        <td>
+                            <div>{{item.noreg}}</div>
+                            <span class="badge" [ngClass]="{'badge-danger': (item.status==='closed'), 'badge-success': (item.status==='open')}">{{item.status | uppercase}}</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-icon btn-outline-primary rounded-circle" [disabled]="item.status === 'closed'">
+                                <div><i class="bi bi-pencil-square"></i></div>
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </form>
+
     </div>
 </div>
 
 <p-dialog
+    *ngIf="showForm"
     [(visible)]="dialogFormRegistrasi"
     (onHide)="formRegistrasiService.closeDialog()"
     header="Form Registrasi"
     [modal]="true"
-    [draggable]="true"
     position="top"
     [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
     appendTo="body">

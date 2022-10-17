@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-auto border-right">
+        <h5>Pemeriksaan Laboratorium</h5>
+    </div>
+    <div class="col-auto border-right">
+        <app-cari-registrasi [showForm]="false"></app-cari-registrasi>
+    </div>
+    <div class="col-auto">
+        <button class="btn btn-primary mg-r-5"><i class="bi bi-plus-lg"></i> Tambah Pemeriksaan</button>
+        <button class="btn mg-r-5" (click)="dialogHasilLab=true"><i class="bi bi-file-check"></i> Hasil Pemeriksaan</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <app-billing [header]="false" [showTarif]="false"></app-billing>
+    </div>
+</div>
+
+<p-dialog
+    [(visible)]="dialogHasilLab"
+    header="Hasil Laboratorium"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
+    appendTo="body">
+    <app-hasil-laboratorium></app-hasil-laboratorium>
+</p-dialog>

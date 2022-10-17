@@ -22,9 +22,9 @@ export class MasterService {
     pendidikan = new BehaviorSubject<any>('');
     angkatan = new BehaviorSubject<any>('');
     pangkat = new BehaviorSubject<any>('');
-    groupPasien = new BehaviorSubject<any>('');
+    groupPasien = new BehaviorSubject<any[]>([]);
     golonganPasien = new BehaviorSubject<any>('');
-    dokter = new BehaviorSubject<any>('');
+    dokter = new BehaviorSubject<any[]>([]);
     ruangan = new BehaviorSubject<any>('');
     jnsPerawatan = new BehaviorSubject<any>('');
     waktuPelayanan = new BehaviorSubject<any>('');

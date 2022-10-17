@@ -116,9 +116,8 @@ export class KasirComponent implements OnInit, OnDestroy {
     }
 
     handleDataRegistrasi(data: any) {
-        this.registrasi = '';
+        this.registrasi = data;
         if (data) {
-            this.registrasi = data;
             this.billingService.getBillingByNoreg(this.registrasi.noreg)
             this.billingService.getDataPembayaran(this.registrasi.noreg)
         }
