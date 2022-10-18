@@ -35,6 +35,8 @@ import { TopPanelComponent } from './template/top-panel/top-panel.component';
 import { RightPanelComponent } from './template/right-panel/right-panel.component';
 import { MainPanelComponent } from './template/main-panel/main-panel.component';
 import { BillingModule } from './modules/billing/billing.module';
+import { ChartModule } from 'primeng/chart';
+import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +54,8 @@ import { BillingModule } from './modules/billing/billing.module';
         LeftPanelComponent,
         TopPanelComponent,
         RightPanelComponent,
-        MainPanelComponent
+        MainPanelComponent,
+        BarChartComponent,
     ],
     imports: [
         CommonModule,
@@ -75,7 +78,8 @@ import { BillingModule } from './modules/billing/billing.module';
         EKlaimModule,
         RuangRekamMedisModule,
         SettingModule,
-        BillingModule
+        BillingModule,
+        ChartModule
     ],
     providers: [
         DatePipe,

@@ -14,8 +14,9 @@
                 <p class="info-list-label">Total Rawat Jalan</p>
                 <h5 class="info-list-amount">120 <small class="tx-gray-500">pasien</small></h5>
             </div>
-            <span class="peity-bar"
-                data-peity='{ "fill": ["#336490"], "height": 35, "width": 60 }'>8,6,5,9,8,4,9,3,5,9</span>
+            <div>
+                <app-bar-chart></app-bar-chart>
+            </div>
         </div><!-- info-list-item -->
 
         <div class="info-list-item">
@@ -23,8 +24,9 @@
                 <p class="info-list-label">Kapasitas Rawat Inap</p>
                 <h5 class="info-list-amount">82% <small class="tx-gray-500">terisi</small></h5>
             </div>
-            <span class="peity-bar"
-                data-peity='{ "fill": ["#8E4246"], "height": 35, "width": 60 }'>1,2,1,3,2,10,4,12,7</span>
+            <div>
+                <p-chart type="doughnut" [data]="data" [width]="'50px'"></p-chart>
+            </div>
         </div><!-- info-list-item -->
 
     </div><!-- info-list -->

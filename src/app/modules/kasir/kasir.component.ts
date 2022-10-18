@@ -61,8 +61,8 @@ export class KasirComponent implements OnInit, OnDestroy {
     }
 
     handleDataPembayaran(data: any[]){
+        this.dataPembayaran = data;
         if( data ){
-            this.dataPembayaran = data;
             let totalBayar : any = 0;
             data.forEach(element => {
                 totalBayar = parseInt(totalBayar) + parseInt(element.jumlah);
