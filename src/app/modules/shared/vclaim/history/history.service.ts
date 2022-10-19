@@ -23,7 +23,7 @@ export class HistoryService {
         let filterTo = this.appService.reformatDate(to);
 
         this.http.get<any>( config.api_vclaim('history/nomorKartu/'+nomorKartu+'/from/'+filterFrom+'/to/'+filterTo) )
-            .subscribe( data => this.dataHistory.next(data.response) )
+            .subscribe( data => this.dataHistory.next(data.response.histori) )
     }
 
     public deleteSep(data: any) {

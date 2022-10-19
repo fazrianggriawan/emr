@@ -25,8 +25,8 @@
                 </tr>
             </thead>
             <tbody *ngIf="dataRujukanFaskes">
-                <tr *ngFor="let item of dataRujukanFaskes.rujukan">
-                    <td><button class="btn btn-secondary btn-sm" (click)="rujukanService.getRujukan(item.noKunjungan)">{{item.noKunjungan}}</button></td>
+                <tr class="clickable" *ngFor="let item of dataRujukanFaskes.rujukan" (click)="rujukanService.getRujukan(item.noKunjungan)">
+                    <td>{{item.noKunjungan}}</td>
                     <td>
                         <div>{{dateHuman(item.tglKunjungan)}}</div>
                         <div class="badge badge-success" *ngIf="expiredAt(item.tglKunjungan) > 0">{{expiredAt(item.tglKunjungan)}} hari lagi</div>
@@ -65,7 +65,7 @@
                 </tr>
             </thead>
             <tbody *ngIf="dataRujukanRs">
-                <tr *ngFor="let item of dataRujukanRs.rujukan">
+                <tr class="clickable" *ngFor="let item of dataRujukanRs.rujukan" (click)="rujukanService.getRujukan(item.noKunjungan)">
                     <td>{{item.noKunjungan}}</td>
                     <td>
                         <div>{{dateHuman(item.tglKunjungan)}}</div>

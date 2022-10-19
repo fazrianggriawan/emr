@@ -9,6 +9,8 @@ import { VclaimService } from './vclaim.service';
 import { RujukanService } from "./rujukan/rujukan.service";
 import { Subscription } from 'rxjs';
 import { MasterService } from '../../registrasi/services/master.service';
+import { HistoryService } from './history/history.service';
+import { FormSuratKontrolModel } from './surat-kontrol/form-surat-kontrol/form-surat-kontrol.model';
 
 @Component({
     selector: 'app-vclaim',
@@ -39,6 +41,8 @@ export class VclaimComponent implements OnInit, OnDestroy {
 
     rujukan : any;
     totalSepRujukan: number = 0;
+    dialogRujukan: boolean = false;
+    dataHistorySep: any;
 
     subs: Subscription[] = [];
 
@@ -47,10 +51,11 @@ export class VclaimComponent implements OnInit, OnDestroy {
         public vclaimService: VclaimService,
         public formSuratKontrolService: FormSuratKontrolService,
         private suratKontrolService: SuratKontrolService,
-        private appService: AppService,
-        private rujukanService: RujukanService,
+        public appService: AppService,
+        public rujukanService: RujukanService,
         private dataPasienService: DataPasienService,
-        private masterService: MasterService
+        private masterService: MasterService,
+        private historySepService: HistoryService
     ) { }
 
     ngOnInit(): void {
@@ -76,6 +81,8 @@ export class VclaimComponent implements OnInit, OnDestroy {
         this.masterService.ruangan.subscribe(data => this.dataRuangan = data);
 
         this.vclaimService.totalSepRujukan.subscribe(data => {if(data){ this.totalSepRujukan = data.jumlahSEP }} )
+        this.rujukanService.dialog.subscribe(data => this.dialogRujukan = data);
+        this.historySepService.dataHistory.subscribe(data => this.dataHistorySep = data);
     }
 
     ngOnDestroy(): void {
@@ -152,8 +159,9 @@ export class VclaimComponent implements OnInit, OnDestroy {
         })
     }
 
-    public getDpjp() {
+    public changeRuangan() {
         this.dataDokter = [];
+        this.getSepByRuangan();
         if( this.formSep.get('poliklinik')?.value ){
             if (this.formSep.value.jnsKunjungan.kode == 'rawatInap' || this.formSep.value.jnsKunjungan.kode == 'igd') {
                 setTimeout(() => {
@@ -193,7 +201,7 @@ export class VclaimComponent implements OnInit, OnDestroy {
     public onSelectRujukan(data: any) {
         this.rujukan = data;
         this.formSep.get('poliklinik')?.patchValue(this.rujukan.rujukan.poliRujukan.kode);
-        this.formSep.get('diagnosa')?.patchValue(this.rujukan.rujukan.diagnosa);
+        this.formSep.get('diagnosa')?.patchValue({ kode: this.rujukan.rujukan.diagnosa.kode, nama: this.rujukan.rujukan.diagnosa.kode + ' - ' + this.rujukan.rujukan.diagnosa.nama })
         this.vclaimService.getTotalSep(this.rujukan.rujukan.noKunjungan, this.rujukan.asalFaskes);
         return;
         this.formSep.get('noRujukan')?.patchValue(data.rujukan.noKunjungan);
@@ -222,6 +230,30 @@ export class VclaimComponent implements OnInit, OnDestroy {
         this.formSep.get('noKartu')?.patchValue(this.peserta.noKartu);
         this.formSep.value.tglSep = this.appService.reformatDate(this.formSep.value.tglSep);
         this.vclaimService.save(this.formSep.value);
+    }
+
+    public getSepByRuangan(){
+        let a : any = [];
+        if( this.dataHistorySep ){
+            this.dataHistorySep.forEach((element: any) => {
+                let ruangan = this.formSep.get('poliklinik')?.value;
+                if( element == ruangan){
+                    a = element;
+                    return
+                }
+            });
+            console.log(a);
+        }
+    }
+
+    public saveSuratKontrol(){
+        let data : FormSuratKontrolModel = {
+            noSep: this.dataHistorySep[0].noSep,
+            kodeDokter: this.formSep.get('dokter')?.value,
+            poliKontrol: this.formSep.get('poliklinik')?.value,
+            tglRencanaKontrol: this.appService.reformatDate(new Date())
+        };
+        console.log(data);
     }
 
 }

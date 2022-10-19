@@ -25,7 +25,25 @@ export class AppService {
 
     public dateHuman(data: string) {
         let arrayTanggal = data.split('-');
-        return arrayTanggal[2] + '-' + arrayTanggal[1] + '-' + arrayTanggal[0]
+        return arrayTanggal[2] + ' ' + this.arrayBulan(arrayTanggal[1]) + ' ' + arrayTanggal[0]
+    }
+
+    public arrayBulan(key: string){
+        let obj : any = {
+            ['01'] : 'Jan',
+            ['02'] : 'Feb',
+            ['03'] : 'Mar',
+            ['04'] : 'Apr',
+            ['05'] : 'Mei',
+            ['06'] : 'Jun',
+            ['07'] : 'Jul',
+            ['08'] : 'Ags',
+            ['09'] : 'Sep',
+            ['10'] : 'Okt',
+            ['11'] : 'Nop',
+            ['12'] : 'Des',
+        }
+        return obj[key];
     }
 
     public setNotification(type: string, message: string){
