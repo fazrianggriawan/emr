@@ -20,6 +20,7 @@ export class VclaimService {
     statusLaka = new BehaviorSubject<any>('');
     pembiayaanNaikKelas = new BehaviorSubject<any>('');
     jnsKunjungan = new BehaviorSubject<any>('');
+    totalSepRujukan = new BehaviorSubject<any>('');
 
     saveStatus = new BehaviorSubject<boolean>(false);
 
@@ -41,11 +42,11 @@ export class VclaimService {
     public save(data: any) {
         this.http.post<any>(config.api_vclaim('sep/save'), data)
             .subscribe(data => {
-                if(data.metaData.code == '200'){
+                if (data.metaData.code == '200') {
                     this.appService.setNotification('success', data.metaData.message)
                     this.saveStatus.next(true);
                     this.printSep(data.response.sep.noSep);
-                }else{
+                } else {
                     this.appService.setNotification('error', data.metaData.message);
                     this.saveStatus.next(false);
                 }
@@ -54,12 +55,12 @@ export class VclaimService {
 
     public getPesertaByNomorKartu(key: string = '') {
         if (this.dataPasien.no_asuransi) key = this.dataPasien.no_asuransi;
-        if (key != ''){
+        if (key != '') {
             this.http.get<any>(config.api_vclaim('peserta/nomorKartu/' + key))
                 .subscribe(data => {
-                    if( data.metaData.code == '200' ){
+                    if (data.metaData.code == '200') {
                         this.peserta.next(data.response)
-                    }else{
+                    } else {
                         this.peserta.next('');
                         this.appService.setNotification('error', data.metaData.message);
                     }
@@ -146,17 +147,27 @@ export class VclaimService {
 
     public getJnsKunjungan() {
         let data = [
-            { kode: 'rujukanBaru', nama: 'Rujukan Baru', jnsPelayanan: '2', tujuanKunjungan: '0' },
-            { kode: 'kontrolKembali', nama: 'Kontrol Kembali', jnsPelayanan: '2', tujuanKunjungan: '2' },
+            { kode: 'rawatJalan', nama: 'Rawat Jalan', jnsPelayanan: '2', tujuanKunjungan: '0' },
+            // { kode: 'rujukanBaru', nama: 'Rujukan Baru', jnsPelayanan: '2', tujuanKunjungan: '0' },
+            // { kode: 'kontrolKembali', nama: 'Kontrol Kembali', jnsPelayanan: '2', tujuanKunjungan: '2' },
             { kode: 'rawatInap', nama: 'Rawat Inap', jnsPelayanan: '1', tujuanKunjungan: '0' },
             { kode: 'igd', nama: 'IGD', jnsPelayanan: '2', tujuanKunjungan: '0' },
-            { kode: 'antarPoli', nama: 'Rujukan Internal', jnsPelayanan: '2', tujuanKunjungan: '0' },
+            // { kode: 'antarPoli', nama: 'Rujukan Internal', jnsPelayanan: '2', tujuanKunjungan: '0' },
         ]
         this.jnsKunjungan.next(data);
     }
 
+    public getTotalSep(noRujukan: string, jnsPelayanan: string) {
+        this.http.get<any>(config.api_vclaim('rujukan/jumlahSep/nomorRujukan/' + noRujukan + '/jnsPelayanan/' + jnsPelayanan))
+            .subscribe(data => {
+                if (data.metaData.code == '200') {
+                    this.totalSepRujukan.next(data.response);
+                }
+            })
+    }
+
     public printSep(nomorSep: string) {
-        let iframe = '<iframe src="' + config.api_vclaim('sep/print/'+nomorSep) + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
+        let iframe = '<iframe src="' + config.api_vclaim('sep/print/' + nomorSep) + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
         let win: any = window.open("", "", "width=1024,height=510,toolbar=no,menubar=no,resizable=yes");
         win.document.write(iframe);
     }
@@ -171,11 +182,11 @@ export class VclaimService {
 
     public getExpiredRujukan(tanggalRujukan: string) {
 
-        let tanggal : any = tanggalRujukan.split('-');
-        let tglRujukan = new Date(tanggal[0], tanggal[1]-1, tanggal[2]);
-        let expiredDate = new Date(tglRujukan.setDate(tglRujukan.getDate()+90));
+        let tanggal: any = tanggalRujukan.split('-');
+        let tglRujukan = new Date(tanggal[0], tanggal[1] - 1, tanggal[2]);
+        let expiredDate = new Date(tglRujukan.setDate(tglRujukan.getDate() + 90));
 
-        let start =  new Date(this.appService.reformatDate(new Date()));
+        let start = new Date(this.appService.reformatDate(new Date()));
         let end = new Date(this.appService.reformatDate(expiredDate));
 
         let Time = end.getTime() - start.getTime();

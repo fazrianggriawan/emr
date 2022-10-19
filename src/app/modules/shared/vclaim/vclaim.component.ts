@@ -8,6 +8,7 @@ import { SuratKontrolService } from './surat-kontrol/surat-kontrol.service';
 import { VclaimService } from './vclaim.service';
 import { RujukanService } from "./rujukan/rujukan.service";
 import { Subscription } from 'rxjs';
+import { MasterService } from '../../registrasi/services/master.service';
 
 @Component({
     selector: 'app-vclaim',
@@ -32,7 +33,12 @@ export class VclaimComponent implements OnInit, OnDestroy {
     dataStatusLaka: any;
     dataPembiayaanNaikKelas: any;
     dataJnsKunjungan: any;
+    dataRuangan: any[] = [];
     suratKontrol: any;
+
+
+    rujukan : any;
+    totalSepRujukan: number = 0;
 
     subs: Subscription[] = [];
 
@@ -43,11 +49,13 @@ export class VclaimComponent implements OnInit, OnDestroy {
         private suratKontrolService: SuratKontrolService,
         private appService: AppService,
         private rujukanService: RujukanService,
-        private dataPasienService: DataPasienService
+        private dataPasienService: DataPasienService,
+        private masterService: MasterService
     ) { }
 
     ngOnInit(): void {
         this.initFormSep();
+        this.masterService.getRuangan('rj');
         this.vclaimService.peserta.subscribe(data => this.onSelectPeserta(data));
         this.vclaimService.diagnosa.subscribe(data => this.dataDiagnosa = data)
         this.vclaimService.poliklinik.subscribe(data => this.dataPoliklinik = data)
@@ -64,6 +72,10 @@ export class VclaimComponent implements OnInit, OnDestroy {
             if (data) this.vclaimService.getPesertaByNomorKartu();
         })
         this.subs.push(this.dataPasienService.pasien.subscribe(data => this.handlePasien(data)))
+
+        this.masterService.ruangan.subscribe(data => this.dataRuangan = data);
+
+        this.vclaimService.totalSepRujukan.subscribe(data => {if(data){ this.totalSepRujukan = data.jumlahSEP }} )
     }
 
     ngOnDestroy(): void {
@@ -74,13 +86,13 @@ export class VclaimComponent implements OnInit, OnDestroy {
         });
     }
 
-    handlePasien(data: any){
+    handlePasien(data: any) {
         this.initFormSep();
-        if(data){
-            if(data.no_asuransi){
+        if (data) {
+            if (data.no_asuransi) {
                 this.vclaimService.getPesertaByNomorKartu(data.no_asuransi);
-            }else{
-                if(data.nik){
+            } else {
+                if (data.nik) {
                     this.vclaimService.getPesertaByNik(data.nik);
                 }
             }
@@ -110,7 +122,7 @@ export class VclaimComponent implements OnInit, OnDestroy {
             suratKontrol: [''],
             noRujukan: [''],
             diagnosa: ['', Validators.required],
-            poliklinik: ['', Validators.required],
+            poliklinik: [null, Validators.required],
             dokter: ['', Validators.required],
             assessmentPel: [''],
             norm: ['', Validators.required],
@@ -142,14 +154,16 @@ export class VclaimComponent implements OnInit, OnDestroy {
 
     public getDpjp() {
         this.dataDokter = [];
-        if (this.formSep.value.jnsKunjungan.kode == 'rawatInap' || this.formSep.value.jnsKunjungan.kode == 'igd') {
-            setTimeout(() => {
-                this.vclaimService.getDpjp('1', this.formSep.value.poliklinik.kode);
-            }, 100);
-        } else {
-            setTimeout(() => {
-                this.vclaimService.getDpjp('2', this.formSep.value.poliklinik.kode);
-            }, 100);
+        if( this.formSep.get('poliklinik')?.value ){
+            if (this.formSep.value.jnsKunjungan.kode == 'rawatInap' || this.formSep.value.jnsKunjungan.kode == 'igd') {
+                setTimeout(() => {
+                    this.vclaimService.getDpjp('1', this.formSep.value.poliklinik);
+                }, 100);
+            } else {
+                setTimeout(() => {
+                    this.vclaimService.getDpjp('2', this.formSep.value.poliklinik);
+                }, 100);
+            }
         }
     }
 
@@ -177,6 +191,11 @@ export class VclaimComponent implements OnInit, OnDestroy {
     }
 
     public onSelectRujukan(data: any) {
+        this.rujukan = data;
+        this.formSep.get('poliklinik')?.patchValue(this.rujukan.rujukan.poliRujukan.kode);
+        this.formSep.get('diagnosa')?.patchValue(this.rujukan.rujukan.diagnosa);
+        this.vclaimService.getTotalSep(this.rujukan.rujukan.noKunjungan, this.rujukan.asalFaskes);
+        return;
         this.formSep.get('noRujukan')?.patchValue(data.rujukan.noKunjungan);
         this.formSep.get('diagnosa')?.patchValue({ kode: data.rujukan.diagnosa.kode, nama: data.rujukan.diagnosa.kode + ' - ' + data.rujukan.diagnosa.nama })
         this.formSep.get('rujukan')?.patchValue(data);
@@ -190,10 +209,10 @@ export class VclaimComponent implements OnInit, OnDestroy {
         this.formSep.get('assessmentPel')?.patchValue('');
         this.formSep.get('jnsPelayanan')?.patchValue(this.formSep.value.jnsKunjungan.jnsPelayanan);
         this.formSep.get('tujuanKunj')?.patchValue(this.formSep.value.jnsKunjungan.tujuanKunjungan);
-        if( this.formSep.value.jnsKunjungan.kode == 'antarPoli' ){
+        if (this.formSep.value.jnsKunjungan.kode == 'antarPoli') {
             this.formSep.get('assessmentPel')?.addValidators([Validators.required]);
             this.formSep.get('assessmentPel')?.updateValueAndValidity();
-        }else{
+        } else {
             this.formSep.get('assessmentPel')?.clearValidators();
             this.formSep.get('assessmentPel')?.updateValueAndValidity();
         }

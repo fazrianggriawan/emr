@@ -189,6 +189,29 @@
                                     <p-selectButton [options]="dataJnsKunjungan" (ngModelChange)="onSelectJnsKunjungan()" optionLabel="nama" formControlName="jnsKunjungan"></p-selectButton>
                                 </div>
                             </div>
+                            <div class="row mb-1">
+                                <label class="col-3 col-form-label">
+                                    Surat Rujukan <span *ngIf="formSep.get('jnsKunjungan')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col">
+                                    <div *ngIf="rujukan">
+                                        <div>No Rujukan : {{rujukan.rujukan.noKunjungan}}</div>
+                                        <div>Tgl Rujukan : {{rujukan.rujukan.tglKunjungan}}</div>
+                                        <div>Poli Rujukan : {{rujukan.rujukan.poliRujukan.nama}}</div>
+                                        <div>Berlaku sampai : {{vclaimService.getExpiredRujukan(rujukan.rujukan.tglKunjungan).expired}} ({{vclaimService.getExpiredRujukan(rujukan.rujukan.tglKunjungan).hariExpired}} hari lagi)</div>
+                                    </div>
+                                    <button class="btn"><i class="bi bi-grid-3x3"></i> Pilih Rujukan</button>
+
+                                    <div *ngIf="rujukan" class="mg-t-5">
+                                        <div class="badge tx-14 mg-r-5">
+                                            Terpakai Sebanyak : {{totalSepRujukan}}x
+                                        </div>
+                                        <div *ngIf="totalSepRujukan == 0" class="badge badge-success">Rujukan Baru</div>
+                                        <div *ngIf="totalSepRujukan >= 1" class="badge badge-primary">Kontrol Kembali</div>
+                                    </div>
+
+                                </div>
+                            </div>
                             <div class="row mb-1" *ngIf="formSep.value.jnsKunjungan.kode == 'kontrolKembali' || formSep.value.jnsKunjungan.kode == 'rawatInap'">
                                 <label class="col-3 col-form-label">
                                     <span *ngIf="formSep.value.jnsKunjungan.kode == 'kontrolKembali'">Surat Kontrol</span>
@@ -216,24 +239,16 @@
                                 </div>
                             </div>
                             <hr>
-                            <div class="row mb-1">
-                                <label class="col-3 col-form-label">
-                                    Diagnosa <span *ngIf="formSep.get('diagnosa')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
-                                </label>
-                                <div class="col">
-                                    <p-autoComplete (completeMethod)="vclaimService.getDiagnosa($event.query)" [suggestions]="dataDiagnosa" [forceSelection]="true" field="nama" [minLength]="3" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
-                                        <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
-                                    </p-autoComplete>
-                                </div>
-                            </div>
                             <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
                                 <label class="col-3 col-form-label">
                                     Poliklinik <span *ngIf="formSep.get('poliklinik')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
                                 </label>
                                 <div class="col-6">
-                                    <p-autoComplete (ngModelChange)="getDpjp()" (completeMethod)="vclaimService.getPoliklinik($event.query)" [suggestions]="dataPoliklinik" [forceSelection]="true" field="nama" [minLength]="3" formControlName="poliklinik" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                                    <p-dropdown [options]="dataRuangan" (ngModelChange)="getDpjp()" [autoDisplayFirst]="false" optionLabel="name" optionValue="r_poli.kode_bpjs" formControlName="poliklinik" [style]="{width: '100%'}"></p-dropdown>
+
+                                    <!-- <p-autoComplete (ngModelChange)="getDpjp()" (completeMethod)="vclaimService.getPoliklinik($event.query)" [suggestions]="dataPoliklinik" [forceSelection]="true" field="nama" [minLength]="3" formControlName="poliklinik" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
                                         <ng-template let-value pTemplate="item"><span>{{value.nama | uppercase}}</span></ng-template>
-                                    </p-autoComplete>
+                                    </p-autoComplete> -->
                                 </div>
                             </div>
                             <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap'">
@@ -242,6 +257,16 @@
                                 </label>
                                 <div class="col-6">
                                     <p-dropdown [options]="dataDokter" [autoDisplayFirst]="false" optionLabel="nama" formControlName="dokter" [style]="{width: '100%'}"></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="row mb-1">
+                                <label class="col-3 col-form-label">
+                                    Diagnosa <span *ngIf="formSep.get('diagnosa')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col">
+                                    <p-autoComplete (completeMethod)="vclaimService.getDiagnosa($event.query)" [suggestions]="dataDiagnosa" [forceSelection]="true" field="nama" [minLength]="3" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                                        <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
+                                    </p-autoComplete>
                                 </div>
                             </div>
                             <div class="row mb-1" *ngIf="formSep.value.jnsKunjungan.kode == 'antarPoli' ">
