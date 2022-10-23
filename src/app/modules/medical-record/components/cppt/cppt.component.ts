@@ -19,6 +19,7 @@ export class CpptComponent implements OnInit {
     dataTable: any[] = [];
     filteredIcd10: any[] = [];
     dataIcd10: any[] = [];
+    sideBar: boolean = false;
 
     form!: FormGroup;
 
