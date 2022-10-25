@@ -48,6 +48,7 @@ import { TagModule } from 'primeng/tag';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { ToggleButtonModule } from 'primeng/togglebutton';
+import { SidebarModule } from 'primeng/sidebar';
 
 
 let primeModules = [
@@ -80,7 +81,8 @@ let primeModules = [
     TagModule,
     InputSwitchModule,
     PanelMenuModule,
-    ToggleButtonModule
+    ToggleButtonModule,
+    SidebarModule
 ]
 
 let sharedComponent = [
