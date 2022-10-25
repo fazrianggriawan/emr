@@ -56,9 +56,9 @@ export class BillingService {
             })
     }
 
-    public getBillingByNoreg(noreg: string) {
+    public getBillingByNoreg(noreg: string, status: string) {
         if (noreg) {
-            this.http.get<any>(config.api_url('billing/billingByNoreg/' + noreg))
+            this.http.get<any>(config.api_url('billing/billingByNoreg/' + noreg +'/'+status))
                 .subscribe(data => {
                     this.dataBilling.next(data.data);
                     this.getTotalBilling(data.data);

@@ -5,7 +5,7 @@
     </div>
     <div class="col-auto mr-4">
         <div><span class="mr-1 tx-12 text-muted">Nama :</span> <span>{{registrasi.pasien.nama | uppercase}} <span class="badge badge-light">{{registrasi.pasien.r_jns_kelamin.name | uppercase}}</span></span></div>
-        <div><span class="mr-1 tx-12 text-muted">No. RM / No. Reg :</span> <span>{{registrasi.norm}} / {{registrasi.noreg}}</span></div>
+        <div><span class="mr-1 tx-12 text-muted">No. RM / No. Reg :</span> <span>{{registrasi.norm}} / {{registrasi.noreg}}</span> {{appService.getAge(registrasi.pasien.tgl_lahir)}}</div>
     </div>
     <div class="col-auto mr-4">
         <div><span class="mr-1 tx-12 text-muted">Dokter :</span> <span>{{registrasi.dokter.name}}</span></div>

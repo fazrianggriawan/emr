@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from 'src/app/services/app.service';
 import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
 
@@ -13,7 +14,8 @@ export class WidgetRegistrasiComponent implements OnInit {
 
     constructor(
         private registrasiService: RegistrasiService,
-        private dataPasienService: DataPasienService
+        private dataPasienService: DataPasienService,
+        public appService: AppService
     ) { }
 
     ngOnInit(): void {

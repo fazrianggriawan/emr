@@ -55,7 +55,7 @@ export class FileUploadComponent implements OnInit {
         event.files.forEach((file: any) => {
             const formData: FormData = new FormData();
             formData.append('file', file);
-            this.http.post<any>('http://192.168.101.1:8080/upload', formData).subscribe(data => {
+            this.http.post<any>(config.api_upload('upload'), formData).subscribe(data => {
                 this.removeFile(event, file, uploader);
             })
         });

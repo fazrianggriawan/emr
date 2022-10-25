@@ -28,6 +28,9 @@ export class BillingComponent implements OnInit, OnDestroy {
     dataPembayaran: any;
     registrasi: any;
     totalBilling: any;
+    statusBilling: any[] = [];
+    selectedStatusBilling : any = 'open';
+    selectedBillingBatch : any;
 
     subs: Subscription[] = [];
 
@@ -47,6 +50,12 @@ export class BillingComponent implements OnInit, OnDestroy {
         this.subs.push(this.billingService.addDiscountStatus.subscribe(data => this.handleAddDiscount(data)))
         this.selectedCatTarif = 'all';
 
+        this.statusBilling = [
+            {id: 'all', name: 'All'},
+            {id: 'open', name: 'Open'},
+            {id: 'closed', name: 'Closed'},
+        ]
+
         this.catTarif = [
             { id: 'all', name: 'All' },
             { id: 'perawatan', name: 'Perawatan' },
@@ -65,11 +74,14 @@ export class BillingComponent implements OnInit, OnDestroy {
         });
     }
 
+    getDataBilling(){
+        console.log(this.selectedBillingBatch);
+        this.billingService.getBillingByNoreg(this.registrasi.noreg, this.selectedStatusBilling);
+    }
+
     handleRegistrasi(data: any) {
         this.registrasi = data;
-        if (data) {
-            this.billingService.getBillingByNoreg(this.registrasi.noreg);
-        }
+        this.getDataBilling();
     }
 
     handleDataBilling(data: any) {
@@ -84,20 +96,20 @@ export class BillingComponent implements OnInit, OnDestroy {
 
     handleSaveBilling(data: boolean) {
         if (data) {
-            this.billingService.getBillingByNoreg(this.registrasi.noreg);
+            this.getDataBilling();
         }
     }
 
     handleUpdate(data: boolean) {
         if (data) {
-            this.billingService.getBillingByNoreg(this.registrasi.noreg);
+            this.getDataBilling();
             this.opJumlah.hide();
         }
     }
 
     handleAddDiscount(data: boolean) {
         if (data) {
-            this.billingService.getBillingByNoreg(this.registrasi.noreg);
+            this.getDataBilling();
             this.opDisc.hide();
         }
     }
@@ -140,8 +152,13 @@ export class BillingComponent implements OnInit, OnDestroy {
 
     refresh(){
         if( this.registrasi.noreg ){
-            this.billingService.getBillingByNoreg(this.registrasi.noreg);
+            this.getDataBilling();
         }
+    }
+
+    changeStatusBilling(e: any){
+        this.selectedStatusBilling = e;
+        this.getDataBilling();
     }
 
     printBilling() {

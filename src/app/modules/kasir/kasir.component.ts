@@ -3,8 +3,9 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
 import { RegistrasiService } from '../registrasi/services/registrasi.service';
-import { BillingService } from './components/billing/billing.service';
+// import { BillingService } from './components/billing/billing.service';
 import { FormGroup } from '@angular/forms';
+import { BillingService } from '../billing/billing/billing.service';
 
 @Component({
     selector: 'app-kasir',
@@ -118,7 +119,7 @@ export class KasirComponent implements OnInit, OnDestroy {
     handleDataRegistrasi(data: any) {
         this.registrasi = data;
         if (data) {
-            this.billingService.getBillingByNoreg(this.registrasi.noreg)
+            this.billingService.getBillingByNoreg(this.registrasi.noreg, 'open')
             this.billingService.getDataPembayaran(this.registrasi.noreg)
         }
     }
