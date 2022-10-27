@@ -94,6 +94,10 @@ export class MedicalRecordComponent implements OnInit {
         this.router.navigateByUrl(this.currentRoute + '/cppt');
     }
 
+    selectRegistrasi(data: any){
+        this.registrasiService.registrasi.next(data);
+    }
+
     goFilter() {
         let dataFilter = this.formFilter.value;
         dataFilter.from = this.appService.reformatDate(this.formFilter.value.dari);

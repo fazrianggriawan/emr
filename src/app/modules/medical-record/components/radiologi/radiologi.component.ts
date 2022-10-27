@@ -34,6 +34,7 @@ export class RadiologiComponent implements OnInit {
     }
 
     handleRegistrasi(data: any){
+        console.log(data);
         this.registrasi = data;
         if(data){
             this.radiologiService.getDataOrder(this.registrasi.noreg);
