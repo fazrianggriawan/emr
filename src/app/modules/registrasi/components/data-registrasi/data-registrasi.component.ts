@@ -7,6 +7,7 @@ import { MasterService } from '../../services/master.service';
 import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
 import { FormRegistrasiService } from '../form-registrasi/form-registrasi.service';
+import { RiwayatKunjunganService } from '../riwayat-kunjungan/riwayat-kunjungan.service';
 import { DataRegistrasiService } from './data-registrasi.service';
 
 @Component({
@@ -24,6 +25,9 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
     dialogVclaim: boolean = false;
     tanggal: Date[] = [];
     form!: FormGroup;
+    pasien: any;
+
+    dialogRiwayatKunjungan: boolean = false;
 
     jnsPerawatan: any;
     dataDokter: any[] = [];
@@ -40,7 +44,8 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         private registrasiService: RegistrasiService,
         private dataPasienService: DataPasienService,
         private masterService: MasterService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        public riwayatKunjunganService: RiwayatKunjunganService
     ) { }
 
     ngOnInit(): void {
@@ -57,6 +62,8 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         this.masterService.groupPasien.subscribe(data => this.dataJnsPembayaran = data);
         this.registrasiService.dataRegistrasi.subscribe(data => this.dataRegistrasi = data);
         this.formRegistrasiService.saveStatus.subscribe(data => {if(data) this.filterForm()})
+        this.riwayatKunjunganService.dialog.subscribe(data => this.dialogRiwayatKunjungan = data)
+        this.dataPasienService.pasien.subscribe(data => this.pasien = data);
 
         this.initForm();
     }

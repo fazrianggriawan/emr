@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AppService } from 'src/app/services/app.service';
 import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
+import { WidgetRegistrasiService } from './widget-registrasi.service';
 
 @Component({
     selector: 'app-widget-registrasi',
@@ -10,15 +11,19 @@ import { DataPasienService } from '../data-pasien/data-pasien.service';
 })
 export class WidgetRegistrasiComponent implements OnInit {
 
+    @Input() showWidget : Boolean = true;
+
     registrasi: any;
 
     constructor(
         private registrasiService: RegistrasiService,
         private dataPasienService: DataPasienService,
-        public appService: AppService
+        public appService: AppService,
+        private widgetRegistrasiService: WidgetRegistrasiService
     ) { }
 
     ngOnInit(): void {
+        this.widgetRegistrasiService.widget.subscribe(data => this.showWidget = data);
         this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data))
 
         if( sessionStorage.getItem('noreg') ){

@@ -17,11 +17,54 @@ export class FarmasiService {
     orderObatBiasa = new BehaviorSubject<any>('');
     orderObatRacikan = new BehaviorSubject<any>('');
     jenisResep = new BehaviorSubject<any>('biasa');
+    dataObat = new BehaviorSubject<any[]>([]);
+    dataBilling = new BehaviorSubject<any[]>([]);
+    dataDepo = new BehaviorSubject<any[]>([]);
+    dataSupplier = new BehaviorSubject<any[]>([]);
 
     constructor(
         private http: HttpClient,
         private errorHandle: ErrorHandlerService,
     ) { }
+
+    getDataBilling(noreg: string, status: string){
+        this.http.get<any>( config.api_url('farmasi/getBilling/'+noreg+'/'+status) )
+            .subscribe(data => {
+                this.dataBilling.next(data.data)
+            });
+    }
+
+    getDataDepo(){
+        this.http.get<any>( config.api_url('farmasi/master/depo') )
+            .subscribe(data => {
+                this.dataDepo.next(data.data)
+            });
+    }
+
+    getDataSupplier(){
+        this.http.get<any>( config.api_url('farmasi/master/supplier') )
+            .subscribe(data => {
+                this.dataSupplier.next(data.data)
+            })
+    }
+
+    cariObat(key: string) {
+        if(key){
+            this.http.get<any>(config.api_url('farmasi/cariObat/' + key))
+                .subscribe(data => {
+                    this.dataObat.next(data.data);
+                });
+        }
+    }
+
+    savePembayaran(data: any){
+        this.http.post<any>( config.api_url('farmasi/savePembayaran'), data )
+            .subscribe(data => {
+                if( data.code == '200' ){
+                    this.getDataBilling(data.noreg, 'open');
+                }
+            })
+    }
 
     public getMasterObat() {
         this.http.get<any>( config.api_public('vclaim/peserta/get/master_obat') ).subscribe(data => this.masterObat.next(data.data));

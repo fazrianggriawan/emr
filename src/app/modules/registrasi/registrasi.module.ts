@@ -12,6 +12,7 @@ import { WidgetRegistrasiComponent } from './components/widget-registrasi/widget
 import { FormRawatInapComponent } from './components/form-rawat-inap/form-rawat-inap.component';
 import { CariPasienComponent } from './components/cari-pasien/cari-pasien.component';
 import { CariRegistrasiComponent } from './components/cari-registrasi/cari-registrasi.component';
+import { RiwayatKunjunganComponent } from './components/riwayat-kunjungan/riwayat-kunjungan.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { CariRegistrasiComponent } from './components/cari-registrasi/cari-regis
         WidgetRegistrasiComponent,
         FormRawatInapComponent,
         CariPasienComponent,
-        CariRegistrasiComponent
+        CariRegistrasiComponent,
+        RiwayatKunjunganComponent
     ],
     imports: [
         SharedModule,

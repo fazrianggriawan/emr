@@ -30,6 +30,7 @@ export class MasterService {
     waktuPelayanan = new BehaviorSubject<any>('');
     kelasRuangan = new BehaviorSubject<any>('');
     tempatTidur = new BehaviorSubject<any>('');
+    jnsPembayaran = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient
@@ -117,6 +118,10 @@ export class MasterService {
 
     public getJnsPerawatan() {
         this.http.get<any>(config.api_url('master/jnsPerawatan')).subscribe(data => this.jnsPerawatan.next(data.data))
+    }
+
+    public getJnsPembayaran() {
+        this.http.get<any>(config.api_url('master/jnsPembayaran')).subscribe(data => this.jnsPembayaran.next(data.data))
     }
 
     public getDataWaktuPelayanan() {

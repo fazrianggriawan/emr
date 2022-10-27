@@ -1,0 +1,34 @@
+<p-autoComplete
+    #acMasterObat
+    [autoZIndex]="true"
+    appendTo="body"
+    [baseZIndex]="9999"
+    field="nama"
+    placeholder="+ Cari Obat..."
+    (completeMethod)="farmasiService.cariObat($event.query)"
+    (onSelect)="selectObat($event, acMasterObat)"
+    [suggestions]="dataObat"
+    [forceSelection]="true"
+    [delay]="100"
+    [showClear]="true"
+    [minLength]="3"
+    [style]="{'width':'100%'}"
+    scrollHeight="30vw"
+    [inputStyle]="{'width':'100%'}">
+
+    <ng-template pTemplate="header">
+        <div class="row bg-gray-200 sticky-top">
+            <div class="col-6 pd-l-30 pd-t-10 pd-b-10">Nama Obat</div>
+            <div class="col-2 pd-t-10 pd-b-10">Satuan</div>
+            <div class="col-auto pd-t-10 pd-b-10">Harga</div>
+        </div>
+    </ng-template>
+
+    <ng-template let-value pTemplate="item">
+        <div class="row">
+            <div class="col-6">{{value.nama}}</div>
+            <div class="col-2">{{value.satuan}}</div>
+            <div class="col-auto">{{value.harga | number}}</div>
+        </div>
+    </ng-template>
+</p-autoComplete>

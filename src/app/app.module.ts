@@ -37,6 +37,7 @@ import { MainPanelComponent } from './template/main-panel/main-panel.component';
 import { BillingModule } from './modules/billing/billing.module';
 import { ChartModule } from 'primeng/chart';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
+import { FarmasiModule } from './modules/farmasi/farmasi.module';
 
 @NgModule({
     declarations: [
@@ -79,7 +80,8 @@ import { BarChartComponent } from './components/bar-chart/bar-chart.component';
         RuangRekamMedisModule,
         SettingModule,
         BillingModule,
-        ChartModule
+        ChartModule,
+        FarmasiModule
     ],
     providers: [
         DatePipe,

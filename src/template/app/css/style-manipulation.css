@@ -44,3 +44,7 @@ body {
 .br-nav-mailbox .nav-link i {
     font-size: 20px;
 }
+
+.menu-transparent ul, .menu-transparent ul li a{
+    background-color: transparent !important;
+}

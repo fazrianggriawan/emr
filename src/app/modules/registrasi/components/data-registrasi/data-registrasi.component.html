@@ -1,8 +1,15 @@
+
+<style>
+    .p-datatable-flex-scrollable .p-datatable-wrapper {
+  flex-basis: auto !important;
+  height: 0 !important;
+}
+</style>
 <div class="row">
     <div class="col-auto border-right"><h5>Data Registrasi</h5></div>
     <div class="col-auto">
         <button class="btn btn-primary mr-2" *ngIf="showForm" (click)="registrasiBaru()"><i class="bi bi-plus-lg mr-1"></i> Form Registrasi</button>
-        <button class="btn mr-2" (click)="registrasiBaru()" [disabled]="!registrasi.noreg"><i class="bi bi-clock-history mr-1"></i> Riwayat Kunjungan</button>
+        <button class="btn mr-2" (click)="riwayatKunjunganService.showDialog(true)" [disabled]="!registrasi.noreg"><i class="bi bi-clock-history mr-1"></i> Riwayat Kunjungan</button>
         <button class="btn btn-light mr-2" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
     </div>
 </div>
@@ -10,7 +17,12 @@
 <div class="row mg-t-10">
     <div class="col">
         <form [formGroup]="form">
-            <p-table [value]="dataRegistrasi" styleClass="p-datatable-sm table-striped table-hover border-top mb-3" responsiveLayout="scroll">
+            <p-table
+                [value]="dataRegistrasi"
+                styleClass="p-datatable-sm table-striped table-hover border-top mb-3"
+                [scrollable]="true"
+                scrollHeight="30vw"
+                responsiveLayout="scroll">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Tanggal</th>
@@ -70,7 +82,9 @@
                         </td>
                         <td (click)="selectRegistrasi(item)" class="clickable">
                             <div>{{item.noreg}}</div>
-                            <span class="badge" [ngClass]="{'badge-danger': (item.status==='closed'), 'badge-success': (item.status==='open')}">{{item.status | uppercase}}</span>
+                            <div>
+                                <span class="badge" [ngClass]="{'badge-danger': (item.status==='closed'), 'badge-success': (item.status==='open')}">{{item.status | uppercase}}</span>
+                            </div>
                         </td>
                         <td>
                             <button class="btn btn-icon btn-outline-primary rounded-circle" [disabled]="item.status === 'closed'">
@@ -106,4 +120,15 @@
     [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
     appendTo="body">
     <app-form-registrasi *ngIf="dialogFormRegistrasi"></app-form-registrasi>
+</p-dialog>
+
+<p-dialog
+    [(visible)]="dialogRiwayatKunjungan"
+    (onHide)="riwayatKunjunganService.showDialog(false)"
+    header="Riwayat Kunjungan"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
+    appendTo="body">
+    <app-riwayat-kunjungan *ngIf="dialogRiwayatKunjungan"></app-riwayat-kunjungan>
 </p-dialog>
