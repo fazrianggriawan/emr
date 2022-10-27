@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AutoComplete } from 'primeng/autocomplete';
+import { config } from 'src/app/config';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { RadiologiService } from './radiologi.service';
 
@@ -102,6 +103,10 @@ export class RadiologiComponent implements OnInit {
 
     openFile(file: string){
 
+    }
+
+    getPhoto(){
+        return config.api_url('radiologi/hasil-photo/'+this.registrasi.noreg);
     }
 
 }
