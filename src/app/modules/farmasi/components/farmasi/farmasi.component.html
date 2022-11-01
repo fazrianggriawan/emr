@@ -4,38 +4,43 @@
             <div class="col-auto border-right">
                 <h5>Transaksi</h5>
             </div>
-            <div class="col-auto">
+            <div class="col-auto border-right">
                 <app-cari-registrasi></app-cari-registrasi>
             </div>
-            <div class="col-auto border-left">
+            <!-- <div class="col-auto border-left">
                 Transaksi Umum
                 <div class="mg-t-5">
                     <p-inputSwitch [(ngModel)]="isPenjualanLangsung"></p-inputSwitch>
                 </div>
-            </div>
+            </div> -->
             <div class="col-auto">
-                Status Tagihan
-                <div class="mg-t-5">
-                    <p-selectButton [options]="statusBilling" [(ngModel)]="selectedStatusBilling" optionValue="id" optionLabel="name"></p-selectButton>
-                </div>
+                <span class="p-float-label">
+                    <p-dropdown placeholder="Status Tagihan" [(ngModel)]="selectedStatusBilling" [options]="statusBilling" optionValue="id" optionLabel="name" [autoDisplayFirst]="false" placeholder="Pilih Depo"></p-dropdown>
+                    <label>Status Tagihan</label>
+                </span>
             </div>
-            <div class="col-auto">
-                Lokasi Depo
-                <div class="mg-t-5">
-                    <p-dropdown [(ngModel)]="selectedDepo" [options]="dataDepo" optionValue="id" optionLabel="name" [autoDisplayFirst]="false" placeholder="Pilih Depo"></p-dropdown>
-                </div>
+            <div class="col-auto pd-l-0">
+                <span class="p-float-label">
+                    <p-dropdown [(ngModel)]="selectedDepo" [options]="dataDepo" optionValue="id" optionLabel="name" [autoDisplayFirst]="false"></p-dropdown>
+                    <label for="dropdown">Lokasi Depo</label>
+                </span>
+                <!-- <p-dropdown [(ngModel)]="selectedDepo" [options]="dataDepo" optionValue="id" optionLabel="name" [autoDisplayFirst]="false" placeholder="Pilih Depo">
+                    <ng-template pTemplate="header">
+                        <div class="bg-gray-200 text-muted tx-12 pd-10">
+                            Lokasi Depo
+                        </div>
+                    </ng-template>
+                </p-dropdown> -->
             </div>
-            <div class="col-auto">
-                <div class="pd-t-20">
-                    <button class="btn"><i class="bi bi-printer"></i> Print Billing</button>
-                </div>
+            <div class="col-auto pd-l-0">
+                <button class="btn" [disabled]="!registrasi"><i class="bi bi-printer"></i> Print Billing</button>
             </div>
         </div>
         <div class="row mg-t-10 mg-b-10">
             <div class="col">
                 <p-autoComplete
                     #acMasterObat
-                    [disabled]="!selectedDepo"
+                    [disabled]="!selectedDepo || !registrasi"
                     [autoZIndex]="true"
                     appendTo="body"
                     [baseZIndex]="9999"

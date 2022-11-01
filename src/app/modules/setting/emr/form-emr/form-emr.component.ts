@@ -11,6 +11,7 @@ export class FormEmrComponent implements OnInit {
     data : any[] = [];
     options : any[] = [];
     option : any = '';
+    dialogFormEmr: boolean = false;
 
     constructor(
         private formEmrService: FormEmrService
@@ -33,6 +34,17 @@ export class FormEmrComponent implements OnInit {
 
     view(id: number){
         alert(id)
+    }
+
+    editForm(data: any){
+        console.log(data);
+        this.formEmrService.selectedForm.next(data);
+        this.dialogFormEmr = true;
+    }
+
+    resetForm(){
+        this.dialogFormEmr = false;
+        this.formEmrService.selectedForm.next('');
     }
 
 }

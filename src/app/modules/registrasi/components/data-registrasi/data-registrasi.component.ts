@@ -26,6 +26,7 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
     tanggal: Date[] = [];
     form!: FormGroup;
     pasien: any;
+    loading: boolean = false;
 
     dialogRiwayatKunjungan: boolean = false;
 
@@ -60,7 +61,7 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         this.masterService.jnsPerawatan.subscribe(data => this.dataJnsPerawatan = data)
         this.masterService.ruangan.subscribe(data => this.dataRuangan = data)
         this.masterService.groupPasien.subscribe(data => this.dataJnsPembayaran = data);
-        this.registrasiService.dataRegistrasi.subscribe(data => this.dataRegistrasi = data);
+        this.registrasiService.dataRegistrasi.subscribe(data => { this.dataRegistrasi = data; this.loading = false; });
         this.formRegistrasiService.saveStatus.subscribe(data => {if(data) this.filterForm()})
         this.riwayatKunjunganService.dialog.subscribe(data => this.dialogRiwayatKunjungan = data)
         this.dataPasienService.pasien.subscribe(data => this.pasien = data);
@@ -83,10 +84,14 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
     filterForm(){
         let data = this.form.value;
         if( data.tanggal ){
-            if( data.tanggal[0] ) data.from = data.tanggal[0].toLocaleDateString('id-ID').toString();
-            if( data.tanggal[1] ) data.to = data.tanggal[1].toLocaleDateString('id-ID').toString();
+            if( data.tanggal[0] ) data.from = this.appService.reformatDate(data.tanggal[0]);
+            if( data.tanggal[1] ) data.to = this.appService.reformatDate(data.tanggal[1]);
+
+            if(data.tanggal.length > 0){
+                this.loading = true;
+                this.registrasiService.filterDataRegistrasi(data);
+            }
         }
-        this.registrasiService.filterDataRegistrasi(data);
     }
 
     getRuangan(e: any) {

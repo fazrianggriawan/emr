@@ -3,6 +3,7 @@ import { ConfirmationService, MenuItem } from 'primeng/api';
 import { AutoComplete } from 'primeng/autocomplete';
 import { WidgetRegistrasiService } from 'src/app/modules/registrasi/components/widget-registrasi/widget-registrasi.service';
 import { MasterService } from 'src/app/modules/registrasi/services/master.service';
+import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { AppService } from 'src/app/services/app.service';
 import { FarmasiService } from './farmasi.service';
 
@@ -31,38 +32,38 @@ export class FarmasiComponent implements OnInit {
     statusBilling: any[] = [];
     selectedStatusBilling: string = 'open';
     dataDepo: any[] = [];
-    selectedDepo: any = '';
+    selectedDepo: any = null;
+    registrasi: any;
 
     constructor(
         public appService: AppService,
         public farmasiService: FarmasiService,
         private confirmationService: ConfirmationService,
         private masterService: MasterService,
-        private widgetRegistrasiService: WidgetRegistrasiService
-    ) {
-        this.farmasiService.getDataDepo();
-        this.farmasiService.dataObat.subscribe(data => this.dataObat = data)
-        this.farmasiService.dataDepo.subscribe(data => this.dataDepo = data)
-
-        this.widgetRegistrasiService.showWidget(false)
-
-        this.statusBilling = [
-            {id: 'all', name: 'All'},
-            {id: 'open', name: 'Open'},
-            {id: 'closed', name: 'Closed'},
-        ]
-
-    }
+        private widgetRegistrasiService: WidgetRegistrasiService,
+        private registrasiService: RegistrasiService
+    ) { }
 
     ngOnInit(): void {
-
+        // this.widgetRegistrasiService.showWidget(false)
+        this.farmasiService.getDataDepo();
         this.masterService.getJnsPembayaran();
         this.masterService.jnsPembayaran.subscribe(data => this.dataJnsPembayaran = data);
+        this.farmasiService.dataObat.subscribe(data => this.dataObat = data)
+        this.farmasiService.dataDepo.subscribe(data => this.dataDepo = data)
+        this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
 
         this.menuItems = [
             { label: 'Home' },
             { label: 'Transaksi', routerLink: 'transaksi' }
         ]
+
+        this.statusBilling = [
+            {id: 'all', name: 'ALL'},
+            {id: 'open', name: 'OPEN'},
+            {id: 'closed', name: 'CLOSED'},
+        ]
+
     }
 
     selectObat(obat: any, ac: AutoComplete){

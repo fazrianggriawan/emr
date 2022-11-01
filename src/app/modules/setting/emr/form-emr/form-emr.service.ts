@@ -9,6 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class FormEmrService {
 
     data = new BehaviorSubject<any>('');
+    selectedForm  = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient

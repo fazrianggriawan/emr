@@ -34,7 +34,7 @@
         </div>
         <div class="row mg-t-10">
             <div class="col">
-                <p-table [value]="dataBilling" responsiveLayout="scroll" [(selection)]="selectedBillingBatch" dataKey="id">
+                <p-table [value]="dataBilling" responsiveLayout="scroll" [rowHover]="true" styleClass="p-datatable-sm p-datatable-striped" [(selection)]="selectedBillingBatch" dataKey="id">
                     <ng-template pTemplate="header">
                         <tr>
                             <th style="width: 3rem">
@@ -71,8 +71,8 @@
                                 <span class="badge" [ngClass]="{'badge-success': (item.status === 'open'), 'badge-danger': (item.status) === 'closed'}">{{item.status}}</span>
                             </td>
                             <td>
-                                <button class="btn btn-icon btn-outline-light rounded-circle" (click)="confirmDeleteBilling($event, item)">
-                                    <div><i class="bi bi-trash"></i></div>
+                                <button class="btn btn-sm btn-outline-light" (click)="confirmDeleteBilling($event, item)">
+                                    <i class="bi bi-trash"></i>
                                 </button>
                             </td>
                         </tr>
@@ -95,11 +95,11 @@
         <div class="input-group">
             <input type="text" class="form-control" [(ngModel)]="selectedBilling.discount_percent" placeholder="Discount %" aria-label="Discount %" aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-primary btn-icon" type="button" (click)="addDiscount()">
-                    <div><i class="bi bi-check-lg"></i></div>
+                <button class="btn btn-primary" type="button" (click)="addDiscount()">
+                    <i class="bi bi-check-lg"></i>
                 </button>
-                <button class="btn btn-icon" type="button">
-                    <div><i class="bi bi-x-lg"></i></div>
+                <button class="btn" type="button">
+                    <i class="bi bi-x-lg"></i>
                 </button>
             </div>
         </div>
@@ -112,11 +112,11 @@
         <div class="input-group">
             <input type="number" class="form-control"  [(ngModel)]="selectedBilling.qty" placeholder="Qty" aria-label="Qty" aria-describedby="button-addon2">
             <div class="input-group-append">
-                <button class="btn btn-primary btn-icon" (click)="updateJumlah()" type="button">
-                    <div><i class="bi bi-check-lg"></i></div>
+                <button class="btn btn-primary" (click)="updateJumlah()" type="button">
+                    <i class="bi bi-check-lg"></i>
                 </button>
-                <button class="btn btn-icon" type="button">
-                    <div><i class="bi bi-x-lg"></i></div>
+                <button class="btn" type="button">
+                    <i class="bi bi-x-lg"></i>
                 </button>
             </div>
         </div>

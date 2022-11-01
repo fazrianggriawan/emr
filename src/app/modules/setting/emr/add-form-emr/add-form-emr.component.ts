@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AddFormEmrService } from './add-form-emr.service';
 import { Subscription } from "rxjs";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormEmrService } from '../form-emr/form-emr.service';
 
 @Component({
     selector: 'app-add-form-emr',
@@ -16,6 +17,7 @@ export class AddFormEmrComponent implements OnInit {
     required: boolean = false;
     form!: FormGroup;
 
+    selectedForm: any;
     inputTextbox: string = '';
     inputDropdown: string = '';
     inputCheckbox: boolean = false;
@@ -25,16 +27,17 @@ export class AddFormEmrComponent implements OnInit {
 
     subs: Subscription[] = [];
 
-
     constructor(
         private addFormEmrService: AddFormEmrService,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private formEmrService: FormEmrService
     ) { }
 
     ngOnInit(): void {
         this.addFormEmrService.getDataParent(1);
         this.addFormEmrService.getDataControlType();
 
+        this.formEmrService.selectedForm.subscribe(data => this.selectedForm = data)
         this.addFormEmrService.dataParent.subscribe(data => this.parent = data)
         this.addFormEmrService.dataControlType.subscribe(data => this.controlType = data)
         this.addFormEmrService.save.subscribe(data => { if(data) this.initForm(); })
@@ -57,8 +60,8 @@ export class AddFormEmrComponent implements OnInit {
     save() {
         let data : any = {
             form : this.form.value,
-            id_form : 1,
-            id_ruangan : 18,
+            id_form : this.selectedForm.id,
+            id_ruangan : this.selectedForm.id_ruangan,
             options: this.pilihanJawaban,
             value: '',
             hideLabel: this.hideLabel

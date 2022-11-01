@@ -17,6 +17,7 @@ export class DataPasienComponent implements OnInit, OnDestroy {
     dataPasien: any[] = [];
     selectedPasien: any;
     form!: FormGroup;
+    loading: boolean = false;
 
     subs: Subscription[] = [];
     selectedSearch: any;
@@ -29,7 +30,7 @@ export class DataPasienComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.initForm();
-        this.dataPasienService.dataPasien.subscribe(data => this.dataPasien = data)
+        this.dataPasienService.dataPasien.subscribe(data => {this.dataPasien = data; this.loading = false;})
         this.subs.push(this.dataPasienService.dialog.subscribe(data => this.handleDialog(data)))
     }
 
@@ -44,14 +45,15 @@ export class DataPasienComponent implements OnInit, OnDestroy {
         ]
     }
 
-    filterBy(value: any){
-        if(value){
-            this.dataPasienService.searchBy(value.id, value.key)
-        }else{
-            this.dataPasienService.getAllDataPasien();
-        }
-        this.acSearch.clear();
-    }
+    // filterBy(value: any){
+    //     this.loading = true;
+    //     if(value){
+    //         this.dataPasienService.searchBy(value.id, value.key)
+    //     }else{
+    //         this.dataPasienService.getAllDataPasien();
+    //     }
+    //     this.acSearch.clear();
+    // }
 
     ngOnDestroy(): void {
         //Called once, before the instance is destroyed.
@@ -63,6 +65,7 @@ export class DataPasienComponent implements OnInit, OnDestroy {
         this.showDialog = data
         if( data ){
             if( this.dataPasienService.dataPasien.value.length == 0 ){
+                this.loading = true;
                 this.dataPasienService.getAllDataPasien();
             }
         }
@@ -81,6 +84,7 @@ export class DataPasienComponent implements OnInit, OnDestroy {
 
     public sorting(e: KeyboardEvent) {
         if( e.code == 'Enter' ){
+            this.loading = true;
             var tglLahir = this.form.value.tglLahir;
             if( tglLahir ) {
                 var lahir = tglLahir.substr(6, 4) + '-' + tglLahir.substr(3, 2) + '-' + tglLahir.substr(0, 2);

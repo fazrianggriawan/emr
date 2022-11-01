@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MainPanelService {
 
-    margin = new BehaviorSubject<boolean>(true);
+    margin = new BehaviorSubject<boolean>(false);
 
     constructor() { }
 

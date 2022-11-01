@@ -26,7 +26,13 @@
     </div>
 </div> -->
 
-<form [formGroup]="form">
+<div class="row">
+    <div class="col">
+        <h5>{{selectedForm.r_form_emr.name}} :: {{selectedForm.r_ruangan.name}}</h5>
+    </div>
+</div>
+
+<form [formGroup]="form" class="mg-t-10">
     <div class="row">
         <div class="col-auto pr-1">
             <div>Parent :</div>
