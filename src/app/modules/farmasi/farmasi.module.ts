@@ -12,6 +12,7 @@ import { SupplierComponent } from './components/supplier/supplier.component';
 import { StokOpnameComponent } from './components/stok-opname/stok-opname.component';
 import { DataStokComponent } from './components/stok-opname/data-stok/data-stok.component';
 import { CariObatComponent } from './components/cari-obat/cari-obat.component';
+import { FormRegistrasiFarmasiComponent } from './components/form-registrasi-farmasi/form-registrasi-farmasi.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CariObatComponent } from './components/cari-obat/cari-obat.component';
     SupplierComponent,
     StokOpnameComponent,
     DataStokComponent,
-    CariObatComponent
+    CariObatComponent,
+    FormRegistrasiFarmasiComponent
   ],
   imports: [
     CommonModule,

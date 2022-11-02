@@ -3,25 +3,39 @@
     <div class="col-auto border-right" hidden>
         <input type="text" class="form-control" placeholder="Cari...">
     </div>
-    <div class="col-auto mr-4">
-        <div><span class="mr-1 tx-12 text-muted">Nama :</span> <span>{{registrasi.pasien.nama | uppercase}} <span class="badge badge-light">{{registrasi.pasien.r_jns_kelamin.name | uppercase}}</span></span></div>
-        <div><span class="mr-1 tx-12 text-muted">No. RM / No. Reg :</span> <span>{{registrasi.norm}} / {{registrasi.noreg}}</span> {{appService.getAge(registrasi.pasien.tgl_lahir)}}</div>
+    <div class="col">
+        <div class="row">
+            <div class="col-3 text-right">Nama :</div>
+            <div class="col pd-l-0">{{registrasi.pasien.nama | uppercase}} ({{registrasi.norm}})</div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-right">Kelamin, Usia :</div>
+            <div class="col pd-l-0">{{registrasi.pasien.r_jns_kelamin.name | uppercase}}, {{appService.getAge(registrasi.pasien.tgl_lahir)}}</div>
+        </div>
     </div>
-    <div class="col-auto mr-4">
-        <div><span class="mr-1 tx-12 text-muted">Dokter :</span> <span>{{registrasi.dokter.name}}</span></div>
-        <div><span class="mr-1 tx-12 text-muted">Ruangan / Poliklinik :</span> <span>{{registrasi.ruang_perawatan.name | uppercase}}</span></div>
+    <div class="col">
+        <div class="row">
+            <div class="col-3 text-right">Dokter :</div>
+            <div class="col pd-l-0">{{registrasi.dokter.name}}</div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-right">Ruangan :</div>
+            <div class="col pd-l-0">{{registrasi.ruang_perawatan.name | uppercase}} - {{registrasi.jns_perawatan.name | uppercase}}</div>
+        </div>
     </div>
-    <div class="col-auto mr-4">
-        <div><span class="mr-1 tx-12 text-muted">Jns. Perawatan :</span> <span>{{registrasi.jns_perawatan.name | uppercase}}</span></div>
-        <div><span class="mr-1 tx-12 text-muted">Pembayaran :</span> <span>{{registrasi.golpas.r_grouppas.name | uppercase}} - {{registrasi.golpas.name | uppercase}}</span></div>
+    <div class="col">
+        <div class="row">
+            <div class="col-3 text-right">Pembayaran :</div>
+            <div class="col pd-l-0">{{registrasi.golpas.r_grouppas.name | uppercase}} - {{registrasi.golpas.name | uppercase}}</div>
+        </div>
     </div>
-    <div class="col-auto border-left">
+    <!-- <div class="col-auto border-left">
         <button class="btn btn-sm btn-outline-primary">
             <i class="bi bi-clock"></i> Riwayat Kunjungan
         </button>
-    </div>
-    <div class="col"></div>
+    </div> -->
+    <!-- <div class="col"></div>
     <div class="col-auto border-left">
         <app-widget-estimasi-klaim></app-widget-estimasi-klaim>
-    </div>
+    </div> -->
 </div>

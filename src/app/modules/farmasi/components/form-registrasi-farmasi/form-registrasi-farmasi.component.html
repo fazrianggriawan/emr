@@ -1,0 +1,54 @@
+<div class="row">
+    <div class="col">
+        <button class="btn" (click)="dialogTambahRegistrasi = true"><i class="bi bi-plus-lg"></i> Transaksi Umum</button>
+    </div>
+</div>
+
+<p-dialog
+    [(visible)]="dialogTambahRegistrasi"
+    (onHide)="dialogTambahRegistrasi = false"
+    header="Tambah Transaksi Umum"
+    [modal]="true"
+    [draggable]="false"
+    position="top"
+    [style]="{width: '600px'}"
+    appendTo="body">
+
+    <ng-container *ngIf="dialogTambahRegistrasi">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-2 text-right">
+                    Tanggal :
+                </div>
+                <div class="col">
+                    <p-calendar formControlName="tanggal" appendTo="body" [showIcon]="true" dateFormat="dd M yy"></p-calendar>
+                </div>
+            </div>
+            <div class="row mg-t-10">
+                <div class="col-2 text-right">
+                    Nama :
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="nama">
+                </div>
+            </div>
+            <div class="row mg-t-10">
+                <div class="col-2 text-right">
+                    No. Tlp :
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="tlp">
+                </div>
+            </div>
+        </form>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" (click)="save()"><i class="bi bi-save"></i> Simpan</button>
+            </div>
+        </div>
+    </ng-template>
+
+</p-dialog>

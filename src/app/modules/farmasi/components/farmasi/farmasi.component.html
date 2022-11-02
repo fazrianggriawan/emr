@@ -7,13 +7,16 @@
             <div class="col-auto border-right">
                 <app-cari-registrasi></app-cari-registrasi>
             </div>
+            <div class="col-auto">
+                <app-form-registrasi-farmasi></app-form-registrasi-farmasi>
+            </div>
             <!-- <div class="col-auto border-left">
                 Transaksi Umum
                 <div class="mg-t-5">
                     <p-inputSwitch [(ngModel)]="isPenjualanLangsung"></p-inputSwitch>
                 </div>
             </div> -->
-            <div class="col-auto">
+            <div class="col-auto pd-l-0">
                 <span class="p-float-label">
                     <p-dropdown placeholder="Status Tagihan" [(ngModel)]="selectedStatusBilling" [options]="statusBilling" optionValue="id" optionLabel="name" [autoDisplayFirst]="false" placeholder="Pilih Depo"></p-dropdown>
                     <label>Status Tagihan</label>
