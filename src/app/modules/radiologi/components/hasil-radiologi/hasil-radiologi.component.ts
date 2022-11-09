@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
     selector: 'app-hasil-radiologi',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./hasil-radiologi.component.css']
 })
 export class HasilRadiologiComponent implements OnInit {
+
+    @Input() showButton : Boolean = true;
 
     constructor() { }
 

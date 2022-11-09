@@ -54,7 +54,6 @@ export class VclaimService {
     }
 
     public getPesertaByNomorKartu(key: string = '') {
-        if (this.dataPasien.no_asuransi) key = this.dataPasien.no_asuransi;
         if (key != '') {
             this.http.get<any>(config.api_vclaim('peserta/nomorKartu/' + key))
                 .subscribe(data => {

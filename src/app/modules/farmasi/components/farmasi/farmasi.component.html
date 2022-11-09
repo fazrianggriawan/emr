@@ -36,7 +36,7 @@
                 </p-dropdown> -->
             </div>
             <div class="col-auto pd-l-0">
-                <button class="btn" [disabled]="!registrasi"><i class="bi bi-printer"></i> Print Billing</button>
+                <button class="btn" [disabled]="!registrasi" (click)="printBilling()"><i class="bi bi-printer"></i> Print Billing</button>
             </div>
         </div>
         <div class="row mg-t-10 mg-b-10">
@@ -99,8 +99,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-item let-index>
                 <tr>
-                    <td style="min-width:50%">{{item.obat.nama}}</td>
-                    <td style="min-width:100px">{{item.obat.satuan}}</td>
+                    <td style="min-width:50%">{{item.nama_obat}}</td>
+                    <td style="min-width:100px">{{item.satuan}}</td>
                     <td style="min-width:100px" pEditableColumn>
                         <p-cellEditor>
                             <ng-template pTemplate="input">
@@ -180,6 +180,17 @@
             </div>
             <div class="row mg-t-10">
                 <div class="col">
+                    <p-table
+                        [value]="dataPembayaran"
+                        [rowHover]="true"
+                        styleClass="p-datatable-sm p-datatable-striped">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
                     <table class="table table-striped table-hover border bg-white">
                         <thead>
                             <tr class="bg-white">
@@ -190,7 +201,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let item of dataPembayaran">
-                                <td>{{item.r_cara_bayar.name | uppercase}}</td>
+                                <td>{{item.id_cara_bayar | uppercase}}</td>
                                 <td>{{item.jumlah | number}}</td>
                             </tr>
                             <tr *ngIf="dataPembayaran.length == 0">

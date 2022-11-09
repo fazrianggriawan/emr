@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { config } from 'src/app/config';
 import { DataPasienService } from 'src/app/modules/registrasi/components/data-pasien/data-pasien.service';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
+import { AppService } from 'src/app/services/app.service';
 import { HasilLaboratoriumService } from './hasil-laboratorium.service';
 
 @Component({
@@ -13,48 +16,43 @@ export class HasilLaboratoriumComponent implements OnInit {
     registrasi: any = {};
 
     hasilLab: any[] = [];
+    groupNilaiRujukan: any[] = [];
     peserta: any;
     keterangan: any = {catatan: '', pemeriksa: ''};
-
-    golDarah: any = [
-        {name: 'A'},
-        {name: 'B'},
-        {name: 'AB'},
-        {name: 'O'}
-    ]
-
-    positiveNegative: any = [
-        {name: 'NEGATIF'},
-        {name: 'POSITIF'}
-    ]
-
-    reactive: any = [
-        {name: 'REAKTIF'},
-        {name: 'NON REAKTIF'}
-    ]
-
-    positiveNegative2: any = [
-        {name: 'NEGATIF'},
-        {name: 'POSITIF'},
-        {name: 'POSITIF 2'},
-        {name: 'POSITIF 3'},
-    ]
-
-    normalAbnormal: any = [
-        {name: 'NORMAL'},
-        {name: 'ABNORMAL'}
-    ]
+    subs: Subscription[] = [];
+    formatHasilOptions: any[] = [];
+    selectedGroup: string = '';
+    selectedBilling: any;
+    dialogHasilLab: boolean = false;
 
     constructor(
         public laboratoriumService: HasilLaboratoriumService,
-        private registrasiService: RegistrasiService
+        private registrasiService: RegistrasiService,
+        public hasilLaboratoriumService: HasilLaboratoriumService,
+        public appService: AppService,
         // private dataPesertaService: DataPesertaService,
         // private messageService: MessageService
     ) { }
 
     ngOnInit(): void {
-        this.initHasilLab();
+        // this.initHasilLab();
         this.registrasiService.registrasi.subscribe(data => this.registrasi = data);
+        this.hasilLaboratoriumService.dataNilaiRujukan.subscribe(data => this.hasilLab = data);
+        this.hasilLaboratoriumService.selectedBilling.subscribe(data => this.selectedBilling = data)
+        this.subs.push(this.hasilLaboratoriumService.dialog.subscribe(data => this.handleDialog(data)))
+
+        this.groupNilaiRujukan = [
+            {id: 'L', name: 'LAKI-LAKI'},
+            {id: 'P', name: 'PEREMPUAN'},
+            {id: 'AN', name: 'ANAK'},
+            {id: 'BY', name: 'BAYI'},
+        ]
+
+        this.formatHasilOptions = [
+            {id: 'normal', name: 'REGULAR'},
+            {id: 'pcr', name: 'PCR'},
+        ]
+
         // this.dataPesertaService.peserta.subscribe(data => this.peserta = data)
         // this.laboratoriumService.hasilLab.subscribe(data => this.handleHasilLab(data))
         // this.laboratoriumService.dialog.subscribe(data => {
@@ -72,7 +70,27 @@ export class HasilLaboratoriumComponent implements OnInit {
         // })
     }
 
-    public handleHasilLab(data: any) {
+    unsubs(){
+        this.subs.forEach(element => {
+            element.unsubscribe();
+        });
+    }
+
+    handleDialog(data: boolean){
+        if( data ){
+            this.selectedGroup = this.registrasi.pasien.jns_kelamin;
+            this.hasilLaboratoriumService.getNilaiRujukan(this.registrasi.pasien.jns_kelamin, this.registrasi.noreg);
+            this.hasilLaboratoriumService.getHasil(this.selectedBilling.r_billing_head.noreg);
+        }else{
+            this.unsubs();
+        }
+    }
+
+    changeGroup(e: any){
+        this.hasilLaboratoriumService.getNilaiRujukan(e, this.registrasi.noreg);
+    }
+
+    handleHasilLab(data: any) {
         if( data.hasil ){
             if( data.hasil.length > 0 ){
                 this.hasilLab = data.hasil;
@@ -136,17 +154,15 @@ export class HasilLaboratoriumComponent implements OnInit {
 
     public save() {
         let data = {
-            idPeserta: this.peserta.id,
-            data: this.hasilLab,
-            keterangan: this.keterangan
+            noreg: this.registrasi.noreg,
+            data: this.hasilLab
         }
+        this.hasilLaboratoriumService.save(data);
         // this.laboratoriumService.save(data);
     }
 
     public print(){
-        // let iframe = '<iframe src="' + config.api_url('rikkes/printHasilLab/idPeserta/' + this.peserta.id) + '" style="height:calc(100% - 4px);width:calc(100% - 4px)"></iframe>';
-        // let win: any = window.open("", "", "width="+screen.availWidth+",height="+screen.availHeight+",toolbar=no,menubar=no,resizable=yes");
-        // win.document.write(iframe);
+        this.appService.print(config.api_url('print/hasilLab/'+this.registrasi.noreg));
     }
 
 }

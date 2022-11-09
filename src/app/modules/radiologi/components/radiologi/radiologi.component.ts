@@ -71,4 +71,8 @@ export class RadiologiComponent implements OnInit {
 
     }
 
+    tambahTindakan(){
+
+    }
+
 }

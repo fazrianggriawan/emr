@@ -13,10 +13,21 @@ export class TarifService {
     categoryTarif = new BehaviorSubject<any>('');
     defaultPelaksana = new BehaviorSubject<any>('');
     loading = new BehaviorSubject<boolean>(false);
+    jasaPelaksana = new BehaviorSubject<any>('');
+    focusSave = new BehaviorSubject<boolean>(false);
+    optionsTarif = new BehaviorSubject<any[]>([]);
+    focusOnAc = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient
     ) { }
+
+    public cariTarif(keyword: string, category: string){
+        this.http.get<any>(config.api_url('tarif/cariTarif/'+keyword+'/'+category))
+            .subscribe(data => {
+                this.optionsTarif.next(data.data)
+            })
+    }
 
     public getTarifByCategory(categoryId: string) {
         if (categoryId) {

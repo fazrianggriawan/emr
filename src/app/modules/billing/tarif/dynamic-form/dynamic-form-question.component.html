@@ -9,12 +9,14 @@
                 [id]="question.key" [type]="question.type">
 
                 <p-dropdown
+                    [id]="question.key"
                     *ngSwitchCase="'dropdown'"
                     [style]="{width: '100%'}"
                     [filter]="true"
                     [options]="question.options"
                     [formControlName]="question.key"
                     [autoDisplayFirst]="false"
+                    appendTo="body"
                     optionLabel="value"
                     optionValue="key">
                 </p-dropdown>

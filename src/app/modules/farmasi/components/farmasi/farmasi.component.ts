@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import { AutoComplete } from 'primeng/autocomplete';
+import { config } from 'src/app/config';
 import { WidgetRegistrasiService } from 'src/app/modules/registrasi/components/widget-registrasi/widget-registrasi.service';
 import { MasterService } from 'src/app/modules/registrasi/services/master.service';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
@@ -51,7 +52,9 @@ export class FarmasiComponent implements OnInit {
         this.masterService.jnsPembayaran.subscribe(data => this.dataJnsPembayaran = data);
         this.farmasiService.dataObat.subscribe(data => this.dataObat = data)
         this.farmasiService.dataDepo.subscribe(data => this.dataDepo = data)
-        this.registrasiService.registrasi.subscribe(data => this.registrasi = data)
+        this.farmasiService.dataBilling.subscribe(data => this.handleDataBilling(data))
+        this.farmasiService.dataPembayaran.subscribe(data => this.dataPembayaran = data);
+        this.registrasiService.registrasi.subscribe(data =>  this.handleRegistrasi(data))
 
         this.menuItems = [
             { label: 'Home' },
@@ -64,6 +67,14 @@ export class FarmasiComponent implements OnInit {
             {id: 'closed', name: 'CLOSED'},
         ]
 
+    }
+
+    handleRegistrasi(data: any){
+        this.registrasi = data;
+        if( data ){
+            this.farmasiService.getDataBilling(this.registrasi.noreg, this.selectedStatusBilling);
+            this.farmasiService.getDataPembayaran(this.registrasi.noreg);
+        }
     }
 
     selectObat(obat: any, ac: AutoComplete){
@@ -102,7 +113,12 @@ export class FarmasiComponent implements OnInit {
             rejectLabel: 'Tidak',
             accept: () => {
                 //confirm action
-                console.log('save')
+                let data = {
+                    noreg: this.registrasi.noreg,
+                    jumlah: this.tagihan,
+                    cara_bayar: this.selectedJnsBayar
+                }
+                this.farmasiService.savePembayaran(data);
             },
             reject: () => {
                 //reject action
@@ -118,13 +134,30 @@ export class FarmasiComponent implements OnInit {
         this.tagihan = total;
     }
 
+    handleDataBilling(data: any){
+        this.dialogTambahObat = false;
+        this.dataBilling = data;
+        this.hitungTotalTagihan();
+    }
+
     save(ac: AutoComplete){
         if( this.selectedObat.qty && this.selectedObat.qty != '0' ){
-            this.dataBilling.push(this.selectedObat);
-            this.selectedObat = '';
-            this.dialogTambahObat = false;
-            this.hitungTotalTagihan();
-            ac.focusInput();
+            this.selectedObat.noreg = this.registrasi.noreg;
+            let data = {
+                obat: this.selectedObat,
+                noreg: this.registrasi.noreg
+            }
+
+            this.farmasiService.saveBilling(this.selectedObat);
+
+            // let data : any = this.selectObat;
+            // data.noreg = this.registrasi.noreg;
+            // this.dataBilling.push(data);
+            // this.selectedObat = '';
+            // this.dialogTambahObat = false;
+            // console.log(this.dataBilling);
+            // this.hitungTotalTagihan();
+            // ac.focusInput();
         }
     }
 
@@ -143,6 +176,10 @@ export class FarmasiComponent implements OnInit {
                 //reject action
             }
         });
+    }
+
+    printBilling(){
+        this.appService.print( config.api_url('print/billingFarmasi/'+this.registrasi.noreg));
     }
 
 }

@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-auto">
+        <button class="btn btn-primary" [disabled]="!registrasi.noreg" (click)="tambahBillingService.openDialog(true)"><i class="bi bi-plus-lg"></i> Tambah Billing</button>
+    </div>
+</div>
+
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="tambahBillingService.openDialog(false)"
+    header="Tambah Billing"
+    [draggable]="false"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}"
+    appendTo="body">
+
+    <ng-container *ngIf="dialog">
+            <div class="row">
+                <div class="col-auto">
+                    <div class="tx-12 tx-gray-500">Tanggal</div>
+                    <p-calendar [(ngModel)]="tanggal" dateFormat="dd M yy" [showIcon]="true" [style]="{width: '100%'}" appendTo="body"></p-calendar>
+                </div>
+                <div class="col">
+                    <form [formGroup]="form">
+                        <div class="row">
+                            <div class="col">
+                                <div class="tx-12 tx-gray-500">Jns. Perawatan</div>
+                                <p-dropdown formControlName="jnsPerawatan" [options]="optionsJnsPerawatan" optionValue="id" optionLabel="name" appendTo="body" [autoDisplayFirst]="false" [style]="{width: '100%'}"></p-dropdown>
+                            </div>
+                            <div class="col">
+                                <div class="tx-12 tx-gray-500">Ruangan</div>
+                                <p-dropdown formControlName="ruangan" [options]="optionsRuangan" optionValue="id" optionLabel="name" appendTo="body" [autoDisplayFirst]="false" [style]="{width: '100%'}"></p-dropdown>
+                            </div>
+                            <div class="col">
+                                <div class="tx-12 tx-gray-500">Dokter</div>
+                                <p-dropdown formControlName="dokter" [options]="optionsDokter" optionValue="id_pelaksana" optionLabel="r_pelaksana.name" appendTo="body" [autoDisplayFirst]="false" [style]="{width: '100%'}"></p-dropdown>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        <div class="row mg-t-10">
+            <div class="col">
+                <app-cari-tarif [category]="unit"></app-cari-tarif>
+            </div>
+        </div>
+        <div class="row mg-t-10">
+            <div class="col">
+                <app-data-billing></app-data-billing>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary" [disabled]="dataBilling.length == 0" (click)="tambahBillingService.openDialog(false)">
+                    <i class="bi bi-check-lg"></i> Selesai
+                </button>
+            </div>
+        </div>
+
+    </ng-template>
+
+
+</p-dialog>

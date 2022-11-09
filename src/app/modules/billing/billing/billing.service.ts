@@ -36,6 +36,20 @@ export class BillingService {
             .subscribe(data => this.categoryTarif.next(data.data))
     }
 
+    public getBillingDetailByUnit(noreg: string, unit: string){
+        this.http.get<any>(config.api_url('billing/billingDetailByUnit/'+noreg+'/'+unit))
+            .subscribe(data => {
+                this.dataBilling.next(data.data);
+            })
+    }
+
+    public getBillingByHead(idBillingHead: string) {
+        this.http.get<any>( config.api_url('billing/billingByHead/'+idBillingHead) )
+            .subscribe(data => {
+                this.dataBilling.next(data.data);
+            })
+    }
+
     public save(data: any) {
         this.http.post<any>(config.api_url('billing/save'), data)
             .subscribe(data => {

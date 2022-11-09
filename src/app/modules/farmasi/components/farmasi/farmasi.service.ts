@@ -21,11 +21,21 @@ export class FarmasiService {
     dataBilling = new BehaviorSubject<any[]>([]);
     dataDepo = new BehaviorSubject<any[]>([]);
     dataSupplier = new BehaviorSubject<any[]>([]);
+    dataPembayaran = new BehaviorSubject<any[]>([]);
 
     constructor(
         private http: HttpClient,
         private errorHandle: ErrorHandlerService,
     ) { }
+
+    saveBilling(data: any){
+        this.http.post<any>(config.api_url('farmasi/saveBilling'), data)
+            .subscribe(data => {
+                if( data.code == 200 ){
+                    this.getDataBilling(data.data.noreg, 'open');
+                }
+            })
+    }
 
     getDataBilling(noreg: string, status: string){
         this.http.get<any>( config.api_url('farmasi/getBilling/'+noreg+'/'+status) )
@@ -61,16 +71,24 @@ export class FarmasiService {
         this.http.post<any>( config.api_url('farmasi/savePembayaran'), data )
             .subscribe(data => {
                 if( data.code == '200' ){
-                    this.getDataBilling(data.noreg, 'open');
+                    this.getDataBilling(data.data.noreg, 'open');
+                    this.getDataPembayaran(data.data.noreg);
                 }
             })
     }
 
-    public getMasterObat() {
+    getDataPembayaran(noreg: string){
+        this.http.get<any>( config.api_url('farmasi/getDataPembayaran/'+noreg))
+            .subscribe(data => {
+                this.dataPembayaran.next(data.data);
+            })
+    }
+
+    getMasterObat() {
         this.http.get<any>( config.api_public('vclaim/peserta/get/master_obat') ).subscribe(data => this.masterObat.next(data.data));
     }
 
-    public reset() {
+    reset() {
         this.selectedObat.next('');
     }
 

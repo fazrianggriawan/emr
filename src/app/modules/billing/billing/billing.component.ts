@@ -75,7 +75,6 @@ export class BillingComponent implements OnInit, OnDestroy {
     }
 
     getDataBilling(){
-        console.log(this.selectedBillingBatch);
         this.billingService.getBillingByNoreg(this.registrasi.noreg, this.selectedStatusBilling);
     }
 

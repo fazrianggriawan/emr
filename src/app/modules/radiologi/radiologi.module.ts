@@ -8,12 +8,16 @@ import { KasirModule } from '../kasir/kasir.module';
 import { SharedModule } from '../shared/shared.module';
 import { BillingModule } from '../billing/billing.module';
 import { HasilRadiologiComponent } from './components/hasil-radiologi/hasil-radiologi.component';
+import { TambahTindakanComponent } from './components/tambah-tindakan/tambah-tindakan.component';
+import { CariTindakanComponent } from './components/cari-tindakan/cari-tindakan.component';
 
 
 @NgModule({
     declarations: [
         RadiologiComponent,
-        HasilRadiologiComponent
+        HasilRadiologiComponent,
+        TambahTindakanComponent,
+        CariTindakanComponent
     ],
     imports: [
         CommonModule,
