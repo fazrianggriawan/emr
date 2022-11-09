@@ -17,6 +17,7 @@ export class TarifService {
     focusSave = new BehaviorSubject<boolean>(false);
     optionsTarif = new BehaviorSubject<any[]>([]);
     focusOnAc = new BehaviorSubject<boolean>(false);
+    autoSave = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient

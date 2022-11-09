@@ -4,11 +4,12 @@
     appendTo="body"
     scrollHeight="30vw"
     (completeMethod)="tarifService.cariTarif($event.query, category, 'all')"
-    (onFocus)="defaultTarif()"
+    (onFocus)="defaultTarif(ac)"
+    (onClear)="hideAc(ac)"
     (onSelect)="onSelectTarif($event, ac)"
     [suggestions]="optionsTarif"
     [minLength]="2"
-    [delay]="100"
+    [delay]="50"
     [style]="{width: '100%'}"
     [inputStyle]="{'width':'100%'}">
     <ng-template pTemplate="header">

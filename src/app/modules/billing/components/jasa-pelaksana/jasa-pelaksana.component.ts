@@ -49,20 +49,27 @@ export class JasaPelaksanaComponent implements OnInit, OnDestroy {
 
     handleTarifJasa(data: any) {
         this.jasaPelaksanaService.openDialog(false);
+        this.tarifService.autoSave.next(false);
+        this.tarifService.focusSave.next(false);
 
         if (data) {
             this.jasaPelaksanaService.openDialog(true);
 
             let questions: QuestionBase<string>[] = [];
 
+            let autoSave = true;
+
             data.forEach((item: any) => {
                 questions.push(new DropdownQuestion(item));
+                if( item.display ){
+                    autoSave = false;
+                }
             });
 
             this.questions$ = of(questions.sort((a, b) => a.order - b.order))
 
             this.tarifService.focusSave.next(true);
-
+            this.tarifService.autoSave.next(autoSave);
         }
     }
 

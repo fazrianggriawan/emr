@@ -37,6 +37,13 @@ export class DynamicFormComponent implements OnInit {
 
     ngOnInit() {
         this.form = this.qcs.toFormGroup(this.questions as QuestionBase<string>[]);
+        this.subs.push(this.tarifService.autoSave.subscribe(data => {
+            if(data){
+                if(!this.form.invalid){
+                    this.onSubmit();
+                }
+            }
+        }))
         this.subs.push(this.tarifService.focusSave.subscribe(data => {
             if( data ){
                 setTimeout(() => {
@@ -57,7 +64,6 @@ export class DynamicFormComponent implements OnInit {
     }
 
     onSubmit() {
-
         let data = {
             noreg: this.registrasi.noreg,
             ruangan: this.ruangan,

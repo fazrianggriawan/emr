@@ -47,12 +47,18 @@ export class CariTarifComponent implements OnInit {
         ac.clear();
     }
 
-    defaultTarif(){
+    defaultTarif(ac: AutoComplete){
         // 1 = PAKET RAWAT JALAN
         setTimeout(() => {
             this.tarifService.cariTarif('', this.category, 1);
-            this.ac.show();
+            ac.show();
         }, 50);
+    }
+
+    hideAc(ac: AutoComplete){
+        setTimeout(() => {
+            ac.hide();
+        }, 75);
     }
 
 }
