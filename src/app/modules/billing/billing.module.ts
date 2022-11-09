@@ -12,6 +12,7 @@ import { CariTarifComponent } from './components/cari-tarif/cari-tarif.component
 import { JasaPelaksanaComponent } from './components/jasa-pelaksana/jasa-pelaksana.component';
 import { TambahBillingComponent } from './components/tambah-billing/tambah-billing.component';
 import { DataBillingComponent } from './components/data-billing/data-billing.component';
+import { EditBillingComponent } from './components/edit-billing/edit-billing.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { DataBillingComponent } from './components/data-billing/data-billing.com
         CariTarifComponent,
         JasaPelaksanaComponent,
         TambahBillingComponent,
-        DataBillingComponent
+        DataBillingComponent,
+        EditBillingComponent
     ],
     imports: [
         CommonModule,

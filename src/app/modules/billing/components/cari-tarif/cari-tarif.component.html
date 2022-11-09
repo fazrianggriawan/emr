@@ -3,7 +3,8 @@
     placeholder="+ Tambah Tarif"
     appendTo="body"
     scrollHeight="30vw"
-    (completeMethod)="tarifService.cariTarif($event.query, category)"
+    (completeMethod)="tarifService.cariTarif($event.query, category, 'all')"
+    (onFocus)="defaultTarif()"
     (onSelect)="onSelectTarif($event, ac)"
     [suggestions]="optionsTarif"
     [minLength]="2"
@@ -17,11 +18,12 @@
             <div class="col-2 pd-t-10 pd-b-10 pd-l-8">Kategori</div>
         </div>
     </ng-template>
-    <ng-template let-value pTemplate="item">
+    <ng-template let-item pTemplate="item">
         <div class="row">
-            <div class="col-6">{{value.r_tarif.name | uppercase}}</div>
-            <div class="col-2">{{value.harga | number}}</div>
-            <div class="col-2">{{value.r_tarif.r_tarif_category.r_cat_tarif.name}}</div>
+            <div class="col-6">{{item.r_tarif.name | uppercase}}</div>
+            <div class="col-2">{{item.harga | number}}</div>
+            <div class="col-2">{{item.r_tarif.r_tarif_category.r_cat_tarif.name}}</div>
+            <!-- <div class="col-2"></div> -->
         </div>
     </ng-template>
 </p-autoComplete>

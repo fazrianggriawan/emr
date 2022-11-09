@@ -22,8 +22,13 @@ export class TarifService {
         private http: HttpClient
     ) { }
 
-    public cariTarif(keyword: string, category: string){
-        this.http.get<any>(config.api_url('tarif/cariTarif/'+keyword+'/'+category))
+    public cariTarif(keyword: string, category: string, paket: any){
+        let data = {
+            keyword: keyword,
+            category: category,
+            paket: paket
+        }
+        this.http.post<any>(config.api_url('tarif/cariTarif'), data)
             .subscribe(data => {
                 this.optionsTarif.next(data.data)
             })
