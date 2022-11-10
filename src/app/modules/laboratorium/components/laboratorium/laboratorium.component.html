@@ -6,81 +6,13 @@
         <app-cari-registrasi [showForm]="false"></app-cari-registrasi>
     </div>
     <div class="col-auto pd-r-5">
-        <app-tambah-pemeriksaan></app-tambah-pemeriksaan>
-    </div>
-    <div class="col-auto pd-l-0">
-        <button class="btn mg-r-5" (click)="hasilLaboratoriumService.openDialog(true)" hidden>
-            <i class="bi bi-file-check"></i> Hasil Pemeriksaan
-        </button>
+        <app-tambah-billing [unit]="'lab'"></app-tambah-billing>
     </div>
 </div>
 <div class="row mg-t-10">
     <div class="col">
-        <p-table [rowHover]="true"
-                    dataKey="id_billing_head" rowGroupMode="subheader" groupRowsBy="id_billing_head"
-            [value]="dataBilling"
-            styleClass="p-datatable-sm p-datatable-striped">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th colspan="5">Uraian Pemeriksaan</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="groupheader" let-item let-rowIndex="rowIndex" let-expanded="expanded">
-                <tr class="clickable bg-gray-200">
-                    <td>
-                        <button type="button"
-                                pButton
-                                pRipple
-                                [pRowToggler]="item"
-                                class="p-button-text p-button-rounded p-button-plain mr-2 mt-0"
-                                [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
-                        </button>
-                        <!-- <div class="row">
-                            <div class="col-auto">
-
-                            </div>
-                            <div class="col pd-t-8 pd-l-0">
-                                {{appService.dateHuman(item.r_billing_head.tanggal)}}
-                            </div>
-                        </div> -->
-                    </td>
-                    <td [pRowToggler]="item">
-                        {{appService.dateHuman(item.r_billing_head.tanggal)}}
-                    </td>
-                    <td [pRowToggler]="item">
-                        {{item.id_billing_head}}
-                        <div><span class="badge badge-info">{{item.r_billing_head.status}}</span></div>
-                    </td>
-                    <td [pRowToggler]="item">
-                        {{item.r_billing_head.r_dokter.name}}
-                        <div class="tx-12 tx-gray-500">{{item.r_billing_head.r_ruangan.name | uppercase}} ({{item.r_billing_head.r_ruangan.jns_perawatan | uppercase}})</div>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary btn-sm mg-r-5"><i class="bi bi-check-circle"></i> Proses</button>
-                        <button class="btn btn-sm mg-r-5"><i class="bi bi-pencil"></i> Edit</button>
-                        <button class="btn btn-sm" (click)="inputHasil(item)" [disabled]="item.r_billing_head.status != 'process'"><i class="bi bi-file-text"></i> Input Hasil</button>
-                    </td>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="rowexpansion" let-item>
-                <tr>
-                    <td></td>
-                    <td colspan="2"><div class="pd-l-15">{{item.r_tarif_harga.r_tarif.name | uppercase}}</div></td>
-                    <td colspan="2">{{item.r_tarif_harga.harga | number}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <app-data-billing-penunjang [unit]="'lab'"></app-data-billing-penunjang>
     </div>
 </div>
 
-<p-dialog
-    [(visible)]="dialogHasilLab"
-    (onHide)="hasilLaboratoriumService.openDialog(false)"
-    header="Hasil Laboratorium"
-    [draggable]="false"
-    [modal]="true"
-    position="top"
-    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}"
-    appendTo="body">
-    <app-hasil-laboratorium *ngIf="dialogHasilLab"></app-hasil-laboratorium>
-</p-dialog>
+<app-hasil-laboratorium [showButton]="false"></app-hasil-laboratorium>

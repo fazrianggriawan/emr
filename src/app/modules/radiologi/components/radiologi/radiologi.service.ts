@@ -9,6 +9,7 @@ import { config } from 'src/app/config';
 export class RadiologiService {
 
     dataOrder = new BehaviorSubject<any>('');
+    optionsDokter = new BehaviorSubject<any[]>([]);
 
     constructor(
         private http: HttpClient

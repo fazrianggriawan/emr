@@ -20,7 +20,7 @@ export class HttpProvider implements HttpInterceptor {
 
         const timeoutValue = req.headers.get('timeout') || this.defaultTimeout;
         const timeoutValueNumeric = Number(timeoutValue);
-        let login : any = localStorage.getItem('login');
+        let login : any = sessionStorage.getItem('login');
         if( login ){
             const request = req.clone({
                 headers: req.headers.set('Token', JSON.parse(login).token)

@@ -29,8 +29,10 @@ export class CariPasienComponent implements OnInit, OnDestroy {
             if(data.length == 1){
                 this.registrasiService.registrasi.next('');
                 this.dataPasienService.pasien.next(data[0]);
-            }else if(data.length > 1){
-                this.dataPasienService.openDialog();
+            }
+
+            if(data.length > 1){
+                this.dataPasienService.openDialog(true);
             }
         }))
     }

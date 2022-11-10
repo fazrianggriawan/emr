@@ -55,8 +55,8 @@ export class DataPasienService {
         this.http.get<any>(config.api_url('pasien/allData')).subscribe(data => this.dataPasien.next(data.data))
     }
 
-    public openDialog() {
-        this.dialog.next(true);
+    public openDialog(status: boolean) {
+        this.dialog.next(status);
     }
 
     public closeDialog() {

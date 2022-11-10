@@ -6,7 +6,8 @@
         <app-cari-pasien></app-cari-pasien>
     </div>
     <div class="col-auto pd-l-0 border-right">
-        <button class="btn mr-2" (click)="dataPasienService.openDialog()"><i class="bi bi-people-fill mr-1"></i> Data Pasien</button>
+        <app-data-pasien></app-data-pasien>
+        <!-- <button class="btn mr-2" (click)="dataPasienService.openDialog(true)"><i class="bi bi-people-fill mr-1"></i> Data Pasien</button> -->
         <button class="btn mr-2" (click)="formRegistrasiService.dialog.next(true)"><i class="bi bi-plus-lg mr-1"></i> Registrasi</button>
         <button class="btn mr-2" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
         <button class="btn mr-2" (click)="menuPrint.toggle($event)" [disabled]="!selectedPasien.id"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>

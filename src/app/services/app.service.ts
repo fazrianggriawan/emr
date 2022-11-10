@@ -12,6 +12,7 @@ export class AppService {
     notification = new BehaviorSubject<any>('');
     currentRoute = new BehaviorSubject<string>('');
     loginData = new BehaviorSubject<any>('');
+    logout = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
@@ -84,9 +85,17 @@ export class AppService {
         this.http.post<any>(config.api_url('role_access'), {url: url})
             .subscribe(data => {
                 if( data.code != 200 ){
-                    this.router.navigateByUrl('/login');
+                    this.doLogout();
                 }
             })
+    }
+
+    public doLogout(){
+        this.logout.next(true);
+        sessionStorage.clear();
+        setTimeout(() => {
+            this.router.navigateByUrl('/login');
+        }, 100);
     }
 
     public getAge (dateString: string) {

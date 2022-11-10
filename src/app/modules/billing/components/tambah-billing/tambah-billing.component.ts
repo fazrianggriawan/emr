@@ -76,7 +76,6 @@ export class TambahBillingComponent implements OnInit, OnDestroy {
             this.billingService.getBillingByHead(this.sessionId);
         }else{
             this.jasaPelaksanaService.openDialog(false);
-            this.billingService.getBillingByNoreg(this.registrasi.noreg, 'open');
         }
     }
 

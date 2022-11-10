@@ -28,13 +28,10 @@ export class LoginComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        localStorage.clear();
         sessionStorage.clear();
         this.loginService.loginData.next('');
         this.menuService.dataMenu.next('');
         this.subs.push(this.loginService.loginData.subscribe(data => this.handleLogin(data)))
-
-        this.registrasiService.registrasi.next('');
 
         this.formLogin = this.form.group({
             username: [null, Validators.required],
@@ -63,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     public handleLogin(responseLogin: any) {
         if (responseLogin) {
             if (responseLogin.auth) {
-                localStorage.setItem('login', JSON.stringify(responseLogin))
+                sessionStorage.setItem('login', JSON.stringify(responseLogin))
                 this.gotoDashboarPage();
             }
         }

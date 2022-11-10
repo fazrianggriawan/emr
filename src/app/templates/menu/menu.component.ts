@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
     }
 
     getModuleByUser(){
-        let login : any = localStorage.getItem('login');
+        let login : any = sessionStorage.getItem('login');
         if( login ){
             let data = JSON.parse(login);
             this.menuService.GetModule(data.username);

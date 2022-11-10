@@ -10,6 +10,9 @@
         </div>
         <div class="br-section-wrapper"
             [ngClass]="{'br-section-wrapper': (currentRoute != 'login'), 'login-page mg-t-20': (currentRoute == 'login')}">
+
+            <app-widget-registrasi></app-widget-registrasi>
+
             <div class="row">
                 <div class="col">
                     <router-outlet></router-outlet>

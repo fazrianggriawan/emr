@@ -13,6 +13,7 @@ import { JasaPelaksanaComponent } from './components/jasa-pelaksana/jasa-pelaksa
 import { TambahBillingComponent } from './components/tambah-billing/tambah-billing.component';
 import { DataBillingComponent } from './components/data-billing/data-billing.component';
 import { EditBillingComponent } from './components/edit-billing/edit-billing.component';
+import { DataBillingPenunjangComponent } from './components/data-billing-penunjang/data-billing-penunjang.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { EditBillingComponent } from './components/edit-billing/edit-billing.com
         JasaPelaksanaComponent,
         TambahBillingComponent,
         DataBillingComponent,
-        EditBillingComponent
+        EditBillingComponent,
+        DataBillingPenunjangComponent
     ],
     imports: [
         CommonModule,
@@ -38,7 +40,8 @@ import { EditBillingComponent } from './components/edit-billing/edit-billing.com
         DynamicFormComponent,
         CariTarifComponent,
         TambahBillingComponent,
-        DataBillingComponent
+        DataBillingComponent,
+        DataBillingPenunjangComponent
     ]
 })
 export class BillingModule { }

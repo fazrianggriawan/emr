@@ -1,41 +1,30 @@
-<div class="row" *ngIf="registrasi && showWidget">
-    <div class="col-auto border-right pt-1"><h5 class="m-0">PASIEN</h5></div>
-    <div class="col-auto border-right" hidden>
-        <input type="text" class="form-control" placeholder="Cari...">
+<div class="row border-bottom bg-gray-100 shadow-sm" style="margin: -30px -30px 15px -30px; padding: 15px;" *ngIf="registrasi">
+    <div class="col-auto">
+        <div class="tx-12 tx-gray-500">Nama Pasien</div>
+        <div>{{registrasi.pasien.nama | uppercase}}</div>
     </div>
-    <div class="col">
-        <div class="row">
-            <div class="col-3 text-right">Nama :</div>
-            <div class="col pd-l-0">{{registrasi.pasien.nama | uppercase}} ({{registrasi.norm}})</div>
-        </div>
-        <div class="row">
-            <div class="col-3 text-right">Kelamin, Usia :</div>
-            <div class="col pd-l-0">{{registrasi.pasien.r_jns_kelamin.name | uppercase}}, {{appService.getAge(registrasi.pasien.tgl_lahir)}}</div>
-        </div>
+    <div class="col-auto">
+        <div class="tx-12 tx-gray-500">No. RM</div>
+        <div>{{registrasi.pasien.norm | uppercase}}</div>
     </div>
-    <div class="col">
-        <div class="row">
-            <div class="col-3 text-right">Dokter :</div>
-            <div class="col pd-l-0">{{registrasi.dokter.name}}</div>
-        </div>
-        <div class="row">
-            <div class="col-3 text-right">Ruangan :</div>
-            <div class="col pd-l-0">{{registrasi.ruang_perawatan.name | uppercase}} - {{registrasi.jns_perawatan.name | uppercase}}</div>
-        </div>
+    <div class="col-auto">
+        <div class="tx-12 tx-gray-500">Jns. Kelamin</div>
+        <div>{{registrasi.pasien.r_jns_kelamin.name | uppercase}}</div>
     </div>
-    <div class="col">
-        <div class="row">
-            <div class="col-3 text-right">Pembayaran :</div>
-            <div class="col pd-l-0">{{registrasi.golpas.r_grouppas.name | uppercase}} - {{registrasi.golpas.name | uppercase}}</div>
-        </div>
+    <div class="col-auto">
+        <div class="tx-12 tx-gray-500">Usia</div>
+        <div>{{appService.getAge(registrasi.pasien.tgl_lahir)}}</div>
     </div>
-    <!-- <div class="col-auto border-left">
-        <button class="btn btn-sm btn-outline-primary">
-            <i class="bi bi-clock"></i> Riwayat Kunjungan
-        </button>
-    </div> -->
-    <!-- <div class="col"></div>
-    <div class="col-auto border-left">
-        <app-widget-estimasi-klaim></app-widget-estimasi-klaim>
-    </div> -->
+    <div class="col-auto">
+        <div class="tx-12 tx-gray-500">Ruangan / Poliklinik</div>
+        <div>{{registrasi.ruang_perawatan.name | uppercase}}</div>
+    </div>
+    <div class="col-auto">
+        <div class="tx-12 tx-gray-500">Dokter</div>
+        <div>{{registrasi.dokter.name}}</div>
+    </div>
+    <div class="col-auto">
+        <div class="tx-12 tx-gray-500">Pembayaran</div>
+        <div>{{registrasi.golpas.r_grouppas.name | uppercase}} - {{registrasi.golpas.name | uppercase}}</div>
+    </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataPasienService } from './data-pasien.service';
 import { Subscription } from 'rxjs';
@@ -11,9 +11,11 @@ import { AutoComplete } from 'primeng/autocomplete';
 })
 export class DataPasienComponent implements OnInit, OnDestroy {
 
+    @Input() showButton: boolean = true;
+
     @ViewChild('acSearch') acSearch!: AutoComplete;
 
-    showDialog: boolean = true;
+    dialog: boolean = true;
     dataPasien: any[] = [];
     selectedPasien: any;
     form!: FormGroup;
@@ -25,13 +27,19 @@ export class DataPasienComponent implements OnInit, OnDestroy {
 
     constructor(
         private fb: FormBuilder,
-        private dataPasienService: DataPasienService
+        public dataPasienService: DataPasienService
     ) { }
 
     ngOnInit(): void {
         this.initForm();
         this.dataPasienService.dataPasien.subscribe(data => {this.dataPasien = data; this.loading = false;})
         this.subs.push(this.dataPasienService.dialog.subscribe(data => this.handleDialog(data)))
+    }
+
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.subs.forEach(element => element.unsubscribe())
     }
 
     filterData(e: any){
@@ -45,33 +53,14 @@ export class DataPasienComponent implements OnInit, OnDestroy {
         ]
     }
 
-    // filterBy(value: any){
-    //     this.loading = true;
-    //     if(value){
-    //         this.dataPasienService.searchBy(value.id, value.key)
-    //     }else{
-    //         this.dataPasienService.getAllDataPasien();
-    //     }
-    //     this.acSearch.clear();
-    // }
-
-    ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subs.forEach(element => element.unsubscribe())
-    }
-
     handleDialog(data: boolean){
-        this.showDialog = data
-        if( data ){
-            if( this.dataPasienService.dataPasien.value.length == 0 ){
-                this.loading = true;
-                this.dataPasienService.getAllDataPasien();
-            }
+        this.dialog = data
+        if( !data ){
+            this.dataPasienService.dataPasien.next([]);
         }
     }
 
-    public initForm() {
+    initForm() {
         this.form = this.fb.group({
             norm: [''],
             nama: [''],
@@ -82,7 +71,7 @@ export class DataPasienComponent implements OnInit, OnDestroy {
         })
     }
 
-    public sorting(e: KeyboardEvent) {
+    sorting(e: KeyboardEvent) {
         if( e.code == 'Enter' ){
             this.loading = true;
             var tglLahir = this.form.value.tglLahir;
@@ -97,15 +86,9 @@ export class DataPasienComponent implements OnInit, OnDestroy {
         }
     }
 
-    public onSelectPasien() {
+    onSelectPasien() {
         this.dataPasienService.pasien.next(this.selectedPasien);
-        this.closeDialog()
-    }
-
-    public closeDialog() {
-        this.dataPasienService.dataPasien.next([]);
-        this.dataPasienService.dialog.next(false);
-        this.form.reset();
+        this.dataPasienService.openDialog(false);
     }
 
 }

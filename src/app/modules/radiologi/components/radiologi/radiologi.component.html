@@ -18,16 +18,8 @@
 
 <div class="row mg-t-10">
     <div class="col">
-        <app-data-billing></app-data-billing>
+        <app-data-billing-penunjang [unit]="'rad'"></app-data-billing-penunjang>
     </div>
 </div>
 
-<p-dialog
-    [(visible)]="dialogHasilRadiologi"
-    header="Hasil Radiologi"
-    [modal]="true"
-    position="top"
-    [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
-    appendTo="body">
-    <app-hasil-radiologi></app-hasil-radiologi>
-</p-dialog>
+<app-hasil-radiologi [showButton]="false"></app-hasil-radiologi>

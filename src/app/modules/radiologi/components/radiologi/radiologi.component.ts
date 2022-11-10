@@ -3,6 +3,8 @@ import { RegistrasiService } from 'src/app/modules/registrasi/services/registras
 import { RadiologiService } from './radiologi.service';
 import { Subscription } from "rxjs";
 import { AppService } from 'src/app/services/app.service';
+import { DataBillingPenunjangService } from 'src/app/modules/billing/components/data-billing-penunjang/data-billing-penunjang.service';
+import { config } from 'src/app/config';
 
 @Component({
     selector: 'app-radiologi',
@@ -26,18 +28,20 @@ export class RadiologiComponent implements OnInit {
     constructor(
         private radiologiService: RadiologiService,
         private registrasiService: RegistrasiService,
-        private appService: AppService
+        private appService: AppService,
+        private dataBillingAnjunganService: DataBillingPenunjangService
     ) { }
 
     ngOnInit(): void {
-        this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data)))
-        this.radiologiService.dataOrder.subscribe(data => this.dataOrder = data)
-        this.radiologiService.getDataOrder(this.appService.reformatDate(this.tanggal), this.selectedFilter);
+        this.subs.push(this.dataBillingAnjunganService.printHasil.subscribe(data => this.handlePrintHasil(data)))
+        // this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data)))
+        // this.radiologiService.dataOrder.subscribe(data => this.dataOrder = data)
+        // this.radiologiService.getDataOrder(this.appService.reformatDate(this.tanggal), this.selectedFilter);
 
-        this.filter = [
-            {id: 'waiting', name: 'Waiting'},
-            {id: 'completed', name: 'Completed'},
-        ];
+        // this.filter = [
+        //     {id: 'waiting', name: 'Waiting'},
+        //     {id: 'completed', name: 'Completed'},
+        // ];
     }
 
     ngOnDestroy(): void {
@@ -45,7 +49,14 @@ export class RadiologiComponent implements OnInit {
         //Add 'implements OnDestroy' to the class.
         this.subs.forEach(element => {
             element.unsubscribe()
+            this.dataBillingAnjunganService.printHasil.next('');
         });
+    }
+
+    handlePrintHasil(data: any){
+        if(data){
+            this.appService.print(config.api_url('print/hasilRadiologi/'+data.noreg+'/'+data.idBillingHead))
+        }
     }
 
     handleRegistrasi(data: any){

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { DataPasienService } from './modules/registrasi/components/data-pasien/data-pasien.service';
+import { RegistrasiService } from './modules/registrasi/services/registrasi.service';
 import { AppService } from './services/app.service';
 import { LoadingService } from './services/loading.service';
 
@@ -25,16 +26,18 @@ export class AppComponent implements OnInit {
         private router: Router,
         private appService: AppService,
         private messageService: MessageService,
-        private dataPasienService: DataPasienService
+        private dataPasienService: DataPasienService,
+        private registrasiService: RegistrasiService
     ) { }
 
     ngOnInit() {
         this.router.events.subscribe((event: any): void => {
             if (event instanceof NavigationStart) {
-                if( localStorage.getItem('login') ){
+                if( sessionStorage.getItem('login') ){
                     this.appService.roleAccess(event.url);
                 }else{
                     if( event.url != '/login' ){
+                        this.registrasiService.registrasi.next('');
                         this.router.navigateByUrl('/login');
                     }
                 }

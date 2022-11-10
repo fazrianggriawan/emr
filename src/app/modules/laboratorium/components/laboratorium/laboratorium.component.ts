@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { BillingService } from 'src/app/modules/billing/billing/billing.service';
+import { DataBillingPenunjangService } from 'src/app/modules/billing/components/data-billing-penunjang/data-billing-penunjang.service';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { AppService } from 'src/app/services/app.service';
 import { HasilLaboratoriumService } from '../hasil-laboratorium/hasil-laboratorium.service';
@@ -9,7 +11,7 @@ import { HasilLaboratoriumService } from '../hasil-laboratorium/hasil-laboratori
     templateUrl: './laboratorium.component.html',
     styleUrls: ['./laboratorium.component.css']
 })
-export class LaboratoriumComponent implements OnInit {
+export class LaboratoriumComponent implements OnInit, OnDestroy {
 
     dialogHasilLab: boolean = false;
     dataPemeriksaan: any[] = [];
@@ -17,11 +19,14 @@ export class LaboratoriumComponent implements OnInit {
     registrasi: any;
     selectedBilling: any;
 
+    subs: Subscription[] = [];
+
     constructor(
         public hasilLaboratoriumService: HasilLaboratoriumService,
         private billingService: BillingService,
         public appService: AppService,
-        private registrasiService: RegistrasiService
+        private registrasiService: RegistrasiService,
+        private dataBillingPenunjangService: DataBillingPenunjangService
     ) { }
 
     ngOnInit(): void {
@@ -31,16 +36,26 @@ export class LaboratoriumComponent implements OnInit {
         this.billingService.dataBilling.subscribe(data => this.dataBilling = data)
     }
 
+    ngOnDestroy(): void {
+        this.subs.forEach(element => {
+            element.unsubscribe();
+        });
+
+        this.dataBillingPenunjangService.inputHasil.next(false);
+        this.dataBillingPenunjangService.printHasil.next('');
+
+    }
+
     handleRegistrasi(data: any) {
         this.registrasi = data;
-        if (data) {
-            this.billingService.getBillingDetailByUnit(this.registrasi.noreg, 'lab');
-        }
+        // if (data) {
+        //     this.billingService.getBillingDetailByUnit(this.registrasi.noreg, 'lab');
+        // }
     }
 
     inputHasil(data: any){
         this.hasilLaboratoriumService.dialog.next(true);
-        this.hasilLaboratoriumService.selectedBilling.next(data);
+        this.dataBillingPenunjangService.billingHead.next(data);
     }
 
 }

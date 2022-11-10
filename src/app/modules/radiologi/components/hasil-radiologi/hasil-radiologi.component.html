@@ -2,42 +2,56 @@
     <button class="btn btn-primary"><i class="bi bi-plus-lg"></i> Hasil Radiologi</button>
 </ng-container>
 
-<div class="row bg-white pd-t-0 pd-b-10 sticky-top border-bottom shadow-sm">
-    <div class="col-auto border-right">
-        <app-widget-registrasi></app-widget-registrasi>
-    </div>
-    <div class="col text-right">
-        <button class="btn btn-primary mr-1" (click)="save()"><i class="bi bi-save mr-1"></i> Simpan</button>
-    </div>
-</div>
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="hasilRadiologiService.openDialog(false)"
+    header="Tambah Billing"
+    [draggable]="false"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}"
+    appendTo="body">
 
-<div class="row mg-t-20">
-    <div class="col-auto">
-        <div>Tanggal</div>
-        <p-calendar dateFormat="dd M yy"></p-calendar>
-        <!-- <input type="text" value="12 Jun 2022" name="tglHasil" class="form-control" style="width: 120px;"> -->
-    </div>
-    <div class="col">
-        <div>Dokter Radiologi</div>
-        <input type="text" value="dr.Priatna,Sp.Rad" name="tglHasil" class="form-control">
-    </div>
-</div>
-<div class="row mg-t-10">
-    <div class="col bg-gray-100 p-3">
-        <h5 class="mb-3">Kesimpulan Pemeriksaan</h5>
-        <div class="mb-2">
-            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-card-text"></i> Template Hasil</button>
-        </div>
-        <p-editor name="hasil" placeholder="Ketikan hasil di sini..."></p-editor>
-    </div>
-</div>
-<div class="row mg-t-10">
-    <div class="col">
-        <h5 class="mb-3"><i class="bi bi-image"></i> Photo & Files</h5>
+    <ng-container *ngIf="dialog">
+        <form [formGroup]="form">
+            <div class="row mg-t-20">
+                <div class="col-auto">
+                    <div>Tanggal</div>
+                    <p-calendar formControlName="tanggal" dateFormat="dd M yy" [showIcon]="true"></p-calendar>
+                </div>
+                <div class="col">
+                    <div>Dokter Radiologi</div>
+                    <p-dropdown formControlName="dokter" [style]="{width: '100%'}" [options]="optionsDokter" optionValue="r_pelaksana.id" optionLabel="r_pelaksana.name" [autoDisplayFirst]="false"></p-dropdown>
+                </div>
+            </div>
+        </form>
+        <form [formGroup]="form">
+            <div class="row mg-t-10">
+                <div class="col bg-gray-100 p-3">
+                    <h5 class="mb-3">Kesimpulan Pemeriksaan</h5>
+                    <p-editor formControlName="kesimpulan" name="hasil" [style]="{'min-height':'15vw', 'background':'white'}" placeholder="Ketikan kesimpulan pemeriksaan di sini..."></p-editor>
+                </div>
+                <div class="col-5">
+                    <h5 class="mb-3"><i class="bi bi-image"></i> Photo & Files</h5>
+                    <div class="row">
+                        <div class="col">
+                            <app-file-upload [autoUpload]="false"></app-file-upload>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
         <div class="row">
             <div class="col">
-                <app-file-upload [autoUpload]="false"></app-file-upload>
+                <button class="btn btn-primary" [disabled]="form.invalid" (click)="save()">
+                    <i class="bi bi-check-lg"></i> Simpan
+                </button>
             </div>
         </div>
-    </div>
-</div>
+    </ng-template>
+
+
+</p-dialog>

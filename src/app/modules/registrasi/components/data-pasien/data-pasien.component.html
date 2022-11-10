@@ -1,55 +1,83 @@
-    <div class="row">
-        <div class="col">
-            <form [formGroup]="form">
-                <p-table
-                    [value]="dataPasien"
-                    responsiveLayout="scroll"
-                    [style]="{'min-height': '200px'}"
-                    [(selection)]="selectedPasien"
-                    selectionMode="single"
-                    (onRowSelect)="onSelectPasien()"
-                    [loading]="loading">
+<ng-container *ngIf="showButton">
+    <button class="btn mg-r-5" (click)="dataPasienService.openDialog(true)"><i class="bi bi-people-fill"></i> Data Pasien</button>
+</ng-container>
 
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>No. RM</th>
-                            <th>Nama</th>
-                            <th>Tgl. Lahir</th>
-                            <th>Alamat</th>
-                            <th>No. Telp</th>
-                            <th>No. Asuransi / BPJS</th>
-                            <th>Tgl. Registrasi</th>
-                            <th>Tgl. Update</th>
-                        </tr>
-                        <tr>
-                            <th><input type="text" class="form-control" placeholder="Cari No. RM" formControlName="norm" (keyup)="sorting($event)"></th>
-                            <th><input type="text" class="form-control" placeholder="Cari Nama" formControlName="nama" (keyup)="sorting($event)"></th>
-                            <th><p-inputMask formControlName="tglLahir" mask="99-99-9999" placeholder="Cari Tgl. Lahir" (keyup)="sorting($event)" styleClass="form-control"></p-inputMask></th>
-                            <th><input type="text" class="form-control" placeholder="Cari Alamat" formControlName="alamat" (keyup)="sorting($event)"></th>
-                            <th><input type="text" class="form-control" placeholder="Cari No. Telp" formControlName="tlp" (keyup)="sorting($event)"></th>
-                            <th><input type="text" class="form-control" placeholder="Cari No. Asuransi / BPJS" formControlName="noAsuransi" (keyup)="sorting($event)"></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-item>
-                        <tr [pSelectableRow]="item">
-                            <td>{{item.norm}}</td>
-                            <td>{{item.nama | uppercase}}</td>
-                            <td>{{item.tgl_lahir}}</td>
-                            <td>{{item.alamat | uppercase}}</td>
-                            <td>{{item.tlp}}</td>
-                            <td>{{item.no_asuransi}}</td>
-                            <td>{{item.date_created}}</td>
-                            <td>{{item.date_created}}</td>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="footer">
-                        <tr *ngIf="dataPasien.length == 0">
-                            <td colspan="8" class="tx-light" style="text-align: center;"><i class="bi bi-search mr-2"></i> Silahkan Melakukan Pencarian.</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </form>
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="dataPasienService.openDialog(false)"
+    header="Tambah Billing"
+    [draggable]="false"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}"
+    appendTo="body">
+
+    <ng-container *ngIf="dialog">
+        <div class="row">
+            <div class="col">
+                <form [formGroup]="form">
+                    <p-table
+                        [value]="dataPasien"
+                        responsiveLayout="scroll"
+                        [style]="{'min-height': '200px'}"
+                        [(selection)]="selectedPasien"
+                        selectionMode="single"
+                        (onRowSelect)="onSelectPasien()"
+                        [loading]="loading">
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>No. RM</th>
+                                <th>Nama</th>
+                                <th>Tgl. Lahir</th>
+                                <th>Alamat</th>
+                                <th>No. Telp</th>
+                                <th>No. Asuransi / BPJS</th>
+                                <th>Tgl. Registrasi</th>
+                                <th>Tgl. Update</th>
+                            </tr>
+                            <tr>
+                                <th><input type="text" class="form-control" placeholder="Cari No. RM" formControlName="norm" (keyup)="sorting($event)"></th>
+                                <th><input type="text" class="form-control" placeholder="Cari Nama" formControlName="nama" (keyup)="sorting($event)"></th>
+                                <th><p-inputMask formControlName="tglLahir" mask="99-99-9999" placeholder="Cari Tgl. Lahir" (keyup)="sorting($event)" styleClass="form-control"></p-inputMask></th>
+                                <th><input type="text" class="form-control" placeholder="Cari Alamat" formControlName="alamat" (keyup)="sorting($event)"></th>
+                                <th><input type="text" class="form-control" placeholder="Cari No. Telp" formControlName="tlp" (keyup)="sorting($event)"></th>
+                                <th><input type="text" class="form-control" placeholder="Cari No. Asuransi / BPJS" formControlName="noAsuransi" (keyup)="sorting($event)"></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr [pSelectableRow]="item">
+                                <td>{{item.norm}}</td>
+                                <td>{{item.nama | uppercase}}</td>
+                                <td>{{item.tgl_lahir}}</td>
+                                <td>{{item.alamat | uppercase}}</td>
+                                <td>{{item.tlp}}</td>
+                                <td>{{item.no_asuransi}}</td>
+                                <td>{{item.date_created}}</td>
+                                <td>{{item.date_created}}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <tr *ngIf="dataPasien.length == 0">
+                                <td colspan="8" class="tx-light" style="text-align: center;"><i class="bi bi-search mr-2"></i> Silahkan Melakukan Pencarian.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </form>
+            </div>
         </div>
-    </div>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+
+    </ng-template>
+
+
+</p-dialog>
