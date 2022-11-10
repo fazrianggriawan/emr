@@ -8,6 +8,10 @@
 <div class="row">
     <div class="col-auto border-right"><h5>Data Registrasi</h5></div>
     <div class="col-auto">
+        <app-cari-pasien></app-cari-pasien>
+    </div>
+    <div class="col-auto pd-l-0">
+        <app-data-pasien class="mg-r-5"></app-data-pasien>
         <button class="btn btn-primary mr-2" *ngIf="showForm" (click)="registrasiBaru()"><i class="bi bi-plus-lg mr-1"></i> Form Registrasi</button>
         <button class="btn mr-2" (click)="riwayatKunjunganService.showDialog(true)" [disabled]="!registrasi.noreg"><i class="bi bi-clock-history mr-1"></i> Riwayat Kunjungan</button>
         <button class="btn btn-light mr-2" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
@@ -117,6 +121,7 @@
     header="Form Registrasi"
     [modal]="true"
     position="top"
+    [draggable]="false"
     [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
     appendTo="body">
     <app-form-registrasi *ngIf="dialogFormRegistrasi"></app-form-registrasi>
@@ -127,6 +132,7 @@
     (onHide)="riwayatKunjunganService.showDialog(false)"
     header="Riwayat Kunjungan"
     [modal]="true"
+    [draggable]="false"
     position="top"
     [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
     appendTo="body">

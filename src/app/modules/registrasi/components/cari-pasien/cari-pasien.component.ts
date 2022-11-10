@@ -26,12 +26,7 @@ export class CariPasienComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.subs.push(this.dataPasienService.dataPasien.subscribe(data => {
-            if(data.length == 1){
-                this.registrasiService.registrasi.next('');
-                this.dataPasienService.pasien.next(data[0]);
-            }
-
-            if(data.length > 1){
+            if(data.length >= 1){
                 this.dataPasienService.openDialog(true);
             }
         }))

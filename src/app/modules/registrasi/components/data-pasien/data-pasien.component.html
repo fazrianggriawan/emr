@@ -1,15 +1,15 @@
 <ng-container *ngIf="showButton">
-    <button class="btn mg-r-5" (click)="dataPasienService.openDialog(true)"><i class="bi bi-people-fill"></i> Data Pasien</button>
+    <button class="btn" (click)="dataPasienService.openDialog(true)"><i class="bi bi-people-fill"></i> Data Pasien</button>
 </ng-container>
 
 <p-dialog
     [(visible)]="dialog"
     (onHide)="dataPasienService.openDialog(false)"
-    header="Tambah Billing"
+    header="Data Pasien"
     [draggable]="false"
     [modal]="true"
     position="top"
-    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}"
+    [breakpoints]="{'1920px': '85vw', '1366px': '90vw'}"
     appendTo="body">
 
     <ng-container *ngIf="dialog">

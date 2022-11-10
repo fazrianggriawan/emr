@@ -6,7 +6,7 @@
         <app-cari-pasien></app-cari-pasien>
     </div>
     <div class="col-auto pd-l-0 border-right">
-        <app-data-pasien></app-data-pasien>
+        <app-data-pasien class="mr-2"></app-data-pasien>
         <!-- <button class="btn mr-2" (click)="dataPasienService.openDialog(true)"><i class="bi bi-people-fill mr-1"></i> Data Pasien</button> -->
         <button class="btn mr-2" (click)="formRegistrasiService.dialog.next(true)"><i class="bi bi-plus-lg mr-1"></i> Registrasi</button>
         <button class="btn mr-2" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
@@ -344,9 +344,9 @@
     <app-vclaim *ngIf="dialogVclaim"></app-vclaim>
 </p-dialog>
 
-<p-dialog [(visible)]="dialogDataPasien" position="top" (onHide)="dataPasienService.dialog.next(false)" header="Data Pasien" [modal]="true" [draggable]="false" [breakpoints]="{'1300px': '85vw'}" [style]="{width: '80vw'}" [resizable]="false">
+<!-- <p-dialog [(visible)]="dialogDataPasien" position="top" (onHide)="dataPasienService.dialog.next(false)" header="Data Pasien" [modal]="true" [draggable]="false" [breakpoints]="{'1300px': '85vw'}" [style]="{width: '80vw'}" [resizable]="false">
     <app-data-pasien *ngIf="dialogDataPasien"></app-data-pasien>
-</p-dialog>
+</p-dialog> -->
 
 <p-dialog [(visible)]="dialogFormRegistrasi" (onHide)="formRegistrasiService.dialog.next(false)" position="top" header="Form Registrasi" [modal]="true" [draggable]="false" [style]="{width: '75vw'}">
     <app-form-registrasi *ngIf="dialogFormRegistrasi"></app-form-registrasi>
