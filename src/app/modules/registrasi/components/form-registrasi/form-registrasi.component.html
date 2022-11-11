@@ -73,37 +73,37 @@
                     <button class="btn btn-xs btn-outline-light btn-block mt-1"><i class="bi bi-pencil mr-1"></i> Edit Pasien</button> -->
                 </div>
                 <div class="col">
-                    <div class="row mb-1">
+                    <div class="row">
                         <label class="col-4 col-form-label">No. RM</label>
                         <div class="col">
                             <input type="text" readonly class="form-control" formControlName="norm">
                         </div>
                     </div>
-                    <div class="row mb-1">
+                    <div class="row">
                         <label class="col-4 col-form-label">Nama</label>
                         <div class="col">
                             <input type="text" readonly class="form-control" formControlName="nama">
                         </div>
                     </div>
-                    <div class="row mb-1">
+                    <div class="row">
                         <label class="col-4 col-form-label">Alamat</label>
                         <div class="col">
                             <input type="text" readonly class="form-control" formControlName="alamat">
                         </div>
                     </div>
-                    <div class="row mb-1">
+                    <div class="row">
                         <label class="col-4 col-form-label">No. BPJS / Asuransi</label>
                         <div class="col">
                             <input type="text" readonly class="form-control" formControlName="noAsuransi">
                         </div>
                     </div>
-                    <div class="row mb-1">
+                    <div class="row">
                         <label class="col-4 col-form-label">No. Tlp</label>
                         <div class="col">
                             <input type="text" readonly class="form-control" formControlName="noTelp">
                         </div>
                     </div>
-                    <div class="row mb-1">
+                    <div class="row">
                         <label class="col-4 col-form-label">Jns. Kelamin</label>
                         <div class="col">
                             <input type="text" readonly class="form-control" formControlName="jnsKelamin">
@@ -116,7 +116,7 @@
     <div class="col">
         <h5>Data Registrasi</h5>
         <form [formGroup]="form">
-            <div class="row mb-1">
+            <div class="row">
                 <label class="col-4 col-form-label">
                     No. Registrasi <span *ngIf="form.get('noreg')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -124,7 +124,7 @@
                     <input type="text" formControlName="noreg" class="form-control" readonly>
                 </div>
             </div>
-            <div class="row mb-1">
+            <div class="row">
                 <label class="col-4 col-form-label">
                     Status <span *ngIf="form.get('status')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -132,7 +132,7 @@
                     <input type="text" formControlName="status" class="form-control" readonly>
                 </div>
             </div>
-            <div class="row mb-1">
+            <div class="row">
                 <label class="col-4 col-form-label">
                     Tanggal <span *ngIf="form.get('tanggal')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -140,7 +140,7 @@
                     <p-calendar [showIcon]="true" dateFormat="dd-mm-yy" [maxDate]="today" formControlName="tanggal" appendTo="body"></p-calendar>
                 </div>
             </div>
-            <div class="row mb-1">
+            <div class="row">
                 <label class="col-4 col-form-label">
                     Jns. Perawatan <span *ngIf="form.get('jnsPerawatan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -157,7 +157,7 @@
                     </p-dropdown>
                 </div>
             </div>
-            <div class="row mb-1">
+            <div class="row">
                 <label class="col-4 col-form-label">
                     <!-- <span *ngIf="form.get('jnsPerawatan')?.value == 'rj'">Poliklinik</span>
                     <span *ngIf="form.get('jnsPerawatan')?.value == 'ri'">Ruang Perawatan</span> -->
@@ -177,7 +177,7 @@
                     </p-dropdown>
                 </div>
             </div>
-            <div class="row mb-1" *ngIf="form.get('jnsPerawatan')?.value == 'ri'">
+            <div class="row" *ngIf="form.get('jnsPerawatan')?.value == 'ri'">
                 <label class="col-4 col-form-label">
                     Tempat Tidur <span *ngIf="form.get('ruanganPoli')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -217,7 +217,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-1" *ngIf="form.get('jnsPerawatan')?.value == 'rj'">
+            <div class="row" *ngIf="form.get('jnsPerawatan')?.value == 'rj'">
                 <label class="col-4 col-form-label">
                     Waktu Pelayanan <span *ngIf="form.get('waktuPelayanan')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -225,7 +225,7 @@
                     <p-dropdown [options]="dataWaktuPelayanan" formControlName="waktuPelayanan" optionValue="id" optionLabel="name" [style]="{width: '100%'}" [autoDisplayFirst]="false" appendTo="body"></p-dropdown>
                 </div>
             </div>
-            <div class="row mb-1">
+            <div class="row">
                 <label class="col-4 col-form-label">
                     Dokter / DPJP <span *ngIf="form.get('dokter')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
@@ -250,7 +250,7 @@
                     <p-dropdown [options]="dataGolPasien" [autoDisplayFirst]="false" formControlName="golPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
                 </div>
             </div>
-            <div class="row mb-1" hidden>
+            <div class="row" hidden>
                 <label class="col-4 col-form-label">Nomor SEP</label>
                 <div class="col-auto">
                     <div class="input-group">
