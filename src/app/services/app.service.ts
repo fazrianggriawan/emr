@@ -66,6 +66,13 @@ export class AppService {
         }
     }
 
+    public getSessionStorage(key:string){
+        if( sessionStorage.getItem(key) ){
+            let data:any = sessionStorage.getItem(key);
+            return  JSON.parse(data);
+        }
+    }
+
     public print(url: string) {
         let width = screen.width / 1.5;
         let center = (screen.width / 2) - (width /2);

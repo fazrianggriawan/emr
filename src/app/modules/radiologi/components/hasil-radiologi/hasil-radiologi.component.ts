@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { config } from 'src/app/config';
 import { DataBillingPenunjangService } from 'src/app/modules/billing/components/data-billing-penunjang/data-billing-penunjang.service';
 import { MasterService } from 'src/app/modules/registrasi/services/master.service';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
@@ -43,6 +44,7 @@ export class HasilRadiologiComponent implements OnInit, OnDestroy {
         this.subs.push(this.dataBillingPenunjangService.billingHead.subscribe(data => this.handleBillingHead(data)))
         this.subs.push(this.hasilRadiologiService.dialog.subscribe(data => this.handleDialog(data)))
         this.subs.push(this.hasilRadiologiService.hasil.subscribe(data => this.handleHasil(data)))
+        this.subs.push(this.dataBillingPenunjangService.printHasil.subscribe(data => this.handlePrintHasil(data)))
     }
 
     ngOnDestroy(): void {
@@ -103,6 +105,15 @@ export class HasilRadiologiComponent implements OnInit, OnDestroy {
     handleInputHasil(data: boolean) {
         if (data) {
             this.hasilRadiologiService.openDialog(true);
+        }
+    }
+
+    handlePrintHasil(data: any){
+        if(data){
+            if( data.unit == 'rad' ){
+                let login = this.appService.getSessionStorage('login');
+                this.appService.print(config.api_url('print/hasilRadiologi/'+data.noreg+'/'+data.idBillingHead+'/'+login.username))
+            }
         }
     }
 

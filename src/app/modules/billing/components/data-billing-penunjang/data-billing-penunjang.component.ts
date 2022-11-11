@@ -1,5 +1,6 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { config } from 'src/app/config';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { AppService } from 'src/app/services/app.service';
 import { BillingService } from '../../billing/billing.service';
@@ -75,7 +76,17 @@ export class DataBillingPenunjangComponent implements OnInit, OnDestroy {
     }
 
     printHasil(data: any){
-        this.dataBillingPenunjangService.printHasil.next({noreg: data.r_billing_head.noreg, idBillingHead: data.r_billing_head.id})
+
+        let login = this.appService.getSessionStorage('login');
+
+        if( this.unit == 'rad' ){
+            this.appService.print(config.api_url('print/hasilRadiologi/'+data.r_billing_head.noreg+'/'+data.id_billing_head+'/'+login.username))
+        }
+
+        if( this.unit == 'lab' ){
+            this.appService.print(config.api_url('print/hasilLab/'+data.r_billing_head.noreg+'/'+data.id_billing_head+'/'+login.username))
+        }
+
     }
 
 }

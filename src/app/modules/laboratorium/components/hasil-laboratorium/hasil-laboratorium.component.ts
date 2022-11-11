@@ -67,7 +67,10 @@ export class HasilLaboratoriumComponent implements OnInit, OnDestroy {
 
     handlePrintHasil(data: any){
         if(data){
-            this.appService.print(config.api_url('print/hasilLab/'+data.noreg+'/'+data.idBillingHead))
+            if( data.unit == 'lab' ){
+                let login = this.appService.getSessionStorage('login');
+                this.appService.print(config.api_url('print/hasilLab/'+data.noreg+'/'+data.idBillingHead+'/'+login.username))
+            }
         }
     }
 

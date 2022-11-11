@@ -93,8 +93,7 @@ export class KasirComponent implements OnInit, OnDestroy {
     }
 
     handleDataBilling(data: any) {
-        this.dataBilling = [];
-        if (data.length > 0) {
+        if (data) {
             this.dataBilling = data;
 
             this.totalBilling = 0;

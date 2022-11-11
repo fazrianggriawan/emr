@@ -161,7 +161,8 @@ export class BillingComponent implements OnInit, OnDestroy {
     }
 
     printBilling() {
-        this.appService.print( config.api_url('print/rincianBilling/'+this.registrasi.noreg) );
+        let login = this.appService.getSessionStorage('login');
+        this.appService.print( config.api_url('print/rincianBilling/'+this.registrasi.noreg+'/'+login.username) );
     }
 
 }
