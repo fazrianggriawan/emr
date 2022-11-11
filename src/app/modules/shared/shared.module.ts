@@ -39,16 +39,6 @@ import { KonvaComponent } from 'src/app/components/konva/konva.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { FileUploadModule } from 'primeng/fileupload';
-import { AgGridModule } from "ag-grid-angular";
-import { WidgetEstimasiKlaimComponent } from './vclaim/widget-estimasi-klaim/widget-estimasi-klaim.component';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import { TieredMenuModule } from 'primeng/tieredmenu';
-import { TagModule } from 'primeng/tag';
-import { InputSwitchModule } from 'primeng/inputswitch';
-import { PanelMenuModule } from 'primeng/panelmenu';
-import { ToggleButtonModule } from 'primeng/togglebutton';
-import { SidebarModule } from 'primeng/sidebar';
 
 
 let primeModules = [
@@ -75,14 +65,7 @@ let primeModules = [
     ConfirmDialogModule,
     TabMenuModule,
     QRCodeModule,
-    ConfirmPopupModule,
-    FileUploadModule,
-    TieredMenuModule,
-    TagModule,
-    InputSwitchModule,
-    PanelMenuModule,
-    ToggleButtonModule,
-    SidebarModule
+    ConfirmPopupModule
 ]
 
 let sharedComponent = [
@@ -97,31 +80,26 @@ let sharedComponent = [
     SuratKontrolComponent,
     FormRujukanKeluarComponent,
     MenuEmrComponent,
-    KonvaComponent,
-    WidgetEstimasiKlaimComponent,
-    FileUploadComponent
+    KonvaComponent
 ]
 
 @NgModule({
     declarations: [
         sharedComponent,
         PulangSepComponent,
-        FormPasienPulangComponent,
-        WidgetEstimasiKlaimComponent
+        FormPasienPulangComponent
     ],
     imports: [
         primeModules,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule,
-        AgGridModule
+        ReactiveFormsModule
     ],
     exports: [
         sharedComponent,
         primeModules,
         FormsModule,
         ReactiveFormsModule,
-        AgGridModule
     ]
 })
 export class SharedModule { }

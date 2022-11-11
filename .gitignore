@@ -1,4 +1,4 @@
 /.angular/cache
 node_modules
 api
-publish
+publish/

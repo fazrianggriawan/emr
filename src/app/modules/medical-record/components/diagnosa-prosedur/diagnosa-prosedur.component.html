@@ -23,8 +23,8 @@
                             <ng-template let-data pTemplate="item">
                                 <table class="p-m-0 p-p-0">
                                     <tr>
-                                        <td style="width: 90px;" class="tx-left">{{data.id}}</td>
-                                        <td style="width: 400px;" class="tx-left">{{data.name}}</td>
+                                        <td style="width: 90px;" class="tx-left">{{data.icd10code}}</td>
+                                        <td style="width: 400px;" class="tx-left">{{data.deskripsi}}</td>
                                     </tr>
                                 </table>
                             </ng-template>
@@ -40,11 +40,11 @@
             <tbody>
                 <tr *ngFor="let item of dataTable; let i = index;">
                     <td>
-                        {{item.id}}
+                        {{item.icd10code}}
                         <span class="badge badge-primary" *ngIf="i==0">Utama</span>
                         <span class="badge badge-secondary" *ngIf="i>0">Sekunder</span>
                     </td>
-                    <td>{{item.name}}</td>
+                    <td>{{item.deskripsi}}</td>
                     <td [width]="100">
                         <button class="btn btn-xs btn-icon btn-outline-secondary" (click)="deleteIcd10(i)"><i class="bi bi-trash"></i></button>
 
@@ -70,7 +70,7 @@
                 <tr>
                     <th colspan="3">
                         <p-autoComplete #acICD9 appendTo="body"
-                            placeholder="Cari ICD-9 (Min. 3 huruf)" field="name"
+                            placeholder="Cari ICD-9 (Min. 3 huruf)" field="deskripsi"
                             [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [minLength]="3"
                             [autoHighlight]="true" [showEmptyMessage]="true" [suggestions]="filteredIcd9"
                             [showEmptyMessage]="true" [forceSelection]="true"
@@ -87,8 +87,8 @@
                             <ng-template let-data pTemplate="item">
                                 <table class="p-m-0 p-p-0">
                                     <tr>
-                                        <td style="width: 90px;" class="tx-left">{{data.id}}</td>
-                                        <td style="width: 400px;" class="tx-left">{{data.name}}</td>
+                                        <td style="width: 90px;" class="tx-left">{{data.icd9code}}</td>
+                                        <td style="width: 400px;" class="tx-left">{{data.deskripsi}}</td>
                                     </tr>
                                 </table>
                             </ng-template>
@@ -104,9 +104,9 @@
             <tbody>
                 <tr *ngFor="let item of dataTable2; let i = index;">
                     <td>
-                        {{item.id}}
+                        {{item.icd9code}}
                     </td>
-                    <td>{{item.name}}</td>
+                    <td>{{item.deskripsi}}</td>
                     <td [width]="100">
                         <button class="btn btn-xs btn-icon btn-outline-secondary" (click)="deleteIcd9(i)"><i class="bi bi-trash"></i></button>
 

@@ -1,156 +1,117 @@
-<div class="splash-screen" *ngIf="splashScreen"></div>
-
-<ng-container *ngIf="currentRoute != 'login'">
-    <app-left-panel></app-left-panel>
-
-    <app-top-panel></app-top-panel>
-
-    <app-right-panel></app-right-panel>
-</ng-container>
-
-<app-main-panel></app-main-panel>
-
-
-
-<!--
-<div class="row navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != 'login'">
-    <div class="col-auto">
-        <div class="pl-4 pt-3">
-            <span class="df-logo" style="color: white;">BiHealth</span>
-        </div>
+<div class="row navbar navbar-header navbar-header-fixed" *ngIf="currentRoute != ''">
+    <div class="col-auto d-none d-sm-block p-2 pl-4">
+        <span class="df-logo" style="color: white;">BiHealth<span style="color: #75bfff;">.io</span></span>
     </div>
-    <div class="col topMenu">
+    <div class="col">
         <app-menu></app-menu>
     </div>
-    <div class="col-auto" hidden>
-        <button class="btn btn-icon tx-white tx-16">
-            <i class="bi bi-bell mr-1"></i>
-            <span class="badge badge-danger">1</span>
-        </button>
-    </div>
-    <div class="col-auto tx-white" style="padding-top: 3px;">
+    <div class="col-auto tx-white d-none d-sm-block" style="padding-top: 3px; background-color: #324183;">
         <app-user></app-user>
     </div>
-</div> -->
-<!--
-<div class="content content-components m-4 p-0 rounded " style="margin-top: 56px !important;">
-    <div class="content p-3">
-        <div class="row justify-content-center" *ngIf="currentRoute == 'medicalRecord'">
-            <div class="col">
-                <app-menu-emr></app-menu-emr>
-            </div>
-            <div class="col">
-                <div class="row border-bottom border-top pt-2 pb-2 mb-4" style="background-color: #e6ecef;">
-                    <div class="col-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text tx-pink" id="basic-addon1"> Suhu </span>
-                            </div>
-                            <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"> <sup>o</sup>C </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text tx-pink" id="basic-addon1"> Tensi </span>
-                            </div>
-                            <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"> mmHg </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text tx-pink" id="basic-addon1"> Nadi </span>
-                            </div>
-                            <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"> x/menit </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text tx-pink" id="basic-addon1"> BB </span>
-                            </div>
-                            <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"> kg </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text tx-pink" id="basic-addon1"> Tinggi </span>
-                            </div>
-                            <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"> cm </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text tx-pink" id="basic-addon1"> Pernapasan </span>
-                            </div>
-                            <input type="text" class="form-control">
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="basic-addon1"> x/menit </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <router-outlet></router-outlet>
-            </div>
-            <div class="col pt-0">
-                <div class="row">
-                    <div class="col">
-                        <app-menu-emr></app-menu-emr>
-                    </div>
-                </div>
+</div>
 
+<div class="row m-0 content mt-5 justify-content-center" >
+    <div class="col-md-2 d-none d-sm-block" *ngIf="pasien">
+        <div *ngIf="pasien.nama">
+            <div class="bg-light p-3 rounded border tx-center tx-gray-500 mb-2 mt-3">
+                <div class="bi bi-person-bounding-box" style="font-size: 4rem;"></div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <app-widget-registrasi></app-widget-registrasi>
+
+            <div>
+                <div>Nomor RM : {{pasien.norm}}</div>
+                <h5 class="m-0">{{pasien.nama | uppercase}}</h5>
+                <small *ngIf="pasien.jns_kelamin== 'P'">PEREMPUAN</small>
+                <small *ngIf="pasien.jns_kelamin== 'L'">LAKI-LAKI</small>
+                <div class="tx-12">{{pasien.alamat | uppercase}}</div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-auto" *ngIf="currentRoute == 'medicalRecord'">
-                <app-menu-emr></app-menu-emr>
-            </div>
-            <div class="col">
-                <router-outlet></router-outlet>
+            <hr>
+            <div>
+                <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-arrow-clockwise mr-2"></i>Riwayat Pelayanan</button>
+                <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-exclamation-triangle mr-2"></i>Alergi <span class="badge badge-danger float-right mt-1">2</span> </button>
+                <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Penyakit</button>
+                <button class="btn btn-sm btn-outline-light p-1 pl-2 pr-2 btn-block tx-left m-0 mb-1"><i class="bi bi-clock mr-2"></i>Riwayat Operasi</button>
             </div>
         </div>
     </div>
-</div> -->
+    <div class="col-sm-12 col-md-10">
+        <div class="row">
+            <div class="col"><app-menu-emr *ngIf="currentRoute == 'medicalRecord'"></app-menu-emr></div>
+        </div>
+        <div class="row mb-3 border-bottom border-top pt-2 pb-2" style="background-color: #e6ecef;" *ngIf="currentRoute == 'medicalRecord'">
+            <div class="col-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text tx-pink" id="basic-addon1"> Suhu </span>
+                    </div>
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> <sup>o</sup>C </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text tx-pink" id="basic-addon1"> Tensi </span>
+                    </div>
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> mmHg </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text tx-pink" id="basic-addon1"> Nadi </span>
+                    </div>
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> x/menit </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text tx-pink" id="basic-addon1"> BB </span>
+                    </div>
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> kg </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text tx-pink" id="basic-addon1"> Tinggi </span>
+                    </div>
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> cm </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text tx-pink" id="basic-addon1"> Pernapasan </span>
+                    </div>
+                    <input type="text" class="form-control">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"> x/menit </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
 
 <div class="loading" *ngIf="loadingService.status | async">
     <p-progressSpinner strokeWidth="2"></p-progressSpinner>
     <div>Loading...</div>
 </div>
 
-<p-toast position="top-center">
-    <ng-template let-message pTemplate="message">
-        <div class="flex flex-column" style="flex: 1">
-            <div class="grid p-fluid">
-                <div class="col-auto">
-                    <b>{{message.summary | uppercase}}!</b>
-                </div>
-                <div class="col">
-                    <p innerHtml="{{message.detail}}"></p>
-                </div>
-            </div>
-        </div>
-    </ng-template>
-</p-toast>
+<p-toast position="top-center"></p-toast>

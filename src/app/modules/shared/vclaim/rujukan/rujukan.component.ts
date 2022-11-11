@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AppService } from 'src/app/services/app.service';
 import { VclaimService } from '../vclaim.service';
 import { FormRujukanKeluarService } from './form-rujukan-keluar/form-rujukan-keluar.service';
 import { RujukanService } from './rujukan.service';
@@ -21,8 +20,7 @@ export class RujukanComponent implements OnInit {
     constructor(
         public formRujukanKeluarService: FormRujukanKeluarService,
         public rujukanService: RujukanService,
-        private vclaimService: VclaimService,
-        private appService: AppService,
+        private vclaimService: VclaimService
     ) { }
 
     ngOnInit(): void {
@@ -33,26 +31,17 @@ export class RujukanComponent implements OnInit {
         this.rujukanService.dataRujukanKeluar.subscribe(data => this.dataRujukanKeluar = data)
     }
 
-    handlePeserta(data: any) {
+    public handlePeserta(data: any) {
         if( data ) {
             this.peserta = data.peserta;
             this.getDataRujukan();
         }
     }
 
-    getDataRujukan() {
+    public getDataRujukan() {
         this.rujukanService.getDataRujukanFaskes( this.peserta.noKartu );
         this.rujukanService.getDataRujukanRs( this.peserta.noKartu );
         // this.rujukanService.getDataRujukanKeluar();
-    }
-
-    expiredAt(tanggal: string){
-        let expired = this.vclaimService.getExpiredRujukan(tanggal);
-        return expired.hariExpired;
-    }
-
-    dateHuman(tanggal: string){
-        return this.appService.dateHuman(tanggal);
     }
 
 }

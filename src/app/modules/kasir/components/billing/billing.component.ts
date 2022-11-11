@@ -1,85 +1,104 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
-import { Subscription } from 'rxjs';
-import { config } from 'src/app/config';
-import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
-import { AppService } from 'src/app/services/app.service';
 import { BillingService } from './billing.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { AppService } from 'src/app/services/app.service';
+import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 
 @Component({
     selector: 'app-billing',
     templateUrl: './billing.component.html',
     styleUrls: ['./billing.component.css'],
-    providers: [ConfirmationService, MessageService],
+    providers: [ConfirmationService, MessageService]
 })
-export class BillingComponent implements OnInit, OnDestroy {
+export class BillingComponent implements OnInit {
 
     @ViewChild('opDisc') opDisc!: OverlayPanel;
     @ViewChild('opJumlah') opJumlah!: OverlayPanel;
 
-    catTarif: any;
-    selectedCatTarif: string = '';
-    dataBilling: any = '';
+    dataBilling: any;
+    jnsBayar: any;
+    selectedJnsBayar: any;
+    disc: number = 0;
+    jumlah: number = 0;
     selectedBilling: any;
+    totalBilling: number = 0;
+    tagihan: number = 0;
+    totalBayar: number = 0;
     dataPembayaran: any;
     registrasi: any;
-    totalBilling: any;
-
-    subs: Subscription[] = [];
 
     constructor(
-        public billingService: BillingService,
+        private billingService: BillingService,
         private confirmationService: ConfirmationService,
         private registrasiService: RegistrasiService,
         public appService: AppService,
     ) { }
 
     ngOnInit(): void {
-        this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data)))
-        this.subs.push(this.billingService.saveStatus.subscribe(data => this.handleSaveBilling(data)))
-        this.subs.push(this.billingService.deleteStatus.subscribe(data => this.handleSaveBilling(data)))
+
+        this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data));
+        this.billingService.saveStatus.subscribe(data => this.handleSaveBilling(data))
+        this.billingService.deleteStatus.subscribe(data => this.handleSaveBilling(data))
         this.billingService.dataBilling.subscribe(data => this.handleDataBilling(data))
-        this.subs.push(this.billingService.updateStatus.subscribe(data => this.handleUpdate(data)))
-        this.subs.push(this.billingService.addDiscountStatus.subscribe(data => this.handleAddDiscount(data)))
-        this.selectedCatTarif = 'all';
+        this.billingService.updateStatus.subscribe(data => this.handleUpdate(data))
+        this.billingService.addDiscountStatus.subscribe(data => this.handleAddDiscount(data))
+        this.billingService.dataPembayaran.subscribe(data => this.handleDataPembayaran(data));
+        this.billingService.addPembayaranStatus.subscribe(data => this.handleAddPembayaran(data))
+        this.billingService.deletePembayaranStatus.subscribe(data => this.handleAddPembayaran(data))
 
-        this.catTarif = [
-            { id: 'all', name: 'All' },
-            { id: 'perawatan', name: 'Perawatan' },
-            { id: 'lab', name: 'Laboratorium' },
-            { id: 'rad', name: 'Radiologi' },
-            { id: 'farmasi', name: 'Farmasi' },
-            { id: 'operasi', name: 'Operasi' },
-            { id: 'kamar', name: 'Kamar Rawat' },
-        ];
 
-    }
+        this.jnsBayar = [
+            { id: 'CASH', name: 'TUNAI' },
+            { id: 'DC', name: 'KARTU DEBIT' },
+            { id: 'CC', name: 'KARTU KREDIT' },
+            { id: 'TR', name: 'TRANSFER BANK' },
+            { id: 'ASU', name: 'ASURANSI' }
+        ]
 
-    ngOnDestroy(): void {
-        this.subs.forEach(element => {
-            element.unsubscribe();
-        });
+        // setTimeout(() => {
+        //     this.billingService.getDataPembayaran('MC22090100002');
+        // }, 300);
+
     }
 
     handleRegistrasi(data: any) {
-        this.registrasi = '';
-        this.dataBilling = [];
         if (data) {
             this.registrasi = data;
             this.billingService.getBillingByNoreg(this.registrasi.noreg);
+            this.billingService.getDataPembayaran(this.registrasi.noreg);
+        }
+    }
+
+    handleAddPembayaran(data: boolean) {
+        if (data) {
+            this.billingService.getDataPembayaran(this.registrasi.noreg);
+        }
+    }
+
+    handleDataPembayaran(data: any) {
+        if (data.length > 0) {
+            this.dataPembayaran = data;
+            this.totalBayar = 0;
+            this.dataPembayaran.forEach((item: any) => {
+                this.totalBayar = this.totalBayar + parseInt(item.jumlah);
+            });
+            this.tagihan = this.totalBayar - this.tagihan;
+
         }
     }
 
     handleDataBilling(data: any) {
-        this.dataBilling = '';
         if (data.length > 0) {
             this.dataBilling = data;
 
             this.totalBilling = 0;
             this.dataBilling.forEach((item: any) => {
-                this.totalBilling = this.totalBilling + this.billingService.hitungTotalBilling(item)
+                this.totalBilling = this.totalBilling + this.hitungTotalBilling(item)
             });
+
+            this.totalBayar = this.tagihan = this.totalBilling;
+            this.billingService.getDataPembayaran(this.registrasi.noreg);
         }
     }
 
@@ -139,14 +158,52 @@ export class BillingComponent implements OnInit, OnDestroy {
         });
     }
 
-    refresh(){
-        if( this.registrasi.noreg ){
-            this.billingService.getBillingByNoreg(this.registrasi.noreg);
-        }
+    confirmDeletePembayaran(event: any, item: any) {
+        this.confirmationService.confirm({
+            target: event.target,
+            message: 'Yakin ingin menghapus data ini?',
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Ya',
+            rejectLabel: 'Tidak',
+            accept: () => {
+                //confirm action
+                this.billingService.deletePembayaran(item);
+            },
+            reject: () => {
+                //reject action
+            }
+        });
     }
 
-    printBilling() {
-        this.appService.print( config.api_url('print/rincianBilling/'+this.registrasi.noreg) );
+    confirmAddPembayaran(event: any) {
+        this.confirmationService.confirm({
+            target: event.target,
+            message: 'Pastikan data pembayaran sudah benar. Yakin ingin proses?',
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Ya',
+            rejectLabel: 'Tidak',
+            accept: () => {
+                //confirm action
+                let data = {
+                    jnsPembayaran: this.selectedJnsBayar,
+                    jumlah: this.totalBayar,
+                    noreg: 'MC22090100002'
+                }
+                this.billingService.addPembayaran(data);
+            },
+            reject: () => {
+                //reject action
+            }
+        });
+    }
+
+    hitungTotalBilling(item: any) {
+        let total = 0;
+        total = (parseInt(item.harga) * parseInt(item.qty));
+        if (parseInt(item.discount) > 0) {
+            total = total - (total * (parseInt(item.discount) / 100))
+        }
+        return total;
     }
 
 }

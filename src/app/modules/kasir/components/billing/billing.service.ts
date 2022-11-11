@@ -8,17 +8,16 @@ import { config } from 'src/app/config';
 })
 export class BillingService {
 
-    tarif = new BehaviorSubject<any>('');
-    categoryTarif = new BehaviorSubject<any>('');
-    dataBilling = new BehaviorSubject<any>('');
-    dataPembayaran = new BehaviorSubject<any>('');
+    tarif = new BehaviorSubject<any>([]);
+    categoryTarif = new BehaviorSubject<any>([]);
+    dataBilling = new BehaviorSubject<any>([]);
+    dataPembayaran = new BehaviorSubject<any>([]);
     saveStatus = new BehaviorSubject<boolean>(false);
     deleteStatus = new BehaviorSubject<boolean>(false);
     updateStatus = new BehaviorSubject<boolean>(false);
     addDiscountStatus = new BehaviorSubject<boolean>(false);
     addPembayaranStatus = new BehaviorSubject<boolean>(false);
     deletePembayaranStatus = new BehaviorSubject<boolean>(false);
-    totalBilling = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient
@@ -60,12 +59,7 @@ export class BillingService {
         if (noreg) {
             this.http.get<any>(config.api_url('billing/billingByNoreg/' + noreg))
                 .subscribe(data => {
-                    if( data.data.length > 0 ){
-                        this.dataBilling.next(data.data)
-                        this.getTotalBilling(data.data);
-                    }else{
-                        this.totalBilling.next(0);
-                    }
+                    this.dataBilling.next(data.data)
                 })
         }
     }
@@ -113,30 +107,6 @@ export class BillingService {
                     this.deletePembayaranStatus.next(true);
                 }
             })
-    }
-
-    public hitungTotalBilling(item: any) {
-        let total = 0;
-        total = (parseInt(item.r_tarif_harga.harga) * parseInt(item.qty));
-        if (parseInt(item.discount_percent) > 0) {
-            total = total - (total * (parseInt(item.discount_percent) / 100))
-        }
-        return total;
-    }
-
-    public getTotalBilling(dataBilling: any) {
-        if (dataBilling.length > 0) {
-
-            let totalBilling = 0;
-            dataBilling.forEach((item: any) => {
-                totalBilling = totalBilling + this.hitungTotalBilling(item)
-            });
-
-            this.totalBilling.next(totalBilling);
-        }else{
-            this.totalBilling.next('0');
-        }
-
     }
 
 }

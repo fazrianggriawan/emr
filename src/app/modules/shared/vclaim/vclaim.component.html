@@ -1,4 +1,4 @@
-<div class="row mt-3">
+<div class="row mt-1">
     <div class="col-4">
         <!-- <div style="position: absolute; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.8); z-index: 9; padding-top: 25%; padding-left: 45%;">
             <p-progressSpinner [style]="{width: '25px', height: '25px'}" strokeWidth="5"></p-progressSpinner>
@@ -91,7 +91,7 @@
                     <button class="btn btn-outline-light btn-xs"><i class="bi bi-plus-lg mr-1"></i>Lebih Detail</button>
                 </label>
             </div>
-            <div hidden>
+            <div>
                 <div class="row mb-1 border-bottom">
                     <label class="col-4 col-form-label">COB</label>
                     <div class="col border-left">
@@ -166,7 +166,7 @@
             </div>
         </form>
     </div>
-    <div class="col-8 shadow-sm border rounded">
+    <div class="col-8">
         <p-tabView [scrollable]="true" [(activeIndex)]="tabIndex">
             <p-tabPanel header="Form SEP">
                 <div class="row pt-3 pb-3">
@@ -178,7 +178,7 @@
                                     <p-calendar [showIcon]="true" dateFormat="dd M yy" formControlName="tglSep" appendTo="body" [style]="{width:'150px'}"></p-calendar>
                                 </div>
                                 <div class="col pl-0">
-                                    <button class="btn"><i class="bi bi-file-earmark mr-1"></i> SEP Backdate / Fingerprint</button>
+                                    <button class="btn btn-secondary"><i class="bi bi-file-earmark mr-1"></i> SEP Backdate / Fingerprint</button>
                                 </div>
                             </div>
                             <div class="row mb-1">
@@ -187,39 +187,6 @@
                                 </label>
                                 <div class="col">
                                     <p-selectButton [options]="dataJnsKunjungan" (ngModelChange)="onSelectJnsKunjungan()" optionLabel="nama" formControlName="jnsKunjungan"></p-selectButton>
-                                </div>
-                            </div>
-                            <div class="row mb-1 border rounded">
-                                <label class="col-3 col-form-label">
-                                    Surat Rujukan <span *ngIf="formSep.get('jnsKunjungan')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
-                                </label>
-                                <div class="col">
-                                    <div class="pd-5" *ngIf="rujukan">
-                                        <div class="mg-b-5"><span class="text-muted">No. Rujukan: </span><span class="tx-bold">{{rujukan.rujukan.noKunjungan}}</span></div>
-                                        <div><small class="text-muted">Tgl. Rujukan: </small>{{appService.dateHuman(rujukan.rujukan.tglKunjungan)}}</div>
-                                        <div><small class="text-muted">Poli Rujukan: </small>{{rujukan.rujukan.poliRujukan.nama}}</div>
-                                        <div><small class="text-muted">Berlaku Sampai: </small>{{appService.dateHuman(vclaimService.getExpiredRujukan(rujukan.rujukan.tglKunjungan).expired)}} ({{vclaimService.getExpiredRujukan(rujukan.rujukan.tglKunjungan).hariExpired}} hari lagi)</div>
-
-                                        <div class="badge tx-14 mg-r-5 mg-t-5">
-                                            Terpakai Sebanyak : {{totalSepRujukan}}x
-                                        </div>
-                                        <div *ngIf="totalSepRujukan == 0" class="badge badge-success">Rujukan Baru</div>
-                                        <div *ngIf="totalSepRujukan >= 1" class="badge badge-primary">Kontrol Kembali</div>
-                                    </div>
-                                    <button class="btn mg-t-5 mg-b-5" (click)="rujukanService.openDialog(true)"><i class="bi bi-grid-3x3"></i> Pilih Rujukan</button>
-
-                                </div>
-                            </div>
-                            <div class="row mb-1 border rounded">
-                                <label class="col-3 col-form-label">
-                                    Riwayat SEP Terakhir
-                                </label>
-                                <div class="col">
-                                    <div class="pd-5" *ngIf="dataHistorySep">
-                                        <div class="mg-b-5"><span class="text-muted">No. Sep : </span>{{dataHistorySep[0].noSep}}</div>
-                                        <div><span class="text-muted"><small>Tgl. Sep : </small></span>{{appService.dateHuman(dataHistorySep[0].tglSep)}}</div>
-                                        <div><span class="text-muted"><small>Poliklinik : </small></span>{{dataHistorySep[0].poli}} - {{dataHistorySep[0].ppkPelayanan}} - <span [ngSwitch]="dataHistorySep[0].jnsPelayanan"> <span *ngSwitchCase="'2'">RAWAT JALAN</span> <span *ngSwitchCase="'1'">RAWAT INAP</span> </span></div>
-                                    </div>
                                 </div>
                             </div>
                             <div class="row mb-1" *ngIf="formSep.value.jnsKunjungan.kode == 'kontrolKembali' || formSep.value.jnsKunjungan.kode == 'rawatInap'">
@@ -248,27 +215,25 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row mb-1">
-                                <label class="col-3 col-form-label">Surat Kontrol</label>
-                                <div class="col-auto">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" formControlName="noRujukan" placeholder="Nomor Rujukan" readonly>
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" (click)="tabIndex=2"><i class="bi bi-table mr-1"></i> View Data</button>
-                                        </div>
-                                    </div>
+                                <label class="col-3 col-form-label">
+                                    Diagnosa <span *ngIf="formSep.get('diagnosa')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
+                                </label>
+                                <div class="col">
+                                    <p-autoComplete (completeMethod)="vclaimService.getDiagnosa($event.query)" [suggestions]="dataDiagnosa" [forceSelection]="true" field="nama" [minLength]="3" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                                        <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
+                                    </p-autoComplete>
                                 </div>
                             </div>
-                            <div class="row mg-t-10 mb-1" ng-show="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
+                            <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap' && jnsPelayanan!='igd'">
                                 <label class="col-3 col-form-label">
                                     Poliklinik <span *ngIf="formSep.get('poliklinik')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
                                 </label>
                                 <div class="col-6">
-                                    <p-dropdown [options]="dataRuangan" (ngModelChange)="changeRuangan()" [autoDisplayFirst]="false" optionLabel="name" optionValue="r_poli.kode_bpjs" formControlName="poliklinik" [style]="{width: '100%'}"></p-dropdown>
-
-                                    <!-- <p-autoComplete (ngModelChange)="getDpjp()" (completeMethod)="vclaimService.getPoliklinik($event.query)" [suggestions]="dataPoliklinik" [forceSelection]="true" field="nama" [minLength]="3" formControlName="poliklinik" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
+                                    <p-autoComplete (ngModelChange)="getDpjp()" (completeMethod)="vclaimService.getPoliklinik($event.query)" [suggestions]="dataPoliklinik" [forceSelection]="true" field="nama" [minLength]="3" formControlName="poliklinik" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
                                         <ng-template let-value pTemplate="item"><span>{{value.nama | uppercase}}</span></ng-template>
-                                    </p-autoComplete> -->
+                                    </p-autoComplete>
                                 </div>
                             </div>
                             <div class="row mb-1" ng-show="jnsPelayanan!='rawatInap'">
@@ -277,16 +242,6 @@
                                 </label>
                                 <div class="col-6">
                                     <p-dropdown [options]="dataDokter" [autoDisplayFirst]="false" optionLabel="nama" formControlName="dokter" [style]="{width: '100%'}"></p-dropdown>
-                                </div>
-                            </div>
-                            <div class="row mb-1">
-                                <label class="col-3 col-form-label">
-                                    Diagnosa <span *ngIf="formSep.get('diagnosa')!.errors" class="bi bi-exclamation-circle-fill tx-danger tx-12"></span>
-                                </label>
-                                <div class="col">
-                                    <p-autoComplete (completeMethod)="vclaimService.getDiagnosa($event.query)" [suggestions]="dataDiagnosa" [forceSelection]="true" [showClear]="true" field="nama" [minLength]="3" formControlName="diagnosa" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}">
-                                        <ng-template let-value pTemplate="item"><span>{{value.nama}}</span></ng-template>
-                                    </p-autoComplete>
                                 </div>
                             </div>
                             <div class="row mb-1" *ngIf="formSep.value.jnsKunjungan.kode == 'antarPoli' ">
@@ -407,9 +362,9 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col">
-                        <div class="row bg-gray-200 pt-3 pb-3 mt-3">
+                        <div class="row bg-gray-500 pt-3 pb-3 mt-3">
                             <div class="col tx-right">
-                                <button class="btn btn-primary" (click)="save()" [disabled]="formSep.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
+                                <button class="btn btn-sm btn-primary" (click)="save()" [disabled]="formSep.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
                             </div>
                         </div>
                     </div>
@@ -424,21 +379,9 @@
             <p-tabPanel header="PRB">
                 <app-prb></app-prb>
             </p-tabPanel>
-            <p-tabPanel header="Riwayat SEP">
+            <p-tabPanel header="History SEP">
                 <app-history></app-history>
             </p-tabPanel>
         </p-tabView>
     </div>
 </div>
-
-<p-dialog
-    header="Data Rujukan"
-    [(visible)]="dialogRujukan"
-    (onHide)="rujukanService.openDialog(false)"
-    [style]="{width: '800px'}"
-    appendTo="body"
-    [draggable]="false"
-    position="top"
-    [modal]="true">
-    <app-rujukan *ngIf="dialogRujukan"></app-rujukan>
-</p-dialog>

@@ -1,641 +1,176 @@
-<div class="row mg-b-40 no-gutters widget-1 shadow-base">
-    <div class="col-12">
-        <div class="pd-10 border-bottom">
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-sm btn-outline-secondary mg-r-5"><i class="bi bi-printer"></i></button>
-                    <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-file-pdf"></i></button>
-                </div>
-                <div class="col text-right">
-                    <button class="btn btn-sm btn-primary" (click)="sideBar = true">CPPT Perawat <i class="bi bi-box-arrow-up-right mg-l-3"></i></button>
-                </div>
+<div class="row">
+    <div class="col-auto border-right">
+        <h4 class="border-bottom">Keluhan</h4>
+        <div class="row">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="Tambah Keluhan" (keyup)="listenTambahKeluhan($event)">
+                <p-scrollPanel [style]="{width: '100%', height: '20vw'}">
+                    <a class="clickable btn btn-block p-1 mt-1 pl-2 pr-2 btn-secondary bg-gray-200 border-0 tx-gray-800 tx-left mb-0" *ngFor="let item of tplKeluhan" (click)="selectKeluhan(item)">{{item.name}}</a>
+                </p-scrollPanel>
             </div>
         </div>
     </div>
-    <div class="col-auto border-right bg-gray-100">
-        <div class="card bg-gray-100">
-            <div class="card-header">
-                <h6 class="card-title">TANGGAL & <br> DATA REGISTRASI</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div><i class="bi bi-calendar"></i> 26 Okt 2022</div>
-                        <div class="text-muted"><i class="bi bi-clock"></i> 12:00:11</div>
-                        <div class="border-top border-bottom pd-t-9 pd-b-9 mg-t-5 bg-gray-100">
-                            <div class="tx-bold">POLIKLINIK ANAK</div>
-                            <div class="text-muted tx-12">RAWAT JALAN</div>
-                        </div>
-                        <div class="mg-t-15 tx-12 tx-gray-500">No.Reg : RJ221001000001</div>
-                    </div>
-                </div>
-            </div><!-- card-body -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-    <div class="col-sm-6 col-lg-2 mg-t-1 mg-sm-t-0">
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">PROFESI <br> PEMBERI ASUHAN</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div>dr. Mona Elga Kailola, M.Pd</div>
-                        <div class="mg-t-5 tx-12">Dokter</div>
-                    </div>
-                </div>
-            </div><!-- card-body -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-    <div class="col mg-t-1 mg-lg-t-0">
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">HASIL ASSESSMENT PASIEN <br>DAN PEMBERIAN PELAYANAN</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="mg-b-20">
-                            <div class="tx-medium mb-2">Subjective :</div>
-                            <div>Pasien mengatakan nyeri di bagian perut sejak 1 hari yang lalu, disertai deman
-                                dan muntah. Pasien mengatakan nyeri di bagian perut dikarenakan memakan bakso
-                                yang terlalu pedas.</div>
-                        </div>
-                        <div class="mg-b-20">
-                            <div class="tx-medium mb-2">Objective :</div>
-                            <div>Skala Nyeri : 7/10</div>
-                            <div>Pemeriksaan Fisik :</div>
-                            <div>BB : 50 kg</div>
-                            <div>TB : 170 cm</div>
-                            <div>N : 100 x/menit</div>
-                            <div>TD : 100/20</div>
-                        </div>
-                        <div class="mg-b-20">
-                            <div class="tx-medium">Radiologi :</div>
-                            <ul class="mb-0">
-                                <li>ABDOMEN ATAS</li>
-                                <li>THORAX PHOTO</li>
-                            </ul>
-                            <div class="mt-1 ml-4 pl-2">
-                                <button class="btn btn-outline-secondary p-0 pl-2 pr-2"><i
-                                        class="bi bi-eye"></i> Hasil Pemeriksaan</button>
-                            </div>
-                        </div>
-                        <div class="mg-b-20">
-                            <div class="tx-mediuma">Laboratorium :</div>
-                            <ul class="mb-0">
-                                <li>ABDOMEN ATAS</li>
-                                <li>THORAX PHOTO</li>
-                            </ul>
-                            <div class="mt-1 ml-4 pl-2">
-                                <button class="btn btn-outline-secondary p-0 pl-2 pr-2"><i
-                                        class="bi bi-eye"></i> Hasil Pemeriksaan</button>
-                            </div>
-                        </div>
-                        <div class="mg-b-20">
-                            <div>Farmasi</div>
-                            <ul>
-                                <li>ABDOMEN ATAS</li>
-                                <li>THORAX PHOTO</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- card-body -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-    <div class="col-sm-6 col-lg-2 mg-t-1 mg-lg-t-0">
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">ISTRUKSI PPA <br> TERMASUK PASCA BEDAH</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        -
-                    </div>
-                </div>
-            </div><!-- card-body -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-</div><!-- row -->
-
-<div class="row mg-t-10 mg-b-10" hidden>
-    <div class="col tx-center">
-        <button class="btn btn-sm btn-oblong">Tampilkan Sebelumnya <i class="bi bi-plus-lg"></i></button>
-    </div>
-</div>
-
-<div class="row mg-b-10 no-gutters widget-1 shadow-base">
-    <div class="col-auto">
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">TANGGAL & <br> DATA REGISTRASI</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div><i class="bi bi-calendar"></i> 26 Okt 2022</div>
-                        <div class="text-muted"><i class="bi bi-clock"></i> 12:00:11</div>
-                        <div class="border-top border-bottom pd-t-9 pd-b-9 pd-l-0 mg-t-5 bg-gray-100">
-                            <div class="tx-bold">POLIKLINIK ANAK</div>
-                            <div class="text-muted tx-12">RAWAT JALAN</div>
-                        </div>
-                        <div class="mg-t-15 tx-12 tx-gray-500">No.Reg : RJ221001000001</div>
-                    </div>
-                </div>
-            </div><!-- card-body -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-    <div class="col-sm-6 col-lg-2 mg-t-1 mg-sm-t-0">
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">PROFESI <br> PEMBERI ASUHAN</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div>dr. Mona Elga Kailola, M.Pd</div>
-                        <div class="mg-t-5 tx-12">Dokter</div>
-                    </div>
-                </div>
-            </div><!-- card-body -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-    <div class="col mg-t-1 mg-lg-t-0">
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">HASIL ASSESSMENT PASIEN <br>DAN PEMBERIAN PELAYANAN</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <div class="mb-4">
-                            <div style="font-weight: 500;" class="mb-2">Subjective :</div>
-                            <div>Pasien mengatakan nyeri di bagian perut sejak 1 hari yang lalu, disertai deman
-                                dan muntah. Pasien mengatakan nyeri di bagian perut dikarenakan memakan bakso
-                                yang terlalu pedas.</div>
-                        </div>
-                        <div class="mb-3">
-                            <div style="font-weight: 500;" class="mb-2">Objective :</div>
-                            <div>Skala Nyeri : 7/10</div>
-                            <div>Pemeriksaan Fisik :</div>
-                            <div>BB : 50 kg</div>
-                            <div>TB : 170 cm</div>
-                            <div>N : 100 x/menit</div>
-                            <div>TD : 100/20</div>
-                        </div>
-                        <div class="mb-3">
-                            <div>Radiologi :</div>
-                            <ul class="mb-0">
-                                <li>ABDOMEN ATAS</li>
-                                <li>THORAX PHOTO</li>
-                            </ul>
-                            <div class="mt-1 ml-4 pl-2">
-                                <button class="btn btn-outline-secondary p-0 pl-2 pr-2"><i
-                                        class="bi bi-eye"></i> Hasil Pemeriksaan</button>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div>Laboratorium</div>
-                            <ul class="mb-0">
-                                <li>ABDOMEN ATAS</li>
-                                <li>THORAX PHOTO</li>
-                            </ul>
-                            <div class="mt-1 ml-4 pl-2">
-                                <button class="btn btn-outline-secondary p-0 pl-2 pr-2"><i
-                                        class="bi bi-eye"></i> Hasil Pemeriksaan</button>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div>Farmasi</div>
-                            <ul>
-                                <li>ABDOMEN ATAS</li>
-                                <li>THORAX PHOTO</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- card-body -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-    <div class="col-sm-6 col-lg-2 mg-t-1 mg-lg-t-0">
-        <div class="card">
-            <div class="card-header">
-                <h6 class="card-title">ISTRUKSI PPA <br> TERMASUK PASCA BEDAH</h6>
-            </div><!-- card-header -->
-            <div class="card-body">
-                <span id="spark4">8,3,9,6,3,7,1,3,8,5</span>
-                <span>$32,324</span>
-            </div><!-- card-body -->
-            <div class="card-footer">
-                <div>
-                    <span class="tx-11">Gross Sales</span>
-                    <h6 class="tx-inverse">$56,433</h6>
-                </div>
-                <div>
-                    <span class="tx-11">Purchases</span>
-                    <h6 class="tx-inverse">1,654</h6>
-                </div>
-                <div>
-                    <span class="tx-11">Tax Return</span>
-                    <h6 class="tx-danger">$15,354</h6>
-                </div>
-            </div><!-- card-footer -->
-        </div><!-- card -->
-    </div><!-- col-3 -->
-</div><!-- row -->
-
-<div class="row shadow rounded p-3">
     <div class="col">
-        <div class="row border-bottom pb-2 pt-2">
-            <div class="col-auto border-right">
-                <h4>Catatan Perkembangan Pasien Terintegrasi</h4>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col">
-                <table class="table table-border table-striped">
-                    <thead>
-                        <tr>
-                            <th>Tanggal / Ruangan</th>
-                            <th width="250">Profesi Pemberi Asuhan</th>
-                            <th width="550">Hasil Assessment Pasien dan Pemberian Pelayanan</th>
-                            <th>Instruksi PPA Termasuk Pasca Bedah</th>
-                            <th>File Upload</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="badge badge-light">RAWAT JALAN</div>
-                                <div>PENYAKIT DALAM</div>
-                                <div>12-02-2022 - 22:00</div>
-                            </td>
-                            <td>
-                                <div class="badge badge-light">DOKTER</div>
-                                <div>dr. Mona Elga Kailola, M.Pd</div>
-                            </td>
-                            <td>
-                                <div class="mb-4">
-                                    <div style="font-weight: 500;" class="mb-2">Subjective :</div>
-                                    <div>Pasien mengatakan nyeri di bagian perut sejak 1 hari yang lalu, disertai deman
-                                        dan muntah. Pasien mengatakan nyeri di bagian perut dikarenakan memakan bakso
-                                        yang terlalu pedas.</div>
-                                </div>
-                                <div class="mb-3">
-                                    <div style="font-weight: 500;" class="mb-2">Objective :</div>
-                                    <div>Skala Nyeri : 7/10</div>
-                                    <div>Pemeriksaan Fisik :</div>
-                                    <div>BB : 50 kg</div>
-                                    <div>TB : 170 cm</div>
-                                    <div>N : 100 x/menit</div>
-                                    <div>TD : 100/20</div>
-
-                                    <div>Assessment :</div>
-                                    <br>
-                                    <div>Plan :</div>
-                                    <p><strong>S :</strong></p>
-                                    <p><strong>O :</strong></p>
-                                    <p><strong>A :</strong></p>
-                                    <p><strong>P :</strong></p>
-                                </div>
-                                <div class="mb-3">
-                                    <div>Pemeriksaan Fisik :</div>
-                                    <div>BB : 50 kg</div>
-                                    <div>TB : 170 cm</div>
-                                    <div>N : 100 x/menit</div>
-                                    <div>TD : 100/20</div>
-                                </div>
-                                <div class="mb-3">
-                                    <div>Radiologi :</div>
-                                    <ul class="mb-0">
-                                        <li>ABDOMEN ATAS</li>
-                                        <li>THORAX PHOTO</li>
-                                    </ul>
-                                    <div class="mt-1 ml-4 pl-2">
-                                        <button class="btn btn-outline-secondary p-0 pl-2 pr-2"><i
-                                                class="bi bi-eye"></i> Hasil Pemeriksaan</button>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div>Laboratorium</div>
-                                    <ul class="mb-0">
-                                        <li>ABDOMEN ATAS</li>
-                                        <li>THORAX PHOTO</li>
-                                    </ul>
-                                    <div class="mt-1 ml-4 pl-2">
-                                        <button class="btn btn-outline-secondary p-0 pl-2 pr-2"><i
-                                                class="bi bi-eye"></i> Hasil Pemeriksaan</button>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <div>Farmasi</div>
-                                    <ul>
-                                        <li>ABDOMEN ATAS</li>
-                                        <li>THORAX PHOTO</li>
-                                    </ul>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="p-3 bg-white border rounded">
-                                    catatana sdlaksjdlasd jalskdj
-                                </div>
-                            </td>
-                            <td>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div>PENYAKIT DALAM</div>
-                                <div class="badge badge-light">RAWAT JALAN</div> <br>
-                                <div class="badge badge-primary">12-02-2022 - 22:00</div>
-                            </td>
-                            <td>
-                                <div class="p-3 bg-white border rounded">
-                                    catatana sdlaksjdlasd jalskdj
-                                </div>
-                            </td>
-                            <td>
-                                <div class="p-3 bg-white border rounded">
-                                    catatana sdlaksjdlasd jalskdj
-                                </div>
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                <div>dr. Mona Elga Kailola, M.Pd</div>
-                                <div class="badge badge-light">DOKTER</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div>
+            <p-table [value]="dataKeluhan" dataKey="nama" responsiveLayout="scroll" styleClass="p-datatable-sm" (onEditComplete)="updateKeluhan()">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Keluhan</th>
+                        <th [width]="150">Lama Keluhan</th>
+                        <th [width]="150">Keterangan</th>
+                        <th [width]="50">&nbsp;</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-ri="rowIndex">
+                    <tr>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="text" name="keluhan" [(ngModel)]="item.nama">
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    <div class="p-1 bg-gray-100 tx-gray-800" style="min-height: 30px;">{{item.nama}}</div>
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input pInputText type="number" name="lamaKeluhan" style="width: 100px;" [(ngModel)]="item.lamaKeluhan"> Hari
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    <div class="p-1 bg-gray-100" style="min-height: 30px;">{{item.lamaKeluhan}} <span *ngIf="item.lamaKeluhan != '-' && item.lamaKeluhan">Hari</span></div>
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <p-dropdown name="keterangan" [autoDisplayFirst]="false" [options]="keteranganKeluhan" optionLabel="name" optionValue="name" appendTo="body" [(ngModel)]="item.keterangan" [style]="{'width':'100%'}" [showClear]="true"></p-dropdown>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    <div class="p-1 bg-gray-100 tx-gray-800" style="min-height: 30px;">{{item.keterangan}}</div>
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td>
+                            <button class="btn btn-xs btn-icon" (click)="deleteDataKeluhan(ri)"><i class="bi bi-trash"></i></button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <tr *ngIf="dataKeluhan.length == 0">
+                        <td colspan="4" style="font-weight: normal; text-align: center; color: gray;">Tidak ada keluhan saat ini.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
 
-        <div class="row" hidden>
-            <div class="col">
-                <app-form-cppt></app-form-cppt>
-            </div>
-        </div>
-
-        <div hidden>
-
-            <h5>Keluhan</h5>
-            <div class="row">
-                <div class="col-auto border-right">
-                    <div class="row">
-                        <div class="col-auto">
-                            <input type="text" class="form-control" placeholder="Tambah Keluhan"
-                                (keyup)="listenTambahKeluhan($event)">
-                            <p-scrollPanel [style]="{width: '100%'}">
-                                <a class="clickable btn btn-block p-1 mt-1 pl-2 pr-2 btn-secondary bg-gray-200 border-0 tx-gray-800 tx-left mb-0"
-                                    *ngFor="let item of tplKeluhan" (click)="selectKeluhan(item)">{{item.name}}</a>
-                            </p-scrollPanel>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <h5>Keluhan</h5>
-                    <p-table [value]="dataKeluhan" dataKey="nama" responsiveLayout="scroll" styleClass="p-datatable-sm"
-                        (onEditComplete)="updateKeluhan()">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th>Keluhan</th>
-                                <th [width]="150">Lama Keluhan</th>
-                                <th [width]="150">Keterangan</th>
-                                <th [width]="50">&nbsp;</th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-item let-ri="rowIndex">
-                            <tr>
-                                <td pEditableColumn>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input pInputText type="text" name="keluhan" [(ngModel)]="item.nama">
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            <div class="p-1 bg-white tx-gray-800" style="min-height: 30px;">
-                                                {{item.nama}}</div>
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td pEditableColumn>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input pInputText type="number" name="lamaKeluhan" style="width: 100px;"
-                                                [(ngModel)]="item.lamaKeluhan"> Hari
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            <div class="p-1 bg-white" style="min-height: 30px;">{{item.lamaKeluhan}}
-                                                <span *ngIf="item.lamaKeluhan != '-' && item.lamaKeluhan">Hari</span>
-                                            </div>
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td pEditableColumn>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <p-dropdown name="keterangan" [autoDisplayFirst]="false"
-                                                [options]="keteranganKeluhan" optionLabel="name" optionValue="name"
-                                                appendTo="body" [(ngModel)]="item.keterangan" [style]="{'width':'100%'}"
-                                                [showClear]="true"></p-dropdown>
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            <div class="p-1 bg-white tx-gray-800" style="min-height: 30px;">
-                                                {{item.keterangan}}</div>
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td>
-                                    <button class="btn btn-xs btn-icon" (click)="deleteDataKeluhan(ri)"><i
-                                            class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="footer">
-                            <tr *ngIf="dataKeluhan.length == 0">
-                                <td colspan="4" style="font-weight: normal; text-align: center; color: gray;">Tidak ada
-                                    keluhan saat ini.</td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
-
-            </div>
-            <div class="row">
-
+        <div class="mt-4">
+            <h4 class="border-bottom">Catatan SOAP</h4>
+            <div class="row mb-2">
+                <label class="col-2 col-form-label"> Subjective </label>
                 <div class="col">
-                    <div class="mt-4">
-                        <h5 class="border-bottom">Catatan SOAP</h5>
-                        <div class="row mb-2">
-                            <label class="col-2 col-form-label"> Subjective </label>
-                            <div class="col">
-                                <p-editor styleClass="hiddenToolbar" [(ngModel)]="subjective"
-                                    (onTextChange)="updateSubjective($event)"></p-editor>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label class="col-2 col-form-label"> Objective </label>
-                            <div class="col">
-                                <p-editor styleClass="hiddenToolbar"></p-editor>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label class="col-2 col-form-label"> Assessment </label>
-                            <div class="col">
-                                <p-editor styleClass="hiddenToolbar"></p-editor>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label class="col-2 col-form-label"> Plan </label>
-                            <div class="col">
-                                <p-editor styleClass="hiddenToolbar"></p-editor>
-                            </div>
-                        </div>
-                        <div class="row mb-2">
-                            <label class="col-2 col-form-label"> Instruksi </label>
-                            <div class="col">
-                                <p-editor styleClass="hiddenToolbar"></p-editor>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4" hidden>
-                        <h4 class="border-bottom">Diagnosa</h4>
-                        <table class="table table-striped table-hover m-0 p-0">
-                            <thead>
-                                <tr>
-                                    <th colspan="3" class="p-0">
-                                        <p-autoComplete #acICD appendTo="body" placeholder="Cari ICD-10 (Min. 3 huruf)"
-                                            field="name" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
-                                            [minLength]="3" [autoHighlight]="true" [showEmptyMessage]="true"
-                                            [suggestions]="filteredIcd10" [showEmptyMessage]="true"
-                                            [forceSelection]="true" (onSelect)="selected($event, acICD)"
-                                            (completeMethod)="search($event)">
-
-                                            <ng-template pTemplate="header">
-                                                <table class="table p-m-0 p-p-0">
-                                                    <tr>
-                                                        <td style="width: 90px;">ICD Code</td>
-                                                        <td style="width: 400px;">ICD Name</td>
-                                                    </tr>
-                                                </table>
-                                            </ng-template>
-                                            <ng-template let-data pTemplate="item">
-                                                <table class="p-m-0 p-p-0">
-                                                    <tr>
-                                                        <td style="width: 90px;" class="tx-left">{{data.icd10code}}</td>
-                                                        <td style="width: 400px;" class="tx-left">{{data.deskripsi}}
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </ng-template>
-                                        </p-autoComplete>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>Kode</th>
-                                    <th>Nama</th>
-                                    <th [width]="100">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let item of dataTable; let i = index;">
-                                    <td>
-                                        {{item.icd10code}}
-                                        <span class="badge badge-primary" *ngIf="i==0">Utama</span>
-                                        <span class="badge badge-secondary" *ngIf="i>0">Sekunder</span>
-                                    </td>
-                                    <td>{{item.deskripsi}}</td>
-                                    <td [width]="100">
-                                        <button class="btn btn-xs btn-icon btn-outline-secondary"
-                                            (click)="deleteIcd10(i)"><i class="bi bi-trash"></i></button>
-
-                                        <!-- <button class="btn btn-xs btn-outline-danger btn-icon"><i
-                                            class="bi bi-trash"></i></button>
-                                    &nbsp;
-                                    <button class="btn btn-xs btn-outline-primary btn-icon" *ngIf="i>0"><i
-                                            class="bi bi-key"></i> Set Utama</button> -->
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tbody *ngIf="dataTable.length === 0">
-                                <tr>
-                                    <td colspan="3" class="tx-center tx-secondary">Belum ada data saat ini.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="row border-bottom pb-2">
-                        <div class="col-auto border-right">
-                            <h4><i class="bi bi-camera"></i> Upload File</h4>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn btn-sm p-1 pl-3 pr-3 btn-secondary"><i
-                                    class="bi bi-camera mr-2"></i>Upload File</button>
-                        </div>
-                    </div>
+                    <p-editor styleClass="hiddenToolbar" [(ngModel)]="subjective" (onTextChange)="updateSubjective($event)"></p-editor>
                 </div>
             </div>
+            <div class="row mb-2">
+                <label class="col-2 col-form-label"> Objective </label>
+                <div class="col">
+                    <p-editor styleClass="hiddenToolbar"></p-editor>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-2 col-form-label"> Assessment </label>
+                <div class="col">
+                    <p-editor styleClass="hiddenToolbar"></p-editor>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-2 col-form-label"> Plan </label>
+                <div class="col">
+                    <p-editor styleClass="hiddenToolbar"></p-editor>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <label class="col-2 col-form-label"> Instruksi </label>
+                <div class="col">
+                    <p-editor styleClass="hiddenToolbar"></p-editor>
+                </div>
+            </div>
+        </div>
 
+        <div class="mt-4">
+            <h4 class="border-bottom">Diagnosa</h4>
+            <table class="table table-striped table-hover m-0 p-0">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="p-0">
+                            <p-autoComplete #acICD appendTo="body"
+                                placeholder="Cari ICD-10 (Min. 3 huruf)" field="name"
+                                [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}" [minLength]="3"
+                                [autoHighlight]="true" [showEmptyMessage]="true" [suggestions]="filteredIcd10"
+                                [showEmptyMessage]="true" [forceSelection]="true"
+                                (onSelect)="selected($event, acICD)" (completeMethod)="search($event)">
+
+                                <ng-template pTemplate="header">
+                                    <table class="table p-m-0 p-p-0">
+                                        <tr>
+                                            <td style="width: 90px;">ICD Code</td>
+                                            <td style="width: 400px;">ICD Name</td>
+                                        </tr>
+                                    </table>
+                                </ng-template>
+                                <ng-template let-data pTemplate="item">
+                                    <table class="p-m-0 p-p-0">
+                                        <tr>
+                                            <td style="width: 90px;" class="tx-left">{{data.icd10code}}</td>
+                                            <td style="width: 400px;" class="tx-left">{{data.deskripsi}}</td>
+                                        </tr>
+                                    </table>
+                                </ng-template>
+                            </p-autoComplete>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Kode</th>
+                        <th>Nama</th>
+                        <th [width]="100">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of dataTable; let i = index;">
+                        <td>
+                            {{item.icd10code}}
+                            <span class="badge badge-primary" *ngIf="i==0">Utama</span>
+                            <span class="badge badge-secondary" *ngIf="i>0">Sekunder</span>
+                        </td>
+                        <td>{{item.deskripsi}}</td>
+                        <td [width]="100">
+                            <button class="btn btn-xs btn-icon btn-outline-secondary" (click)="deleteIcd10(i)"><i class="bi bi-trash"></i></button>
+
+                            <!-- <button class="btn btn-xs btn-outline-danger btn-icon"><i
+                                    class="bi bi-trash"></i></button>
+                            &nbsp;
+                            <button class="btn btn-xs btn-outline-primary btn-icon" *ngIf="i>0"><i
+                                    class="bi bi-key"></i> Set Utama</button> -->
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="dataTable.length === 0">
+                    <tr>
+                        <td colspan="3" class="tx-center tx-secondary">Belum ada data saat ini.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="row border-bottom pb-2">
+            <div class="col-auto border-right"><h4><i class="bi bi-camera"></i> Upload File</h4></div>
+            <div class="col-auto">
+                <button class="btn btn-sm p-1 pl-3 pr-3 btn-secondary"><i class="bi bi-camera mr-2"></i>Upload File</button>
+            </div>
         </div>
     </div>
 </div>
-
-<p-sidebar
-    [(visible)]="sideBar"
-    position="right"
-    appendTo="body"
-    [modal]="false"
-    [closeOnEscape]="false"
-    [dismissible]="false">
-
-    <div class="row border-bottom">
-        <div class="col">
-            <h5>Perawat / Gizi</h5>
-        </div>
-    </div>
-    <div class="row bg-gray-200 pd-t-10 pd-b-10">
-        <div class="col">
-            <div><i class="bi bi-calendar"></i> 26 Okt 2022</div>
-            <div class="text-muted"><i class="bi bi-clock"></i> 12:00:11</div>
-        </div>
-        <div class="col">
-            <div class="tx-14">Susi Sulistiowati</div>
-            <div class="tx-12 tx-gray-600">Perawat</div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="tx-medium mg-b-5 mg-t-20">Subjective :</div>
-            <div class="mg-b-2"><button class="btn btn-light tx-primary pd-t-0 pd-b-0 pd-l-1 pd-r-1"><i class="bi bi-arrow-left-circle"></i></button> keluhan : pasien mengalami sakit kepala sejak 3 hari</div>
-            <div class="tx-medium mg-b-5 mg-t-20">Objective :</div>
-            <div class="mg-b-2"><button class="btn btn-light tx-primary pd-t-0 pd-b-0 pd-l-1 pd-r-1"><i class="bi bi-arrow-left-circle"></i></button> Skala Nyeri : 7/10</div>
-            <div class="mg-b-2"><button class="btn btn-light tx-primary pd-t-0 pd-b-0 pd-l-1 pd-r-1"><i class="bi bi-arrow-left-circle"></i></button> BB : 50 kg</div>
-            <div class="mg-b-2"><button class="btn btn-light tx-primary pd-t-0 pd-b-0 pd-l-1 pd-r-1"><i class="bi bi-arrow-left-circle"></i></button> TB : 170 cm</div>
-            <div class="mg-b-2"><button class="btn btn-light tx-primary pd-1"><i class="bi bi-arrow-left-circle"></i></button> N : 100 x/menit</div>
-            <div class="mg-b-2"><button class="btn btn-light tx-primary pd-1"><i class="bi bi-arrow-left-circle"></i></button> TD : 100/20</div>
-            <div class="mg-b-2"><button class="btn btn-light tx-primary pd-1"><i class="bi bi-arrow-left-circle"></i></button> Pernah Dirawat : Ya</div>
-            <div class="mg-b-2 mg-l-20"><button class="btn btn-light tx-primary pd-1"><i class="bi bi-arrow-left-circle"></i></button> Kapan : Seminggu yang lalu</div>
-            <div class="mg-b-2 mg-l-20"><button class="btn btn-light tx-primary pd-1"><i class="bi bi-arrow-left-circle"></i></button> Dimana : RS Siloam Bogor</div>
-            <div class="mg-b-2 mg-l-20"><button class="btn btn-light tx-primary pd-1"><i class="bi bi-arrow-left-circle"></i></button> Diagnosis : Penyakit usus</div>
-            <div class="tx-medium mg-b-5 mg-t-20">Assessment :</div>
-            <div class="mg-b-2 hover"><button class="btn btn-light tx-primary pd-t-0 pd-b-0 pd-l-1 pd-r-1"><i class="bi bi-arrow-left-circle"></i></button> Diagnosis : penyakit lambung</div>
-        </div>
-    </div>
-    <div class="row mg-t-20">
-        <div class="col-auto">
-            <div><i class="bi bi-calendar"></i> 26 Okt 2022</div>
-            <div class="text-muted"><i class="bi bi-clock"></i> 12:00:11</div>
-            <div class="border-top border-bottom pd-t-9 pd-b-9 mg-t-5 bg-gray-100">
-                <div class="tx-bold">POLIKLINIK ANAK</div>
-                <div class="text-muted tx-12">RAWAT JALAN</div>
-            </div>
-            <div class="mg-t-15 tx-12 tx-gray-500">No.Reg : RJ221001000001</div>
-        </div>
-    </div>
-</p-sidebar>

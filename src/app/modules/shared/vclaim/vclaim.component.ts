@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { AppService } from 'src/app/services/app.service';
@@ -7,17 +7,13 @@ import { FormSuratKontrolService } from './surat-kontrol/form-surat-kontrol/form
 import { SuratKontrolService } from './surat-kontrol/surat-kontrol.service';
 import { VclaimService } from './vclaim.service';
 import { RujukanService } from "./rujukan/rujukan.service";
-import { Subscription } from 'rxjs';
-import { MasterService } from '../../registrasi/services/master.service';
-import { HistoryService } from './history/history.service';
-import { FormSuratKontrolModel } from './surat-kontrol/form-surat-kontrol/form-surat-kontrol.model';
 
 @Component({
     selector: 'app-vclaim',
     templateUrl: './vclaim.component.html',
     styleUrls: ['./vclaim.component.css']
 })
-export class VclaimComponent implements OnInit, OnDestroy {
+export class VclaimComponent implements OnInit {
 
     peserta: any;
     formSep!: FormGroup;
@@ -35,33 +31,21 @@ export class VclaimComponent implements OnInit, OnDestroy {
     dataStatusLaka: any;
     dataPembiayaanNaikKelas: any;
     dataJnsKunjungan: any;
-    dataRuangan: any[] = [];
     suratKontrol: any;
-
-
-    rujukan : any;
-    totalSepRujukan: number = 0;
-    dialogRujukan: boolean = false;
-    dataHistorySep: any;
-
-    subs: Subscription[] = [];
 
     constructor(
         private fb: FormBuilder,
         public vclaimService: VclaimService,
         public formSuratKontrolService: FormSuratKontrolService,
         private suratKontrolService: SuratKontrolService,
-        public appService: AppService,
-        public rujukanService: RujukanService,
-        private dataPasienService: DataPasienService,
-        private masterService: MasterService,
-        private historySepService: HistoryService
+        private appService: AppService,
+        private rujukanService: RujukanService
     ) { }
 
     ngOnInit(): void {
         this.initFormSep();
-        this.masterService.getRuangan('rj');
         this.vclaimService.peserta.subscribe(data => this.onSelectPeserta(data));
+        this.vclaimService.dialog.subscribe(data => this.initFormSep() )
         this.vclaimService.diagnosa.subscribe(data => this.dataDiagnosa = data)
         this.vclaimService.poliklinik.subscribe(data => this.dataPoliklinik = data)
         this.vclaimService.dokter.subscribe(data => this.dataDokter = data)
@@ -76,35 +60,7 @@ export class VclaimComponent implements OnInit, OnDestroy {
         this.vclaimService.dialog.subscribe(data => {
             if (data) this.vclaimService.getPesertaByNomorKartu();
         })
-        this.subs.push(this.dataPasienService.pasien.subscribe(data => this.handlePasien(data)))
 
-        this.masterService.ruangan.subscribe(data => this.dataRuangan = data);
-
-        this.vclaimService.totalSepRujukan.subscribe(data => {if(data){ this.totalSepRujukan = data.jumlahSEP }} )
-        this.rujukanService.dialog.subscribe(data => this.dialogRujukan = data);
-        this.historySepService.dataHistory.subscribe(data => this.dataHistorySep = data);
-    }
-
-    ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subs.forEach(element => {
-            element.unsubscribe();
-        });
-    }
-
-    handlePasien(data: any) {
-        this.initFormSep();
-        if (data) {
-            if (data.no_asuransi) {
-                this.vclaimService.getPesertaByNomorKartu(data.no_asuransi);
-            } else {
-                if (data.nik) {
-                    this.vclaimService.getPesertaByNik(data.nik);
-                }
-            }
-
-        }
     }
 
     public onSelectPeserta(data: any) {
@@ -129,7 +85,7 @@ export class VclaimComponent implements OnInit, OnDestroy {
             suratKontrol: [''],
             noRujukan: [''],
             diagnosa: ['', Validators.required],
-            poliklinik: [null, Validators.required],
+            poliklinik: ['', Validators.required],
             dokter: ['', Validators.required],
             assessmentPel: [''],
             norm: ['', Validators.required],
@@ -159,19 +115,16 @@ export class VclaimComponent implements OnInit, OnDestroy {
         })
     }
 
-    public changeRuangan() {
+    public getDpjp() {
         this.dataDokter = [];
-        this.getSepByRuangan();
-        if( this.formSep.get('poliklinik')?.value ){
-            if (this.formSep.value.jnsKunjungan.kode == 'rawatInap' || this.formSep.value.jnsKunjungan.kode == 'igd') {
-                setTimeout(() => {
-                    this.vclaimService.getDpjp('1', this.formSep.value.poliklinik);
-                }, 100);
-            } else {
-                setTimeout(() => {
-                    this.vclaimService.getDpjp('2', this.formSep.value.poliklinik);
-                }, 100);
-            }
+        if (this.formSep.value.jnsKunjungan.kode == 'rawatInap' || this.formSep.value.jnsKunjungan.kode == 'igd') {
+            setTimeout(() => {
+                this.vclaimService.getDpjp('1', this.formSep.value.poliklinik.kode);
+            }, 100);
+        } else {
+            setTimeout(() => {
+                this.vclaimService.getDpjp('2', this.formSep.value.poliklinik.kode);
+            }, 100);
         }
     }
 
@@ -199,11 +152,6 @@ export class VclaimComponent implements OnInit, OnDestroy {
     }
 
     public onSelectRujukan(data: any) {
-        this.rujukan = data;
-        this.formSep.get('poliklinik')?.patchValue(this.rujukan.rujukan.poliRujukan.kode);
-        this.formSep.get('diagnosa')?.patchValue({ kode: this.rujukan.rujukan.diagnosa.kode, nama: this.rujukan.rujukan.diagnosa.kode + ' - ' + this.rujukan.rujukan.diagnosa.nama })
-        this.vclaimService.getTotalSep(this.rujukan.rujukan.noKunjungan, this.rujukan.asalFaskes);
-        return;
         this.formSep.get('noRujukan')?.patchValue(data.rujukan.noKunjungan);
         this.formSep.get('diagnosa')?.patchValue({ kode: data.rujukan.diagnosa.kode, nama: data.rujukan.diagnosa.kode + ' - ' + data.rujukan.diagnosa.nama })
         this.formSep.get('rujukan')?.patchValue(data);
@@ -217,10 +165,10 @@ export class VclaimComponent implements OnInit, OnDestroy {
         this.formSep.get('assessmentPel')?.patchValue('');
         this.formSep.get('jnsPelayanan')?.patchValue(this.formSep.value.jnsKunjungan.jnsPelayanan);
         this.formSep.get('tujuanKunj')?.patchValue(this.formSep.value.jnsKunjungan.tujuanKunjungan);
-        if (this.formSep.value.jnsKunjungan.kode == 'antarPoli') {
+        if( this.formSep.value.jnsKunjungan.kode == 'antarPoli' ){
             this.formSep.get('assessmentPel')?.addValidators([Validators.required]);
             this.formSep.get('assessmentPel')?.updateValueAndValidity();
-        } else {
+        }else{
             this.formSep.get('assessmentPel')?.clearValidators();
             this.formSep.get('assessmentPel')?.updateValueAndValidity();
         }
@@ -230,30 +178,6 @@ export class VclaimComponent implements OnInit, OnDestroy {
         this.formSep.get('noKartu')?.patchValue(this.peserta.noKartu);
         this.formSep.value.tglSep = this.appService.reformatDate(this.formSep.value.tglSep);
         this.vclaimService.save(this.formSep.value);
-    }
-
-    public getSepByRuangan(){
-        let a : any = [];
-        if( this.dataHistorySep ){
-            this.dataHistorySep.forEach((element: any) => {
-                let ruangan = this.formSep.get('poliklinik')?.value;
-                if( element == ruangan){
-                    a = element;
-                    return
-                }
-            });
-            console.log(a);
-        }
-    }
-
-    public saveSuratKontrol(){
-        let data : FormSuratKontrolModel = {
-            noSep: this.dataHistorySep[0].noSep,
-            kodeDokter: this.formSep.get('dokter')?.value,
-            poliKontrol: this.formSep.get('poliklinik')?.value,
-            tglRencanaKontrol: this.appService.reformatDate(new Date())
-        };
-        console.log(data);
     }
 
 }

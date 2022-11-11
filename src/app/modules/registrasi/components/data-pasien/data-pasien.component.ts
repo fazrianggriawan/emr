@@ -1,66 +1,31 @@
-import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataPasienService } from './data-pasien.service';
-import { Subscription } from 'rxjs';
-import { AutoComplete } from 'primeng/autocomplete';
 
 @Component({
     selector: 'app-data-pasien',
     templateUrl: './data-pasien.component.html',
     styleUrls: ['./data-pasien.component.css']
 })
-export class DataPasienComponent implements OnInit, OnDestroy {
+export class DataPasienComponent implements OnInit {
 
-    @Input() showButton: boolean = true;
-
-    @ViewChild('acSearch') acSearch!: AutoComplete;
-
-    dialog: boolean = true;
+    showDialog: boolean = true;
     dataPasien: any[] = [];
     selectedPasien: any;
     form!: FormGroup;
-    loading: boolean = false;
-
-    subs: Subscription[] = [];
-    selectedSearch: any;
-    searchOptions: any[] = [];
 
     constructor(
         private fb: FormBuilder,
-        public dataPasienService: DataPasienService
+        private dataPasienService: DataPasienService
     ) { }
 
     ngOnInit(): void {
         this.initForm();
-        this.dataPasienService.dataPasien.subscribe(data => {this.dataPasien = data; this.loading = false;})
-        this.subs.push(this.dataPasienService.dialog.subscribe(data => this.handleDialog(data)))
+        this.dataPasienService.dataPasien.subscribe(data => this.dataPasien = data)
+        this.dataPasienService.dialog.subscribe(data => this.showDialog = data)
     }
 
-    ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subs.forEach(element => element.unsubscribe())
-    }
-
-    filterData(e: any){
-        let key = e.query;
-        this.searchOptions = [
-            {id: 'norm', name: 'No. RM', key: key},
-            {id: 'nama', name: 'Nama', key: key},
-            {id: 'alamat', name: 'Alamat', key: key},
-            {id: 'tlp', name: 'No. Telepon', key: key},
-            {id: 'noaskes', name: 'No. BPJS / Asuransi', key: key},
-        ]
-    }
-
-    handleDialog(data: boolean){
-        this.dialog = data
-        if( !data ){
-            this.dataPasienService.dataPasien.next([]);
-        }
-    }
-
-    initForm() {
+    public initForm() {
         this.form = this.fb.group({
             norm: [''],
             nama: [''],
@@ -71,9 +36,8 @@ export class DataPasienComponent implements OnInit, OnDestroy {
         })
     }
 
-    sorting(e: KeyboardEvent) {
+    public sorting(e: KeyboardEvent) {
         if( e.code == 'Enter' ){
-            this.loading = true;
             var tglLahir = this.form.value.tglLahir;
             if( tglLahir ) {
                 var lahir = tglLahir.substr(6, 4) + '-' + tglLahir.substr(3, 2) + '-' + tglLahir.substr(0, 2);
@@ -86,9 +50,15 @@ export class DataPasienComponent implements OnInit, OnDestroy {
         }
     }
 
-    onSelectPasien() {
+    public onSelectPasien() {
         this.dataPasienService.pasien.next(this.selectedPasien);
-        this.dataPasienService.openDialog(false);
+        this.closeDialog()
+    }
+
+    public closeDialog() {
+        this.dataPasienService.dataPasien.next([]);
+        this.dataPasienService.dialog.next(false);
+        this.form.reset();
     }
 
 }

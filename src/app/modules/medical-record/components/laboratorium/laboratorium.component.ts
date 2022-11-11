@@ -1,34 +1,50 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { AutoComplete } from 'primeng/autocomplete';
-import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
+import { RadiologiService } from '../radiologi/radiologi.service';
 import { LaboratoriumService } from './laboratorium.service';
 
 @Component({
     selector: 'app-laboratorium',
     templateUrl: './laboratorium.component.html',
-    styleUrls: ['./laboratorium.component.css'],
-    providers: [ConfirmationService, MessageService]
+    styleUrls: ['./laboratorium.component.css']
 })
 export class LaboratoriumComponent implements OnInit {
 
     dataLab: any;
-    dataOrder: any;
+    dataOrder: any = [];
     hasil: any;
-    registrasi: any;
 
     results: any = [];
 
+    search(event: any) {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let filtered: any[] = [];
+        let query = event.query;
+
+        for (let i = 0; i < this.dataLab.length; i++) {
+            let data = this.dataLab[i];
+            if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(data);
+            }
+        }
+        this.results = filtered;
+    }
+
+    selectPemeriksaan(e: any, ac: AutoComplete){
+        this.dataOrder.push(e);
+        ac.inputEL.nativeElement.value = null;
+    }
+
+    deleteOrder(i:number){
+        this.dataOrder.splice(i, 1);
+    }
+
     constructor(
-        private laboratoriumService: LaboratoriumService,
-        private registrasiService: RegistrasiService,
-        private confirmationService: ConfirmationService,
+        private laboratoriumService: LaboratoriumService
     ) { }
 
     ngOnInit(): void {
         this.laboratoriumService.dataLab.subscribe(data => this.dataLab = data)
-        this.laboratoriumService.dataOrder.subscribe(data => this.dataOrder = data)
-        this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data))
         this.hasil = [
             {
               "name": "HEMOGLOBIN",
@@ -261,56 +277,4 @@ export class LaboratoriumComponent implements OnInit {
         ];
     }
 
-    handleRegistrasi(data: any){
-        this.registrasi = data;
-        if(data){
-            this.laboratoriumService.getDataOrder(this.registrasi.noreg);
-        }
-    }
-
-    search(event: any) {
-        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
-        let filtered: any[] = [];
-        let query = event.query;
-
-        for (let i = 0; i < this.dataLab.length; i++) {
-            let data = this.dataLab[i];
-            if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-                filtered.push(data);
-            }
-        }
-        this.results = filtered;
-    }
-
-    selectPemeriksaan(e: any, ac: AutoComplete){
-        ac.inputEL.nativeElement.value = null;
-
-        let data = {
-            noreg : this.registrasi.noreg,
-            unit : 'lab',
-            tipeId : 'nonCito',
-            tipeName : 'Non Cito',
-            order : e
-        }
-
-        this.laboratoriumService.saveOrder(data);
-
-    }
-
-    deleteOrder(event: any, i:number){
-        this.confirmationService.confirm({
-            target: event.target,
-            message: 'Yakin ingin menghapus data ini?',
-            icon: 'pi pi-exclamation-triangle',
-            acceptLabel: 'Ya',
-            rejectLabel: 'Tidak',
-            accept: () => {
-                //confirm action
-                this.laboratoriumService.deleteOrder(this.dataOrder[i])
-            },
-            reject: () => {
-                //reject action
-            }
-        });
-    }
 }

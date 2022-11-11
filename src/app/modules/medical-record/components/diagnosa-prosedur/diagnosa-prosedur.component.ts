@@ -51,11 +51,9 @@ export class DiagnosaProsedurComponent implements OnInit {
         let filtered: any[] = [];
         let query = event.query;
 
-        console.log(event);
-
         for (let i = 0; i < this.dataIcd10.length; i++) {
             let data = this.dataIcd10[i];
-            if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.id.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            if (data.deskripsi.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.icd10code.toLowerCase().indexOf(query.toLowerCase()) == 0) {
                 filtered.push(data);
             }
         }
@@ -69,7 +67,7 @@ export class DiagnosaProsedurComponent implements OnInit {
 
         for (let i = 0; i < this.dataIcd9.length; i++) {
             let data = this.dataIcd9[i];
-            if (data.name.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.id.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            if (data.deskripsi.toLowerCase().indexOf(query.toLowerCase()) == 0 || data.icd9code.toLowerCase().indexOf(query.toLowerCase()) == 0) {
                 filtered.push(data);
             }
         }

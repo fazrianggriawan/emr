@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { config } from 'src/app/config';
-import { AppService } from 'src/app/services/app.service';
 import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
 
@@ -18,8 +17,7 @@ export class FormRegistrasiService {
     constructor(
         private http: HttpClient,
         private dataPasienService: DataPasienService,
-        private registrasiService: RegistrasiService,
-        private appService: AppService
+        private registrasiService: RegistrasiService
     ) { }
 
     save(data: any) {
@@ -29,19 +27,20 @@ export class FormRegistrasiService {
                     this.saveStatus.next(true)
                     this.registrasiService.registrasi.next(data.data);
                 }else{
-                    this.appService.setNotification('error', data.message);
                     this.saveStatus.next(false)
                 }
             })
     }
 
     searchPasien(searchBy: string, key: string){
-        this.http.get<any>( config.api_url('pasien/searchBy/'+searchBy+'/key/'+key) )
-            .subscribe(data => {
-                if( data.data ) {
-                    this.dataPasienService.pasien.next(data.data);
-                }
-            })
+        if( searchBy && key ){
+            this.http.get<any>( config.api_url('pasien/searchBy/'+searchBy+'/key/'+key) )
+                .subscribe(data => {
+                    if( data.data ) {
+                        this.dataPasienService.pasien.next(data.data);
+                    }
+                })
+        }
     }
 
     openDialog() {

@@ -24,9 +24,9 @@
 </div>
 <div id="container-konva" class="viewer"></div>
 <div class="thumbnail-image">
-    <img [src]="config.api_url('get_image')" class="img-thumbnail" width="100%"
-        (click)="rebuild(config.api_url('get_image'))">
-     <button class="btn btn-primary" (click)="saveImage()">Save Image</button>
+    <img src="http://localhost/emr/api/public/get_image" class="img-thumbnail" width="100%"
+        (click)="rebuild('http://localhost/emr/api/public/get_image')">
+     <button class="btn btn-primary" (click)="saveImage()">Save Image</button> -->
 </div>
 <div class="panel-legend">
     <div class="legend" *ngFor="let item of a; let i = index">

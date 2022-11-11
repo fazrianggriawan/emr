@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from './menu.service';
 
 @Component({
     selector: 'app-menu',
@@ -11,23 +10,16 @@ export class MenuComponent implements OnInit {
     public menus : any = [];
     public selectedMenu: any;
 
-    constructor(
-        private menuService: MenuService
-    ) { }
+    constructor() { }
 
     ngOnInit(): void {
-        this.getModuleByUser();
-        this.menuService.dataMenu.subscribe(data => {
-            this.menus = data;
-        })
-    }
-
-    getModuleByUser(){
-        let login : any = sessionStorage.getItem('login');
-        if( login ){
-            let data = JSON.parse(login);
-            this.menuService.GetModule(data.username);
-        }
+        this.menus = [
+            { label: 'Pendaftaran', routerLink: 'registrasi' },
+            { label: 'MCU', routerLink: 'rikkes' },
+            { label: 'Kasir', routerLink: 'kasir' },
+            { label: 'Admin Website' },
+            { label: 'Setting' },
+        ]
     }
 
 }

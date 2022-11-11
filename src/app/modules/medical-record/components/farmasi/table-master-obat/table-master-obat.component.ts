@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Table } from 'primeng/table';
-import { FarmasiService } from 'src/app/modules/farmasi/components/farmasi/farmasi.service';
+import { FarmasiService } from '../../../../farmasi/services/farmasi.service';
 
 @Component({
     selector: 'app-table-master-obat',

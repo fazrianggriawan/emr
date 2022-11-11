@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { DataPasienService } from './modules/registrasi/components/data-pasien/data-pasien.service';
-import { RegistrasiService } from './modules/registrasi/services/registrasi.service';
 import { AppService } from './services/app.service';
 import { LoadingService } from './services/loading.service';
 
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit {
     loading: boolean = false;
     currentRoute: string = '';
     pasien: any;
-    splashScreen: boolean = true;
 
     constructor(
         public loadingService: LoadingService,
@@ -26,32 +24,16 @@ export class AppComponent implements OnInit {
         private router: Router,
         private appService: AppService,
         private messageService: MessageService,
-        private dataPasienService: DataPasienService,
-        private registrasiService: RegistrasiService
+        private dataPasienService: DataPasienService
     ) { }
 
     ngOnInit() {
-        this.router.events.subscribe((event: any): void => {
-            if (event instanceof NavigationStart) {
-                if( sessionStorage.getItem('login') ){
-                    this.appService.roleAccess(event.url);
-                }else{
-                    if( event.url != '/login' ){
-                        this.registrasiService.registrasi.next('');
-                        this.router.navigateByUrl('/login');
-                    }
-                }
-            }
-          });
-
         this.primeNgConfig.ripple = true;
 
         this.loadingService.status.subscribe(data => this.loading = data)
         this.appService.notification.subscribe(data => {
-            if( data ){
-                if( data.type == 'error' ) this.messageService.add({severity:'error', summary:'Error', detail:data.message, life: 5000});
-                if( data.type == 'success' ) this.messageService.add({severity:'success', summary:'Sukses', detail:data.message});
-            }
+            if( data.type == 'error' ) this.messageService.add({severity:'error', summary:'Error', detail:data.message});
+            if( data.type == 'success' ) this.messageService.add({severity:'success', summary:'Sukses', detail:data.message});
         })
 
         this.appService.currentRoute.subscribe(data => this.currentRoute = data)
@@ -68,13 +50,7 @@ export class AppComponent implements OnInit {
             }
         })
 
-        this.appService.getLoginData();
-
         this.dataPasienService.pasien.subscribe(data => this.pasien = data);
-
-        setTimeout(() => {
-            this.splashScreen = false;
-        }, 500);
 
     }
 }

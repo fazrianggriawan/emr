@@ -1,11 +1,9 @@
-// var host        = 'http://192.168.107.3';
-var host        = 'http://localhost';
-var public_host = 'http://182.253.22.220';
-
+var host = 'http://localhost/bihealth/api';
+var hostVclaim = 'http://localhost/vclaim';
+var hostPublic = 'http://182.253.22.220';
 export const config = {
     host: host,
-    api_url: function (url: string) { return host + '/bihealth_api/public/' + url },
-    api_vclaim: function (url: string) { return host + '/bihealth_vclaim/public/' + url },
-    api_upload: function (url: string) { return host + ':8080/' + url },
-    api_public: function (url: string) { return public_host + '/vclaim/index.php/' + url },
+    api_url: function (url: string) { return host + '/public/' + url },
+    api_vclaim: function (url: string) { return hostVclaim + '/public/' + url },
+    api_public: function (url: string) { return hostPublic + '/vclaim/index.php' + url },
 }

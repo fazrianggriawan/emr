@@ -1,50 +1,33 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { LoginService } from './login.service';
-import { Subscription } from "rxjs";
-import { MenuService } from '../menu/menu.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
     public loginData: any;
     public messageErrorLogin: string = '';
     public formLogin: any;
 
-    subs: Subscription[] = [];
-
     constructor(
         private form: FormBuilder,
         private loginService: LoginService,
-        private router: Router,
-        private registrasiService: RegistrasiService,
-        private menuService: MenuService
+        private router: Router
     ) { }
 
     ngOnInit(): void {
-        sessionStorage.clear();
-        this.loginService.loginData.next('');
-        this.menuService.dataMenu.next('');
-        this.subs.push(this.loginService.loginData.subscribe(data => this.handleLogin(data)))
+        // this.loginService.loginData.subscribe(data => this.handleLogin(data))
+        // this.loginService.errorMessage.subscribe(data => this.messageErrorLogin = data)
 
         this.formLogin = this.form.group({
             username: [null, Validators.required],
             password: [null, Validators.required]
         })
-    }
-
-    ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
-        this.subs.forEach(element => {
-            element.unsubscribe();
-        });
     }
 
     public listenLogin(e: KeyboardEvent) {
@@ -54,20 +37,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     public doLogin() {
-        this.loginService.login(this.formLogin.value)
+        if( this.formLogin.value.username == 'demo' && this.formLogin.value.password == 'demo' ){
+            sessionStorage.setItem('login', 'demo')
+            this.gotoDashboarPage();
+        }
     }
 
     public handleLogin(responseLogin: any) {
-        if (responseLogin) {
-            if (responseLogin.auth) {
-                sessionStorage.setItem('login', JSON.stringify(responseLogin))
-                this.gotoDashboarPage();
-            }
+        if (responseLogin && responseLogin.auth) {
+            localStorage.setItem('login', JSON.stringify(responseLogin))
+            this.gotoDashboarPage();
         }
     }
 
     public gotoDashboarPage() {
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('registrasi');
     }
 
 }

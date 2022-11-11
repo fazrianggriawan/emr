@@ -1,44 +1,26 @@
+<div class="mb-2" hidden>
+    <div class="tx-secondary pt-1 pb-1">Paket Tarif : </div>
+    <button class="btn btn-xs btn-light mr-1 mb-1"><i class="bi bi-archive-fill"></i> Pemeriksaan Dokter</button>
+    <button class="btn btn-xs btn-light mr-1 mb-1"><i class="bi bi-archive-fill"></i> Pasien Baru</button>
+    <button class="btn btn-xs btn-secondary mr-1 mb-1"><i class="bi bi-gear"></i></button>
+</div>
 <div class="row">
-    <div class="col">
-        <div class="row mb-2">
-            <div class="col">
-                <div>Tanggal :</div>
-                <div><p-calendar [showIcon]="true" dateFormat="d M yy" [(ngModel)]="tanggal"></p-calendar></div>
-            </div>
-            <div class="col">
-                <div>Ruang Tindakan :</div>
-                <div>
-                    <p-dropdown
-                        placeholder="Pilih Ruangan"
-                        [options]="dataRuangan"
-                        [autoDisplayFirst]="false"
-                        optionLabel="name"
-                        optionValue="id"
-                        [(ngModel)]="selectedRuangan"
-                        [filter]="true"
-                        [style]="{width: '100%'}">
-                    </p-dropdown>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p-dropdown
-                    placeholder="Kategori Tarif"
-                    [options]="categoryTarif"
-                    [autoDisplayFirst]="false"
-                    [resetFilterOnHide]="true"
-                    optionLabel="name"
-                    optionValue="id"
-                    [(ngModel)]="selectedCategoryTarif"
-                    (ngModelChange)="changeCategoryTarif($event)"
-                    [filter]="true"
-                    [style]="{width: '100%'}">
-                </p-dropdown>
-            </div>
-        </div>
+    <div class="col"><h3>Master Tarif</h3></div>
+</div>
+<div class="row">
+    <div class="col-auto pr-1">
+        <p-dropdown
+            placeholder="Pilih Kategori"
+            [options]="categoryTarif"
+            optionLabel="name"
+            optionValue="id"
+            [(ngModel)]="selectedCategoryTarif"
+            (ngModelChange)="tarifService.getTarifByCategory(selectedCategoryTarif)"
+            [filter]="true"
+            [style]="{width: '100%'}">
+        </p-dropdown>
     </div>
-    <div class="col pl-0" hidden>
+    <div class="col pl-0">
         <div class="input-group">
             <input type="text" class="form-control" placeholder="Cari Tarif...">
             <div class="input-group-append">
@@ -47,46 +29,24 @@
         </div>
     </div>
 </div>
-<table class="table table-striped table-hover bd rounded mt-2">
-    <thead>
-        <tr>
-            <th>Nama Tarif</th>
-            <th>Harga</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let item of tarif" class="clickable" (click)="selectTarif(item, $event)">
-            <td>{{item.tarif_name}}</td>
-            <td>{{item.harga | number}}</td>
-        </tr>
-        <tr>
-            <td colspan="2" *ngIf="tarif.length == 0" class="text-center text-muted">Tidak ada data saat ini.</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="table table-striped table-hover">
-    <tr *ngFor="let item of tarifJasa">
-        <td>{{item.group_jasa_name | uppercase}}</td>
-        <td><input type="text" class="form-control"></td>
-    </tr>
-</table>
-
-
-<p-overlayPanel #op [appendTo]="'body'" [dismissable]="true" [showCloseIcon]="true" [baseZIndex]="9999">
-    <ng-template pTemplate>
-        <div style="width: 20vw">
-            <div class="d-flex justify-content-center p-3 mb-2" *ngIf="loadingTarifJasa">
-                <div class="spinner-border text-primary text-center spinner-border" role="status"></div>
-            </div>
-            <div class="row" *ngIf="!loadingTarifJasa">
-                <div class="col">
-                    <div class="tx-14 border-bottom mb-2 tx-bold pt-2 pb-2">PELAKSANA MEDIS</div>
-                    <app-dynamic-form *ngIf="questions$" [tanggal]="tanggal" [tarif]="selectedTarif" [registrasi]="registrasi" [ruangan]="selectedRuangan" [questions]="questions$ | async"></app-dynamic-form>
-                </div>
-            </div>
-        </div>
-    </ng-template>
-</p-overlayPanel>
-
-
+<div class="row">
+    <div class="col">
+        <table class="table table-striped table-hover bd rounded mt-2">
+            <thead>
+                <tr>
+                    <th>Nama Tarif</th>
+                    <th>Harga</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of tarif" class="clickable" (click)="selectTarif(item)">
+                    <td>{{item.tarif_name}}</td>
+                    <td>{{item.harga | number}}</td>
+                </tr>
+                <tr>
+                    <td colspan="2" *ngIf="tarif.length == 0" class="text-center text-muted">Tidak ada data saat ini.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
