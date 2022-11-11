@@ -28,9 +28,10 @@ export class DataPasienService {
                 if (data.code == 200) {
                     this.pasien.next(data.data)
                     this.saveStatusPasien.next(true);
+                    this.appService.setNotification('success', data.message);
                 } else {
                     this.saveStatusPasien.next(false);
-                    alert(data.message);
+                    this.appService.setNotification('error', data.message);
                 }
             })
     }

@@ -38,7 +38,7 @@
                         <th style="min-width: 150px;">Dokter</th>
                         <th style="min-width: 150px;">Jenis Pembayaran</th>
                         <th style="min-width: 150px;">No. Registrasi</th>
-                        <th></th>
+                        <th colspan="2"></th>
                     </tr>
                     <tr>
                         <th class="bg-white" style="min-width: 140px;">
@@ -62,10 +62,10 @@
                         <th class="bg-white" style="min-width: 150px;">
                             <p-dropdown formControlName="jnsPembayaran" (onChange)="filterForm()" (onClear)="filterForm()" [options]="dataJnsPembayaran" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" optionLabel="name" optionValue="id" placeholder="Pilih Jenis Pembayaran" [style]="{width: '140px'}"></p-dropdown>
                         </th>
-                        <th class="bg-white" style="min-width: 150px;">
+                        <th class="bg-white" style="min-width: 130px;">
                             <input type="text" formControlName="noreg" class="form-control" placeholder="Cari No.Registrasi">
                         </th>
-                        <th class="bg-white">
+                        <th class="bg-white" colspan="2">
                             <button class="btn btn-primary" (click)="filterForm()">
                                 <i class="bi bi-funnel"></i>
                             </button>
@@ -84,12 +84,11 @@
                         <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 150px;">
                             <div class="text-muted">{{item.golpas.r_grouppas.name | uppercase}} - {{item.golpas.name | uppercase}}</div>
                         </td>
-                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 150px;">
-                            <div>{{item.noreg}}</div>
-                            <div>
-                                <span class="badge" [ngClass]="{'badge-danger': (item.status==='closed'), 'badge-success': (item.status==='open')}">{{item.status | uppercase}}</span>
-                            </div>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 130px;">{{item.noreg}}</td>
+                        <td>
+                            <span class="badge" [ngClass]="{'badge-danger': (item.status==='closed'), 'badge-success': (item.status==='open'), 'badge-secondary': (item.status==='credit')}">{{item.status | uppercase}}</span>
                         </td>
+
                         <td>
                             <button hidden class="btn btn-icon btn-outline-primary rounded-circle" [disabled]="item.status === 'closed'">
                                 <div><i class="bi bi-pencil-square"></i></div>

@@ -41,7 +41,7 @@ export class AppService {
             ['08'] : 'Ags',
             ['09'] : 'Sep',
             ['10'] : 'Okt',
-            ['11'] : 'Nop',
+            ['11'] : 'Nov',
             ['12'] : 'Des',
         }
         return obj[key];

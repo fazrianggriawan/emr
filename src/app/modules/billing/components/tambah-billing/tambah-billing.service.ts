@@ -32,14 +32,19 @@ export class TambahBillingService {
                 if(data.code == 200){
                     this.appService.setNotification('success', data.message);
                     this.billingService.getBillingByHead(data.data.idBillingHead);
-                    this.jasaPelaksanaService.openDialog(false);
-                    this.tarifService.tarifJasa.next('');
-                    this.jasaPelaksanaService.jasaPelaksana.next('');
+                    this.clear();
                 }else{
                     this.appService.setNotification('error', data.message);
+                    this.clear();
                 }
 
             })
+    }
+
+    clear(){
+        this.jasaPelaksanaService.openDialog(false);
+        this.tarifService.tarifJasa.next('');
+        this.jasaPelaksanaService.jasaPelaksana.next('');
     }
 
 }

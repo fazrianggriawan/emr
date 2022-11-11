@@ -15,10 +15,6 @@
 
         <p-menu #menuPrint appendTo="body" [popup]="true" appendTo="body" [model]="menuPendaftaran"></p-menu>
     </div>
-    <div class="col-auto">
-        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan Baru</button>
-        <button class="btn btn-primary" (click)="update()" [disabled]="form.invalid" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update Data</button>
-    </div>
     <div class="col tx-right" hidden>
         <button class="btn btn-light"><i class="bi bi-trash mr-1"></i> Batal</button>
     </div>
@@ -337,6 +333,13 @@
                 </div>
             </div> -->
         </form>
+    </div>
+</div>
+
+<div class="row mg-t-20 border-top pd-20">
+    <div class="col text-right">
+        <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid" *ngIf="!form.get('id')?.value"><i class="bi bi-save mr-1"></i> Simpan Pasien Baru</button>
+        <button class="btn btn-primary" (click)="update()" [disabled]="form.invalid" *ngIf="form.get('id')?.value"><i class="bi bi-save mr-1"></i> Update Data</button>
     </div>
 </div>
 

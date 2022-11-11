@@ -20,7 +20,13 @@ export class RegistrasiService {
 
     updatePasien(data: any) {
         this.http.post<any>(config.api_url('pasien/update'), data)
-            .subscribe(data => console.log(data))
+            .subscribe(data => {
+                if( data.code == 200 ){
+                    this.appService.setNotification('success', data.message)
+                }else{
+                    this.appService.setNotification('error', data.message)
+                }
+            })
     }
 
     getDataRegistrasi() {

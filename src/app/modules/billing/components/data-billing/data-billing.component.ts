@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { AppService } from 'src/app/services/app.service';
@@ -8,7 +9,8 @@ import { TambahBillingService } from '../tambah-billing/tambah-billing.service';
 @Component({
     selector: 'app-data-billing',
     templateUrl: './data-billing.component.html',
-    styleUrls: ['./data-billing.component.css']
+    styleUrls: ['./data-billing.component.css'],
+    providers: [ConfirmationService]
 })
 export class DataBillingComponent implements OnInit, OnDestroy {
 
@@ -21,7 +23,8 @@ export class DataBillingComponent implements OnInit, OnDestroy {
         private billingService: BillingService,
         private registrasiService: RegistrasiService,
         public appService: AppService,
-        private tambahBillingService: TambahBillingService
+        private tambahBillingService: TambahBillingService,
+        private confirmationService: ConfirmationService,
     ) { }
 
     ngOnInit(): void {
@@ -63,6 +66,24 @@ export class DataBillingComponent implements OnInit, OnDestroy {
         if(data){
             this.getBilling();
         }
+    }
+
+    deleteBilling(event: any, id: any){
+        this.confirmationService.confirm({
+            target: event.target,
+            message: 'Yakin ingin menghapus data ini?',
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Ya',
+            rejectLabel: 'Tidak',
+            accept: () => {
+                //confirm action
+                this.billingService.deleteBilling( { noreg: this.registrasi.noreg, id: id } )
+            },
+            reject: () => {
+                //reject action
+            }
+        });
+
     }
 
 }

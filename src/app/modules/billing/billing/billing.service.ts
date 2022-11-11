@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { config } from 'src/app/config';
+import { AppService } from 'src/app/services/app.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,8 @@ export class BillingService {
     totalBilling = new BehaviorSubject<any>('');
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+        private appService: AppService
     ) {
         this.getCategory();
     }
@@ -66,6 +68,10 @@ export class BillingService {
             .subscribe(data => {
                 if( data.code == 200 ){
                     this.deleteStatus.next(true);
+                    this.appService.setNotification('success', data.message);
+                    this.getBillingByNoreg(data.data.noreg, 'open');
+                }else{
+                    this.appService.setNotification('error', data.message);
                 }
             })
     }
@@ -102,7 +108,11 @@ export class BillingService {
         this.http.post<any>(config.api_url('billing/addPembayaran'), data)
             .subscribe(data => {
                 if(data.code == 200){
+                    this.getBillingByNoreg(data.data.noreg, 'open');
                     this.addPembayaranStatus.next(true);
+                    this.appService.setNotification('success', data.message);
+                }else{
+                    this.appService.setNotification('error', data.message);
                 }
             })
     }
