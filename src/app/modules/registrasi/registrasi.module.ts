@@ -13,6 +13,7 @@ import { FormRawatInapComponent } from './components/form-rawat-inap/form-rawat-
 import { CariPasienComponent } from './components/cari-pasien/cari-pasien.component';
 import { CariRegistrasiComponent } from './components/cari-registrasi/cari-registrasi.component';
 import { RiwayatKunjunganComponent } from './components/riwayat-kunjungan/riwayat-kunjungan.component';
+import { VclaimModule } from '../vclaim/vclaim.module';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { RiwayatKunjunganComponent } from './components/riwayat-kunjungan/riwaya
     imports: [
         SharedModule,
         CommonModule,
-        RegistrasiRoutingModule
+        RegistrasiRoutingModule,
+        VclaimModule
     ],
     exports: [
         DataRegistrasiComponent,

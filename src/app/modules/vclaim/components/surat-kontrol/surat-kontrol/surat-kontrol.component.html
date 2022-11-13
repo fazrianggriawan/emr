@@ -1,0 +1,17 @@
+<button class="btn" (click)="suratKontrolService.openDialog(true)">
+    Surat Kontrol / SPRI
+</button>
+
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="suratKontrolService.openDialog(false)"
+    header="Surat Kontrol / SPRI"
+    position="top"
+    appendTo="body"
+    [modal]="true"
+    [draggable]="false"
+    [breakpoints]="{'1920px': '70vw', '1366px': '90vw'}">
+    <ng-container *ngIf="dialog">
+        <app-data-surat-kontrol></app-data-surat-kontrol>
+    </ng-container>
+</p-dialog>

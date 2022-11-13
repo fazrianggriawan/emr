@@ -1,0 +1,88 @@
+<div class="row mg-t-10">
+    <div class="col-auto border-right">
+        <h5>Data Riwayat SEP</h5>
+    </div>
+    <div class="col-auto">
+        Dari :
+            <p-calendar
+                (ngModelChange)="getDataHistory()"
+                [(ngModel)]="filter.from"
+                [readonlyInput]="true"
+                [maxDate]="today"
+                [style]="{width:'120px'}"
+                appendTo="body"
+                dateFormat="d M yy"
+                styleClass="mr-2">
+            </p-calendar>
+    </div>
+    <div class="col-auto pd-l-0">
+        Sampai :
+            <p-calendar
+                (ngModelChange)="getDataHistory()"
+                [(ngModel)]="filter.to"
+                [readonlyInput]="true"
+                [maxDate]="today"
+                [style]="{width:'120px'}"
+                dateFormat="d M yy"
+                appendTo="body">
+            </p-calendar>
+    </div>
+    <div class="col-auto pd-l-0">
+        <button class="btn" (click)="getDataHistory()"><i class="bi bi-arrow-clockwise"></i></button>
+    </div>
+</div>
+
+<div class="row mg-t-10">
+    <div class="col">
+        <p-table
+            [value]="dataHistory"
+            [scrollable]="true"
+            [rowHover]="true"
+            scrollHeight="30vw"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-sm p-datatable-striped">
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="min-width: 180px;">No. SEP</th>
+                    <th style="min-width: 100px;">Jns. Pelayanan</th>
+                    <th style="min-width: 100px;">Poli / Ruangan</th>
+                    <th style="min-width: 100px;">RS</th>
+                    <th style="min-width: 180px;">No. Rujukan</th>
+                    <th style="min-width: 100px;">Tgl. SEP</th>
+                    <th style="min-width: 100px;">Tgl. Pulang</th>
+                    <th style="min-width: 100px;">&nbsp;</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-item>
+                <tr>
+                    <td style="min-width: 180px;">{{item.noSep}}</td>
+                    <td style="min-width: 100px;">
+                        <span *ngIf="item.jnsPelayanan === '1'">RAWAT INAP</span>
+                        <span *ngIf="item.jnsPelayanan === '2'">RAWAT JALAN</span>
+                    </td>
+                    <td style="min-width: 100px;">
+                        <span *ngIf="item.poli">{{item.poli}}</span>
+                        <span *ngIf="!item.poli">-</span>
+                    </td>
+                    <td style="min-width: 100px;">{{item.ppkPelayanan}}</td>
+                    <td style="min-width: 180px;">{{item.noRujukan}}</td>
+                    <td style="min-width: 100px;">{{appService.dateHuman(item.tglSep)}}</td>
+                    <td style="min-width: 100px;">{{appService.dateHuman(item.tglPlgSep)}}</td>
+                    <td style="min-width: 100px;">
+                        <button class="btn btn-sm btn-outline-primary mg-r-5" (click)="printSep(item.noSep)">
+                            <div><i class="bi bi-printer"></i></div>
+                        </button>
+
+                        <button class="btn btn-sm btn-outline-danger mg-r-5" (click)="delete(item.noSep)">
+                            <div><i class="bi bi-trash"></i></div>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<p-confirmDialog header="Konfirmasi" icon="pi pi-exclamation-triangle"></p-confirmDialog>

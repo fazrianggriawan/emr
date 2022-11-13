@@ -1,0 +1,156 @@
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <label class="col-4 col-form-label">Cari Peserta</label>
+            <div class="col">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="noPeserta" [(ngModel)]="keyNomorKartu" placeholder="No. Kartu BPJS" (keyup)="listenCariPeserta($event)">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" (click)="pesertaService.getPesertaByNomorKartu(keyNomorKartu)"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mg-b-6">
+            <div class="col-4"></div>
+            <div class="col">
+                <div class="input-append">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="nik" [(ngModel)]="keyNik" placeholder="No. KTP / NIK" (keyup)="listenCariPeserta($event)">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" (click)="pesertaService.getPesertaByNik(keyNik)"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form>
+            <div class="row">
+                <label class="col-4 col-form-label">Nama</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.nama}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">No. Kartu</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.noKartu}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">NIK</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.nik}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label"> No. RM</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.mr.noMR}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label"> No. Tlp</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.mr.noTelepon}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">Kelamin - Tgl. Lahir</label>
+                <div class="col-2 pr-2">
+                    <input type="text" class="form-control" value="{{peserta.sex}}" readonly>
+                </div>
+                <div class="col pl-0">
+                    <input type="text" class="form-control" value="{{peserta.tglLahir}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">Usia</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.umur.umurSekarang}}" readonly>
+                </div>
+            </div>
+
+            <div class="row">
+                <label class="col-4 col-form-label">Status Peserta</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.statusPeserta.keterangan}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">Jenis Peserta</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.jenisPeserta.keterangan}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">Hak Kelas</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.hakKelas.keterangan}}" readonly>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">Provider</label>
+                <div class="col">
+                    <input type="text" class="form-control" value="{{peserta.provUmum.nmProvider}}" readonly>
+                </div>
+            </div>
+
+            <hr class="mg-b-10">
+
+            <div class="row border-bottom">
+                <label class="col-4 col-form-label">COB</label>
+                <div class="col border-left">
+                    <div class="row">
+                        <label class="col-4 col-form-label">Nama Asuransi</label>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{peserta.cob.nmAsuransi}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-4 col-form-label">No. Asuransi</label>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{peserta.cob.noAsuransi}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-4 col-form-label">Tgl. TAT</label>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{peserta.cob.tglTAT}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-4 col-form-label">Tgl. TMT</label>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{peserta.cob.tglTMT}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row border-bottom">
+                <label class="col-4 col-form-label">Informasi</label>
+                <div class="col border-left">
+                    <div class="row">
+                        <label class="col-4 col-form-label"> Dinsos</label>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{peserta.informasi.dinsos}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-4 col-form-label"> No. SKTM</label>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{peserta.informasi.noSKTM}}" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-4 col-form-label"> PRB</label>
+                        <div class="col">
+                            <input type="text" class="form-control" value="{{peserta.informasi.prolanisPRB}}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataPasienService } from './data-pasien.service';
 import { Subscription } from 'rxjs';
 import { AutoComplete } from 'primeng/autocomplete';
+import { RegistrasiService } from '../../services/registrasi.service';
 
 @Component({
     selector: 'app-data-pasien',
@@ -27,7 +28,8 @@ export class DataPasienComponent implements OnInit, OnDestroy {
 
     constructor(
         private fb: FormBuilder,
-        public dataPasienService: DataPasienService
+        public dataPasienService: DataPasienService,
+        private registrasiService: RegistrasiService
     ) { }
 
     ngOnInit(): void {
@@ -87,6 +89,7 @@ export class DataPasienComponent implements OnInit, OnDestroy {
     }
 
     onSelectPasien() {
+        this.registrasiService.registrasi.next('');
         this.dataPasienService.pasien.next(this.selectedPasien);
         this.dataPasienService.openDialog(false);
     }
