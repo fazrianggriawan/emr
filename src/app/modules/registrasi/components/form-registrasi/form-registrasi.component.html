@@ -241,22 +241,24 @@
                     </p-dropdown>
                 </div>
             </div>
-            <div class="row mb-1">
+            <div class="row mg-b-5">
                 <label class="col-4 col-form-label">
-                    Jenis Pembayaran  <span *ngIf="form.get('groupPasien')?.errors || form.get('golPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                    Jenis Pembayaran <span *ngIf="form.get('groupPasien')?.errors || form.get('golPasien')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
                 </label>
                 <div class="col">
                     <p-dropdown [options]="dataGroupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body" styleClass="mb-1" (ngModelChange)="getGolPasienByGroup($event)"></p-dropdown>
                     <p-dropdown [options]="dataGolPasien" [autoDisplayFirst]="false" formControlName="golPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
                 </div>
             </div>
-            <div class="row" hidden>
-                <label class="col-4 col-form-label">Nomor SEP</label>
+            <div class="row">
+                <label class="col-4 col-form-label">
+                    Nomor SEP <span *ngIf="form.get('noSep')?.errors" class="bi bi-exclamation-circle-fill tx-danger ml-1 tx-13"></span>
+                </label>
                 <div class="col-auto">
                     <div class="input-group">
                         <input type="text" formControlName="noSep" class="form-control">
                         <div class="input-group-append">
-                            <button class="btn btn-secondary" (click)="vclaimService.openDialog()"><i class="bi bi-table"></i></button>
+                            <button class="btn btn-sm btn-primary" (click)="vclaimService.openDialog()">VClaim BPJS</button>
                         </div>
                     </div>
                 </div>
@@ -271,7 +273,6 @@
         <div class="row border-top pt-3 mb-3">
             <div class="col-4"></div>
             <div class="col">
-                <button class="btn mr-1" (click)="vclaimService.openDialog()"><i class="bi bi-credit-card mr-1"></i> VClaim BPJS</button>
                 <button class="btn btn-primary  mr-1" (click)="save()" [disabled]="form.invalid"><i class="bi bi-save mr-1"></i> Simpan</button>
             </div>
         </div>

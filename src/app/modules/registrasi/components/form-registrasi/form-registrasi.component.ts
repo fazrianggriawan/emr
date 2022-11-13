@@ -157,6 +157,15 @@ export class FormRegistrasiComponent implements OnInit, OnDestroy {
 
     getGolPasienByGroup(value: string){
         this.masterService.getGolPasienByGroup(value);
+
+        setTimeout(() => {
+            if( value == 'BPJS' ){
+                this.form.get('noSep')?.setValidators([Validators.required]);
+            }else{
+                this.form.get('noSep')?.clearValidators();
+            }
+            this.form.get('noSep')?.updateValueAndValidity();
+        }, 0);
     }
 
     getDataRuangan(jnsPerawatan: string){

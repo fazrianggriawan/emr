@@ -108,7 +108,6 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
     }
 
     refresh() {
-        console.log(this.tanggal);
         // this.dataRegistrasi = '';
         // this.registrasiService.getDataRegistrasi();
     }
