@@ -2,14 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { RikkesComponent } from './components/rikkes/rikkes.component';
-import { VclaimComponent } from './modules/shared/vclaim/vclaim.component';
 import { LoginComponent } from './templates/login/login.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'rikkes', component: RikkesComponent },
-    { path: 'vclaim', component: VclaimComponent },
+    // { path: 'vclaim', component: VclaimComponent },
     { path: 'home', component: HomeComponent },
     { path: 'medicalRecord', loadChildren: () => import('./modules/medical-record/medical-record.module').then(m => m.MedicalRecordModule) },
     { path: 'registrasi', loadChildren: () => import('./modules/registrasi/registrasi.module').then(m => m.RegistrasiModule) },
@@ -23,6 +22,7 @@ const routes: Routes = [
     { path: 'setting', loadChildren: () => import('./modules/setting/setting.module').then(m => m.SettingModule) },
     { path: 'billing', loadChildren: () => import('./modules/billing/billing.module').then(m => m.BillingModule) },
     { path: 'laboratorium', loadChildren: () => import('./modules/laboratorium/laboratorium.module').then(m => m.LaboratoriumModule) },
+    { path: 'vclaim', loadChildren: () => import('./modules/vclaim/vclaim.module').then(m => m.VclaimModule) },
 ];
 
 @NgModule({

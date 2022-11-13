@@ -1,0 +1,17 @@
+<button class="btn" (click)="sepService.openDialog(true)">
+    SEP
+</button>
+
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="sepService.openDialog(false)"
+    header="SEP"
+    position="top"
+    appendTo="body"
+    [modal]="true"
+    [draggable]="false"
+    [breakpoints]="{'1920px': '70vw', '1366px': '90vw'}">
+    <ng-container *ngIf="dialog">
+        <app-data-sep></app-data-sep>
+    </ng-container>
+</p-dialog>

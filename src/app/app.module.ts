@@ -56,7 +56,7 @@ import { FarmasiModule } from './modules/farmasi/farmasi.module';
         TopPanelComponent,
         RightPanelComponent,
         MainPanelComponent,
-        BarChartComponent,
+        BarChartComponent
     ],
     imports: [
         CommonModule,
