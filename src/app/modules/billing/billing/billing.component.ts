@@ -20,6 +20,8 @@ export class BillingComponent implements OnInit, OnDestroy {
 
     @Input() showTarif: Boolean = true;
     @Input() header: Boolean = true;
+    @Input() btnKwitansi: Boolean = true;
+    @Input() showBayar: Boolean = false;
 
     catTarif: any;
     selectedCatTarif: string = '';
@@ -31,6 +33,8 @@ export class BillingComponent implements OnInit, OnDestroy {
     statusBilling: any[] = [];
     selectedStatusBilling : any = 'open';
     selectedBillingBatch : any;
+    unit: string = 'all';
+    billingForKasir: boolean = false;
 
     subs: Subscription[] = [];
 
@@ -48,6 +52,7 @@ export class BillingComponent implements OnInit, OnDestroy {
         this.billingService.dataBilling.subscribe(data => this.handleDataBilling(data))
         this.subs.push(this.billingService.updateStatus.subscribe(data => this.handleUpdate(data)))
         this.subs.push(this.billingService.addDiscountStatus.subscribe(data => this.handleAddDiscount(data)))
+        this.subs.push(this.billingService.billingForKasir.subscribe(data => this.billingForKasir = data))
         this.selectedCatTarif = 'all';
 
         this.statusBilling = [
@@ -72,6 +77,7 @@ export class BillingComponent implements OnInit, OnDestroy {
         this.subs.forEach(element => {
             element.unsubscribe();
         });
+        this.billingService.billingForKasir.next(false);
     }
 
     getDataBilling(){
@@ -80,6 +86,7 @@ export class BillingComponent implements OnInit, OnDestroy {
 
     handleRegistrasi(data: any) {
         this.registrasi = data;
+        this.unit = this.registrasi.id_jns_perawatan;
         this.getDataBilling();
     }
 

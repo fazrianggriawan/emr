@@ -23,6 +23,8 @@ const routes: Routes = [
     { path: 'billing', loadChildren: () => import('./modules/billing/billing.module').then(m => m.BillingModule) },
     { path: 'laboratorium', loadChildren: () => import('./modules/laboratorium/laboratorium.module').then(m => m.LaboratoriumModule) },
     { path: 'vclaim', loadChildren: () => import('./modules/vclaim/vclaim.module').then(m => m.VclaimModule) },
+    { path: 'operasi', loadChildren: () => import('./modules/operasi/operasi.module').then(m => m.OperasiModule) },
+    { path: 'e-klaim', loadChildren: () => import('./modules/e-klaim/e-klaim.module').then(m => m.EKlaimModule) },
 ];
 
 @NgModule({

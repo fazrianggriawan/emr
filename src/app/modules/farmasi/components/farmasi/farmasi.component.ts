@@ -17,6 +17,7 @@ import { FarmasiService } from './farmasi.service';
 export class FarmasiComponent implements OnInit {
 
     @ViewChild('qty') qtyElement!: ElementRef;
+    @ViewChild('acMasterObat') ac!: AutoComplete;
 
     menuItems!: MenuItem[];
     namaObat: any;
@@ -137,7 +138,14 @@ export class FarmasiComponent implements OnInit {
     handleDataBilling(data: any){
         this.dialogTambahObat = false;
         this.dataBilling = data;
+        this.focusOnActarif();
         this.hitungTotalTagihan();
+    }
+
+    focusOnActarif(){
+        setTimeout(() => {
+            this.ac.focusInput();
+        }, 0);
     }
 
     save(ac: AutoComplete){
@@ -161,7 +169,7 @@ export class FarmasiComponent implements OnInit {
         }
     }
 
-    deleteObat(event: any, index: any){
+    deleteObat(event: any, item: any){
         this.confirmationService.confirm({
             target: event.target,
             message: 'Yakin ingin menghapus data ini?',
@@ -170,7 +178,8 @@ export class FarmasiComponent implements OnInit {
             rejectLabel: 'Tidak',
             accept: () => {
                 //confirm action
-                this.dataBilling.splice(index, 1);
+                this.farmasiService.deleteBilling(item);
+                // this.dataBilling.splice(index, 1);
             },
             reject: () => {
                 //reject action

@@ -58,3 +58,7 @@ body {
 .p-dropdown-panel .p-dropdown-items:not(.p-dropdown-virtualscroll) {
     padding: 0;
 }
+
+.p-scrollpanel .p-scrollpanel-bar{
+    background-color: #d1d7df;
+}

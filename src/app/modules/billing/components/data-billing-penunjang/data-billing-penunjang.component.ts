@@ -19,6 +19,7 @@ export class DataBillingPenunjangComponent implements OnInit, OnDestroy {
     dataBilling: any[] = [];
     registrasi: any;
     loading: boolean = false;
+    optionsPrint: any[] = [];
     subs: Subscription[] = [];
 
     constructor(
@@ -87,6 +88,11 @@ export class DataBillingPenunjangComponent implements OnInit, OnDestroy {
             this.appService.print(config.api_url('print/hasilLab/'+data.r_billing_head.noreg+'/'+data.id_billing_head+'/'+login.username))
         }
 
+    }
+
+    printBilling(data: any){
+        let login = this.appService.getSessionStorage('login');
+        this.appService.print(config.api_url('print/rincianBillingHead/'+data.noreg+'/'+login.username+'/'+data.id_billing_head))
     }
 
 }

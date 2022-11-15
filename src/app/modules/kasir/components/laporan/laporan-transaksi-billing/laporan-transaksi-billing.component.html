@@ -1,0 +1,51 @@
+<button class="btn" (click)="lapTransaksiBillService.openDialog(true)">
+    Laporan Transaksi
+</button>
+
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="lapTransaksiBillService.openDialog(false)"
+    header="Laporan Transaksi Billing"
+    [draggable]="false"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '30vw', '1366px': '30vw'}"
+    appendTo="body">
+
+    <ng-container *ngIf="dialog">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-5">Dari Tanggal</div>
+                <div class="col">
+                    <p-calendar [showIcon]="true" [showTime]="true" formControlName="from" dateFormat="dd M yy" appendTo="body"></p-calendar>
+                </div>
+            </div>
+            <div class="row mg-t-5">
+                <div class="col-5">Sampai Tanggal</div>
+                <div class="col">
+                    <p-calendar [showIcon]="true" [showTime]="true" formControlName="to" dateFormat="dd M yy" appendTo="body"></p-calendar>
+                </div>
+            </div>
+            <div class="row mg-t-5">
+                <div class="col-5">Jns. Perawatan</div>
+                <div class="col">
+                    <p-dropdown [style]="{width: '100%'}" formControlName="jnsPerawatan" [autoDisplayFirst]="false"  [options]="optionsJnsPerawatan" optionValue="id" optionLabel="name" appendTo="body"></p-dropdown>
+                </div>
+            </div>
+            <div class="row mg-t-5">
+                <div class="col-5">Jns. Pembayaran</div>
+                <div class="col">
+                    <p-dropdown [style]="{width: '100%'}" formControlName="jnsPembayaran" [autoDisplayFirst]="false" [options]="optionsJnsPembayaran" optionValue="id" optionLabel="name" appendTo="body"></p-dropdown>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+        <button class="btn btn-primary" (click)="proses()" [disabled]="form.invalid">
+            <i class="bi bi-check-lg"></i> Proses
+        </button>
+    </ng-template>
+
+
+</p-dialog>

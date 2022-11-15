@@ -40,7 +40,8 @@ import { SepComponent } from './components/sep/sep/sep.component';
     SharedModule
   ],
   exports: [
-    VclaimComponent
+    VclaimComponent,
+    DataSepComponent
   ]
 })
 export class VclaimModule { }

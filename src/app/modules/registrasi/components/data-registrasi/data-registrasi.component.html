@@ -5,7 +5,7 @@
   height: 0 !important;
 }
 </style>
-<div class="row">
+<div class="row" *ngIf="showHeader">
     <div class="col-auto border-right"><h5>Data Registrasi</h5></div>
     <div class="col-auto">
         <app-cari-pasien></app-cari-pasien>
@@ -37,8 +37,9 @@
                         <th style="min-width: 150px;">Ruangan / Poliklinik</th>
                         <th style="min-width: 150px;">Dokter</th>
                         <th style="min-width: 150px;">Jenis Pembayaran</th>
-                        <th style="min-width: 150px;">No. Registrasi</th>
-                        <th colspan="2"></th>
+                        <th style="min-width: 130px;">No. Registrasi</th>
+                        <th></th>
+                        <th></th>
                     </tr>
                     <tr>
                         <th class="bg-white" style="min-width: 140px;">
@@ -65,11 +66,12 @@
                         <th class="bg-white" style="min-width: 130px;">
                             <input type="text" formControlName="noreg" class="form-control" placeholder="Cari No.Registrasi">
                         </th>
-                        <th class="bg-white" colspan="2">
+                        <th class="bg-white" style="min-width: 40px;">
                             <button class="btn btn-primary" (click)="filterForm()">
                                 <i class="bi bi-funnel"></i>
                             </button>
                         </th>
+                        <th class="bg-white" style="min-width: 50px;"></th>
                     </tr>
                 </ng-template>
 
@@ -85,13 +87,13 @@
                             <div class="text-muted">{{item.golpas.r_grouppas.name | uppercase}} - {{item.golpas.name | uppercase}}</div>
                         </td>
                         <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 130px;">{{item.noreg}}</td>
-                        <td>
+                        <td style="min-width: 40px;">
                             <span class="badge" [ngClass]="{'badge-danger': (item.status==='closed'), 'badge-success': (item.status==='open'), 'badge-secondary': (item.status==='credit')}">{{item.status | uppercase}}</span>
                         </td>
 
-                        <td>
-                            <button hidden class="btn btn-icon btn-outline-primary rounded-circle" [disabled]="item.status === 'closed'">
-                                <div><i class="bi bi-pencil-square"></i></div>
+                        <td style="min-width: 50px;">
+                            <button class="btn btn-sm btn-outline-primary" (click)="editRegistrasi(item)" *ngIf="item.status == 'open'">
+                                <i class="bi bi-pencil-square"></i>
                             </button>
                         </td>
                     </tr>
@@ -137,3 +139,6 @@
     appendTo="body">
     <app-riwayat-kunjungan *ngIf="dialogRiwayatKunjungan"></app-riwayat-kunjungan>
 </p-dialog>
+
+
+<app-edit-registrasi></app-edit-registrasi>

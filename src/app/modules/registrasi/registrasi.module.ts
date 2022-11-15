@@ -14,6 +14,7 @@ import { CariPasienComponent } from './components/cari-pasien/cari-pasien.compon
 import { CariRegistrasiComponent } from './components/cari-registrasi/cari-registrasi.component';
 import { RiwayatKunjunganComponent } from './components/riwayat-kunjungan/riwayat-kunjungan.component';
 import { VclaimModule } from '../vclaim/vclaim.module';
+import { EditRegistrasiComponent } from './components/edit-registrasi/edit-registrasi.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { VclaimModule } from '../vclaim/vclaim.module';
         FormRawatInapComponent,
         CariPasienComponent,
         CariRegistrasiComponent,
-        RiwayatKunjunganComponent
+        RiwayatKunjunganComponent,
+        EditRegistrasiComponent
     ],
     imports: [
         SharedModule,

@@ -24,6 +24,12 @@ export class AppService {
         return parsingTanggal[2].toString() + '-' + parsingTanggal[1].toString().padStart(2, '0') + '-' + parsingTanggal[0].toString().padStart(2, '0')
     }
 
+    public reformatDateTime(date: Date) {
+        let parsingTanggal = date.toLocaleDateString('id-ID').toString().split('/');
+        console.log(date.toLocaleDateString('id-ID').toString());
+        return parsingTanggal[2].toString() + '-' + parsingTanggal[1].toString().padStart(2, '0') + '-' + parsingTanggal[0].toString().padStart(2, '0')
+    }
+
     public dateHuman(data: string) {
         let arrayTanggal = data.split('-');
         return arrayTanggal[2] + ' ' + this.arrayBulan(arrayTanggal[1]) + ' ' + arrayTanggal[0]
@@ -106,6 +112,9 @@ export class AppService {
     }
 
     public getAge (dateString: string) {
+        if( !dateString ){
+            return '';
+        }
         // format dateString = mm/dd/yyyy
         var now   : any = new Date();
 

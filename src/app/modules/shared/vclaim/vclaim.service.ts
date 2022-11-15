@@ -21,6 +21,7 @@ export class VclaimService {
     pembiayaanNaikKelas = new BehaviorSubject<any>('');
     jnsKunjungan = new BehaviorSubject<any>('');
     totalSepRujukan = new BehaviorSubject<any>('');
+    sep = new BehaviorSubject<any>('');
 
     saveStatus = new BehaviorSubject<boolean>(false);
 
@@ -96,6 +97,17 @@ export class VclaimService {
             .subscribe(data => {
                 if (data.metaData.code == '200') {
                     this.dokter.next(data.response.list)
+                }
+            })
+    }
+
+    public getSep(noSep: string) {
+        this.http.get<any>(config.api_vclaim('sep/nomorSep/'+noSep))
+            .subscribe(data => {
+                if (data.metaData.code == '200') {
+                    this.sep.next(data.response)
+                }else{
+                    this.appService.setNotification('error', data.metaData.message)
                 }
             })
     }

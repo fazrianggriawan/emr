@@ -85,6 +85,7 @@ export class RegistrasiComponent implements OnInit {
 
         this.menuPendaftaran = [
             { label: 'Barcode Pasien', command: (() => { this.appService.print(config.api_url('print/stickerBarcode/'+this.selectedPasien.id)) }) },
+            { label: 'Kartu Pasien', command: (() => { this.appService.print(config.api_url('print/kartuPasien/'+this.selectedPasien.id)) }) },
             { label: 'Kartu Identitas Pasien', command: (() => { this.appService.print(config.api_url('print/biodataPasien/'+this.selectedPasien.id)) }) },
         ]
     }
@@ -255,17 +256,21 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public save() {
-        let tglLahir = this.reformatDate(this.form.get('tglLahir')?.value);
-        this.form.value.tglLahir = tglLahir;
-        this.dataPasienService.savePasien(this.form.value);
+
+        let data = this.form.getRawValue();
+
+        data.tglLahir = this.appService.reformatDate(data.tglLahir);
+
+        this.dataPasienService.savePasien(data);
     }
 
     public update() {
 
-        let tglLahir = this.reformatDate(this.form.get('tglLahir')?.value);
-        this.form.value.tglLahir = tglLahir;
+        let data = this.form.getRawValue();
 
-        this.registrasiService.updatePasien(this.form.value);
+        data.tglLahir = this.appService.reformatDate(data.tglLahir);
+
+        this.registrasiService.updatePasien(data);
     }
 
     public reformatDate(date: Date) {

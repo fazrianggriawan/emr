@@ -27,7 +27,11 @@
                     </div>
                     <div class="col-auto">
                         <div class="tx-gray-500 tx-12">Jns. Kelamin</div>
-                        <div>{{registrasi.pasien.r_jns_kelamin.name | uppercase}}</div>
+                        <div *ngIf="registrasi.pasien.r_jns_kelamin">
+                            <ng-container *ngIf="registrasi.pasien.r_jns_kelamin.name">
+                                {{registrasi.pasien.r_jns_kelamin.name | uppercase}}
+                            </ng-container>
+                        </div>
                     </div>
                     <div class="col-auto">
                         <div class="tx-gray-500 tx-12">Usia</div>

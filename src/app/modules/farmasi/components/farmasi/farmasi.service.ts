@@ -37,6 +37,15 @@ export class FarmasiService {
             })
     }
 
+    deleteBilling(data: any){
+        this.http.post<any>(config.api_url('farmasi/deleteBilling'), data)
+            .subscribe(data => {
+                if( data.code == 200 ){
+                    this.getDataBilling(data.data.noreg, 'open');
+                }
+            })
+    }
+
     getDataBilling(noreg: string, status: string){
         this.http.get<any>( config.api_url('farmasi/getBilling/'+noreg+'/'+status) )
             .subscribe(data => {
@@ -60,7 +69,7 @@ export class FarmasiService {
 
     cariObat(key: string) {
         if(key){
-            this.http.get<any>(config.api_url('farmasi/cariObat/' + key))
+            this.http.get<any>(config.api_farmasi('farmasi/cariObat/' + key))
                 .subscribe(data => {
                     this.dataObat.next(data.data);
                 });

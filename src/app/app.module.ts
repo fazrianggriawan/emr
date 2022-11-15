@@ -38,6 +38,7 @@ import { BillingModule } from './modules/billing/billing.module';
 import { ChartModule } from 'primeng/chart';
 import { BarChartComponent } from './components/bar-chart/bar-chart.component';
 import { FarmasiModule } from './modules/farmasi/farmasi.module';
+import { OperasiModule } from './modules/operasi/operasi.module';
 
 @NgModule({
     declarations: [
@@ -81,7 +82,8 @@ import { FarmasiModule } from './modules/farmasi/farmasi.module';
         SettingModule,
         BillingModule,
         ChartModule,
-        FarmasiModule
+        FarmasiModule,
+        OperasiModule
     ],
     providers: [
         DatePipe,

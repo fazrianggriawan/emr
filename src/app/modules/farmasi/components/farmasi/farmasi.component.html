@@ -10,12 +10,6 @@
             <div class="col-auto">
                 <app-form-registrasi-farmasi></app-form-registrasi-farmasi>
             </div>
-            <!-- <div class="col-auto border-left">
-                Transaksi Umum
-                <div class="mg-t-5">
-                    <p-inputSwitch [(ngModel)]="isPenjualanLangsung"></p-inputSwitch>
-                </div>
-            </div> -->
             <div class="col-auto pd-l-0">
                 <span class="p-float-label">
                     <p-dropdown placeholder="Status Tagihan" [(ngModel)]="selectedStatusBilling" [options]="statusBilling" optionValue="id" optionLabel="name" [autoDisplayFirst]="false" placeholder="Pilih Depo"></p-dropdown>
@@ -27,13 +21,6 @@
                     <p-dropdown [(ngModel)]="selectedDepo" [options]="dataDepo" optionValue="id" optionLabel="name" [autoDisplayFirst]="false"></p-dropdown>
                     <label for="dropdown">Lokasi Depo</label>
                 </span>
-                <!-- <p-dropdown [(ngModel)]="selectedDepo" [options]="dataDepo" optionValue="id" optionLabel="name" [autoDisplayFirst]="false" placeholder="Pilih Depo">
-                    <ng-template pTemplate="header">
-                        <div class="bg-gray-200 text-muted tx-12 pd-10">
-                            Lokasi Depo
-                        </div>
-                    </ng-template>
-                </p-dropdown> -->
             </div>
             <div class="col-auto pd-l-0">
                 <button class="btn" [disabled]="!registrasi" (click)="printBilling()"><i class="bi bi-printer"></i> Print Billing</button>
@@ -115,7 +102,7 @@
                     <td style="min-width:100px"><div class="text-right w-100">{{(item.qty * item.harga) | number}}</div></td>
                     <td style="min-width:100px">
                         <div class="text-right w-100 pd-r-10">
-                            <button class="btn btn-outline-danger btn-sm" (click)="deleteObat($event, index)">
+                            <button class="btn btn-outline-danger btn-sm" (click)="deleteObat($event, item)">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </div>

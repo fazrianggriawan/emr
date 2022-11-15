@@ -169,6 +169,7 @@
                         [options]="dataPoli"
                         [autoDisplayFirst]="false"
                         (ngModelChange)="changeRuangan($event)"
+                        [filter]="true"
                         formControlName="ruanganPoli"
                         optionValue="id"
                         optionLabel="name"
@@ -185,6 +186,7 @@
                     <p-dropdown
                         [options]="dataTempatTidur"
                         [autoDisplayFirst]="false"
+                        [filter]="true"
                         formControlName="tempatTidur"
                         [style]="{width: '100%'}"
                         appendTo="body">
@@ -233,6 +235,7 @@
                     <p-dropdown
                         [options]="dataDokter"
                         [autoDisplayFirst]="false"
+                        [filter]="true"
                         formControlName="dokter"
                         optionValue="id_pelaksana"
                         optionLabel="r_pelaksana.name"

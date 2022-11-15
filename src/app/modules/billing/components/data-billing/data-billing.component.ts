@@ -1,6 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { config } from 'src/app/config';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { AppService } from 'src/app/services/app.service';
 import { BillingService } from '../../billing/billing.service';
@@ -14,10 +15,14 @@ import { TambahBillingService } from '../tambah-billing/tambah-billing.service';
 })
 export class DataBillingComponent implements OnInit, OnDestroy {
 
+    @Input() showBayar : boolean = false;
+
     dataBilling: any[] = [];
     registrasi: any;
     loading: boolean = false;
     subs: Subscription[] = [];
+    selectedBilling: Subscription[] = [];
+    status: string = 'open';
 
     constructor(
         private billingService: BillingService,
@@ -59,6 +64,7 @@ export class DataBillingComponent implements OnInit, OnDestroy {
     handleDataBilling(data: any){
         this.loading = false;
         this.dataBilling = data;
+        this.billingService.selectedBilling.next(data);
     }
 
     handleRegistrasi(data: any){
@@ -66,6 +72,29 @@ export class DataBillingComponent implements OnInit, OnDestroy {
         if(data){
             this.getBilling();
         }
+    }
+
+    bayarByHead(idBillingHead: any){
+        let data : any = [];
+        this.dataBilling.forEach(element => {
+            if(element.id_billing_head == idBillingHead){
+                data.push(element)
+            }
+        });
+        this.billingService.selectedBilling.next(data);
+        // console.log(idBillingHead);
+        // this.billingService.getBillingByHead(idBillingHead);
+    }
+
+    printBillingHead(data: any){
+        let login = this.appService.getSessionStorage('login');
+        this.appService.print(config.api_url('print/rincianBillingHead/'+data.noreg+'/'+login.username+'/'+data.id_billing_head))
+    }
+
+    onRowSelect(){
+        setTimeout(() => {
+            this.billingService.selectedBilling.next(this.selectedBilling);
+        }, 100);
     }
 
     deleteBilling(event: any, id: any){
@@ -83,7 +112,6 @@ export class DataBillingComponent implements OnInit, OnDestroy {
                 //reject action
             }
         });
-
     }
 
 }

@@ -1,34 +1,36 @@
-<div class="row border-bottom bg-gray-100 shadow-sm" style="margin: -30px -30px 15px -30px; padding: 15px;" *ngIf="registrasi">
+<div class="row border-bottom shadow-sm" style="background-color: #fffce8; color: black !important; margin: -30px -30px 15px -30px; padding: 15px;" *ngIf="registrasi">
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">Nama Pasien</div>
-        <div>{{registrasi.pasien.nama | uppercase}}</div>
+        <div class="tx-12 tx-gray-800">Nama Pasien</div>
+        <div class="tx-medium tx-gray-800">{{registrasi.pasien.nama | uppercase}}</div>
     </div>
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">No. RM</div>
-        <div>{{registrasi.pasien.norm | uppercase}}</div>
+        <div class="tx-12 tx-gray-800">No. RM</div>
+        <div class="tx-medium tx-gray-800">{{registrasi.pasien.norm | uppercase}}</div>
     </div>
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">Jns. Kelamin</div>
-        <div *ngIf="registrasi.pasien.r_jns_kelamin">{{registrasi.pasien.r_jns_kelamin.name | uppercase}}</div>
+        <div class="tx-12 tx-gray-700">Jns. Kelamin</div>
+        <div class="tx-medium tx-gray-800" *ngIf="registrasi.pasien.r_jns_kelamin">
+            <ng-container *ngIf="registrasi.pasien.r_jns_kelamin.name">{{registrasi.pasien.r_jns_kelamin.name | uppercase}}</ng-container>
+        </div>
     </div>
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">Usia</div>
-        <div>{{appService.getAge(registrasi.pasien.tgl_lahir)}}</div>
+        <div class="tx-12 tx-gray-700">Usia</div>
+        <div class="tx-medium tx-gray-800">{{appService.getAge(registrasi.pasien.tgl_lahir)}}</div>
     </div>
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">Ruangan / Poliklinik</div>
-        <div>{{registrasi.ruang_perawatan.name | uppercase}}</div>
+        <div class="tx-12 tx-gray-700">Ruangan / Poliklinik</div>
+        <div class="tx-medium tx-gray-800">{{registrasi.ruang_perawatan.name | uppercase}}</div>
     </div>
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">Dokter</div>
-        <div>{{registrasi.dokter.name}}</div>
+        <div class="tx-12 tx-gray-700">Dokter</div>
+        <div class="tx-medium tx-gray-800">{{registrasi.dokter.name}}</div>
     </div>
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">Pembayaran</div>
-        <div>{{registrasi.golpas.r_grouppas.name | uppercase}} - {{registrasi.golpas.name | uppercase}}</div>
+        <div class="tx-12 tx-gray-700">Pembayaran</div>
+        <div class="tx-medium tx-gray-800" *ngIf="registrasi.golpas">{{registrasi.golpas.r_grouppas.name | uppercase}} - {{registrasi.golpas.name | uppercase}}</div>
     </div>
     <div class="col-auto">
-        <div class="tx-12 tx-gray-500">Status</div>
-        <div>{{registrasi.status | uppercase}}</div>
+        <div class="tx-12 tx-gray-700">Status</div>
+        <div class="tx-medium tx-gray-800">{{registrasi.status | uppercase}}</div>
     </div>
 </div>

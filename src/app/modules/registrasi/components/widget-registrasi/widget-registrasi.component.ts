@@ -11,7 +11,7 @@ import { WidgetRegistrasiService } from './widget-registrasi.service';
 })
 export class WidgetRegistrasiComponent implements OnInit {
 
-    @Input() showWidget : Boolean = true;
+    @Input() showWidget: Boolean = true;
 
     registrasi: any;
 
@@ -25,22 +25,23 @@ export class WidgetRegistrasiComponent implements OnInit {
     ngOnInit(): void {
         this.widgetRegistrasiService.widget.subscribe(data => this.showWidget = data);
         this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data))
-        this.appService.logout.subscribe(data => { if(data){ this.handleLogout(data) } })
+        this.appService.logout.subscribe(data => { if (data) { this.handleLogout(data) } })
 
-        if( sessionStorage.getItem('noreg') ){
+        if (sessionStorage.getItem('noreg')) {
             this.registrasiService.getRegistrasiByNoreg(sessionStorage.getItem('noreg'));
         }
     }
 
-    handleLogout(data: boolean){
-        if(data){
+    handleLogout(data: boolean) {
+        if (data) {
             this.registrasiService.registrasi.next('');
         }
     }
 
-    handleRegistrasi(data: any){
-        this.registrasi = data;
-        if( data ){
+    handleRegistrasi(data: any) {
+        this.registrasi = { pasien: {},ruang_perawatan: {}, dokter: {} };
+        if (data) {
+            this.registrasi = data;
             this.dataPasienService.pasien.next(this.registrasi.pasien);
         }
     }

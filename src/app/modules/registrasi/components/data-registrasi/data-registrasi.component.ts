@@ -6,6 +6,7 @@ import { AppService } from 'src/app/services/app.service';
 import { MasterService } from '../../services/master.service';
 import { RegistrasiService } from '../../services/registrasi.service';
 import { DataPasienService } from '../data-pasien/data-pasien.service';
+import { EditRegistrasiService } from '../edit-registrasi/edit-registrasi.service';
 import { FormRegistrasiService } from '../form-registrasi/form-registrasi.service';
 import { RiwayatKunjunganService } from '../riwayat-kunjungan/riwayat-kunjungan.service';
 import { DataRegistrasiService } from './data-registrasi.service';
@@ -18,6 +19,7 @@ import { DataRegistrasiService } from './data-registrasi.service';
 export class DataRegistrasiComponent implements OnInit, OnDestroy {
 
     @Input() showForm : Boolean = true;
+    @Input() showHeader : Boolean = true;
 
     registrasi: any;
     dataRegistrasi: any[] = [];
@@ -46,7 +48,8 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         private dataPasienService: DataPasienService,
         private masterService: MasterService,
         private fb: FormBuilder,
-        public riwayatKunjunganService: RiwayatKunjunganService
+        public riwayatKunjunganService: RiwayatKunjunganService,
+        private editRegistrasiService: EditRegistrasiService
     ) { }
 
     ngOnInit(): void {
@@ -121,6 +124,11 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         this.formRegistrasiService.dialog.next(true)
     }
 
+    editRegistrasi(data: any){
+        this.registrasiService.registrasi.next(data);
+        this.editRegistrasiService.openDialog(true);
+    }
+
     selectRegistrasi(data: any) {
         if (data) {
             this.registrasiService.showDialog(false)
@@ -128,10 +136,6 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
             this.dataPasienService.pasien.next(data.pasien);
             sessionStorage.setItem('noreg', data.noreg);
         }
-    }
-
-    changeTanggal() {
-        console.log(this.tanggal);
     }
 
 }

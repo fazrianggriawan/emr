@@ -20,6 +20,8 @@ export class BillingService {
     addPembayaranStatus = new BehaviorSubject<boolean>(false);
     deletePembayaranStatus = new BehaviorSubject<boolean>(false);
     totalBilling = new BehaviorSubject<any>('');
+    selectedBilling = new BehaviorSubject<any[]>([]);
+    billingForKasir = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,

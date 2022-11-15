@@ -1,0 +1,19 @@
+<p-autoComplete
+    #ac
+    placeholder="Cari Prosedur ICD-9"
+    appendTo="body"
+    (completeMethod)="cariIcd9Service.cari($event.query)"
+    (onSelect)="onSelect($event, ac)"
+    [suggestions]="optionsIcd"
+    [minLength]="3"
+    [delay]="100"
+    [baseZIndex]="999999"
+    [virtualScroll]="true"
+    [style]="{width: '100%'}"
+    [inputStyle]="{'width':'100%'}">
+    <ng-template let-item pTemplate="item">
+        <div>
+            {{item.nama | uppercase}}
+        </div>
+    </ng-template>
+</p-autoComplete>

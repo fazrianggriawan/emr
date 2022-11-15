@@ -74,7 +74,7 @@ export class DataPasienComponent implements OnInit, OnDestroy {
     }
 
     sorting(e: KeyboardEvent) {
-        if( e.code == 'Enter' ){
+        if( e.keyCode == 13 ){
             this.loading = true;
             var tglLahir = this.form.value.tglLahir;
             if( tglLahir ) {

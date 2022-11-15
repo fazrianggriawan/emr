@@ -6,6 +6,7 @@ import { RegistrasiService } from '../registrasi/services/registrasi.service';
 // import { BillingService } from './components/billing/billing.service';
 import { FormGroup } from '@angular/forms';
 import { BillingService } from '../billing/billing/billing.service';
+import { config } from 'src/app/config';
 
 @Component({
     selector: 'app-kasir',
@@ -16,6 +17,7 @@ import { BillingService } from '../billing/billing/billing.service';
 export class KasirComponent implements OnInit, OnDestroy {
 
     dataBilling: any[] = [];
+    selectedBilling: any[] = [];
     totalBilling: number = 0;
     tagihan: number = 0;
     totalBayar: any = 0;
@@ -39,9 +41,11 @@ export class KasirComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleDataRegistrasi(data)))
         this.subs.push(this.billingService.dataPembayaran.subscribe(data => this.handleDataPembayaran(data)))
-        this.subs.push(this.billingService.dataBilling.subscribe(data => this.handleDataBilling(data)))
         this.subs.push(this.billingService.addPembayaranStatus.subscribe(data => this.handleSavePembayaran(data)))
         this.subs.push(this.billingService.deletePembayaranStatus.subscribe(data => {if(data){ this.billingService.getDataPembayaran(this.registrasi.noreg) }}))
+        this.subs.push(this.billingService.selectedBilling.subscribe(data => this.handleSelectedBilling(data)))
+
+        this.billingService.billingForKasir.next(true);
 
         this.jnsBayar = [
             { id: 'cash', name: 'TUNAI' },
@@ -49,7 +53,7 @@ export class KasirComponent implements OnInit, OnDestroy {
             { id: 'cc', name: 'KARTU KREDIT' },
             { id: 'tr', name: 'TRANSFER BANK' },
             { id: 'asu', name: 'ASURANSI' },
-            { id: 'bpjs', name: 'BPJS' },
+            { id: 'bpjs', name: 'BPJS' }
         ]
     }
 
@@ -59,6 +63,13 @@ export class KasirComponent implements OnInit, OnDestroy {
         this.subs.forEach(element => {
             element.unsubscribe();
         });
+    }
+
+    handleSelectedBilling(data: any){
+        if(data){
+            this.handleDataBilling(data);
+            // this.selectedBilling = data;
+        }
     }
 
     handleDataPembayaran(data: any[]){
@@ -133,9 +144,6 @@ export class KasirComponent implements OnInit, OnDestroy {
             accept: () => {
                 //confirm action
                 this.billingService.deletePembayaran(item);
-            },
-            reject: () => {
-                //reject action
             }
         });
     }
@@ -152,12 +160,10 @@ export class KasirComponent implements OnInit, OnDestroy {
                 let data = {
                     jnsPembayaran: this.selectedJnsBayar,
                     jumlah: this.tagihan,
-                    noreg: this.registrasi.noreg
+                    noreg: this.registrasi.noreg,
+                    billing: this.selectedBilling
                 }
                 this.billingService.addPembayaran(data);
-            },
-            reject: () => {
-                //reject action
             }
         });
     }
@@ -183,15 +189,14 @@ export class KasirComponent implements OnInit, OnDestroy {
         }
     }
 
-    save() {
-        if(this.tagihan > 0){
-            let data = {
-                noreg: this.registrasi.noreg,
-                jnsPembayaran: this.selectedJnsBayar,
-                jumlahBayar: this.totalBayar
-            }
-            console.log(data);
-        }
+    printBilling(item: any){
+        let login = this.appService.getSessionStorage('login');
+        this.appService.print(config.api_url('print/rincianBillingPembayaran/'+item.noreg+'/'+login.username+'/'+item.id))
+    }
+
+    printKwitansi() {
+        let login = this.appService.getSessionStorage('login');
+        this.appService.print( config.api_url('print/kwitansiWithRincian/'+this.registrasi.noreg+'/'+login.username) );
     }
 
 }

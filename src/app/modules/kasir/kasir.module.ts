@@ -5,11 +5,13 @@ import { KasirRoutingModule } from './kasir-routing.module';
 import { KasirComponent } from './kasir.component';
 import { SharedModule } from '../shared/shared.module';
 import { BillingModule } from '../billing/billing.module';
+import { LaporanTransaksiBillingComponent } from './components/laporan/laporan-transaksi-billing/laporan-transaksi-billing.component';
 
 
 @NgModule({
   declarations: [
-    KasirComponent
+    KasirComponent,
+    LaporanTransaksiBillingComponent
   ],
   imports: [
     CommonModule,
