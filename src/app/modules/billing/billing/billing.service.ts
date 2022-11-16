@@ -101,7 +101,10 @@ export class BillingService {
         this.http.post<any>(config.api_url('billing/updateJumlah'), data)
             .subscribe(data => {
                 if(data.code == 200){
-                    this.updateStatus.next(true);
+                    this.getBillingByNoreg(data.data.noreg, 'open');
+                    this.appService.setNotification('success', data.message);
+                }else{
+                    this.appService.setNotification('error', data.message);
                 }
             })
     }

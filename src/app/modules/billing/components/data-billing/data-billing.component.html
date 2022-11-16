@@ -70,7 +70,9 @@
 
             </td>
             <td>{{item.r_tarif_harga.harga | number}}</td>
-            <td>{{item.qty}}</td>
+            <td>
+                <input type="text" class="form-control" [value]="item.qty" (keyup)="listenRubahQty($event, item.id)">
+            </td>
             <td>{{(item.r_tarif_harga.harga * item.qty) | number}}</td>
             <td >
                 <div class="w-100 tx-right">
