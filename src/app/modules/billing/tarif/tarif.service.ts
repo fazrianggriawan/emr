@@ -18,6 +18,7 @@ export class TarifService {
     optionsTarif = new BehaviorSubject<any[]>([]);
     focusOnAc = new BehaviorSubject<boolean>(false);
     autoSave = new BehaviorSubject<boolean>(false);
+    optionsGroupTarif  = new BehaviorSubject<any[]>([]);
 
     constructor(
         private http: HttpClient
