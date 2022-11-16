@@ -1,0 +1,83 @@
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="detailTarifService.openDialog(false)"
+    header="Detail Tarif"
+    position="top"
+    appendTo="body"
+    [modal]="true"
+    [draggable]="false"
+    styleClass="pd-0"
+    [breakpoints]="{'1920px': '30vw', '1366px': '30vw'}">
+    <ng-container *ngIf="dialog">
+        <form [formGroup]="form">
+            <div class="row">
+                <label class="col-4 col-form-label">Nama Tarif</label>
+                <div class="col">
+                    <input type="text" class="form-control" formControlName="nama">
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">Group</label>
+                <div class="col">
+                    <p-dropdown [style]="{width: '100%'}" [filter]="true" (ngModelChange)="changeGroup($event)" [options]="optionsGroupTarif" optionLabel="name" optionValue="id" formControlName="group" [autoDisplayFirst]="false" appendTo="body"></p-dropdown>
+                </div>
+            </div>
+            <div class="row">
+                <label class="col-4 col-form-label">Category</label>
+                <div class="col-8">
+                    <p-dropdown [style]="{width: '100%'}" [filter]="true" [options]="optionsCategory" optionLabel="r_category.name" optionValue="id_category_tarif" formControlName="category" [autoDisplayFirst]="false" appendTo="body"></p-dropdown>
+                </div>
+            </div>
+        </form>
+        <div class="row mg-t-10">
+            <div class="col">
+                <p-table
+                    [value]="jasaTarif"
+                    dataKey="id"
+                    rowGroupMode="subheader"
+                    [rowHover]="true"
+                    editMode="column"
+                    dataKey="jasa"
+                    styleClass="p-datatable-sm p-datatable-striped border-top">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 180px;">JASA PELAKSANA</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>
+                                <div class="pd-l-10">{{item.id_group_jasa | uppercase}}</div>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <input pInputText (blur)="hitungHarga()" class="form-control" type="text" [(ngModel)]="item.jasa">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        <input type="text" class="form-control" value="{{item.jasa | number}}" readOnly>
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </ng-container>
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class="col-4 tx-gray-600">
+                HARGA :
+            </div>
+            <div class="col-auto tx-left">
+                <div class="tx-20 tx-medium">{{harga | number}}</div>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" (click)="save()" [disabled]="form.invalid || harga == 0"><i class="bi bi-save"></i> Simpan</button>
+            </div>
+        </div>
+    </ng-template>
+
+</p-dialog>

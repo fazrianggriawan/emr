@@ -8,7 +8,6 @@ const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'login', component: LoginComponent },
     { path: 'rikkes', component: RikkesComponent },
-    // { path: 'vclaim', component: VclaimComponent },
     { path: 'home', component: HomeComponent },
     { path: 'medicalRecord', loadChildren: () => import('./modules/medical-record/medical-record.module').then(m => m.MedicalRecordModule) },
     { path: 'registrasi', loadChildren: () => import('./modules/registrasi/registrasi.module').then(m => m.RegistrasiModule) },
@@ -25,6 +24,7 @@ const routes: Routes = [
     { path: 'vclaim', loadChildren: () => import('./modules/vclaim/vclaim.module').then(m => m.VclaimModule) },
     { path: 'operasi', loadChildren: () => import('./modules/operasi/operasi.module').then(m => m.OperasiModule) },
     { path: 'e-klaim', loadChildren: () => import('./modules/e-klaim/e-klaim.module').then(m => m.EKlaimModule) },
+    { path: 'administrator', loadChildren: () => import('./modules/administrator/administrator.module').then(m => m.AdministratorModule) },
 ];
 
 @NgModule({
