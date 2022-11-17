@@ -45,8 +45,16 @@
         </div> -->
         <div class="row">
             <div class="col">
-                <div class="tx-medium mg-t-10 border-bottom pd-b-10 mg-b-10">
-                    DATA SEP
+                <div class="row border-bottom pd-b-5 mg-b-5">
+                    <div class="col-4">
+                        <div class="tx-medium">DATA SEP</div>
+                    </div>
+                    <div class="col">
+                        <input type="text" placeholder="Update Nomor SEP" class="form-control" [(ngModel)]="nomorSep" (keyup)="listenUpdateSep($event)">
+                    </div>
+                    <!-- <div class="col-auto pd-l-0">
+                        <button class="btn btn-sm">Update</button>
+                    </div> -->
                 </div>
                 <div>
                     <form>

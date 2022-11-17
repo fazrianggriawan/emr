@@ -25,11 +25,14 @@ export class KasirComponent implements OnInit, OnDestroy {
     selectedJnsBayar: any;
     jnsBayar: any;
     registrasi: any;
+    administrasi: number = 0;
+    layananFaskes: number = 0;
+    minAdministrasi: number = 40000;
+    percentAdministrasi: number = 4;
 
     subs: Subscription[] = [];
 
     form!: FormGroup;
-
 
     constructor(
         private billingService: BillingService,
@@ -42,7 +45,7 @@ export class KasirComponent implements OnInit, OnDestroy {
         this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleDataRegistrasi(data)))
         this.subs.push(this.billingService.dataPembayaran.subscribe(data => this.handleDataPembayaran(data)))
         this.subs.push(this.billingService.addPembayaranStatus.subscribe(data => this.handleSavePembayaran(data)))
-        this.subs.push(this.billingService.deletePembayaranStatus.subscribe(data => {if(data){ this.billingService.getDataPembayaran(this.registrasi.noreg) }}))
+        this.subs.push(this.billingService.deletePembayaranStatus.subscribe(data => { if (data) { this.billingService.getDataPembayaran(this.registrasi.noreg) } }))
         this.subs.push(this.billingService.selectedBilling.subscribe(data => this.handleSelectedBilling(data)))
 
         this.billingService.billingForKasir.next(true);
@@ -65,17 +68,17 @@ export class KasirComponent implements OnInit, OnDestroy {
         });
     }
 
-    handleSelectedBilling(data: any){
-        if(data){
+    handleSelectedBilling(data: any) {
+        if (data) {
             this.handleDataBilling(data);
             // this.selectedBilling = data;
         }
     }
 
-    handleDataPembayaran(data: any[]){
+    handleDataPembayaran(data: any[]) {
         this.dataPembayaran = data;
-        if( data ){
-            let totalBayar : any = 0;
+        if (data) {
+            let totalBayar: any = 0;
             data.forEach(element => {
                 totalBayar = parseInt(totalBayar) + parseInt(element.jumlah);
             });
@@ -84,21 +87,15 @@ export class KasirComponent implements OnInit, OnDestroy {
                 let tagihan = this.totalBayar;
                 let total = tagihan - totalBayar;
                 this.totalBayar = total
-                // if( total > 0 ){
-                //     // this.totalBayar = this.formatNumber(total)
-                //     this.totalBayar = total
-                // }else{
-                //     this.totalBayar = total;
-                // }
             }, 500);
-        }else{
+        } else {
             this.dataPembayaran = [];
         }
 
     }
 
-    handleSavePembayaran(data: any){
-        if( data ){
+    handleSavePembayaran(data: any) {
+        if (data) {
             this.billingService.getDataPembayaran(this.registrasi.noreg);
         }
     }
@@ -108,22 +105,19 @@ export class KasirComponent implements OnInit, OnDestroy {
             this.dataBilling = data;
 
             this.totalBilling = 0;
+            this.administrasi = 0;
+            this.layananFaskes = 0;
+
             this.dataBilling.forEach((item: any) => {
                 this.totalBilling = this.totalBilling + this.billingService.hitungTotalBilling(item)
             });
 
-            let totalBayar = this.tagihan = Math.ceil(this.totalBilling);
-            this.formatNumber(totalBayar.toString());
-        }
-    }
+            this.tagihan = this.totalBilling;
 
-    hitungTotalBilling(item: any) {
-        let total = 0;
-        total = (parseInt(item.harga) * parseInt(item.qty));
-        if (parseInt(item.discount) > 0) {
-            total = total - (total * (parseInt(item.discount) / 100))
+            if( this.totalBilling > 0 ){
+                this.hitungAdministrasi(this.totalBilling);
+            }
         }
-        return total;
     }
 
     handleDataRegistrasi(data: any) {
@@ -157,11 +151,17 @@ export class KasirComponent implements OnInit, OnDestroy {
             rejectLabel: 'Tidak',
             accept: () => {
                 //confirm action
+                let rincian = [
+                    { id: 'adm', name: 'Administrasi', jumlah: this.administrasi },
+                    { id: 'faskes', name: 'Layanan Faskes', jumlah: this.layananFaskes },
+                    { id: 'total', name: 'Total Billing', jumlah: this.totalBilling },
+                ]
                 let data = {
                     jnsPembayaran: this.selectedJnsBayar,
                     jumlah: this.tagihan,
                     noreg: this.registrasi.noreg,
-                    billing: this.dataBilling
+                    billing: this.dataBilling,
+                    rincian: rincian
                 }
                 this.billingService.addPembayaran(data);
             }
@@ -172,13 +172,13 @@ export class KasirComponent implements OnInit, OnDestroy {
         if (value) {
             setTimeout(() => {
                 var number_string = value.replace(/[^0-9]/g, '').toString(),
-                split   		= number_string.split(','),
-                sisa     		= split[0].length % 3,
-                rupiah     		= split[0].substr(0, sisa),
-                ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
                 // tambahkan titik jika yang di input sudah menjadi angka ribuan
-                if(ribuan){
+                if (ribuan) {
                     separator = sisa ? ',' : '';
                     rupiah += separator + ribuan.join(',');
                 }
@@ -189,14 +189,36 @@ export class KasirComponent implements OnInit, OnDestroy {
         }
     }
 
-    printBilling(item: any){
+    hitungAdministrasi(totalTagihan: number) {
+        this.administrasi = 0;
+
+        if (this.registrasi.id_jns_perawatan == 'ri') {
+            let adm = totalTagihan * (this.percentAdministrasi / 100);
+            if (adm <= this.minAdministrasi) {
+                adm = this.minAdministrasi;
+            }
+            this.administrasi = adm;
+        }
+
+        this.tagihan = this.tagihan + this.administrasi;
+
+    }
+
+    hitungFaskes(e: any) {
+        this.layananFaskes = e.target.value;
+        if (e.target.value > 0) {
+            this.tagihan = parseInt(e.target.value) + this.tagihan;
+        }
+    }
+
+    printBilling(item: any) {
         let login = this.appService.getSessionStorage('login');
-        this.appService.print(config.api_url('print/rincianBillingPembayaran/'+item.noreg+'/'+login.username+'/'+item.id))
+        this.appService.print(config.api_url('print/rincianBillingPembayaran/' + item.noreg + '/' + login.username + '/' + item.id))
     }
 
     printKwitansi() {
         let login = this.appService.getSessionStorage('login');
-        this.appService.print( config.api_url('print/kwitansiWithRincian/'+this.registrasi.noreg+'/'+login.username) );
+        this.appService.print(config.api_url('print/kwitansiWithRincian/' + this.registrasi.noreg + '/' + login.username));
     }
 
 }

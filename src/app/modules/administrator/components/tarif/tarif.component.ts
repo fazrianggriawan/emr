@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { DetailTarifService } from './detail-tarif/detail-tarif.service';
 import { TarifService } from './tarif.service';
@@ -6,7 +7,8 @@ import { TarifService } from './tarif.service';
 @Component({
     selector: 'app-tarif',
     templateUrl: './tarif.component.html',
-    styleUrls: ['./tarif.component.css']
+    styleUrls: ['./tarif.component.css'],
+    providers: [ConfirmationService]
 })
 export class TarifComponent implements OnInit {
 
@@ -21,7 +23,8 @@ export class TarifComponent implements OnInit {
 
     constructor(
         private tarifService: TarifService,
-        private detailTarifService: DetailTarifService
+        private detailTarifService: DetailTarifService,
+        private confirmationService: ConfirmationService,
     ) { }
 
     ngOnInit(): void {
@@ -74,6 +77,34 @@ export class TarifComponent implements OnInit {
             total = parseInt(element.jasa) + total;
         });
         return total;
+    }
+
+    deleteTarif(event: any, id: any){
+        this.confirmationService.confirm({
+            target: event.target,
+            message: 'Yakin ingin menonaktifkan tarif ini?',
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Ya',
+            rejectLabel: 'Tidak',
+            accept: () => {
+                //confirm action
+                this.tarifService.deleteTarif({ id: id });
+            }
+        });
+    }
+
+    activateTarif(event: any, id: any){
+        this.confirmationService.confirm({
+            target: event.target,
+            message: 'Yakin ingin mengaktifkan tarif ini?',
+            icon: 'pi pi-exclamation-triangle',
+            acceptLabel: 'Ya',
+            rejectLabel: 'Tidak',
+            accept: () => {
+                //confirm action
+                this.tarifService.activateTarif({ id: id });
+            }
+        });
     }
 
 }
