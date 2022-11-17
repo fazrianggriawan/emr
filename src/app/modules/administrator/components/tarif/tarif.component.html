@@ -90,11 +90,10 @@
                             <td (click)="getTarifHarga(item)">
                                 {{item.r_tarif_category.r_cat_tarif.name | uppercase}}
                             </td>
-                            <td style="width: 100px;" (click)="getTarifHarga(item)">
+                            <td style="width: 100px;">
                                 <span class="badge badge-success" *ngIf="item.active == 1">Active</span>
                                 <span class="badge badge-secondary" *ngIf="item.active == 0">Non Active</span>
                             </td>
-                            <td><button class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i></button></td>
                         </tr>
                     </ng-template>
                 </p-table>
