@@ -61,6 +61,13 @@ export class DataBillingComponent implements OnInit, OnDestroy {
         }
     }
 
+    listenRubahQty(e: any, idBillingDetail: any){
+        if( e.keyCode == 13 ) {
+            let data = { id: idBillingDetail, noreg: this.registrasi.noreg, qty: e.target.value }
+            this.billingService.updateJumlah(data);
+        }
+    }
+
     handleDataBilling(data: any){
         this.loading = false;
         this.dataBilling = data;

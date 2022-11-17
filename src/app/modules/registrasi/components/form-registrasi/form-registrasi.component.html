@@ -250,7 +250,7 @@
                 </label>
                 <div class="col">
                     <p-dropdown [options]="dataGroupPasien" [autoDisplayFirst]="false" formControlName="groupPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body" styleClass="mb-1" (ngModelChange)="getGolPasienByGroup($event)"></p-dropdown>
-                    <p-dropdown [options]="dataGolPasien" [autoDisplayFirst]="false" formControlName="golPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
+                    <p-dropdown [options]="dataGolPasien" [filter]="true" [autoDisplayFirst]="false" formControlName="golPasien" optionValue="id" optionLabel="name" [style]="{width: '100%'}" appendTo="body"></p-dropdown>
                 </div>
             </div>
             <div class="row">

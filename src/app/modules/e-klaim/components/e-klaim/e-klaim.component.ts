@@ -182,4 +182,9 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         this.appService.print(config.api_url('eklaim/print/'+this.sep.noSep));
     }
 
+    printLampiran(){
+        let login = this.appService.getSessionStorage('login');
+        this.appService.print(config.api_url('print/lampiranKlaim/'+this.registrasi.noreg+'/'+login.username));
+    }
+
 }

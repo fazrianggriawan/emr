@@ -161,7 +161,7 @@ export class KasirComponent implements OnInit, OnDestroy {
                     jnsPembayaran: this.selectedJnsBayar,
                     jumlah: this.tagihan,
                     noreg: this.registrasi.noreg,
-                    billing: this.selectedBilling
+                    billing: this.dataBilling
                 }
                 this.billingService.addPembayaran(data);
             }
