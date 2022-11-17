@@ -62,31 +62,33 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         });
     }
 
-    initSep(){
+    initSep() {
         this.sep = { peserta: {} };
     }
 
-    handleKlaim(data: any){
+    handleKlaim(data: any) {
         this.klaim = data;
     }
 
-    handleSep(data: any){
+    handleSep(data: any) {
         this.initSep();
-        if( data ){
+        if (data) {
             this.sep = data;
         }
     }
 
     handleSepByNoreg(data: any) {
+        this.nomorSep = '';
         if (data) {
+            this.nomorSep = data.no_sep;
             this.vclaimService.getSep(data.no_sep);
             this.eklaimService.getBillingGroupEklaim(data.noreg);
         }
     }
 
-    handleBilling(data: any){
+    handleBilling(data: any) {
         this.billing = data;
-        if( data ){
+        if (data) {
             this.hitungTotalBilling(data);
         }
     }
@@ -112,8 +114,8 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         }
     }
 
-    hitungTotalBilling(data: any){
-        let total : any = 0;
+    hitungTotalBilling(data: any) {
+        let total: any = 0;
         Object.entries(data).forEach((entry: any) => {
             const [key, value] = entry;
             total = parseInt(total) + parseInt(value)
@@ -129,7 +131,7 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         })
     }
 
-    newKlaim(){
+    newKlaim() {
         let data = {
             registrasi: this.registrasi,
             sep: this.sep
@@ -137,7 +139,7 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         this.eklaimService.newKlaim(data);
     }
 
-    simpanKlaim(){
+    simpanKlaim() {
         let data = {
             registrasi: this.registrasi,
             sep: this.sep,
@@ -148,15 +150,15 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         this.eklaimService.save(data);
     }
 
-    groupingStage1(){
+    groupingStage1() {
         this.eklaimService.groupingStage1({ noSep: this.sep.noSep })
     }
 
-    editUlang(){
+    editUlang() {
         this.eklaimService.editUlang({ noSep: this.sep.noSep })
     }
 
-    finalisasi(event: any){
+    finalisasi(event: any) {
         this.confirmationService.confirm({
             target: event.target,
             message: 'Yakin ingin finalisasi klaim ini?',
@@ -170,21 +172,28 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         });
     }
 
-    deleteDiagnosa(idx: number){
+    listenUpdateSep(e: any) {
+        if (e.keyCode == 13) {
+            let data = { noreg: this.registrasi.noreg, sep: e.target.value }
+            this.eklaimService.updateSep(data);
+        }
+    }
+
+    deleteDiagnosa(idx: number) {
         this.dataDiagnosa.splice(idx, 1);
     }
 
-    deleteProcedure(idx: number){
+    deleteProcedure(idx: number) {
         this.dataProsedur.splice(idx, 1);
     }
 
-    printKlaim(){
-        this.appService.print(config.api_url('eklaim/print/'+this.sep.noSep));
+    printKlaim() {
+        this.appService.print(config.api_url('eklaim/print/' + this.sep.noSep));
     }
 
-    printLampiran(){
+    printLampiran() {
         let login = this.appService.getSessionStorage('login');
-        this.appService.print(config.api_url('print/lampiranKlaim/'+this.registrasi.noreg+'/'+login.username));
+        this.appService.print(config.api_url('print/lampiranKlaim/' + this.registrasi.noreg + '/' + login.username));
     }
 
 }

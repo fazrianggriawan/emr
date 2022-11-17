@@ -56,4 +56,28 @@ export class TarifService {
             })
     }
 
+    deleteTarif(data: any){
+        this.http.post<any>(config.api_url('master/tarif/delete'), data)
+            .subscribe(data => {
+                if( data.code == 200 ){
+                    this.getDataTarif();
+                    this.appService.setNotification('success', data.message);
+                }else{
+                    this.appService.setNotification('error', data.message);
+                }
+            })
+    }
+
+    activateTarif(data: any){
+        this.http.post<any>(config.api_url('master/tarif/activate'), data)
+            .subscribe(data => {
+                if( data.code == 200 ){
+                    this.getDataTarif();
+                    this.appService.setNotification('success', data.message);
+                }else{
+                    this.appService.setNotification('error', data.message);
+                }
+            })
+    }
+
 }

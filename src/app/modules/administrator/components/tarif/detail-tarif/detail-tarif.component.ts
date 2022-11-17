@@ -49,7 +49,6 @@ export class DetailTarifComponent implements OnInit, OnDestroy {
         if(data){
             let jasa : any[] = [];
             data.forEach((element: any) => {
-                console.log(element)
                 let item = {
                     id_group_jasa: element.id,
                     jasa: 0
