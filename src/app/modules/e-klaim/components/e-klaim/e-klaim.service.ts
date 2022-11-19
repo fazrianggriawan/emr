@@ -87,7 +87,6 @@ export class EKlaimService {
     }
 
     getSepByNoreg(noreg: string){
-        this.sep.next('');
         this.http.get<any>(config.api_url('eklaim/sepByNoreg/'+noreg))
             .subscribe(data => {
                 if( data.code == 200 ){

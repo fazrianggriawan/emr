@@ -53,11 +53,13 @@ export class BillingComponent implements OnInit, OnDestroy {
         this.subs.push(this.billingService.updateStatus.subscribe(data => this.handleUpdate(data)))
         this.subs.push(this.billingService.addDiscountStatus.subscribe(data => this.handleAddDiscount(data)))
         this.subs.push(this.billingService.billingForKasir.subscribe(data => this.billingForKasir = data))
+        this.billingService.statusBilling.subscribe(data => this.selectedStatusBilling = data)
         this.selectedCatTarif = 'all';
 
         this.statusBilling = [
             {id: 'all', name: 'All'},
             {id: 'open', name: 'Open'},
+            {id: 'credit', name: 'Credit'},
             {id: 'closed', name: 'Closed'},
         ]
 
@@ -87,6 +89,7 @@ export class BillingComponent implements OnInit, OnDestroy {
     handleRegistrasi(data: any) {
         this.registrasi = data;
         this.unit = this.registrasi.id_jns_perawatan;
+        this.billingService.statusBilling.next(this.selectedStatusBilling);
         this.getDataBilling();
     }
 
@@ -163,8 +166,8 @@ export class BillingComponent implements OnInit, OnDestroy {
     }
 
     changeStatusBilling(e: any){
-        this.selectedStatusBilling = e;
-        this.getDataBilling();
+        this.billingService.statusBilling.next(e);
+        // this.getDataBilling();
     }
 
     printBilling() {

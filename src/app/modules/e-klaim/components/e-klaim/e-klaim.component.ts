@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { config } from 'src/app/config';
+import { FormPulangPerawatanService } from 'src/app/modules/kasir/components/form-pulang-perawatan/form-pulang-perawatan.service';
 import { RegistrasiService } from 'src/app/modules/registrasi/services/registrasi.service';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
 import { AppService } from 'src/app/services/app.service';
@@ -24,6 +25,7 @@ export class EKlaimComponent implements OnInit, OnDestroy {
     klaim: any;
     subs: Subscription[] = [];
     form!: FormGroup;
+    pulangPerawatan: any;
 
     dataDiagnosa: any[] = [];
     dataProsedur: any[] = [];
@@ -40,7 +42,8 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         private cariIcd9Service: CariIcd9Service,
         private vclaimService: VclaimService,
         private appService: AppService,
-        private confirmationService: ConfirmationService
+        private confirmationService: ConfirmationService,
+        private pulangPerawatanService: FormPulangPerawatanService
     ) { }
 
     ngOnInit(): void {
@@ -52,6 +55,7 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         this.subs.push(this.vclaimService.sep.subscribe(data => this.handleSep(data)))
         this.subs.push(this.eklaimService.billing.subscribe(data => this.handleBilling(data)))
         this.subs.push(this.eklaimService.klaim.subscribe(data => this.handleKlaim(data)))
+        this.pulangPerawatanService.pulangPerawatan.subscribe(data => this.pulangPerawatan = data)
     }
 
     ngOnDestroy(): void {
@@ -111,6 +115,7 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         this.registrasi = registrasi;
         if (registrasi) {
             this.eklaimService.getSepByNoreg(registrasi.noreg);
+            this.pulangPerawatanService.getPulangPerawatan(this.registrasi.noreg);
         }
     }
 
@@ -148,6 +153,23 @@ export class EKlaimComponent implements OnInit, OnDestroy {
             prosedur: this.dataProsedur
         }
         this.eklaimService.save(data);
+    }
+
+    changePrimary(event: any, item: any, i: number){
+        if( i > 0 ){
+            this.confirmationService.confirm({
+                target: event.target,
+                message: 'Ingin merubah menjadi diagnosa utama?',
+                icon: 'pi pi-exclamation-triangle',
+                acceptLabel: 'Ya',
+                rejectLabel: 'Tidak',
+                accept: () => {
+                    //confirm action
+                    this.dataDiagnosa.splice(i, 1);
+                    this.dataDiagnosa.unshift(item);
+                }
+            });
+        }
     }
 
     groupingStage1() {

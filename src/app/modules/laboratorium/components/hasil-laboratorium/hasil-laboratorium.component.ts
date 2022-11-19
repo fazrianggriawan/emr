@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { iif, Subscription } from 'rxjs';
 import { config } from 'src/app/config';
 import { DataBillingPenunjangService } from 'src/app/modules/billing/components/data-billing-penunjang/data-billing-penunjang.service';
 import { DataPasienService } from 'src/app/modules/registrasi/components/data-pasien/data-pasien.service';
@@ -77,7 +77,13 @@ export class HasilLaboratoriumComponent implements OnInit, OnDestroy {
     handleBillingHead(data: any){
         this.billingHead = data;
         if(data){
-            this.hasilLaboratoriumService.getNilaiRujukan(this.registrasi.pasien.jns_kelamin, this.billingHead.id);
+            if( this.registrasi.pasien.jns_kelamin == 'P' ){
+                this.selectedGroup = 'L'
+            }else{
+                this.selectedGroup = 'P'
+            }
+
+            this.hasilLaboratoriumService.getNilaiRujukan(this.selectedGroup, this.billingHead.id);
         }
     }
 
@@ -98,7 +104,7 @@ export class HasilLaboratoriumComponent implements OnInit, OnDestroy {
     }
 
     changeGroup(e: any){
-        this.hasilLaboratoriumService.getNilaiRujukan(e, this.registrasi.noreg);
+        this.hasilLaboratoriumService.getNilaiRujukan(e, this.billingHead.id);
     }
 
     public save() {

@@ -14,8 +14,8 @@ export class RuangRekamMedisService {
         private http: HttpClient,
     ) { }
 
-    getDataRequestRm(id_ruangan: any[]){
-        this.http.post<any>( config.api_url('registrasi/request_rm'), {ruangan: id_ruangan} )
+    getDataRequestRm(data: any){
+        this.http.post<any>( config.api_url('registrasi/request_rm'), data)
             .subscribe(data => {
                 this.dataRequestRm.next(data);
             })

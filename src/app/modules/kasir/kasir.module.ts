@@ -6,12 +6,14 @@ import { KasirComponent } from './kasir.component';
 import { SharedModule } from '../shared/shared.module';
 import { BillingModule } from '../billing/billing.module';
 import { LaporanTransaksiBillingComponent } from './components/laporan/laporan-transaksi-billing/laporan-transaksi-billing.component';
+import { FormPulangPerawatanComponent } from './components/form-pulang-perawatan/form-pulang-perawatan.component';
 
 
 @NgModule({
   declarations: [
     KasirComponent,
-    LaporanTransaksiBillingComponent
+    LaporanTransaksiBillingComponent,
+    FormPulangPerawatanComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,8 @@ import { LaporanTransaksiBillingComponent } from './components/laporan/laporan-t
     SharedModule,
     BillingModule
   ],
-  exports: []
+  exports: [
+    FormPulangPerawatanComponent
+  ]
 })
 export class KasirModule { }

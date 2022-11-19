@@ -8,6 +8,7 @@ import { VclaimModule } from '../vclaim/vclaim.module';
 import { SharedModule } from '../shared/shared.module';
 import { CariIcd10Component } from './components/cari-icd10/cari-icd10.component';
 import { CariIcd9Component } from './components/cari-icd9/cari-icd9.component';
+import { KasirModule } from '../kasir/kasir.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { CariIcd9Component } from './components/cari-icd9/cari-icd9.component';
     EKlaimRoutingModule,
     RegistrasiModule,
     VclaimModule,
-    SharedModule
+    SharedModule,
+    KasirModule
   ]
 })
 export class EKlaimModule { }

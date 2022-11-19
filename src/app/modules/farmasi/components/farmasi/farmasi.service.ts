@@ -67,13 +67,13 @@ export class FarmasiService {
             })
     }
 
-    cariObat(key: string) {
-        if(key){
-            this.http.get<any>(config.api_farmasi('farmasi/cariObat/' + key))
+    cariObat(data: any) {
+        this.http.post<any>(config.api_farmasi('farmasi/cariObat'), data)
                 .subscribe(data => {
-                    this.dataObat.next(data.data);
+                    if( data.code == 200 ){
+                        this.dataObat.next(data.data);
+                    }
                 });
-        }
     }
 
     savePembayaran(data: any){

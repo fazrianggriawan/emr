@@ -1,11 +1,11 @@
 <div class="row border-bottom pd-b-10">
-    <div class="col-auto border-right">
+    <div class="col-auto border-right  mg-b-5">
         <h5>E-Klaim INACBG</h5>
     </div>
-    <div class="col-auto border-right">
+    <div class="col-auto border-right  mg-b-5">
         <app-cari-registrasi></app-cari-registrasi>
     </div>
-    <div class="col-auto border-right">
+    <div class="col-auto border-right  mg-b-5">
         <button class="btn btn-primary" (click)="newKlaim()" [disabled]="!registrasi || !sep.noSep">
             <i class="bi bi-plus-lg"></i> Klaim Baru
         </button>
@@ -13,11 +13,11 @@
             <i class="bi bi-check-lg"></i> Simpan Klaim
         </button>
     </div>
-    <div class="col-auto">
+    <div class="col-auto  mg-b-5">
         <button class="btn mg-r-5" (click)="groupingStage1()">Grouping</button>
         <button class="btn mg-r-5" (click)="finalisasi($event)">Finalisasi</button>
     </div>
-    <div class="col-auto border-left">
+    <div class="col-auto border-left mg-b-5 pd-r-10">
         <button class="btn mg-r-5" (click)="editUlang()">
             <i class="bi bi-pencil"></i> Edit Ulang
         </button>
@@ -28,21 +28,13 @@
             <i class="bi bi-paperclip"></i> Lampiran Klaim
         </button>
     </div>
+    <div class="col-auto border-left border-right">
+        <app-form-pulang-perawatan [showInfo]="true"></app-form-pulang-perawatan>
+    </div>
 </div>
 
 <div class="row mg-t-10">
     <div class="col-4">
-        <!-- <div class="row">
-            <div class="col-auto">
-                Nomor SEP :
-            </div>
-            <div class="col">
-                <input type="text" class="form-control" [(ngModel)]="nomorSep">
-            </div>
-            <div class="col-auto pd-l-0">
-                <button class="btn">Riwayat SEP</button>
-            </div>
-        </div> -->
         <div class="row">
             <div class="col">
                 <div class="row border-bottom pd-b-5 mg-b-5">
@@ -52,9 +44,6 @@
                     <div class="col">
                         <input type="text" placeholder="Update Nomor SEP" class="form-control" [(ngModel)]="nomorSep" (keyup)="listenUpdateSep($event)">
                     </div>
-                    <!-- <div class="col-auto pd-l-0">
-                        <button class="btn btn-sm">Update</button>
-                    </div> -->
                 </div>
                 <div>
                     <form>
@@ -65,7 +54,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-4 col-form-label">Tanggal</label>
+                            <label class="col-4 col-form-label">Tgl. Masuk</label>
                             <div class="col">
                                 <input type="text" class="form-control" value="{{sep.tglSep}}" readonly>
                             </div>
@@ -120,7 +109,7 @@
     </div>
     <div class="col">
         <div class="row">
-            <div class="col">
+            <div class="col-7">
                 <div class="tx-medium mg-t-10 border-bottom pd-b-10 mg-b-10">
                     DIAGNOSA & PROSEDUR
                 </div>
@@ -131,13 +120,21 @@
                         styleClass="p-datatable-sm p-datatable-striped mg-t-5">
                         <ng-template pTemplate="header">
                             <tr>
+                                <th [width]="25">Kode</th>
                                 <th colspan="2">Keterangan</th>
                             </tr>
                         </ng-template>
 
                         <ng-template pTemplate="body" let-item let-i="rowIndex">
                             <tr>
-                                <td>{{item.nama | uppercase}}</td>
+                                <td [width]="25">{{item.id | uppercase}}</td>
+                                <td>
+                                    {{item.name | uppercase}}
+                                    <span class="badge" (click)="changePrimary($event, item, i)" [ngClass]="{'badge-primary': (i == 0), 'badge-secondary clickable': (i > 0)}">
+                                         <span *ngIf="i == 0">Utama</span>
+                                         <span *ngIf="i > 0">Sekunder</span>
+                                    </span>
+                                </td>
                                 <td>
                                     <button class="btn btn-xs btn-outline-danger" (click)="deleteDiagnosa(i)"><i class="bi bi-x-lg"></i></button>
                                 </td>
@@ -153,13 +150,19 @@
                         styleClass="p-datatable-sm p-datatable-striped mg-t-5">
                         <ng-template pTemplate="header">
                             <tr>
+                                <th [width]="25">Kode</th>
                                 <th colspan="2">Keterangan</th>
                             </tr>
                         </ng-template>
 
                         <ng-template pTemplate="body" let-item let-i="rowIndex" >
                             <tr>
-                                <td>{{item.nama | uppercase}}</td>
+                                <td [width]="25">
+                                    {{item.id | uppercase}}
+                                </td>
+                                <td>
+                                    {{item.name | uppercase}}
+                                </td>
                                 <td>
                                     <button class="btn btn-xs btn-outline-danger" (click)="deleteProcedure(i)"><i class="bi bi-x-lg"></i></button>
                                 </td>

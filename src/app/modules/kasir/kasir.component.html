@@ -4,8 +4,11 @@
     </div>
     <div class="col-3">
         <div class="row">
-            <div class="col">
+            <div class="col-auto">
                 <app-laporan-transaksi-billing></app-laporan-transaksi-billing>
+            </div>
+            <div class="col-auto pd-l-0">
+                <app-form-pulang-perawatan></app-form-pulang-perawatan>
             </div>
         </div>
 
@@ -66,7 +69,7 @@
                 <div class="col text-right">
                     <button
                         class="btn btn-primary btn-block"
-                        [disabled]="!selectedJnsBayar || tagihan == 0"
+                        [disabled]="!selectedJnsBayar || tagihan == 0 || statusBilling != 'open'"
                         (click)="confirmAddPembayaran($event)">
                             <i class="bi bi-plus-lg mr-1"></i>Bayar
                     </button>
@@ -79,6 +82,11 @@
             </div>
             <div class="row mg-t-10">
                 <div class="col">
+                    <!-- <div class="card" *ngFor="let item of dataPembayaran">
+                        <div class="card-content">
+                            <div class="tx-gray-600">{{item.no_pembayaran}}</div>
+                        </div>
+                    </div> -->
                     <table class="table table-striped table-hover border bg-white mg-b-0">
                         <thead>
                             <tr class="bg-white">
@@ -94,6 +102,9 @@
                                 <td>
                                     <button class="btn btn-xs btn-outline-primary" (click)="printBilling(item)">
                                         <i class="bi bi-printer"></i>
+                                    </button>
+                                    <button class="btn btn-xs btn-outline-primary mg-l-5" (click)="confirmDeletePembayaran($event, item)">
+                                        <i class="bi bi-trash"></i>
                                     </button>
                                 </td>
                             </tr>

@@ -207,10 +207,10 @@ export class RegistrasiComponent implements OnInit {
             jnsKelamin: ['', Validators.required],
             alamat: ['', Validators.required],
             negara: [101, Validators.required],
-            provinsi: ['', Validators.required],
-            kota: ['', Validators.required],
-            kecamatan: ['', Validators.required],
-            kelurahan: ['', Validators.required],
+            provinsi: [''],
+            kota: [''],
+            kecamatan: [''],
+            kelurahan: [''],
             suku: [''],
             statusNikah: ['', Validators.required],
             agama: ['', Validators.required],
@@ -253,6 +253,12 @@ export class RegistrasiComponent implements OnInit {
         if( groupPasien ){
             this.masterService.getGolonganPasien(groupPasien);
         }
+    }
+
+    refresh() {
+        this.form.reset();
+        this.form.get('negara')?.patchValue(101);
+        this.form.get('rs')?.patchValue(1);
     }
 
     public save() {

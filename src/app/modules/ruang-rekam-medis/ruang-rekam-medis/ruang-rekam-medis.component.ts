@@ -20,6 +20,7 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
     ruangan: any[] = [];
     selectedRuangan: any[] = [];
     selectedFilterRuangan: any = 'all';
+    tanggal = new Date();
 
     interval: any;
 
@@ -91,7 +92,11 @@ export class RuangRekamMedisComponent implements OnInit, OnDestroy {
     }
 
     getData() {
-        this.ruangRekamMedisService.getDataRequestRm(this.selectedRuangan);
+        let data = {
+            ruangan: this.selectedRuangan,
+            tanggal: this.appService.reformatDate(this.tanggal)
+        }
+        this.ruangRekamMedisService.getDataRequestRm(data);
     }
 
     filterChanged(val: any) {

@@ -22,6 +22,7 @@ export class BillingService {
     totalBilling = new BehaviorSubject<any>('');
     selectedBilling = new BehaviorSubject<any[]>([]);
     billingForKasir = new BehaviorSubject<boolean>(false);
+    statusBilling = new BehaviorSubject<any>('');
 
     constructor(
         private http: HttpClient,
@@ -101,7 +102,7 @@ export class BillingService {
         this.http.post<any>(config.api_url('billing/updateJumlah'), data)
             .subscribe(data => {
                 if(data.code == 200){
-                    this.getBillingByNoreg(data.data.noreg, 'open');
+                    this.getBillingByNoreg(data.data.noreg, this.statusBilling.value);
                     this.appService.setNotification('success', data.message);
                 }else{
                     this.appService.setNotification('error', data.message);
@@ -135,7 +136,11 @@ export class BillingService {
         this.http.post<any>(config.api_url('billing/deletePembayaran'), data)
             .subscribe(data => {
                 if(data.code == 200){
-                    this.deletePembayaranStatus.next(true);
+                    this.statusBilling.next('open');
+                    this.getDataPembayaran(data.data.noreg);
+                    this.appService.setNotification('success', data.message);
+                }else{
+                    this.appService.setNotification('error', data.message);
                 }
             })
     }

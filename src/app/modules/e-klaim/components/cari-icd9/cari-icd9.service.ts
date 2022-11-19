@@ -17,12 +17,10 @@ export class CariIcd9Service {
 
     cari(keyword: string){
         let data = { keyword: keyword }
-        this.http.post<any>( config.api_vclaim('referensi/procedure'), data )
+        this.http.post<any>( config.api_url('eklaim/cari/icd9'), data )
             .subscribe(data => {
-                if(data){
-                    if(data.metaData.code=='200'){
-                        this.icd9.next(data.response.procedure);
-                    }
+                if(data.code == 200){
+                    this.icd9.next(data.data);
                 }
             })
     }

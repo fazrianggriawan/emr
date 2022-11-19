@@ -7,6 +7,7 @@ import { RegistrasiService } from '../registrasi/services/registrasi.service';
 import { FormGroup } from '@angular/forms';
 import { BillingService } from '../billing/billing/billing.service';
 import { config } from 'src/app/config';
+import { FormPulangPerawatanService } from './components/form-pulang-perawatan/form-pulang-perawatan.service';
 
 @Component({
     selector: 'app-kasir',
@@ -29,6 +30,8 @@ export class KasirComponent implements OnInit, OnDestroy {
     layananFaskes: number = 0;
     minAdministrasi: number = 40000;
     percentAdministrasi: number = 4;
+    dialogFormPulang : boolean = false;
+    statusBilling: string = '';
 
     subs: Subscription[] = [];
 
@@ -39,6 +42,7 @@ export class KasirComponent implements OnInit, OnDestroy {
         private confirmationService: ConfirmationService,
         private registrasiService: RegistrasiService,
         public appService: AppService,
+        private formPulangPerawatan: FormPulangPerawatanService
     ) { }
 
     ngOnInit(): void {
@@ -47,6 +51,8 @@ export class KasirComponent implements OnInit, OnDestroy {
         this.subs.push(this.billingService.addPembayaranStatus.subscribe(data => this.handleSavePembayaran(data)))
         this.subs.push(this.billingService.deletePembayaranStatus.subscribe(data => { if (data) { this.billingService.getDataPembayaran(this.registrasi.noreg) } }))
         this.subs.push(this.billingService.selectedBilling.subscribe(data => this.handleSelectedBilling(data)))
+        this.formPulangPerawatan.dialog.subscribe(data => this.dialogFormPulang = data)
+        this.billingService.statusBilling.subscribe(data => this.statusBilling = data)
 
         this.billingService.billingForKasir.next(true);
 

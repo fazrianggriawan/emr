@@ -31,8 +31,12 @@ export class AppService {
     }
 
     public dateHuman(data: string) {
-        let arrayTanggal = data.split('-');
-        return arrayTanggal[2] + ' ' + this.arrayBulan(arrayTanggal[1]) + ' ' + arrayTanggal[0]
+        if( data ){
+            let arrayTanggal = data.split('-');
+            return arrayTanggal[2] + ' ' + this.arrayBulan(arrayTanggal[1]) + ' ' + arrayTanggal[0]
+        }else{
+            return '';
+        }
     }
 
     public arrayBulan(key: string){

@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-auto pd-r-0" *ngIf="showInfo">
+        Tgl.Pulang :
+    </div>
+    <div class="col-auto pd-r-0 pd-l-8" *ngIf="showInfo">
+        <input type="text" [style]="{width: '130px'}" class="form-control bg-white" value="{{appService.dateHuman(tanggalPulang)}}" placeholder="Tanggal Pulang" readonly>
+    </div>
+    <div class="col-auto pd-l-5">
+        <button class="btn" (click)="formPulangPerawatanService.openDialog(true)">Pulang Perawatan</button>
+    </div>
+</div>
+
+<p-dialog [(visible)]="dialog" (onHide)="formPulangPerawatanService.openDialog(false)" position="top"
+    header="Form Pulang Perawatan" [modal]="true" [draggable]="false"
+    [breakpoints]="{'1920px': '30vw', '1366px': '35vw'}">
+    <ng-container *ngIf="dialog">
+        <div class="row">
+            <div class="col-4">Tanggal Pulang</div>
+            <div class="col">
+                <p-calendar dateFormat="dd M yy" [(ngModel)]="tanggal" appendTo="body" [baseZIndex]="99999"
+                    [showIcon]="true"></p-calendar>
+            </div>
+        </div>
+        <div class="row mg-t-10">
+            <div class="col-4">Keterangan Pulang</div>
+            <div class="col">
+                <p-dropdown [autoDisplayFirst]="false" appendTo="body" optionValue="id" optionLabel="name"
+                    [style]="{width: '100%'}" [(ngModel)]="keteranganPulang" [options]="optionsKeteranganPulang">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="row mg-t-10">
+            <div class="col-4">Catatan</div>
+            <div class="col">
+                <input type="text" class="form-control" [(ngModel)]="catatan">
+            </div>
+        </div>
+        <div class="row mg-t-10 border-top pd-t-10">
+            <div class="col-4"></div>
+            <div class="col-auto">
+                <button class="btn btn-primary" [disabled]="!registrasi.noreg || !tanggal || !keteranganPulang"
+                    (click)=save()><i class="bi bi-save"></i> Simpan</button>
+            </div>
+        </div>
+    </ng-container>
+
+</p-dialog>

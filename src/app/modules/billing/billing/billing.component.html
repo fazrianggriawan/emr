@@ -1,19 +1,27 @@
 <div class="row" *ngIf="header">
-    <div class="col-auto border-right">
+    <div class="col-auto mg-b-5 border-right">
         <h5>Billing Perawatan</h5>
     </div>
-    <div class="col-auto border-right">
+    <div class="col-auto mg-b-5 border-right">
         <app-cari-registrasi [showForm]="false"></app-cari-registrasi>
     </div>
-    <div class="col-auto pd-r-6">
+    <div class="col-auto mg-b-5 pd-r-6">
         <app-tambah-billing [unit]="unit"></app-tambah-billing>
     </div>
-    <div class="col-auto pd-l-0">
+    <div class="col-auto mg-b-5 pd-l-0">
         <button class="btn mr-2" (click)="printBilling()"><i class="bi bi-printer"></i> Rincian Billing</button>
         <button class="btn mr-2" (click)="refresh()"><i class="bi bi-arrow-repeat"></i> Refresh</button>
     </div>
-    <div class="col-auto pd-l-0">
-
+    <div class="col-auto mg-b-5 border-left">
+        <p-dropdown
+            placeholder="Status Tagihan"
+            [(ngModel)]="selectedStatusBilling"
+            (ngModelChange)="changeStatusBilling($event)"
+            [options]="statusBilling"
+            optionValue="id"
+            optionLabel="name"
+            [autoDisplayFirst]="false">
+        </p-dropdown>
     </div>
 </div>
 

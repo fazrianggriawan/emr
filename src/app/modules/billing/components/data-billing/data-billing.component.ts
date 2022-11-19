@@ -22,7 +22,7 @@ export class DataBillingComponent implements OnInit, OnDestroy {
     loading: boolean = false;
     subs: Subscription[] = [];
     selectedBilling: Subscription[] = [];
-    status: string = 'open';
+    status: string = 'all';
 
     constructor(
         private billingService: BillingService,
@@ -36,6 +36,14 @@ export class DataBillingComponent implements OnInit, OnDestroy {
         this.subs.push(this.registrasiService.registrasi.subscribe(data => this.handleRegistrasi(data)))
         this.subs.push(this.billingService.dataBilling.subscribe(data => this.handleDataBilling(data)))
         this.subs.push(this.tambahBillingService.dialog.subscribe(data => this.handleDialogTambahBilling(data)))
+        this.billingService.statusBilling.subscribe(data => this.handleStatusBilling(data))
+    }
+
+    handleStatusBilling(data: any){
+        this.status = data;
+        if( data ){
+            this.getBilling();
+        }
     }
 
     ngOnDestroy(): void {
@@ -57,7 +65,7 @@ export class DataBillingComponent implements OnInit, OnDestroy {
     getBilling(){
         if( this.registrasi ){
             this.loading = true;
-            this.billingService.getBillingByNoreg(this.registrasi.noreg, 'open');
+            this.billingService.getBillingByNoreg(this.registrasi.noreg, this.status);
         }
     }
 
@@ -71,7 +79,12 @@ export class DataBillingComponent implements OnInit, OnDestroy {
     handleDataBilling(data: any){
         this.loading = false;
         this.dataBilling = data;
-        this.billingService.selectedBilling.next(data);
+        console.log(this.status);
+        if( this.status == 'open' ){
+            this.billingService.selectedBilling.next(data);
+        }else{
+            this.billingService.selectedBilling.next([]);
+        }
     }
 
     handleRegistrasi(data: any){
@@ -89,8 +102,6 @@ export class DataBillingComponent implements OnInit, OnDestroy {
             }
         });
         this.billingService.selectedBilling.next(data);
-        // console.log(idBillingHead);
-        // this.billingService.getBillingByHead(idBillingHead);
     }
 
     printBillingHead(data: any){

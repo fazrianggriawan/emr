@@ -12,6 +12,6 @@
     [style]="{width: '100%'}"
     [inputStyle]="{'width':'100%'}">
     <ng-template let-item pTemplate="item">
-        {{item.nama | uppercase}}
+        {{item.id | uppercase}} :: {{item.name | uppercase}}
     </ng-template>
 </p-autoComplete>

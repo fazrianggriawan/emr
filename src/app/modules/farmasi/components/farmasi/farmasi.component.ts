@@ -187,6 +187,11 @@ export class FarmasiComponent implements OnInit {
         });
     }
 
+    cariObat(item: any){
+        let data = { keyword: item.query }
+        this.farmasiService.cariObat(data)
+    }
+
     printBilling(){
         this.appService.print( config.api_url('print/billingFarmasi/'+this.registrasi.noreg));
     }
