@@ -8,8 +8,13 @@ import { SharedModule } from '../shared/shared.module';
 import { FormRawatJalanComponent } from './components/form-rawat-jalan/form-rawat-jalan.component';
 import { DataRegistrasiComponent } from './components/data-registrasi/data-registrasi.component';
 import { FormRegistrasiComponent } from './components/form-registrasi/form-registrasi.component';
-import { MenuModule } from 'primeng/menu';
-import { KasirModule } from '../kasir/kasir.module';
+import { WidgetRegistrasiComponent } from './components/widget-registrasi/widget-registrasi.component';
+import { FormRawatInapComponent } from './components/form-rawat-inap/form-rawat-inap.component';
+import { CariPasienComponent } from './components/cari-pasien/cari-pasien.component';
+import { CariRegistrasiComponent } from './components/cari-registrasi/cari-registrasi.component';
+import { RiwayatKunjunganComponent } from './components/riwayat-kunjungan/riwayat-kunjungan.component';
+import { VclaimModule } from '../vclaim/vclaim.module';
+import { EditRegistrasiComponent } from './components/edit-registrasi/edit-registrasi.component';
 
 @NgModule({
     declarations: [
@@ -17,18 +22,26 @@ import { KasirModule } from '../kasir/kasir.module';
         DataPasienComponent,
         FormRawatJalanComponent,
         DataRegistrasiComponent,
-        FormRegistrasiComponent
+        FormRegistrasiComponent,
+        WidgetRegistrasiComponent,
+        FormRawatInapComponent,
+        CariPasienComponent,
+        CariRegistrasiComponent,
+        RiwayatKunjunganComponent,
+        EditRegistrasiComponent
     ],
     imports: [
         SharedModule,
         CommonModule,
         RegistrasiRoutingModule,
-        MenuModule,
-        KasirModule
+        VclaimModule
     ],
     exports: [
         DataRegistrasiComponent,
-        FormRegistrasiComponent
+        FormRegistrasiComponent,
+        WidgetRegistrasiComponent,
+        CariPasienComponent,
+        CariRegistrasiComponent
     ]
 })
 export class RegistrasiModule { }

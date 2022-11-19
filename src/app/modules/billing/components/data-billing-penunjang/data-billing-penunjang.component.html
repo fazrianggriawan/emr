@@ -1,0 +1,92 @@
+<p-table
+    [value]="dataBilling"
+    dataKey="id_billing_head"
+    rowGroupMode="subheader"
+    groupRowsBy="id_billing_head"
+    [rowHover]="true"
+    [scrollable]="true"
+    [loading]="loading"
+    scrollHeight="30vw"
+    responsiveLayout="scroll"
+    styleClass="p-datatable-sm p-datatable-striped">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="min-width: 100px;">Tanggal</th>
+            <th style="min-width: 300px;">Nama Tarif</th>
+            <th style="min-width: 200px;">Dokter</th>
+            <th>Harga</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="groupheader" let-item let-rowIndex="rowIndex" let-expanded="expanded">
+        <tr>
+            <th style="min-width: 100%;" colspan="7" class="pd-8 bg-gray-200">
+                <div class="row">
+                    <div class="col-auto" style="width: 130px;">
+                        <div class="tx-12 tx-gray-600 tx-normal">No. Permintaan</div>
+                        {{item.id_billing_head}}
+                    </div>
+                    <div class="col-auto">
+                        <div class="tx-12 tx-gray-600 tx-normal">Ruangan / Poliklinik</div>
+                        {{item.r_billing_head.r_ruangan.name}}
+                    </div>
+                    <div class="col-auto">
+                        <div class="tx-12 tx-gray-600 tx-normal">Jns. Perawatan</div>
+                        {{item.r_billing_head.r_jns_perawatan.name}}
+                    </div>
+                    <div class="col-auto">
+                        <div class="tx-12 tx-gray-600 tx-normal">Permintaan Dokter</div>
+                        {{item.r_billing_head.r_pelaksana.name}}
+                    </div>
+                    <div class="col-auto tx-right">
+                        <div class="pd-5">
+                            <button class="btn btn-outline-primary btn-sm mg-r-5" (click)="inputHasil(item.r_billing_head)"><i class="bi bi-file-text"></i> Input Hasil</button>
+                            <button class="btn btn-sm btn-outline-secondary mg-r-5" (click)="printHasil(item)"><i class="bi bi-printer"></i> Hasil</button>
+                            <button class="btn btn-sm btn-outline-secondary mg-r-5" (click)="printBilling(item)"><i class="bi bi-printer"></i> Billing</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-item>
+        <tr>
+            <td style="min-width: 100px;"><div class="pd-l-10">{{appService.dateHuman(item.tanggal)}}</div></td>
+            <td style="min-width: 300px;">{{item.r_tarif_harga.r_tarif.name}}</td>
+            <td style="min-width: 200px;">
+                <ng-container *ngFor="let jasaPelaksana of item.r_billing_detail_jasa">
+                    <span *ngIf="jasaPelaksana.group == 'dokter' && jasaPelaksana.r_pelaksana">
+                        {{jasaPelaksana.r_pelaksana.name}}
+                    </span>
+                </ng-container>
+
+            </td>
+            <td>{{item.r_tarif_harga.harga | number}}</td>
+            <td>
+                <input type="text" class="form-control" [value]="item.qty" (keyup)="listenRubahQty($event, item.id)">
+            </td>
+            <td>{{(item.r_tarif_harga.harga * item.qty) | number}}</td>
+            <td >
+                <div class="w-100 tx-right">
+                    <button class="btn btn-sm btn-outline-danger" (click)="deleteBilling($event, item.id)">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <tr *ngIf="dataBilling.length == 0">
+            <th colspan="6" style="min-width: 100%;">
+                <div class="w-100 tx-normal tx-center pd-10 text-muted">
+                    Belum ada data saat ini.
+                </div>
+            </th>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-confirmPopup></p-confirmPopup>

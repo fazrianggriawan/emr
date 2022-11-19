@@ -1,0 +1,118 @@
+<ng-container *ngIf="showButton">
+    <button class="btn btn-primary"><i class="bi bi-plus-lg"></i> Hasil Laboratorium</button>
+</ng-container>
+
+
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="hasilLaboratoriumService.openDialog(false)"
+    header="Hasil Pemeriksaan Lab"
+    [draggable]="false"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}"
+    appendTo="body">
+
+    <ng-container *ngIf="dialog">
+        <div class="row bg-white pd-t-5 pd-b-10 sticky-top border-bottom shadow-sm">
+            <div class="col border-right">
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="tx-gray-500 tx-12">Nama Pasien</div>
+                        <div>{{registrasi.pasien.nama | uppercase}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="tx-gray-500 tx-12">No. RM</div>
+                        <div>{{registrasi.pasien.norm | uppercase}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="tx-gray-500 tx-12">Jns. Kelamin</div>
+                        <div *ngIf="registrasi.pasien.r_jns_kelamin">
+                            <ng-container *ngIf="registrasi.pasien.r_jns_kelamin.name">
+                                {{registrasi.pasien.r_jns_kelamin.name | uppercase}}
+                            </ng-container>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="tx-gray-500 tx-12">Usia</div>
+                        <div>{{appService.getAge(registrasi.pasien.tgl_lahir) | uppercase}}</div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="tx-gray-500 tx-12">Ruangan</div>
+                        <div>{{registrasi.ruang_perawatan.name | uppercase}} ({{registrasi.jns_perawatan.id | uppercase}})</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <p-table
+                    [value]="hasilLab"
+                    [rowHover]="true"
+                    editMode="column"
+                    dataKey="name"
+                    responsiveLayout="scroll"
+                    rowGroupMode="subheader"
+                    groupRowsBy="group"
+                    styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Pemeriksaan</th>
+                            <th>Hasil</th>
+                            <th style="min-width: 100px;">Nilai Rujukan</th>
+                            <th style="min-width: 100px;">
+                                <p-dropdown [autoDisplayFirst]="false" [(ngModel)]="selectedGroup" (ngModelChange)="changeGroup($event)" [options]="groupNilaiRujukan" optionValue="id" optionLabel="name"></p-dropdown>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="groupheader" let-item>
+                        <tr pRowGroupHeader>
+                            <td colspan="5" class="tx-bold">{{item.group | uppercase}}</td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr>
+                            <td>
+                                <span class="ml-3">{{item.name}}</span>
+                            </td>
+                            <td pEditableColumn>
+                                <p-cellEditor>
+                                    <ng-template pTemplate="input">
+                                        <p-dropdown
+                                            *ngIf="item.options.length > 0"
+                                            appendTo="body"
+                                            [showClear]="true"
+                                            [options]="item.options"
+                                            [autoDisplayFirst]="false"
+                                            [(ngModel)]="item.hasil"
+                                            optionValue="name"
+                                            optionLabel="name"
+                                            [style]="{'width':'100%'}">
+                                        </p-dropdown>
+                                        <input pInputText *ngIf="item.options.length == 0" class="form-control" type="text" [(ngModel)]="item.hasil">
+                                    </ng-template>
+                                    <ng-template pTemplate="output">
+                                        <input type="text" class="form-control" value="{{item.hasil}}" readOnly>
+                                    </ng-template>
+                                </p-cellEditor>
+                            </td>
+                            <td style="min-width: 100px;">
+                                {{item.nilaiRujukan}}
+                            </td>
+                            <td style="min-width: 100px;"></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary mr-1" (click)="save()"><i class="bi bi-save mr-1"></i> Simpan</button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

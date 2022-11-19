@@ -1,73 +1,144 @@
 
-<div class="row p-2 sticky-top caption-title">
+<style>
+    .p-datatable-flex-scrollable .p-datatable-wrapper {
+  flex-basis: auto !important;
+  height: 0 !important;
+}
+</style>
+<div class="row" *ngIf="showHeader">
     <div class="col-auto border-right"><h5>Data Registrasi</h5></div>
-    <div class="col">
-        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1" (click)="registrasiBaru()"><i class="bi bi-plus-lg mr-1"></i> Registrasi Baru</button>
-        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1"><i class="bi bi-printer mr-1"></i> Print <i class="bi bi-chevron-down ml-2"></i></button>
-        <button class="btn btn-sm p-1 pl-2 pr-2 btn-secondary mr-1"><i class="bi bi-arrow-repeat mr-1"></i> Refresh</button>
+    <div class="col-auto">
+        <app-cari-pasien></app-cari-pasien>
+    </div>
+    <div class="col-auto pd-l-0">
+        <app-data-pasien class="mg-r-5"></app-data-pasien>
+        <button class="btn btn-primary mr-2" *ngIf="showForm" (click)="registrasiBaru()"><i class="bi bi-plus-lg mr-1"></i> Form Registrasi</button>
+        <button class="btn mr-2" (click)="riwayatKunjunganService.showDialog(true)" [disabled]="!registrasi.noreg"><i class="bi bi-clock-history mr-1"></i> Riwayat Kunjungan</button>
+        <button class="btn btn-light mr-2" (click)="refresh()"><i class="bi bi-arrow-repeat mr-1"></i></button>
     </div>
 </div>
 
-<div class="row mt-3">
+<div class="row mg-t-10">
     <div class="col">
-        <p-table [value]="dataRegistrasi" styleClass="p-datatable-sm table-striped table-hover border-top mb-3" responsiveLayout="scroll">
-            <ng-template pTemplate="header">
-                <tr>
-                    <th>No. Antrian</th>
-                    <th>Tanggal</th>
-                    <th>Nama</th>
-                    <th>No. RM</th>
-                    <th>Jns. Perawatan</th>
-                    <th>Ruangan / Poliklinik</th>
-                    <th>Dokter</th>
-                    <th>Jenis Tagihan</th>
-                </tr>
-                <tr>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                    <th class="bg-white"><input type="text" class="form-control"></th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-item>
-                <tr>
-                    <td>A1-01</td>
-                    <td>{{item.tglReg}}</td>
-                    <td>{{item.nama}}</td>
-                    <td>{{item.norm}}</td>
-                    <td>{{item.jnsPerawatanName}}</td>
-                    <td>{{item.ruanganName}}</td>
-                    <td>{{item.dokter}}</td>
-                    <td>{{item.golpasName}}</td>
-                </tr>
-            </ng-template>
-        </p-table>
+        <form [formGroup]="form">
+            <p-table
+                [value]="dataRegistrasi"
+                styleClass="p-datatable-sm table-striped table-hover border-top mb-3"
+                [scrollable]="true"
+                [loading]="loading"
+                scrollHeight="30vw"
+                responsiveLayout="scroll">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="min-width: 140px;">Tanggal</th>
+                        <th style="min-width: 250px;">Nama</th>
+                        <th style="min-width: 130px;">No. RM</th>
+                        <th style="min-width: 150px;">Jns. Perawatan</th>
+                        <th style="min-width: 150px;">Ruangan / Poliklinik</th>
+                        <th style="min-width: 150px;">Dokter</th>
+                        <th style="min-width: 150px;">Jenis Pembayaran</th>
+                        <th style="min-width: 130px;">No. Registrasi</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th class="bg-white" style="min-width: 140px;">
+                            <p-calendar formControlName="tanggal" (onClose)="filterForm()" (onShow)="clearTanggal()" [showClear]="true" placeholder="Pilih Tanggal..." selectionMode="range" [readonlyInput]="true" inputId="range" dateFormat="d M yy" appendTo="body"></p-calendar>
+                        </th>
+                        <th class="bg-white" style="min-width: 250px;">
+                            <input type="text" formControlName="nama" class="form-control" placeholder="Cari Nama">
+                        </th>
+                        <th class="bg-white" style="min-width: 130px;">
+                            <input type="text" formControlName="norm" class="form-control" placeholder="Cari No.RM">
+                        </th>
+                        <th class="bg-white" style="min-width: 150px;">
+                            <p-dropdown formControlName="jnsPerawatan" [options]="dataJnsPerawatan" [showClear]="true" appendTo="body" (onChange)="getRuangan($event)" (onClear)="filterForm()" [autoDisplayFirst]="false" optionLabel="name" optionValue="id" placeholder="Pilih Jns. Perawatan" [style]="{width: '140px'}"></p-dropdown>
+                        </th>
+                        <th class="bg-white" style="min-width: 150px;">
+                            <p-dropdown formControlName="ruangan" (onChange)="filterForm()" (onClear)="filterForm()" [options]="dataRuangan" [filter]="true" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" optionLabel="name" optionValue="id" placeholder="Pilih Ruangan" [style]="{width: '140px'}"></p-dropdown>
+                        </th>
+                        <th class="bg-white" style="min-width: 150px;">
+                            <p-dropdown formControlName="dokter" (onChange)="filterForm()" (onClear)="filterForm()" [options]="dataDokter" [filter]="true" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" optionLabel="r_pelaksana.name" optionValue="r_pelaksana.id" placeholder="Pilih Dokter" [style]="{width: '140px'}"></p-dropdown>
+                        </th>
+                        <th class="bg-white" style="min-width: 150px;">
+                            <p-dropdown formControlName="jnsPembayaran" (onChange)="filterForm()" (onClear)="filterForm()" [options]="dataJnsPembayaran" [showClear]="true" appendTo="body" [autoDisplayFirst]="false" optionLabel="name" optionValue="id" placeholder="Pilih Jenis Pembayaran" [style]="{width: '140px'}"></p-dropdown>
+                        </th>
+                        <th class="bg-white" style="min-width: 130px;">
+                            <input type="text" formControlName="noreg" class="form-control" placeholder="Cari No.Registrasi">
+                        </th>
+                        <th class="bg-white" style="min-width: 40px;">
+                            <button class="btn btn-primary" (click)="filterForm()">
+                                <i class="bi bi-funnel"></i>
+                            </button>
+                        </th>
+                        <th class="bg-white" style="min-width: 50px;"></th>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-item>
+                    <tr [ngClass]="{'text-muted': (item.status==='closed')}">
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 140px;">{{appService.dateHuman(item.tglReg)}}</td>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 250px;">{{item.pasien.nama | uppercase}}</td>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 130px;">{{item.norm}}</td>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 150px;">{{item.jns_perawatan.name}}</td>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 150px;">{{item.ruang_perawatan.name}}</td>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 150px;">{{item.dokter.name}}</td>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 150px;">
+                            <div class="text-muted">{{item.golpas.r_grouppas.name | uppercase}} - {{item.golpas.name | uppercase}}</div>
+                        </td>
+                        <td (click)="selectRegistrasi(item)" class="clickable" style="min-width: 130px;">{{item.noreg}}</td>
+                        <td style="min-width: 40px;">
+                            <span class="badge" [ngClass]="{'badge-danger': (item.status==='closed'), 'badge-success': (item.status==='open'), 'badge-secondary': (item.status==='credit')}">{{item.status | uppercase}}</span>
+                        </td>
+
+                        <td style="min-width: 50px;">
+                            <button class="btn btn-sm btn-outline-primary" (click)="editRegistrasi(item)" *ngIf="item.status == 'open'">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template pTemplate="footer">
+                    <tr *ngIf="dataRegistrasi.length == 0">
+                        <td colspan="10">
+                            <div class="text-muted text-center pd-10">
+                                Tidak ada data saat ini.
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </form>
+
     </div>
 </div>
 
 <p-dialog
+    *ngIf="showForm"
     [(visible)]="dialogFormRegistrasi"
     (onHide)="formRegistrasiService.closeDialog()"
     header="Form Registrasi"
     [modal]="true"
-    [draggable]="true"
+    position="top"
+    [draggable]="false"
     [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
     appendTo="body">
     <app-form-registrasi *ngIf="dialogFormRegistrasi"></app-form-registrasi>
 </p-dialog>
 
 <p-dialog
-    [(visible)]="dialogVclaim"
-    [closeOnEscape]="false"
-    (onHide)="vclaimService.closeDialog()"
-    header="Bridging VClaim BPJS"
+    [(visible)]="dialogRiwayatKunjungan"
+    (onHide)="riwayatKunjunganService.showDialog(false)"
+    header="Riwayat Kunjungan"
     [modal]="true"
-    [draggable]="true"
-    [breakpoints]="{'640px': '100vw', '3000px': '90vw'}"
+    [draggable]="false"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1280px': '85vw', '1028px': '95vw'}"
     appendTo="body">
-    <app-vclaim *ngIf="dialogVclaim"></app-vclaim>
+    <app-riwayat-kunjungan *ngIf="dialogRiwayatKunjungan"></app-riwayat-kunjungan>
 </p-dialog>
+
+
+<app-edit-registrasi></app-edit-registrasi>

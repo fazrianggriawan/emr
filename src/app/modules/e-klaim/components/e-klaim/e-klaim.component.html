@@ -1,0 +1,331 @@
+<div class="row border-bottom pd-b-10">
+    <div class="col-auto border-right  mg-b-5">
+        <h5>E-Klaim INACBG</h5>
+    </div>
+    <div class="col-auto border-right  mg-b-5">
+        <app-cari-registrasi></app-cari-registrasi>
+    </div>
+    <div class="col-auto border-right  mg-b-5">
+        <button class="btn btn-primary" (click)="newKlaim()" [disabled]="!registrasi || !sep.noSep">
+            <i class="bi bi-plus-lg"></i> Klaim Baru
+        </button>
+        <button class="btn btn-primary mg-l-5" (click)="simpanKlaim()" [disabled]="!registrasi || !sep.noSep">
+            <i class="bi bi-check-lg"></i> Simpan Klaim
+        </button>
+    </div>
+    <div class="col-auto  mg-b-5">
+        <button class="btn mg-r-5" (click)="groupingStage1()">Grouping</button>
+        <button class="btn mg-r-5" (click)="finalisasi($event)">Finalisasi</button>
+    </div>
+    <div class="col-auto border-left mg-b-5 pd-r-10">
+        <button class="btn mg-r-5" (click)="editUlang()">
+            <i class="bi bi-pencil"></i> Edit Ulang
+        </button>
+        <button class="btn mg-r-5" (click)="printKlaim()">
+            <i class="bi bi-printer"></i> Print Klaim
+        </button>
+        <button class="btn mg-r-5" (click)="printLampiran()">
+            <i class="bi bi-paperclip"></i> Lampiran Klaim
+        </button>
+    </div>
+    <div class="col-auto border-left border-right">
+        <app-form-pulang-perawatan [showInfo]="true"></app-form-pulang-perawatan>
+    </div>
+</div>
+
+<div class="row mg-t-10">
+    <div class="col-4">
+        <div class="row">
+            <div class="col">
+                <div class="row border-bottom pd-b-5 mg-b-5">
+                    <div class="col-4">
+                        <div class="tx-medium">DATA SEP</div>
+                    </div>
+                    <div class="col">
+                        <input type="text" placeholder="Update Nomor SEP" class="form-control" [(ngModel)]="nomorSep" (keyup)="listenUpdateSep($event)">
+                    </div>
+                </div>
+                <div>
+                    <form>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Nomor SEP</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.noSep}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Tgl. Masuk</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.tglSep}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Nama Pasien</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.peserta.nama}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Nomor BPJS</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.peserta.noKartu}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">No. RM</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.peserta.noMr}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Jns. Perawatan</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.jnsPelayanan | uppercase}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Poliklinik</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.poli | uppercase}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Diagnosa</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.diagnosa | uppercase}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Jns. Peserta</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{sep.peserta.jnsPeserta}}" readonly>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="row">
+            <div class="col-7">
+                <div class="tx-medium mg-t-10 border-bottom pd-b-10 mg-b-10">
+                    DIAGNOSA & PROSEDUR
+                </div>
+                <div class="mg-t-10">
+                    <div class="mg-b-5 tx-medium">Diagnosa ICD-10</div>
+                    <app-cari-icd10></app-cari-icd10>
+                    <p-table [value]="dataDiagnosa" [rowHover]="true"
+                        styleClass="p-datatable-sm p-datatable-striped mg-t-5">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [width]="25">Kode</th>
+                                <th colspan="2">Keterangan</th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-item let-i="rowIndex">
+                            <tr>
+                                <td [width]="25">{{item.id | uppercase}}</td>
+                                <td>
+                                    {{item.name | uppercase}}
+                                    <span class="badge" (click)="changePrimary($event, item, i)" [ngClass]="{'badge-primary': (i == 0), 'badge-secondary clickable': (i > 0)}">
+                                         <span *ngIf="i == 0">Utama</span>
+                                         <span *ngIf="i > 0">Sekunder</span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-xs btn-outline-danger" (click)="deleteDiagnosa(i)"><i class="bi bi-x-lg"></i></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+                <div class="mg-t-20 border-top pd-t-10">
+                    <div class="mg-b-5 tx-medium">Prosedur ICD-9</div>
+                    <app-cari-icd9></app-cari-icd9>
+                    <p-table [value]="dataProsedur" [rowHover]="true"
+                        styleClass="p-datatable-sm p-datatable-striped mg-t-5">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th [width]="25">Kode</th>
+                                <th colspan="2">Keterangan</th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-item let-i="rowIndex" >
+                            <tr>
+                                <td [width]="25">
+                                    {{item.id | uppercase}}
+                                </td>
+                                <td>
+                                    {{item.name | uppercase}}
+                                </td>
+                                <td>
+                                    <button class="btn btn-xs btn-outline-danger" (click)="deleteProcedure(i)"><i class="bi bi-x-lg"></i></button>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+            <div class="col">
+                <div class="tx-medium mg-t-10 border-bottom pd-b-10 mg-b-10">
+                    BILLING RUMAH SAKIT
+                </div>
+                <p-scrollPanel [style]="{width: '100%', height: '25vw'}" styleClass="custombar1">
+                    <div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Konsultasi</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.konsultasi | number}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Radiologi</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.radiologi | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Laboratorium</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.laboratorium | number}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Obat</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.obat | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Obat Kemoterapi</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.obat_kemoterapi
+                                    | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Obat Kronis</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.obat_kronis
+                                    | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Kamar</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.kamar
+                                    | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Keperawatan</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.keperawatan
+                                    | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Penunjang</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.penunjang | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Bedah</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.prosedur_bedah | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Non Bedah</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.prosedur_non_bedah | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Rehabilitasi Medik</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.rehabilitasi | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Pelayanan Darah</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.pelayanan_darah | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Alkes</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.alkes | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">BMHP</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.bmhp | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Rawat Intensif</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.rawat_intensif | number}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Sewa Alat</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.sewa_alat | number}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-4 col-form-label">Tenaga Ahli</label>
+                            <div class="col">
+                                <input type="text" class="form-control" value="{{billing.tenaga_ahli | number}}"
+                                    readonly>
+                            </div>
+                        </div>
+                    </div>
+                </p-scrollPanel>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row mg-t-20">
+            <div class="col">
+                <div class="alert alert-primary">
+                    <div>Total Paket Klaim</div>
+                    <div class="text-dark tx-medium tx-18">
+                        {{totalPaket | number}}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-warning">
+                    <div>Total Billing Rumah Sakit</div>
+                    <div class="text-dark tx-medium tx-18">
+                        {{totalBilling | number}}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="alert alert-secondary">
+                    <div>Estimasi Pendapatan</div>
+                    <div class="text-dark tx-medium tx-18">
+                        {{(totalPaket - totalBilling) | number}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p-confirmPopup></p-confirmPopup>

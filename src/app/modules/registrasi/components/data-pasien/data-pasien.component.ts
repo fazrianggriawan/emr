@@ -1,31 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataPasienService } from './data-pasien.service';
+import { Subscription } from 'rxjs';
+import { AutoComplete } from 'primeng/autocomplete';
+import { RegistrasiService } from '../../services/registrasi.service';
 
 @Component({
     selector: 'app-data-pasien',
     templateUrl: './data-pasien.component.html',
     styleUrls: ['./data-pasien.component.css']
 })
-export class DataPasienComponent implements OnInit {
+export class DataPasienComponent implements OnInit, OnDestroy {
 
-    showDialog: boolean = true;
+    @Input() showButton: boolean = true;
+
+    @ViewChild('acSearch') acSearch!: AutoComplete;
+
+    dialog: boolean = true;
     dataPasien: any[] = [];
     selectedPasien: any;
     form!: FormGroup;
+    loading: boolean = false;
+
+    subs: Subscription[] = [];
+    selectedSearch: any;
+    searchOptions: any[] = [];
 
     constructor(
         private fb: FormBuilder,
-        private dataPasienService: DataPasienService
+        public dataPasienService: DataPasienService,
+        private registrasiService: RegistrasiService
     ) { }
 
     ngOnInit(): void {
         this.initForm();
-        this.dataPasienService.dataPasien.subscribe(data => this.dataPasien = data)
-        this.dataPasienService.dialog.subscribe(data => this.showDialog = data)
+        this.dataPasienService.dataPasien.subscribe(data => {this.dataPasien = data; this.loading = false;})
+        this.subs.push(this.dataPasienService.dialog.subscribe(data => this.handleDialog(data)))
     }
 
-    public initForm() {
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+        this.subs.forEach(element => element.unsubscribe())
+    }
+
+    filterData(e: any){
+        let key = e.query;
+        this.searchOptions = [
+            {id: 'norm', name: 'No. RM', key: key},
+            {id: 'nama', name: 'Nama', key: key},
+            {id: 'alamat', name: 'Alamat', key: key},
+            {id: 'tlp', name: 'No. Telepon', key: key},
+            {id: 'noaskes', name: 'No. BPJS / Asuransi', key: key},
+        ]
+    }
+
+    handleDialog(data: boolean){
+        this.dialog = data
+        if( !data ){
+            this.dataPasienService.dataPasien.next([]);
+        }
+    }
+
+    initForm() {
         this.form = this.fb.group({
             norm: [''],
             nama: [''],
@@ -36,8 +73,9 @@ export class DataPasienComponent implements OnInit {
         })
     }
 
-    public sorting(e: KeyboardEvent) {
-        if( e.code == 'Enter' ){
+    sorting(e: KeyboardEvent) {
+        if( e.keyCode == 13 ){
+            this.loading = true;
             var tglLahir = this.form.value.tglLahir;
             if( tglLahir ) {
                 var lahir = tglLahir.substr(6, 4) + '-' + tglLahir.substr(3, 2) + '-' + tglLahir.substr(0, 2);
@@ -50,15 +88,10 @@ export class DataPasienComponent implements OnInit {
         }
     }
 
-    public onSelectPasien() {
+    onSelectPasien() {
+        this.registrasiService.registrasi.next('');
         this.dataPasienService.pasien.next(this.selectedPasien);
-        this.closeDialog()
-    }
-
-    public closeDialog() {
-        this.dataPasienService.dataPasien.next([]);
-        this.dataPasienService.dialog.next(false);
-        this.form.reset();
+        this.dataPasienService.openDialog(false);
     }
 
 }

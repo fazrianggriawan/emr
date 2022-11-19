@@ -1,0 +1,83 @@
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="editRegistrasiService.openDialog(false)"
+    header="Edit Registrasi"
+    [draggable]="false"
+    [modal]="true"
+    position="top"
+    [breakpoints]="{'1920px': '65vw', '1366px': '50vw'}"
+    appendTo="body">
+    <ng-container *ngIf="dialog">
+        <div class="row">
+            <div class="col">
+                <div class="row">
+                    <label class="col-4 col-form-label">
+                        No. Registrasi
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" [value]="registrasi.noreg" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-4 col-form-label">
+                        Nama Pasien
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" [value]="registrasi.pasien.nama" readonly>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-4 col-form-label">
+                        No. RM
+                    </label>
+                    <div class="col">
+                        <input type="text" class="form-control" [value]="registrasi.pasien.norm" readonly>
+                    </div>
+                </div>
+                <form [formGroup]="form">
+                    <div class="row">
+                        <label class="col-4 col-form-label">
+                            Tgl. Registrasi
+                        </label>
+                        <div class="col">
+                            <p-calendar formControlName="tanggal" dateFormat="dd M yy" [showIcon]="true"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-4 col-form-label">
+                            Ruangan
+                        </label>
+                        <div class="col">
+                            <p-dropdown formControlName="ruangan" [options]="optionsRuangan" optionValue="id" optionLabel="name" appendTo="body" [autoDisplayFirst]="false" [style]="{width: '100%'}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-4 col-form-label">
+                            Dokter
+                        </label>
+                        <div class="col">
+                            <p-dropdown formControlName="dokter" [options]="optionsDokter" optionValue="id_pelaksana" optionLabel="r_pelaksana.name" appendTo="body" [autoDisplayFirst]="false" [style]="{width: '100%'}"></p-dropdown>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template pTemplate="footer">
+        <div class="row">
+            <div class="col tx-left">
+                <button class="btn btn-outline-danger" (click)="cancel()">
+                    <i class="bi bi-trash"></i> Batalkan Registrasi
+                </button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary" (click)="update()">
+                    <i class="bi bi-save"></i> Update Data
+                </button>
+            </div>
+        </div>
+
+    </ng-template>
+
+</p-dialog>

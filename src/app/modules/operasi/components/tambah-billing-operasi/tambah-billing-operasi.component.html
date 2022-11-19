@@ -1,0 +1,90 @@
+<button class="btn btn-primary" (click)="tambahBillingOperasiService.openDialog(true)">
+    <i class="bi bi-plus-lg"></i> Tambah Billing Operasi
+</button>
+
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="tambahBillingOperasiService.openDialog(false)"
+    header="Tambah Billing Operasi"
+    position="top"
+    appendTo="body"
+    [modal]="true"
+    [draggable]="false"
+    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}">
+    <ng-container *ngIf="dialog">
+        <div class="row">
+            <div class="col">
+                <p-table
+                    [value]="dataTarif"
+                    [rowHover]="true"
+                    [scrollable]="true"
+                    scrollHeight="30vw"
+                    [style]="{width: '100%'}"
+                    responsiveLayout="scroll"
+                    styleClass="p-datatable-sm p-datatable-striped">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Nama Tarif</th>
+                            <th>Jasa Operator</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                        <tr class="clickable" (click)="onSelectTarif(item)">
+                            <td>{{item.name}}</td>
+                            <td>
+                                <span *ngFor="let tarif_harga of item.r_tarif_harga">
+                                    {{tarif_harga.harga | number}}
+                                </span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            <div class="col">
+                <div class="row">
+                    <div class="col-auto">
+                        <h5>Perhitungan Tarif Operasi</h5>
+                    </div>
+                </div>
+                <div class="row mg-t-10 border-top pd-t-10">
+                    <div class="col">
+                        <div class="row border-bottom pd-b-5 tx-medium">
+                            <div class="col-3">Keterangan</div>
+                            <div class="col-1">Hadir</div>
+                            <div class="col">Nama Pelaksana</div>
+                            <div class="col-3">Jasa Pelaksana</div>
+                        </div>
+                        <div class="row mg-t-10" *ngFor="let item of percent">
+                            <div class="col-3">{{item.name}}</div>
+                            <div class="col-1">
+                                <p-checkbox (ngModelChange)="onSelectPelaksana($event, item)" [(ngModel)]="item.hadir" [binary]="true"></p-checkbox>
+                            </div>
+                            <div class="col">
+                                <p-dropdown
+                                    [options]="optionsPelaksana"
+                                    optionValue="id"
+                                    optionLabel="name"
+                                    [autoDisplayFirst]="false"
+                                    [(ngModel)]="item.pelaksana"
+                                    [showClear]="true"
+                                    [style]="{width: '100%'}">
+                                </p-dropdown>
+                            </div>
+                            <div class="col-3">
+                                <input type="text" class="form-control" value="{{item.jasa + item.tambahanJasa | number}}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mg-t-10 border-top pd-t-10">
+                    <div class="col tx-right">
+                        Total Harga
+                    </div>
+                    <div class="col-3 tx-medium tx-16">
+                        {{totalHarga | number}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+</p-dialog>

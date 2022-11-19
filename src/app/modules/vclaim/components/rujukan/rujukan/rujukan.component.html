@@ -1,0 +1,15 @@
+<button class="btn" (click)="rujukanService.openDialog(true)">Rujukan</button>
+
+<p-dialog
+    [(visible)]="dialog"
+    (onHide)="rujukanService.openDialog(false)"
+    header="Rujukan"
+    position="top"
+    appendTo="body"
+    [modal]="true"
+    [draggable]="false"
+    [breakpoints]="{'1920px': '65vw', '1366px': '80vw'}">
+    <ng-container *ngIf="dialog">
+        <app-data-rujukan></app-data-rujukan>
+    </ng-container>
+</p-dialog>

@@ -1,0 +1,17 @@
+<p-autoComplete
+    #ac
+    placeholder="Cari Diagnosa ICD-10"
+    appendTo="body"
+    (completeMethod)="cariIcd10Service.cari($event.query)"
+    (onSelect)="onSelect($event, ac)"
+    [suggestions]="optionsIcd"
+    [minLength]="3"
+    [virtualScroll]="true"
+    [delay]="100"
+    [baseZIndex]="999999"
+    [style]="{width: '100%'}"
+    [inputStyle]="{'width':'100%'}">
+    <ng-template let-item pTemplate="item">
+        {{item.id | uppercase}} :: {{item.name | uppercase}}
+    </ng-template>
+</p-autoComplete>

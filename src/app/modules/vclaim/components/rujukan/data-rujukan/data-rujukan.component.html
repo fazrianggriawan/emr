@@ -1,0 +1,125 @@
+<div class="row border-bottom pd-b-10 mg-t-5">
+    <div class="col-auto border-right">
+        <h5>Data Rujukan</h5>
+    </div>
+    <div class="col-auto">
+        <app-data-rujukan-keluar></app-data-rujukan-keluar>
+    </div>
+</div>
+
+<div class="row mg-t-10">
+    <div class="col">
+        <h5>Faskes / PPK</h5>
+        <p-table
+            [value]="dataRujukanFaskes"
+            [scrollable]="true"
+            [rowHover]="true"
+            scrollHeight="15vw"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-sm p-datatable-striped">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="min-width: 180px;">No. Rujukan</th>
+                    <th style="min-width: 100px;">Tgl. Rujukan</th>
+                    <th style="min-width: 100px;">Jns. Pelayanan</th>
+                    <th style="min-width: 100px;">Spesialis</th>
+                    <th style="min-width: 100px;">Asal Rujukan</th>
+                    <th style="min-width: 180px;">Diagnosa</th>
+                    <th style="min-width: 100px;">Masa Berlaku</th>
+                    <th style="min-width: 100px;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr class="clickable">
+                    <td style="min-width: 180px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">
+                        {{item.noKunjungan}}
+                    </td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">
+                        <div>{{dateHuman(item.tglKunjungan)}}</div>
+                    </td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.pelayanan.nama | uppercase}}</td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.poliRujukan.nama}}</td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.provPerujuk.nama}}</td>
+                    <td style="min-width: 180px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.diagnosa.kode}} - {{item.diagnosa.nama}}</td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">
+                        <div>
+                            <p class="mg-b-0">{{dateHuman(expiredDate(item.tglKunjungan).expired)}}</p>
+                            <div class="badge badge-success" *ngIf="expiredDate(item.tglKunjungan).hariExpired > 0">{{expiredDate(item.tglKunjungan).hariExpired}} Hari lagi</div>
+                            <div class="badge badge-danger" *ngIf="expiredDate(item.tglKunjungan).hariExpired < 0"> Expired : {{expiredDate(item.tglKunjungan).hariExpired}} Hari</div>
+                        </div>
+                    </td>
+                    <td style="min-width: 100px;">
+                        <button class="btn btn-sm btn-outline-primary" (click)="print(item.noKunjungan)">
+                            <i class="bi bi-printer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr *ngIf="dataRujukanFaskes.length == 0">
+                    <th colspan="7" style="min-width: 100%;">
+                        <div class="w-100 tx-normal text-muted tx-center pd-10">Tidak ada data saat ini.</div>
+                    </th>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<div class="row mg-t-10 border-top pd-t-20">
+    <div class="col">
+        <h5>Rumah Sakit</h5>
+        <p-table
+            [value]="dataRujukanRs"
+            [scrollable]="true"
+            [rowHover]="true"
+            scrollHeight="15vw"
+            responsiveLayout="scroll"
+            styleClass="p-datatable-sm p-datatable-striped">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="min-width: 180px;">No. Rujukan</th>
+                    <th style="min-width: 100px;">Tgl. Rujukan</th>
+                    <th style="min-width: 100px;">Jns. Pelayanan</th>
+                    <th style="min-width: 100px;">Spesialis</th>
+                    <th style="min-width: 100px;">Asal Rujukan</th>
+                    <th style="min-width: 180px;">Diagnosa</th>
+                    <th style="min-width: 100px;">Masa Berlaku</th>
+                    <th style="min-width: 100px;"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+                <tr class="clickable">
+                    <td style="min-width: 180px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">
+                        {{item.noKunjungan}}
+                    </td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">
+                        <div>{{dateHuman(item.tglKunjungan)}}</div>
+                    </td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.pelayanan.nama | uppercase}}</td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.poliRujukan.nama}}</td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.provPerujuk.nama}}</td>
+                    <td style="min-width: 180px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">{{item.diagnosa.kode}} - {{item.diagnosa.nama}}</td>
+                    <td style="min-width: 100px;" (click)="dataRujukanService.getRujukan(item.noKunjungan)">
+                        <div>
+                            <p class="mg-b-0">{{dateHuman(expiredDate(item.tglKunjungan).expired)}}</p>
+                            <div class="badge badge-success" *ngIf="expiredDate(item.tglKunjungan).hariExpired > 0">{{expiredDate(item.tglKunjungan).hariExpired}} hari lagi</div>
+                        </div>
+                    </td>
+                    <td style="min-width: 100px;">
+                        <button class="btn btn-sm btn-outline-primary" (click)="dataRujukanService.print(item.noKunjungan)">
+                            <i class="bi bi-printer"></i>
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <tr *ngIf="dataRujukanRs.length == 0">
+                    <th colspan="7" style="min-width: 100%;">
+                        <div class="w-100 tx-normal text-muted tx-center pd-10">Tidak ada data saat ini.</div>
+                    </th>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
