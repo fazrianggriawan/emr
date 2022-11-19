@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { config } from 'src/app/config';
-import { AppService } from 'src/app/services/app.service';
+import { DataPasienService } from '../components/data-pasien/data-pasien.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,66 +11,30 @@ export class RegistrasiService {
 
     registrasi = new BehaviorSubject<any>('')
     dataRegistrasi = new BehaviorSubject<any>('')
-    dialog = new BehaviorSubject<boolean>(false);
 
     constructor(
         private http: HttpClient,
-        private appService: AppService
+        private dataPasienService: DataPasienService
     ) { }
 
-    updatePasien(data: any) {
-        this.http.post<any>(config.api_url('pasien/update'), data)
+    public getDataRegistrasi() {
+        this.http.get<any>( config.api_url('registrasi/dataRegistrasi') )
+            .subscribe(data => this.dataRegistrasi.next(data.data))
+    }
+
+    public savePasien(data: any){
+        this.http.post<any>(config.api_url('pasien/save'), data)
             .subscribe(data => {
-                if( data.code == 200 ){
-                    this.appService.setNotification('success', data.message)
+                if(data.code == 200){
+                    this.dataPasienService.pasien.next(data.data)
                 }else{
-                    this.appService.setNotification('error', data.message)
+                    alert(data.message);
                 }
             })
     }
 
-    getDataRegistrasi() {
-        this.http.get<any>(config.api_url('registrasi/dataRegistrasi'))
-            .subscribe(data => {
-                if (data.code == 200) {
-                    this.dataRegistrasi.next(data.data)
-                }
-            })
-    }
-
-    getRegistrasiByNoreg(noreg: any) {
-        this.http.get<any>(config.api_url('registrasi/registrasiByNoreg/' + noreg))
-            .subscribe(data => {
-                if (data.code == 200) {
-                    this.registrasi.next(data.data);
-                }else{
-                    this.registrasi.next('');
-                }
-            })
-    }
-
-    filterDataRegistrasi(filter: any){
-        this.http.post<any>(config.api_url('registrasi/filtering'), filter)
-            .subscribe(data => {
-                this.dataRegistrasi.next(data.data);
-            })
-    }
-
-    formFilter(){
-        return {
-            tanggal: [[new Date()]],
-            nama: [null],
-            norm: [null],
-            jnsPerawatan: [null],
-            ruangan: [null],
-            dokter: [null],
-            jnsPembayaran: [null],
-            noreg: [null],
-        }
-    }
-
-    showDialog(val: boolean){
-        this.dialog.next(val)
+    public updatePasien(data: any) {
+        this.http.post<any>(config.api_url('pasien/update'), data).subscribe(data => console.log(data))
     }
 
 }

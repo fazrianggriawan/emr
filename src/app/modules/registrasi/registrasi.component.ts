@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
 import { Subscription } from 'rxjs';
-import { config } from 'src/app/config';
 import { AppService } from 'src/app/services/app.service';
 import { VclaimService } from '../shared/vclaim/vclaim.service';
 import { DataPasienService } from './components/data-pasien/data-pasien.service';
@@ -15,7 +14,7 @@ import { RegistrasiService } from './services/registrasi.service';
     templateUrl: './registrasi.component.html',
     styleUrls: ['./registrasi.component.css']
 })
-export class RegistrasiComponent implements OnInit {
+export class RegistrasiComponent implements OnInit, OnDestroy {
 
     rs: any[] = [];
     awalanNama: any[] = [];
@@ -33,28 +32,26 @@ export class RegistrasiComponent implements OnInit {
     pangkat: any[] = [];
     groupPasien: any[] = [];
     golonganPasien: any[] = [];
-    hubkel: any[] = [];
 
-    selectedPasien: any;
+    pasien: any;
     dataPesertaBpjs: any;
     form!: FormGroup;
     dialogVclaim: boolean = false;
     dialogDataPasien: boolean = false;
-    dialogFormRegistrasi: boolean = false;
-    dialogFormRawatInap: boolean = false;
-
+    dialogRegistrasi: boolean = false;
+    dialogSavePasien: boolean = true;
     menuPendaftaran!: MenuItem[];
 
-    subs: Subscription[] = [];
+    subscription: Subscription | undefined;
 
     constructor(
         private masterService: MasterService,
         private fb: FormBuilder,
         private registrasiService: RegistrasiService,
-        private appService: AppService,
         public formRegistrasiService: FormRegistrasiService,
-        public vclaimService: VclaimService,
         public dataPasienService: DataPasienService,
+        public vclaimService: VclaimService,
+        public appService: AppService
     ) { }
 
     ngOnInit(): void {
@@ -77,26 +74,21 @@ export class RegistrasiComponent implements OnInit {
         this.masterService.groupPasien.subscribe(data => this.groupPasien = data)
         this.masterService.golonganPasien.subscribe(data => this.golonganPasien = data)
 
-        this.subs.push(this.dataPasienService.pasien.subscribe(data => this.setToForm(data)))
-        this.dataPasienService.dialog.subscribe(data => { this.dialogDataPasien = data; if(!data) this.dataPasienService.dataPasien.next([]) })
+        let pasien = this.dataPasienService.pasien.subscribe(data => this.setToForm(data))
+        let dialogDataPasien = this.dataPasienService.dialog.subscribe( data => this.dialogDataPasien = data )
+        let saveStatusPasien = this.dataPasienService.saveStatusPasien.subscribe(data => this.dialogSavePasien = data)
+        let dialogFormRegistrasi = this.formRegistrasiService.dialog.subscribe(data => this.dialogRegistrasi = data)
 
-        this.vclaimService.dialog.subscribe(data => this.dialogVclaim = data)
-        this.formRegistrasiService.dialog.subscribe(data => this.dialogFormRegistrasi = data)
-
-        this.menuPendaftaran = [
-            { label: 'Barcode Pasien', command: (() => { this.appService.print(config.api_url('print/stickerBarcode/'+this.selectedPasien.id)) }) },
-            { label: 'Kartu Pasien', command: (() => { this.appService.print(config.api_url('print/kartuPasien/'+this.selectedPasien.id)) }) },
-            { label: 'Kartu Identitas Pasien', command: (() => { this.appService.print(config.api_url('print/biodataPasien/'+this.selectedPasien.id)) }) },
-        ]
+        this.subscription?.add(pasien);
+        this.subscription?.add(dialogDataPasien);
+        this.subscription?.add(saveStatusPasien);
+        this.subscription?.add(dialogFormRegistrasi);
     }
 
     ngOnDestroy(): void {
         //Called once, before the instance is destroyed.
         //Add 'implements OnDestroy' to the class.
-        this.formRegistrasiService.dialog.next(false);
-        this.subs.forEach(element => {
-            element.unsubscribe();
-        });
+        this.subscription?.unsubscribe();
     }
 
     public getMasterData() {
@@ -115,18 +107,14 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public openFormRawatJalan() {
-        this.formRegistrasiService.dialog.next(true);
-    }
-
-    public openFormRawatInap() {
-        this.dialogFormRawatInap = true;
+        this.dialogRegistrasi = true;
     }
 
     public getPesertaBpjs() {
-        if (this.form.get('nomorAsuransi')?.value) {
+        if( this.form.get('nomorAsuransi')?.value ){
             this.vclaimService.getPesertaByNomorKartu();
-        } else {
-            if (this.form.get('nik')?.value) {
+        }else{
+            if( this.form.get('nik')?.value ){
                 this.vclaimService.getPesertaByNik();
             }
         }
@@ -139,8 +127,9 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public setToForm(data: any) {
-        this.selectedPasien = data;
-        if (data) {
+        this.form.reset();
+        this.pasien = data;
+        if( data ) {
             this.form.get('id')?.patchValue(data.id);
             this.form.get('nomorRm')?.patchValue(data.norm);
             this.form.get('rs')?.patchValue(data.rs);
@@ -207,10 +196,10 @@ export class RegistrasiComponent implements OnInit {
             jnsKelamin: ['', Validators.required],
             alamat: ['', Validators.required],
             negara: [101, Validators.required],
-            provinsi: [''],
-            kota: [''],
-            kecamatan: [''],
-            kelurahan: [''],
+            provinsi: ['', Validators.required],
+            kota: ['', Validators.required],
+            kecamatan: ['', Validators.required],
+            kelurahan: ['', Validators.required],
             suku: [''],
             statusNikah: ['', Validators.required],
             agama: ['', Validators.required],
@@ -232,55 +221,45 @@ export class RegistrasiComponent implements OnInit {
     }
 
     public getKota(provinsi: string) {
-        if(provinsi){
-            this.masterService.getKota(provinsi);
-        }
+        this.masterService.getKota(provinsi);
     }
 
     public getKecamatan(kota: string) {
-        if(kota){
-            this.masterService.getKecamatan(kota);
-        }
+        this.masterService.getKecamatan(kota);
     }
 
     public getKelurahan(kecamatan: string) {
-        if(kecamatan){
-            this.masterService.getKelurahan(kecamatan);
-        }
+        this.masterService.getKelurahan(kecamatan);
     }
 
     public getGolonganPasien(groupPasien: string) {
-        if( groupPasien ){
-            this.masterService.getGolonganPasien(groupPasien);
-        }
-    }
-
-    refresh() {
-        this.form.reset();
-        this.form.get('negara')?.patchValue(101);
-        this.form.get('rs')?.patchValue(1);
+        this.masterService.getGolPasienByGroup(groupPasien);
     }
 
     public save() {
-
-        let data = this.form.getRawValue();
-
+        let data = this.form.value;
         data.tglLahir = this.appService.reformatDate(data.tglLahir);
-
         this.dataPasienService.savePasien(data);
     }
 
     public update() {
 
-        let data = this.form.getRawValue();
-
-        data.tglLahir = this.appService.reformatDate(data.tglLahir);
-
-        this.registrasiService.updatePasien(data);
+        let tglLahir = this.appService.reformatDate(this.form.get('tglLahir')?.value);
+        this.form.value.tglLahir = tglLahir;
+        this.registrasiService.updatePasien(this.form.value);
     }
 
     public reformatDate(date: Date) {
         return date.toISOString().substr(0, 10);
+    }
+
+    public addRegistrasi() {
+        this.formRegistrasiService.dialog.next(true);
+    }
+
+    public resetForm() {
+        this.initForm();
+        this.dataPasienService.pasien.next('');
     }
 
 }

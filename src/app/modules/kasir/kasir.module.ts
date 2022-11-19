@@ -3,26 +3,27 @@ import { CommonModule } from '@angular/common';
 
 import { KasirRoutingModule } from './kasir-routing.module';
 import { KasirComponent } from './kasir.component';
+import { FormBillingComponent } from './components/form-billing/form-billing.component';
+import { BillingComponent } from './components/billing/billing.component';
+import { TarifComponent } from './components/tarif/tarif.component';
 import { SharedModule } from '../shared/shared.module';
-import { BillingModule } from '../billing/billing.module';
-import { LaporanTransaksiBillingComponent } from './components/laporan/laporan-transaksi-billing/laporan-transaksi-billing.component';
-import { FormPulangPerawatanComponent } from './components/form-pulang-perawatan/form-pulang-perawatan.component';
 
 
 @NgModule({
   declarations: [
     KasirComponent,
-    LaporanTransaksiBillingComponent,
-    FormPulangPerawatanComponent
+    FormBillingComponent,
+    BillingComponent,
+    TarifComponent
   ],
   imports: [
-    CommonModule,
-    KasirRoutingModule,
     SharedModule,
-    BillingModule
+    CommonModule,
+    KasirRoutingModule
   ],
   exports: [
-    FormPulangPerawatanComponent
+    TarifComponent,
+    BillingComponent
   ]
 })
 export class KasirModule { }
