@@ -17,7 +17,7 @@ export class TambahBillingOperasiComponent implements OnInit {
     tarif: any;
     totalHarga: number = 0;
 
-    harga: number = 0;
+    harga: any = 0;
 
     percent: any[] = [];
 
@@ -33,9 +33,6 @@ export class TambahBillingOperasiComponent implements OnInit {
         this.optionsPelaksana = [
             { id: 1, name: 'Dokter' }
         ];
-
-        // this.initHitungTarif();
-        // this.getDefaultHarga();
     }
 
     initHitungTarif(){
@@ -49,11 +46,14 @@ export class TambahBillingOperasiComponent implements OnInit {
         this.hitungTarif(this.percent);
     }
 
-    getDefaultHarga() {
-        this.percent.forEach(element => {
-            if (element.id == 'opr') {
-                this.harga = element.jasa;
-            }
+    getDefaultHarga(tarif: any) {
+        console.log(tarif);
+        tarif.r_tarif_harga.forEach((element: any) => {
+            element.r_tarif_harga_jasa.forEach((item: any) => {
+                if (item.id_group_jasa == 'dokter') {
+                    this.harga = item.jasa;
+                }
+            });
         });
     }
 
@@ -106,7 +106,7 @@ export class TambahBillingOperasiComponent implements OnInit {
 
     onSelectTarif(item: any){
         this.tarif = item;
-        this.harga = this.getHarga(item.r_tarif_harga);
+        this.getDefaultHarga(this.tarif);
         this.initHitungTarif();
     }
 
