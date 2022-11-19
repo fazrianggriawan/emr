@@ -32,6 +32,7 @@ export class KasirComponent implements OnInit, OnDestroy {
     percentAdministrasi: number = 4;
     dialogFormPulang : boolean = false;
     statusBilling: string = '';
+    hasAdm : boolean = true;
 
     subs: Subscription[] = [];
 
@@ -126,6 +127,12 @@ export class KasirComponent implements OnInit, OnDestroy {
         }
     }
 
+    onChangeHasAdm(e: any){
+        setTimeout(() => {
+            this.handleDataBilling(this.dataBilling);
+        }, 0);
+    }
+
     handleDataRegistrasi(data: any) {
         this.registrasi = data;
         if (data) {
@@ -198,7 +205,7 @@ export class KasirComponent implements OnInit, OnDestroy {
     hitungAdministrasi(totalTagihan: number) {
         this.administrasi = 0;
 
-        if (this.registrasi.id_jns_perawatan == 'ri') {
+        if (this.registrasi.id_jns_perawatan == 'ri' && this.hasAdm) {
             let adm = totalTagihan * (this.percentAdministrasi / 100);
             if (adm <= this.minAdministrasi) {
                 adm = this.minAdministrasi;

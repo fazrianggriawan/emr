@@ -30,6 +30,7 @@
             <div class="row mg-t-5">
                 <div class="col-5">
                     Administrasi
+                    <p-checkbox [(ngModel)]="hasAdm" [binary]="true" (ngModelChange)="onChangeHasAdm($event)"></p-checkbox>
                 </div>
                 <div class="col">
                     <input type="text" class="form-control" value="{{administrasi | number}}" readonly>
