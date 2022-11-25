@@ -79,7 +79,6 @@ export class DataBillingComponent implements OnInit, OnDestroy {
     handleDataBilling(data: any){
         this.loading = false;
         this.dataBilling = data;
-        console.log(this.status);
         if( this.status == 'open' ){
             this.billingService.selectedBilling.next(data);
         }else{

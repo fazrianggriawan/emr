@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { VclaimService } from 'src/app/modules/shared/vclaim/vclaim.service';
@@ -49,7 +49,8 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         private masterService: MasterService,
         private fb: FormBuilder,
         public riwayatKunjunganService: RiwayatKunjunganService,
-        private editRegistrasiService: EditRegistrasiService
+        private editRegistrasiService: EditRegistrasiService,
+        private changeDetector: ChangeDetectorRef,
     ) { }
 
     ngOnInit(): void {
@@ -70,6 +71,10 @@ export class DataRegistrasiComponent implements OnInit, OnDestroy {
         this.dataPasienService.pasien.subscribe(data => this.pasien = data);
 
         this.initForm();
+    }
+
+    ngAfterContentChecked(): void {
+        this.changeDetector.detectChanges();
     }
 
     ngOnDestroy(): void {

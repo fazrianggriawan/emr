@@ -71,7 +71,10 @@ export class EKlaimComponent implements OnInit, OnDestroy {
     }
 
     handleKlaim(data: any) {
-        this.klaim = data;
+        if( data ){
+            this.klaim = data;
+            this.totalPaket = this.klaim.grouper.response.cbg.tariff
+        }
     }
 
     handleSep(data: any) {
@@ -85,8 +88,11 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         this.nomorSep = '';
         if (data) {
             this.nomorSep = data.no_sep;
-            this.vclaimService.getSep(data.no_sep);
-            this.eklaimService.getBillingGroupEklaim(data.noreg);
+            if(this.nomorSep.length > 15){
+                this.vclaimService.getSep(data.no_sep);
+                this.eklaimService.getBillingGroupEklaim(data.noreg);
+                this.eklaimService.getDetailKlaim(data);
+            }
         }
     }
 

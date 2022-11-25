@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { AppService } from 'src/app/services/app.service';
@@ -43,7 +43,8 @@ export class KasirComponent implements OnInit, OnDestroy {
         private confirmationService: ConfirmationService,
         private registrasiService: RegistrasiService,
         public appService: AppService,
-        private formPulangPerawatan: FormPulangPerawatanService
+        private formPulangPerawatan: FormPulangPerawatanService,
+        private changeDetector: ChangeDetectorRef,
     ) { }
 
     ngOnInit(): void {
@@ -65,6 +66,10 @@ export class KasirComponent implements OnInit, OnDestroy {
             { id: 'asu', name: 'ASURANSI' },
             { id: 'bpjs', name: 'BPJS' }
         ]
+    }
+
+    ngAfterContentChecked(): void {
+        this.changeDetector.detectChanges();
     }
 
     ngOnDestroy(): void {

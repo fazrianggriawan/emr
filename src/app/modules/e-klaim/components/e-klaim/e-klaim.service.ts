@@ -109,4 +109,15 @@ export class EKlaimService {
             })
     }
 
+    getDetailKlaim(data: any){
+        this.http.post<any>(config.api_url('eklaim/detailKlaim'), data)
+            .subscribe(data => {
+                if( data.code == 200 ){
+                    this.klaim.next(data.data.response.data);
+                }else{
+                    this.appService.setNotification('error', data.message);
+                }
+            })
+    }
+
 }

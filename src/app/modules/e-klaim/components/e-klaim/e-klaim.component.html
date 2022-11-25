@@ -325,6 +325,27 @@
                 </div>
             </div>
         </div>
+        <hr class="mg-t-0">
+        <div class="row mg-t-10" *ngIf="klaim">
+            <div class="col">
+                <table class="table table-sm" *ngIf="klaim.grouper.response">
+                    <thead>
+                        <tr>
+                            <th>Kode</th>
+                            <th>Deskripsi</th>
+                            <th>Tarif</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="klaim.grouper.response.cbg">
+                            <td>{{klaim.grouper.response.cbg.code}}</td>
+                            <td>{{klaim.grouper.response.cbg.description}}</td>
+                            <td>{{klaim.grouper.response.cbg.tariff | number}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 
