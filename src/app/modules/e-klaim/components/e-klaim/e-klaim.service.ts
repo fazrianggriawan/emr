@@ -12,6 +12,8 @@ export class EKlaimService {
     sep = new BehaviorSubject<any>('');
     billing = new BehaviorSubject<any>('');
     klaim = new BehaviorSubject<any>('');
+    dataDiagnosa = new BehaviorSubject<any[]>([]);
+    dataProcedure = new BehaviorSubject<any[]>([]);
 
     constructor(
         private http: HttpClient,
@@ -117,6 +119,22 @@ export class EKlaimService {
                 }else{
                     this.appService.setNotification('error', data.message);
                 }
+            })
+    }
+
+    getValueDiagnosa(diagnosa: string){
+        let data = { diagnosa: diagnosa }
+        this.http.post<any>(config.api_url('eklaim/valueDiagnosa'), data)
+            .subscribe(data => {
+                this.dataDiagnosa.next(data.data);
+            })
+    }
+
+    getValueProcedure(procedure: string){
+        let data = { procedure: procedure }
+        this.http.post<any>(config.api_url('eklaim/valueProcedure'), data)
+            .subscribe(data => {
+                this.dataProcedure.next(data.data);
             })
     }
 

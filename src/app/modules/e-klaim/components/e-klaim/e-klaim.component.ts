@@ -55,6 +55,8 @@ export class EKlaimComponent implements OnInit, OnDestroy {
         this.subs.push(this.vclaimService.sep.subscribe(data => this.handleSep(data)))
         this.subs.push(this.eklaimService.billing.subscribe(data => this.handleBilling(data)))
         this.subs.push(this.eklaimService.klaim.subscribe(data => this.handleKlaim(data)))
+        this.eklaimService.dataDiagnosa.subscribe(data => this.dataDiagnosa = data)
+        this.eklaimService.dataProcedure.subscribe(data => this.dataProsedur = data)
         this.pulangPerawatanService.pulangPerawatan.subscribe(data => this.pulangPerawatan = data)
     }
 
@@ -73,7 +75,11 @@ export class EKlaimComponent implements OnInit, OnDestroy {
     handleKlaim(data: any) {
         if( data ){
             this.klaim = data;
-            this.totalPaket = this.klaim.grouper.response.cbg.tariff
+            if( this.klaim.grouper ){
+                this.totalPaket = this.klaim.grouper.response.cbg.tariff
+                this.eklaimService.getValueDiagnosa(this.klaim.diagnosa);
+                this.eklaimService.getValueProcedure(this.klaim.procedure);
+            }
         }
     }
 

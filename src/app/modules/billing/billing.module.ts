@@ -14,6 +14,7 @@ import { TambahBillingComponent } from './components/tambah-billing/tambah-billi
 import { DataBillingComponent } from './components/data-billing/data-billing.component';
 import { EditBillingComponent } from './components/edit-billing/edit-billing.component';
 import { DataBillingPenunjangComponent } from './components/data-billing-penunjang/data-billing-penunjang.component';
+import { TransferBillingComponent } from './components/transfer-billing/transfer-billing.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { DataBillingPenunjangComponent } from './components/data-billing-penunja
         TambahBillingComponent,
         DataBillingComponent,
         EditBillingComponent,
-        DataBillingPenunjangComponent
+        DataBillingPenunjangComponent,
+        TransferBillingComponent
     ],
     imports: [
         CommonModule,
@@ -41,7 +43,8 @@ import { DataBillingPenunjangComponent } from './components/data-billing-penunja
         CariTarifComponent,
         TambahBillingComponent,
         DataBillingComponent,
-        DataBillingPenunjangComponent
+        DataBillingPenunjangComponent,
+        TransferBillingComponent
     ]
 })
 export class BillingModule { }
